@@ -1,0 +1,9 @@
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+node_modules
+dist
+package-lock.json

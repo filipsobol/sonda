@@ -1,0 +1,24 @@
+{
+  "name": "unplugin-detailed-sourcemaps",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "node ../../scripts/build.js && tsc"
+  },
+  "dependencies": {
+    "convert-source-map": "^2.0.0",
+    "unplugin": "^1.12.1"
+  },
+  "devDependencies": {
+    "@types/convert-source-map": "^2.0.3"
+  }
+}
