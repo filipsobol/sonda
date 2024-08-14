@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
-import { vitePlugin as pitbull } from 'pitbull';
+import { vitePlugin as sourcemaps } from 'unplugin-detailed-sourcemaps';
 
 export default defineConfig( {
   plugins: [
-    pitbull()
+    sourcemaps()
   ],
   build: {
     sourcemap: true

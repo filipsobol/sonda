@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "node ../../scripts/build.js && tsc"
+    "build": "rollup -c ../../rollup.config.js && tsc"
   },
   "dependencies": {
     "convert-source-map": "^2.0.0",

@@ -1,10 +1,18 @@
-import fs from "fs";
+import { readFileSync, writeFileSync } from "fs";
+import { parse } from "path";
 import { decode, type SourceMapMappings } from "@jridgewell/sourcemap-codec";
-// import { parseSourceMapInput } from './loadSourceMap.js';
-import type { SourceMap } from './types.js';
+
+export interface SourceMap {
+  version: number;
+  file?: string;
+  sourceRoot?: string;
+  sources: Array<string>;
+  sourcesContent?: Array<string | null>;
+  names: Array<string>;
+  mappings: string;
+}
 
 function analyze( code: string, map: SourceMap ) {
-  const totalSize = Buffer.byteLength(code);
   const mappings: SourceMapMappings = decode(map.mappings);
   const contributions = new Array(map.sources.length).fill('');
   const codeLines = code.split('\n').map( code => code + '\n' );
@@ -30,11 +38,13 @@ function analyze( code: string, map: SourceMap ) {
 
   const data = contributions.reduce( (carry, code, index) => {
     const file = map.sources[index];
-    const size = Buffer.byteLength(code);
+    const bytes = Buffer.byteLength(code);
+    const { dir, base } = parse( file );
 
     carry[file] = {
-      size,
-      percentage: ( size / totalSize ) * 100
+      dir,
+      filename: base,
+      bytes,
     }
 
     return carry;
@@ -44,12 +54,11 @@ function analyze( code: string, map: SourceMap ) {
 }
 
 // ---------------------------------------------------------------
-const code = fs.readFileSync("./mocks/Vite/index.js", "utf8");
-const rawMap = fs.readFileSync("./mocks/Vite/index.js.map", "utf8");
-// const map = parseSourceMapInput(rawMap);
+const code = readFileSync("../../playground/vite/dist/assets/index-2UIh27I2.js", "utf8");
+const rawMap = readFileSync("../../playground/vite/dist/assets/index-2UIh27I2.js.map", "utf8");
 const result = analyze( code, JSON.parse( rawMap ) );
 
-fs.writeFileSync(
+writeFileSync(
   "output.json",
   JSON.stringify(result, null, 2),
 );

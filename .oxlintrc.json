@@ -1,7 +1,0 @@
-{
-  "rules": {
-    "eqeqeq": "error",
-    "no-await-in-loop": "warn",
-    "no-accumulating-spread": "warn"
-  }
-}

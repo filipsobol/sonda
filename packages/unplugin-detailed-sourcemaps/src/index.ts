@@ -52,10 +52,10 @@ function factory( options?: Options ): ReturnType<Factory> {
 type Plugin = UnpluginInstance<Options | undefined>;
 
 export const plugin: Plugin = /* #__PURE__ */ createUnplugin(factory);
-export const vitePlugin: Plugin['vite'] = /* #__PURE__ */ plugin.vite;
-export const rollupPlugin: Plugin['rollup'] = /* #__PURE__ */ plugin.rollup;
-export const rolldownPlugin: Plugin['rolldown'] = /* #__PURE__ */ plugin.rolldown;
-export const webpackPlugin: Plugin['webpack'] = /* #__PURE__ */ plugin.webpack;
-export const rspackPlugin: Plugin['rspack'] = /* #__PURE__ */ plugin.rspack;
-export const esbuildPlugin: Plugin['esbuild'] = /* #__PURE__ */ plugin.esbuild;
-export const farmPlugin: Plugin['farm'] = /* #__PURE__ */ plugin.farm;
+export const vitePlugin: Plugin['vite'] = plugin.vite;
+export const rollupPlugin: Plugin['rollup'] = plugin.rollup;
+export const rolldownPlugin: Plugin['rolldown'] = plugin.rolldown;
+export const webpackPlugin: Plugin['webpack'] = plugin.webpack;
+export const rspackPlugin: Plugin['rspack'] = plugin.rspack;
+export const esbuildPlugin: Plugin['esbuild'] = plugin.esbuild;
+export const farmPlugin: Plugin['farm'] = plugin.farm;
