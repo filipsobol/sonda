@@ -3,7 +3,7 @@
 		v-for="( tile, index ) in tiles"
 		:key="children[index].path"
 		:data-id="children[index].path"
-		class="cursor-pointer group"
+		class="cursor-pointer"
 	>
 		<rect
 			:x="tile.x"
@@ -11,24 +11,24 @@
 			:width="tile.width"
 			:height="tile.height"
 			:fill="`hsl(${ Math.random() * 360 }, 80%, 90%)`"
-			class="group-hover:brightness-[92%] stroke-black"
+			class="stroke-black stroke-1"
 			rx="0"
 			ry="0"
 		/>
 
 		<foreignObject
+			v-if="tile.width >= paddingTop && tile.height >= paddingTop"
 			:x="tile.x"
 			:y="tile.y"
 			:width="tile.width"
-			:height="tile.height"
+			:height="paddingTop"
 		>
 			<p
 				xmlns="http://www.w3.org/1999/xhtml"
-				class="size-full p-1 text-md truncate"
+				class="p-1 text-center text-md truncate"
 			>
 				<span class="text-gray-900 font-bold">{{ children[index].name }}</span>
-				-
-				<span class="text-gray-600">{{ formatSize( children[index].bytes ) }}</span>
+				<!-- <span class="text-gray-600">- {{ formatSize( children[index].bytes ) }}</span> -->
 			</p>
 		</foreignObject>
 
@@ -50,8 +50,12 @@ import Tile from './Tile.vue';
 import { TreeMapGenerator } from './TreeMapGenerator';
 import type { Content } from './data';
 
-const padding = 5;
-const paddingTop = 30;
+// TODO: tooltip
+// TODO: hover effect
+// TODO: generating colors
+
+const padding = 6;
+const paddingTop = 32;
 
 const props = defineProps<{
 	level: number;
