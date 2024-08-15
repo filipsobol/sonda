@@ -1,9 +1,7 @@
 <template>
 	<g
-		v-for="( tile, index ) in tiles"
-		:key="children[index].path"
-		:data-id="children[index].path"
-		class="cursor-pointer"
+		:key="content.path"
+		:data-hover="content.path + ' - ' + formatSize( content.bytes )"
 	>
 		<rect
 			:x="tile.x"
@@ -11,33 +9,31 @@
 			:width="tile.width"
 			:height="tile.height"
 			:fill="`hsl(${ Math.random() * 360 }, 80%, 90%)`"
-			class="stroke-black stroke-1"
-			rx="0"
-			ry="0"
+			class="stroke-gray-600 stroke-1"
 		/>
 
 		<foreignObject
-			v-if="tile.width >= paddingTop && tile.height >= paddingTop"
 			:x="tile.x"
 			:y="tile.y"
 			:width="tile.width"
-			:height="paddingTop"
+			:height="tile.height"
 		>
 			<p
 				xmlns="http://www.w3.org/1999/xhtml"
-				class="p-1 text-center text-md truncate"
+				class="px-1 py-px size-full text-center text-sm truncate"
 			>
-				<span class="text-gray-900 font-bold">{{ children[index].name }}</span>
-				<!-- <span class="text-gray-600">- {{ formatSize( children[index].bytes ) }}</span> -->
+				<span v-if="shouldDisplayText">
+					<span class="text-gray-900 font-semibold">{{ content.name }}</span>
+					<span class="text-gray-500">- {{ formatSize( content.bytes ) }}</span>
+				</span>
 			</p>
 		</foreignObject>
 
-		<Tile
-			v-if="children.length > 0"
-			:level="level + 1"
-			:content="children[index]"
-			:width="tile.width - ( padding * 2 )"
-			:height="tile.height - padding - paddingTop"
+		<Level
+			v-if="shouldDisplayChildren"
+			:content="content"
+			:width="childWidth"
+			:height="childHeight"
 			:xStart="tile.x + padding"
 			:yStart="tile.y + paddingTop"
 		/>
@@ -46,47 +42,34 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import Tile from './Tile.vue';
-import { TreeMapGenerator } from './TreeMapGenerator';
+import Level from './Level.vue';
 import type { Content } from './data';
+import type { TileData } from './types';
 
-// TODO: tooltip
 // TODO: hover effect
 // TODO: generating colors
 
 const padding = 6;
-const paddingTop = 32;
+const paddingTop = 22;
 
 const props = defineProps<{
-	level: number;
+	tile: TileData;
 	content: Content;
-	width: number;
-	height: number;
-	xStart: number;
-	yStart: number;
 }>();
 
-const children = computed<Array<Content>>(() => {
-	const values = Object.values<Content>( props.content.contents ?? {} );
+const childWidth = computed( () => props.tile.width - ( padding * 2 ) );
+const childHeight = computed( () => props.tile.height - padding - paddingTop );
 
-	return values.sort( ( a, b ) => b.bytes - a.bytes );
+const shouldDisplayText = computed( () => {
+	return props.tile.width >= ( paddingTop * 1.75 ) && props.tile.height >= paddingTop;
 });
 
-const tiles = computed( () => {
-	if ( !children.value.length ) {
-		return [];
-	}
-
-	const generator = new TreeMapGenerator(
-		children?.value.map( child => child.bytes ) ?? [ props.content.bytes ],
-		props.width,
-		props.height,
-		props.xStart,
-		props.yStart
-	);
-
-	return generator.calculate();
-} );
+const shouldDisplayChildren = computed( () => {
+	return props.content.type === 'folder'
+		&& Object.keys( props.content.contents ).length > 0
+		&& childHeight.value > 0
+		&& childWidth.value > 0;
+});
 
 function formatSize( bytes: number ) {
 	const distance = 1024;
@@ -107,6 +90,18 @@ function formatSize( bytes: number ) {
 		iterations++;
 	}
 
-	return `${ size.toFixed(2) } ${ sizes[iterations] }`;
+	// Use `toFixed` only if the size is in KiB or greater.
+	return `${ iterations ? size.toFixed(2) : size } ${ sizes[iterations] }`;
 }
 </script>
+
+<style>
+[data-tooltip]:hover::after {
+  display: block;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid black;
+  background: #eee;
+  padding: .25em;
+}
+</style>

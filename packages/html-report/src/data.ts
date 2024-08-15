@@ -23,6 +23,10 @@ export interface Folder {
 
 export type Content = Folder | File;
 
+export function isFolder( content: Content ): content is Folder {
+	return content.type === 'folder';
+}
+
 export function parse( files: Record<string, RawFile> ): Content {
 	let rootFolder: Folder = {
 		type: 'folder',

@@ -37,7 +37,7 @@ function factory( options?: Options ): ReturnType<Factory> {
   } = Object.assign({}, defaultOptions, options) as Required<Options>;
 
   return {
-    name: 'unplugin-pitbull',
+    name: 'unplugin-sonar',
 
     loadInclude( id: string ): boolean {
       return include.test(id) && ( !exclude || !exclude.test(id) );

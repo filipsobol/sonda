@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "ckeditor5": "^43.0.0",
-    "pitbull": "file:../../packages/pitbull"
+    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",

@@ -1,10 +1,9 @@
 {
-  "name": "pitbull-repo",
+  "name": "sonar-repo",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "oxlint --fix packages/*/src",
     "build": "npm run build --workspaces"
   },
   "devDependencies": {

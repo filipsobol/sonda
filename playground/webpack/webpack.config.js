@@ -1,5 +1,5 @@
-const path = require('path');
-const { webpackPlugin: pitbull } = require('pitbull');
+const path = require( 'path' );
+const { vitePlugin: sourcemaps } = require( 'unplugin-detailed-sourcemaps' );
 
 module.exports = {
   entry: './src/index.js',
@@ -13,6 +13,6 @@ module.exports = {
     rules: []
   },
   plugins: [
-    pitbull()
+    sourcemaps()
   ]
 };
