@@ -1,15 +1,12 @@
 <template>
-	<g
-		:key="content.path"
-		:data-hover="content.path + ' - ' + formatSize( content.bytes )"
-	>
+	<g :data-hover="`${ content.name } - ${ formattedSize } (${ percentageOfTotal }%)`">
 		<rect
 			:x="tile.x"
 			:y="tile.y"
 			:width="tile.width"
 			:height="tile.height"
-			:fill="`hsl(${ Math.random() * 360 }, 80%, 90%)`"
-			class="stroke-gray-600 stroke-1"
+			:fill="color"
+			class="stroke-slate-500 stroke-1"
 		/>
 
 		<foreignObject
@@ -20,11 +17,11 @@
 		>
 			<p
 				xmlns="http://www.w3.org/1999/xhtml"
-				class="px-1 py-px size-full text-center text-sm truncate"
+				class="p-1 size-full text-center text-xs truncate"
 			>
 				<span v-if="shouldDisplayText">
 					<span class="text-gray-900 font-semibold">{{ content.name }}</span>
-					<span class="text-gray-500">- {{ formatSize( content.bytes ) }}</span>
+					<span class="text-gray-600">- {{ formattedSize }}</span>
 				</span>
 			</p>
 		</foreignObject>
@@ -41,13 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import Level from './Level.vue';
-import type { Content } from './data';
-import type { TileData } from './types';
-
-// TODO: hover effect
-// TODO: generating colors
+import type { Content } from '../data';
+import type { TileData } from '../TreeMapGenerator';
 
 const padding = 6;
 const paddingTop = 22;
@@ -57,8 +51,13 @@ const props = defineProps<{
 	content: Content;
 }>();
 
+const totalSize = inject<number>( 'totalSize' )!;
+
 const childWidth = computed( () => props.tile.width - ( padding * 2 ) );
 const childHeight = computed( () => props.tile.height - padding - paddingTop );
+const formattedSize = computed( () => formatSize( props.content.bytes ) );
+const percentageOfTotal = computed( () => ( props.content.bytes / totalSize * 100 ).toFixed(2) );
+const color = computed( () => `color-mix(in oklch, #fca5a5 ${ percentageOfTotal.value }%, #86efac)` );
 
 const shouldDisplayText = computed( () => {
 	return props.tile.width >= ( paddingTop * 1.75 ) && props.tile.height >= paddingTop;
@@ -94,14 +93,3 @@ function formatSize( bytes: number ) {
 	return `${ iterations ? size.toFixed(2) : size } ${ sizes[iterations] }`;
 }
 </script>
-
-<style>
-[data-tooltip]:hover::after {
-  display: block;
-  position: absolute;
-  content: attr(data-tooltip);
-  border: 1px solid black;
-  background: #eee;
-  padding: .25em;
-}
-</style>

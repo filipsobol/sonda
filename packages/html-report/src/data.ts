@@ -1,5 +1,3 @@
-// TODO: Do this when generating the data, not in the app
-
 interface RawFile {
 	dir: string;
 	filename: string;

@@ -10,8 +10,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import Tile from './Tile.vue';
-import { TreeMapGenerator } from './TreeMapGenerator';
-import type { Content } from './data';
+import { TreeMapGenerator } from '../TreeMapGenerator';
+import type { Content } from '../data';
 
 const props = defineProps<{
 	content: Content;
@@ -37,7 +37,7 @@ const tiles = computed( () => {
 	}
 
 	const generator = new TreeMapGenerator(
-		children?.value.map( child => child.bytes ) ?? [ props.content.bytes ],
+		children.value.map( child => child.bytes ),
 		props.width,
 		props.height,
 		props.xStart,

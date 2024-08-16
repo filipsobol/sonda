@@ -1,4 +1,10 @@
-import type { TileData } from './types';
+export interface TileData {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+}
+
 
 function sumArray( data: Array<number> ): number {
 	return data.reduce( ( acc, cur ) => acc + cur, 0 );
