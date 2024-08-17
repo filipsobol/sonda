@@ -1,3 +1,15 @@
 {
-  "extends": "../../tsconfig.json"
+  "extends": [
+    "@tsconfig/svelte/tsconfig.json",
+    "../../tsconfig.json"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "DOM"
+    ]
+  },
+  "include": [
+    "src"
+  ]
 }

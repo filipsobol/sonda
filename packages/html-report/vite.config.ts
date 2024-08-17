@@ -1,22 +1,7 @@
-import { fileURLToPath, URL } from 'node:url';
-import { defineConfig, type PluginOption } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    {
-      name: 'always-full-reload',
-      handleHotUpdate( { server } ) {
-        server.ws.send( { type: "full-reload" } )
-        return []
-      },
-    } satisfies PluginOption
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+  plugins: [svelte()],
 })
