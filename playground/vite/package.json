@@ -1,19 +1,17 @@
 {
-  "name": "vite",
+  "name": "playground-vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build"
   },
   "dependencies": {
-    "ckeditor5": "^43.0.0",
-    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps"
+    "ckeditor5": "^43.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.5.3",
-    "vite": "^5.4.0"
+    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps",
+    "unplugin-sonar": "file:../../packages/unplugin-sonar",
+    "vite": "^5.4.1"
   }
 }

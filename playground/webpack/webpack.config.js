@@ -1,18 +1,16 @@
 const path = require( 'path' );
-const { vitePlugin: sourcemaps } = require( 'unplugin-detailed-sourcemaps' );
+const { webpackPlugin: sourcemaps } = require( 'unplugin-detailed-sourcemaps' );
+const { webpackPlugin: sonar } = require( 'unplugin-sonar' );
 
 module.exports = {
   entry: './src/index.js',
   devtool: 'source-map',
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'dist/index.js',
     clean: true
   },
-  module: {
-    rules: []
-  },
   plugins: [
-    sourcemaps()
+    sourcemaps(),
+    sonar()
   ]
 };

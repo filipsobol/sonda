@@ -1,0 +1,20 @@
+{
+  "name": "playground-rollup",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "ckeditor5": "^43.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.21.0",
+    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps",
+    "unplugin-sonar": "file:../../packages/unplugin-sonar"
+  }
+}
