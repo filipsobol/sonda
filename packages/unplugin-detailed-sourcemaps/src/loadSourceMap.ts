@@ -36,47 +36,62 @@ export async function loadCodeAndMap( path: string ): Promise<TransformResult> {
   const extractedComment = convert.mapFileCommentRegex.exec(code)!;
 
   if ( !extractedComment ) {
-    return {
-      code
-    };
+    return code;
   }
-
-  let converter: SourceMapConverter;
 
   try {
-    converter = await handleSourceMappingURL(extractedComment, path);
-  } catch (err) {
+    const { map } = await handleSourceMappingURL( extractedComment, path );
+
+    // TODO: Handle `map.sections`
+
+    map.sourcesContent ??= await updateSourcesContent( map );
+
     return {
-      code
+      code,
+      map
     };
+  } catch {
+    return code;
   }
+}
 
-  const map = parseSourceMapInput( converter.toJSON() );
+async function handleSourceMappingURL(
+  extractedComment: RegExpExecArray,
+  sourcePath: string,
+): Promise<{ map: SourceMap; path: string | null }> {
+  const [ comment, souceMappingURL ] = extractedComment;
 
-  if ( map ) {
-    // Make sure that the sourceRoot ends with a slash
-    map.sourceRoot = dirname( path.replace( /\/?$/, '/' ) )
-  }
+  const { converter, path } = await ( async () => {
+    if ( souceMappingURL.startsWith( 'data' ) ) {
+      return {
+        converter: convert.fromComment( comment ),
+        path: null
+      };
+    }
 
-  // TODO: `map.sections` ??
-  // TODO: Handle missing `sourcesContent`
+    const path = join( sourcePath, '..', souceMappingURL );
+    const file = await readFile( path, { encoding: 'utf8' } );
+
+    return {
+      converter: convert.fromJSON( file ),
+      path
+    };
+  } )();
 
   return {
-    code,
-    map
+    map: parseSourceMapInput( converter.toJSON() ),
+    path
   };
 }
 
-async function handleSourceMappingURL( extractedComment: RegExpExecArray, sourcePath: string ): Promise<SourceMapConverter> {
-  const [ comment, souceMappingURL ] = extractedComment;
+async function updateSourcesContent( { sources, sourceRoot }: SourceMap ): Promise<SourceMap[ 'sourcesContent' ]> {
+  const sourcesContent: SourceMap['sourcesContent'] = new Array( sources.length ).fill( null );
 
-  // TODO: Handle souceMappingURL being an actual URL
+  for ( const [ index, source ] of sources.entries() ) {
+    const path = sourceRoot ? join( sourceRoot, source ) : source;
 
-  if ( souceMappingURL.startsWith('data') ) {
-    return convert.fromComment(comment);
+    sourcesContent[ index ] = await readFile( path, { encoding: 'utf8' } );
   }
 
-  const path = join( sourcePath, '..', souceMappingURL );
-  const file = await readFile(path, { encoding: 'utf8' });
-  return convert.fromJSON(file);
+  return sourcesContent;
 }

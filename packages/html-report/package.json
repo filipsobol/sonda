@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "npm run check && npm run build-only",
     "preview": "vite preview",
-    "build-only": "vite build && tsc",
+    "build-only": "vite build",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -20,6 +20,8 @@
     "tailwindcss": "^3.4.10",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-singlefile": "^2.0.2"
   }
 }
