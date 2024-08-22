@@ -14,7 +14,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.21.0",
-    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps",
-    "unplugin-sonar": "file:../../packages/unplugin-sonar"
+    "unplugin-detailed-sourcemaps": "workspace:^*",
+    "unplugin-sonar": "workspace:^*"
   }
 }

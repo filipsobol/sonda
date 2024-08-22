@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build"
+    "build": "vite build"
   },
   "dependencies": {
     "ckeditor5": "^43.0.0"
   },
   "devDependencies": {
-    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps",
-    "unplugin-sonar": "file:../../packages/unplugin-sonar",
+    "unplugin-detailed-sourcemaps": "workspace:^*",
+    "unplugin-sonar": "workspace:^*",
     "vite": "^5.4.1"
   }
 }

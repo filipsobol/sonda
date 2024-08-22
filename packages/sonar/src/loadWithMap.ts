@@ -1,22 +1,13 @@
-import { dirname, join } from 'path';
+import { join } from 'path';
 import { readFile } from 'fs/promises';
-import convert, { type SourceMapConverter } from 'convert-source-map';
-import type { TransformResult } from 'unplugin';
+import convert from 'convert-source-map';
+import type { SourceMap } from './types';
 
-interface SourceMap {
-  version: number;
-  file?: string;
-  sourceRoot?: string;
-  sources: Array<string>;
-  sourcesContent?: Array<string | null>;
-  names: Array<string>;
-  mappings: string;
-}
+type Result = void | { code: string; map?: SourceMap };
 
 /**
- * Strip any JSON XSSI avoidance prefix from the string (as documented
- * in the source maps specification), and then parse the string as
- * JSON.
+ * Strip any JSON XSSI avoidance prefix from the string (as documented in the source maps specification),
+ * and parses the string as JSON.
  *
  * https://github.com/mozilla/source-map/blob/3cb92cc3b73bfab27c146bae4ef2bc09dbb4e5ed/lib/util.js#L162-L164
  */
@@ -24,7 +15,11 @@ export function parseSourceMapInput( str: string ): SourceMap {
   return JSON.parse( str.replace( /^\)]}'[^\n]*\n/, "" ) );
 }
 
-export async function loadCodeAndMap( path: string ): Promise<TransformResult> {
+/**
+ * Loads code and (optionally) source map from a given file. If the file is missing
+ * the `sourcesContent` field, it will be populated based on the `sources` field paths.
+ */
+export async function loadCodeAndMap( path: string ): Promise<Result> {
   let code: string = '';
 
   try {
@@ -36,7 +31,7 @@ export async function loadCodeAndMap( path: string ): Promise<TransformResult> {
   const extractedComment = convert.mapFileCommentRegex.exec(code)!;
 
   if ( !extractedComment ) {
-    return code;
+    return { code };
   }
 
   try {
@@ -51,10 +46,13 @@ export async function loadCodeAndMap( path: string ): Promise<TransformResult> {
       map
     };
   } catch {
-    return code;
+    return { code };
   }
 }
 
+/**
+ * Loads the source map information from the data URL and file path.
+ */
 async function handleSourceMappingURL(
   extractedComment: RegExpExecArray,
   sourcePath: string,
@@ -90,6 +88,7 @@ async function updateSourcesContent( { sources, sourceRoot }: SourceMap ): Promi
   for ( const [ index, source ] of sources.entries() ) {
     const path = sourceRoot ? join( sourceRoot, source ) : source;
 
+    // TODO: Load files in parallel to improve performance
     sourcesContent[ index ] = await readFile( path, { encoding: 'utf8' } );
   }
 

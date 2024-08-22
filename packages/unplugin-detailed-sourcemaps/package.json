@@ -15,10 +15,7 @@
     "build": "rollup -c ../../rollup.config.js && tsc"
   },
   "dependencies": {
-    "convert-source-map": "^2.0.0",
+    "sonar": "workspace:^*",
     "unplugin": "^1.12.1"
-  },
-  "devDependencies": {
-    "@types/convert-source-map": "^2.0.3"
   }
 }

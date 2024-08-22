@@ -4,7 +4,7 @@ import {
   type UnpluginInstance,
   type TransformResult
 } from 'unplugin';
-import { loadCodeAndMap } from './loadSourceMap.js';
+import { loadCodeAndMap } from 'sonar';
 
 export interface Options {
 

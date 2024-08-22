@@ -36,7 +36,6 @@
 import { setContext, onMount, onDestroy } from 'svelte';
 import Level from './Level.svelte';
 import { parse } from '../data';
-import data from '../output';
 
 type TrackerDomElements = 'wrapper' | 'tooltip' | 'body';
 
@@ -50,7 +49,7 @@ const resizeObserver = new ResizeObserver( entries => {
 	} );
 } );
 
-const content = parse( data );
+const content = parse( window.SONAR_JSON_REPORT );
 let wrapper = $state<HTMLElement>();
 let tooltip = $state<HTMLElement>();
 let hoveredElement = $state<Element | null>( null );
@@ -86,7 +85,7 @@ function onMouseMove( { target, clientX, clientY }: MouseEvent ) {
 
 	hoveredElement?.classList.remove( 'hovered' );
 	hoveredElement = ( target as Element ).closest( '[data-hover]' );
-	
+
 	if ( !hoveredElement ) {
 		return onMouseLeave();
 	}

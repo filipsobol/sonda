@@ -3,18 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18.20",
+    "pnpm": ">=9.7"
+  },
   "scripts": {
-    "build": "npm run build --workspaces"
+    "build": "pnpm -r run build"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-swc": "^0.3.1",
-    "@types/node": "^22.1.0",
-    "rollup": "^4.20.0",
+    "@types/node": "^22.5.0",
+    "rollup": "^4.21.0",
     "typescript": "^5.5.4"
-  },
-  "workspaces": [
-    "packages/*",
-    "playground/*"
-  ]
+  }
 }

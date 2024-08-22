@@ -1,4 +1,4 @@
-import { join, dirname } from 'path';
+import { join, dirname, resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import {
   createUnplugin,
@@ -6,7 +6,11 @@ import {
   type UnpluginOptions,
 } from 'unplugin';
 import type { NormalizedOutputOptions, OutputBundle } from 'rollup';
-import { analyze } from './loadSourceMap';
+import { generateHtmlReport } from 'sonar';
+
+function reportNoMap( filename: string ) {
+  console.warn( `Could not find source map for ${ filename }` );
+}
 
 function getJavaScriptAndSourceMaps(
   assets: Array<string>,
@@ -32,17 +36,19 @@ async function generateReportFromAssets(
   for ( const [ codePath, mapPath ] of Object.entries( assets ) ) {
     const code = await readFile( codePath, 'utf8' );
     const map = await readFile( mapPath, 'utf8' );
-    const result = await analyze( code, JSON.parse( map ) );
+    const result = await generateHtmlReport( code, JSON.parse( map ) );
 
-    await writeFile(
-      join( outputDir, `sonar-report-${ index }.json` ),
-      JSON.stringify( result, null, 2 )
-    );
+    const open = (await import( 'open' )).default;
+    const path = join( outputDir, `sonar-report-${ index }.html` );
+
+    await writeFile( path, result );
+    await open( path );
 
     index++;
   }
 }
 
+// TODO: Add "open" parameter
 function factory(): UnpluginOptions {
   // Absolute path to the output directory
   let outputDir: string;
@@ -59,17 +65,14 @@ function factory(): UnpluginOptions {
       }
 
       if ( args.length ) {
-      // Get outputs from Rollup / Vite
+        // Get outputs from Rollup / Vite
         const [ options, bundle ] = args as unknown as [ NormalizedOutputOptions, OutputBundle ];
-        outputDir = join(
-          process.cwd(),
-          dirname( options.dir ?? options.file! )
-        );
 
+        outputDir = resolve( process.cwd(), options.dir ?? dirname( options.file! ) );
         assets = getJavaScriptAndSourceMaps( Object.keys( bundle ), outputDir );
       }
 
-      return generateReportFromAssets( assets, outputDir )
+      return generateReportFromAssets(assets, outputDir);
     },
 
     // Get outputs from Webpack

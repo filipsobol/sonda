@@ -1,0 +1,28 @@
+{
+  "name": "sonar",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build:html": "cd ../html-report && pnpm run build",
+    "build:dist": "rollup -c ../../rollup.config.js && tsc",
+    "build": "pnpm run build:dist && pnpm run build:html"
+  },
+  "dependencies": {
+    "@jridgewell/sourcemap-codec": "^1.5.0",
+    "convert-source-map": "^2.0.0",
+    "neotraverse": "^0.6.18",
+    "oxc-parser": "^0.24.2"
+  },
+  "devDependencies": {
+    "@types/convert-source-map": "^2.0.3"
+  }
+}

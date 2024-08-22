@@ -11,8 +11,8 @@
   "devDependencies": {
     "@types/webpack": "^5.28.5",
     "css-loader": "^6.8.1",
-    "unplugin-detailed-sourcemaps": "file:../../packages/unplugin-detailed-sourcemaps",
-    "unplugin-sonar": "file:../../packages/unplugin-sonar",
+    "unplugin-detailed-sourcemaps": "workspace:^*",
+    "unplugin-sonar": "workspace:^*",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   }

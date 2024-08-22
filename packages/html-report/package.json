@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "REPORT_DATA=sample_data.json vite",
     "build": "npm run check && npm run build-only",
     "preview": "vite preview",
     "build-only": "vite build",
