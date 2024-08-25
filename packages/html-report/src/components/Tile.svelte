@@ -39,7 +39,7 @@
 <script lang="ts">
 import { getContext } from 'svelte';
 import Level from './Level.svelte';
-import type { Content } from '../data';
+import type { Content } from '../parser';
 import type { TileData } from '../TreeMapGenerator';
 
 const padding = 6;

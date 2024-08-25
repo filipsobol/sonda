@@ -5,16 +5,12 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import { createHtmlPlugin } from "vite-plugin-html";
 
-let REPORT_DATA = `
-  __REPORT_DATA__
-`;
+let REPORT_DATA = "__REPORT_DATA__";
 
 if ( process.env.NODE_ENV !== "production" ) {
   const dataFilePath = resolve( process.cwd(), process.env.REPORT_DATA );
 
-  REPORT_DATA = readFileSync( dataFilePath, {
-    encoding: "utf-8",
-  } );
+  REPORT_DATA = readFileSync( dataFilePath, 'utf-8' );
 }
 
 // https://vitejs.dev/config/
@@ -28,7 +24,7 @@ export default defineConfig({
       minify: false,
       inject: {
         data: {
-          SONAR_REPORT_DATA: `<script type="module">window.SONAR_JSON_REPORT = JSON.parse(\`${REPORT_DATA}\`);</script>`,
+          SONAR_REPORT_DATA: `<script type="module">window.SONAR_JSON_REPORT = JSON.parse(String.raw\`${REPORT_DATA}\`);</script>`,
         },
       },
     }),

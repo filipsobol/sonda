@@ -1,51 +1,60 @@
 import { join, dirname, resolve } from 'path';
-import { readFile, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import {
   createUnplugin,
   type UnpluginInstance,
   type UnpluginOptions,
 } from 'unplugin';
+import {
+  generateHtmlReport,
+  loadCodeAndMap,
+  type ImportsGraph,
+  type SourcesGraph
+} from 'sonar';
 import type { NormalizedOutputOptions, OutputBundle } from 'rollup';
-import { generateHtmlReport } from 'sonar';
+import type { NormalModule } from 'webpack';
 
-function reportNoMap( filename: string ) {
-  console.warn( `Could not find source map for ${ filename }` );
+/*
+function removeLongestCommonPrefix( strings: Array<string> ): Array<string> {
+  if ( !strings.length ) {
+    return [];
+  }
+
+  let i = 0;
+
+  while ( strings[ 0 ][ i ] && strings.every( w => w[ i ] === strings[ 0 ][ i ] ) ) {
+    i++;
+  }
+
+  return strings.map( s => s.slice( i ) );
 }
-
-function getJavaScriptAndSourceMaps(
-  assets: Array<string>,
-  outputDir: string = process.cwd()
-): Record<string, string> {
-  return assets.reduce( ( acc, name ) => {
-    const sourceMapName = `${ name }.map`;
-
-    if ( assets.includes( sourceMapName ) ) {
-      acc[ join( outputDir, name ) ] = join( outputDir, sourceMapName )
-    }
-
-    return acc;
-  }, {} as Record<string, string> )
-}
+*/
 
 async function generateReportFromAssets(
-  assets: Record<string, string>,
-  outputDir: string
+  assets: Array<string>,
+  outputDir: string,
+  importsGraph: ImportsGraph,
+  sourcesGraph: SourcesGraph
 ): Promise<void> {
-  let index = 0;
+  const { default: open } = await import( 'open' );
 
-  for ( const [ codePath, mapPath ] of Object.entries( assets ) ) {
-    const code = await readFile( codePath, 'utf8' );
-    const map = await readFile( mapPath, 'utf8' );
-    const result = await generateHtmlReport( code, JSON.parse( map ) );
+  const reports = assets
+    .map( asset => generateHtmlReport( asset, importsGraph, sourcesGraph ) )
+    .map( async ( reportPromise, index ) => {
+      const path = join( outputDir, `sonar-report-${ index }.html` );
+      const report = await reportPromise;
 
-    const open = (await import( 'open' )).default;
-    const path = join( outputDir, `sonar-report-${ index }.html` );
+      if ( !report ) {
+        return null;
+      }
 
-    await writeFile( path, result );
-    await open( path );
+      await writeFile( path, report );
+      await open( path );
 
-    index++;
-  }
+      return path;
+    } );
+
+  await Promise.all( reports );
 }
 
 // TODO: Add "open" parameter
@@ -53,11 +62,26 @@ function factory(): UnpluginOptions {
   // Absolute path to the output directory
   let outputDir: string;
 
-  // Map of abolute paths to JavaScript assets and their source maps
-  let assets: Record<string, string>;
+  // Map of abolute paths to assets and their source maps
+  let assets: Array<string>;
+
+  // Map of absolute paths to source files and files they import
+  let importsGraph: ImportsGraph = {};
+
+  // Map of absolute paths to compiled files and files that they include
+  let sourcesGraph: SourcesGraph = new Map();
 
   return {
     name: 'unplugin-sonar',
+    enforce: 'pre',
+
+    async load( id: string ): Promise<void> {
+      const result = await loadCodeAndMap( id );
+
+      if ( result?.map ) {
+        result.map.sources.forEach( source => sourcesGraph.set( source, id ) );
+      }
+    },
 
     writeBundle( ...args ) {
       if ( !args.length && !assets ) {
@@ -69,19 +93,59 @@ function factory(): UnpluginOptions {
         const [ options, bundle ] = args as unknown as [ NormalizedOutputOptions, OutputBundle ];
 
         outputDir = resolve( process.cwd(), options.dir ?? dirname( options.file! ) );
-        assets = getJavaScriptAndSourceMaps( Object.keys( bundle ), outputDir );
+        assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
       }
 
-      return generateReportFromAssets(assets, outputDir);
+      return generateReportFromAssets( assets, outputDir, importsGraph, sourcesGraph );
     },
 
     // Get outputs from Webpack
-    webpack( { hooks } ) {
+    webpack( { hooks, options } ) {
+      hooks.afterEnvironment.tap( 'ModifyOutputPlugin', () => {
+        options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
+      } );
+  
       hooks.afterEmit.tap( 'unplugin-sonar', ( compiler ) => {
         outputDir = compiler.options.output.path ?? process.cwd();
-        assets = getJavaScriptAndSourceMaps( Object.keys( compiler.assets ), outputDir );
+        assets = Object.keys( compiler.assets ).map( name => join( outputDir, name ) );
       } );
-    }
+      
+      hooks.compilation.tap( 'unplugin-sonar', ( { hooks, moduleGraph } ) => {
+        hooks.optimizeModules.tap( 'unplugin-sonar', ( modules ) => {
+          Array
+            .from( modules as Iterable<NormalModule> )
+            .forEach( ( { dependencies, resource, type } ) => {
+              const resolvedDependencies = dependencies
+                .map( dependency => moduleGraph.getModule( dependency ) as NormalModule | null )
+                .map( resolved => resolved?.resource )
+                .filter( resolved => resolved !== undefined );
+
+              importsGraph[ resource ] = {
+                format: type === 'javascript/esm' ? 'esm' : 'cjs',
+                imports: Array.from( new Set(resolvedDependencies) )
+              };
+            } );
+        } );
+      } );
+    },
+
+    rollup: {
+      moduleParsed( module ) {
+        importsGraph[ module.id ] = {
+          format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
+          imports: module.importedIds
+        };
+      },
+    },
+
+    vite: {
+      moduleParsed( module ) {
+        importsGraph[ module.id ] = {
+          format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
+          imports: module.importedIds
+        }
+      },
+    },
   };
 }
 

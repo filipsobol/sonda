@@ -35,7 +35,7 @@
 <script lang="ts">
 import { setContext, onMount, onDestroy } from 'svelte';
 import Level from './Level.svelte';
-import { parse } from '../data';
+import { parse } from '../parser';
 
 type TrackerDomElements = 'wrapper' | 'tooltip' | 'body';
 

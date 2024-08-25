@@ -4,8 +4,8 @@ import { vitePlugin as sonar } from 'unplugin-sonar';
 
 export default defineConfig( {
   plugins: [
-    sourcemaps(),
     sonar(),
+    sourcemaps(),
   ],
   build: {
     sourcemap: true

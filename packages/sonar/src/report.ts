@@ -1,68 +1,56 @@
 import { dirname, parse, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFile } from 'fs/promises';
-import { decode, type SourceMapMappings } from '@jridgewell/sourcemap-codec';
-import { getImports } from './imports.js';
+import { getBytesPerSource } from './sourcemap/bytes.js';
+import { loadCodeAndMap } from './sourcemap/load.js';
+import type { ImportsGraph, SourcesGraph, JsonReportData, NormalizedSource } from './types.js';
 
-export interface SourceMap {
-  version: number;
-  file?: string;
-  sourceRoot?: string;
-  sources: Array<string>;
-  sourcesContent?: Array<string | null>;
-  names: Array<string>;
-  mappings: string;
-}
+export async function generateJsonReport(
+  codePath: string,
+  importsGraph: ImportsGraph,
+  sourcesGraph: SourcesGraph
+): Promise<JsonReportData | null> {
+  const { code, map } = await loadCodeAndMap( codePath ) || {};
 
-export async function generateJsonReport( code: string, map: SourceMap ): Promise<any> {
-  const mappings: SourceMapMappings = decode( map.mappings );
-  const contributions = new Array( map.sources.length ).fill( '' );
-  const codeLines = code.split( '\n' ).map( code => code + '\n' );
-
-  for ( let lineIndex = 0; lineIndex < mappings.length; lineIndex++ ) {
-    const line = mappings[ lineIndex ];
-    const lineCode = codeLines[ lineIndex ];
-
-    for ( let mappingIndex = 0; mappingIndex < line.length; mappingIndex++ ) {
-      // 0: generatedColumn
-      // 1: fileIndex
-      // 2: originalLine
-      // 3: originalColumn
-      // 4: nameIndex
-
-      const [ startColumn, fileIndex ] = line[ mappingIndex ];
-      const endColumn = line[ mappingIndex + 1 ]?.[ 0 ] ?? lineCode.length;
-
-      // TODO: What if fileIndex is null / undefined?
-      contributions[ fileIndex! ] += lineCode.slice( startColumn, endColumn );
-    }
+  if ( !code || !map ) {
+    return null;
   }
 
-  const result: Record<string, any> = {};
+  const bytes = getBytesPerSource( code, map );
 
-  for ( let index = 0; index < map.sources.length; index++ ) {
-    const path = map.sources[ index ];
-    const bundleCode = contributions[ index ];
-    const sourceCode = map.sourcesContent?.[ index ];
-
+  const dataPromise = map.sources.map(( path, index ): [ string, NormalizedSource ] => {
     const { dir, base } = parse( path );
+    const parent = sourcesGraph.get( path ) ?? null;
+    const data = importsGraph[ path ];
+    const parentData = parent ? importsGraph[ parent ] : null;
 
-    result[ path ] = {
+    return [ path, {
+      originalPath: path,
       dir,
       filename: base,
-      bytes: Buffer.byteLength( bundleCode ),
-      imports: sourceCode ? await getImports( path, sourceCode ) : []
-    };
-  }
+      bytes: bytes[ index ],
+      format: data?.format ?? parentData?.format ?? 'unknown',
+      imports: data?.imports ?? [],
+      parent
+    } ];
+  } );
 
-  return result;
+  return Object.fromEntries( dataPromise ) as JsonReportData;
 }
 
-export async function generateHtmlReport( code: string, map: SourceMap ): Promise<any> {
+export async function generateHtmlReport(
+  codePath: string,
+  importsGraph: ImportsGraph,
+  sourcesGraph: SourcesGraph
+): Promise<string> {
   // @ts-ignore This file will be available at runtime
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
-  const template = await readFile( resolve( __dirname, './index.html' ), { encoding: 'utf-8' } );
-  const json = await generateJsonReport( code, map );
+  const template = await readFile( resolve( __dirname, './index.html' ), 'utf-8' );
+  const json = await generateJsonReport( codePath, importsGraph, sourcesGraph );
+
+  if ( !json ) {
+    return '';
+  }
 
   return template.replace( '__REPORT_DATA__', JSON.stringify( json, null, 2 ) );
 }

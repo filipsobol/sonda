@@ -13,7 +13,7 @@ export interface Options {
    *
    * @default /\.js$/
    */
-  include?: RegExp;
+  include: RegExp;
 
   /**
    * RegExp matching imports for which sourcemaps should be ignored.
@@ -25,7 +25,7 @@ export interface Options {
 
 type Factory = UnpluginFactory<Options | undefined>;
 
-function factory( options?: Options ): ReturnType<Factory> {
+function factory( options?: Partial<Options> ): ReturnType<Factory> {
   const defaultOptions: Options = {
     include: /\.js$/,
     exclude: undefined,
@@ -34,22 +34,25 @@ function factory( options?: Options ): ReturnType<Factory> {
   const {
     include,
     exclude
-  } = Object.assign({}, defaultOptions, options) as Required<Options>;
+  } = Object.assign({}, defaultOptions, options) as Options;
 
   return {
-    name: 'unplugin-sonar',
+    name: 'unplugin-detailed-sourcemaps',
+    enforce: 'pre',
 
     loadInclude( id: string ): boolean {
-      return include.test(id) && ( !exclude || !exclude.test(id) );
+      return include.test(id) && !exclude?.test(id);
     },
 
-    load( id: string ): Promise<TransformResult> {
-      return loadCodeAndMap( id );
+    async load( id: string ): Promise<TransformResult> {
+      const result = await loadCodeAndMap( id );
+
+      return result;
     }
   };
 }
 
-type Plugin = UnpluginInstance<Options | undefined>;
+type Plugin = UnpluginInstance<Partial<Options> | undefined>;
 
 export const plugin: Plugin = /* #__PURE__ */ createUnplugin(factory);
 export const vitePlugin: Plugin['vite'] = plugin.vite;

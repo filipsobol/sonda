@@ -8,7 +8,7 @@
 <script lang="ts">
 import Tile from './Tile.svelte';
 import { TreeMapGenerator } from '../TreeMapGenerator';
-import type { Content } from '../data';
+import type { Content } from '../parser';
 
 interface Props {
 	content: Content;

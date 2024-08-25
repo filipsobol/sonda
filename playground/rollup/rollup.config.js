@@ -22,7 +22,7 @@ export default defineConfig( {
 			preferBuiltins: false
 		} ),
 		terser(),
+		sonar(),
 		sourcemaps(),
-		sonar()
 	]
 } );

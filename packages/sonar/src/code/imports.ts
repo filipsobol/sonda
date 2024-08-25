@@ -1,5 +1,6 @@
 import { Traverse } from 'neotraverse/modern';
 import { moduleLexerAsync, parseAsync } from 'oxc-parser';
+import type { ModuleInfo } from '../types';
 
 /**
  * Returns a list of imports / require statements used in a given file
@@ -7,14 +8,14 @@ import { moduleLexerAsync, parseAsync } from 'oxc-parser';
  * @param code Source code to be analyzed
  * @param path File path used to determine whether the code is written in JavaScript or TypeScript
  */
-export async function getImports( code: string, path: string ): Promise<Array<string>> {
-
+export async function getImports( code: string, path: string ): Promise<ModuleInfo> {
   /**
-   * Naively check if the file contains any `import` or `require(` statements to
+   * Naively check if the file contains any `import` or `require` statements to
    * avoid parsing files that can be easily determined to depend on other files.
    */
-  if ( !code.includes( 'import' ) && !code.includes( 'require(' ) ) {
-    return [];
+  if ( !code.includes( 'import' ) && !code.includes( 'require' ) ) {
+    // TODO: Detect format based on nearest package.json
+    return { format: 'cjs', imports: [] };
   }
 
   const { hasModuleSyntax, imports } = await moduleLexerAsync( code, {
@@ -23,9 +24,12 @@ export async function getImports( code: string, path: string ): Promise<Array<st
 
   // If file is an ES module, we can statically analyze imports
   if ( hasModuleSyntax ) {
-    return imports
-      .map( item => item.n )
-      .filter( item => item !== undefined ); // Can be empty if dynamic import doesn't have a valid JS string.
+    return {
+      format: 'esm',
+      imports: imports
+        .map( item => item.n )
+        .filter( item => item !== undefined ) // Can be empty if dynamic import doesn't have a valid JS string.
+    };
   }
 
   // Otherwise, the file is a CommonJS module and we need to traverse the AST and look for `require` calls.
@@ -42,5 +46,8 @@ export async function getImports( code: string, path: string ): Promise<Array<st
     }
   } );
 
-  return requires;
+  return {
+    format: 'cjs',
+    imports: requires
+  };
 }

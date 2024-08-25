@@ -18,5 +18,8 @@
     "open": "^10.1.0",
     "sonar": "workspace:^*",
     "unplugin": "^1.12.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0"
   }
 }

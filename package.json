@@ -8,7 +8,7 @@
     "pnpm": ">=9.7"
   },
   "scripts": {
-    "build": "pnpm -r run build"
+    "build": "pnpm -r --stream run build"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
