@@ -14,22 +14,6 @@ import {
 import type { NormalizedOutputOptions, OutputBundle } from 'rollup';
 import type { NormalModule } from 'webpack';
 
-/*
-function removeLongestCommonPrefix( strings: Array<string> ): Array<string> {
-  if ( !strings.length ) {
-    return [];
-  }
-
-  let i = 0;
-
-  while ( strings[ 0 ][ i ] && strings.every( w => w[ i ] === strings[ 0 ][ i ] ) ) {
-    i++;
-  }
-
-  return strings.map( s => s.slice( i ) );
-}
-*/
-
 async function generateReportFromAssets(
   assets: Array<string>,
   outputDir: string,
@@ -66,7 +50,7 @@ function factory(): UnpluginOptions {
   let assets: Array<string>;
 
   // Map of absolute paths to source files and files they import
-  let importsGraph: ImportsGraph = {};
+  let importsGraph: ImportsGraph = new Map();
 
   // Map of absolute paths to compiled files and files that they include
   let sourcesGraph: SourcesGraph = new Map();
@@ -79,7 +63,13 @@ function factory(): UnpluginOptions {
       const result = await loadCodeAndMap( id );
 
       if ( result?.map ) {
-        result.map.sources.forEach( source => sourcesGraph.set( source, id ) );
+        result.map.sources.forEach( source => {
+          if ( source === id ) {
+            return;
+          }
+
+          return sourcesGraph.set( source, id );
+        } );
       }
     },
 
@@ -120,10 +110,10 @@ function factory(): UnpluginOptions {
                 .map( resolved => resolved?.resource )
                 .filter( resolved => resolved !== undefined );
 
-              importsGraph[ resource ] = {
+              importsGraph.set( resource, {
                 format: type === 'javascript/esm' ? 'esm' : 'cjs',
-                imports: Array.from( new Set(resolvedDependencies) )
-              };
+                imports: Array.from( new Set( resolvedDependencies ) )
+              } )
             } );
         } );
       } );
@@ -131,19 +121,19 @@ function factory(): UnpluginOptions {
 
     rollup: {
       moduleParsed( module ) {
-        importsGraph[ module.id ] = {
+        importsGraph.set( module.id, {
           format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
           imports: module.importedIds
-        };
+        } );
       },
     },
 
     vite: {
       moduleParsed( module ) {
-        importsGraph[ module.id ] = {
+        importsGraph.set( module.id, {
           format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
           imports: module.importedIds
-        }
+        } );
       },
     },
   };

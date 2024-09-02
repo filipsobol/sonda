@@ -8,7 +8,7 @@ import { createHtmlPlugin } from "vite-plugin-html";
 let REPORT_DATA = "__REPORT_DATA__";
 
 if ( process.env.NODE_ENV !== "production" ) {
-  const dataFilePath = resolve( process.cwd(), process.env.REPORT_DATA );
+  const dataFilePath = resolve( process.cwd(), 'sample_data.json' );
 
   REPORT_DATA = readFileSync( dataFilePath, 'utf-8' );
 }

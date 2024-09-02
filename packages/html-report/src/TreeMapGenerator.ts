@@ -5,7 +5,6 @@ export interface TileData {
 	height: number;
 }
 
-
 function sumArray( data: Array<number> ): number {
 	return data.reduce( ( acc, cur ) => acc + cur, 0 );
 }

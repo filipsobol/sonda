@@ -1,15 +1,4 @@
-interface RawFile {
-	dir: string;
-	filename: string;
-	bytes: number;
-}
-
-export interface File {
-	type: 'file',
-	name: string;
-	path: string;
-	bytes: number;
-}
+import type { JsonReportData, NormalizedSource } from 'sonar';
 
 export interface Folder {
 	type: 'folder',
@@ -19,13 +8,13 @@ export interface Folder {
 	contents: Record<string, Content>;
 }
 
-export type Content = Folder | File;
+export type Content = Folder | NormalizedSource;
 
 export function isFolder( content: Content ): content is Folder {
-	return content.type === 'folder';
+	return 'contents' in content;
 }
 
-export function parse( files: Record<string, RawFile> ): Content {
+export function parse( files: JsonReportData ): Folder {
 	let rootFolder: Folder = {
 		type: 'folder',
 		name: '',
@@ -35,9 +24,13 @@ export function parse( files: Record<string, RawFile> ): Content {
 	};
 
 	Object
-		.entries( files )
-		.forEach( ( [ path, file ] ) => {
-			const segments = path.split( '/' );
+		.values( files )
+		.forEach( file => {
+			if ( !file.bytes ) {
+				return;
+			}
+
+			const segments = file.mappedPath.split( '/' );
 			const filename = segments.pop()!;
 			const traversedPath: Array<string> = [];
 			let folder = rootFolder;
@@ -51,31 +44,26 @@ export function parse( files: Record<string, RawFile> ): Content {
 
 				folder = (folder.contents[ dirname ] as Folder) ??= {
 					type: 'folder',
-					name: dirname,
+					name: dirname || '[root]',
 					path,
 					contents: {},
 					bytes: Object
 						.values( files )
-						.filter( file => file.dir.startsWith( path ) )
-						.reduce( ( sum: number, file: RawFile ) => sum + file.bytes, 0 )
+						.filter( file => file.mappedPath.startsWith( path ) )
+						.reduce( ( sum: number, file: NormalizedSource ) => sum + file.bytes, 0 )
 				};
 			}
 
 			traversedPath.push( filename );
 
-			folder.contents[ filename ] = {
-				type: 'file',
-				name: filename,
-				path,
-				bytes: file.bytes
-			};
+			folder.contents[ filename ] = file;
 		} );
 	
-	let root: Content = rootFolder;
+	let root: Folder = rootFolder;
 
 	// Skip directories that don't have any files and have only one subdirectory
 	while ( ('contents' in root) && Object.keys( root.contents ).length === 1 ) {
-		root = Object.values( root.contents )[ 0 ];
+		root = Object.values( root.contents )[ 0 ] as Folder;
 	}
 
 	return root;

@@ -1,6 +1,6 @@
-{#each tiles as tile, index ( children[index].path ) }
+{#each tiles as tile, index ( tile ) }
 	<Tile
-		tile={ tile}
+		tile={ tile }
 		content={ children[index] }
 	/>
 {/each}
@@ -8,10 +8,10 @@
 <script lang="ts">
 import Tile from './Tile.svelte';
 import { TreeMapGenerator } from '../TreeMapGenerator';
-import type { Content } from '../parser';
+import { type Content } from '../parser';
 
 interface Props {
-	content: Content;
+	content: Content | Array<Content>;
 	width: number;
 	height: number;
 	xStart: number;
@@ -27,12 +27,12 @@ let {
 }: Props = $props();
 
 const children = $derived.by(() => {
-	if ( content.type === 'file' ) {
-		return [];
+	if ( !Array.isArray( content ) ) {
+		return [ content ];
 	}
 
 	return Object
-		.values<Content>( content.contents )
+		.values<Content>( content )
 		.sort( ( a, b ) => b.bytes - a.bytes );
 });
 

@@ -29,6 +29,7 @@ export interface ModuleInfo {
 
 export interface NormalizedSource extends ModuleInfo {
   originalPath: string;
+  mappedPath: string;
   dir: string;
   filename: string;
   bytes: number;
@@ -36,7 +37,7 @@ export interface NormalizedSource extends ModuleInfo {
 }
 
 export type Sources = Record<string, NormalizedSource>;
-export type ImportsGraph = Record<string, ModuleInfo>;
+export type ImportsGraph = Map<string, ModuleInfo>;
 export type SourcesGraph = Map<string, string>;
 export type JsonReportData = Record<string, NormalizedSource>;
 

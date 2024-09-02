@@ -4,6 +4,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { rollupPlugin as sourcemaps } from 'unplugin-detailed-sourcemaps';
 import { rollupPlugin as sonar } from 'unplugin-sonar';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig( {
 	input: 'src/index.js',
@@ -22,6 +23,7 @@ export default defineConfig( {
 			preferBuiltins: false
 		} ),
 		terser(),
+		// visualizer(),
 		sonar(),
 		sourcemaps(),
 	]

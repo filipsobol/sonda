@@ -2,35 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.wrapper:hover {
-
-	/* Add grayscale filter to all elements that are not hovered or not containing a hovered element */
-	g {
-		filter: grayscale(100%);
-	}
-
-	/* Remove grayscale filter from hovered element */
-	g:is(
-		/* Hovered element */
-		.hovered,
-
-		/* Parents of hovered element */
-		:has(g.hovered),
-
-		/* Children of hovered element */
-		.hovered g
-	) {
-		filter: grayscale(0%);
-	}
-
-	/* This is the same as above, but has worse Paint performance */
-	/*
-	g:not(
-		.hovered,
-		:has(g.hovered),
-		.hovered g
-	) {
-		filter: grayscale(100%);
-	}
-	*/
+rect:hover {
+	filter: brightness(1.15);
 }

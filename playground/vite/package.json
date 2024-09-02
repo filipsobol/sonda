@@ -12,6 +12,7 @@
   "devDependencies": {
     "unplugin-detailed-sourcemaps": "workspace:^*",
     "unplugin-sonar": "workspace:^*",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-virtual": "^0.3.0"
   }
 }
