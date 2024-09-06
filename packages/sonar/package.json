@@ -18,9 +18,7 @@
   },
   "dependencies": {
     "@jridgewell/sourcemap-codec": "^1.5.0",
-    "convert-source-map": "^2.0.0",
-    "neotraverse": "^0.6.18",
-    "oxc-parser": "^0.24.2"
+    "convert-source-map": "^2.0.0"
   },
   "devDependencies": {
     "@types/convert-source-map": "^2.0.3"
