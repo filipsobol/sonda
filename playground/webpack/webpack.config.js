@@ -1,4 +1,3 @@
-const { webpackPlugin: sourcemaps } = require( 'unplugin-detailed-sourcemaps' );
 const { webpackPlugin: sonar } = require( 'unplugin-sonar' );
 // const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 
@@ -11,7 +10,6 @@ module.exports = {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    sourcemaps(),
     sonar(),
   ]
 };

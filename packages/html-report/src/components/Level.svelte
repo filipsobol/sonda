@@ -2,16 +2,18 @@
 	<Tile
 		tile={ tile }
 		content={ children[index] }
+		totalBytes={ totalBytes }
 	/>
 {/each}
 
 <script lang="ts">
 import Tile from './Tile.svelte';
 import { TreeMapGenerator } from '../TreeMapGenerator';
-import { type Content } from '../parser';
+import type { Content } from '../parser';
 
 interface Props {
 	content: Content | Array<Content>;
+	totalBytes: number;
 	width: number;
 	height: number;
 	xStart: number;
@@ -20,6 +22,7 @@ interface Props {
 
 let {
 	content,
+	totalBytes,
 	width,
 	height,
 	xStart,
@@ -37,10 +40,6 @@ const children = $derived.by(() => {
 });
 
 const tiles = $derived.by( () => {
-	if ( !children.length ) {
-		return [];
-	}
-
 	const generator = new TreeMapGenerator(
 		children.map( child => child.bytes ),
 		width,

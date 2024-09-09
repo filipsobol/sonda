@@ -6,6 +6,7 @@
 >
 	<Level
 		content={ content }
+		totalBytes={ content.bytes }
 		width={ width }
 		height={ height }
 		xStart={ 0 }

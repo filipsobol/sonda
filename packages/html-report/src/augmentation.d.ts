@@ -1,5 +1,5 @@
 
-import type { JsonReportData } from 'sonar';
+import type { JsonReport } from 'sonar';
 import type { TileData } from '../TreeMapGenerator';
 
 declare module 'svelte/elements' {
@@ -10,7 +10,7 @@ declare module 'svelte/elements' {
 
 declare global {
 	interface Window {
-		SONAR_JSON_REPORT: JsonReportData;
+		SONAR_JSON_REPORT: JsonReport;
 	}
 }
 

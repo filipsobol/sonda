@@ -7,6 +7,7 @@
     "build": "rollup -c rollup.config.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-engine": "42.0.2",
     "ckeditor5": "^43.0.0"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.21.0",
+    "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "unplugin-detailed-sourcemaps": "workspace:^*",
     "unplugin-sonar": "workspace:^*"

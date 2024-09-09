@@ -1,13 +1,13 @@
 import { dirname, join, resolve, isAbsolute } from 'path';
 import { readFile } from 'fs/promises';
 import convert from 'convert-source-map';
-import type { SourceMap, LoadCodeAndMapResult } from '../types.js';
+import type { SourceMap, MaybeCodeMap } from '../types.js';
 
 /**
  * Loads code and (optionally) source map from a given file. If the file is missing
  * the `sourcesContent` field, it will be populated based on the `sources` field paths.
  */
-export async function loadCodeAndMap( codePath: string ): Promise<LoadCodeAndMapResult> {
+export async function loadCodeAndMap( codePath: string ): Promise<MaybeCodeMap> {
   let code: string = '';
 
   try {
@@ -28,7 +28,7 @@ export async function loadCodeAndMap( codePath: string ): Promise<LoadCodeAndMap
     // TODO: Handle `map.sections`
     // https://tc39.es/source-map/#index-map
 
-    map.sourcesContent ??= await updateSourcesContent( map );
+    // map.sourcesContent ??= await updateSourcesContent( map );
     map.sources = normalizeSourcesPaths( map, mapPath );
     delete map.sourceRoot;
 
@@ -58,7 +58,8 @@ async function handleSourceMappingURL(
   extractedComment: RegExpExecArray,
   sourcePath: string,
 ): Promise<{ map: SourceMap; mapPath: string }> {
-  const [ comment, souceMappingURL ] = extractedComment;
+  const comment = extractedComment[0];
+  const souceMappingURL = extractedComment[1] || extractedComment[2];
 
   const { converter, mapPath } = await ( async () => {
     if ( souceMappingURL.startsWith( 'data' ) ) {
@@ -83,11 +84,13 @@ async function handleSourceMappingURL(
   };
 }
 
+/*
 function updateSourcesContent( { sources, sourceRoot }: SourceMap ): Promise<SourceMap[ 'sourcesContent' ]> {
   return Promise.all(
     sources.map( source => readFile( join( sourceRoot ?? '', source ), 'utf-8' ) )
   );
 }
+*/
 
 function normalizeSourcesPaths( map: SourceMap, mapPath: string ): SourceMap['sources'] {
   const mapDir = dirname( mapPath );

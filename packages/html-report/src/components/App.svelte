@@ -4,26 +4,45 @@
 />
 
 <div
-	bind:clientWidth={ width }
-	bind:clientHeight={ height }
 	role="application"
-	class="wrapper relative flex size-full overflow-hidden font-mono"
+	class="wrapper relative flex overflow-hidden font-mono p-4 h-screen w-screen"
 >
-	{#if width && height}
-		<Treemap
-			content={ parsedReport }
-			width={ width }
-			height={ height }
-		/>
-	{/if}
+	<div class="flex flex-col flex-grow">
+		<!-- Tabs-->
+		<div class="">
+			{#each outputs as output}
+				<button
+					class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+					onclick={() => activeOutput = output!}
+				>
+					{ output }
+				</button>
+			{/each}
+		</div>
+
+		<!-- Treemap -->
+		<div
+			bind:clientWidth={ width }
+			bind:clientHeight={ height }
+			class="flex-grow"
+		>
+			{#if width && height}
+				<Treemap
+					content={ activeFolder }
+					width={ width }
+					height={ height }
+				/>
+			{/if}
+		</div>
+	</div>
 
 	<Dialog
-		open={ !!activeFolder }
-		onClose={ () => activeFolder = null }
+		open={ !!focusedFolder }
+		onClose={ () => focusedFolder = null }
 	>
 		{#snippet children()}
 			<Treemap
-				content={ activeFolder! }
+				content={ focusedFolder! }
 				width={ width * 0.9 }
 				height={ height * 0.9 }
 			/>
@@ -31,13 +50,13 @@
 	</Dialog>
 
 	<Dialog
-		open={ !!activeFile }
-		onClose={ () => activeFile = null }
+		open={ !!focusedFile }
+		onClose={ () => focusedFile = null }
 		dark={ true }
 	>
 		{#snippet children()}
-			<pre class="p-4">{ JSON.stringify( activeFile, null, 2 ) }</pre>
-			<pre class="p-4">{ JSON.stringify( getImporters(activeFile!), null, 2 ) }</pre>
+			<pre class="p-4">{ JSON.stringify( focusedFile, null, 2 ) }</pre>
+			<pre class="p-4">{ JSON.stringify( getImporters(focusedFile!), null, 2 ) }</pre>
 		{/snippet}
 	</Dialog>
 
@@ -45,23 +64,24 @@
 </div>
 
 <script lang="ts">
-import { setContext } from 'svelte';
-import type { NormalizedSource } from 'sonar';
-import { isFolder, parse, type Folder } from '../parser';
+import type { ReportInput } from 'sonar';
+import { isFolder, parse, type Content, type Folder } from '../parser';
 
 import Treemap from './Treemap.svelte';
 import Dialog from './Dialog.svelte';
 import Tooltip from './Tooltip.svelte';
 
 const report = window.SONAR_JSON_REPORT;
+const outputs = Object.keys( report.outputs ).map( key => key.split( '/' ).pop() );
 const parsedReport = parse( report );
-
-setContext<number>( 'totalSize', parsedReport.bytes );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeFolder = $state<Folder | null>( null );
-let activeFile = $state<NormalizedSource | null>( null );
+let activeOutput = $state<string>( outputs[0]! );
+let focusedFolder = $state<Folder | null>( null );
+let focusedFile = $state<Content | null>( null );
+
+const activeFolder = $derived( parsedReport[ outputs.indexOf( activeOutput ) ] );
 
 function onClick( { target }: Event ) {
 	const contentData = (target as any)?.contentData;
@@ -71,27 +91,17 @@ function onClick( { target }: Event ) {
 	}
 
 	if ( isFolder( contentData ) ) {
-		return activeFolder = contentData;
+		return focusedFolder = contentData;
 	}
 
-	return activeFile = contentData;
+	return focusedFile = contentData;
 }
 
-function getImporters( content: NormalizedSource ) {
-	let parent = content.parent;
-	let nodes = [
-		content.originalPath
-	];
+function getImporters( content: Content ) {
+	return Object.entries( report.inputs )
+		.filter( ( [, file ] ) => file.imports.includes( content.path ) )
 
-	while ( parent ) {
-		nodes.push( parent );
-		parent = report[ parent ]?.parent;
-	}
-
-	return Object
-		.entries( report )
-		.filter( ( [ _path, source ] ) => source.bytes > 0  )
-		.filter( ( [ _path, source ] ) => source.imports.some( node => nodes.includes( node ) ) )
+		// TODO: Remove this to get all importers data
 		.map( ( [ path ] ) => path );
 }
 </script>

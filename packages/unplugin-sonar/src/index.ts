@@ -2,75 +2,83 @@ import { join, dirname, resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   createUnplugin,
+  type TransformResult,
   type UnpluginInstance,
   type UnpluginOptions,
 } from 'unplugin';
 import {
   generateHtmlReport,
   loadCodeAndMap,
-  type ImportsGraph,
-  type SourcesGraph
+  type JsonReport,
 } from 'sonar';
 import type { NormalizedOutputOptions, OutputBundle } from 'rollup';
 import type { NormalModule } from 'webpack';
+import { rollupHandler } from './rollup.js';
+import { normalizePath } from './utils.js';
 
 async function generateReportFromAssets(
   assets: Array<string>,
   outputDir: string,
-  importsGraph: ImportsGraph,
-  sourcesGraph: SourcesGraph
+  inputs: JsonReport[ 'inputs' ],
+  sourcesGraph: Map<string, Array<string>>
 ): Promise<void> {
   const { default: open } = await import( 'open' );
 
-  const reports = assets
-    .map( asset => generateHtmlReport( asset, importsGraph, sourcesGraph ) )
-    .map( async ( reportPromise, index ) => {
-      const path = join( outputDir, `sonar-report-${ index }.html` );
-      const report = await reportPromise;
+  sourcesGraph.forEach( ( sources, path ) => {
+    const parent = inputs[ path ];
 
-      if ( !report ) {
-        return null;
+    sources.forEach( source => {
+      const normalized = normalizePath(
+        join( dirname( path ), source )
+      );
+
+      inputs[ normalized ] = {
+        bytes: 0,
+        format: parent.format,
+        imports: [],
+        belongsTo: path,
       }
-
-      await writeFile( path, report );
-      await open( path );
-
-      return path;
     } );
+  });
 
-  await Promise.all( reports );
+  const report = await generateHtmlReport( assets, inputs );
+
+  if ( !report ) {
+    return;
+  }
+
+  const path = join( outputDir, 'sonar-report.html' );
+  await writeFile( path, report );
+  await open( path );
 }
 
 // TODO: Add "open" parameter
 function factory(): UnpluginOptions {
-  // Absolute path to the output directory
   let outputDir: string;
-
-  // Map of abolute paths to assets and their source maps
   let assets: Array<string>;
-
-  // Map of absolute paths to source files and files they import
-  let importsGraph: ImportsGraph = new Map();
-
-  // Map of absolute paths to compiled files and files that they include
-  let sourcesGraph: SourcesGraph = new Map();
+  let inputs: JsonReport['inputs'] = {};
+  let sourcesGraph = new Map<string, Array<string>>();
 
   return {
     name: 'unplugin-sonar',
     enforce: 'pre',
 
-    async load( id: string ): Promise<void> {
+    async load( id: string ): Promise<TransformResult> {
       const result = await loadCodeAndMap( id );
+      const relativePath = normalizePath( id );
 
-      if ( result?.map ) {
-        result.map.sources.forEach( source => {
-          if ( source === id ) {
-            return;
-          }
+      inputs[ relativePath ] = {
+        bytes: 0,
+        format: 'unknown',
+        imports: [],
+        belongsTo: null,
+      };
 
-          return sourcesGraph.set( source, id );
-        } );
+      if ( result?.map?.sources ) {
+        sourcesGraph.set( relativePath, result.map.sources )
       }
+
+      return result;
     },
 
     writeBundle( ...args ) {
@@ -86,7 +94,7 @@ function factory(): UnpluginOptions {
         assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
       }
 
-      return generateReportFromAssets( assets, outputDir, importsGraph, sourcesGraph );
+      return generateReportFromAssets( assets, outputDir, inputs, sourcesGraph );
     },
 
     // Get outputs from Webpack
@@ -109,33 +117,29 @@ function factory(): UnpluginOptions {
                 .map( dependency => moduleGraph.getModule( dependency ) as NormalModule | null )
                 .map( resolved => resolved?.resource )
                 .filter( resolved => resolved !== undefined );
+              
+              const existingInput = inputs[ resource ];
 
-              importsGraph.set( resource, {
+              if ( existingInput ) {
+                existingInput.format = type === 'javascript/esm' ? 'esm' : 'cjs';
+                existingInput.imports = resolvedDependencies;
+                return;
+              }
+
+              inputs[ normalizePath( resource ) ] = {
+                // TODO: Get bytes from the module
+                bytes: 0,
                 format: type === 'javascript/esm' ? 'esm' : 'cjs',
-                imports: Array.from( new Set( resolvedDependencies ) )
-              } )
+                imports: resolvedDependencies.map( dep => normalizePath( dep ) ),
+                belongsTo: null,
+              };
             } );
         } );
       } );
     },
 
-    rollup: {
-      moduleParsed( module ) {
-        importsGraph.set( module.id, {
-          format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
-          imports: module.importedIds
-        } );
-      },
-    },
-
-    vite: {
-      moduleParsed( module ) {
-        importsGraph.set( module.id, {
-          format: module.meta?.commonjs?.isCommonJS ? 'cjs' : 'esm',
-          imports: module.importedIds
-        } );
-      },
-    },
+    rollup: rollupHandler( inputs ),
+    vite: rollupHandler( inputs ),
   };
 }
 

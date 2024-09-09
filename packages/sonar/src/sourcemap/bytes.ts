@@ -1,7 +1,7 @@
 import { decode, type SourceMapMappings } from '@jridgewell/sourcemap-codec';
 import type { SourceMap } from '../types.js';
 
-export function getBytesPerSource( code: string, map: SourceMap ): Array<number> {
+export function getBytesPerSource( code: string, map: SourceMap ): Map<string, number> {
 	const mappings: SourceMapMappings = decode( map.mappings );
 	const contributions = new Array( map.sources.length ).fill( '' );
 
@@ -27,5 +27,7 @@ export function getBytesPerSource( code: string, map: SourceMap ): Array<number>
 		}
 	}
 
-	return contributions.map( code => Buffer.byteLength( code ) );
+	return new Map<string, number>( 
+		contributions.map( ( code, index ) => [ map.sources[ index ], Buffer.byteLength( code ) ] )
+	);
 }

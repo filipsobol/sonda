@@ -22,26 +22,31 @@ export interface SourceMapSection {
   map: SourceMap;
 }
 
-export interface ModuleInfo {
-  format: 'esm' | 'cjs' | 'unknown';
-  imports: ReadonlyArray<string>;
-}
-
-export interface NormalizedSource extends ModuleInfo {
-  originalPath: string;
-  mappedPath: string;
-  dir: string;
-  filename: string;
+export interface ReportInput {
   bytes: number;
-  parent: string | null
+  format: ModuleFormat;
+  imports: ReadonlyArray<string>;
+  belongsTo: string | null;
 }
 
-export type Sources = Record<string, NormalizedSource>;
-export type ImportsGraph = Map<string, ModuleInfo>;
-export type SourcesGraph = Map<string, string>;
-export type JsonReportData = Record<string, NormalizedSource>;
+export interface ReportOutput {
+  bytes: number;
+  inputs: Record<string, ReportOutputInput>;
+}
 
-export type LoadCodeAndMapResult = null | {
+export interface ReportOutputInput {
+  bytesInOutput: number;
+}
+
+export interface JsonReport {
+  inputs: Record<string, ReportInput>;
+  outputs: Record<string, ReportOutput>;
+}
+
+export interface CodeMap {
   code: string;
   map?: SourceMap;
 }
+
+export type ModuleFormat = 'esm' | 'cjs' | 'unknown';
+export type MaybeCodeMap = CodeMap | null;

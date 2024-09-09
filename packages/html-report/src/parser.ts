@@ -1,4 +1,4 @@
-import type { JsonReportData, NormalizedSource } from 'sonar';
+import type { JsonReport } from 'sonar';
 
 export interface Folder {
 	type: 'folder',
@@ -8,63 +8,95 @@ export interface Folder {
 	contents: Record<string, Content>;
 }
 
-export type Content = Folder | NormalizedSource;
+export interface File {
+	type: 'file',
+	name: string;
+	path: string;
+	bytes: number;
+}
+
+export type Content = Folder | File;
 
 export function isFolder( content: Content ): content is Folder {
 	return 'contents' in content;
 }
 
-export function parse( files: JsonReportData ): Folder {
-	let rootFolder: Folder = {
-		type: 'folder',
-		name: '',
-		path: '',
-		bytes: 0,
-		contents: {}
-	};
+export function parse( report: JsonReport ): Array<Folder> {
+	let folders: Array<Folder> = [];
 
-	Object
-		.values( files )
-		.forEach( file => {
-			if ( !file.bytes ) {
+	Object.entries( report.outputs ).forEach( ( [ path, output ] ) => {
+		let rootFolder: Folder = {
+			type: 'folder',
+			name: path,
+			path: '',
+			bytes: output.bytes,
+			contents: {}
+		};
+
+		const inputs = Object.entries( output.inputs );
+
+		inputs.forEach( ( [ path, input ] ) => {
+			if ( !input.bytesInOutput ) {
 				return;
 			}
 
-			const segments = file.mappedPath.split( '/' );
+			const segments = path.split( '/' ).filter( Boolean );
 			const filename = segments.pop()!;
-			const traversedPath: Array<string> = [];
+			const traversedParts: Array<string> = [ '' ];
 			let folder = rootFolder;
 
 			while ( segments.length ) {
-				const dirname = segments.shift()!
+				let dirname = segments.shift()!
 
-				traversedPath.push( dirname );
+				// if ( dirname.startsWith( '@' ) && traversedParts.at( -1 ) === 'node_modules' ) {
+				// 	dirname += '/' + segments.shift();
+				// }
 
-				const path = traversedPath.join( '/' );
+				traversedParts.push( dirname );
 
-				folder = (folder.contents[ dirname ] as Folder) ??= {
+				const traversedPath = traversedParts.join( '/' );
+
+				folder = ( folder.contents[ dirname ] as Folder ) ??= {
 					type: 'folder',
 					name: dirname || '[root]',
-					path,
+					path: traversedPath,
 					contents: {},
-					bytes: Object
-						.values( files )
-						.filter( file => file.mappedPath.startsWith( path ) )
-						.reduce( ( sum: number, file: NormalizedSource ) => sum + file.bytes, 0 )
+					bytes: inputs
+						.filter( ( [ path ] ) => path.startsWith( traversedPath ) )
+						.reduce( ( sum: number, [ _path, input ] ) => sum + input.bytesInOutput, 0 )
 				};
 			}
 
-			traversedPath.push( filename );
+			traversedParts.push( filename );
 
-			folder.contents[ filename ] = file;
+			folder.contents[ filename ] = {
+				type: 'file',
+				name: filename,
+				path: traversedParts.join( '/' ),
+				bytes: input.bytesInOutput
+			};
 		} );
-	
-	let root: Folder = rootFolder;
 
-	// Skip directories that don't have any files and have only one subdirectory
-	while ( ('contents' in root) && Object.keys( root.contents ).length === 1 ) {
-		root = Object.values( root.contents )[ 0 ] as Folder;
-	}
+		// Skip directories that don't have any files and have only one subdirectory
+		// while ( isFolder( rootFolder ) && Object.keys( rootFolder.contents ).length === 1 ) {
+		// 	rootFolder = Object.values( rootFolder.contents )[ 0 ] as Folder;
+		// 	rootFolder.name = rootFolder.path;
+		// }
 
-	return root;
+		const assignedBytes = Object.values( rootFolder.contents ).reduce( ( sum, content ) => sum + content.bytes, 0 );
+		const unassignedBytes = rootFolder.bytes - assignedBytes;
+
+		if ( unassignedBytes ) {
+			rootFolder.contents[ '[unassigned]' ] = {
+				type: 'file',
+				name: '[unassigned]',
+				path: '[unassigned]',
+				bytes: unassignedBytes
+			};
+		}
+
+		folders.push( rootFolder );
+	} );
+
+	return folders;
 }

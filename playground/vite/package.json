@@ -7,9 +7,11 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-engine": "42.0.2",
     "ckeditor5": "^43.0.0"
   },
   "devDependencies": {
+    "esbuild": "^0.23.1",
     "unplugin-detailed-sourcemaps": "workspace:^*",
     "unplugin-sonar": "workspace:^*",
     "vite": "^5.4.1",

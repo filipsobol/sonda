@@ -1,14 +1,14 @@
 <g>
 	<rect
 		bind:this={ element }
-		data-tile={ path }
-		data-hover={ `${ name } - ${ formattedSize } (${ percentageOfTotal }%)` }
+		data-tile={ content.path }
+		data-hover={ `${ collapsedData.name } - ${ formattedSize } (${ percentageOfTotal }%)` }
 		x={ tile.x }
 		y={ tile.y }
 		width={ tile.width }
 		height={ tile.height }
 		fill={ color }
-		class="stroke-gray-800 stroke-[0.3] { isFolder( content ) ? 'cursor-zoom-in' : 'cursor-pointer' }"
+		class="stroke-black stroke-[0.3] { isFolder( content ) ? 'cursor-zoom-in' : 'cursor-pointer' }"
 	/>
 
 	<foreignObject
@@ -23,15 +23,16 @@
 			class="p-1 size-full text-center text-xs truncate"
 		>
 			{#if shouldDisplayText}
-				<span class="text-gray-900 font-semibold">{ name }</span>
+				<span class="text-gray-900 font-medium">{ collapsedData.name }</span>
 				<span class="text-gray-600">- { formattedSize }</span>
 			{/if}
 		</p>
 	</foreignObject>
 
-	{#if children}
+	{#if collapsedData.children.length}
 		<Level
-			content={ children }
+			content={ collapsedData.children }
+			totalBytes={ totalBytes }
 			width={ childWidth }
 			height={ childHeight }
 			xStart={ tile.x + padding }
@@ -41,45 +42,63 @@
 </g>
 
 <script lang="ts">
-import { getContext, onDestroy, onMount } from 'svelte';
+import { onDestroy, onMount } from 'svelte';
 import Level from './Level.svelte';
 import { isFolder, type Content } from '../parser';
 import type { TileData } from '../TreeMapGenerator';
 
+const tresholdInPixels = 20;
 const padding = 6;
 const paddingTop = 22;
 
 interface Props {
 	tile: TileData;
 	content: Content;
+	totalBytes: number;
 }
 
-let { tile, content }: Props = $props();
+let { tile, content, totalBytes }: Props = $props();
 
 let element = $state<SVGRectElement & { contentData?: Content }>();
 
-const totalSize = getContext<number>( 'totalSize' );
 const childWidth = $derived( tile.width - ( padding * 2 ) );
 const childHeight = $derived( tile.height - padding - paddingTop );
 const formattedSize = $derived( formatSize( content.bytes ) );
-const percentageOfTotal = $derived( ( content.bytes / totalSize * 100 ).toFixed(2) );
+const percentageOfTotal = $derived( ( content.bytes / totalBytes * 100 ).toFixed(2) );
 const color = $derived( `color-mix(in oklch, #fca5a5 ${ percentageOfTotal }%, #86efac)` );
 const shouldDisplayText = $derived( tile.width >= ( paddingTop * 1.75 ) && tile.height >= paddingTop );
-const name = $derived( isFolder( content ) ? content.name : content.filename );
-const path = $derived( isFolder( content ) ? content.path : content.mappedPath );
 
-const children = $derived.by(() => {
-	if ( !isFolder(content) ) {
-		return;
+const collapsedData = $derived.by(() => {
+	if ( !isFolder( content ) || childHeight <= tresholdInPixels || childWidth <= tresholdInPixels ) {
+		return {
+			name: content.name,
+			children: []
+		};
 	}
 
-	const children = Object.values( content.contents );
+	let name;
+	const pathSegments = content.path.split( '/' );
+	let children = Object.values( content.contents );
 
-	if ( !children.length || childHeight <= 0 || childWidth <= 0 ) {
-		return;
+	if ( !children.length ) {
+		return {
+			name: content.name,
+			children: []
+		};
 	}
 
-	return children;
+	while( children.length === 1 && isFolder( children[0] ) ) {
+		name = children[0].path
+			.split( '/' )
+			.slice( pathSegments.length - 1 )
+			.join( '/' );
+		children = Object.values( children[0].contents );
+	}
+
+	return {
+		name: name || content.name,
+		children
+	};
 } );
 
 function formatSize( bytes: number ) {

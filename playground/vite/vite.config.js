@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import virtual from 'vite-plugin-virtual'
-import { vitePlugin as sourcemaps } from 'unplugin-detailed-sourcemaps';
 import { vitePlugin as sonar } from 'unplugin-sonar';
 
 export default defineConfig( {
@@ -10,7 +9,6 @@ export default defineConfig( {
       'virtual:config': { hello: 'world' }
     } ),
     sonar(),
-    sourcemaps(),
   ],
   build: {
     sourcemap: true
