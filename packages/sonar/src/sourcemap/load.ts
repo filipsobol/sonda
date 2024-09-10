@@ -3,6 +3,8 @@ import { dirname, join, resolve, isAbsolute } from 'path';
 import convert from 'convert-source-map';
 import type { SourceMap, MaybeCodeMap } from '../types.js';
 
+const sourceMappingRegExp = /* #__PURE__ */ ( () => /(?:\/\/|\/\*)[@#][ \t]+sourceMappingURL=([^\s*'"`]+)[ \t]*\*?\/*/mg )();
+
 /**
  * Loads code and (optionally) source map from a given file. If the file is missing
  * the `sourcesContent` field, it will be populated based on the `sources` field paths.
@@ -16,7 +18,7 @@ export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
     return null;
   }
 
-  const extractedComment = /(?:\/\/|\/\*)[@#][ \t]+sourceMappingURL=([^\s*'"`]+)[ \t]*\*?\/*/mg.exec( code );
+  const extractedComment = code.includes( 'sourceMappingURL' ) && sourceMappingRegExp.exec( code );
 
   if ( !extractedComment ) {
     return { code };
