@@ -1,5 +1,5 @@
+import { readFileSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
-import { readFile } from 'fs/promises';
 import convert from 'convert-source-map';
 import type { SourceMap, MaybeCodeMap } from '../types.js';
 
@@ -7,38 +7,34 @@ import type { SourceMap, MaybeCodeMap } from '../types.js';
  * Loads code and (optionally) source map from a given file. If the file is missing
  * the `sourcesContent` field, it will be populated based on the `sources` field paths.
  */
-export async function loadCodeAndMap( codePath: string ): Promise<MaybeCodeMap> {
+export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
   let code: string = '';
 
   try {
-    code = await readFile( codePath, 'utf-8' );
+    code = readFileSync( codePath, 'utf-8' );
   } catch (err) {
     return null;
   }
 
-  const extractedComment = convert.mapFileCommentRegex.exec(code)!;
+  const extractedComment = /(?:\/\/|\/\*)[@#][ \t]+sourceMappingURL=([^\s*'"`]+)[ \t]*\*?\/*/mg.exec( code );
 
   if ( !extractedComment ) {
     return { code };
   }
 
-  try {
-    const { map, mapPath } = await handleSourceMappingURL( extractedComment, codePath );
+  const { map, mapPath } = handleSourceMappingURL( extractedComment, codePath );
 
-    // TODO: Handle `map.sections`
-    // https://tc39.es/source-map/#index-map
+  // TODO: Handle `map.sections`
+  // https://tc39.es/source-map/#index-map
 
-    // map.sourcesContent ??= await updateSourcesContent( map );
-    map.sources = normalizeSourcesPaths( map, mapPath );
-    delete map.sourceRoot;
+  // map.sourcesContent ??= await updateSourcesContent( map );
+  map.sources = normalizeSourcesPaths( map, mapPath );
+  delete map.sourceRoot;
 
-    return {
-      code,
-      map
-    };
-  } catch {
-    return { code };
-  }
+  return {
+    code,
+    map
+  };
 }
 
 /**
@@ -54,14 +50,14 @@ function parseSourceMapInput( str: string ): SourceMap {
 /**
  * Loads the source map information from the data URL and file path.
  */
-async function handleSourceMappingURL(
+function handleSourceMappingURL(
   extractedComment: RegExpExecArray,
   sourcePath: string,
-): Promise<{ map: SourceMap; mapPath: string }> {
+): { map: SourceMap; mapPath: string } {
   const comment = extractedComment[0];
-  const souceMappingURL = extractedComment[1] || extractedComment[2];
+  const souceMappingURL = extractedComment[1];
 
-  const { converter, mapPath } = await ( async () => {
+  const { converter, mapPath } = ( () => {
     if ( souceMappingURL.startsWith( 'data' ) ) {
       return {
         converter: convert.fromComment( comment ),
@@ -70,7 +66,7 @@ async function handleSourceMappingURL(
     }
 
     const mapPath = join( sourcePath, '..', souceMappingURL );
-    const file = await readFile( mapPath, 'utf-8' );
+    const file = readFileSync( mapPath, 'utf-8' );
 
     return {
       converter: convert.fromJSON( file ),

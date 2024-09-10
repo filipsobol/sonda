@@ -1,6 +1,6 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { readFile } from 'fs/promises';
+import { readFileSync } from 'fs';
 import { getBytesPerSource } from './sourcemap/bytes.js';
 import { loadCodeAndMap } from './sourcemap/load.js';
 import type {
@@ -12,12 +12,14 @@ import type {
   ReportOutputInput
 } from './types.js';
 
-export async function generateJsonReport(
+export function generateJsonReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>
-): Promise<JsonReport | null> {
-  const outputsOrNull = await Promise.all( assets.map( asset => processAsset( asset ) ) );
-  const outputsEntries = outputsOrNull.filter( output => !!output );
+): JsonReport | null {
+  const outputsEntries = assets
+    .filter( asset => !asset.endsWith( '.map' ) )
+    .map( asset => processAsset( asset ) )
+    .filter( output => !!output );
 
   return {
     inputs,
@@ -25,25 +27,25 @@ export async function generateJsonReport(
   };
 }
 
-export async function generateHtmlReport(
+export function generateHtmlReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>
-): Promise<string> {
+): string {
   // @ts-ignore This file will be available at runtime
-  const json = await generateJsonReport( assets, inputs );
+  const json = generateJsonReport( assets, inputs );
 
   if ( !json ) {
     return '';
   }
 
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
-  const template = await readFile( resolve( __dirname, './index.html' ), 'utf-8' );
+  const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
 
-async function processAsset( asset: string ): Promise<[ string, ReportOutput ] | void> {
-  const maybeCodeMap = await loadCodeAndMap( asset );
+function processAsset( asset: string ): [ string, ReportOutput ] | void {
+  const maybeCodeMap = loadCodeAndMap( asset );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
     return;

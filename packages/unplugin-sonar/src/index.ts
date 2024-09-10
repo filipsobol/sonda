@@ -1,5 +1,5 @@
 import { join, dirname, resolve } from 'path';
-import { writeFile } from 'fs/promises';
+import { writeFileSync } from 'fs';
 import {
   createUnplugin,
   type TransformResult,
@@ -14,16 +14,40 @@ import {
 import type { NormalizedOutputOptions, OutputBundle } from 'rollup';
 import type { NormalModule } from 'webpack';
 import { rollupHandler } from './rollup.js';
-import { normalizePath } from './utils.js';
+import { normalizePath, open } from './utils.js';
 
-async function generateReportFromAssets(
+export interface Options {
+
+  /**
+   * RegExp matching imports which sourcemap should be read.
+   *
+   * @default /(\.js|\.css)$/
+   */
+  include: RegExp;
+
+  /**
+   * RegExp matching imports for which sourcemaps should be ignored.
+   *
+   * @default undefined
+   */
+  exclude?: RegExp;
+
+  /**
+   * Whether to open the generated report in the default program for HTML files.
+   *
+   * @default true
+   */
+  open: boolean;
+}
+
+
+function generateReportFromAssets(
   assets: Array<string>,
   outputDir: string,
   inputs: JsonReport[ 'inputs' ],
-  sourcesGraph: Map<string, Array<string>>
-): Promise<void> {
-  const { default: open } = await import( 'open' );
-
+  sourcesGraph: Map<string, Array<string>>,
+  shouldOpen: boolean
+): void {
   sourcesGraph.forEach( ( sources, path ) => {
     const parent = inputs[ path ];
 
@@ -41,19 +65,32 @@ async function generateReportFromAssets(
     } );
   });
 
-  const report = await generateHtmlReport( assets, inputs );
+  const report = generateHtmlReport( assets, inputs );
 
   if ( !report ) {
     return;
   }
 
   const path = join( outputDir, 'sonar-report.html' );
-  await writeFile( path, report );
-  await open( path );
+
+  writeFileSync( path, report );
+  shouldOpen && open( path );
 }
 
 // TODO: Add "open" parameter
-function factory(): UnpluginOptions {
+function factory( options?: Partial<Options> ): UnpluginOptions {
+  const defaultOptions: Options = {
+    include: /(\.js|\.css)$/,
+    exclude: undefined,
+    open: true,
+  };
+
+  const {
+    include,
+    exclude,
+    open
+  } = Object.assign( {}, defaultOptions, options ) as Options;
+
   let outputDir: string;
   let assets: Array<string>;
   let inputs: JsonReport['inputs'] = {};
@@ -63,8 +100,12 @@ function factory(): UnpluginOptions {
     name: 'unplugin-sonar',
     enforce: 'pre',
 
-    async load( id: string ): Promise<TransformResult> {
-      const result = await loadCodeAndMap( id );
+    loadInclude( id: string ): boolean {
+      return include.test( id ) && !exclude?.test( id );
+    },
+
+    load( id: string ): TransformResult {
+      const result = loadCodeAndMap( id );
       const relativePath = normalizePath( id );
 
       inputs[ relativePath ] = {
@@ -94,7 +135,7 @@ function factory(): UnpluginOptions {
         assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
       }
 
-      return generateReportFromAssets( assets, outputDir, inputs, sourcesGraph );
+      return generateReportFromAssets( assets, outputDir, inputs, sourcesGraph, open );
     },
 
     // Get outputs from Webpack
@@ -143,7 +184,7 @@ function factory(): UnpluginOptions {
   };
 }
 
-type Plugin = UnpluginInstance<undefined>;
+type Plugin = UnpluginInstance<Partial<Options> | undefined>;
 
 export const plugin: Plugin = /* #__PURE__ */ createUnplugin(factory);
 export const vitePlugin: Plugin['vite'] = plugin.vite;
