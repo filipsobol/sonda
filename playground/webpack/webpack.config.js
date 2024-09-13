@@ -1,4 +1,4 @@
-const { webpackPlugin: sonar } = require( 'unplugin-sonar' );
+const { webpackPlugin: sonar } = require( 'sonar' );
 // const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 
 module.exports = {

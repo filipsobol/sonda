@@ -12,7 +12,7 @@
     "@types/webpack": "^5.28.5",
     "css-loader": "^6.8.1",
     "unplugin-detailed-sourcemaps": "workspace:^*",
-    "unplugin-sonar": "workspace:^*",
+    "sonar": "workspace:^*",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4"

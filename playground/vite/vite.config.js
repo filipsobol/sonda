@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import virtual from 'vite-plugin-virtual'
-import { vitePlugin as sonar } from 'unplugin-sonar';
+import { vitePlugin as sonar } from 'sonar';
 
 export default defineConfig( {
   plugins: [
