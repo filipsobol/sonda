@@ -53,7 +53,7 @@ let transform = $derived.by( () => {
 
 function onMouseMove( { target, clientX, clientY }: MouseEvent ) {
 	const element = target instanceof Element
-		&& target.hasAttribute( 'data-tile' )
+		&& target.hasAttribute( 'data-hover' )
 		&& target;
 
 	if ( !element ) {

@@ -5,127 +5,159 @@ export interface TileData {
 	height: number;
 }
 
-function sumArray( data: Array<number> ): number {
-	return data.reduce( ( acc, cur ) => acc + cur, 0 );
-}
-
-function worstRatio( row: Array<number>, width: number ): number {
-	const sum = sumArray( row );
-	const rowMax = Math.max( ...row );
-	const rowMin = Math.min( ...row );
-
-	return Math.max(
-		( ( width ** 2 ) * rowMax ) / ( sum ** 2 ),
-		( sum ** 2 ) / ( ( width ** 2 ) * rowMin )
-	);
-}
-
-// https://www.win.tue.nl/~vanwijk/stm.pdf
 export class TreeMapGenerator {
-	private content: Array<number>;
-	private sizes: Array<number> = [];
+	private sizes: Float32Array;
+	private tiles: Array<TileData>;
 	private xStart: number;
 	private yStart: number;
-	private tiles: Array<TileData> = [];
 	private widthLeft: number;
 	private heightLeft: number;
 
-	public constructor(
+	public constructor (
 		content: Array<number>,
 		width: number,
 		height: number,
 		xStart: number = 0,
-		yStart: number = 0,
+		yStart: number = 0
 	) {
-		const multiplier = height * width / sumArray( content );
+		const total = content.reduce( ( acc, cur ) => acc + cur, 0 );
+		const multiplier = ( height * width ) / total;
 
-		this.content = content;
-		this.sizes = this.content.map( size => size * multiplier );
+		this.sizes = new Float32Array( content.length );
+
+		for ( let i = 0; i < content.length; i++ ) {
+			this.sizes[ i ] = content[ i ] * multiplier;
+		}
+
+		this.tiles = new Array();
 		this.xStart = xStart;
 		this.yStart = yStart;
 		this.widthLeft = width;
 		this.heightLeft = height;
 	}
 
-	private get minSize(): number {
-		return Math.min( this.widthLeft, this.heightLeft );
-	}
+	private layout(
+		startIndex: number,
+		endIndex: number,
+		layoutLength: number,
+		vertical: boolean,
+		tileIndex: number
+	): number {
+		let offset = vertical ? this.yStart : this.xStart;
+		let dimension: number;
 
-	private layout( tiles: Array<number>, width: number, vertical: boolean ) {
-		vertical
-			? this.layoutRow( tiles, width )
-			: this.layoutColumn( tiles, width );
-	}
+		const sizes = this.sizes;
+		const tiles = this.tiles;
 
-	private layoutRow( sizes: Array<number>, width: number ): void {
-		const rowHeight = sumArray( sizes ) / width;
-		let heightOffset = this.yStart;
+		for ( let i = startIndex; i <= endIndex; i++ ) {
+			dimension = sizes[ i ] / layoutLength;
 
-		const row = sizes.map( size => {
-			const tileHeight = size / rowHeight;
-			const tileData: TileData = {
-				x: this.xStart,
-				y: heightOffset,
-				width: rowHeight,
-				height: tileHeight
-			};
+			if ( vertical ) {
+				tiles.push( {
+					x: this.xStart,
+					y: offset,
+					width: layoutLength,
+					height: dimension 
+				} );
+			} else {
+				tiles.push( {
+					x: offset,
+					y: this.yStart,
+					width: dimension,
+					height: layoutLength
+				} );
+			}
 
-			heightOffset += tileHeight;
-
-			return tileData;
-		} );
-
-		this.tiles = this.tiles.concat( row );
-		this.xStart += rowHeight;
-		this.widthLeft -= rowHeight;
-	}
-
-	private layoutColumn( sizes: Array<number>, width: number ): void {
-		const columnHeight = sumArray( sizes ) / width;
-		let widthOffset = this.xStart;
-
-		const column = sizes.map( size => {
-			const tileWidth = size / columnHeight;
-			const tileData: TileData = {
-				x: widthOffset,
-				y: this.yStart,
-				width: tileWidth,
-				height: columnHeight
-			};
-
-			widthOffset += tileWidth;
-
-			return tileData;
-		} );
-
-		this.tiles = this.tiles.concat( column );
-		this.yStart += columnHeight;
-		this.heightLeft -= columnHeight;
-	}
-
-	public calculate(
-		sizes: Array<number> = this.sizes,
-		accumulated: Array<number> = [],
-		width: number = this.minSize
-	): Array<TileData> {
-		const vertical = this.minSize === this.heightLeft;
-
-		if ( sizes.length === 1 ) {
-			this.layout( accumulated, width, vertical );
-			this.layout( sizes, width, vertical );
-			
-			return this.tiles;
+			offset += dimension;
+			tileIndex++;
 		}
 
-		const acc = [ ...accumulated, sizes[ 0 ] ];
-
-		if ( accumulated.length === 0 || worstRatio( accumulated, width ) > worstRatio( acc, width ) ) {
-			sizes.shift();
-			return this.calculate( sizes, acc, width );
+		// Update offsets after layout
+		if ( vertical ) {
+			this.xStart += layoutLength;
+			this.widthLeft -= layoutLength;
+		} else {
+			this.yStart += layoutLength;
+			this.heightLeft -= layoutLength;
 		}
 
-		this.layout( accumulated, width, vertical );
+		return tileIndex;
+	}
 
-		return this.calculate( sizes );
+	public calculate(): Array<TileData> {
+		let vertical = this.heightLeft < this.widthLeft;
+		let width = vertical ? this.heightLeft : this.widthLeft;
+		let widthSquared = width * width;
+		let rowStart = 0;
+		let rowEnd = 0;
+		let rowSum = this.sizes[ 0 ];
+		let rowMin = this.sizes[ 0 ];
+		let rowMax = this.sizes[ 0 ];
+		let tileIndex = 0;
+		let sumSquared = rowSum * rowSum;
+		let prevRatio = Math.max(
+			( widthSquared * rowMax ) / sumSquared,
+			sumSquared / ( widthSquared * rowMin )
+		);
+
+		for ( let i = 1; i < this.sizes.length; i++ ) {
+			const size = this.sizes[ i ];
+			const newSum = rowSum + size;
+			const newMin = rowMin < size ? rowMin : size;
+			const newMax = rowMax > size ? rowMax : size;
+			const newSumSquared = newSum * newSum;
+			const nextRatio = Math.max(
+				( widthSquared * newMax ) / newSumSquared,
+				newSumSquared / ( widthSquared * newMin )
+			);
+			const shouldLayout = prevRatio <= nextRatio ? 1 : 0;
+
+			if ( shouldLayout ) {
+				// Layout current row
+				tileIndex = this.layout(
+					rowStart,
+					rowEnd,
+					rowSum / width,
+					vertical,
+					tileIndex
+				);
+
+				// Update positions
+				vertical = this.heightLeft < this.widthLeft;
+				width = vertical ? this.heightLeft : this.widthLeft;
+				widthSquared = width * width;
+
+				// Reset row variables
+				rowStart = i;
+				rowEnd = i;
+				rowSum = size;
+				rowMin = size;
+				rowMax = size;
+				sumSquared = size * size;
+				prevRatio = Math.max(
+					( widthSquared * rowMax ) / sumSquared,
+					sumSquared / ( widthSquared * rowMin )
+				);
+			} else {
+				// Expand current row
+				rowEnd = i;
+				rowSum = newSum;
+				rowMin = newMin;
+				rowMax = newMax;
+				sumSquared = newSumSquared;
+				prevRatio = nextRatio;
+			}
+		}
+
+		// Layout the final row
+		tileIndex = this.layout(
+			rowStart,
+			rowEnd,
+			rowSum / width,
+			vertical,
+			tileIndex
+		);
+
+		return this.tiles;
 	}
 }

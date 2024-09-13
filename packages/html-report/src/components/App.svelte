@@ -5,35 +5,34 @@
 
 <div
 	role="application"
-	class="wrapper relative flex overflow-hidden font-mono p-4 h-screen w-screen"
+	class="wrapper relative flex flex-col overflow-hidden font-mono h-screen w-screen"
 >
-	<div class="flex flex-col flex-grow">
-		<!-- Tabs-->
-		<div class="">
-			{#each outputs as output}
-				<button
-					class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
-					onclick={() => activeOutput = output!}
-				>
-					{ output }
-				</button>
-			{/each}
-		</div>
+	<!-- Tabs-->
+	<div class="relative flex w-full h-auto overflow-scroll p-4">
+		{#each outputs as output}
+			<button
+				class="py-2.5 px-5 me-2 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-50"
+				onclick={() => activeOutput = output!}
+				data-hover={ output.path }
+			>
+				{ output.name }
+			</button>
+		{/each}
+	</div>
 
-		<!-- Treemap -->
-		<div
-			bind:clientWidth={ width }
-			bind:clientHeight={ height }
-			class="flex-grow"
-		>
-			{#if width && height}
-				<Treemap
-					content={ activeFolder }
-					width={ width }
-					height={ height }
-				/>
-			{/if}
-		</div>
+	<!-- Treemap -->
+	<div
+		bind:clientWidth={ width }
+		bind:clientHeight={ height }
+		class="flex-grow"
+	>
+		{#if width && height}
+			<Treemap
+				content={ activeFolder }
+				width={ width }
+				height={ height }
+			/>
+		{/if}
 	</div>
 
 	<Dialog
@@ -64,7 +63,6 @@
 </div>
 
 <script lang="ts">
-import type { ReportInput } from 'sonar';
 import { isFolder, parse, type Content, type Folder } from '../parser';
 
 import Treemap from './Treemap.svelte';
@@ -72,16 +70,19 @@ import Dialog from './Dialog.svelte';
 import Tooltip from './Tooltip.svelte';
 
 const report = window.SONAR_JSON_REPORT;
-const outputs = Object.keys( report.outputs ).map( key => key.split( '/' ).pop() );
+const outputs = Object.keys( report.outputs ).map( key => ({
+	name: key.split( '/' ).pop(),
+	path: key,
+}) );
 const parsedReport = parse( report );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeOutput = $state<string>( outputs[0]! );
+let activeOutput = $state( outputs[0]! );
 let focusedFolder = $state<Folder | null>( null );
 let focusedFile = $state<Content | null>( null );
 
-const activeFolder = $derived( parsedReport[ outputs.indexOf( activeOutput ) ] );
+const activeFolder = $derived( parsedReport[ outputs.findIndex( output => output.name === activeOutput.name ) ] );
 
 function onClick( { target }: Event ) {
 	const contentData = (target as any)?.contentData;
