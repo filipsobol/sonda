@@ -15,7 +15,7 @@ import type {
 export function generateJsonReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>
-): JsonReport | null {
+): JsonReport {
   const outputsEntries = assets
     .filter( asset => !asset.endsWith( '.map' ) )
     .map( asset => processAsset( asset ) )
@@ -31,7 +31,6 @@ export function generateHtmlReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>
 ): string {
-  // @ts-ignore This file will be available at runtime
   const json = generateJsonReport( assets, inputs );
 
   if ( !json ) {

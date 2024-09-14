@@ -1,5 +1,5 @@
 export interface SourceMap {
-  version: number;
+  version: 3;
   file?: string;
   sourceRoot?: string;
 
