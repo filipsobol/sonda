@@ -4,13 +4,14 @@
 	xmlns="http://www.w3.org/2000/svg"
 	role="img"
 >
+	<!-- Substract 1 and start at 0.5 to prevent stroke clipping at viewport edges -->
 	<Level
 		content={ content }
 		totalBytes={ content.bytes }
-		width={ width }
-		height={ height }
-		xStart={ 0 }
-		yStart={ 0 }
+		width={ width - 1 }
+		height={ height - 1 }
+		xStart={ 0.5 }
+		yStart={ 0.5 }
 	/>
 </svg>
 

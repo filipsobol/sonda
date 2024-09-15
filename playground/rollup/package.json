@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "42.0.2",

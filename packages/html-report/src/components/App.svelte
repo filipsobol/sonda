@@ -5,26 +5,29 @@
 
 <div
 	role="application"
-	class="wrapper relative flex flex-col overflow-hidden font-mono h-screen w-screen"
+	class="wrapper relative flex flex-col overflow-hidden h-screen w-screen"
 >
-	<!-- Tabs-->
-	<div class="relative flex w-full h-auto overflow-scroll p-4">
-		{#each outputs as output}
-			<button
-				class="py-2.5 px-5 me-2 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-50"
-				onclick={() => activeOutput = output!}
-				data-hover={ output.path }
+	<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-end space-x-2 bg-gray-50">
+		<div class="flex items-center justify-center space-x-2 max-w-sm">
+			<label for="outputs" class="block text-sm font-medium text-gray-900">Output</label>
+			<select
+				bind:value={ activeOutput }
+				onchange={() => activeOutput = activeOutput }
+				id="outputs"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 			>
-				{ output.name }
-			</button>
-		{/each}
+				{#each outputs as output, index}
+					<option value={ output }>{ index + 1 }. { output.name }</option>
+				{/each}
+			</select>
+		</div>
 	</div>
 
 	<!-- Treemap -->
 	<div
 		bind:clientWidth={ width }
 		bind:clientHeight={ height }
-		class="flex-grow"
+		class="flex-grow font-mono"
 	>
 		{#if width && height}
 			<Treemap
@@ -34,33 +37,32 @@
 			/>
 		{/if}
 	</div>
-
-	<Dialog
-		open={ !!focusedFolder }
-		onClose={ () => focusedFolder = null }
-	>
-		{#snippet children()}
-			<Treemap
-				content={ focusedFolder! }
-				width={ width * 0.9 }
-				height={ height * 0.9 }
-			/>
-		{/snippet}
-	</Dialog>
-
-	<Dialog
-		open={ !!focusedFile }
-		onClose={ () => focusedFile = null }
-		dark={ true }
-	>
-		{#snippet children()}
-			<pre class="p-4">{ JSON.stringify( focusedFile, null, 2 ) }</pre>
-			<pre class="p-4">{ JSON.stringify( getImporters(focusedFile!), null, 2 ) }</pre>
-		{/snippet}
-	</Dialog>
-
-	<Tooltip />
 </div>
+
+<Dialog
+	open={ !!focusedFolder }
+	onClose={ () => focusedFolder = null }
+>
+	{#snippet children()}
+		<Treemap
+			content={ focusedFolder! }
+			width={ width * 0.9 }
+			height={ height * 0.9 }
+		/>
+	{/snippet}
+</Dialog>
+
+<Dialog
+	open={ !!focusedFile }
+	onClose={ () => focusedFile = null }
+>
+	{#snippet children()}
+		<pre class="p-4">{ JSON.stringify( focusedFile, null, 2 ) }</pre>
+		<pre class="p-4">{ JSON.stringify( getImporters(focusedFile!), null, 2 ) }</pre>
+	{/snippet}
+</Dialog>
+
+<Tooltip />
 
 <script lang="ts">
 import { isFolder, parse, type Content, type Folder } from '../parser';

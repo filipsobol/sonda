@@ -1,15 +1,3 @@
-<!-- <dialog
-	bind:this={ element }
-	onclick={ onClick }
-  class="backdrop:bg-white backdrop:opacity-60"
->
-  <button onclick={ onClose }>X</button>
-	
-	{#if open}
-		{@render children()}
-	{/if}
-</dialog> -->
-
 <svelte:body
 	onclick={ onClick }
 	onkeydown={ onKeyDown }
@@ -22,14 +10,17 @@
 	>
 		<div
 			bind:this={ backdrop }
-			class="absolute { dark? 'bg-black' : 'bg-white' } opacity-60 w-full h-full"
+			class="absolute bg-gray-200/60 w-full h-full backdrop-blur-sm"
+			aria-hidden="true"
 		>
 		</div>
 
-		<div class="absolute top-0 right-0 m-2">
+		<div
+			class="bg-white fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] flex flex-col rounded-lg border p-6 shadow-lg"
+		>
 			<button
 				onclick={ onClose }
-				class="flex justify-center items-center border border-transparent rounded-full w-10 h-10 { dark ? 'text-gray-100' : 'text-gray-900' } hover:bg-gray-100 hover:border-gray-300"
+				class="absolute right-4 top-4 flex justify-center items-center border border-transparent rounded-full w-8 h-8 text-gray-900"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -45,12 +36,12 @@
 					<path d="M18 6 6 18M6 6l12 12"/>
 				</svg>
 			</button>
-		</div>
+			
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold leading-none tracking-tight">123</h2>
+				<p class="text-gray-500 text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio, soluta.</p>
+			</div>
 
-		<div
-			transition:fly
-			class="m-8 relative border border-gray-400 max-w-full bg-white overflow-x-auto"
-		>
 			{@render children()}
 		</div>
 	</div>
@@ -63,14 +54,12 @@ import type { Snippet } from 'svelte';
 interface Props {
 	children: Snippet;
 	open: boolean;
-	dark?: boolean;
 	onClose?: () => void;
 }
 
 let {
 	children,
 	open,
-	dark,
 	onClose
 }: Props = $props();
 

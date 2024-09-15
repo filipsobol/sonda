@@ -1,9 +1,9 @@
 <svelte:body
 	bind:clientWidth={ bodyWidth }
 	bind:clientHeight={ bodyHeight }
+	onmouseover={ onMouseMove }
 	onmousemove={ onMouseMove }
 	onmouseleave={ onMouseLeave }
-	onclick={ onMouseLeave }
 />
 
 <div
@@ -11,7 +11,7 @@
 	bind:clientHeight={ height }
 	style:visibility={ visibility }
 	style:transform={ transform }
-	class="invisible absolute z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none"
+	class="invisible absolute z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none font-mono"
 	role="tooltip"
 >
 	{ content }
