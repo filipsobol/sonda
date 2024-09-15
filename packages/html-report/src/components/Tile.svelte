@@ -8,7 +8,9 @@
 		width={ tile.width }
 		height={ tile.height }
 		fill={ color }
-		class="stroke-black stroke-[0.3] { isFolder( content ) ? 'cursor-zoom-in' : 'cursor-pointer' }"
+		class="stroke-gray-500 { isFolder( content ) ? 'cursor-zoom-in' : 'cursor-pointer' }"
+		shape-rendering="crispEdges"
+		vector-effect="non-scaling-stroke"
 	/>
 
 	<foreignObject
