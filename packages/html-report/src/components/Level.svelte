@@ -1,4 +1,4 @@
-{#each tiles as tile, index ( tile ) }
+{#each tiles as tile, index (tile)}
 	<Tile
 		tile={ tile }
 		content={ children[index] }

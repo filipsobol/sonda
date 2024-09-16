@@ -38,8 +38,8 @@
 			</button>
 			
 			<div class="mb-4">
-				<h2 class="text-lg font-semibold leading-none tracking-tight">123</h2>
-				<p class="text-gray-500 text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio, soluta.</p>
+				<h2 class="block align-text-bottom text-lg font-semibold leading-none tracking-tight">{@html title }</h2>
+				<p class="pt-2 block align-text-bottom text-gray-500 text-sm">{@html description }</p>
 			</div>
 
 			{@render children()}
@@ -48,17 +48,21 @@
 {/if}
 
 <script lang="ts">
-import { fade, fly } from 'svelte/transition';
+import { fade } from 'svelte/transition';
 import type { Snippet } from 'svelte';
 
 interface Props {
 	children: Snippet;
+	title: string;
+	description: string;
 	open: boolean;
 	onClose?: () => void;
 }
 
 let {
 	children,
+	title,
+	description,
 	open,
 	onClose
 }: Props = $props();
