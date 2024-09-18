@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import virtual from 'vite-plugin-virtual'
-import { vitePlugin as sonar } from 'sonar';
+import { vitePlugin as sonda } from 'sonda';
 
 export default defineConfig( {
   plugins: [
@@ -8,7 +8,7 @@ export default defineConfig( {
       'virtual:module': `export default { hello: 'world' }`,
       'virtual:config': { hello: 'world' }
     } ),
-    sonar(),
+    sonda(),
   ],
   build: {
     sourcemap: true

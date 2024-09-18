@@ -67,7 +67,7 @@ function generateReportFromAssets(
 		return;
 	}
 
-	const path = join( outputDir, 'sonar-report.html' );
+	const path = join( outputDir, 'sonda-report.html' );
 
 	writeFileSync( path, report );
 	shouldOpen && open( path );
@@ -93,7 +93,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 	let sourcesGraph = new Map<string, Array<string>>();
 
 	return {
-		name: 'sonar',
+		name: 'sonda',
 		enforce: 'pre',
 
 		loadInclude( id: string ): boolean {
@@ -120,7 +120,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 
 		writeBundle( ...args ) {
 			if ( !args.length && !assets ) {
-				throw new Error( 'Could not detect output assets. Please file an issue in the Sonar repository.' );
+				throw new Error( 'Could not detect output assets. Please file an issue in the Sonda repository.' );
 			}
 
 			if ( args.length ) {
@@ -140,13 +140,13 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 				options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
 			} );
 
-			hooks.afterEmit.tap( 'sonar', ( compiler ) => {
+			hooks.afterEmit.tap( 'sonda', ( compiler ) => {
 				outputDir = compiler.options.output.path ?? process.cwd();
 				assets = Object.keys( compiler.assets ).map( name => join( outputDir, name ) );
 			} );
 
-			hooks.compilation.tap( 'sonar', ( { hooks, moduleGraph } ) => {
-				hooks.optimizeModules.tap( 'sonar', ( modules ) => {
+			hooks.compilation.tap( 'sonda', ( { hooks, moduleGraph } ) => {
+				hooks.optimizeModules.tap( 'sonda', ( modules ) => {
 					Array
 						.from( modules as Iterable<NormalModule> )
 						.forEach( ( { dependencies, resource, type } ) => {
@@ -218,15 +218,15 @@ export function rollupHandler( inputs: JsonReport[ 'inputs' ] ): Partial<Plugin>
 }
 
 
-type SonarPlugin = UnpluginInstance<Partial<Options> | undefined>;
+type SondaPlugin = UnpluginInstance<Partial<Options> | undefined>;
 
-export const plugin: SonarPlugin = /* #__PURE__ */ createUnplugin( factory );
-export const vitePlugin: SonarPlugin[ 'vite' ] = plugin.vite;
-export const rollupPlugin: SonarPlugin[ 'rollup' ] = plugin.rollup;
-export const rolldownPlugin: SonarPlugin[ 'rolldown' ] = plugin.rolldown;
-export const webpackPlugin: SonarPlugin[ 'webpack' ] = plugin.webpack;
-export const rspackPlugin: SonarPlugin[ 'rspack' ] = plugin.rspack;
-export const esbuildPlugin: SonarPlugin[ 'esbuild' ] = plugin.esbuild;
-export const farmPlugin: SonarPlugin[ 'farm' ] = plugin.farm;
+export const plugin: SondaPlugin = /* #__PURE__ */ createUnplugin( factory );
+export const vitePlugin: SondaPlugin[ 'vite' ] = plugin.vite;
+export const rollupPlugin: SondaPlugin[ 'rollup' ] = plugin.rollup;
+export const rolldownPlugin: SondaPlugin[ 'rolldown' ] = plugin.rolldown;
+export const webpackPlugin: SondaPlugin[ 'webpack' ] = plugin.webpack;
+export const rspackPlugin: SondaPlugin[ 'rspack' ] = plugin.rspack;
+export const esbuildPlugin: SondaPlugin[ 'esbuild' ] = plugin.esbuild;
+export const farmPlugin: SondaPlugin[ 'farm' ] = plugin.farm;
 
 export type { JsonReport } from './types';

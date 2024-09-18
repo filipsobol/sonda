@@ -15,7 +15,7 @@
     "build": "rollup -c ../../rollup.config.js && tsc"
   },
   "dependencies": {
-    "sonar": "workspace:^*",
+    "sonda": "workspace:^*",
     "unplugin": "^1.12.1"
   }
 }

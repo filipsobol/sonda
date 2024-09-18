@@ -1,4 +1,4 @@
-import type { JsonReport } from 'sonar';
+import type { JsonReport } from 'sonda';
 
 export interface Folder {
 	type: 'folder',

@@ -38,7 +38,7 @@
 			</svg>
 		</button>
 		<a
-			href="https://github.com/filipsobol/sonar"
+			href="https://github.com/filipsobol/sonda"
 			target="_blank"
 			class="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
 		>
@@ -112,7 +112,7 @@ import Treemap from './Treemap.svelte';
 import Dialog from './Dialog.svelte';
 import Tooltip from './Tooltip.svelte';
 
-const report = window.SONAR_JSON_REPORT;
+const report = window.SONDA_JSON_REPORT;
 const outputs = Object.keys( report.outputs ).map( key => ({
 	name: key.split( '/' ).pop(),
 	path: key,

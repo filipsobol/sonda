@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import styles from 'rollup-plugin-styles';
-import { rollupPlugin as sonar } from 'sonar';
+import { rollupPlugin as sonda } from 'sonda';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig( {
@@ -33,6 +33,6 @@ export default defineConfig( {
 			// }
 		} ),
 		// visualizer(),
-		sonar(),
+		sonda(),
 	]
 } );

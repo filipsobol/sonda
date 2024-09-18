@@ -24,13 +24,13 @@ export default defineConfig({
       minify: false,
       inject: {
         data: {
-          SONAR_REPORT_DATA: `<script type="module">window.SONAR_JSON_REPORT = JSON.parse(String.raw\`${REPORT_DATA}\`);</script>`,
+          SONDA_REPORT_DATA: `<script type="module">window.SONDA_JSON_REPORT = JSON.parse(String.raw\`${REPORT_DATA}\`);</script>`,
         },
       },
     }),
   ],
   build: {
     emptyOutDir: false,
-    outDir: resolve(import.meta.dirname, "../sonar/dist"),
+    outDir: resolve(import.meta.dirname, "../sonda/dist"),
   },
 });
