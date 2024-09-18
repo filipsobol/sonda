@@ -1,6 +1,6 @@
 <svelte:body
-	onclick={ onClick }
-	onkeydown={ onClick }
+	{ onclick }
+	{ onkeydown }
 />
 
 <div
@@ -19,7 +19,10 @@
 				{/each}
 			</select>
 		</div>
-		<button class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10">
+		<button
+			aria-label="Details of the entire build output"
+			class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="20"
@@ -40,6 +43,7 @@
 		<a
 			href="https://github.com/filipsobol/sonda"
 			target="_blank"
+			aria-label="GitHub repository"
 			class="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
 		>
 			<svg
@@ -127,7 +131,7 @@ let focusedFile = $state<Content | null>( null );
 
 const activeFolder = $derived( parsedReport[ outputs.findIndex( output => output.name === activeOutput.name ) ] );
 
-function onClick( { target }: Event ) {
+function onclick( { target }: Event ) {
 	const contentData = (target as any)?.contentData;
 
 	if ( !contentData ) {
@@ -139,6 +143,22 @@ function onClick( { target }: Event ) {
 	}
 
 	return focusedFile = contentData;
+}
+
+function onkeydown(  event: KeyboardEvent  ) {
+	if ( event.key !== 'Escape' ) {
+		return;
+	}
+
+	event.stopPropagation();
+
+	if ( focusedFile ) {
+		return focusedFile = null;
+	}
+
+	if ( focusedFolder ) {
+		return focusedFolder = null;
+	}
 }
 
 function getImporters( content: Content ) {

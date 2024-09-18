@@ -1,6 +1,5 @@
 <svelte:body
-	onclick={ onClick }
-	onkeydown={ onKeyDown }
+	{ onclick }
 />
 
 {#if open}
@@ -10,7 +9,7 @@
 	>
 		<div
 			bind:this={ backdrop }
-			class="absolute bg-gray-200/60 w-full h-full backdrop-blur-sm"
+			class="absolute bg-gray-200/70 w-full h-full backdrop-blur-sm"
 			aria-hidden="true"
 		>
 		</div>
@@ -20,6 +19,7 @@
 		>
 			<button
 				onclick={ onClose }
+				aria-label="Close dialog"
 				class="absolute right-4 top-4 flex justify-center items-center border border-transparent rounded-full w-8 h-8 text-gray-900"
 			>
 				<svg
@@ -69,14 +69,8 @@ let {
 
 let backdrop = $state<HTMLElement>();
 
-function onClick( event: MouseEvent ) {
+function onclick( event: MouseEvent ) {
 	if ( onClose && event.target === backdrop! ) {
-		onClose();
-	}
-}
-
-function onKeyDown( event: KeyboardEvent ) {
-	if ( onClose && event.key === 'Escape' ) {
 		onClose();
 	}
 }
