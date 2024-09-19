@@ -1,3 +1,4 @@
+import { relative } from 'path';
 import { exec } from 'child_process';
 import upath from 'upath';
 
@@ -6,11 +7,15 @@ const normalizers: Array<[ RegExp, string ]> = /* #__PURE__ */ ( () => [
 	[ /^\0/, '' ],
 ] )();
 
+const cwd = process.cwd();
+
 export function normalizePath( path: string ): string {
-	return normalizers.reduce(
+	const normalized = normalizers.reduce(
 		( p, [ pattern, replace ] ) => p.replace( pattern, replace ),
 		upath.normalizeSafe( path )
 	);
+
+	return relative( cwd, normalized );
 }
 
 function getCommandLine() {
