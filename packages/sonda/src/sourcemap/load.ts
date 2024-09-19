@@ -18,15 +18,15 @@ function parseSourceMapInput( str: string ): SourceMap {
 	sourceMappingURL=data:application/json;uri,data
 	sourceMappingURL=map-file-comment.css.map
 */
-const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\s*/;
+const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 
 export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
 	try {
 		const code = readFileSync( codePath, 'utf-8' );
 
-		const extractedComment = code.includes( 'sourceMappingURL' ) && sourceMappingRegExp.exec( code );
+		const extractedComment = code.includes( 'sourceMappingURL' ) && Array.from( code.matchAll( sourceMappingRegExp ) ).at( -1 );
 
-		if ( !extractedComment ) {
+		if ( !extractedComment || !extractedComment.length ) {
 			return { code };
 		}
 

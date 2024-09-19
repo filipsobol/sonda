@@ -136,9 +136,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 
 		// Get outputs from Webpack
 		webpack( { hooks, options } ) {
-			hooks.afterEnvironment.tap( 'ModifyOutputPlugin', () => {
-				options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
-			} );
+			options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
 
 			hooks.afterEmit.tap( 'sonda', ( compiler ) => {
 				outputDir = normalizePath( compiler.options.output.path ?? process.cwd() );
