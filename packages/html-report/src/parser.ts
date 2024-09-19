@@ -40,17 +40,13 @@ export function parse( report: JsonReport ): Array<Folder> {
 				return;
 			}
 
-			const segments = path.split( '/' ).filter( Boolean );
+			const segments = path.split( '/' );
 			const filename = segments.pop()!;
-			const traversedParts: Array<string> = [ '' ];
+			const traversedParts: Array<string> = [];
 			let folder = rootFolder;
 
 			while ( segments.length ) {
 				let dirname = segments.shift()!
-
-				// if ( dirname.startsWith( '@' ) && traversedParts.at( -1 ) === 'node_modules' ) {
-				// 	dirname += '/' + segments.shift();
-				// }
 
 				traversedParts.push( dirname );
 
@@ -76,12 +72,6 @@ export function parse( report: JsonReport ): Array<Folder> {
 				bytes: input.bytesInOutput
 			};
 		} );
-
-		// Skip directories that don't have any files and have only one subdirectory
-		// while ( isFolder( rootFolder ) && Object.keys( rootFolder.contents ).length === 1 ) {
-		// 	rootFolder = Object.values( rootFolder.contents )[ 0 ] as Folder;
-		// 	rootFolder.name = rootFolder.path;
-		// }
 
 		const assignedBytes = Object.values( rootFolder.contents ).reduce( ( sum, content ) => sum + content.bytes, 0 );
 		const unassignedBytes = rootFolder.bytes - assignedBytes;

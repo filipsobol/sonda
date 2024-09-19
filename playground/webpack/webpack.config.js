@@ -1,4 +1,5 @@
 const { webpackPlugin: sonda } = require( 'sonda' );
+const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
 // const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 
 module.exports = {
@@ -9,7 +10,16 @@ module.exports = {
     clean: true
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
     sonda(),
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [ MiniCssExtractPlugin.loader, "css-loader" ],
+      },
+    ],
+  },
 };

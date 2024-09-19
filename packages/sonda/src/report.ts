@@ -11,6 +11,7 @@ import type {
   CodeMap,
   ReportOutputInput
 } from './types.js';
+import { normalizePath } from './utils.js';
 
 export function generateJsonReport(
   assets: Array<string>,
@@ -53,10 +54,10 @@ function processAsset( asset: string ): [ string, ReportOutput ] | void {
   const { code, map } = maybeCodeMap;
   const bytes = getBytesPerSource( code, map );
 
-  return [ asset, {
+  return [ normalizePath( asset ), {
     bytes: Buffer.byteLength( code ),
     inputs: map.sources.reduce( (acc, source) => {
-      acc[ source ] = {
+      acc[ normalizePath( source ) ] = {
         bytesInOutput: bytes.get( source ) || 0
       };
 

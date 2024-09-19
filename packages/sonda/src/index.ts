@@ -112,7 +112,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 			};
 
 			if ( result?.map?.sources ) {
-				sourcesGraph.set( relativePath, result.map.sources )
+				sourcesGraph.set( relativePath, result.map.sources.map( source => normalizePath( source ) ) )
 			}
 
 			return result;
@@ -127,7 +127,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 				// Get outputs from Rollup / Vite
 				const [ options, bundle ] = args as unknown as [ NormalizedOutputOptions, OutputBundle ];
 
-				outputDir = resolve( process.cwd(), options.dir ?? dirname( options.file! ) );
+				outputDir = normalizePath( resolve( process.cwd(), options.dir ?? dirname( options.file! ) ) );
 				assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
 			}
 
@@ -141,7 +141,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 			} );
 
 			hooks.afterEmit.tap( 'sonda', ( compiler ) => {
-				outputDir = compiler.options.output.path ?? process.cwd();
+				outputDir = normalizePath( compiler.options.output.path ?? process.cwd() );
 				assets = Object.keys( compiler.assets ).map( name => join( outputDir, name ) );
 			} );
 
@@ -150,12 +150,17 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 					Array
 						.from( modules as Iterable<NormalModule> )
 						.forEach( ( { dependencies, resource, type } ) => {
+							if ( !resource ) {
+								return;
+							}
+
+							const relativePath = normalizePath( resource );
 							const resolvedDependencies = dependencies
 								.map( dependency => moduleGraph.getModule( dependency ) as NormalModule | null )
 								.map( resolved => resolved?.resource )
 								.filter( resolved => resolved !== undefined );
 
-							const existingInput = inputs[ resource ];
+							const existingInput = inputs[ relativePath ];
 
 							if ( existingInput ) {
 								existingInput.format = type === 'javascript/esm' ? 'esm' : 'cjs';
@@ -163,7 +168,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 								return;
 							}
 
-							inputs[ normalizePath( resource ) ] = {
+							inputs[ relativePath ] = {
 								// TODO: Get bytes from the module
 								bytes: 0,
 								format: type === 'javascript/esm' ? 'esm' : 'cjs',
@@ -217,7 +222,6 @@ export function rollupHandler( inputs: JsonReport[ 'inputs' ] ): Partial<Plugin>
 	};
 }
 
-
 type SondaPlugin = UnpluginInstance<Partial<Options> | undefined>;
 
 export const plugin: SondaPlugin = /* #__PURE__ */ createUnplugin( factory );
@@ -229,4 +233,5 @@ export const rspackPlugin: SondaPlugin[ 'rspack' ] = plugin.rspack;
 export const esbuildPlugin: SondaPlugin[ 'esbuild' ] = plugin.esbuild;
 export const farmPlugin: SondaPlugin[ 'farm' ] = plugin.farm;
 
+export { loadCodeAndMap } from './sourcemap/load.js';
 export type { JsonReport } from './types';

@@ -1,6 +1,7 @@
 import { builtinModules } from 'module';
-import { resolve } from "path";
-import { rm } from "fs/promises";
+import { resolve } from 'path';
+import { pathToFileURL } from 'url';
+import { rm } from 'fs/promises';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import swc from '@rollup/plugin-swc';
 
@@ -11,7 +12,7 @@ function cwdResolve ( name ) {
 // Remove old build folder
 await rm( cwdResolve( "dist" ), { recursive: true, force: true } );
 
-const { default: pkg } = await import( cwdResolve( "./package.json" ), {
+const { default: pkg } = await import( pathToFileURL( cwdResolve( "./package.json" ) ), {
 	with: { type: "json" },
 } );
 

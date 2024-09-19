@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+import upath from 'upath';
 
 const normalizers: Array<[ RegExp, string ]> = /* #__PURE__ */ ( () => [
 	// Unicode escape sequences used by Rollup and Vite to identify virtual modules
@@ -6,7 +7,10 @@ const normalizers: Array<[ RegExp, string ]> = /* #__PURE__ */ ( () => [
 ] )();
 
 export function normalizePath( path: string ): string {
-	return normalizers.reduce( ( p, [ pattern, replace ] ) => p.replace( pattern, replace ), path );
+	return normalizers.reduce(
+		( p, [ pattern, replace ] ) => p.replace( pattern, replace ),
+		upath.normalizeSafe( path )
+	);
 }
 
 function getCommandLine() {

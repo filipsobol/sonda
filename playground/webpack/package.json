@@ -3,16 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-engine": "42.0.2",
     "ckeditor5": "^43.0.0"
   },
   "devDependencies": {
     "@types/webpack": "^5.28.5",
-    "css-loader": "^6.8.1",
-    "unplugin-detailed-sourcemaps": "workspace:^*",
+    "css-loader": "^6.11.0",
+    "mini-css-extract-plugin": "^2.9.1",
     "sonda": "workspace:^*",
+    "style-loader": "^4.0.0",
+    "unplugin-detailed-sourcemaps": "workspace:^*",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4"
