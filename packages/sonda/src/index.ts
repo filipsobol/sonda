@@ -232,4 +232,4 @@ export const esbuildPlugin: SondaPlugin[ 'esbuild' ] = plugin.esbuild;
 export const farmPlugin: SondaPlugin[ 'farm' ] = plugin.farm;
 
 export { loadCodeAndMap } from './sourcemap/load.js';
-export type { JsonReport } from './types';
+export type { JsonReport, ReportInput, ReportOutput, ReportOutputInput } from './types';

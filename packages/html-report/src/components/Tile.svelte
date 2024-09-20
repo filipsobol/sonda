@@ -1,8 +1,8 @@
 <g>
 	<rect
 		bind:this={ element }
-		data-tile={ content.path }
-		data-hover={ `${ collapsedData.name } - ${ formattedSize } (${ percentageOfTotal }%)` }
+		data-tile={ content.name }
+		data-hover={ `${ content.name } - ${ formattedSize } (${ percentageOfTotal }%)` }
 		x={ tile.x }
 		y={ tile.y }
 		width={ tile.width }
@@ -25,15 +25,15 @@
 			class="p-1 size-full text-center text-xs truncate"
 		>
 			{#if shouldDisplayText}
-				<span class="text-gray-900 font-medium">{ collapsedData.name }</span>
+				<span class="text-gray-900 font-medium">{ content.name }</span>
 				<span class="text-gray-600">- { formattedSize }</span>
 			{/if}
 		</p>
 	</foreignObject>
 
-	{#if collapsedData.children.length}
+	{#if children.length}
 		<Level
-			content={ collapsedData.children }
+			content={ children }
 			totalBytes={ totalBytes }
 			width={ childWidth }
 			height={ childHeight }
@@ -46,7 +46,7 @@
 <script lang="ts">
 import { onDestroy, onMount } from 'svelte';
 import Level from './Level.svelte';
-import { isFolder, type Content } from '../parser';
+import { isFolder, type Content } from '../FileSystemTrie';
 import type { TileData } from '../TreeMapGenerator';
 
 const tresholdInPixels = 20;
@@ -70,37 +70,12 @@ const percentageOfTotal = $derived( ( content.bytes / totalBytes * 100 ).toFixed
 const color = $derived( `color-mix(in oklch, #fca5a5 ${ percentageOfTotal }%, #86efac)` );
 const shouldDisplayText = $derived( tile.width >= ( paddingTop * 1.75 ) && tile.height >= paddingTop );
 
-const collapsedData = $derived.by(() => {
+const children = $derived.by(() => {
 	if ( !isFolder( content ) || childHeight <= tresholdInPixels || childWidth <= tresholdInPixels ) {
-		return {
-			name: content.name,
-			children: []
-		};
+		return [];
 	}
 
-	let name;
-	const pathSegments = content.path.split( '/' );
-	let children = Object.values( content.contents );
-
-	if ( !children.length ) {
-		return {
-			name: content.name,
-			children: []
-		};
-	}
-
-	while( children.length === 1 && isFolder( children[0] ) ) {
-		name = children[0].path
-			.split( '/' )
-			.slice( pathSegments.length - 1 )
-			.join( '/' );
-		children = Object.values( children[0].contents );
-	}
-
-	return {
-		name: name || content.name,
-		children
-	};
+	return content.items;
 } );
 
 function formatSize( bytes: number ) {

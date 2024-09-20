@@ -110,7 +110,7 @@
 <Tooltip />
 
 <script lang="ts">
-import { isFolder, parse, type Content, type Folder } from '../parser';
+import { isFolder, getTrie, type File, type Folder } from '../FileSystemTrie';
 
 import Treemap from './Treemap.svelte';
 import Dialog from './Dialog.svelte';
@@ -121,15 +121,15 @@ const outputs = Object.keys( report.outputs ).map( key => ({
 	name: key.split( '/' ).pop(),
 	path: key,
 }) );
-const parsedReport = parse( report );
+const parsedReport = getTrie( report );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
 let activeOutput = $state( outputs[0]! );
 let focusedFolder = $state<Folder | null>( null );
-let focusedFile = $state<Content | null>( null );
+let focusedFile = $state<File | null>( null );
 
-const activeFolder = $derived( parsedReport[ outputs.findIndex( output => output.name === activeOutput.name ) ] );
+const activeFolder = $derived( parsedReport[ outputs.findIndex( output => output.name === activeOutput.name ) ] as Folder );
 
 function onclick( { target }: Event ) {
 	const contentData = (target as any)?.contentData;
@@ -161,9 +161,9 @@ function onkeydown(  event: KeyboardEvent  ) {
 	}
 }
 
-function getImporters( content: Content ) {
+function getImporters( content: File ) {
 	return Object.entries( report.inputs )
-		.filter( ( [, file ] ) => file.imports.includes( content.path ) )
+		.filter( ( [, file ] ) => file.imports.includes( content.name ) )
 
 		// TODO: Remove this to get all importers data
 		.map( ( [ path ] ) => path );

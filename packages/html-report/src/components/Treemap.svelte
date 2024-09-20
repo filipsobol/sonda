@@ -20,12 +20,12 @@
 
 <script lang="ts">
 import Level from './Level.svelte';
-import type { Content } from '../parser';
+import type { Folder } from '../FileSystemTrie';
 
 interface Props {
 	width: number;
 	height: number;
-	content: Content;
+	content: Folder;
 }
 
 let {

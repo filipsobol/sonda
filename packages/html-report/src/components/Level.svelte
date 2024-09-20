@@ -9,7 +9,7 @@
 <script lang="ts">
 import Tile from './Tile.svelte';
 import { TreeMapGenerator } from '../TreeMapGenerator';
-import type { Content } from '../parser';
+import type { Content } from '../FileSystemTrie';
 
 interface Props {
 	content: Content | Array<Content>;
@@ -34,9 +34,7 @@ const children = $derived.by(() => {
 		return [ content ];
 	}
 
-	return Object
-		.values<Content>( content )
-		.sort( ( a, b ) => b.bytes - a.bytes );
+	return Object.values<Content>( content );
 });
 
 const tiles = $derived.by( () => {
