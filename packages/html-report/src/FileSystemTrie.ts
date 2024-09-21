@@ -15,20 +15,18 @@ export interface Folder {
 
 export type Content = Folder | File;
 
-export function getTrie( report: JsonReport ): Array<Content> {
+export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 	return Object.entries( report.outputs ).map( ( [ outputPath, output ] ) => {
 		const trie = new FileSystemTrie();
 
-		Object.entries( output.inputs ).forEach( ( [ path, input ] ) => {
-			trie.insert( path, input );
-		} );
-
-		const unassignedBytes = output.bytes - trie.root.bytes;
+		Object
+			.entries( output.inputs )
+			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
 
 		trie.root.items.push( {
 			name: '[unassigned]',
 			path: '[unassigned]',
-			bytes: unassignedBytes,
+			bytes: output.bytes - trie.root.bytes,
 			items: []
 		} );
 
@@ -37,7 +35,7 @@ export function getTrie( report: JsonReport ): Array<Content> {
 
 		trie.optimize();
 
-		return trie.root;
+		return trie;
 	} );
 }
 
@@ -109,5 +107,15 @@ export class FileSystemTrie {
 			// Repeat for child folders
 			node.items.forEach( item => isFolder( item ) && stack.push( item ) );
 		}
+	}
+
+	get( path: string ): Content | null {
+		let content: Content | null = this.root;
+
+		while ( content && content.path !== path ) {
+			content = isFolder( content ) && content.items.find( item => path.startsWith( item.path ) ) || null;
+		}
+
+		return content;
 	}
 }

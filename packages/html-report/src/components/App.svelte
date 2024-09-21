@@ -10,12 +10,11 @@
 	<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-end space-x-2 bg-gray-50">
 		<div class="flex items-center justify-center space-x-2 max-w-sm">
 			<select
-				bind:value={ activeOutput }
-				onchange={() => activeOutput = activeOutput }
+				bind:value={ activeOutputIndex }
 				class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10 min-w-80"
 			>
 				{#each outputs as output, index}
-					<option value={ output }>{ index + 1 }. { output.name }</option>
+					<option value={ index }>{ index + 1 }. { output.root.name }</option>
 				{/each}
 			</select>
 		</div>
@@ -72,7 +71,7 @@
 	>
 		{#if width && height}
 			<Treemap
-				content={ activeFolder }
+				content={ activeOutput.root }
 				width={ width }
 				height={ height }
 			/>
@@ -117,32 +116,34 @@ import Dialog from './Dialog.svelte';
 import Tooltip from './Tooltip.svelte';
 
 const report = window.SONDA_JSON_REPORT;
-const outputs = Object.keys( report.outputs ).map( key => ({
-	name: key.split( '/' ).pop(),
-	path: key,
-}) );
-const parsedReport = getTrie( report );
+const outputs = getTrie( report );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeOutput = $state( outputs[0]! );
 let focusedFolder = $state<Folder | null>( null );
 let focusedFile = $state<File | null>( null );
+let activeOutputIndex = $state<number>( 0 );
 
-const activeFolder = $derived( parsedReport[ outputs.findIndex( output => output.name === activeOutput.name ) ] as Folder );
+const activeOutput = $derived( outputs[ activeOutputIndex ] );
 
 function onclick( { target }: Event ) {
-	const contentData = (target as any)?.contentData;
+	const path = target instanceof Element && target.getAttribute( 'data-tile' );
 
-	if ( !contentData ) {
+	if ( !path ) {
 		return;
 	}
 
-	if ( isFolder( contentData ) ) {
-		return focusedFolder = contentData;
+	const content = activeOutput.get( path );
+
+	if ( !content ) {
+		return;
 	}
 
-	return focusedFile = contentData;
+	if ( isFolder( content ) ) {
+		return focusedFolder = content;
+	}
+
+	return focusedFile = content;
 }
 
 function onkeydown(  event: KeyboardEvent  ) {
@@ -163,7 +164,7 @@ function onkeydown(  event: KeyboardEvent  ) {
 
 function getImporters( content: File ) {
 	return Object.entries( report.inputs )
-		.filter( ( [, file ] ) => file.imports.includes( content.name ) )
+		.filter( ( [, file ] ) => file.imports.includes( content.path ) )
 
 		// TODO: Remove this to get all importers data
 		.map( ( [ path ] ) => path );

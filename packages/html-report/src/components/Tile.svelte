@@ -1,7 +1,6 @@
 <g>
 	<rect
-		bind:this={ element }
-		data-tile={ content.name }
+		data-tile={ content.path }
 		data-hover={ `${ content.name } - ${ formattedSize } (${ percentageOfTotal }%)` }
 		x={ tile.x }
 		y={ tile.y }
@@ -44,7 +43,6 @@
 </g>
 
 <script lang="ts">
-import { onDestroy, onMount } from 'svelte';
 import Level from './Level.svelte';
 import { isFolder, type Content } from '../FileSystemTrie';
 import type { TileData } from '../TreeMapGenerator';
@@ -60,8 +58,6 @@ interface Props {
 }
 
 let { tile, content, totalBytes }: Props = $props();
-
-let element = $state<SVGRectElement & { contentData?: Content }>();
 
 const childWidth = $derived( tile.width - ( padding * 2 ) );
 const childHeight = $derived( tile.height - padding - paddingTop );
@@ -100,12 +96,4 @@ function formatSize( bytes: number ) {
 	// Use `toFixed` only if the size is in KiB or greater.
 	return `${ iterations ? size.toFixed(2) : size } ${ sizes[iterations] }`;
 }
-
-onMount( () => {
-	element!.contentData = content;
-} );
-
-onDestroy( () => {
-	element!.contentData = undefined;
-} );
 </script>
