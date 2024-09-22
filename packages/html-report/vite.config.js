@@ -21,7 +21,6 @@ export default defineConfig({
       removeViteModuleLoader: true,
     }),
     createHtmlPlugin({
-      minify: false,
       inject: {
         data: {
           SONDA_REPORT_DATA: `<script type="module">window.SONDA_JSON_REPORT = JSON.parse(String.raw\`${REPORT_DATA}\`);</script>`,

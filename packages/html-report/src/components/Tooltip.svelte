@@ -3,19 +3,18 @@
 	bind:clientHeight={ bodyHeight }
 	onmouseover={ onMouseMove }
 	onmousemove={ onMouseMove }
-	onmouseleave={ () => hoveredElement = null }
+	onmouseleave={ () => content = '' }
 />
 
 <div
 	bind:clientWidth={ width }
 	bind:clientHeight={ height }
-	class="fixed z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none font-mono will-change-transform"
-	style="transform: translate( calc( var(--x) - var(--x-offset) ), calc( var(--y) - var(--y-offset) ) )"
 	role="tooltip"
+	class="fixed z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none font-mono will-change-transform"
+	class:invisible={ !content }
+	style="transform: translate( var(--x), var(--y) )"
 	style:--x={ x }
-	style:--x-offset={ xOffset }
 	style:--y={ y }
-	style:--y-offset={ yOffset }
 >
 	{ content }
 </div>
@@ -29,22 +28,20 @@ let bodyWidth = $state<number>( 0 );
 let bodyHeight = $state<number>( 0 );
 let mouseX = $state<number>( 0 );
 let mouseY = $state<number>( 0 );
-let hoveredElement = $state<Element | null>( null );
+let content = $state<string>( '' );
+let x = $state<string>( '0px' );
+let y = $state<string>( '0px' );
 
-const content = $derived( hoveredElement?.getAttribute( 'data-hover' ) );
-const x = $derived( hoveredElement ? `${ mouseX }px` : '-9999px' );
-const y = $derived( hoveredElement ? `${ mouseY }px` : '-9999px' );
-const xOffset = $derived( mouseX + width > bodyWidth - margin ? `${ margin }px - 100%` : `-${ margin }px` );
-const yOffset = $derived( mouseY + height > bodyHeight - margin ? '0px - 100%' : `-${ margin }px` );
+$effect(() => {
+	if ( !content ) return;
+
+	// Update tooltip position in one batch
+	x = ( mouseX + width + margin > bodyWidth ? mouseX - width - margin : mouseX + margin ) + 'px';
+	y = ( mouseY + height + margin > bodyHeight ? mouseY - height : mouseY + margin ) + 'px';
+});
 
 function onMouseMove( { target, clientX, clientY }: MouseEvent ) {
-	hoveredElement = target instanceof Element
-		&& target.hasAttribute( 'data-hover' )
-		&& target
-		|| null;
-
-	if ( !hoveredElement ) return;
-
+	content = target instanceof Element && target.getAttribute( 'data-hover' ) || '';
 	mouseX = clientX;
 	mouseY = clientY;
 }
