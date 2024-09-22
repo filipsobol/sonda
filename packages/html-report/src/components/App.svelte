@@ -28,45 +28,19 @@
 	</div>
 </div>
 
-<Dialog
-	open={ !!focusedFolder }
-	title={ `Details of the <code>${ focusedFolder!.name }</code> directory` }
-	description={ `Full path: <code>${ focusedFolder!.path }</code>` }
-	onClose={ () => focusedFolder = null }
->
-	{#snippet children()}
-		<Treemap
-			content={ focusedFolder! }
-			width={ width * 0.9 }
-			height={ height * 0.9 }
-		/>
-	{/snippet}
-</Dialog>
-
-<Dialog
-	open={ !!focusedFile }
-	title={ `Details of the <code>${ focusedFile!.name }</code> file` }
-	description={ `Full path: <code>${ focusedFile!.path }</code>` }
-	onClose={ () => focusedFile = null }
->
-	{#snippet children()}
-		<pre class="p-4">{ JSON.stringify( focusedFile, null, 2 ) }</pre>
-		<pre class="p-4">{ JSON.stringify( getImporters(focusedFile!), null, 2 ) }</pre>
-	{/snippet}
-</Dialog>
-
+<FolderDialog { focusedFolder } />
+<FileDialog { focusedFile } />
 <Tooltip />
 
 <script lang="ts">
-import { isFolder, getTrie, type File, type Folder } from '../FileSystemTrie';
-
 import Header from './Header.svelte';
 import Treemap from './Treemap.svelte';
-import Dialog from './Dialog.svelte';
+import FileDialog from './FileDialog.svelte';
+import FolderDialog from './FolderDialog.svelte';
 import Tooltip from './Tooltip.svelte';
+import { isFolder, getTrie, type File, type Folder } from '../FileSystemTrie';
 
-const report = window.SONDA_JSON_REPORT;
-const outputs = getTrie( report );
+const outputs = getTrie( window.SONDA_JSON_REPORT );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
@@ -110,13 +84,5 @@ function onkeydown(  event: KeyboardEvent  ) {
 	if ( focusedFolder ) {
 		return focusedFolder = null;
 	}
-}
-
-function getImporters( content: File ) {
-	return Object.entries( report.inputs )
-		.filter( ( [, file ] ) => file.imports.includes( content.path ) )
-
-		// TODO: Remove this to get all importers data
-		.map( ( [ path ] ) => path );
 }
 </script>
