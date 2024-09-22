@@ -47,14 +47,16 @@ function generateReportFromAssets(
 	sourcesGraph.forEach( ( sources, path ) => {
 		const parent = inputs[ path ];
 
-		sources.forEach( source => {
-			inputs[ source.path ] = {
-				bytes: source.bytes,
-				format: parent.format,
-				imports: [],
-				belongsTo: path,
-			}
-		} );
+		sources
+			.filter( source => !inputs[ source.path ] )
+			.forEach( source => {
+				inputs[ source.path ] = {
+					bytes: source.bytes,
+					format: parent.format,
+					imports: [],
+					belongsTo: path,
+				}
+			} );
 	} );
 
 	const report = generateHtmlReport( assets, inputs );
