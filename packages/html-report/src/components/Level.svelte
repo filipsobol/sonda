@@ -1,8 +1,8 @@
 {#each tiles as tile, index (tile)}
 	<Tile
-		tile={ tile }
+		{ tile }
 		content={ children[index] }
-		totalBytes={ totalBytes }
+		{ totalBytes }
 	/>
 {/each}
 

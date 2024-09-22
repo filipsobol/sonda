@@ -33,7 +33,7 @@
 	{#if children.length}
 		<Level
 			content={ children }
-			totalBytes={ totalBytes }
+			{ totalBytes }
 			width={ childWidth }
 			height={ childHeight }
 			xStart={ tile.x + padding }
