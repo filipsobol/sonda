@@ -41,19 +41,15 @@ function generateReportFromAssets(
 	assets: Array<string>,
 	outputDir: string,
 	inputs: JsonReport[ 'inputs' ],
-	sourcesGraph: Map<string, Array<string>>,
+	sourcesGraph: Map<string, Array<{ path: string; bytes: number }>>,
 	shouldOpen: boolean
 ): void {
 	sourcesGraph.forEach( ( sources, path ) => {
 		const parent = inputs[ path ];
 
 		sources.forEach( source => {
-			const normalized = normalizePath(
-				join( dirname( path ), source )
-			);
-
-			inputs[ normalized ] = {
-				bytes: 0,
+			inputs[ source.path ] = {
+				bytes: source.bytes,
 				format: parent.format,
 				imports: [],
 				belongsTo: path,
@@ -90,7 +86,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 	let outputDir: string;
 	let assets: Array<string>;
 	let inputs: JsonReport[ 'inputs' ] = {};
-	let sourcesGraph = new Map<string, Array<string>>();
+	let sourcesGraph = new Map<string, Array<{ path: string; bytes: number }>>();
 
 	return {
 		name: 'sonda',
@@ -105,14 +101,17 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 			const relativePath = normalizePath( id );
 
 			inputs[ relativePath ] = {
-				bytes: 0,
+				bytes: result?.code ? Buffer.byteLength( result.code ) : 0,
 				format: 'unknown',
 				imports: [],
 				belongsTo: null,
 			};
 
 			if ( result?.map?.sources ) {
-				sourcesGraph.set( relativePath, result.map.sources.map( source => normalizePath( source ) ) )
+				sourcesGraph.set( relativePath, result.map.sources.map( ( source, index ) => ( {
+					path: normalizePath( source ),
+					bytes: Buffer.byteLength( result.map!.sourcesContent?.[ index ] ?? '' ),
+				} ) ) )
 			}
 
 			return result;
