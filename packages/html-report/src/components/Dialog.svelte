@@ -1,26 +1,23 @@
-<svelte:body
-	{ onclick }
-/>
+<svelte:body { onclick } />
 
-{#if open}
+<div
+	transition:fade={{ duration: 150 }}
+	class="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center"
+>
 	<div
-		transition:fade={{ duration: 150 }}
-		class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bottom-0 z-5 flex justify-center items-center"
+		bind:this={ backdrop }
+		class="fixed bg-gray-200/70 w-full h-full backdrop-blur-sm"
+		aria-hidden="true"
 	>
-		<div
-			bind:this={ backdrop }
-			class="absolute bg-gray-200/70 w-full h-full backdrop-blur-sm"
-			aria-hidden="true"
-		>
-		</div>
+	</div>
 
-		<div
-			class="bg-white fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] flex flex-col rounded-lg border p-6 shadow-lg"
-		>
+	<div class="bg-white relative flex flex-col rounded-lg border p-6 shadow-lg overflow-hidden max-h-[95vh] max-w-[95vw]">
+		<div class="mb-4">
+			<h2 class="py-2 pr-6 block align-text-bottom font-semibold leading-none tracking-tight text-base border-b-2 border-gray-300 border-dashed">{ heading }</h2>
 			<button
 				onclick={ onClose }
 				aria-label="Close dialog"
-				class="absolute right-4 top-4 flex justify-center items-center border border-transparent rounded-full w-8 h-8 text-gray-900"
+				class="absolute top-0 right-0 mt-2 mr-2 flex justify-center items-center border border-transparent rounded-full w-10 h-10 text-gray-600 hover:text-gray-900"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -36,16 +33,11 @@
 					<path d="M18 6 6 18M6 6l12 12"/>
 				</svg>
 			</button>
-			
-			<div class="mb-4">
-				<h2 class="block align-text-bottom text-lg font-semibold leading-none tracking-tight">{@html title }</h2>
-				<p class="pt-2 block align-text-bottom text-gray-500 text-sm">{@html description }</p>
-			</div>
-
-			{@render children()}
 		</div>
+
+		{@render children()}
 	</div>
-{/if}
+</div>
 
 <script lang="ts">
 import { fade } from 'svelte/transition';
@@ -53,17 +45,13 @@ import type { Snippet } from 'svelte';
 
 interface Props {
 	children: Snippet;
-	title: string;
-	description: string;
-	open: boolean;
+	heading: string;
 	onClose?: () => void;
 }
 
 let {
 	children,
-	title,
-	description,
-	open,
+	heading,
 	onClose
 }: Props = $props();
 

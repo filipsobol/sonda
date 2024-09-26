@@ -26,8 +26,7 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 		trie.root.items.push( {
 			name: '[unassigned]',
 			path: '[unassigned]',
-			bytes: output.bytes - trie.root.bytes,
-			items: []
+			bytes: output.bytes - trie.root.bytes
 		} );
 
 		trie.root.name = outputPath;

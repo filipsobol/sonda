@@ -16,7 +16,7 @@
 	<div
 		bind:clientWidth={ width }
 		bind:clientHeight={ height }
-		class="flex-grow font-mono"
+		class="flex-grow"
 	>
 		{#if width && height}
 			<Treemap
@@ -28,8 +28,8 @@
 	</div>
 </div>
 
-<FolderDialog { focusedFolder } />
-<FileDialog { focusedFile } />
+<FolderDialog folder={ focusedFolder } />
+<FileDialog file={ focusedFile } />
 <Tooltip />
 
 <script lang="ts">

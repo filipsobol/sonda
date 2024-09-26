@@ -5,12 +5,3 @@
 rect:hover {
 	filter: brightness(1.15);
 }
-
-code {
-	@apply bg-slate-200;
-	@apply px-1.5;
-	@apply py-1;
-	@apply font-mono;
-	@apply text-[80%];
-	@apply rounded;
-}

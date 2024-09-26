@@ -10,7 +10,7 @@
 	bind:clientWidth={ width }
 	bind:clientHeight={ height }
 	role="tooltip"
-	class="fixed z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none font-mono will-change-transform"
+	class="fixed z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none will-change-transform"
 	class:invisible={ !content }
 	style="transform: translate( var(--x), var(--y) )"
 	style:--x={ x }
