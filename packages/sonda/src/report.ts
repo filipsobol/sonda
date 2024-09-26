@@ -33,11 +33,6 @@ export function generateHtmlReport(
   inputs: Record<string, ReportInput>
 ): string {
   const json = generateJsonReport( assets, inputs );
-
-  if ( !json ) {
-    return '';
-  }
-
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 

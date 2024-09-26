@@ -6,7 +6,7 @@ import {
 	type UnpluginInstance,
 	type UnpluginOptions,
 } from 'unplugin';
-import { generateHtmlReport } from './report.js';
+import { generateHtmlReport, generateJsonReport } from './report.js';
 import { loadCodeAndMap } from './sourcemap/load.js';
 import { normalizePath, open } from './utils.js';
 import type { ModuleFormat, JsonReport } from './types.js';
@@ -30,6 +30,13 @@ export interface Options {
 	exclude?: RegExp;
 
 	/**
+	 * Output format of the report.
+	 *
+	 * @default 'html'
+	 */
+	format: 'html' | 'json';
+
+	/**
 	 * Whether to open the generated report in the default program for HTML files.
 	 *
 	 * @default true
@@ -37,58 +44,66 @@ export interface Options {
 	open: boolean;
 }
 
-function generateReportFromAssets(
-	assets: Array<string>,
-	outputDir: string,
-	inputs: JsonReport[ 'inputs' ],
-	sourcesGraph: Map<string, Array<{ path: string; bytes: number }>>,
-	shouldOpen: boolean
-): void {
-	sourcesGraph.forEach( ( sources, path ) => {
-		const parent = inputs[ path ];
-
-		sources
-			.filter( source => !inputs[ source.path ] )
-			.forEach( source => {
-				inputs[ source.path ] = {
-					bytes: source.bytes,
-					format: parent.format,
-					imports: [],
-					belongsTo: path,
-				}
-			} );
-	} );
-
-	const report = generateHtmlReport( assets, inputs );
-
-	if ( !report ) {
-		return;
-	}
-
-	const path = join( outputDir, 'sonda-report.html' );
-
-	writeFileSync( path, report );
-	shouldOpen && open( path );
-}
-
-// TODO: Add "open" parameter
 function factory( options?: Partial<Options> ): UnpluginOptions {
 	const defaultOptions: Options = {
 		include: /(\.js|\.css)$/,
 		exclude: undefined,
 		open: true,
+		format: 'html',
 	};
 
 	const {
 		include,
 		exclude,
-		open
+		open: shouldOpen,
+		format
 	} = Object.assign( {}, defaultOptions, options ) as Options;
 
 	let outputDir: string;
 	let assets: Array<string>;
 	let inputs: JsonReport[ 'inputs' ] = {};
 	let sourcesGraph = new Map<string, Array<{ path: string; bytes: number }>>();
+
+	function generateReportFromAssets(): void {
+		sourcesGraph.forEach( ( sources, path ) => {
+			const parent = inputs[ path ];
+
+			sources
+				.filter( source => !inputs[ source.path ] )
+				.forEach( source => {
+					inputs[ source.path ] = {
+						bytes: source.bytes,
+						format: parent.format,
+						imports: [],
+						belongsTo: path,
+					}
+				} );
+		} );
+
+		const path = format === 'html'
+			? saveHtml()
+			: saveJson();
+
+		shouldOpen && path && open( path );
+	}
+
+	function saveHtml(): string | null {
+		const report = generateHtmlReport( assets, inputs );
+		const path = join( outputDir, 'sonda-report.html' );
+
+		writeFileSync( path, report );
+
+		return path;
+	}
+
+	function saveJson(): string | null {
+		const report = generateJsonReport( assets, inputs );
+		const path = join( outputDir, 'sonda-report.json' );
+
+		writeFileSync( path, JSON.stringify( report, null, 2 ) );
+
+		return path;
+	}
 
 	return {
 		name: 'sonda',
@@ -132,7 +147,7 @@ function factory( options?: Partial<Options> ): UnpluginOptions {
 				assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
 			}
 
-			return generateReportFromAssets( assets, outputDir, inputs, sourcesGraph, open );
+			return generateReportFromAssets();
 		},
 
 		// Get outputs from Webpack
