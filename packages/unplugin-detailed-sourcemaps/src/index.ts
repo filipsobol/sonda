@@ -44,10 +44,8 @@ function factory( options?: Partial<Options> ): ReturnType<Factory> {
       return include.test(id) && !exclude?.test(id);
     },
 
-    async load( id: string ): Promise<TransformResult> {
-      const result = await loadCodeAndMap( id );
-
-      return result;
+    load( id: string ): TransformResult {
+      return loadCodeAndMap( id ) as TransformResult;
     }
   };
 }
