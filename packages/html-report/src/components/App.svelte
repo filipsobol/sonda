@@ -18,13 +18,11 @@
 		bind:clientHeight={ height }
 		class="flex-grow"
 	>
-		{#if width && height}
-			<Treemap
-				content={ activeOutput.root }
-				{ width }
-				{ height }
-			/>
-		{/if}
+		<Treemap
+			content={ activeOutput.root }
+			{ width }
+			{ height }
+		/>
 	</div>
 </div>
 
