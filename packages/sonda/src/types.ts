@@ -1,25 +1,19 @@
-export interface SourceMap {
-  version: 3;
-  file?: string;
-  sourceRoot?: string;
+import type { EncodedSourceMap } from '@ampproject/remapping';
 
-  // TODO: Potentially `null`?
-  // https://tc39.es/source-map/#source-map-format
-  sources: Array<string>; 
+export interface Options {
+  /**
+   * Output format of the report.
+   *
+   * @default 'html'
+   */
+  format: 'html' | 'json';
 
-  sourcesContent?: Array<string | null>;
-  names: Array<string>;
-  mappings: string;
-  ignoreList?: Array<number>;
-  sections?: Array<SourceMapSection>;
-}
-
-export interface SourceMapSection {
-  offset: {
-    line: number;
-    column: number;
-  };
-  map: SourceMap;
+  /**
+   * Whether to open the generated report in the default program for HTML files.
+   *
+   * @default true
+   */
+  open: boolean;
 }
 
 export interface ReportInput {
@@ -45,7 +39,7 @@ export interface JsonReport {
 
 export interface CodeMap {
   code: string;
-  map?: SourceMap;
+  map?: EncodedSourceMap;
 }
 
 export type ModuleFormat = 'esm' | 'cjs' | 'unknown';

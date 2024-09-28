@@ -1,15 +1,13 @@
-import { decode, type SourceMapMappings } from '@jridgewell/sourcemap-codec';
-import type { SourceMap } from '../types.js';
+import type { DecodedSourceMap } from '@ampproject/remapping';
 
-export function getBytesPerSource( code: string, map: SourceMap ): Map<string, number> {
-	const mappings: SourceMapMappings = decode( map.mappings );
+export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<string, number> {
 	const contributions = new Array( map.sources.length ).fill( '' );
 
 	// Split the source code by lines
 	const codeLines = code.split( /(?<=\r?\n)/ );
 
-	for ( let lineIndex = 0; lineIndex < mappings.length; lineIndex++ ) {
-		const line = mappings[ lineIndex ];
+	for ( let lineIndex = 0; lineIndex < map.mappings.length; lineIndex++ ) {
+		const line = map.mappings[ lineIndex ];
 		const lineCode = codeLines[ lineIndex ];
 
 		for ( let mappingIndex = 0; mappingIndex < line.length; mappingIndex++ ) {
@@ -28,6 +26,6 @@ export function getBytesPerSource( code: string, map: SourceMap ): Map<string, n
 	}
 
 	return new Map<string, number>( 
-		contributions.map( ( code, index ) => [ map.sources[ index ], Buffer.byteLength( code ) ] )
+		contributions.map( ( code, index ) => [ map.sources[ index ]!, Buffer.byteLength( code ) ] )
 	);
 }

@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
-import type { SourceMap, MaybeCodeMap } from '../types.js';
+import type { MaybeCodeMap } from '../types.js';
+import type { EncodedSourceMap } from '@ampproject/remapping';
 
 /**
  * Strip any JSON XSSI avoidance prefix from the string (as documented in the source maps specification),
@@ -8,7 +9,7 @@ import type { SourceMap, MaybeCodeMap } from '../types.js';
  *
  * https://github.com/mozilla/source-map/blob/3cb92cc3b73bfab27c146bae4ef2bc09dbb4e5ed/lib/util.js#L162-L164
  */
-function parseSourceMapInput( str: string ): SourceMap {
+function parseSourceMapInput( str: string ): EncodedSourceMap {
 	return JSON.parse( str.replace( /^\)]}'[^\n]*\n/, "" ) );
 }
 
@@ -43,7 +44,7 @@ export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
 	}
 }
 
-function loadMap( codePath: string, sourceMappingURL: string ): { map: SourceMap; mapPath: string } {
+function loadMap( codePath: string, sourceMappingURL: string ): { map: EncodedSourceMap; mapPath: string } {
 	if ( sourceMappingURL.startsWith( 'data:' ) ) {
 		const map = parseDataUrl( sourceMappingURL );
 
@@ -75,12 +76,12 @@ function parseDataUrl( url: string ): string {
 	}
 }
 
-function normalizeSourcesPaths( map: SourceMap, mapPath: string ): SourceMap[ 'sources' ] {
+function normalizeSourcesPaths( map: EncodedSourceMap, mapPath: string ): EncodedSourceMap[ 'sources' ] {
 	const mapDir = dirname( mapPath );
 
 	return map.sources.map( source => {
-		return isAbsolute( source )
+		return isAbsolute( source! )
 			? source
-			: resolve( mapDir, map.sourceRoot ?? '.', source );
+			: resolve( mapDir, map.sourceRoot ?? '.', source! );
 	} );
 }

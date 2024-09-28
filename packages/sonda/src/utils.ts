@@ -1,7 +1,17 @@
 import { relative, posix, sep } from 'path';
 import { exec } from 'child_process';
+import type { Options } from './types';
 
-const cwd = process.cwd();
+const cwd = /* #__ PURE__ */ process.cwd();
+
+export function normalizeOptions( options?: Partial<Options> ) {
+	const defaultOptions: Options = {
+		open: true,
+		format: 'html',
+	};
+
+	return Object.assign( {}, defaultOptions, options ) as Options;
+}
 
 export function normalizePath( path: string ): string {
 	// Unicode escape sequences used by Rollup and Vite to identify virtual modules

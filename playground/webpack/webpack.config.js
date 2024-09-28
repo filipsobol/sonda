@@ -1,4 +1,4 @@
-const { webpackPlugin: sonda } = require( 'sonda' );
+const { SondaWebpackPlugin } = require( 'sonda' );
 const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
 // const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 
@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
-    sonda(),
+    new SondaWebpackPlugin(),
   ],
   module: {
     rules: [

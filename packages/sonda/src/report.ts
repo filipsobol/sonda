@@ -1,6 +1,7 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
+import { mapSourceMap } from './sourcemap/map.js';
 import { getBytesPerSource } from './sourcemap/bytes.js';
 import { loadCodeAndMap } from './sourcemap/load.js';
 import type {
@@ -19,7 +20,7 @@ export function generateJsonReport(
 ): JsonReport {
   const outputsEntries = assets
     .filter( asset => !asset.endsWith( '.map' ) )
-    .map( asset => processAsset( asset ) )
+    .map( asset => processAsset( asset, inputs ) )
     .filter( output => !!output );
 
   return {
@@ -39,7 +40,7 @@ export function generateHtmlReport(
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
 
-function processAsset( asset: string ): [ string, ReportOutput ] | void {
+function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ string, ReportOutput ] | void {
   const maybeCodeMap = loadCodeAndMap( asset );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
@@ -47,13 +48,17 @@ function processAsset( asset: string ): [ string, ReportOutput ] | void {
   }
 
   const { code, map } = maybeCodeMap;
-  const bytes = getBytesPerSource( code, map );
+  const mapped = mapSourceMap( map, dirname( asset ), inputs );
+
+  mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
+
+  const bytes = getBytesPerSource( code, mapped );
 
   return [ normalizePath( asset ), {
     bytes: Buffer.byteLength( code ),
-    inputs: map.sources.reduce( (acc, source) => {
-      acc[ normalizePath( source ) ] = {
-        bytesInOutput: bytes.get( source ) || 0
+    inputs: mapped.sources.reduce( ( acc, source ) => {
+      acc[ normalizePath( source! ) ] = {
+        bytesInOutput: bytes.get( source! ) || 0
       };
 
       return acc;
