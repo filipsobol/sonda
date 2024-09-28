@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
 import type { MaybeCodeMap } from '../types.js';
 import type { EncodedSourceMap } from '@ampproject/remapping';
@@ -22,29 +22,36 @@ function parseSourceMapInput( str: string ): EncodedSourceMap {
 const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 
 export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
-	try {
-		const code = readFileSync( codePath, 'utf-8' );
-
-		const extractedComment = code.includes( 'sourceMappingURL' ) && Array.from( code.matchAll( sourceMappingRegExp ) ).at( -1 );
-
-		if ( !extractedComment || !extractedComment.length ) {
-			return { code };
-		}
-
-		const { map, mapPath } = loadMap( codePath, extractedComment[ 1 ] );
-		map.sources = normalizeSourcesPaths( map, mapPath );
-		delete map.sourceRoot;
-
-		return {
-			code,
-			map
-		};
-	} catch {
+	if ( !existsSync( codePath ) ) {
 		return null;
 	}
+
+	const code = readFileSync( codePath, 'utf-8' );
+
+	const extractedComment = code.includes( 'sourceMappingURL' ) && Array.from( code.matchAll( sourceMappingRegExp ) ).at( -1 );
+
+	if ( !extractedComment || !extractedComment.length ) {
+		return { code };
+	}
+
+	const maybeMap = loadMap( codePath, extractedComment[ 1 ] );
+
+	if ( !maybeMap ) {
+		return { code };
+	}
+
+	const { map, mapPath } = maybeMap;
+
+	map.sources = normalizeSourcesPaths( map, mapPath );
+	delete map.sourceRoot;
+
+	return {
+		code,
+		map
+	};
 }
 
-function loadMap( codePath: string, sourceMappingURL: string ): { map: EncodedSourceMap; mapPath: string } {
+function loadMap( codePath: string, sourceMappingURL: string ): { map: EncodedSourceMap; mapPath: string } | null {
 	if ( sourceMappingURL.startsWith( 'data:' ) ) {
 		const map = parseDataUrl( sourceMappingURL );
 
@@ -55,6 +62,10 @@ function loadMap( codePath: string, sourceMappingURL: string ): { map: EncodedSo
 	}
 
 	const mapPath = join( codePath, '..', sourceMappingURL );
+
+	if ( !existsSync( mapPath ) ) {
+		return null;
+	}
 
 	return {
 		map: parseSourceMapInput( readFileSync( mapPath, 'utf-8' ) ),
@@ -80,8 +91,12 @@ function normalizeSourcesPaths( map: EncodedSourceMap, mapPath: string ): Encode
 	const mapDir = dirname( mapPath );
 
 	return map.sources.map( source => {
-		return isAbsolute( source! )
+		if ( !source ) {
+			return source;
+		}
+
+		return isAbsolute( source )
 			? source
-			: resolve( mapDir, map.sourceRoot ?? '.', source! );
+			: resolve( mapDir, map.sourceRoot ?? '.', source );
 	} );
 }
