@@ -1,16 +1,25 @@
 {
   "name": "sonda",
   "version": "0.1.0",
-  "description": "",
+  "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, and esbuild",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipsobol/sonda.git",
+    "directory": "packages/sonda"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepack": "pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
