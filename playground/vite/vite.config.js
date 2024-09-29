@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import virtual from 'vite-plugin-virtual'
-import { vitePlugin as sonda } from 'sonda';
+import { SondaRollupPlugin } from 'sonda';
 
 export default defineConfig( {
   plugins: [
@@ -8,7 +8,7 @@ export default defineConfig( {
       'virtual:module': `export default { hello: 'world' }`,
       'virtual:config': { hello: 'world' }
     } ),
-    sonda(),
+    SondaRollupPlugin(),
   ],
   build: {
     sourcemap: true
