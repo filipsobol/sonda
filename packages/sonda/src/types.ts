@@ -25,11 +25,15 @@ export interface ReportInput {
 
 export interface ReportOutput {
   bytes: number;
+  gzip: number;
+  brotli: number;
   inputs: Record<string, ReportOutputInput>;
 }
 
 export interface ReportOutputInput {
-  bytesInOutput: number;
+  bytes: number;
+  gzip: number;
+  brotli: number;
 }
 
 export interface JsonReport {

@@ -2,7 +2,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import { mapSourceMap } from './sourcemap/map.js';
-import { getBytesPerSource } from './sourcemap/bytes.js';
+import { getBytesPerSource, getSizes } from './sourcemap/bytes.js';
 import { loadCodeAndMap } from './sourcemap/load.js';
 import type {
   JsonReport,
@@ -55,11 +55,15 @@ function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ s
   const bytes = getBytesPerSource( code, mapped );
 
   return [ normalizePath( asset ), {
-    bytes: Buffer.byteLength( code ),
+    ...getSizes( code ),
     inputs: mapped.sources.reduce( ( acc, source ) => {
-      acc[ normalizePath( source! ) ] = {
-        bytesInOutput: bytes.get( source! ) || 0
-      };
+      if ( source ) {
+        acc[ normalizePath( source ) ] = bytes.get( source ) ?? {
+          bytes: 0,
+          gzip: 0,
+          brotli: 0
+        };
+      }
 
       return acc;
     }, {} as Record<string, ReportOutputInput> )

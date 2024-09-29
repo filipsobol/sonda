@@ -1,6 +1,13 @@
+import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap } from '@ampproject/remapping';
 
-export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<string, number> {
+export interface Sizes {
+	bytes: number;
+	gzip: number;
+	brotli: number;
+}
+
+export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<string, Sizes> {
 	const contributions = new Array( map.sources.length ).fill( '' );
 
 	// Split the source code by lines
@@ -20,12 +27,19 @@ export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<st
 			const [ startColumn, fileIndex ] = line[ mappingIndex ];
 			const endColumn = line[ mappingIndex + 1 ]?.[ 0 ] ?? lineCode.length;
 
-			// TODO: What if fileIndex is null / undefined?
 			contributions[ fileIndex! ] += lineCode.slice( startColumn, endColumn );
 		}
 	}
 
-	return new Map<string, number>( 
-		contributions.map( ( code, index ) => [ map.sources[ index ]!, Buffer.byteLength( code ) ] )
+	return new Map<string, Sizes>( 
+		contributions.map( ( code, index ) => [ map.sources[ index ]!, getSizes( code ) ] )
 	);
+}
+
+export function getSizes( code: string ): Sizes {
+	return {
+		bytes: Buffer.byteLength( code ),
+		gzip: gzipSync( code ).length,
+		brotli: brotliCompressSync( code ).length
+	};
 }

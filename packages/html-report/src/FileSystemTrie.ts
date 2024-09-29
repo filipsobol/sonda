@@ -4,12 +4,16 @@ export interface File {
 	name: string;
 	path: string;
 	bytes: number;
+	gzip: number;
+	brotli: number
 }
 
 export interface Folder {
 	name: string;
 	path: string;
 	bytes: number;
+	gzip: number;
+	brotli: number
 	items: Array<Content>;
 }
 
@@ -26,7 +30,9 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 		trie.root.items.push( {
 			name: '[unassigned]',
 			path: '[unassigned]',
-			bytes: output.bytes - trie.root.bytes
+			bytes: output.bytes - trie.root.bytes,
+			gzip: output.gzip - trie.root.gzip,
+			brotli: output.brotli - trie.root.brotli
 		} );
 
 		trie.root.name = outputPath;
@@ -54,6 +60,8 @@ export class FileSystemTrie {
 			name,
 			path,
 			bytes: 0,
+			gzip: 0,
+			brotli: 0,
 			items: [],
 		};
 	}
@@ -73,16 +81,20 @@ export class FileSystemTrie {
 			}
 
 			node = childNode;
-			node.bytes += metadata.bytesInOutput;
+			node.bytes += metadata.bytes;
+			node.gzip += metadata.gzip;
+			node.brotli += metadata.brotli;
 		} );
 
 		node.items.push( {
 			name,
 			path: `${ node.path }/${ name }`,
-			bytes: metadata.bytesInOutput,
+			bytes: metadata.bytes,
+			gzip: metadata.gzip,
+			brotli: metadata.brotli
 		} );
 
-		this.root.bytes += metadata.bytesInOutput;
+		this.root.bytes += metadata.bytes;
 	}
 
 	optimize(): void {

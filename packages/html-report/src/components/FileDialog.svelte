@@ -4,10 +4,12 @@
 		onClose={ () => file = null }
 	>
 		{#snippet children()}
-			<div class="mb-4 flex flex-col overflow-y-auto">
+			<div class="flex flex-col overflow-y-auto">
 				{#if format !== 'UNKNOWN'}<p>File format: <b>{ format }</b></p>{/if}
 				<p>Original size: <b>{ formatSize( input?.bytes || 0 ) }</b></p>
 				<p>Bundled size: <b>{ formatSize( file!.bytes ) }</b></p>
+				<p>GZIP size: <b>{ formatSize( file!.gzip ) }</b></p>
+				<p>Brotli size: <b>{ formatSize( file!.brotli ) }</b></p>
 
 				{#if dependencyTree}
 					<p class="mt-8">This file is in the bundle, because it is:</p>
@@ -24,7 +26,7 @@
 import Dialog from './Dialog.svelte';
 import { formatSize } from '../format';
 import type { File } from '../FileSystemTrie';
-    import { AsciiTree } from '../AsciiTree';
+import { AsciiTree } from '../AsciiTree';
 
 interface Props {
 	file: File | null;
