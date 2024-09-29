@@ -59,7 +59,7 @@ function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ s
     inputs: mapped.sources.reduce( ( acc, source ) => {
       if ( source ) {
         acc[ normalizePath( source ) ] = bytes.get( source ) ?? {
-          bytes: 0,
+          uncompressed: 0,
           gzip: 0,
           brotli: 0
         };

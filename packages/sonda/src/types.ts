@@ -23,22 +23,21 @@ export interface ReportInput {
   belongsTo: string | null;
 }
 
-export interface ReportOutput {
-  bytes: number;
-  gzip: number;
-  brotli: number;
+export interface ReportOutput extends Sizes {
   inputs: Record<string, ReportOutputInput>;
 }
 
-export interface ReportOutputInput {
-  bytes: number;
-  gzip: number;
-  brotli: number;
-}
+export interface ReportOutputInput extends Sizes {}
 
 export interface JsonReport {
   inputs: Record<string, ReportInput>;
   outputs: Record<string, ReportOutput>;
+}
+
+export interface Sizes {
+  uncompressed: number;
+  gzip: number;
+  brotli: number;
 }
 
 export interface CodeMap {

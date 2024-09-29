@@ -3,7 +3,7 @@ import type { JsonReport, ReportOutputInput } from 'sonda';
 export interface File {
 	name: string;
 	path: string;
-	bytes: number;
+	uncompressed: number;
 	gzip: number;
 	brotli: number
 }
@@ -11,7 +11,7 @@ export interface File {
 export interface Folder {
 	name: string;
 	path: string;
-	bytes: number;
+	uncompressed: number;
 	gzip: number;
 	brotli: number
 	items: Array<Content>;
@@ -30,13 +30,13 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 		trie.root.items.push( {
 			name: '[unassigned]',
 			path: '[unassigned]',
-			bytes: output.bytes - trie.root.bytes,
+			uncompressed: output.uncompressed - trie.root.uncompressed,
 			gzip: output.gzip - trie.root.gzip,
 			brotli: output.brotli - trie.root.brotli
 		} );
 
 		trie.root.name = outputPath;
-		trie.root.bytes = output.bytes;
+		trie.root.uncompressed = output.uncompressed;
 
 		trie.optimize();
 
@@ -59,7 +59,7 @@ export class FileSystemTrie {
 		return {
 			name,
 			path,
-			bytes: 0,
+			uncompressed: 0,
 			gzip: 0,
 			brotli: 0,
 			items: [],
@@ -81,7 +81,7 @@ export class FileSystemTrie {
 			}
 
 			node = childNode;
-			node.bytes += metadata.bytes;
+			node.uncompressed += metadata.uncompressed;
 			node.gzip += metadata.gzip;
 			node.brotli += metadata.brotli;
 		} );
@@ -89,12 +89,12 @@ export class FileSystemTrie {
 		node.items.push( {
 			name,
 			path: `${ node.path }/${ name }`,
-			bytes: metadata.bytes,
+			uncompressed: metadata.uncompressed,
 			gzip: metadata.gzip,
 			brotli: metadata.brotli
 		} );
 
-		this.root.bytes += metadata.bytes;
+		this.root.uncompressed += metadata.uncompressed;
 	}
 
 	optimize(): void {
@@ -113,7 +113,7 @@ export class FileSystemTrie {
 			}
 
 			// Sort by size, largest first
-			node.items.sort( ( a, b ) => b.bytes - a.bytes );
+			node.items.sort( ( a, b ) => b.uncompressed - a.uncompressed );
 
 			// Repeat for child folders
 			node.items.forEach( item => isFolder( item ) && stack.push( item ) );

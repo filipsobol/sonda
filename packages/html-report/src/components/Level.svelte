@@ -39,7 +39,7 @@ const children = $derived.by(() => {
 
 const tiles = $derived.by( () => {
 	const generator = new TreeMapGenerator(
-		children.map( child => child.bytes ),
+		children.map( child => child.uncompressed ),
 		width,
 		height,
 		xStart,

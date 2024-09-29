@@ -9,7 +9,7 @@
 		<!-- Substract 1 and start at 0.5 to prevent stroke clipping at viewport edges -->
 		<Level
 			{ content }
-			totalBytes={ content.bytes }
+			totalBytes={ content.uncompressed }
 			width={ width - 1 }
 			height={ height - 1 }
 			xStart={ 0.5 }

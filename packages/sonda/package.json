@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "prepack": "pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rollup -c ../../rollup.config.js && tsc",
     "build": "pnpm run build:dist && pnpm run build:html"

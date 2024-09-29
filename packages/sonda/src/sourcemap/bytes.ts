@@ -1,11 +1,6 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap } from '@ampproject/remapping';
-
-export interface Sizes {
-	bytes: number;
-	gzip: number;
-	brotli: number;
-}
+import type { Sizes } from '../types';
 
 export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<string, Sizes> {
 	const contributions = new Array( map.sources.length ).fill( '' );
@@ -38,7 +33,7 @@ export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<st
 
 export function getSizes( code: string ): Sizes {
 	return {
-		bytes: Buffer.byteLength( code ),
+		uncompressed: Buffer.byteLength( code ),
 		gzip: gzipSync( code ).length,
 		brotli: brotliCompressSync( code ).length
 	};

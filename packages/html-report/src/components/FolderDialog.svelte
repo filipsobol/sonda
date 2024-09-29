@@ -7,7 +7,7 @@
 		{#snippet children()}
 			<div class="mb-4 grid grid-cols-[auto_1fr] gap-x-8">
 				<span>Bundled size</span>
-				<span class="font-bold">{ formatSize( folder!.bytes ) }</span>
+				<span class="font-bold">{ formatSize( folder!.uncompressed ) }</span>
 
 				<span>GZIP size</span>
 				<span class="font-bold">{ formatSize( folder!.gzip ) }</span>

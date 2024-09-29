@@ -11,11 +11,11 @@
 						<span class="font-bold">{ format }</span>
 					{/if}
 
-					<span>Original size</span>
+					<span>Original file size</span>
 					<span class="font-bold">{ formatSize( input?.bytes || 0 ) }</span>
 
 					<span>Bundled size</span>
-					<span class="font-bold">{ formatSize( file!.bytes ) }</span>
+					<span class="font-bold">{ formatSize( file!.uncompressed ) }</span>
 
 					<span>GZIP size</span>
 					<span class="font-bold">{ formatSize( file!.gzip ) }</span>
