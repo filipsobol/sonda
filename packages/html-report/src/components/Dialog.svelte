@@ -11,7 +11,11 @@
 	>
 	</div>
 
-	<div class="bg-white relative flex flex-col rounded-lg border p-6 shadow-lg overflow-hidden max-h-[95vh] max-w-[95vw]">
+	<div
+		class="bg-white relative flex flex-col rounded-lg border p-6 shadow-lg overflow-hidden max-h-[95vh] max-w-[95vw]"
+		class:w-[95vw]={ large }
+		class:h-[95vh]={ large }
+	>
 		<div class="mb-4">
 			<h2 class="py-2 pr-6 block align-text-bottom font-semibold leading-none tracking-tight text-base border-b-2 border-gray-300 border-dashed">{ heading }</h2>
 			<button
@@ -46,12 +50,14 @@ import type { Snippet } from 'svelte';
 interface Props {
 	children: Snippet;
 	heading: string;
+	large?: boolean;
 	onClose?: () => void;
 }
 
 let {
 	children,
 	heading,
+	large,
 	onClose
 }: Props = $props();
 

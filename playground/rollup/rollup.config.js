@@ -32,7 +32,12 @@ export default defineConfig( {
 			// 	comments: false
 			// }
 		} ),
-		// visualizer(),
+		// visualizer( {
+		// 	open: true,
+		// 	sourcemap: true,
+		// 	gzipSize: true,
+		// 	brotliSize: true
+		// } ),
 		SondaRollupPlugin(),
 	]
 } );

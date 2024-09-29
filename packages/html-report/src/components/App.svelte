@@ -12,11 +12,10 @@
 		{ outputs }
 	/>
 
-	<!-- Treemap -->
 	<div
 		bind:clientWidth={ width }
 		bind:clientHeight={ height }
-		class="flex-grow"
+		class="flex-grow overflow-hidden"
 	>
 		<Treemap
 			content={ activeOutput.root }

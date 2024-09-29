@@ -5,15 +5,28 @@
 	>
 		{#snippet children()}
 			<div class="flex flex-col overflow-y-auto">
-				{#if format !== 'UNKNOWN'}<p>File format: <b>{ format }</b></p>{/if}
-				<p>Original size: <b>{ formatSize( input?.bytes || 0 ) }</b></p>
-				<p>Bundled size: <b>{ formatSize( file!.bytes ) }</b></p>
-				<p>GZIP size: <b>{ formatSize( file!.gzip ) }</b></p>
-				<p>Brotli size: <b>{ formatSize( file!.brotli ) }</b></p>
+				<div class="grid grid-cols-[auto_1fr] gap-x-8">
+					{#if format !== 'UNKNOWN'}
+						<span>File format</span>
+						<span class="font-bold">{ format }</span>
+					{/if}
+
+					<span>Original size</span>
+					<span class="font-bold">{ formatSize( input?.bytes || 0 ) }</span>
+
+					<span>Bundled size</span>
+					<span class="font-bold">{ formatSize( file!.bytes ) }</span>
+
+					<span>GZIP size</span>
+					<span class="font-bold">{ formatSize( file!.gzip ) }</span>
+
+					<span>Brotli size</span>
+					<span class="font-bold">{ formatSize( file!.brotli ) }</span>
+				</div>
 
 				{#if dependencyTree}
 					<p class="mt-8">This file is in the bundle, because it is:</p>
-					<code class="mt-2 p-4 leading-5 bg-slate-200 rounded overflow-auto">
+					<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto">
 						<pre>{ dependencyTree }</pre>
 					</code>
 				{/if}

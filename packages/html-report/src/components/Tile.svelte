@@ -24,7 +24,7 @@
 			class="p-1 size-full text-center text-xs truncate"
 		>
 			{#if shouldDisplayText}
-				<span class="text-gray-900 font-medium">{ content.name }</span>
+				<span class="text-gray-900">{ content.name }</span>
 				<span class="text-gray-600">- { formattedSize }</span>
 			{/if}
 		</p>

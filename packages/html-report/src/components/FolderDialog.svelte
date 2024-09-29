@@ -1,25 +1,32 @@
-<svelte:body
-	bind:clientWidth={ bodyWidth }
-	bind:clientHeight={ bodyHeight }
-/>
-
 {#if folder}
 	<Dialog
 		heading={ folder!.path }
 		onClose={ () => folder = null }
+		large={ true }
 	>
 		{#snippet children()}
-			<div class="mb-4 flex flex-col overflow-y-auto">
-				<p>Bundled size: <b>{ formatSize( folder!.bytes ) }</b></p>
-				<p>GZIP size: <b>{ formatSize( folder!.gzip ) }</b></p>
-				<p>Brotli size: <b>{ formatSize( folder!.brotli ) }</b></p>
+			<div class="mb-4 grid grid-cols-[auto_1fr] gap-x-8">
+				<span>Bundled size</span>
+				<span class="font-bold">{ formatSize( folder!.bytes ) }</span>
+
+				<span>GZIP size</span>
+				<span class="font-bold">{ formatSize( folder!.gzip ) }</span>
+
+				<span>Brotli size</span>
+				<span class="font-bold">{ formatSize( folder!.brotli ) }</span>
 			</div>
 
-			<Treemap
-				content={ folder! }
-				width={ bodyWidth * 0.9 }
-				height={ bodyHeight * 0.8 }
-			/>
+			<div
+				bind:clientWidth={ width }
+				bind:clientHeight={ height }
+				class="flex-grow overflow-hidden"
+			>
+				<Treemap
+					content={ folder! }
+					width={ width }
+					height={ height }
+				/>
+			</div>
 		{/snippet}
 	</Dialog>
 {/if}
@@ -36,6 +43,6 @@ interface Props {
 
 let { folder }: Props = $props();
 
-let bodyWidth = $state<number>( 0 );
-let bodyHeight = $state<number>( 0 );
+let width = $state<number>( 0 );
+let height = $state<number>( 0 );
 </script>
