@@ -1,5 +1,5 @@
 import { relative, posix, sep } from 'path';
-import { exec } from 'child_process';
+import { execFileSync } from 'child_process';
 import type { Options } from './types';
 
 const cwd = /* #__ PURE__ */ process.cwd();
@@ -33,5 +33,5 @@ function getOpenCommand() {
 }
 
 export function open( path: string ): void {
-	exec( getOpenCommand() + ' ' + path )
+	execFileSync( getOpenCommand(), [ path ] )
 }
