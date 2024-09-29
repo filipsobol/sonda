@@ -16,7 +16,7 @@ export class SondaWebpackPlugin {
 	}
 
 	apply( compiler: Compiler ): void {
-		compiler.options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
+		compiler.options.output.devtoolModuleFilenameTemplate = '[resource-path]';
 
 		compiler.hooks.compilation.tap( 'SondaWebpackPlugin', ( compilation ) => {
 			compilation.hooks.optimizeModules.tap( 'SondaWebpackPlugin', ( modules ) => {
