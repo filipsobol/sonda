@@ -100,3 +100,24 @@ module.exports = {
 ```
 
 Internally, Sonda changes the default webpack configuration to output relative paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
+
+## Options
+
+Each plugin accepts an optional configuration object. The following options are available.
+
+### `format`
+
+* **Type:** `string`
+* **Default:** `'html'`
+
+The format of the output. The following formats are supported:
+
+* `'html'` - HTML file with treemap
+* `'json'` - JSON file
+
+### `open`
+
+* **Type:** `boolean`
+* **Default:** `true`
+
+Whether to open the report in the default program for given file extension (`.html` or `.json` depending on the `format` option) after the build.
