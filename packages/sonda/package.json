@@ -2,6 +2,17 @@
   "name": "sonda",
   "version": "0.1.1",
   "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, and esbuild",
+  "keywords": [
+    "bundle analyzer",
+    "bundle visualizer",
+    "analyzer",
+    "visualizer",
+    "source-map",
+    "vite",
+    "rollup",
+    "webpack",
+    "esbuild"
+  ],
   "license": "MIT",
   "type": "module",
   "repository": {

@@ -7,7 +7,7 @@ Sonda works with the following bundlers:
 * Vite
 * Rollup
 * esbuild
-* Webpack
+* webpack
 
 ## Installation
 
@@ -84,7 +84,7 @@ build( {
 
 Unlike for other bundlers, the esbuild plugin relies not only on source maps but also on the metafile. The plugin should automatically enable the metafile option for you, but if you get the error, be sure to enable it manually (`metafile: true`).
 
-### Webpack
+### webpack
 
 ```javascript
 // webpack.config.js
