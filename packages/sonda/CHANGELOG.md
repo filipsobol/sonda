@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+Show the approximate file and folder size after GZIP and Brotli compression.
+
 ## 0.1.2
 
 Use the `open` package to open the generated reports.
