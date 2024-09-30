@@ -55,9 +55,8 @@ export class SondaWebpackPlugin {
 				assets,
 				this.inputs,
 				normalizeOptions( this.options )
-			);
-
-			callback();
+			)
+			.then(() => callback());
 		} );
 	}
 }

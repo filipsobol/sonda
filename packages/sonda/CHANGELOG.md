@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+Use the `open` package to open the generated reports.
+
 ## 0.1.1
 
 Use `execFileSync` instead of `exec` to prevent potential shell injection when the path contains characters that the shell interprets in a special way, for instance quotes and spaces.

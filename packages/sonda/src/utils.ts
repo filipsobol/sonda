@@ -1,5 +1,4 @@
 import { relative, posix, sep } from 'path';
-import { execFileSync } from 'child_process';
 import type { Options } from './types';
 
 const cwd = /* #__ PURE__ */ process.cwd();
@@ -22,16 +21,4 @@ export function normalizePath( path: string ): string {
 
 	// Ensure paths are POSIX-compliant - https://stackoverflow.com/a/63251716/4617687
 	return relativized.replaceAll( sep, posix.sep );
-}
-
-function getOpenCommand() {
-	switch ( process.platform ) {
-		case 'darwin': return 'open';
-		case 'win32': return 'start';
-		default: return 'xdg-open';
-	}
-}
-
-export function open( path: string ): void {
-	execFileSync( getOpenCommand(), [ path ] )
 }

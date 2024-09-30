@@ -1,14 +1,15 @@
 import { join } from 'path';
 import { writeFileSync } from 'fs';
-import { open } from '../utils.js';
 import { generateHtmlReport, generateJsonReport } from '../report.js';
 import type { Options, JsonReport } from '../types.js';
 
-export function generateReportFromAssets(
+export async function generateReportFromAssets(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
 	options: Options
-): void {
+): Promise<void> {
+	const { default: open } = await import( 'open' );
+
 	const handler = options.format === 'html'
 		? saveHtml
 		: saveJson;

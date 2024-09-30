@@ -28,7 +28,7 @@ export function SondaEsbuildPlugin( options?: Partial<Options> ): Plugin {
 						return acc;
 					}, {} as JsonReport[ 'inputs' ] );
 
-				generateReportFromAssets(
+				return generateReportFromAssets(
 					Object.keys( result.metafile.outputs ),
 					inputs,
 					normalizeOptions( options )

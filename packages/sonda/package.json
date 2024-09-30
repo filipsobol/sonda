@@ -39,7 +39,8 @@
     "build": "pnpm run build:dist && pnpm run build:html"
   },
   "dependencies": {
-    "@ampproject/remapping": "^2.3.0"
+    "@ampproject/remapping": "^2.3.0",
+    "open": "^10.1.0"
   },
   "devDependencies": {
     "esbuild": "^0.23.1",
