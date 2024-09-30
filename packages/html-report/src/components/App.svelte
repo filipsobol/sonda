@@ -25,8 +25,15 @@
 	</div>
 </div>
 
-<FolderDialog folder={ focusedFolder } />
-<FileDialog file={ focusedFile } />
+<FolderDialog
+	{ folder }
+	{ activeOutput }
+/>
+
+<FileDialog
+	{ file }
+	{ activeOutput }
+/>
 <Tooltip />
 
 <script lang="ts">
@@ -41,8 +48,8 @@ const outputs = getTrie( window.SONDA_JSON_REPORT );
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let focusedFolder = $state<Folder | null>( null );
-let focusedFile = $state<File | null>( null );
+let folder = $state<Folder | null>( null );
+let file = $state<File | null>( null );
 let activeOutputIndex = $state<number>( 0 );
 
 const activeOutput = $derived( outputs[ activeOutputIndex ] );
@@ -61,10 +68,10 @@ function onclick( { target }: Event ) {
 	}
 
 	if ( isFolder( content ) ) {
-		return focusedFolder = content;
+		return folder = content;
 	}
 
-	return focusedFile = content;
+	return file = content;
 }
 
 function onkeydown(  event: KeyboardEvent  ) {
@@ -74,12 +81,12 @@ function onkeydown(  event: KeyboardEvent  ) {
 
 	event.stopPropagation();
 
-	if ( focusedFile ) {
-		return focusedFile = null;
+	if ( file ) {
+		return file = null;
 	}
 
-	if ( focusedFolder ) {
-		return focusedFolder = null;
+	if ( folder ) {
+		return folder = null;
 	}
 }
 </script>

@@ -36,7 +36,6 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 		} );
 
 		trie.root.name = outputPath;
-		trie.root.uncompressed = output.uncompressed;
 
 		trie.optimize();
 
@@ -95,6 +94,8 @@ export class FileSystemTrie {
 		} );
 
 		this.root.uncompressed += metadata.uncompressed;
+		this.root.gzip += metadata.gzip;
+		this.root.brotli += metadata.brotli;
 	}
 
 	optimize(): void {
