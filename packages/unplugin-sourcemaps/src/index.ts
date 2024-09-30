@@ -37,7 +37,7 @@ function factory( options?: Partial<Options> ): ReturnType<Factory> {
   } = Object.assign({}, defaultOptions, options) as Options;
 
   return {
-    name: 'unplugin-detailed-sourcemaps',
+    name: 'unplugin-sourcemaps',
     enforce: 'pre',
 
     loadInclude( id: string ): boolean {
