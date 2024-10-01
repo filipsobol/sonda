@@ -17,32 +17,40 @@
 		bind:clientHeight={ height }
 		class="flex-grow overflow-hidden"
 	>
-		<Treemap
-			content={ activeOutput.root }
-			{ width }
-			{ height }
-		/>
+		{#if activeOutput}
+			<Treemap
+				content={ activeOutput.root }
+				{ width }
+				{ height }
+			/>
+		{:else}
+			<NoData />
+		{/if}
 	</div>
 </div>
 
-<FolderDialog
-	{ folder }
-	{ activeOutput }
-/>
+{#if activeOutput}
+	<FolderDialog
+		{ folder }
+		{ activeOutput }
+	/>
 
-<FileDialog
-	{ file }
-	{ activeOutput }
-/>
+	<FileDialog
+		{ file }
+		{ activeOutput }
+	/>
+{/if}
+
 <Tooltip />
 
 <script lang="ts">
 import Header from './Header.svelte';
 import Treemap from './Treemap.svelte';
+import NoData from './NoData.svelte';
 import FileDialog from './FileDialog.svelte';
 import FolderDialog from './FolderDialog.svelte';
 import Tooltip from './Tooltip.svelte';
-import { isFolder, getTrie, type File, type Folder } from '../FileSystemTrie';
+import { isFolder, getTrie, type File, type Folder, type FileSystemTrie } from '../FileSystemTrie';
 
 const outputs = getTrie( window.SONDA_JSON_REPORT );
 
@@ -52,7 +60,7 @@ let folder = $state<Folder | null>( null );
 let file = $state<File | null>( null );
 let activeOutputIndex = $state<number>( 0 );
 
-const activeOutput = $derived( outputs[ activeOutputIndex ] );
+const activeOutput = $derived<FileSystemTrie | undefined>( outputs.at( activeOutputIndex ) );
 
 function onclick( { target }: Event ) {
 	const path = target instanceof Element && target.getAttribute( 'data-tile' );
@@ -61,7 +69,7 @@ function onclick( { target }: Event ) {
 		return;
 	}
 
-	const content = activeOutput.get( path );
+	const content = activeOutput!.get( path );
 
 	if ( !content ) {
 		return;

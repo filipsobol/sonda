@@ -1,14 +1,17 @@
-<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-end space-x-2 bg-gray-50">
+<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-end space-x-2 bg-gray-50 shadow">
 	<div class="flex items-center justify-center space-x-2 max-w-sm">
-		<select
-			bind:value={ activeOutputIndex }
-			class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10 min-w-80"
-		>
-			{#each outputs as output, index}
-				<option value={ index }>{ index + 1 }. { output.root.name }</option>
-			{/each}
-		</select>
+		{#if outputs.length > 0}
+			<select
+				bind:value={ activeOutputIndex }
+				class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10 min-w-80"
+			>
+				{#each outputs as output, index}
+					<option value={ index }>{ index + 1 }. { output.root.name }</option>
+				{/each}
+			</select>
+		{/if}
 	</div>
+
 	<button
 		aria-label="Details of the entire build output"
 		class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
