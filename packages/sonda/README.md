@@ -46,13 +46,13 @@ import { defineConfig } from 'rollup';
 import { SondaRollupPlugin } from 'sonda';
 
 export default defineConfig( {
- output: {
-  // Other options are skipped for brevity
-  sourcemap: true,
- },
- plugins: [
-  SondaRollupPlugin(),
- ]
+  output: {
+    // Other options are skipped for brevity
+    sourcemap: true,
+  },
+  plugins: [
+    SondaRollupPlugin(),
+  ]
 } );
 ```
 
@@ -75,10 +75,10 @@ import { build } from 'esbuild';
 import { SondaEsbuildPlugin } from 'sonda';
 
 build( {
- sourcemap: true,
- plugins: [
-  SondaEsbuildPlugin()
- ]
+  sourcemap: true,
+  plugins: [
+    SondaEsbuildPlugin()
+  ]
 } );
 ```
 
