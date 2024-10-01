@@ -1,13 +1,14 @@
-import { resolve } from "path";
-import { readFileSync } from "fs";
-import { defineConfig } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { viteSingleFile } from "vite-plugin-singlefile";
-import { createHtmlPlugin } from "vite-plugin-html";
+import { resolve } from 'path';
+import { readFileSync } from 'fs';
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { viteSingleFile } from 'vite-plugin-singlefile';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import ViteRestart from 'vite-plugin-restart';
 
-let REPORT_DATA = "__REPORT_DATA__";
+let REPORT_DATA = '__REPORT_DATA__';
 
-if ( process.env.NODE_ENV !== "production" ) {
+if ( process.env.NODE_ENV !== 'production' ) {
   const dataFilePath = resolve( process.cwd(), 'sample_data.json' );
 
   REPORT_DATA = readFileSync( dataFilePath, 'utf-8' );
@@ -27,9 +28,14 @@ export default defineConfig({
         },
       },
     }),
+    ViteRestart( {
+      restart: [
+        './sample_data.json'
+      ]
+    } )
   ],
   build: {
     emptyOutDir: false,
-    outDir: resolve(import.meta.dirname, "../sonda/dist"),
+    outDir: resolve(import.meta.dirname, '../sonda/dist'),
   },
 });
