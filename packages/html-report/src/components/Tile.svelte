@@ -63,7 +63,7 @@ let { tile, content, totalBytes }: Props = $props();
 const childWidth = $derived( tile.width - ( padding * 2 ) );
 const childHeight = $derived( tile.height - padding - paddingTop );
 const formattedSize = $derived( formatSize( content.uncompressed ) );
-const percentageOfTotal = $derived( ( content.uncompressed / totalBytes * 100 ).toFixed(2) );
+const percentageOfTotal = $derived( Math.min( content.uncompressed / totalBytes * 100, 100 ).toFixed(2) );
 const color = $derived( `color-mix(in oklch, #fca5a5 ${ percentageOfTotal }%, #86efac)` );
 const shouldDisplayText = $derived( tile.width >= ( paddingTop * 1.75 ) && tile.height >= paddingTop );
 
