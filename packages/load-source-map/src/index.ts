@@ -1,7 +1,23 @@
 import { existsSync, readFileSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
-import type { MaybeCodeMap } from '../types.js';
-import type { EncodedSourceMap } from '@ampproject/remapping';
+
+export interface SourceMapV3 {
+	file?: string | null;
+	names: string[];
+	sourceRoot?: string;
+	sources: ( string | null )[];
+	sourcesContent?: ( string | null )[];
+	mappings: string;
+	version: 3;
+	ignoreList?: number[];
+}
+
+export interface CodeMap {
+	code: string;
+	map?: SourceMapV3;
+}
+
+export type MaybeCodeMap = CodeMap | null;
 
 /**
  * Strip any JSON XSSI avoidance prefix from the string (as documented in the source maps specification),
@@ -9,13 +25,13 @@ import type { EncodedSourceMap } from '@ampproject/remapping';
  *
  * https://github.com/mozilla/source-map/blob/3cb92cc3b73bfab27c146bae4ef2bc09dbb4e5ed/lib/util.js#L162-L164
  */
-function parseSourceMapInput( str: string ): EncodedSourceMap {
+function parseSourceMapInput( str: string ): SourceMapV3 {
 	return JSON.parse( str.replace( /^\)]}'[^\n]*\n/, "" ) );
 }
 
 /**
 	sourceMappingURL=data:application/json;charset=utf-8;base64,data
- 	sourceMappingURL=data:application/json;base64,data
+		sourceMappingURL=data:application/json;base64,data
 	sourceMappingURL=data:application/json;uri,data
 	sourceMappingURL=map-file-comment.css.map
 */
@@ -51,7 +67,7 @@ export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
 	};
 }
 
-function loadMap( codePath: string, sourceMappingURL: string ): { map: EncodedSourceMap; mapPath: string } | null {
+function loadMap( codePath: string, sourceMappingURL: string ): { map: SourceMapV3; mapPath: string } | null {
 	if ( sourceMappingURL.startsWith( 'data:' ) ) {
 		const map = parseDataUrl( sourceMappingURL );
 
@@ -87,7 +103,7 @@ function parseDataUrl( url: string ): string {
 	}
 }
 
-function normalizeSourcesPaths( map: EncodedSourceMap, mapPath: string ): EncodedSourceMap[ 'sources' ] {
+function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3[ 'sources' ] {
 	const mapDir = dirname( mapPath );
 
 	return map.sources.map( source => {

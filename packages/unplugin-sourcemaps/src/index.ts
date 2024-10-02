@@ -4,7 +4,7 @@ import {
   type UnpluginInstance,
   type TransformResult
 } from 'unplugin';
-import { loadCodeAndMap } from 'sonda';
+import { loadCodeAndMap } from 'load-source-map';
 
 export interface Options {
 

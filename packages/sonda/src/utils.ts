@@ -1,7 +1,7 @@
 import { relative, posix, sep } from 'path';
 import type { Options } from './types';
 
-const cwd = /* #__ PURE__ */ process.cwd();
+const cwd = /* #__PURE__ */ process.cwd();
 
 export function normalizeOptions( options?: Partial<Options> ) {
 	const defaultOptions: Options = {

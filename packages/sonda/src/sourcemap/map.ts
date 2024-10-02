@@ -1,5 +1,5 @@
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
-import { loadCodeAndMap } from './load';
+import { loadCodeAndMap } from 'load-source-map';
 import { resolve } from 'path';
 import type { ReportInput } from '../types';
 import { normalizePath } from '../utils';

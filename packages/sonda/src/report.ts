@@ -1,9 +1,9 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
+import { loadCodeAndMap } from 'load-source-map';
 import { mapSourceMap } from './sourcemap/map.js';
 import { getBytesPerSource, getSizes } from './sourcemap/bytes.js';
-import { loadCodeAndMap } from './sourcemap/load.js';
 import type {
   JsonReport,
   MaybeCodeMap,
