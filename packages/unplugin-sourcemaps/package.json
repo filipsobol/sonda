@@ -31,6 +31,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "prepack": "pnpm run build",
     "build": "rollup -c ../../rollup.config.js && tsc"
   },
   "dependencies": {
