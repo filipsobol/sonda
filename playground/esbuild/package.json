@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.23.1",
-    "sonda": "workspace:^*"
+    "sonda": "workspace:^*",
+    "unplugin-sourcemaps": "workspace:^*"
   }
 }
