@@ -1,0 +1,19 @@
+{
+  "name": "rspack",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rsbuild dev --open",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-engine": "42.0.2",
+    "ckeditor5": "^43.0.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.1",
+    "sonda": "workspace:^*",
+    "unplugin-sourcemaps": "workspace:^*"
+  }
+}
