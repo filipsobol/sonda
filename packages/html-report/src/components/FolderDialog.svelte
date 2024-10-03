@@ -10,10 +10,10 @@
 				<span class="font-bold">{ formatSize( folder!.uncompressed ) }</span>
 
 					<span>Approx. GZIP size</span>
-					<span class="font-bold">{ formatSize( potentialGzipSize ) }</span>
+					<span class="font-bold">{ formatSize( folder!.gzip ) }</span>
 
 					<span>Approx. Brotli size</span>
-					<span class="font-bold">{ formatSize( potentialBrotliSize ) }</span>
+					<span class="font-bold">{ formatSize( folder!.brotli ) }</span>
 			</div>
 
 			<div
@@ -35,19 +35,14 @@
 import Dialog from './Dialog.svelte';
 import Treemap from './Treemap.svelte';
 import { formatSize } from '../format';
-import { potentialSize } from '../size';
-import type { Folder, FileSystemTrie } from '../FileSystemTrie';
+import type { Folder } from '../FileSystemTrie';
 
 interface Props {
 	folder: Folder | null;
-	activeOutput: FileSystemTrie;
 }
 
-let { folder, activeOutput }: Props = $props();
+let { folder }: Props = $props();
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-
-const potentialGzipSize = $derived( potentialSize( activeOutput, folder!, 'gzip' ) );
-const potentialBrotliSize = $derived( potentialSize( activeOutput, folder!, 'brotli' ) );
 </script>

@@ -18,14 +18,21 @@ export function generateJsonReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>
 ): JsonReport {
-  const outputsEntries = assets
+  const outputs = assets
     .filter( asset => !asset.endsWith( '.map' ) )
-    .map( asset => processAsset( asset, inputs ) )
-    .filter( output => !!output );
+    .reduce( ( carry, asset ) => {
+      const data = processAsset( asset, inputs );
+
+      if ( data ) {
+        carry[ normalizePath( asset ) ] = data;
+      }
+
+      return carry;
+    }, {} as Record<string, ReportOutput> );
 
   return {
     inputs,
-    outputs: Object.fromEntries( outputsEntries )
+    outputs
   };
 }
 
@@ -40,7 +47,7 @@ export function generateHtmlReport(
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
 
-function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ string, ReportOutput ] | void {
+function processAsset( asset: string, inputs: Record<string, ReportInput> ): ReportOutput | void {
   const maybeCodeMap = loadCodeAndMap( asset );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
@@ -52,22 +59,17 @@ function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ s
 
   mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
 
-  const bytes = getBytesPerSource( code, mapped );
+  const assetSizes = getSizes( code );
+  const bytes = getBytesPerSource( code, mapped, assetSizes );
 
-  return [ normalizePath( asset ), {
-    ...getSizes( code ),
-    inputs: mapped.sources.reduce( ( acc, source ) => {
-      if ( source ) {
-        acc[ normalizePath( source ) ] = bytes.get( source ) ?? {
-          uncompressed: 0,
-          gzip: 0,
-          brotli: 0
-        };
-      }
+  return {
+    ...assetSizes,
+    inputs: Array.from( bytes ).reduce( ( carry, [ source, sizes ] ) => {
+      carry[ normalizePath( source ) ] = sizes;
 
-      return acc;
+      return carry;
     }, {} as Record<string, ReportOutputInput> )
-  }  ];
+  };
 }
 
 function hasCodeAndMap( result: MaybeCodeMap ): result is Required<CodeMap> {

@@ -19,12 +19,12 @@
 
 					{#if file!.path !== '[unassigned]'}
 						<span>Approx. GZIP size</span>
-						<span class="font-bold">{ formatSize( potentialGzipSize ) }</span>
+						<span class="font-bold">{ formatSize( file!.gzip ) }</span>
 					{/if}
 
 					{#if file!.path !== '[unassigned]'}
 						<span>Approx. Brotli size</span>
-						<span class="font-bold">{ formatSize( potentialBrotliSize ) }</span>
+						<span class="font-bold">{ formatSize( file!.brotli ) }</span>
 					{/if}
 				</div>
 
@@ -42,21 +42,16 @@
 <script lang="ts">
 import Dialog from './Dialog.svelte';
 import { formatSize } from '../format';
-import { potentialSize } from '../size';
 import { AsciiTree } from '../AsciiTree';
-import type { File, FileSystemTrie } from '../FileSystemTrie';
+import type { File } from '../FileSystemTrie';
 
 interface Props {
 	file: File | null;
-	activeOutput: FileSystemTrie;
 }
 
-let { file, activeOutput }: Props = $props();
+let { file }: Props = $props();
 
 const input = $derived( file && window.SONDA_JSON_REPORT.inputs[ file.path ] );
-
-const potentialGzipSize = $derived( potentialSize( activeOutput, file!, 'gzip' ) )
-const potentialBrotliSize = $derived( potentialSize( activeOutput, file!, 'brotli' ) );
 
 const format = $derived.by( () => {
 	if ( input ) {

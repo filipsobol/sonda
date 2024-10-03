@@ -1,34 +1,74 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
-import type { DecodedSourceMap } from '@ampproject/remapping';
+import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
 import type { Sizes } from '../types';
 
-export function getBytesPerSource( code: string, map: DecodedSourceMap ): Map<string, Sizes> {
-	const contributions = new Array( map.sources.length ).fill( '' );
+const UNASSIGNED = '[unassigned]';
 
-	// Split the source code by lines
+export function getBytesPerSource(
+	code: string,
+	map: DecodedSourceMap,
+	assetSizes: Sizes
+): Map<string, Sizes> {
+	const contributions = getContributions( map.sources );
+
+	// Split the code into lines
 	const codeLines = code.split( /(?<=\r?\n)/ );
 
-	for ( let lineIndex = 0; lineIndex < map.mappings.length; lineIndex++ ) {
-		const line = map.mappings[ lineIndex ];
+	for ( let lineIndex = 0; lineIndex < codeLines.length; lineIndex++ ) {
 		const lineCode = codeLines[ lineIndex ];
+		const mappings = map.mappings[ lineIndex ] || [];
+		let currentColumn = 0;
 
-		for ( let mappingIndex = 0; mappingIndex < line.length; mappingIndex++ ) {
+		for ( let i = 0; i <= mappings.length; i++ ) {
 			// 0: generatedColumn
-			// 1: fileIndex
+			// 1: sourceIndex
 			// 2: originalLine
 			// 3: originalColumn
 			// 4: nameIndex
 
-			const [ startColumn, fileIndex ] = line[ mappingIndex ];
-			const endColumn = line[ mappingIndex + 1 ]?.[ 0 ] ?? lineCode.length;
+			const mapping: SourceMapSegment | undefined = mappings[ i ];
+			const startColumn = mapping?.[ 0 ] ?? lineCode.length;
+			const endColumn = mappings[ i + 1 ]?.[ 0 ] ?? lineCode.length;
 
-			contributions[ fileIndex! ] += lineCode.slice( startColumn, endColumn );
+			// Slice the code from currentColumn to startColumn for unassigned code
+			if ( startColumn > currentColumn ) {
+				contributions.set( UNASSIGNED, contributions.get( UNASSIGNED ) + lineCode.slice( currentColumn, startColumn ) );
+			}
+
+			if ( mapping ) {
+				// Slice the code from startColumn to endColumn for assigned code
+				const sourceIndex = mapping?.[ 1 ];
+				const codeSlice = lineCode.slice( startColumn, endColumn );
+				const source = sourceIndex !== undefined ? map.sources[ sourceIndex ]! : UNASSIGNED;
+
+				contributions.set( source, contributions.get( source ) + codeSlice );
+				currentColumn = endColumn;
+			} else {
+				currentColumn = startColumn;
+			}
 		}
 	}
 
-	return new Map<string, Sizes>( 
-		contributions.map( ( code, index ) => [ map.sources[ index ]!, getSizes( code ) ] )
-	);
+	// Compute sizes for each source
+	const sourceSizes = new Map<string, Sizes>();
+
+	const contributionsSum: Sizes = {
+		uncompressed: 0,
+		gzip: 0,
+		brotli: 0
+	};
+
+	for ( const [ source, codeSegment ] of contributions ) {
+		const sizes = getSizes( codeSegment );
+
+		contributionsSum.uncompressed += sizes.uncompressed;
+		contributionsSum.gzip += sizes.gzip;
+		contributionsSum.brotli += sizes.brotli;
+
+		sourceSizes.set( source, sizes );
+	}
+
+	return adjustSizes( sourceSizes, assetSizes, contributionsSum );
 }
 
 export function getSizes( code: string ): Sizes {
@@ -37,4 +77,48 @@ export function getSizes( code: string ): Sizes {
 		gzip: gzipSync( code ).length,
 		brotli: brotliCompressSync( code ).length
 	};
+}
+
+function getContributions( sources: Array<string | null> ): Map<string, string> {
+	const contributions = new Map<string, string>();
+
+	// Populate contributions with sources
+	sources
+		.filter( source => source !== null )
+		.forEach( source => contributions.set( source, '' ) );
+
+	// Add entry for the code that is not assigned to any source
+	contributions.set( UNASSIGNED, '' );
+
+	return contributions;
+}
+
+/**
+ * Compression efficiency improves with the size of the file.
+ *
+ * However, what we have is the compressed size of the entire bundle (`actual`),
+ * the sum of all files compressed individually (`sum`) and the compressed
+ * size of a given file (`content`). The last value is essentially a “worst-case”
+ * scenario, and the actual size of the file in the bundle is likely to be smaller.
+ *
+ * We use this information to estimate the actual size of the file in the bundle
+ * after compression.
+ */
+function adjustSizes(
+	sources: Map<string, Sizes>,
+	asset: Sizes,
+	sums: Sizes
+): Map<string, Sizes> {
+	const gzipDelta = asset.gzip / sums.gzip;
+	const brotliDelta = asset.brotli / sums.brotli;
+
+	for ( const [ source, sizes ] of sources ) {
+		sources.set( source, {
+			uncompressed: sizes.uncompressed,
+			gzip: Math.round( sizes.gzip * gzipDelta ),
+			brotli: Math.round( sizes.brotli * brotliDelta )
+		} );
+	}
+
+	return sources;
 }

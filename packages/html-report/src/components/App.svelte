@@ -30,15 +30,8 @@
 </div>
 
 {#if activeOutput}
-	<FolderDialog
-		{ folder }
-		{ activeOutput }
-	/>
-
-	<FileDialog
-		{ file }
-		{ activeOutput }
-	/>
+	<FolderDialog { folder } />
+	<FileDialog { file } />
 {/if}
 
 <Tooltip />
