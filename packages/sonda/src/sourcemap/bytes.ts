@@ -1,13 +1,14 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
-import type { Sizes } from '../types';
+import type { Options, Sizes } from '../types';
 
 const UNASSIGNED = '[unassigned]';
 
 export function getBytesPerSource(
 	code: string,
 	map: DecodedSourceMap,
-	assetSizes: Sizes
+	assetSizes: Sizes,
+	options: Options
 ): Map<string, Sizes> {
 	const contributions = getContributions( map.sources );
 
@@ -59,7 +60,7 @@ export function getBytesPerSource(
 	};
 
 	for ( const [ source, codeSegment ] of contributions ) {
-		const sizes = getSizes( codeSegment );
+		const sizes = getSizes( codeSegment, options );
 
 		contributionsSum.uncompressed += sizes.uncompressed;
 		contributionsSum.gzip += sizes.gzip;
@@ -68,14 +69,17 @@ export function getBytesPerSource(
 		sourceSizes.set( source, sizes );
 	}
 
-	return adjustSizes( sourceSizes, assetSizes, contributionsSum );
+	return adjustSizes( sourceSizes, assetSizes, contributionsSum, options );
 }
 
-export function getSizes( code: string ): Sizes {
+export function getSizes(
+	code: string,
+	options: Options
+): Sizes {
 	return {
 		uncompressed: Buffer.byteLength( code ),
-		gzip: gzipSync( code ).length,
-		brotli: brotliCompressSync( code ).length
+		gzip: options.gzip ? gzipSync( code ).length : 0,
+		brotli: options.brotli ? brotliCompressSync( code ).length : 0
 	};
 }
 
@@ -107,16 +111,17 @@ function getContributions( sources: Array<string | null> ): Map<string, string> 
 function adjustSizes(
 	sources: Map<string, Sizes>,
 	asset: Sizes,
-	sums: Sizes
+	sums: Sizes,
+	options: Options
 ): Map<string, Sizes> {
-	const gzipDelta = asset.gzip / sums.gzip;
-	const brotliDelta = asset.brotli / sums.brotli;
+	const gzipDelta = options.gzip ? asset.gzip / sums.gzip : 0;
+	const brotliDelta = options.brotli ? asset.brotli / sums.brotli : 0;
 
 	for ( const [ source, sizes ] of sources ) {
 		sources.set( source, {
 			uncompressed: sizes.uncompressed,
-			gzip: Math.round( sizes.gzip * gzipDelta ),
-			brotli: Math.round( sizes.brotli * brotliDelta )
+			gzip: options.gzip ? Math.round( sizes.gzip * gzipDelta ) : 0,
+			brotli: options.brotli ? Math.round( sizes.brotli * brotliDelta ) : 0
 		} );
 	}
 

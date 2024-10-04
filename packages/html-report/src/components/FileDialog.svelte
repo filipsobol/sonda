@@ -17,12 +17,12 @@
 					<span>Bundled size</span>
 					<span class="font-bold">{ formatSize( file!.uncompressed ) }</span>
 
-					{#if file!.path !== '[unassigned]'}
+					{#if file!.gzip}
 						<span>Approx. GZIP size</span>
 						<span class="font-bold">{ formatSize( file!.gzip ) }</span>
 					{/if}
 
-					{#if file!.path !== '[unassigned]'}
+					{#if file!.brotli}
 						<span>Approx. Brotli size</span>
 						<span class="font-bold">{ formatSize( file!.brotli ) }</span>
 					{/if}

@@ -9,11 +9,15 @@
 				<span>Bundled size</span>
 				<span class="font-bold">{ formatSize( folder!.uncompressed ) }</span>
 
+				{#if folder!.gzip}
 					<span>Approx. GZIP size</span>
 					<span class="font-bold">{ formatSize( folder!.gzip ) }</span>
+				{/if}
 
+				{#if folder!.brotli}
 					<span>Approx. Brotli size</span>
 					<span class="font-bold">{ formatSize( folder!.brotli ) }</span>
+				{/if}
 			</div>
 
 			<div

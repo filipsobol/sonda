@@ -10,18 +10,20 @@ import type {
   ReportInput,
   ReportOutput,
   CodeMap,
-  ReportOutputInput
+  ReportOutputInput,
+  Options
 } from './types.js';
 import { normalizePath } from './utils.js';
 
 export function generateJsonReport(
   assets: Array<string>,
-  inputs: Record<string, ReportInput>
+  inputs: Record<string, ReportInput>,
+  options: Options
 ): JsonReport {
   const outputs = assets
     .filter( asset => !asset.endsWith( '.map' ) )
     .reduce( ( carry, asset ) => {
-      const data = processAsset( asset, inputs );
+      const data = processAsset( asset, inputs, options );
 
       if ( data ) {
         carry[ normalizePath( asset ) ] = data;
@@ -38,16 +40,21 @@ export function generateJsonReport(
 
 export function generateHtmlReport(
   assets: Array<string>,
-  inputs: Record<string, ReportInput>
+  inputs: Record<string, ReportInput>,
+  options: Options
 ): string {
-  const json = generateJsonReport( assets, inputs );
+  const json = generateJsonReport( assets, inputs, options );
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
 
-function processAsset( asset: string, inputs: Record<string, ReportInput> ): ReportOutput | void {
+function processAsset(
+  asset: string,
+  inputs: Record<string, ReportInput>,
+  options: Options
+): ReportOutput | void {
   const maybeCodeMap = loadCodeAndMap( asset );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
@@ -59,8 +66,8 @@ function processAsset( asset: string, inputs: Record<string, ReportInput> ): Rep
 
   mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
 
-  const assetSizes = getSizes( code );
-  const bytes = getBytesPerSource( code, mapped, assetSizes );
+  const assetSizes = getSizes( code, options );
+  const bytes = getBytesPerSource( code, mapped, assetSizes, options );
 
   return {
     ...assetSizes,

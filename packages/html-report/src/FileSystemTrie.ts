@@ -27,14 +27,6 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 			.entries( output.inputs )
 			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
 
-		trie.root.items.push( {
-			name: '[unassigned]',
-			path: '[unassigned]',
-			uncompressed: output.uncompressed - trie.root.uncompressed,
-			gzip: output.gzip - trie.root.gzip,
-			brotli: output.brotli - trie.root.brotli
-		} );
-
 		trie.root.name = outputPath;
 		trie.root.uncompressed = output.uncompressed;
 		trie.root.gzip = output.gzip;
@@ -90,15 +82,11 @@ export class FileSystemTrie {
 
 		node.items.push( {
 			name,
-			path: `${ node.path }/${ name }`,
+			path: node.path ? `${ node.path }/${ name }` : name,
 			uncompressed: metadata.uncompressed,
 			gzip: metadata.gzip,
 			brotli: metadata.brotli
 		} );
-
-		this.root.uncompressed += metadata.uncompressed;
-		this.root.gzip += metadata.gzip;
-		this.root.brotli += metadata.brotli;
 	}
 
 	optimize(): void {

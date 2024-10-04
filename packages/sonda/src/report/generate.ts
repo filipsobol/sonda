@@ -14,16 +14,17 @@ export async function generateReportFromAssets(
 		? saveHtml
 		: saveJson;
 
-	const path = handler( assets, inputs );
+	const path = handler( assets, inputs, options );
 
 	options.open && path && open( path );
 }
 
 function saveHtml(
 	assets: string[],
-	inputs: JsonReport[ 'inputs' ]
+	inputs: JsonReport[ 'inputs' ],
+	options: Options
 ): string | null {
-	const report = generateHtmlReport( assets, inputs );
+	const report = generateHtmlReport( assets, inputs, options );
 	const path = join( process.cwd(), 'sonda-report.html' );
 
 	writeFileSync( path, report );
@@ -33,9 +34,10 @@ function saveHtml(
 
 function saveJson(
 	assets: string[],
-	inputs: JsonReport[ 'inputs' ]
+	inputs: JsonReport[ 'inputs' ],
+	options: Options
 ): string | null {
-	const report = generateJsonReport( assets, inputs );
+	const report = generateJsonReport( assets, inputs, options );
 	const path = join( process.cwd(), 'sonda-report.json' );
 
 	writeFileSync( path, JSON.stringify( report, null, 2 ) );
