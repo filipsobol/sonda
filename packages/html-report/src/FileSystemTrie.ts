@@ -1,19 +1,13 @@
-import type { JsonReport, ReportOutputInput } from 'sonda';
+import type { JsonReport, ReportOutputInput, Sizes } from 'sonda';
 
-export interface File {
+export interface File extends Sizes {
 	name: string;
 	path: string;
-	uncompressed: number;
-	gzip: number;
-	brotli: number
 }
 
-export interface Folder {
+export interface Folder extends Sizes {
 	name: string;
 	path: string;
-	uncompressed: number;
-	gzip: number;
-	brotli: number
 	items: Array<Content>;
 }
 

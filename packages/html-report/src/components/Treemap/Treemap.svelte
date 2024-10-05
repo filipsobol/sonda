@@ -9,7 +9,7 @@
 		<!-- Substract 1 and start at 0.5 to prevent stroke clipping at viewport edges -->
 		<Level
 			{ content }
-			totalBytes={ content.uncompressed }
+			totalBytes={ content[ compression.type ] }
 			width={ width - 1 }
 			height={ height - 1 }
 			xStart={ 0.5 }
@@ -20,7 +20,8 @@
 
 <script lang="ts">
 import Level from './Level.svelte';
-import type { Folder } from '../FileSystemTrie';
+import { compression } from '../../stores.svelte';
+import type { Folder } from '../../FileSystemTrie';
 
 interface Props {
 	width: number;
