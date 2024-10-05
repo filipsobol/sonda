@@ -31,9 +31,10 @@ function parseSourceMapInput( str: string ): SourceMapV3 {
 
 /**
 	sourceMappingURL=data:application/json;charset=utf-8;base64,data
-		sourceMappingURL=data:application/json;base64,data
+	sourceMappingURL=data:application/json;base64,data
 	sourceMappingURL=data:application/json;uri,data
 	sourceMappingURL=map-file-comment.css.map
+	sourceMappingURL=map-file-comment.css.map?query=value
 */
 const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 
@@ -78,7 +79,7 @@ function loadMap( codePath: string, sourceMappingURL: string ): { map: SourceMap
 	}
 
 	const sourceMapFilename = new URL( sourceMappingURL, 'file://' ).pathname;
-	const mapPath = join( dirname(codePath), sourceMapFilename );
+	const mapPath = join( dirname( codePath ), sourceMapFilename );
 
 	if ( !existsSync( mapPath ) ) {
 		return null;
