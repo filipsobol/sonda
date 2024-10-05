@@ -77,7 +77,8 @@ function loadMap( codePath: string, sourceMappingURL: string ): { map: SourceMap
 		};
 	}
 
-	const mapPath = join( codePath, '..', sourceMappingURL );
+	const sourceMapFilename = new URL( sourceMappingURL, 'file://' ).pathname;
+	const mapPath = join( dirname(codePath), sourceMapFilename );
 
 	if ( !existsSync( mapPath ) ) {
 		return null;
