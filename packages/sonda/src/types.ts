@@ -9,11 +9,40 @@ export interface Options {
   format: 'html' | 'json';
 
   /**
-   * Whether to open the generated report in the default program for HTML files.
+   * Whether to open the report in the default program for given file extension
+   * (`.html` or `.json` depending on the `format` option) after the build.
    *
    * @default true
    */
   open: boolean;
+
+  /**
+   * Whether to calculate the sizes of assets after compression with GZIP.
+   *
+   * The report will also include the estimated compressed sizes of the
+   * individual files that make up each asset. However, unlike the
+   * compressed size of the entire asset, the estimates for individual
+   * files are not completely accurate and should only be used as a reference.
+   *
+   * Enabling this option will increase the time it takes to generate the report.
+   *
+   * @default false
+   */
+  gzip: boolean;
+
+  /**
+   * Whether to calculate the sizes of assets after compression with Brotli.
+   *
+   * The report will also include the estimated compressed sizes of the
+   * individual files that make up each asset. However, unlike the
+   * compressed size of the entire asset, the estimates for individual
+   * files are not completely accurate and should only be used as a reference.
+   *
+   * Enabling this option will increase the time it takes to generate the report.
+   *
+   * @default false
+   */
+  brotli: boolean;
 }
 
 export interface ReportInput {

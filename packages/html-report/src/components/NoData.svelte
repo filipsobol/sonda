@@ -21,3 +21,5 @@
 
 	<p class="mt-4 text-lg text-gray-500">Did you enable source maps in the bundler configuration?</p>
 </div>
+
+<script lang="ts"></script>

@@ -7,5 +7,7 @@ export type {
 	JsonReport,
 	ReportInput,
 	ReportOutput,
-	ReportOutputInput
+	ReportOutputInput,
+	Sizes,
+	ModuleFormat
 } from './types.js';

@@ -44,9 +44,10 @@
 
 <script lang="ts">
 import Level from './Level.svelte';
-import { formatSize } from '../format';
-import { isFolder, type Content } from '../FileSystemTrie';
-import type { TileData } from '../TreeMapGenerator';
+import { formatSize } from '../../format';
+import { compression } from '../../stores.svelte';
+import { isFolder, type Content } from '../../FileSystemTrie';
+import type { TileData } from '../../TreeMapGenerator';
 
 const tresholdInPixels = 20;
 const padding = 6;
@@ -62,8 +63,8 @@ let { tile, content, totalBytes }: Props = $props();
 
 const childWidth = $derived( tile.width - ( padding * 2 ) );
 const childHeight = $derived( tile.height - padding - paddingTop );
-const formattedSize = $derived( formatSize( content.uncompressed ) );
-const percentageOfTotal = $derived( Math.min( content.uncompressed / totalBytes * 100, 100 ).toFixed(2) );
+const formattedSize = $derived( formatSize( content[ compression.type ] ) );
+const percentageOfTotal = $derived( Math.min( content[ compression.type ] / totalBytes * 100, 100 ).toFixed(2) );
 const color = $derived( `color-mix(in oklch, #fca5a5 ${ percentageOfTotal }%, #86efac)` );
 const shouldDisplayText = $derived( tile.width >= ( paddingTop * 1.75 ) && tile.height >= paddingTop );
 

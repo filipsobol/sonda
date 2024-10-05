@@ -10,37 +10,51 @@ import type {
   ReportInput,
   ReportOutput,
   CodeMap,
-  ReportOutputInput
+  ReportOutputInput,
+  Options
 } from './types.js';
 import { normalizePath } from './utils.js';
 
 export function generateJsonReport(
   assets: Array<string>,
-  inputs: Record<string, ReportInput>
+  inputs: Record<string, ReportInput>,
+  options: Options
 ): JsonReport {
-  const outputsEntries = assets
+  const outputs = assets
     .filter( asset => !asset.endsWith( '.map' ) )
-    .map( asset => processAsset( asset, inputs ) )
-    .filter( output => !!output );
+    .reduce( ( carry, asset ) => {
+      const data = processAsset( asset, inputs, options );
+
+      if ( data ) {
+        carry[ normalizePath( asset ) ] = data;
+      }
+
+      return carry;
+    }, {} as Record<string, ReportOutput> );
 
   return {
     inputs,
-    outputs: Object.fromEntries( outputsEntries )
+    outputs
   };
 }
 
 export function generateHtmlReport(
   assets: Array<string>,
-  inputs: Record<string, ReportInput>
+  inputs: Record<string, ReportInput>,
+  options: Options
 ): string {
-  const json = generateJsonReport( assets, inputs );
+  const json = generateJsonReport( assets, inputs, options );
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
 
-function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ string, ReportOutput ] | void {
+function processAsset(
+  asset: string,
+  inputs: Record<string, ReportInput>,
+  options: Options
+): ReportOutput | void {
   const maybeCodeMap = loadCodeAndMap( asset );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
@@ -52,22 +66,17 @@ function processAsset( asset: string, inputs: Record<string, ReportInput> ): [ s
 
   mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
 
-  const bytes = getBytesPerSource( code, mapped );
+  const assetSizes = getSizes( code, options );
+  const bytes = getBytesPerSource( code, mapped, assetSizes, options );
 
-  return [ normalizePath( asset ), {
-    ...getSizes( code ),
-    inputs: mapped.sources.reduce( ( acc, source ) => {
-      if ( source ) {
-        acc[ normalizePath( source ) ] = bytes.get( source ) ?? {
-          uncompressed: 0,
-          gzip: 0,
-          brotli: 0
-        };
-      }
+  return {
+    ...assetSizes,
+    inputs: Array.from( bytes ).reduce( ( carry, [ source, sizes ] ) => {
+      carry[ normalizePath( source ) ] = sizes;
 
-      return acc;
+      return carry;
     }, {} as Record<string, ReportOutputInput> )
-  }  ];
+  };
 }
 
 function hasCodeAndMap( result: MaybeCodeMap ): result is Required<CodeMap> {

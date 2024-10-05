@@ -4,8 +4,8 @@ import { generateReportFromAssets } from '../report/generate.js';
 import type { Options, ModuleFormat, JsonReport } from '../types.js';
 import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
 
-const esmRegex = /* #__ PURE__ */ /\.m[tj]sx?$/;
-const cjsRegex = /* #__ PURE__ */ /\.c[tj]sx?$/;
+const esmRegex = /\.m[tj]sx?$/;
+const cjsRegex = /\.c[tj]sx?$/;
 
 export function SondaRollupPlugin( options?: Partial<Options> ): Plugin {
 	let inputs: JsonReport[ 'inputs' ] = {};

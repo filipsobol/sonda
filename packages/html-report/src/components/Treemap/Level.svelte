@@ -8,8 +8,9 @@
 
 <script lang="ts">
 import Tile from './Tile.svelte';
-import { TreeMapGenerator } from '../TreeMapGenerator';
-import type { Content } from '../FileSystemTrie';
+import { TreeMapGenerator } from '../../TreeMapGenerator';
+import { compression } from '../../stores.svelte';
+import type { Content } from '../../FileSystemTrie';
 
 interface Props {
 	content: Content | Array<Content>;
@@ -39,7 +40,7 @@ const children = $derived.by(() => {
 
 const tiles = $derived.by( () => {
 	const generator = new TreeMapGenerator(
-		children.map( child => child.uncompressed ),
+		children.map( child => child[ compression.type ] ),
 		width,
 		height,
 		xStart,

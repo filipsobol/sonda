@@ -4,7 +4,7 @@ import { generateReportFromAssets } from '../report/generate';
 import type { Options, ModuleFormat, JsonReport } from '../types';
 import { NormalModule, type Compiler, type Module } from 'webpack';
 
-const jsRegexp = /* #__PURE__ */ /\.[c|m]?[t|j]s[x]?$/;
+const jsRegexp = /\.[c|m]?[t|j]s[x]?$/;
 
 export class SondaWebpackPlugin {
 	options: Partial<Options>;
