@@ -31,8 +31,10 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "prepack": "pnpm run build",
-    "build": "rollup -c ../../rollup.config.js && tsc"
+    "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
+    "build:load-source-map": "cd ../load-source-map && pnpm run build",
+    "build:dist": "rollup -c ../../rollup.config.js && tsc",
+    "build": "pnpm run build:load-source-map && pnpm run build:dist"
   },
   "dependencies": {
     "unplugin": "^1.12.1"

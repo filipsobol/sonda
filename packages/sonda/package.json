@@ -33,10 +33,11 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "prepack": "pnpm run build",
+    "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
+    "build:load-source-map": "cd ../load-source-map && pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rollup -c ../../rollup.config.js && tsc",
-    "build": "pnpm run build:dist && pnpm run build:html"
+    "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html"
   },
   "dependencies": {
     "@ampproject/remapping": "^2.3.0",

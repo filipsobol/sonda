@@ -21,7 +21,8 @@ npm install sonda --save-dev
 
 Then register the bundler-specific plugin and enable the source maps. **Remember to use Sonda in development mode only**.
 
-### Vite
+<details>
+<summary>Vite</summary>
 
 ```javascript
 // vite.config.js
@@ -39,7 +40,10 @@ export default defineConfig( {
 } );
 ```
 
-### Rollup
+</details>
+
+<details>
+<summary>Rollup</summary>
 
 ```javascript
 // rollup.config.js
@@ -70,7 +74,10 @@ styles( {
 } )
 ```
 
-### esbuild
+</details>
+
+<details>
+<summary>esbuild</summary>
 
 ```javascript
 import { build } from 'esbuild';
@@ -86,7 +93,10 @@ build( {
 
 Unlike for other bundlers, the esbuild plugin relies not only on source maps but also on the metafile. The plugin should automatically enable the metafile option for you, but if you get the error, be sure to enable it manually (`metafile: true`).
 
-### webpack
+</details>
+
+<details>
+<summary>webpack</summary>
 
 ```javascript
 // webpack.config.js
@@ -103,9 +113,20 @@ module.exports = {
 
 Internally, Sonda changes the default webpack configuration to output relative paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
 
+</details>
+
 ## Options
 
-Each plugin accepts an optional configuration object. The following options are available.
+Each plugin accepts an optional configuration object with the following options. Example:
+
+```javascript
+SondaRollupPlugin( {
+  format: 'html',
+  open: true,
+  gzip: true,
+  brotli: true,
+} )
+```
 
 ### `format`
 
@@ -123,3 +144,25 @@ The format of the output. The following formats are supported:
 * **Default:** `true`
 
 Whether to open the report in the default program for given file extension (`.html` or `.json` depending on the `format` option) after the build.
+
+### `gzip`
+
+* **Type:** `boolean`
+* **Default:** `false`
+
+Whether to calculate the sizes of assets after compression with GZIP.
+
+The report will also include the estimated compressed sizes of the individual files that make up each asset. However, unlike the compressed size of the entire asset, the estimates for individual files are not completely accurate and should only be used as a reference.
+
+Enabling this option will increase the time it takes to generate the report.
+
+### `brotli`
+
+* **Type:** `boolean`
+* **Default:** `false`
+
+Whether to calculate the sizes of assets after compression with Brotli.
+
+The report will also include the estimated compressed sizes of the individual files that make up each asset. However, unlike the compressed size of the entire asset, the estimates for individual files are not completely accurate and should only be used as a reference.
+
+Enabling this option will increase the time it takes to generate the report.

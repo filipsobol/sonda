@@ -9,5 +9,5 @@ dist
 package-lock.json
 pnpm-lock.yaml
 
-sonda-report.html
-sonda-report.json
+sonda-report.*
+*.backup
