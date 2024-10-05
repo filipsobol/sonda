@@ -25,7 +25,7 @@
 			</div>
 
 			{#if dependencyTree}
-				<p class="mt-8">This file is in the bundle, because it is:</p>
+				<p class="mt-12">This file is in the bundle, because it is:</p>
 				<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto min-w-full">
 					<pre>{ dependencyTree }</pre>
 				</code>

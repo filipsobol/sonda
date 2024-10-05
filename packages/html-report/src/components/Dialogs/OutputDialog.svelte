@@ -18,7 +18,7 @@
 		</div>
 
 		{#if unknownPercentage < 100}
-			<p class="mt-12">Formats of the source files</p>
+			<p class="mt-12">Module types</p>
 
 			<div class="mt-2 h-10 w-[40rem] max-w-full flex rounded-lg overflow-hidden">
 				<div class="bg-yellow-300 h-full" style={ `width: ${ esmPercentage }%` }></div>
@@ -42,6 +42,14 @@
 					<p>Unknown: <span class="font-semibold">{ unknownPercentage }%</span></p>
 				</div>
 			</div>
+		{/if}
+
+		<p class="mt-12">This asset includes <span class="font-semibold">{ dependencies.length }</span> external dependencies</p>
+
+		{#if dependencies.length > 0}
+			<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto min-w-full">
+				<pre>{ asciiDependencies }</pre>
+			</code>
 		{/if}
 	{/snippet}
 </Dialog>
@@ -82,4 +90,20 @@ const formats = $derived.by( () => {
 const esmPercentage = $derived( Math.round( formats.esm / data.uncompressed * 100 ) );
 const cjsPercentage = $derived( Math.round( formats.cjs / data.uncompressed * 100 ));
 const unknownPercentage = $derived( Math.round( formats.unknown / data.uncompressed * 100 ) );
+
+const dependencies = $derived.by<Array<string>>( () => {
+	const packageNameRegExp = /(?:.*node_modules\/)(@[^\/]+\/[^\/]+|[^\/]+)/;
+
+	return Object
+		.keys( data.inputs )
+		.map( name => name.match( packageNameRegExp )?.[ 1 ] ?? null )
+		.filter( ( value, index, self ): value is string => value !== null && self.indexOf( value ) === index )
+		.sort();
+} );
+
+const asciiDependencies = $derived.by<string>( () => {
+	return dependencies
+		.map( ( name, index, self ) => self.length === index + 1 ? `└── ${ name }` : `├── ${ name }` )
+		.join( '\n' );
+} );
 </script>
