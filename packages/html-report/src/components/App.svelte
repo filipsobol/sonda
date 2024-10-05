@@ -26,27 +26,20 @@
 	</div>
 </div>
 
-{#if activeOutput}
-	<FolderDialog { folder } />
-	<FileDialog { file } />
-{/if}
-
+<Dialogs />
 <Tooltip />
 
 <script lang="ts">
+import Dialogs from './Dialogs/Dialogs.svelte';
 import Header from './Header/Header.svelte';
 import Treemap from './Treemap/Treemap.svelte';
 import NoData from './NoData.svelte';
-import FileDialog from './FileDialog.svelte';
-import FolderDialog from './FolderDialog.svelte';
 import Tooltip from './Tooltip.svelte';
-import { activeOutput } from '../stores.svelte';
-import { isFolder, type File, type Folder } from '../FileSystemTrie';
+import { activeOutput, dialog } from '../stores.svelte';
+import { isFolder } from '../FileSystemTrie';
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let folder = $state<Folder | null>( null );
-let file = $state<File | null>( null );
 
 function onclick( { target }: Event ) {
 	const path = target instanceof Element && target.getAttribute( 'data-tile' );
@@ -61,11 +54,7 @@ function onclick( { target }: Event ) {
 		return;
 	}
 
-	if ( isFolder( content ) ) {
-		return folder = content;
-	}
-
-	return file = content;
+	dialog.open( isFolder( content ) ? 'folder' : 'file', content );
 }
 
 function onkeydown(  event: KeyboardEvent  ) {
@@ -74,13 +63,6 @@ function onkeydown(  event: KeyboardEvent  ) {
 	}
 
 	event.stopPropagation();
-
-	if ( file ) {
-		return file = null;
-	}
-
-	if ( folder ) {
-		return folder = null;
-	}
+	dialog.close();
 }
 </script>

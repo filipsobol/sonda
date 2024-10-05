@@ -8,5 +8,6 @@ export type {
 	ReportInput,
 	ReportOutput,
 	ReportOutputInput,
-	Sizes
+	Sizes,
+	ModuleFormat
 } from './types.js';

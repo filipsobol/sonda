@@ -19,7 +19,7 @@
 		<div class="mb-4">
 			<h2 class="py-2 pr-6 block align-text-bottom font-semibold leading-none tracking-tight text-base border-b-2 border-gray-300 border-dashed">{ heading }</h2>
 			<button
-				onclick={ onClose }
+				onclick={ () => dialog.close() }
 				aria-label="Close dialog"
 				class="absolute top-0 right-0 mt-2 mr-2 flex justify-center items-center border border-transparent rounded-full w-10 h-10 text-gray-600 hover:text-gray-900"
 			>
@@ -45,27 +45,26 @@
 
 <script lang="ts">
 import { fade } from 'svelte/transition';
+import { dialog } from '../stores.svelte';
 import type { Snippet } from 'svelte';
 
 interface Props {
 	children: Snippet;
 	heading: string;
 	large?: boolean;
-	onClose?: () => void;
 }
 
 let {
 	children,
 	heading,
 	large,
-	onClose
 }: Props = $props();
 
 let backdrop = $state<HTMLElement>();
 
 function onclick( event: MouseEvent ) {
-	if ( onClose && event.target === backdrop! ) {
-		onClose();
+	if ( event.target === backdrop! ) {
+		dialog.close();
 	}
 }
 </script>
