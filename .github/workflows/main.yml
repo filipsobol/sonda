@@ -1,4 +1,5 @@
-name: CI
+name: Build packages
+
 on:
   push:
     branches:
@@ -6,7 +7,9 @@ on:
 
 jobs:
   build:
+    name: Build packages
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,7 +26,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build all packages
         run: pnpm run build
