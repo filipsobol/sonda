@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "filipsobol/sonda"
+    }
+  ],
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [
+    "html-report",
+    "playground-esbuild",
+    "playground-rollup",
+    "playground-rspack",
+    "playground-vite",
+    "playground-webpack"
+  ]
+}
