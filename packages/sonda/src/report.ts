@@ -62,7 +62,7 @@ function processAsset(
   }
 
   const { code, map } = maybeCodeMap;
-  const mapped = mapSourceMap( map, dirname( asset ), inputs );
+  const mapped = mapSourceMap( map, dirname( asset ), inputs, options );
 
   mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
 

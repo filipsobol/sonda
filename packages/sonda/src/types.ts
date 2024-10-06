@@ -17,6 +17,23 @@ export interface Options {
   open: boolean;
 
   /**
+   * Whether to read the source maps of imported modules.
+   * 
+   * By default, external dependencies that are bundled into a single file are shown
+   * as a single asset in the report. However, when investigating tree-shaking issues,
+   * it can be useful to see individual source files of the dependencies.
+   * 
+   * Enabling this options will read the source maps of imported modules and show
+   * individual files that make up these bundles.
+   *
+   * Enabling this option will increase the time it takes to generate the report and
+   * decrease the accuracy of the estimated GZIP and Brotli sizes of individual files.
+   *
+   * @default false
+   */
+  detailed: boolean;
+
+  /**
    * Whether to calculate the sizes of assets after compression with GZIP.
    *
    * The report will also include the estimated compressed sizes of the

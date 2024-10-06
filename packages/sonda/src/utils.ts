@@ -7,6 +7,7 @@ export function normalizeOptions( options?: Partial<Options> ) {
 	const defaultOptions: Options = {
 		open: true,
 		format: 'html',
+		detailed: false,
 		gzip: false,
 		brotli: false,
 	};

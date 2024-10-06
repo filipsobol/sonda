@@ -1,13 +1,14 @@
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
 import { loadCodeAndMap } from 'load-source-map';
 import { resolve } from 'path';
-import type { ReportInput } from '../types';
 import { normalizePath } from '../utils';
+import type { Options, ReportInput } from '../types';
 
 export function mapSourceMap(
 	map: EncodedSourceMap,
 	dirPath: string,
-	inputs: Record<string, ReportInput>
+	inputs: Record<string, ReportInput>,
+	options: Options
 ): DecodedSourceMap {
 	const alreadyRemapped = new Set<string>();
 	const remapped = remapping( map, ( file, ctx ) => {
@@ -23,8 +24,12 @@ export function mapSourceMap(
 			return;
 		}
 
+		if ( !options.detailed ) {
+			return null;
+		}
+
 		const parentPath = normalizePath( file );
-		const { format } = inputs[ parentPath ];
+		const format = inputs[ parentPath ]?.format ?? 'unknown';
 
 		codeMap.map?.sources
 			.filter( source => source !== null )
