@@ -16,18 +16,18 @@ Please refer to README.md for more information.
 
 ### Minor Changes
 
-- b8b5b87: Add switch to toggle between uncompressed, GZIP, and Brotli treemap diagrams.
-- b8b5b87: Do not read dependency source maps by default. Use the `detailed` configuration option to read them.
-- b8b5b87: Update modal for assets to display how much code comes from ESM, CJS, or unknown sources.
-- b8b5b87: Improve GZIP and Brotli compression size estimations instead of showing worst-case sizes.
-- b8b5b87: Add modal for assets that displays the bundled, GZIP, and Brotli sizes.
-- b8b5b87: Update modal for assets to list external dependencies.
-- b8b5b87: Do not calculate GZIP and Brotli sizes by default. Use the `gzip` and `brotli` configuration options to calculate them.
+- Add switch to toggle between uncompressed, GZIP, and Brotli treemap diagrams.
+- Do not read dependency source maps by default. Use the `detailed` configuration option to read them.
+- Update modal for assets to display how much code comes from ESM, CJS, or unknown sources.
+- Improve GZIP and Brotli compression size estimations instead of showing worst-case sizes.
+- Add modal for assets that displays the bundled, GZIP, and Brotli sizes.
+- Update modal for assets to list external dependencies.
+- Do not calculate GZIP and Brotli sizes by default. Use the `gzip` and `brotli` configuration options to calculate them.
 
 ### Patch Changes
 
-- b8b5b87: Correctly load source maps when `sourceMappingURL` contains URL params.
-- b8b5b87: Remove unnecessary `#__PURE__` comments.
+- Correctly load source maps when `sourceMappingURL` contains URL params.
+- Remove unnecessary `#__PURE__` comments.
 
 ## 0.1.4
 
