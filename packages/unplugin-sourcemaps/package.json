@@ -1,6 +1,6 @@
 {
   "name": "unplugin-sourcemaps",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Universal plugin for loading existing source maps from imported modules. Works with Vite, Rollup, webpack, and esbuild.",
   "keywords": [
     "sourcemap",
