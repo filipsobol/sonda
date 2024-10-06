@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### Patch Changes
+
+- 97fcbb3: Round module type percentages to two decimal places
+
 ## 0.2.1
 
 ### Patch Changes
