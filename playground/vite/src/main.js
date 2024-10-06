@@ -1,7 +1,7 @@
 import 'ckeditor5';
 import '@ckeditor/ckeditor5-engine/dist/index.js';
 
-import 'ckeditor5/ckeditor5.css';
+import './styles.css';
 
 const loremIpsum = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor velit volutpat nisl vehicula auctor. Maecenas cursus ultricies lacinia. Proin ex mauris, lobortis at pellentesque quis, sollicitudin eu arcu. Fusce fringilla leo iaculis elementum tincidunt. Quisque sed risus vestibulum, iaculis risus id, venenatis enim. Vestibulum cursus erat a pellentesque lobortis. Aenean nisl enim, convallis ut nulla eu, vestibulum ornare ante. Fusce dignissim, dui in blandit viverra, lectus est consequat lorem, non luctus urna nibh sit amet tortor. Morbi iaculis dolor nec viverra efficitur. Sed convallis pulvinar mauris id convallis. Nullam rhoncus suscipit augue vel placerat. Maecenas sit amet ex venenatis, iaculis metus ac, sollicitudin ipsum. Etiam nisl mi, venenatis non sapien sed, auctor porttitor sapien.
