@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- a64e6d8: Update README.md to include information about the new `detailed` configuration option.
+
 ## 0.2.0
 
 Besides the new features listed below, this release changes some default behaviors. Now, sonda will not read external source maps or calculate file sizes after compression with GZIP and Brotli. If you want to use these features, use the following new configuration options:
