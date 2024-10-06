@@ -46,7 +46,7 @@
   "devDependencies": {
     "esbuild": "^0.23.1",
     "load-source-map": "workspace:^*",
-    "rollup": "^4.21.3",
+    "rollup": "^4.24.0",
     "webpack": "^5.89.0"
   }
 }

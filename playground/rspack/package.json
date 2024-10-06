@@ -8,8 +8,8 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-engine": "42.0.2",
-    "ckeditor5": "^43.0.0"
+    "@ckeditor/ckeditor5-engine": "43.0.0",
+    "ckeditor5": "43.2.0"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.0.1",
