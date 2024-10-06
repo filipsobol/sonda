@@ -11,7 +11,7 @@
     "build": "pnpm -r --stream run build"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/changelog-git": "^0.2.0",
     "@changesets/cli": "^2.27.9",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-swc": "^0.4.0",
