@@ -12,7 +12,11 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
-    new SondaWebpackPlugin(),
+    new SondaWebpackPlugin( {
+      gzip: true,
+      brotli: true,
+      detailed: true
+    } ),
   ],
   module: {
     rules: [

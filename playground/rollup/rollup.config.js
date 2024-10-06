@@ -38,6 +38,10 @@ export default defineConfig( {
 		// 	gzipSize: true,
 		// 	brotliSize: true
 		// } ),
-		SondaRollupPlugin(),
+		SondaRollupPlugin({
+			gzip: true,
+			brotli: true,
+			detailed: true
+		}),
 	]
 } );

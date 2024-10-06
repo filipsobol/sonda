@@ -12,6 +12,10 @@ build( {
 	minify: true,
 	metafile: true,
 	plugins: [
-		SondaEsbuildPlugin()
+		SondaEsbuildPlugin( {
+			gzip: true,
+			brotli: true,
+			detailed: true
+		} )
 	]
 } );

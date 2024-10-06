@@ -4,7 +4,13 @@ import { SondaWebpackPlugin } from 'sonda';
 export default defineConfig( {
 	tools: {
 		rspack: {
-			plugins: [ new SondaWebpackPlugin() ]
+			plugins: [
+				new SondaWebpackPlugin( {
+					gzip: true,
+					brotli: true,
+					detailed: true
+				} )
+			]
 		}
 	}
 } );

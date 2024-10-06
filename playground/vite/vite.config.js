@@ -8,7 +8,11 @@ export default defineConfig( {
       'virtual:module': `export default { hello: 'world' }`,
       'virtual:config': { hello: 'world' }
     } ),
-    SondaRollupPlugin(),
+    SondaRollupPlugin( {
+      gzip: true,
+      brotli: true,
+      detailed: true
+    } ),
   ],
   build: {
     sourcemap: true
