@@ -87,9 +87,9 @@ const formats = $derived.by( () => {
 	return formats;
 } );
 
-const esmPercentage = $derived( Math.round( formats.esm / data.uncompressed * 100 ) );
-const cjsPercentage = $derived( Math.round( formats.cjs / data.uncompressed * 100 ));
-const unknownPercentage = $derived( Math.round( formats.unknown / data.uncompressed * 100 ) );
+const esmPercentage = $derived( Math.round( formats.esm / data.uncompressed * 10000 ) / 100 );
+const cjsPercentage = $derived( Math.round( formats.cjs / data.uncompressed * 10000 ) / 100);
+const unknownPercentage = $derived( Math.round( formats.unknown / data.uncompressed * 10000 ) / 100 );
 
 const dependencies = $derived.by<Array<string>>( () => {
 	const packageNameRegExp = /(?:.*node_modules\/)(@[^\/]+\/[^\/]+|[^\/]+)/;
