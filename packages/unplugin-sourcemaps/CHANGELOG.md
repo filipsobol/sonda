@@ -4,4 +4,4 @@
 
 ### Patch Changes
 
-- b8b5b87: Correctly load source maps when `sourceMappingURL` contains URL params.
+- Correctly load source maps when `sourceMappingURL` contains URL params.
