@@ -134,7 +134,7 @@ function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
 		}
 
 		if ( source && existsSync( source ) ) {
-			return readFileSync( source + '.js', 'utf-8' );
+			return readFileSync( source, 'utf-8' );
 		}
 
 		return null;
