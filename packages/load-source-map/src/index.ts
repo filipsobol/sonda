@@ -128,15 +128,11 @@ function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3
  * Loop through the sources and try to load missing `sourcesContent` from the file system.
  */
 function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
-	const sourcesContent = map.sourcesContent ?? [];
-
 	return map.sources.map( ( source, index ) => {
-		const content = sourcesContent[ index ];
-
-		if ( !source || content ) {
+		if ( !source ) {
 			return null;
 		}
 
-		return readFileSync( source, 'utf-8' );
+		return map.sourcesContent?.[ index ] || readFileSync( source, 'utf-8' )
 	} );
 }
