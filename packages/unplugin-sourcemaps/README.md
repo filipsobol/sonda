@@ -12,9 +12,10 @@ Start by installing the package:
 npm install unplugin-sourcemaps --save-dev
 ```
 
-Then register the bundler-specific plugin.
+Then register the bundler-specific plugin and enable the source maps.
 
-### Vite
+<details>
+<summary>Vite</summary>
 
 ```javascript
 // vite.config.js
@@ -25,11 +26,17 @@ import { ViteSourcemap } from 'unplugin-sourcemaps';
 export default defineConfig( {
   plugins: [
     ViteSourcemap()
-  ]
+  ],
+  build: {
+    sourcemap: true
+  }
 } );
 ```
 
-### Rollup
+</details>
+
+<details>
+<summary>esbuild</summary>
 
 ```javascript
 // rollup.config.js
@@ -38,13 +45,20 @@ import { defineConfig } from 'rollup';
 import { RollupSourcemap } from 'unplugin-sourcemaps';
 
 export default defineConfig( {
+  output: {
+    // Other options are skipped for brevity
+    sourcemap: true,
+  },
   plugins: [
     RollupSourcemap()
   ]
 } );
 ```
 
-### esbuild
+</details>
+
+<details>
+<summary>esbuild</summary>
 
 ```javascript
 import { build } from 'esbuild';
@@ -58,7 +72,10 @@ build( {
 } );
 ```
 
-### webpack
+</details>
+
+<details>
+<summary>webpack</summary>
 
 ```javascript
 // webpack.config.js
@@ -72,3 +89,5 @@ module.exports = {
   ],
 };
 ```
+
+</details>
