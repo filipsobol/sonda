@@ -125,7 +125,7 @@ function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3
 }
 
 /**
- * Loop through the sources and try to load the content of the missing sources.
+ * Loop through the sources and try to load missing `sourcesContent` from the file system.
  */
 function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
 	const sourcesContent = map.sourcesContent ?? [];
