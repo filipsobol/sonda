@@ -1,5 +1,6 @@
 export { SondaEsbuildPlugin } from './bundlers/esbuild.js';
 export { SondaRollupPlugin } from './bundlers/rollup.js';
+export { SondaRspackPlugin } from './bundlers/rspack.js';
 export { SondaWebpackPlugin } from './bundlers/webpack.js';
 
 export type {
