@@ -18,9 +18,6 @@
     "url": "git+https://github.com/filipsobol/sonda.git",
     "directory": "packages/unplugin-sourcemaps"
   },
-  "publishConfig": {
-    "provenance": true
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

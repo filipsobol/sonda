@@ -20,9 +20,6 @@
     "url": "git+https://github.com/filipsobol/sonda.git",
     "directory": "packages/sonda"
   },
-  "publishConfig": {
-    "provenance": true
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
