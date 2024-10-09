@@ -2,6 +2,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import { loadCodeAndMap } from 'load-source-map';
+import { decode } from '@jridgewell/sourcemap-codec';
 import { mapSourceMap } from './sourcemap/map.js';
 import { getBytesPerSource, getSizes } from './sourcemap/bytes.js';
 import type {
@@ -62,7 +63,9 @@ function processAsset(
   }
 
   const { code, map } = maybeCodeMap;
-  const mapped = mapSourceMap( map, dirname( asset ), inputs, options );
+  const mapped = options.detailed
+    ? mapSourceMap( map, dirname( asset ), inputs )
+    : { ...map, mappings: decode( map.mappings ) };
 
   mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
 
