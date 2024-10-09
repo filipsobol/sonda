@@ -129,10 +129,14 @@ function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3
  */
 function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
 	return map.sources.map( ( source, index ) => {
-		if ( !source ) {
-			return null;
+		if ( map.sourcesContent?.[ index ] ) {
+			return map.sourcesContent[ index ];
 		}
 
-		return map.sourcesContent?.[ index ] || readFileSync( source, 'utf-8' )
+		if ( source && existsSync( source ) ) {
+			return readFileSync( source + '.js', 'utf-8' );
+		}
+
+		return null;
 	} );
 }
