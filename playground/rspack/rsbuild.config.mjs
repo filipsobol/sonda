@@ -1,11 +1,12 @@
 import { defineConfig } from '@rsbuild/core';
-import { SondaWebpackPlugin } from 'sonda';
+import { SondaRspackPlugin } from 'sonda';
 
 export default defineConfig( {
 	tools: {
 		rspack: {
+			devtool: 'source-map',
 			plugins: [
-				new SondaWebpackPlugin( {
+				new SondaRspackPlugin( {
 					gzip: true,
 					brotli: true,
 					detailed: true

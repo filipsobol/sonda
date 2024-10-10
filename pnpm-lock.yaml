@@ -95,6 +95,9 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
     devDependencies:
+      '@rspack/core':
+        specifier: ^1.0.8
+        version: 1.0.8(@swc/helpers@0.5.13)
       esbuild:
         specifier: ^0.23.1
         version: 0.23.1
