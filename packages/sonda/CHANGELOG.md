@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3
+
+### Patch Changes
+
+- e825cfa: Configure npm package provenance
+- e825cfa: Fix missing "inputs" in the report created by the esbuild plugin.
+
 ## 0.2.2
 
 ### Patch Changes
