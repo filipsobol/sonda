@@ -60,6 +60,8 @@ export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
 	const { map, mapPath } = maybeMap;
 
 	map.sources = normalizeSourcesPaths( map, mapPath );
+	map.sourcesContent = loadMissingSourcesContent( map );
+
 	delete map.sourceRoot;
 
 	return {
@@ -105,6 +107,9 @@ function parseDataUrl( url: string ): string {
 	}
 }
 
+/**
+ * Normalize the paths of the sources in the source map to be absolute paths.
+ */
 function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3[ 'sources' ] {
 	const mapDir = dirname( mapPath );
 
@@ -116,5 +121,22 @@ function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3
 		return isAbsolute( source )
 			? source
 			: resolve( mapDir, map.sourceRoot ?? '.', source );
+	} );
+}
+
+/**
+ * Loop through the sources and try to load missing `sourcesContent` from the file system.
+ */
+function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
+	return map.sources.map( ( source, index ) => {
+		if ( map.sourcesContent?.[ index ] ) {
+			return map.sourcesContent[ index ];
+		}
+
+		if ( source && existsSync( source ) ) {
+			return readFileSync( source, 'utf-8' );
+		}
+
+		return null;
 	} );
 }
