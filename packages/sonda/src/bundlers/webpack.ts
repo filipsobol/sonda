@@ -57,11 +57,11 @@ function getFormat( module: StatsModule ): ModuleFormat {
 		return 'unknown';
 	}
 
-	if ( module.moduleType === 'javascript/esm' ) {
-		return 'esm';
-	}
-
-	if ( Array.isArray( module.providedExports ) && module.providedExports.length > 0 ) {
+	/**
+	 * Sometimes ESM modules have `moduleType` set as `javascript/auto`, so we
+	 * also need to check if the module has exports to determine if it's ESM.
+	 */
+	if ( module.moduleType === 'javascript/esm' || !!module.providedExports?.length ) {
 		return 'esm';
 	}
 
