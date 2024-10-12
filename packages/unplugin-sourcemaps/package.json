@@ -9,7 +9,8 @@
     "vite",
     "rollup",
     "webpack",
-    "esbuild"
+    "esbuild",
+    "unplugin"
   ],
   "license": "MIT",
   "type": "module",
