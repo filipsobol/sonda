@@ -45,7 +45,6 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
-    "@rspack/core": "^1.0.8",
     "esbuild": "^0.23.1",
     "load-source-map": "workspace:^*",
     "rollup": "^4.24.0",
