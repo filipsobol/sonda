@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- b7831e3: Update the webpack plugin to make it work with Rspack
+
+### Patch Changes
+
+- 30ddb2b: Add missing `sourcesContent` to source maps when they are available in the filesystem
+- e825cfa: Configure npm package provenance
+- e825cfa: Fix missing `inputs` in the report created by the esbuild plugin.
+
 ## 0.2.2
 
 ### Patch Changes
