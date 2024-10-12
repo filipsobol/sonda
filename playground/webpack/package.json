@@ -2,6 +2,7 @@
   "name": "playground-webpack",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build": "webpack --mode=production",
     "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
@@ -15,7 +16,6 @@
     "css-loader": "^6.11.0",
     "mini-css-extract-plugin": "^2.9.1",
     "sonda": "workspace:^*",
-    "style-loader": "^4.0.0",
     "unplugin-sourcemaps": "workspace:^*",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.2",

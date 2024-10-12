@@ -111,7 +111,27 @@ module.exports = {
 };
 ```
 
-Internally, Sonda changes the default webpack configuration to output relative paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
+Internally, Sonda changes the default webpack configuration to output absolute paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
+
+</details>
+
+<details>
+<summary>Rspack</summary>
+
+```javascript
+// rspack.config.js
+
+import { SondaWebpackPlugin } from 'sonda';
+
+export default {
+  devtool: 'source-map',
+  plugins: [
+    new SondaWebpackPlugin(),
+  ],
+};
+```
+
+Internally, Sonda changes the default Rspack configuration to output absolute paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
 
 </details>
 
@@ -123,6 +143,7 @@ Each plugin accepts an optional configuration object with the following options.
 SondaRollupPlugin( {
   format: 'html',
   open: true,
+  detailed: true,
   gzip: true,
   brotli: true,
 } )
