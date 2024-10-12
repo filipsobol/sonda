@@ -1,8 +1,8 @@
-const { SondaWebpackPlugin } = require( 'sonda' );
-const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
-// const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
+import { SondaWebpackPlugin } from 'sonda';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-module.exports = {
+export default {
   entry: './src/index.js',
   devtool: 'source-map',
   output: {
@@ -22,7 +22,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [ MiniCssExtractPlugin.loader, "css-loader" ],
+        use: [ MiniCssExtractPlugin.loader, 'css-loader' ],
       },
     ],
   },

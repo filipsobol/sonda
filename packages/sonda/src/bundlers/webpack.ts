@@ -1,78 +1,69 @@
 import { join } from 'path';
 import { normalizeOptions, normalizePath } from '../utils';
 import { generateReportFromAssets } from '../report/generate';
+import type { Compiler, StatsModule } from 'webpack';
 import type { Options, ModuleFormat, JsonReport } from '../types';
-import { NormalModule, type Compiler, type Module } from 'webpack';
 
 const jsRegexp = /\.[c|m]?[t|j]s[x]?$/;
 
 export class SondaWebpackPlugin {
 	options: Partial<Options>;
-	inputs: JsonReport[ 'inputs' ];
 
 	constructor ( options?: Partial<Options> ) {
 		this.options = options || {};
-		this.inputs = {};
 	}
 
 	apply( compiler: Compiler ): void {
 		compiler.options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
 
-		compiler.hooks.compilation.tap( 'SondaWebpackPlugin', ( compilation ) => {
-			compilation.hooks.optimizeModules.tap( 'SondaWebpackPlugin', ( modules ) => {
-				Array
-					.from( modules )
-					.forEach( module => {
-						if ( !isNormalModule( module ) ) {
-							return;
-						}
-
-						const imports = module.dependencies.reduce( ( acc, dependency ) => {
-							const module = compilation.moduleGraph.getModule( dependency );
-
-							if ( isNormalModule( module ) ) {
-								acc.push( normalizePath( module.resource ) );
-							}
-
-							return acc;
-						}, [] as Array<string> );
-
-						this.inputs[ normalizePath( module.resource ) ] = {
-							bytes: module.size(),
-							format: getFormat( module ),
-							imports,
-							belongsTo: null,
-						};
-					} );
+		compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', compilation => {
+			const inputs: JsonReport[ 'inputs' ] = {};
+			const stats = compilation.getStats().toJson( {
+				modules: true,
+				providedExports: true
 			} );
-		} );
 
-		compiler.hooks.emit.tapAsync( 'SondaWebpackPlugin', ( compilation, callback ) => {
-			const outputPath = compiler.options.output.path || compiler.outputPath || process.cwd();
-			const assets = Object.keys( compilation.assets ).map( name => join( outputPath, name ) );
+			const outputPath = stats.outputPath || compiler.outputPath;
+			const modules = stats.modules?.filter( mod => mod.nameForCondition && mod.moduleType !== 'asset/inline' ) || [];
 
-			generateReportFromAssets(
-				assets,
-				this.inputs,
+			modules.forEach( module => {
+				const imports = modules.reduce( ( acc, { nameForCondition, issuerName, reasons } ) => {
+					if ( issuerName === module.name || reasons?.some( reason => reason.resolvedModule === module.name ) ) {
+						acc.push( normalizePath( nameForCondition! ) );
+					}
+
+					return acc;
+				}, [] as Array<string> );
+
+				inputs[ normalizePath( module.nameForCondition! ) ] = {
+					bytes: module.size || 0,
+					format: getFormat( module ),
+					imports,
+					belongsTo: null
+				};
+			} );
+
+			return generateReportFromAssets(
+				stats.assets?.map( asset => join( outputPath, asset.name ) ) || [],
+				inputs,
 				normalizeOptions( this.options )
-			)
-			.then(() => callback());
+			);
 		} );
 	}
 }
 
-function getFormat( module: NormalModule ): ModuleFormat {
-	if ( !jsRegexp.test( module.resource ) ) {
+function getFormat( module: StatsModule ): ModuleFormat {
+	if ( !jsRegexp.test( module.nameForCondition! ) ) {
 		return 'unknown';
 	}
 
-	if ( module.type === 'javascript/esm' || module.buildMeta?.exportsType === 'namespace' ) {
+	/**
+	 * Sometimes ESM modules have `moduleType` set as `javascript/auto`, so we
+	 * also need to check if the module has exports to determine if it's ESM.
+	 */
+	if ( module.moduleType === 'javascript/esm' || !!module.providedExports?.length ) {
 		return 'esm';
 	}
 
 	return 'cjs';
-}
-
-function isNormalModule( module: Module | NormalModule | null ): module is NormalModule {
-	return module !== null && 'resource' in module;
 }
