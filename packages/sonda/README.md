@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-Internally, Sonda changes the default webpack configuration to output relative paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
+Internally, Sonda changes the default webpack configuration to output absolute paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
 
 </details>
 
@@ -131,7 +131,7 @@ export default {
 };
 ```
 
-Internally, Sonda changes the default Rspack configuration to output relative paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
+Internally, Sonda changes the default Rspack configuration to output absolute paths in the source maps instead of using the `webpack://` protocol (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`).
 
 </details>
 
