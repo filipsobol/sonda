@@ -1,18 +1,19 @@
 {
   "name": "playground-rspack",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "rsbuild dev --open",
-    "build": "rsbuild build",
-    "preview": "rsbuild preview"
+    "dev": "rspack serve",
+    "build": "rspack build",
+    "preview": "rspack preview"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "43.0.0",
     "ckeditor5": "43.2.0"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.0.1",
+    "@rspack/cli": "^1.0.10",
     "sonda": "workspace:^*",
     "unplugin-sourcemaps": "workspace:^*"
   }
