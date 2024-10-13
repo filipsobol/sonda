@@ -25,11 +25,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run all tests
-        run: pnpm run test
-
       - name: Build all packages
         run: pnpm run build
+
+      - name: Run all tests
+        run: pnpm run test
       
       - name: Release preview
         run: pnpx pkg-pr-new publish --compact --comment=update './packages/sonda' './packages/unplugin-sourcemaps'
