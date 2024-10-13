@@ -1,7 +1,5 @@
-import { relative, posix, sep } from 'path';
+import path from 'path';
 import type { Options } from './types';
-
-const cwd = /* #__PURE__ */ process.cwd();
 
 export function normalizeOptions( options?: Partial<Options> ) {
 	const defaultOptions: Options = {
@@ -15,13 +13,13 @@ export function normalizeOptions( options?: Partial<Options> ) {
 	return Object.assign( {}, defaultOptions, options ) as Options;
 }
 
-export function normalizePath( path: string ): string {
+export function normalizePath( pathToNormalize: string ): string {
 	// Unicode escape sequences used by Rollup and Vite to identify virtual modules
-	const normalized = path.replace( /^\0/, '' )
+	const normalized = pathToNormalize.replace( /^\0/, '' )
 
 	// Transform absolute paths to relative paths
-	const relativized = relative( cwd, normalized );
+	const relativized = path.relative( process.cwd(), normalized );
 
 	// Ensure paths are POSIX-compliant - https://stackoverflow.com/a/63251716/4617687
-	return relativized.replaceAll( sep, posix.sep );
+	return relativized.replaceAll( path.win32.sep, path.posix.sep );
 }

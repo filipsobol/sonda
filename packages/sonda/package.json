@@ -34,6 +34,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
@@ -46,9 +48,11 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "2.1.2",
     "esbuild": "^0.23.1",
     "load-source-map": "workspace:^*",
     "rollup": "^4.24.0",
+    "vitest": "^2.1.2",
     "webpack": "^5.89.0"
   }
 }

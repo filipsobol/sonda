@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["src/index.js"],"sourcesContent":["import './styles.css';\n\nexport function sum( a, b ) {\n\t\treturn a + b;\n}\n"],"names":["sum","a","b"],"mappings":"AAEO,SAASA,EAAKC,EAAGC,GACtB,OAAOD,EAAIC,CACb"}
