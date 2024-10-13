@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1
+
+### Patch Changes
+
+- e20ec92: Rollup plugin: Fix detecting ESM files when `@rollup/plugin-commonjs` plugin is not installed
+- e20ec92: Webpack plugin: Fix reported files sizes, which sometimes included imported dependencies.
+
 ## 0.3.0
 
 ### Minor Changes
