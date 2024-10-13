@@ -1,6 +1,10 @@
 import { relative, win32, posix } from 'path';
 import type { Options } from './types';
 
+export const esmRegex: RegExp = /\.m[tj]sx?$/;
+export const cjsRegex: RegExp = /\.c[tj]sx?$/;
+export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
+
 export function normalizeOptions( options?: Partial<Options> ) {
 	const defaultOptions: Options = {
 		open: true,

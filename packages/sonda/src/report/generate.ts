@@ -2,21 +2,28 @@ import { join } from 'path';
 import { writeFileSync } from 'fs';
 import { generateHtmlReport, generateJsonReport } from '../report.js';
 import type { Options, JsonReport } from '../types.js';
+import { normalizeOptions } from '../utils.js';
 
 export async function generateReportFromAssets(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
-	options: Options
+	userOptions: Partial<Options>
 ): Promise<void> {
-	const { default: open } = await import( 'open' );
-
-	const handler = options.format === 'html'
-		? saveHtml
-		: saveJson;
-
+	const options = normalizeOptions( userOptions );
+	const handler = options.format === 'html' ? saveHtml : saveJson;
 	const path = handler( assets, inputs, options );
 
-	options.open && path && open( path );
+	if ( !options.open || !path ) {
+		return;
+	}
+
+	/**
+	 * `open` is ESM-only package, so we need to import it
+	 * dynamically to make it work in CommonJS environment.
+	 */
+	const { default: open } = await import( 'open' );
+
+	open( path );
 }
 
 function saveHtml(

@@ -1,13 +1,10 @@
 import { join, resolve, dirname } from 'path';
-import { normalizeOptions, normalizePath } from '../utils.js';
+import { normalizePath, cjsRegex, jsRegexp } from '../utils.js';
 import { generateReportFromAssets } from '../report/generate.js';
 import type { Options, ModuleFormat, JsonReport } from '../types.js';
 import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
 
-const esmRegex = /\.m[tj]sx?$/;
-const cjsRegex = /\.c[tj]sx?$/;
-
-export function SondaRollupPlugin( options?: Partial<Options> ): Plugin {
+export function SondaRollupPlugin( options: Partial<Options> = {} ): Plugin {
 	let inputs: JsonReport[ 'inputs' ] = {};
 
 	return {
@@ -23,7 +20,7 @@ export function SondaRollupPlugin( options?: Partial<Options> ): Plugin {
 			return generateReportFromAssets(
 				assets,
 				inputs,
-				normalizeOptions( options )
+				options
 			);
 		},
 
@@ -43,7 +40,7 @@ function getFormat( moduleId: string, isCommonJS: boolean | undefined ): ModuleF
 		return 'cjs';
 	}
 
-	if ( isCommonJS === false || esmRegex.test( moduleId ) ) {
+	if ( isCommonJS === false || jsRegexp.test( moduleId ) ) {
 		return 'esm';
 	}
 

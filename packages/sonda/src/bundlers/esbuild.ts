@@ -1,15 +1,17 @@
 import { resolve } from 'path';
-import { normalizeOptions } from '../utils';
+import { addSourcesToInputs } from '../sourcemap/map';
 import { generateReportFromAssets } from '../report/generate';
 import type { Plugin } from 'esbuild';
 import type { Options, JsonReport } from '../types';
-import { addSourcesToInputs } from '../sourcemap/map';
 
-export function SondaEsbuildPlugin( options?: Partial<Options> ): Plugin {
+export function SondaEsbuildPlugin( options: Partial<Options> = {} ): Plugin {
 	return {
 		name: 'sonda',
 		setup( build ) {
 			build.initialOptions.metafile = true;
+
+			// Esbuild already reads the existing source maps, so there's no need to do it again
+			options.detailed = false;
 
 			build.onEnd( result => {
 				if ( !result.metafile ) {
@@ -17,11 +19,6 @@ export function SondaEsbuildPlugin( options?: Partial<Options> ): Plugin {
 				}
 
 				const cwd = process.cwd();
-				const normalizedOptions = normalizeOptions( options );
-
-				// Esbuild already reads the existing source maps, so there's no need to do it again
-				normalizedOptions.detailed = false;
-
 				const inputs = Object
 					.entries( result.metafile.inputs )
 					.reduce( ( acc, [ path, data ] ) => {
@@ -47,9 +44,9 @@ export function SondaEsbuildPlugin( options?: Partial<Options> ): Plugin {
 					}, {} as JsonReport[ 'inputs' ] );
 
 				return generateReportFromAssets(
-					Object.keys( result.metafile.outputs ),
+					Object.keys( result.metafile.outputs ).map( path => resolve( cwd, path ) ),
 					inputs,
-					normalizeOptions( options )
+					options
 				);
 			} );
 		}

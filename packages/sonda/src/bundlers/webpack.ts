@@ -1,16 +1,14 @@
 import { join } from 'path';
-import { normalizeOptions, normalizePath } from '../utils';
+import { normalizePath, jsRegexp } from '../utils';
 import { generateReportFromAssets } from '../report/generate';
 import type { Compiler, StatsModule } from 'webpack';
 import type { Options, ModuleFormat, JsonReport } from '../types';
 
-const jsRegexp = /\.[c|m]?[t|j]s[x]?$/;
-
 export class SondaWebpackPlugin {
 	options: Partial<Options>;
 
-	constructor ( options?: Partial<Options> ) {
-		this.options = options || {};
+	constructor ( options: Partial<Options> = {} ) {
+		this.options = options;
 	}
 
 	apply( compiler: Compiler ): void {
@@ -20,11 +18,15 @@ export class SondaWebpackPlugin {
 			const inputs: JsonReport[ 'inputs' ] = {};
 			const stats = compilation.getStats().toJson( {
 				modules: true,
-				providedExports: true
+				providedExports: true,
 			} );
 
 			const outputPath = stats.outputPath || compiler.outputPath;
-			const modules = stats.modules?.filter( mod => mod.nameForCondition && mod.moduleType !== 'asset/inline' ) || [];
+			const modules: Array<StatsModule> = stats.modules
+				?.flatMap( mod => mod.modules ? [ mod, ...mod.modules ] : mod )
+				.filter( mod => mod.nameForCondition && !mod.codeGenerated )
+				.filter( ( mod, index, self ) => self.findIndex( m => m.nameForCondition === mod.nameForCondition ) === index )
+				|| [];
 
 			modules.forEach( module => {
 				const imports = modules.reduce( ( acc, { nameForCondition, issuerName, reasons } ) => {
@@ -46,7 +48,7 @@ export class SondaWebpackPlugin {
 			return generateReportFromAssets(
 				stats.assets?.map( asset => join( outputPath, asset.name ) ) || [],
 				inputs,
-				normalizeOptions( this.options )
+				this.options
 			);
 		} );
 	}
