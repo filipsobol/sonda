@@ -1,8 +1,32 @@
 import { vi, describe, it, expect } from 'vitest';
+import { join } from 'path';
 import { normalizeOptions, normalizePath } from '../src/utils';
-import path from 'path';
+import { beforeEach } from 'node:test';
+
+const mocks = vi.hoisted( () => ( {
+	windows: false,
+} ) );
+
+vi.mock( 'path', async ( originalImport ) => {
+	const path: any = await originalImport();
+
+	return {
+		...path,
+		relative( ...args: Array<string> ) {
+			const implementation = mocks.windows
+				? path.win32.relative
+				: path.relative;
+			
+			return implementation( ...args );
+		},
+	}
+} )
 
 describe('utils.ts', () => {
+	beforeEach( () => {
+		mocks.windows = false;
+	} );
+
 	describe( 'normalizeOptions', () => {
 		it( 'should return default options when no options are provided', () => {
 			expect( normalizeOptions() ).toEqual( {
@@ -44,14 +68,14 @@ describe('utils.ts', () => {
 	describe( 'normalizePath', () => {
 		it( 'should transform absolute paths to relative paths in POSIX format', () => {
 			const relativePath = 'src/subfolder/file.ts';
-			const absolutePath = path.join( process.cwd(), relativePath );
+			const absolutePath = join( process.cwd(), relativePath );
 
 			expect( normalizePath( absolutePath ) ).toBe( relativePath );
 		} );
 
 		it( 'removes unicode escape sequence used by virtual modules in Rollup and Vite', () => {
 			const relativePath = 'src/subfolder/file.ts';
-			const absolutePath = path.join( process.cwd(), relativePath );
+			const absolutePath = join( process.cwd(), relativePath );
 
 			expect( normalizePath( '\0' + absolutePath ) ).toBe( 'src/subfolder/file.ts' );
 		} );
@@ -59,7 +83,7 @@ describe('utils.ts', () => {
 		it( 'should transform Windows paths to POSIX format', () => {
 			const absolutePath = 'C:\\Users\\Test\\Project\\src\\subfolder\\file.ts';
 
-			vi.spyOn( path, 'relative').mockImplementationOnce( path.win32.relative );
+			mocks.windows = true;
 			vi.spyOn( process, 'cwd' ).mockImplementationOnce( () => 'C:\\Users\\Test\\Project' );
 
 			expect( normalizePath( absolutePath ) ).toBe( 'src/subfolder/file.ts' );

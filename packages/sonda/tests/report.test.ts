@@ -1,14 +1,27 @@
 import { vi, describe, it, expect } from 'vitest';
-import fs from 'fs';
 import { join } from 'path';
 import { generateJsonReport, generateHtmlReport } from '../src/report';
 import { normalizeOptions } from '../src/utils';
 import type { ReportInput } from '../src';
 
+vi.mock( 'fs', async ( originalImport ) => {
+	const fs: any = await originalImport();
+
+	return {
+		...fs,
+		readFileSync( path: string, options: any ) {
+			if ( path.endsWith( 'index.html' ) ) {
+				path = join( import.meta.dirname, 'fixtures/index.html' );
+			}
+
+			return fs.readFileSync( path, options );
+		}
+	};
+} );
+
 vi.spyOn( process, 'cwd' ).mockImplementation( () => import.meta.dirname );
 
 const defaultOptions = normalizeOptions();
-const htmlReprtTemplate = fs.readFileSync( join( import.meta.dirname, 'fixtures/index.html' ), 'utf8' );
 
 describe( 'report.ts', () => {
 	describe( 'generateJsonReport', () => {
@@ -332,8 +345,6 @@ describe( 'report.ts', () => {
 		it( 'should return report in HTML format', () => {
 			const stringifiedEmptyReport = JSON.stringify( { inputs: {}, outputs: {} } );
 
-			vi.spyOn( fs, 'readFileSync' ).mockImplementationOnce( () => htmlReprtTemplate );
-
 			expect( generateHtmlReport( [], {}, defaultOptions ) ).toContain( stringifiedEmptyReport );
 		} );
 
@@ -362,8 +373,6 @@ describe( 'report.ts', () => {
 			} );
 
 			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];
-
-			vi.spyOn( fs, 'readFileSync' ).mockImplementationOnce( () => htmlReprtTemplate );
 
 			expect( generateHtmlReport( assets, {}, defaultOptions ) ).toContain( stringifiedReport );
 		} );
