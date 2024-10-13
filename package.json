@@ -8,6 +8,7 @@
     "pnpm": ">=9.7"
   },
   "scripts": {
+    "test": "pnpm -r --stream run test",
     "build": "pnpm -r --stream run build",
     "restore": "pnpm run restore:sonda && pnpm run restore:unplugin-sourcemaps",
     "restore:sonda": "cd packages/sonda && clean-package restore",
