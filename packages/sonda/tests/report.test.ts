@@ -1,12 +1,14 @@
 import { vi, describe, it, expect } from 'vitest';
+import fs from 'fs';
+import { join } from 'path';
 import { generateJsonReport, generateHtmlReport } from '../src/report';
 import { normalizeOptions } from '../src/utils';
-import { join } from 'path';
 import type { ReportInput } from '../src';
 
 vi.spyOn( process, 'cwd' ).mockImplementation( () => import.meta.dirname );
 
 const defaultOptions = normalizeOptions();
+const htmlReprtTemplate = fs.readFileSync( join( import.meta.dirname, 'fixtures/index.html' ), 'utf8' );
 
 describe( 'report.ts', () => {
 	describe( 'generateJsonReport', () => {
@@ -323,6 +325,47 @@ describe( 'report.ts', () => {
 					}
 				}
 			} );
+		} );
+	} );
+
+	describe( 'generateHtmlReport', () => {
+		it( 'should return report in HTML format', () => {
+			const stringifiedEmptyReport = JSON.stringify( { inputs: {}, outputs: {} } );
+
+			vi.spyOn( fs, 'readFileSync' ).mockImplementationOnce( () => htmlReprtTemplate );
+
+			expect( generateHtmlReport( [], {}, defaultOptions ) ).toContain( stringifiedEmptyReport );
+		} );
+
+		it( 'processes JavaScript files with sourceMappingURL', () => {
+			const stringifiedReport = JSON.stringify( {
+				inputs: {},
+				outputs: {
+					'fixtures/hasMapping/index.js': {
+						uncompressed: 79,
+						gzip: 0,
+						brotli: 0,
+						inputs: {
+							'fixtures/hasMapping/src/index.js': {
+								uncompressed: 45,
+								gzip: 0,
+								brotli: 0,
+							},
+							'[unassigned]': {
+								uncompressed: 34, // Length of the sourceMappingURL comment
+								gzip: 0,
+								brotli: 0,
+							},
+						}
+					}
+				},
+			} );
+
+			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];
+
+			vi.spyOn( fs, 'readFileSync' ).mockImplementationOnce( () => htmlReprtTemplate );
+
+			expect( generateHtmlReport( assets, {}, defaultOptions ) ).toContain( stringifiedReport );
 		} );
 	} );
 } );

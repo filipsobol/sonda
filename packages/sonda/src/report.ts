@@ -1,6 +1,6 @@
-import { dirname, resolve } from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { readFileSync } from 'fs';
+import { dirname, resolve } from 'path';
 import { loadCodeAndMap } from 'load-source-map';
 import { decode } from '@jridgewell/sourcemap-codec';
 import { mapSourceMap } from './sourcemap/map.js';
@@ -46,7 +46,7 @@ export function generateHtmlReport(
 ): string {
   const json = generateJsonReport( assets, inputs, options );
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
-  const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
+  const template = fs.readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
   return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
 }
