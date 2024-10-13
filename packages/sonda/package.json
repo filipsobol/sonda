@@ -34,9 +34,10 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
+    "prepack": "pnpm run test && pnpm run build && clean-package -rm devDependencies scripts",
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rollup -c ../../rollup.config.js && tsc",
