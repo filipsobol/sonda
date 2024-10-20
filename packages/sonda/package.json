@@ -1,6 +1,6 @@
 {
   "name": "sonda",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild",
   "keywords": [
     "bundle analyzer",

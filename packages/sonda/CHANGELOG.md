@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- ca8322a: Add modal showing list of duplicated modules
+
+### Patch Changes
+
+- e20ec92: Rollup plugin: Fix detection of the ES modules when `@rollup/plugin-commonjs` plugin is not installed
+- 52ae692: Update dependencies
+- e20ec92: Webpack plugin: Fix reported files sizes, which sometimes included imported dependencies.
+
 ## 0.3.0
 
 ### Minor Changes
