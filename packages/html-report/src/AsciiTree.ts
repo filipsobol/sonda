@@ -8,7 +8,10 @@ export class AsciiTree {
 		items: Items,
 		getChildren?: GetChildren,
 	): string {
-		return AsciiTree.processItems( items, getChildren ).join( '\n' );
+		return this
+			.processItems( items, getChildren )
+			.join( '\n' )
+			.trim();
 	}
 
 	private static processItems(
@@ -16,7 +19,7 @@ export class AsciiTree {
 		getChildren: GetChildren = null,
 		prefix: string = '',
 	): string[] {
-		const lines: string[] = [];
+		const lines: Array<string> = [];
 		const lastIndex = items.length - 1;
 
 		items.forEach( ( item, index ) => {
@@ -28,8 +31,13 @@ export class AsciiTree {
 			lines.push( prefix + connector + name );
 
 			if ( children ) {
-				const newPrefix = prefix + ( isLast ? '    ' : '│   ' );
-				lines.push( ...this.processItems( children, getChildren, newPrefix ) );
+				const connector = isLast ? '    ' : '│   ';
+
+				return lines.push( ...this.processItems( children, getChildren, prefix + connector ) );
+			}
+
+			if ( isLast ) {
+				return lines.push( prefix );
 			}
 		} );
 
