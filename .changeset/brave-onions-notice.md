@@ -2,4 +2,4 @@
 "sonda": patch
 ---
 
-Rollup plugin: Fix detecting ESM files when `@rollup/plugin-commonjs` plugin is not installed
+Rollup plugin: Fix detection of the ES modules when `@rollup/plugin-commonjs` plugin is not installed
