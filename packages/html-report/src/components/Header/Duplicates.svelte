@@ -2,6 +2,7 @@
 	<button
 		aria-label="Details of the entire build output"
 		class="text-gray-900 bg-white border border-red-300 focus:outline-none hover:bg-red-50 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
+		title="See issues found in the build output"
 		{ onclick }
 	>
 		<svg
