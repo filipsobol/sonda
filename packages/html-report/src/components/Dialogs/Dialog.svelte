@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { fade } from 'svelte/transition';
-import { dialog } from '../stores.svelte';
+import { dialog } from '../../stores/index.svelte.js';
 import type { Snippet } from 'svelte';
 
 interface Props {

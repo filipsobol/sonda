@@ -9,7 +9,7 @@
 <script lang="ts">
 import Tile from './Tile.svelte';
 import { TreeMapGenerator } from '../../TreeMapGenerator';
-import { compression } from '../../stores.svelte';
+import { compression } from '../../stores/index.svelte.js';
 import type { Content } from '../../FileSystemTrie';
 
 interface Props {

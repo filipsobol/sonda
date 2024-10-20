@@ -1,74 +1,38 @@
+export type Item = string | [ id: string, name: string ];
+export type Items = Item[];
+export type NullishItems = Items | null | undefined;
+export type GetChildren = ( ( id: string, items: Items ) => NullishItems ) | null;
+
 export class AsciiTree {
-	private depth: number = 0;
-	private tree: Array<string> = [];
-
-	/**
-	 * Processes the given asset and its importers and adds them to the tree.
-	 */
-	private process( asset: string ): void {
-		const importers = this.getImporters( asset );
-
-		if ( !importers.length ) {
-			return;
-		}
-
-		// Narrow down the tree only if there is a single importer.
-		if ( importers.length === 1 ) {
-			this.addLast( `imported by ${ importers[ 0 ] }` );
-			
-			return this.process( importers[ 0 ] );
-		}
-
-		const last = importers.pop()!;
-
-		importers.forEach( importer => this.add( `imported by ${ importer }` ) );
-
-		this.addLast( `imported by ${ last }` );
+	public static generate(
+		items: Items,
+		getChildren?: GetChildren,
+	): string {
+		return AsciiTree.processItems( items, getChildren ).join( '\n' );
 	}
 
-	/**
-	 * Returns an array of all the files that import the given asset.
-	 */
-	private getImporters( asset: string ): Array<string> {
-		if ( !asset ) {
-			return [];
-		}
+	private static processItems(
+		items: Items,
+		getChildren: GetChildren = null,
+		prefix: string = '',
+	): string[] {
+		const lines: string[] = [];
+		const lastIndex = items.length - 1;
 
-		return Object.entries( window.SONDA_JSON_REPORT.inputs )
-			.filter( ( [ , file ] ) => file.imports.includes( asset! ) )
-			.map( ( [ path ] ) => path );
-	}
+		items.forEach( ( item, index ) => {
+			const isLast = index === lastIndex;
+			const connector = isLast ? '└── ' : '├── ';
+			const [ id, name ] = typeof item === 'string' ? [ item, item ] : item;
+			const children = getChildren?.( id, items );
 
-	/**
-	 * Adds a new line to the tree with the last element	.
-	 */
-	private addLast( text: string ): void {
-		this.tree.push( ' '.repeat( this.depth * 4 ) + '└── ' + text );
-		this.depth++;
-	}
+			lines.push( prefix + connector + name );
 
-	/**
-	 * Adds a new line to the tree.
-	 */
-	private add( text: string ): void {
-		this.tree.push( ' '.repeat( this.depth * 4 ) + '├── ' + text );
-	}
+			if ( children ) {
+				const newPrefix = prefix + ( isLast ? '    ' : '│   ' );
+				lines.push( ...this.processItems( children, getChildren, newPrefix ) );
+			}
+		} );
 
-	/**
-	 * Renders the entire dependency tree.
-	 */
-	public render( asset: string ): string {
-		const input = window.SONDA_JSON_REPORT.inputs[ asset ];
-
-		if ( input.belongsTo ) {
-			this.tree.push( `└── part of the ${ input.belongsTo } bundle` );
-			this.depth++;
-
-			asset = input.belongsTo;
-		}
-
-		this.process( asset! );
-
-		return this.tree.join( '\n' );
+		return lines;
 	}
 }

@@ -1,12 +1,12 @@
 <g>
 	<rect
 		data-tile={ content.path }
-		data-hover={ `${ content.name } - ${ formattedSize } (${ percentageOfTotal }%)` }
+		data-hover={ hoverData }
 		x={ tile.x }
 		y={ tile.y }
 		width={ tile.width }
 		height={ tile.height }
-		fill={ color }
+		style:--percentage={ percentage }
 		class="stroke-gray-500 { isFolder( content ) ? 'cursor-zoom-in' : 'cursor-pointer' }"
 		shape-rendering="crispEdges"
 		vector-effect="non-scaling-stroke"
@@ -45,7 +45,7 @@
 <script lang="ts">
 import Level from './Level.svelte';
 import { formatSize } from '../../format';
-import { compression } from '../../stores.svelte';
+import { compression } from '../../stores/index.svelte.js';
 import { isFolder, type Content } from '../../FileSystemTrie';
 import type { TileData } from '../../TreeMapGenerator';
 
@@ -64,8 +64,9 @@ let { tile, content, totalBytes }: Props = $props();
 const childWidth = $derived( tile.width - ( padding * 2 ) );
 const childHeight = $derived( tile.height - padding - paddingTop );
 const formattedSize = $derived( formatSize( content[ compression.type ] ) );
-const percentageOfTotal = $derived( Math.min( content[ compression.type ] / totalBytes * 100, 100 ).toFixed(2) );
-const color = $derived( `color-mix(in oklch, #fca5a5 ${ percentageOfTotal }%, #86efac)` );
+const percentageOfTotal = $derived( Math.min( content[ compression.type ] / totalBytes * 100, 100 ) );
+const hoverData = $derived( `${ content.name } - ${ formattedSize } (${ percentageOfTotal.toFixed( 2 ) }%)` );
+const percentage = $derived( Math.round( percentageOfTotal ) + '%' );
 const shouldDisplayText = $derived( tile.width >= ( paddingTop * 1.75 ) && tile.height >= paddingTop );
 
 const children = $derived.by(() => {
@@ -78,7 +79,11 @@ const children = $derived.by(() => {
 </script>
 
 <style>
+rect {
+	fill: color-mix(in oklch, #fca5a5 var(--percentage), #86efac)
+}
+
 rect:hover {
-	filter: brightness(1.15);
+	fill: color-mix(in oklch, #fecaca var(--percentage), #bbf7d0);
 }
 </style>

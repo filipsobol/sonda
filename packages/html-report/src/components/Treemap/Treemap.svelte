@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Level from './Level.svelte';
-import { compression } from '../../stores.svelte';
+import { compression } from '../../stores/index.svelte.js';
 import type { Folder } from '../../FileSystemTrie';
 
 interface Props {

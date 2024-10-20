@@ -35,9 +35,9 @@
 </Dialog>
 
 <script lang="ts">
-import Dialog from '../Dialog.svelte';
+import Dialog from './Dialog.svelte';
 import { formatSize } from '../../format';
-import { AsciiTree } from '../../AsciiTree';
+import { AsciiTree, type Items } from '../../AsciiTree';
 import type { File } from '../../FileSystemTrie';
 
 interface Props {
@@ -62,14 +62,35 @@ const format = $derived.by( () => {
 	return window.SONDA_JSON_REPORT.inputs[ parent ].format.toUpperCase;
 } );
 
+function getImporters(
+	key: string,
+	items: Items
+): Array<[ string, string ]> {
+	// Do not show more importers if current file already has multiple importers
+	if ( items.length > 1 ) {
+		return [];
+	}
+
+	return Object
+		.entries( window.SONDA_JSON_REPORT.inputs )
+		.filter( ( [ , file ] ) => file.imports.includes( key ) )
+		.map( ( [ path ] ) => [ path, `imported by ${ path }` ] );
+}
+
 const dependencyTree = $derived.by<string | null>( () => {
 	if ( !input ) {
 		return null;
 	}
 
-	const tree = new AsciiTree();
+	const start: Array<[ string, string ]> = input.belongsTo
+		// If the file is part of a bundle, show the bundle name first
+		? [ [ input.belongsTo, `part of the ${ input.belongsTo } bundle` ] ]
+		// Otherwise, show file importers
+		: getImporters( file.path, [] );
 
-	return tree.render( file.path );
+	return AsciiTree.generate(
+		start,
+		getImporters
+	);
 } );
-
 </script>

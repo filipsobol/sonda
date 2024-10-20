@@ -48,15 +48,16 @@
 
 		{#if dependencies.length > 0}
 			<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto min-w-full">
-				<pre>{ asciiDependencies }</pre>
+				<pre>{ dependencyTree }</pre>
 			</code>
 		{/if}
 	{/snippet}
 </Dialog>
 
 <script lang="ts">
-import Dialog from '../Dialog.svelte';
+import Dialog from './Dialog.svelte';
 import { formatSize } from '../../format';
+import { AsciiTree } from '../../AsciiTree';
 import type { ModuleFormat } from 'sonda';
 import type { FileSystemTrie } from '../../FileSystemTrie';
 
@@ -101,9 +102,5 @@ const dependencies = $derived.by<Array<string>>( () => {
 		.sort();
 } );
 
-const asciiDependencies = $derived.by<string>( () => {
-	return dependencies
-		.map( ( name, index, self ) => self.length === index + 1 ? `└── ${ name }` : `├── ${ name }` )
-		.join( '\n' );
-} );
+const dependencyTree = $derived( AsciiTree.generate( dependencies ) );
 </script>

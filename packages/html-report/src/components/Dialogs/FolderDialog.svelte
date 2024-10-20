@@ -33,7 +33,7 @@
 </Dialog>
 
 <script lang="ts">
-import Dialog from '../Dialog.svelte';
+import Dialog from './Dialog.svelte';
 import Treemap from '../Treemap/Treemap.svelte';
 import { formatSize } from '../../format';
 import type { Folder } from '../../FileSystemTrie';

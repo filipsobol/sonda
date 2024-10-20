@@ -6,6 +6,7 @@
 				class="px-4 py-2 text-sm font-medium hover:bg-gray-100 text-gray-900 border border-gray-300 first:rounded-s-lg last:rounded-e-lg focus:ring-1 focus:ring-blue-300 focus:z-10"
 				class:active={ type === compression.type }
 				onclick={ () => compression.setType( type ) }
+				title={ `Show the ${ name } file size in diagram` }
 			>
 				{ name }
 			</button>	
@@ -14,7 +15,7 @@
 {/if}
 
 <script lang="ts">
-import { compression, activeOutput, type CompressionType } from '../../stores.svelte';
+import { compression, activeOutput, type CompressionType } from '../../stores/index.svelte.js';
 
 const hasGzip = $derived( activeOutput.output!.root.gzip > 0 );
 const hasBrotli = $derived( activeOutput.output!.root.brotli > 0 );

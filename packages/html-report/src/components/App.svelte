@@ -35,7 +35,7 @@ import Header from './Header/Header.svelte';
 import Treemap from './Treemap/Treemap.svelte';
 import NoData from './NoData.svelte';
 import Tooltip from './Tooltip.svelte';
-import { activeOutput, dialog } from '../stores.svelte';
+import { activeOutput, dialog } from '../stores/index.svelte.js';
 import { isFolder } from '../FileSystemTrie';
 
 let width = $state<number>( 0 );
