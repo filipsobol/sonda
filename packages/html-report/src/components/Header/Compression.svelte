@@ -1,9 +1,9 @@
 {#if compressions.length > 1}
-	<div class="inline-flex space-x-[-1px] bg-white" role="group">
+	<div class="inline-flex space-x-[-1px]" role="group">
 		{#each compressions as [ type, name ] ( type )}
 			<button
 				type="button"
-				class="px-4 py-2 text-sm font-medium hover:bg-gray-100 text-gray-900 border border-gray-300 first:rounded-s-lg last:rounded-e-lg focus:ring-1 focus:ring-blue-300 focus:z-10"
+				class="px-4 py-2 text-sm font-medium bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 first:rounded-s-lg last:rounded-e-lg focus:ring-1 focus:ring-blue-300 focus:z-10"
 				class:active={ type === compression.type }
 				onclick={ () => compression.setType( type ) }
 				title={ `Show the ${ name } file size in diagram` }
