@@ -1,8 +1,8 @@
 {#if duplicates.size > 1}
 	<button
-		aria-label="Details of the entire build output"
+		title="See duplicate modules found in the build"
+		aria-label="List of duplicate modules found in the build output"
 		class="text-gray-900 bg-white border border-red-300 focus:outline-none hover:bg-red-50 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
-		title="See issues found in the build output"
 		{ onclick }
 	>
 		<svg
@@ -27,6 +27,6 @@ import { duplicates } from '../../stores/dependencies.js';
 import { dialog } from '../../stores/index.svelte.js';
 
 function onclick() {
-	dialog.open( 'issues', true );
+	dialog.open( 'duplicates', true );
 }
 </script>

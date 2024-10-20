@@ -1,4 +1,4 @@
-<Dialog heading="Issues found in the build" >
+<Dialog heading="Duplicate modules found in the build" >
 	{#snippet children()}
 		{#if duplicates.size > 0}
 			<p>The following dependencies are duplicated:</p>
