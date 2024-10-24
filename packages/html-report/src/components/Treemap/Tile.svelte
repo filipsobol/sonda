@@ -47,7 +47,7 @@ import Level from './Level.svelte';
 import { formatSize } from '../../format';
 import { compression } from '../../stores/index.svelte.js';
 import { isFolder, type Content } from '../../FileSystemTrie';
-import type { TileData } from '../../TreeMapGenerator';
+import type { TileData } from '../../treemap';
 
 const tresholdInPixels = 20;
 const padding = 6;

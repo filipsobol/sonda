@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Tile from './Tile.svelte';
-import { TreeMapGenerator } from '../../TreeMapGenerator';
+import { generateTreeMap } from '../../treemap';
 import { compression } from '../../stores/index.svelte.js';
 import type { Content } from '../../FileSystemTrie';
 
@@ -38,15 +38,7 @@ const children = $derived.by(() => {
 	return Object.values<Content>( content );
 });
 
-const tiles = $derived.by( () => {
-	const generator = new TreeMapGenerator(
-		children.map( child => child[ compression.type ] ),
-		width,
-		height,
-		xStart,
-		yStart
-	);
-
-	return generator.calculate();
-} );
+const tiles = $derived(
+	generateTreeMap( children.map( child => child[ compression.type ] ), width, height, xStart, yStart )
+);
 </script>
