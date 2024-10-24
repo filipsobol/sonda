@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+### Patch Changes
+
+- 05de327: Sort `inputs` and `outputs.inputs` in JSON report for easier diffing
+
 ## 0.4.0
 
 ### Minor Changes
