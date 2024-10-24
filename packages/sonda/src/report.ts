@@ -34,8 +34,8 @@ export function generateJsonReport(
     }, {} as Record<string, ReportOutput> );
 
   return {
-    inputs,
-    outputs
+    inputs: sortObjectKeys( inputs ),
+    outputs: sortObjectKeys( outputs )
   };
 }
 
@@ -71,17 +71,31 @@ function processAsset(
 
   const assetSizes = getSizes( code, options );
   const bytes = getBytesPerSource( code, mapped, assetSizes, options );
-
-  return {
-    ...assetSizes,
-    inputs: Array.from( bytes ).reduce( ( carry, [ source, sizes ] ) => {
+  const outputInputs = Array
+    .from( bytes )
+    .reduce( ( carry, [ source, sizes ] ) => {
       carry[ normalizePath( source ) ] = sizes;
 
       return carry;
-    }, {} as Record<string, ReportOutputInput> )
+    }, {} as Record<string, ReportOutputInput> );
+
+  return {
+    ...assetSizes,
+    inputs: sortObjectKeys( outputInputs )
   };
 }
 
 function hasCodeAndMap( result: MaybeCodeMap ): result is Required<CodeMap> {
   return Boolean( result && result.code && result.map );
 }
+
+function sortObjectKeys<T extends unknown>( object: Record<string, T> ): Record<string, T> {
+  return Object
+    .keys( object )
+    .sort()
+    .reduce( ( carry, key ) => {
+      carry[ key ] = object[ key ];
+
+      return carry;
+    }, {} as Record<string, T> );
+} 
