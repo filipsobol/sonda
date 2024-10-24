@@ -357,16 +357,16 @@ describe( 'report.ts', () => {
 						gzip: 0,
 						brotli: 0,
 						inputs: {
-							'fixtures/hasMapping/src/index.js': {
-								uncompressed: 45,
-								gzip: 0,
-								brotli: 0,
-							},
 							'[unassigned]': {
 								uncompressed: 34, // Length of the sourceMappingURL comment
 								gzip: 0,
 								brotli: 0,
 							},
+							'fixtures/hasMapping/src/index.js': {
+								uncompressed: 45,
+								gzip: 0,
+								brotli: 0,
+							}
 						}
 					}
 				},
