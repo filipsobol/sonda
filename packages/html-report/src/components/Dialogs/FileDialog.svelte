@@ -47,20 +47,7 @@ interface Props {
 let { file }: Props = $props();
 
 const input = $derived( window.SONDA_JSON_REPORT.inputs[ file.path ] );
-
-const format = $derived.by( () => {
-	if ( input ) {
-		return input.format.toUpperCase();
-	}
-
-	const parent = window.SONDA_JSON_REPORT.inputs[ file.path ]?.belongsTo;
-
-	if ( !parent ) {
-		return 'UNKNOWN';
-	}
-
-	return window.SONDA_JSON_REPORT.inputs[ parent ].format.toUpperCase;
-} );
+const format = $derived( input?.format.toUpperCase() ?? 'UNKNOWN' );
 
 function getImporters(
 	key: string,
