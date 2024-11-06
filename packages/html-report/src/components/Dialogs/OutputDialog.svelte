@@ -1,18 +1,31 @@
 <Dialog heading={ output.root.name } >
 	{#snippet children()}
-		<div class="flex flex-col overflow-y-auto">
-			<div class="grid grid-cols-[auto_1fr] gap-x-8">
-				<span>Bundled size</span>
-				<span class="font-bold">{ formatSize( output.root.uncompressed ) }</span>
+		<div class="flex flex-col overflow-y-auto max-w-[500px]">
+			<div class="grid grid-cols-[auto_auto_auto] gap-x-12">
+				<span class="font-bold">Type</span>
+				<span class="font-bold text-right">Size</span>
+				<span class="font-bold text-right">
+					Download time
+
+					<span data-hover="Estimations for a slow 3G connection">
+						<InfoIcon width={20} height={20} class="inline-block pointer-events-none" />
+					</span>
+				</span>
+
+				<span class="font-bold">Uncompressed</span>
+				<span class="text-right">{ formatSize( output.root.uncompressed ) }</span>
+				<span class="text-right">{ downloadTimeOriginal }</span>
 
 				{#if output.root.gzip}
-					<span> GZIP size</span>
-					<span class="font-bold">{ formatSize( output.root.gzip ) }</span>
+					<span class="font-bold"> GZIP</span>
+					<span class="text-right">{ formatSize( output.root.gzip ) }</span>
+					<span class="text-right">{ downloadTimeGzip }</span>
 				{/if}
 
 				{#if output.root.brotli}
-					<span>Brotli size</span>
-					<span class="font-bold">{ formatSize( output.root.brotli ) }</span>
+					<span class="font-bold">Brotli</span>
+					<span class="text-right">{ formatSize( output.root.brotli ) }</span>
+					<span class="text-right">{ downloadTimeBrotli }</span>
 				{/if}
 			</div>
 		</div>
@@ -56,7 +69,8 @@
 
 <script lang="ts">
 import Dialog from './Dialog.svelte';
-import { formatSize } from '../../format';
+import InfoIcon from '../Icons/Info.svelte';
+import { formatSize, formatTime } from '../../format';
 import { AsciiTree } from '../../AsciiTree';
 import type { ModuleFormat } from 'sonda';
 import type { FileSystemTrie } from '../../FileSystemTrie';
@@ -67,7 +81,12 @@ interface Props {
 
 let { output }: Props = $props();
 
+const SLOW_3G = 50 * 1024 * 8;
+
 const data = $derived( window.SONDA_JSON_REPORT.outputs[ output.root.name ] );
+const downloadTimeOriginal = $derived( formatTime( Math.round( output.root.uncompressed / SLOW_3G * 1000 ) ) );
+const downloadTimeGzip = $derived( formatTime( Math.round( output.root.gzip / SLOW_3G * 1000 ) ) );
+const downloadTimeBrotli = $derived( formatTime( Math.round( output.root.brotli / SLOW_3G * 1000 ) ) );
 
 const formats = $derived.by( () => {
 	const formats: Record<ModuleFormat, number> = {

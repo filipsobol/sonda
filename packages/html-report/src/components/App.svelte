@@ -14,7 +14,7 @@
 		bind:clientHeight={ height }
 		class="flex-grow overflow-hidden"
 	>
-		{#if activeOutput}
+		{#if activeOutput.output}
 			<Treemap
 				content={ activeOutput.output!.root }
 				{ width }
@@ -48,7 +48,7 @@ function onclick( { target }: Event ) {
 		return;
 	}
 
-	const content = activeOutput.output!.get( path );
+	const content = activeOutput.output?.get( path );
 
 	if ( !content ) {
 		return;

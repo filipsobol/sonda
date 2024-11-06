@@ -23,19 +23,7 @@
 				aria-label="Close dialog"
 				class="absolute top-0 right-0 mt-2 mr-2 flex justify-center items-center border border-transparent rounded-full w-10 h-10 text-gray-600 hover:text-gray-900"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<path d="M0 0h24v24H0z" stroke="none"/>
-					<path d="M18 6 6 18M6 6l12 12"/>
-				</svg>
+				<CloseIcon />
 			</button>
 		</div>
 
@@ -44,6 +32,7 @@
 </div>
 
 <script lang="ts">
+import CloseIcon from '../Icons/Close.svelte';
 import { fade } from 'svelte/transition';
 import { dialog } from '../../stores/index.svelte.js';
 import type { Snippet } from 'svelte';

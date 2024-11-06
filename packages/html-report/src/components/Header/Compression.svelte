@@ -17,8 +17,8 @@
 <script lang="ts">
 import { compression, activeOutput, type CompressionType } from '../../stores/index.svelte.js';
 
-const hasGzip = $derived( activeOutput.output!.root.gzip > 0 );
-const hasBrotli = $derived( activeOutput.output!.root.brotli > 0 );
+const hasGzip = $derived( activeOutput.output?.root.gzip ?? 0 > 0 );
+const hasBrotli = $derived( activeOutput.output?.root.brotli ?? 0 > 0 );
 
 const compressions = $derived.by( () => {
 	const compressions: Array<[ CompressionType, string ]> = [
