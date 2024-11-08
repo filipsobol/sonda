@@ -6,12 +6,17 @@ import { viteSingleFile } from 'vite-plugin-singlefile';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import ViteRestart from 'vite-plugin-restart';
 
-let REPORT_DATA = '__REPORT_DATA__';
+let SONDA_REPORT_DATA = '__REPORT_DATA__';
 
 if ( process.env.NODE_ENV !== 'production' ) {
-  const dataFilePath = resolve( process.cwd(), 'sample_data.json' );
+  const sampleDataPath = resolve(
+    process.cwd(),
+    'sample_data.json'
+  );
 
-  REPORT_DATA = readFileSync( dataFilePath, 'utf-8' );
+  SONDA_REPORT_DATA = encodeURIComponent(
+    readFileSync( sampleDataPath, 'utf-8' )
+  );
 }
 
 // https://vitejs.dev/config/
@@ -24,7 +29,7 @@ export default defineConfig({
     createHtmlPlugin({
       inject: {
         data: {
-          SONDA_REPORT_DATA: `<script type="module">window.SONDA_JSON_REPORT = JSON.parse(String.raw\`${REPORT_DATA}\`);</script>`,
+          SONDA_REPORT_DATA,
         },
       },
     }),
@@ -35,6 +40,7 @@ export default defineConfig({
     } )
   ],
   build: {
+    modulePreload: false,
     emptyOutDir: false,
     outDir: resolve(import.meta.dirname, '../sonda/dist'),
   },

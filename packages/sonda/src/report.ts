@@ -48,7 +48,7 @@ export function generateHtmlReport(
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
-  return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
+  return template.replace( '__REPORT_DATA__', encodeURIComponent( JSON.stringify( json ) ) );
 }
 
 function processAsset(
@@ -81,7 +81,14 @@ function processAsset(
 
   return {
     ...assetSizes,
-    inputs: sortObjectKeys( outputInputs )
+    inputs: sortObjectKeys( outputInputs ),
+    map: options.sources ? {
+      version: 3,
+      names: [],
+      mappings: mapped.mappings,
+      sources: mapped.sources,
+      sourcesContent: mapped.sourcesContent,
+    } : undefined
   };
 }
 

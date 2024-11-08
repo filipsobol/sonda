@@ -1,4 +1,4 @@
-import type { JsonReport, ReportOutputInput, Sizes } from 'sonda';
+import type { JsonReport, ReportOutput, ReportOutputInput, Sizes } from 'sonda';
 
 export interface File extends Sizes {
 	name: string;
@@ -9,6 +9,10 @@ export interface Folder extends Sizes {
 	name: string;
 	path: string;
 	items: Array<Content>;
+}
+
+export interface Root extends Folder {
+	map: ReportOutput[ 'map' ];
 }
 
 export type Content = Folder | File;
@@ -22,6 +26,7 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
 
 		trie.root.name = outputPath;
+		trie.root.map = output.map;
 		trie.root.uncompressed = output.uncompressed;
 		trie.root.gzip = output.gzip;
 		trie.root.brotli = output.brotli;
@@ -37,10 +42,10 @@ export function isFolder( content: Content ): content is Folder {
 }
 
 export class FileSystemTrie {
-	root: Folder;
+	root: Root;
 
 	constructor() {
-		this.root = this.createNode( '', '' );
+		this.root = this.createNode( '', '' ) as Root;
 	}
 
 	private createNode( name: string, path: string ): Folder {
@@ -58,7 +63,7 @@ export class FileSystemTrie {
 		const parts = filePath.split( '/' );
 		const name = parts.pop()!;
 
-		let node = this.root;
+		let node: Folder = this.root;
 
 		parts.forEach( part => {
 			let childNode = node.items.find( ( item ): item is Folder => isFolder( item ) && item.name === part );

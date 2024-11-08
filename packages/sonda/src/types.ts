@@ -1,4 +1,4 @@
-import type { EncodedSourceMap } from '@ampproject/remapping';
+import type { DecodedSourceMap, EncodedSourceMap } from '@ampproject/remapping';
 
 export interface Options {
   /**
@@ -18,11 +18,11 @@ export interface Options {
 
   /**
    * Whether to read the source maps of imported modules.
-   * 
+   *
    * By default, external dependencies that are bundled into a single file are shown
    * as a single asset in the report. However, when investigating tree-shaking issues,
    * it can be useful to see individual source files of the dependencies.
-   * 
+   *
    * Enabling this options will read the source maps of imported modules and show
    * individual files that make up these bundles.
    *
@@ -32,6 +32,20 @@ export interface Options {
    * @default false
    */
   detailed: boolean;
+
+  /**
+   * Whether to include the source maps of the assets in the report for visualizing
+   * parts of the code that contribute to the final bundle size.
+   *
+   * ⚠️⚠️⚠️
+   * This option will significantly increase the report size and include in it the
+   * source code of the assets. If you work with sensitive code, be cautious when
+   * sharing the report.
+   * ⚠️⚠️⚠️
+   *
+   * @default false
+   */
+  sources: boolean;
 
   /**
    * Whether to calculate the sizes of assets after compression with GZIP.
@@ -71,6 +85,7 @@ export interface ReportInput {
 
 export interface ReportOutput extends Sizes {
   inputs: Record<string, ReportOutputInput>;
+  map?: DecodedSourceMap;
 }
 
 export interface ReportOutputInput extends Sizes {}
