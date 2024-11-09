@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { dirname, extname, resolve } from 'path';
 import { loadCodeAndMap } from 'load-source-map';
 import { decode } from '@jridgewell/sourcemap-codec';
 import { mapSourceMap } from './sourcemap/map.js';
@@ -21,8 +21,10 @@ export function generateJsonReport(
   inputs: Record<string, ReportInput>,
   options: Options
 ): JsonReport {
+  const acceptedExtensions = [ '.js', '.css' ];
+
   const outputs = assets
-    .filter( asset => !asset.endsWith( '.map' ) )
+    .filter( asset => acceptedExtensions.includes( extname( asset ) ) )
     .reduce( ( carry, asset ) => {
       const data = processAsset( asset, inputs, options );
 
