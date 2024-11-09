@@ -33,6 +33,7 @@ describe('utils.ts', () => {
 				open: true,
 				format: 'html',
 				detailed: false,
+				sources: false,
 				gzip: false,
 				brotli: false,
 			} );
@@ -43,6 +44,7 @@ describe('utils.ts', () => {
 				open: true,
 				format: 'json',
 				detailed: false,
+				sources: false,
 				gzip: false,
 				brotli: false,
 			} );
@@ -53,12 +55,14 @@ describe('utils.ts', () => {
 				open: false,
 				format: 'json',
 				detailed: true,
+				sources: true,
 				gzip: true,
 				brotli: true,
 			} ) ).toEqual( {
 				open: false,
 				format: 'json',
 				detailed: true,
+				sources: true,
 				gzip: true,
 				brotli: true,
 			} );

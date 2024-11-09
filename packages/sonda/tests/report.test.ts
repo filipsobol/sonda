@@ -343,13 +343,13 @@ describe( 'report.ts', () => {
 
 	describe( 'generateHtmlReport', () => {
 		it( 'should return report in HTML format', () => {
-			const stringifiedEmptyReport = JSON.stringify( { inputs: {}, outputs: {} } );
+			const stringifiedEmptyReport = encodeURIComponent( JSON.stringify( { inputs: {}, outputs: {} } ) );
 
 			expect( generateHtmlReport( [], {}, defaultOptions ) ).toContain( stringifiedEmptyReport );
 		} );
 
 		it( 'processes JavaScript files with sourceMappingURL', () => {
-			const stringifiedReport = JSON.stringify( {
+			const stringifiedReport = encodeURIComponent( JSON.stringify( {
 				inputs: {},
 				outputs: {
 					'fixtures/hasMapping/index.js': {
@@ -370,7 +370,7 @@ describe( 'report.ts', () => {
 						}
 					}
 				},
-			} );
+			} ) );
 
 			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];
 
