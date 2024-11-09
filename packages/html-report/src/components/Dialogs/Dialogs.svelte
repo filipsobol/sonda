@@ -14,10 +14,15 @@
 	<DuplicatesDialog />
 {/if}
 
+{#if dialog.code}
+	<CodeDialog file={ dialog.code } />
+{/if}
+
 <script lang="ts">
-import FolderDialog from './FolderDialog.svelte';
-import FileDialog from './FileDialog.svelte';
+import CodeDialog from './CodeDialog.svelte';
 import DuplicatesDialog from './DuplicatesDialog.svelte';
+import FileDialog from './FileDialog.svelte';
+import FolderDialog from './FolderDialog.svelte';
 import OutputDialog from './OutputDialog.svelte';
 import { dialog } from '../../stores/index.svelte.js';
 </script>
