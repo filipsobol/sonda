@@ -12,7 +12,8 @@ export default defineConfig({
 		new SondaWebpackPlugin( {
 			gzip: true,
 			brotli: true,
-			detailed: true
+			detailed: true,
+			sources: true,
 		} )
 	],
 	experiments: {
