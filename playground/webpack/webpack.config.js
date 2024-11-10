@@ -15,7 +15,8 @@ export default {
     new SondaWebpackPlugin( {
       gzip: true,
       brotli: true,
-      detailed: true
+      detailed: true,
+      sources: true,
     } ),
   ],
   module: {

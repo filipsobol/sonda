@@ -15,7 +15,8 @@ build( {
 		SondaEsbuildPlugin( {
 			gzip: true,
 			brotli: true,
-			detailed: true
+			detailed: true,
+			sources: true,
 		} )
 	]
 } );

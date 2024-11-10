@@ -60,9 +60,7 @@
 		<p class="mt-12">This asset includes <span class="font-semibold">{ dependencies.length }</span> external dependencies</p>
 
 		{#if dependencies.length > 0}
-			<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto min-w-full">
-				<pre>{ dependencyTree }</pre>
-			</code>
+			<pre class="mt-2 p-4 w-max leading-5 bg-slate-100 rounded overflow-auto min-w-full"><code>{ dependencyTree }</code></pre>
 		{/if}
 	{/snippet}
 </Dialog>

@@ -8,6 +8,7 @@ interface Dialogs {
 	folder: Folder | null;
 	output: FileSystemTrie | null;
 	duplicates: true | null;
+	code: File | null;
 }
 
 type DialogsType = keyof Dialogs;
@@ -22,7 +23,8 @@ export function dialogsStore(): OpenedDialogsStore {
 		file: null,
 		folder: null,
 		output: null,
-		duplicates: null
+		duplicates: null,
+		code: null,
 	} );
 
 	let stack = $state<Array<DialogsType>>( [] );
@@ -32,6 +34,7 @@ export function dialogsStore(): OpenedDialogsStore {
 		get folder() { return dialogs.folder },
 		get output() { return dialogs.output },
 		get duplicates() { return dialogs.duplicates },
+		get code() { return dialogs.code },
 
 		open<T extends DialogsType>( type: T, data: Dialogs[ T ] ) {
 			stack.push( type );

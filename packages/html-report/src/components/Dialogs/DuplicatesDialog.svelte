@@ -2,9 +2,7 @@
 	{#snippet children()}
 		{#if duplicates.size > 0}
 			<p>The following dependencies are duplicated:</p>
-			<code class="mt-2 p-4 w-max leading-5 bg-slate-200 rounded overflow-auto min-w-full">
-				<pre>{ tree }</pre>
-			</code>
+			<pre class="mt-2 p-4 w-max leading-5 bg-slate-100 rounded overflow-auto min-w-full"><code>{ tree }</code></pre>
 		{/if}
 	{/snippet}
 </Dialog>

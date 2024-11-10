@@ -66,3 +66,11 @@ function onkeydown(  event: KeyboardEvent  ) {
 	dialog.close();
 }
 </script>
+
+<style>
+:global {
+	* {
+		scrollbar-width: thin;
+	}
+}
+</style>

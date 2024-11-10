@@ -11,7 +11,8 @@ export default defineConfig( {
     SondaRollupPlugin( {
       gzip: true,
       brotli: true,
-      detailed: true
+      detailed: true,
+      sources: true,
     } ),
   ],
   build: {

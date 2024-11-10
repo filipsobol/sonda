@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { dirname, extname, resolve } from 'path';
 import { loadCodeAndMap } from 'load-source-map';
 import { decode } from '@jridgewell/sourcemap-codec';
 import { mapSourceMap } from './sourcemap/map.js';
@@ -21,8 +21,10 @@ export function generateJsonReport(
   inputs: Record<string, ReportInput>,
   options: Options
 ): JsonReport {
+  const acceptedExtensions = [ '.js', '.css' ];
+
   const outputs = assets
-    .filter( asset => !asset.endsWith( '.map' ) )
+    .filter( asset => acceptedExtensions.includes( extname( asset ) ) )
     .reduce( ( carry, asset ) => {
       const data = processAsset( asset, inputs, options );
 
@@ -48,7 +50,7 @@ export function generateHtmlReport(
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
-  return template.replace( '__REPORT_DATA__', JSON.stringify( json ) );
+  return template.replace( '__REPORT_DATA__', encodeURIComponent( JSON.stringify( json ) ) );
 }
 
 function processAsset(
@@ -81,7 +83,14 @@ function processAsset(
 
   return {
     ...assetSizes,
-    inputs: sortObjectKeys( outputInputs )
+    inputs: sortObjectKeys( outputInputs ),
+    map: options.sources ? {
+      version: 3,
+      names: [],
+      mappings: mapped.mappings,
+      sources: mapped.sources,
+      sourcesContent: mapped.sourcesContent,
+    } : undefined
   };
 }
 

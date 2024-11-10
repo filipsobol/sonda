@@ -10,6 +10,7 @@ export function normalizeOptions( options?: Partial<Options> ) {
 		open: true,
 		format: 'html',
 		detailed: false,
+		sources: false,
 		gzip: false,
 		brotli: false,
 	};
