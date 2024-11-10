@@ -4,8 +4,8 @@
 
 ### Minor Changes
 
+- 744143d: Add `sources` option for visualizing parts of the code included in the final bundle.
 - 3427bb0: Show the estimated download time using "Slow 3G" for assets
-- 744143d: Add `sources` option for visualizing parts of the code that were added to the bundle.
 
 ## 0.4.1
 
