@@ -36,7 +36,7 @@
 						class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
 						onclick={ () => dialog.open( 'code', file ) }
 					>
-						View the used code
+						Show used code
 					</button>
 				</div>
 			{/if}

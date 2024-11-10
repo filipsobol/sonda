@@ -13,15 +13,13 @@
             <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility">Browser Compatibility page</a> for more information.
           </p>
         </div>
-      {/if}
-
-			{#if sourceCode}
+			{:else if sourceCode}
       	<p>Code that ended up in the bundle is highlighted</p>
 
 				<pre class="h-full mt-2 p-4 w-full leading-5 bg-slate-100 text-slate-600 rounded overflow-auto text-xs flex">
 					<div class="line-numbers flex flex-col flex-shrink mr-2 select-none text-slate-400">
-						{#each sourceCodeLines as _}
-							<span class="border-r border-slate-300 text-right pr-2"></span>
+						{#each sourceCodeLines as _, index}
+							<span class="border-r border-slate-300 text-right pr-2">{ index }</span>
 						{/each}
 					</div>
 					<code bind:this={ codeElement }>{ sourceCode }</code>
@@ -91,15 +89,5 @@ $effect( () => {
 ::highlight(used-code) {
 	background-color: theme( 'colors.orange.200' );
 	color: theme( 'colors.orange.900' );
-}
-
-.line-numbers::before {
-  counter-reset: listing;
-}
-.line-numbers span {
-  counter-increment: listing;
-}
-.line-numbers span::before {
-  content: counter(listing);
 }
 </style>
