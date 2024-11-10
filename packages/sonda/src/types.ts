@@ -2,74 +2,67 @@ import type { DecodedSourceMap, EncodedSourceMap } from '@ampproject/remapping';
 
 export interface Options {
   /**
-   * Output format of the report.
+   * Determines the output format of the report.
    *
    * @default 'html'
    */
   format: 'html' | 'json';
 
   /**
-   * Whether to open the report in the default program for given file extension
-   * (`.html` or `.json` depending on the `format` option) after the build.
+   * Determines whether to open the report in the default program for given file
+   * extension (`.html` or `.json` depending on the `format` option) after the build.
    *
    * @default true
    */
   open: boolean;
 
   /**
-   * Whether to read the source maps of imported modules.
+   * Determines whether to read the source maps of imported modules.
    *
-   * By default, external dependencies that are bundled into a single file are shown
-   * as a single asset in the report. However, when investigating tree-shaking issues,
-   * it can be useful to see individual source files of the dependencies.
+   * By default, external dependencies that are bundled into a single file appear as
+   * a single asset in the report. When this option is enabled, the report will instead
+   * include the source files of the imported modules, if they have source maps.
    *
-   * Enabling this options will read the source maps of imported modules and show
-   * individual files that make up these bundles.
-   *
-   * Enabling this option will increase the time it takes to generate the report and
-   * decrease the accuracy of the estimated GZIP and Brotli sizes of individual files.
+   * Enabling this option will increase the time needed to generate the report and
+   * reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
    *
    * @default false
    */
   detailed: boolean;
 
   /**
-   * Whether to include the source maps of the assets in the report for visualizing
-   * parts of the code that contribute to the final bundle size.
+   * Determines whether to include the source maps of the assets in the report to
+   * visualize which parts of the code contribute to the final bundle size.
    *
-   * ⚠️⚠️⚠️
-   * This option will significantly increase the report size and include in it the
-   * source code of the assets. If you work with sensitive code, be cautious when
-   * sharing the report.
-   * ⚠️⚠️⚠️
+   * ⚠️ Enabling this option will significantly increase the report size and include
+   * it in the **source code** of the assets. If you work with proprietary code, be
+   * cautious when sharing the report. ⚠️
    *
    * @default false
    */
   sources: boolean;
 
   /**
-   * Whether to calculate the sizes of assets after compression with GZIP.
+   * Determines whether to calculate the sizes of assets after compression with GZIP.
    *
-   * The report will also include the estimated compressed sizes of the
-   * individual files that make up each asset. However, unlike the
-   * compressed size of the entire asset, the estimates for individual
-   * files are not completely accurate and should only be used as a reference.
+   * The report will include estimated compressed sizes for each file within an asset.
+   * However, unlike the compressed size of the entire asset, these individual file
+   * estimates are approximate and should be used as a general reference.
    *
-   * Enabling this option will increase the time it takes to generate the report.
+   * Enabling this option will increase the time needed to generate the report.
    *
    * @default false
    */
   gzip: boolean;
 
   /**
-   * Whether to calculate the sizes of assets after compression with Brotli.
+   * Determines whether to calculate the sizes of assets after compression with Brotli.
    *
-   * The report will also include the estimated compressed sizes of the
-   * individual files that make up each asset. However, unlike the
-   * compressed size of the entire asset, the estimates for individual
-   * files are not completely accurate and should only be used as a reference.
+   * The report will include estimated compressed sizes for each file within an asset.
+   * However, unlike the compressed size of the entire asset, these individual file
+   * estimates are approximate and should be used as a general reference.
    *
-   * Enabling this option will increase the time it takes to generate the report.
+   * Enabling this option will increase the time needed to generate the report.
    *
    * @default false
    */
