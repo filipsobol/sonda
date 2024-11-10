@@ -148,6 +148,45 @@ describe( 'report.ts', () => {
 			} );
 		} );
 
+		it( 'includes sources maps', () => {
+			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];
+			const options = normalizeOptions( { sources: true } );
+
+			expect( generateJsonReport( assets, {}, options ) ).toEqual( {
+				inputs: {},
+				outputs: {
+					'fixtures/hasMapping/index.js': {
+						brotli: 0,
+						gzip: 0,
+						uncompressed: 79,
+						inputs: {
+							'[unassigned]': {
+								brotli: 0,
+								gzip: 0,
+								uncompressed: 34 // Length of the sourceMappingURL comment
+							},
+							'fixtures/hasMapping/src/index.js': {
+								brotli: 0,
+								gzip: 0,
+								uncompressed: 45
+							}
+						},
+						map: {
+							version: 3,
+							names: [],
+							mappings: expect.any( Array ),
+							sources: [
+								'fixtures/hasMapping/src/index.js'
+							],
+							sourcesContent: [
+								expect.stringContaining( 'import' )
+							]
+						}
+					}
+				},
+			} );
+		} );
+
 		it( 'doesnt read existing source maps by default', () => {
 			const assets = [ join( import.meta.dirname, 'fixtures/detailed/index.js' ) ];
 
