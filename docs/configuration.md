@@ -11,6 +11,7 @@ These are the default options:
 ```js
 {
   format: 'html',
+  filename: 'sonda-report.html',
   open: true,
   detailed: false,
   sources: false,
@@ -38,6 +39,15 @@ Determines the output format of the report. The following formats are supported:
 
 * `'html'` - HTML file with treemap
 * `'json'` - JSON file
+
+### `filename`
+
+* **Type:** `string`
+* **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
+
+Determines the path of the generated report. The values can be either a filename, a relative path, or an absolute path.
+
+By default, the report is saved in the current working directory.
 
 ### `open`
 
