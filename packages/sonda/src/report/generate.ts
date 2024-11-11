@@ -1,5 +1,5 @@
-import { join } from 'path';
-import { writeFileSync } from 'fs';
+import { dirname } from 'path';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { generateHtmlReport, generateJsonReport } from '../report.js';
 import type { Options, JsonReport } from '../types.js';
 import { normalizeOptions } from '../utils.js';
@@ -11,9 +11,18 @@ export async function generateReportFromAssets(
 ): Promise<void> {
 	const options = normalizeOptions( userOptions );
 	const handler = options.format === 'html' ? saveHtml : saveJson;
-	const path = handler( assets, inputs, options );
+	const report = handler( assets, inputs, options );
+	const outputDirectory = dirname( options.filename );
 
-	if ( !options.open || !path ) {
+	// Ensure the output directory exists
+	if ( !existsSync( outputDirectory ) ) {
+		mkdirSync( outputDirectory, { recursive: true } );
+	}
+
+	// Write the report to the file system
+	writeFileSync( options.filename, report );
+
+	if ( !options.open ) {
 		return;
 	}
 
@@ -23,31 +32,24 @@ export async function generateReportFromAssets(
 	 */
 	const { default: open } = await import( 'open' );
 
-	open( path );
+	// Open the report in the default program for the file extension
+	open( options.filename );
 }
 
 function saveHtml(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
 	options: Options
-): string | null {
-	const report = generateHtmlReport( assets, inputs, options );
-	const path = join( process.cwd(), 'sonda-report.html' );
-
-	writeFileSync( path, report );
-
-	return path;
+): string {
+	return generateHtmlReport( assets, inputs, options );
 }
 
 function saveJson(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
 	options: Options
-): string | null {
+): string {
 	const report = generateJsonReport( assets, inputs, options );
-	const path = join( process.cwd(), 'sonda-report.json' );
 
-	writeFileSync( path, JSON.stringify( report, null, 2 ) );
-
-	return path;
+	return JSON.stringify( report, null, 2 );
 }

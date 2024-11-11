@@ -7,10 +7,14 @@ const mocks = vi.hoisted( () => ( {
 	generateHtmlReport: vi.fn(),
 	generateJsonReport: vi.fn(),
 	writeFileSync: vi.fn(),
+	existsSync: vi.fn(),
+	mkdirSync: vi.fn(),
 } ) );
 
 vi.mock( 'fs', () => ( {
 	writeFileSync: mocks.writeFileSync,
+	existsSync: mocks.existsSync,
+	mkdirSync: mocks.mkdirSync,
 } ) );
 
 vi.mock( 'open', () => ( {
@@ -30,6 +34,8 @@ describe( 'generate.ts', () => {
 	it( 'saves HTML report by default', async () => {
 		await generateReportFromAssets( [], {}, normalizeOptions() );
 
+		expect( mocks.existsSync ).toHaveBeenCalled();
+		expect( mocks.mkdirSync ).toHaveBeenCalled();
 		expect( mocks.writeFileSync ).toHaveBeenCalled();
 		expect( mocks.generateHtmlReport ).toHaveBeenCalled();
 		expect( mocks.generateJsonReport ).not.toHaveBeenCalled();
@@ -38,6 +44,8 @@ describe( 'generate.ts', () => {
 	it( 'saves JSON report', async () => {
 		await generateReportFromAssets( [], {}, normalizeOptions( { format: 'json' } ) );
 
+		expect( mocks.existsSync ).toHaveBeenCalled();
+		expect( mocks.mkdirSync ).toHaveBeenCalled();
 		expect( mocks.writeFileSync ).toHaveBeenCalled();
 		expect( mocks.generateJsonReport ).toHaveBeenCalled();
 		expect( mocks.generateHtmlReport ).not.toHaveBeenCalled();

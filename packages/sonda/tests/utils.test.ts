@@ -30,8 +30,9 @@ describe('utils.ts', () => {
 	describe( 'normalizeOptions', () => {
 		it( 'should return default options when no options are provided', () => {
 			expect( normalizeOptions() ).toEqual( {
-				open: true,
 				format: 'html',
+				filename: process.cwd() + '/sonda-report.html',
+				open: true,
 				detailed: false,
 				sources: false,
 				gzip: false,
@@ -40,9 +41,10 @@ describe('utils.ts', () => {
 		});
 
 		it( 'merges defaults with provided values', () => {
-			expect( normalizeOptions( { format: 'json' } ) ).toEqual( {
-				open: true,
-				format: 'json',
+			expect( normalizeOptions( { open: false } ) ).toEqual( {
+				format: 'html',
+				filename: process.cwd() + '/sonda-report.html',
+				open: false,
 				detailed: false,
 				sources: false,
 				gzip: false,
@@ -52,21 +54,80 @@ describe('utils.ts', () => {
 
 		it( 'allows overriding all options', () => {
 			expect( normalizeOptions( {
-				open: false,
 				format: 'json',
+				filename: __dirname + '/sonda-report.json',
+				open: false,
 				detailed: true,
 				sources: true,
 				gzip: true,
 				brotli: true,
 			} ) ).toEqual( {
-				open: false,
 				format: 'json',
+				filename: __dirname + '/sonda-report.json',
+				open: false,
 				detailed: true,
 				sources: true,
 				gzip: true,
 				brotli: true,
 			} );
-		} )
+		} );
+
+		it( 'ensures the `filename` is an absolute path', () => {
+			expect( normalizeOptions( { filename: './dist/sonda.json' } ) ).toEqual( {
+				format: 'json',
+				filename: process.cwd() + '/dist/sonda.json',
+				open: true,
+				detailed: false,
+				sources: false,
+				gzip: false,
+				brotli: false,
+			} );
+		} );
+
+		it( 'matches the `filename` when `format` is provided', () => {
+			expect( normalizeOptions( { format: 'json' } ) ).toEqual( {
+				format: 'json',
+				filename: process.cwd() + '/sonda-report.json',
+				open: true,
+				detailed: false,
+				sources: false,
+				gzip: false,
+				brotli: false,
+			} );
+		} );
+
+		it( 'matches the `format` when `filename` is provided', () => {
+			expect( normalizeOptions( { filename: 'sonda.json' } ) ).toEqual( {
+				format: 'json',
+				filename: process.cwd() + '/sonda.json',
+				open: true,
+				detailed: false,
+				sources: false,
+				gzip: false,
+				brotli: false,
+			} );
+		} );
+
+		it( 'warns and fixes `format` and `filename` mismatch', () => {
+			const spy = vi.spyOn( console, 'warn' ).mockImplementationOnce( () => {} );
+
+			const options = normalizeOptions( {
+				format: 'json',
+				filename: __dirname + '/sonda-report.html',
+			} );
+
+			expect( spy ).toHaveBeenCalledOnce();
+			
+			expect( options ).toEqual( {
+				format: 'json',
+				filename: __dirname + '/sonda-report.json',
+				open: true,
+				detailed: false,
+				sources: false,
+				gzip: false,
+				brotli: false,
+			} );
+		} );
 	} );
 
 	describe( 'normalizePath', () => {
