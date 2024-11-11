@@ -145,6 +145,7 @@ SondaRollupPlugin( {
   format: 'html',
   open: true,
   detailed: true,
+  sources: true,
   gzip: true,
   brotli: true,
 } )

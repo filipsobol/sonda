@@ -7,8 +7,8 @@ export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
 
 export function normalizeOptions( options?: Partial<Options> ) {
 	const defaultOptions: Options = {
-		open: true,
 		format: 'html',
+		open: true,
 		detailed: false,
 		sources: false,
 		gzip: false,
