@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- 0e92901: Add the `filename` option to allow changing the report output path
+
 ## 0.5.0
 
 ### Minor Changes
