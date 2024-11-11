@@ -9,6 +9,14 @@ export interface Options {
   format: 'html' | 'json';
 
   /**
+   * Determines the path of the generated report. The values can be either
+   * a filename, a relative path, or an absolute path.
+   *
+   * @default 'sonda-report.html' or 'sonda-report.json' depending on the `format` option
+   */
+  filename: string;
+
+  /**
    * Determines whether to open the report in the default program for given file
    * extension (`.html` or `.json` depending on the `format` option) after the build.
    *
