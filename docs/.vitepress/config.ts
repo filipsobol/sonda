@@ -8,11 +8,11 @@ export default defineConfig({
   head: [ [ 'link', { rel: 'icon', href: '/sonda.ico' } ] ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/sonda.png',
+    logo: '/sonda.jpg',
 
     nav: [
       { text: 'Guide', link: '/introduction' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Demo', link: '/demo.html', target: '_blank' },
     ],
 
     sidebar: [
@@ -26,7 +26,11 @@ export default defineConfig({
       {
         text: 'Features',
         items: [
-          { text: 'Compression sizes', link: '/features/compression-sizes' }
+          { text: 'Compression sizes', link: '/features/compression-sizes' },
+          { text: 'Detailed view', link: '/features/detailed-view' },
+          { text: 'Dependency tree', link: '/features/dependency-tree' },
+          { text: 'Used code', link: '/features/used-code' },
+          { text: 'Dependency warnings', link: '/features/dependency-warnings' },
         ]
       }
     ],

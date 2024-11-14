@@ -8,9 +8,9 @@ outline: deep
 
 ## What is Sonda?
 
-Sonda is a universal visualizer and analyzer for JavaScript and CSS bundles. It is designed to help you understand the structure of your bundles and how various parts depend on each other, identify potential issues, and optimize them for better performance.
+Sonda is a universal visualizer and analyzer for JavaScript and CSS assets. It is designed to help you understand the structure of your assets and how various parts depend on each other, identify potential issues, and optimize them for better performance.
 
-Unlike other tools, Sonda is not designed for a specific bundler, but rather to analyze the JavaScript and CSS bundles themselves. Thanks to this approach, Sonda is more accurate and works with all popular bundlers, including:
+Unlike other tools, Sonda is not designed for a specific bundler, but rather to analyze the JavaScript and CSS assets themselves. Thanks to this approach, Sonda is more accurate and works with all popular bundlers, including:
 
 * Vite
 * Rollup
@@ -18,7 +18,7 @@ Unlike other tools, Sonda is not designed for a specific bundler, but rather to 
 * webpack
 * Rspack
 
-To see what it can do, check out the [demo](/TODO).
+To see what it can do, check out the <a href="/demo.html" target="_blank">demo</a>.
 
 ## Installation
 

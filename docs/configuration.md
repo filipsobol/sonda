@@ -72,10 +72,10 @@ Enabling this option will increase the time needed to generate the report and re
 * **Type:** `boolean`
 * **Default:** `false`
 
-Determines whether to include the source maps of the assets in the report to visualize which parts of the code contribute to the final bundle size.
+Determines whether to include the source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
 
 ::: warning ⚠️ Be cautious when sharing the report
-Enabling this option will significantly increase the report size and include it in the **source code** of the bundles. If you work with proprietary code, be cautious when sharing the report.
+Enabling this option will significantly increase the report size and include it in the **source code** of the assets. If you work with proprietary code, be cautious when sharing the report.
 :::
 
 ### `gzip`
