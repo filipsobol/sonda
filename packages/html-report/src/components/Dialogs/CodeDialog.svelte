@@ -6,11 +6,11 @@
     <div class="h-full flex flex-col overflow-auto p-1">
       {#if !supportsHighlight}
         <div class="p-4 mb-8 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-          <p class="font-bold">Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API">CSS Custom Highlight API</a>.</p>
+          <p class="font-bold">Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>.</p>
 
           <p class="mt-4">
             To use this feature, please update your browser to a version that supports it, or use a different browser. See the
-            <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility">Browser Compatibility page</a> for more information.
+            <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility" target="_blank">Browser Compatibility page</a> for more information.
           </p>
         </div>
 			{:else if sourceCode}
