@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "43.0.0",
-    "ckeditor5": "43.2.0"
+    "ckeditor5": "43.3.1"
   },
   "devDependencies": {
-    "esbuild": "^0.23.1",
-    "sonda": "workspace:^*",
-    "unplugin-sourcemaps": "workspace:^*"
+    "esbuild": "^0.24.0",
+    "sonda": "workspace:^",
+    "unplugin-sourcemaps": "workspace:^"
   }
 }

@@ -9,15 +9,15 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "43.0.0",
-    "ckeditor5": "43.2.0"
+    "ckeditor5": "43.3.1"
   },
   "devDependencies": {
     "@types/webpack": "^5.28.5",
-    "css-loader": "^6.11.0",
-    "mini-css-extract-plugin": "^2.9.1",
-    "sonda": "workspace:^*",
-    "unplugin-sourcemaps": "workspace:^*",
-    "webpack": "^5.89.0",
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.2",
+    "sonda": "workspace:^",
+    "unplugin-sourcemaps": "workspace:^",
+    "webpack": "^5.96.1",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4"
   }

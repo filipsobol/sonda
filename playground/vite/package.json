@@ -9,13 +9,12 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "43.0.0",
-    "ckeditor5": "43.2.0"
+    "ckeditor5": "43.3.1"
   },
   "devDependencies": {
-    "esbuild": "^0.23.1",
-    "unplugin-sourcemaps": "workspace:^*",
-    "sonda": "workspace:^*",
-    "vite": "^5.4.1",
+    "sonda": "workspace:^",
+    "unplugin-sourcemaps": "workspace:^",
+    "vite": "^5.4.11",
     "vite-plugin-virtual": "^0.3.0"
   }
 }

@@ -9,16 +9,16 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-engine": "43.0.0",
-    "ckeditor5": "43.2.0"
+    "ckeditor5": "43.3.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.24.0",
+    "rollup": "^4.27.2",
     "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-visualizer": "^5.12.0",
-    "sonda": "workspace:^*",
-    "unplugin-sourcemaps": "workspace:^*"
+    "sonda": "workspace:^",
+    "unplugin-sourcemaps": "workspace:^"
   }
 }
