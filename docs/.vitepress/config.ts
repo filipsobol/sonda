@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -26,6 +26,7 @@ export default defineConfig({
       {
         text: 'Features',
         items: [
+          { text: 'Treemap graph', link: '/features/treemap-graph' },
           { text: 'Compression sizes', link: '/features/compression-sizes' },
           { text: 'Detailed view', link: '/features/detailed-view' },
           { text: 'Dependency tree', link: '/features/dependency-tree' },
@@ -37,6 +38,7 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/filipsobol/sonda' },
+      { icon: 'npm', link: 'https://www.npmjs.com/package/sonda' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/filipsobol.bsky.social' },
       { icon: 'x', link: 'https://x.com/filipsobol' },
     ],

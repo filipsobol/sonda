@@ -11,8 +11,9 @@ hero:
       text: Get started
       link: /introduction
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Demo
+      link: /demo
+      target: _blank
 
 features:
   - title: Works with all bundlers
