@@ -28,8 +28,8 @@ export default defineConfig({
         items: [
           { text: 'Treemap graph', link: '/features/treemap-graph' },
           { text: 'Compression sizes', link: '/features/compression-sizes' },
-          { text: 'Detailed view', link: '/features/detailed-view' },
           { text: 'Dependency tree', link: '/features/dependency-tree' },
+          { text: 'Detailed view', link: '/features/detailed-view' },
           { text: 'Used code', link: '/features/used-code' },
           { text: 'Dependency warnings', link: '/features/dependency-warnings' },
         ]

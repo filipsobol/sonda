@@ -7,7 +7,7 @@ outline: deep
 The tree map chart visualizes the contents of the selected asset, with each tile representing a single source file or folder.
 
 <CustomImage
-  src="/treemap.png"
+  src="/treemap.jpg"
   alt="Tree map chart for a folder containing multiple folders and files from the Sonda project itself"
   caption="Tree map chart of the Sonda project itself"
 />

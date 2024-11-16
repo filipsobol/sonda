@@ -13,6 +13,7 @@ export default defineConfig( {
 		sourcemap: true,
 		format: 'es'
 	},
+	external: ['open', 'fs', 'path', 'url', 'zlib'],
 	plugins: [
 		commonjs( {
 			sourceMap: true,
@@ -41,7 +42,7 @@ export default defineConfig( {
 		SondaRollupPlugin({
 			gzip: true,
 			brotli: true,
-			detailed: true,
+			// detailed: true,
 			sources: true
 		}),
 	]
