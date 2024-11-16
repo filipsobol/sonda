@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=18.20",
-    "pnpm": ">=9.7"
+    "node": ">=18.17",
+    "pnpm": ">=8.7"
   },
   "scripts": {
     "test": "pnpm -r --stream run test",
