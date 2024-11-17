@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, useTemplateRef, onMounted, onUnmounted } from 'vue';
+import { useTemplateRef, onMounted, onUnmounted } from 'vue';
 import mediumZoom, { type Zoom } from 'medium-zoom';
 
 defineProps<{

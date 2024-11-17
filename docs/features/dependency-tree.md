@@ -13,7 +13,7 @@ Clicking on a file tile in the tree map chart opens a modal with detailed inform
 
 In the example above, the selected file is in the bundle because:
 
-1. The file `src/index.js` imports `sonda` (or more precisely, its distribution file `sonda/dist/index.js`).
+1. The file `src/main.ts` imports `sonda` (or more precisely, its distribution file `sonda/dist/index.js`).
 2. Sonda imports the `@ampproject/remapping` package.
 3. That package imports the `@jridgewell/gen-mapping` package.
 4. That package imports the `@jridgewell/set-array` package.
