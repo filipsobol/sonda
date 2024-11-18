@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1
+
+### Patch Changes
+
+- d6e2d76: Add links to Sonda documentation
+
 ## 0.6.0
 
 ### Minor Changes
