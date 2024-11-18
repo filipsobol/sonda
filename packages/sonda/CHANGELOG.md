@@ -2,6 +2,8 @@
 
 ## 0.6.1
 
+Sonda has a new home. You can now visit [https://sonda.dev](https://sonda.dev) for installation and usage instructions, or try it out at [https://sonda.dev/demo](https://sonda.dev/demo).
+
 ### Patch Changes
 
 - d6e2d76: Add links to Sonda documentation
