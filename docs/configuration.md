@@ -67,6 +67,8 @@ By default, external dependencies that are bundled into a single file appear as 
 
 Enabling this option will increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
 
+See the [Detailed view](/features/detailed-view) section for more information.
+
 ### `sources`
 
 * **Type:** `boolean`
@@ -74,8 +76,10 @@ Enabling this option will increase the time needed to generate the report and re
 
 Determines whether to include the source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
 
-::: warning ⚠️ Be cautious when sharing the report
-Enabling this option will significantly increase the report size and include it in the **source code** of the assets. If you work with proprietary code, be cautious when sharing the report.
+See the [Used code](/features/used-code) section for more information.
+
+::: danger ⚠️ Be careful when sharing the report with the `sources` option enabled
+Enabling this option will significantly increase the size of the report and include it in the **source code** of the assets. If you are working with proprietary code, be careful who you share the report with.
 :::
 
 ### `gzip`
