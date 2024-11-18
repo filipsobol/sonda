@@ -21,6 +21,7 @@
     "url": "git+https://github.com/filipsobol/sonda.git",
     "directory": "packages/sonda"
   },
+  "homepage": "https://sonda.dev",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
