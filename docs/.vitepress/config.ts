@@ -6,6 +6,9 @@ export default defineConfig({
   title: 'Sonda',
   description: 'Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild',
   head: [ [ 'link', { rel: 'icon', href: '/sonda.ico' } ] ],
+  sitemap: {
+    hostname: 'https://sonda.dev'
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/sonda.jpg',
@@ -32,6 +35,12 @@ export default defineConfig({
           { text: 'Detailed view', link: '/features/detailed-view' },
           { text: 'Used code', link: '/features/used-code' },
           { text: 'Dependency warnings', link: '/features/dependency-warnings' },
+        ]
+      },
+      {
+        text: 'Blog',
+        items: [
+          { text: 'What makes Sonda accurate?', link: '/blog/what-makes-sonda-accurate' },
         ]
       }
     ],
