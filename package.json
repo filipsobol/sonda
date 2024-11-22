@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@changesets/cli": "^2.27.9",
+    "@changesets/cli": "^2.27.10",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-swc": "^0.4.0",
     "@types/node": "^22.9.0",
