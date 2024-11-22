@@ -142,8 +142,8 @@ importers:
   playground/esbuild:
     dependencies:
       '@ckeditor/ckeditor5-engine':
-        specifier: 43.0.0
-        version: 43.0.0
+        specifier: 43.3.1
+        version: 43.3.1
       ckeditor5:
         specifier: 43.3.1
         version: 43.3.1
@@ -161,8 +161,8 @@ importers:
   playground/rollup:
     dependencies:
       '@ckeditor/ckeditor5-engine':
-        specifier: 43.0.0
-        version: 43.0.0
+        specifier: 43.3.1
+        version: 43.3.1
       ckeditor5:
         specifier: 43.3.1
         version: 43.3.1
@@ -195,8 +195,8 @@ importers:
   playground/rspack:
     dependencies:
       '@ckeditor/ckeditor5-engine':
-        specifier: 43.0.0
-        version: 43.0.0
+        specifier: 43.3.1
+        version: 43.3.1
       ckeditor5:
         specifier: 43.3.1
         version: 43.3.1
@@ -214,8 +214,8 @@ importers:
   playground/vite:
     dependencies:
       '@ckeditor/ckeditor5-engine':
-        specifier: 43.0.0
-        version: 43.0.0
+        specifier: 43.3.1
+        version: 43.3.1
       ckeditor5:
         specifier: 43.3.1
         version: 43.3.1
@@ -236,8 +236,8 @@ importers:
   playground/webpack:
     dependencies:
       '@ckeditor/ckeditor5-engine':
-        specifier: 43.0.0
-        version: 43.0.0
+        specifier: 43.3.1
+        version: 43.3.1
       ckeditor5:
         specifier: 43.3.1
         version: 43.3.1
@@ -486,9 +486,6 @@ packages:
   '@ckeditor/ckeditor5-editor-multi-root@43.3.1':
     resolution: {integrity: sha512-HDgfTuotrHW91AZ+x+lumwo1tngRRZ87dnHT8kjSRFWAeXPSd2Kw986++Oj9K080+idZaYLF+IutAOqvCT32sw==}
 
-  '@ckeditor/ckeditor5-engine@43.0.0':
-    resolution: {integrity: sha512-0CcNbxxNjrmxytBPjh49ZELwyoE8lFSCFx+44CGRicY+GYeg45+sIUiyY0rWiBaxukfVajl1sYlctDVGezP9Bg==}
-
   '@ckeditor/ckeditor5-engine@43.3.1':
     resolution: {integrity: sha512-Fkv3ibQLDPVHFH0z4/+gA5wrkPVWOen+Cjv/NecNBeAszZUo+F2j9RwvQ1zHwtGb0RWj3+BWOPgo8jhSe7tFgA==}
 
@@ -593,9 +590,6 @@ packages:
 
   '@ckeditor/ckeditor5-upload@43.3.1':
     resolution: {integrity: sha512-uOEhCgqgiK4V/CnbnuwHU/NUOG4ioQE5KUUtVmRG2xjQKg5C1uIT2dig+wnKw8vOdwVTMD2hVt7/OC/whQuheQ==}
-
-  '@ckeditor/ckeditor5-utils@43.0.0':
-    resolution: {integrity: sha512-xupNfpUX3EGVVRycijYGOZXTaWEebHPwEMAfI5rduYAUAf63AbTpL4s7sakxFaHp1SS3bQWN+j1QiXh/TBhRAw==}
 
   '@ckeditor/ckeditor5-utils@43.3.1':
     resolution: {integrity: sha512-4CyM3AP+DcfuPuw+zceI3UTh3HcusnvFVeRPPw6j3Qe29/jadZYsdvkdo9KsDaiwgx0ctooKCuY9SfAcd/CZNQ==}
@@ -4995,11 +4989,6 @@ snapshots:
       ckeditor5: 43.3.1
       lodash-es: 4.17.21
 
-  '@ckeditor/ckeditor5-engine@43.0.0':
-    dependencies:
-      '@ckeditor/ckeditor5-utils': 43.0.0
-      lodash-es: 4.17.21
-
   '@ckeditor/ckeditor5-engine@43.3.1':
     dependencies:
       '@ckeditor/ckeditor5-utils': 43.3.1
@@ -5283,10 +5272,6 @@ snapshots:
     dependencies:
       '@ckeditor/ckeditor5-core': 43.3.1
       '@ckeditor/ckeditor5-utils': 43.3.1
-
-  '@ckeditor/ckeditor5-utils@43.0.0':
-    dependencies:
-      lodash-es: 4.17.21
 
   '@ckeditor/ckeditor5-utils@43.3.1':
     dependencies:
