@@ -9,7 +9,7 @@
     "preview": "rspack preview"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-engine": "43.0.0",
+    "@ckeditor/ckeditor5-engine": "43.3.1",
     "ckeditor5": "43.3.1"
   },
   "devDependencies": {
