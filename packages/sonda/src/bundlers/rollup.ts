@@ -1,10 +1,16 @@
 import { join, resolve, dirname } from 'path';
-import { normalizePath, cjsRegex, jsRegexp } from '../utils.js';
-import { generateReportFromAssets } from '../report/generate.js';
-import type { Options, ModuleFormat, JsonReport } from '../types.js';
+import {
+	generateReportFromAssets,
+	cjsRegex,
+	jsRegexp,
+	normalizePath,
+	type JsonReport,
+	type ModuleFormat,
+	type UserOptions
+} from '../index.js';
 import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
 
-export function SondaRollupPlugin( options: Partial<Options> = {} ): Plugin {
+export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ): Plugin {
 	let inputs: JsonReport[ 'inputs' ] = {};
 
 	return {

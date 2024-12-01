@@ -1,0 +1,20 @@
+{
+  "name": "playground-parcel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "parcel build index.html --reporter sonda/parcel --no-cache",
+    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-engine": "43.0.0",
+    "ckeditor5": "43.3.1"
+  },
+  "devDependencies": {
+    "@parcel/core": "^2.13.0",
+    "parcel": "^2.13.0",
+    "sonda": "workspace:^",
+    "unplugin-sourcemaps": "workspace:^"
+  }
+}

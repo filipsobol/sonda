@@ -23,7 +23,7 @@ These are the default options:
 You may override these options by passing a configuration object to the plugin, for example:
 
 ```js
-SondaRollupPlugin( {
+Sonda( {
   open: false
 } );
 ```

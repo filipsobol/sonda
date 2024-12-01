@@ -3,8 +3,8 @@ import { fileURLToPath } from 'url';
 import { dirname, extname, resolve } from 'path';
 import { loadCodeAndMap } from 'load-source-map';
 import { decode } from '@jridgewell/sourcemap-codec';
-import { mapSourceMap } from './sourcemap/map.js';
-import { getBytesPerSource, getSizes } from './sourcemap/bytes.js';
+import { mapSourceMap } from '../sourcemap/map.js';
+import { getBytesPerSource, getSizes } from '../sourcemap/bytes.js';
 import type {
   JsonReport,
   MaybeCodeMap,
@@ -12,14 +12,14 @@ import type {
   ReportOutput,
   CodeMap,
   ReportOutputInput,
-  Options
-} from './types.js';
-import { normalizePath } from './utils.js';
+  PluginOptions
+} from '../types.js';
+import { normalizePath } from '../utils.js';
 
 export function generateJsonReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>,
-  options: Options
+  options: PluginOptions
 ): JsonReport {
   const acceptedExtensions = [ '.js', '.css' ];
 
@@ -44,9 +44,10 @@ export function generateJsonReport(
 export function generateHtmlReport(
   assets: Array<string>,
   inputs: Record<string, ReportInput>,
-  options: Options
+  options: PluginOptions
 ): string {
   const json = generateJsonReport( assets, inputs, options );
+  // Replace with `import.meta.dirname` after upgrading to Node 20
   const __dirname = dirname( fileURLToPath( import.meta.url ) );
   const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
 
@@ -56,9 +57,9 @@ export function generateHtmlReport(
 function processAsset(
   asset: string,
   inputs: Record<string, ReportInput>,
-  options: Options
+  options: PluginOptions
 ): ReportOutput | void {
-  const maybeCodeMap = loadCodeAndMap( asset );
+  const maybeCodeMap = loadCodeAndMap( asset, options.sourcesPathNormalizer );
 
   if ( !hasCodeAndMap( maybeCodeMap ) ) {
     return;

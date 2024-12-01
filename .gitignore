@@ -14,3 +14,4 @@ docs/.vitepress/cache
 
 sonda-report.*
 *.backup
+.parcel-cache

@@ -1,8 +1,8 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import esbuild from 'esbuild';
-import { SondaEsbuildPlugin } from '../src/bundlers/esbuild';
-import type { Options } from '../src/types';
+import Sonda from '../src/bundlers/esbuild';
+import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {
 	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
@@ -19,7 +19,7 @@ describe( 'SondaEsbuildPlugin', () => {
 			bundle: true,
 			outfile: join( import.meta.dirname, 'dist/esbuild_1.js' ), 
 			sourcemap: true,
-			plugins: [ SondaEsbuildPlugin() ],
+			plugins: [ Sonda() ],
 			format: 'esm',
 		} );
 
@@ -61,7 +61,7 @@ describe( 'SondaEsbuildPlugin', () => {
 	} );
 
 	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<Options> = {
+		const options: Partial<PluginOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -71,7 +71,7 @@ describe( 'SondaEsbuildPlugin', () => {
 			bundle: true,
 			outfile: join( import.meta.dirname, 'dist/esbuild_2.js' ),
 			sourcemap: true,
-			plugins: [ SondaEsbuildPlugin( options ) ],
+			plugins: [ Sonda( options ) ],
 			format: 'esm',
 		} );
 

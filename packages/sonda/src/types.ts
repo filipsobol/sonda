@@ -1,6 +1,6 @@
 import type { DecodedSourceMap, EncodedSourceMap } from '@ampproject/remapping';
 
-export interface Options {
+export interface UserOptions {
   /**
    * Determines the output format of the report.
    *
@@ -77,10 +77,14 @@ export interface Options {
   brotli: boolean;
 }
 
+export interface PluginOptions extends UserOptions {
+  sourcesPathNormalizer: ( (path: string) => string ) | null;
+}
+
 export interface ReportInput {
   bytes: number;
   format: ModuleFormat;
-  imports: ReadonlyArray<string>;
+  imports: Array<string>;
   belongsTo: string | null;
 }
 

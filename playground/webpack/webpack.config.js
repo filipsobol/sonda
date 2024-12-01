@@ -1,4 +1,4 @@
-import { SondaWebpackPlugin } from 'sonda';
+import Sonda from 'sonda/webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
@@ -12,7 +12,7 @@ export default {
   plugins: [
     new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
-    new SondaWebpackPlugin( {
+    new Sonda( {
       gzip: true,
       brotli: true,
       detailed: true,

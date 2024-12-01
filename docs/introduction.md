@@ -40,11 +40,11 @@ Then register the bundler-specific plugin and enable the source maps. **Remember
 // vite.config.js
 
 import { defineConfig } from 'vite';
-import { SondaRollupPlugin } from 'sonda';
+import Sonda from 'sonda/vite';
 
 export default defineConfig( {
   plugins: [
-    SondaRollupPlugin(),
+    Sonda(),
   ],
   build: {
     sourcemap: true
@@ -56,26 +56,26 @@ export default defineConfig( {
 // rollup.config.js
 
 import { defineConfig } from 'rollup';
-import { SondaRollupPlugin } from 'sonda';
+import Sonda from 'sonda/rollup';
 
 export default defineConfig( {
   output: {
     sourcemap: true,
   },
   plugins: [
-    SondaRollupPlugin(),
+    Sonda(),
   ]
 } );
 ```
 
 ```js{2,5,7} [esbuild]
 import { build } from 'esbuild';
-import { SondaEsbuildPlugin } from 'sonda';
+import Sonda from 'sonda/esbuild';
 
 build( {
   sourcemap: true,
   plugins: [
-    SondaEsbuildPlugin()
+    Sonda()
   ]
 } );
 ```
@@ -83,12 +83,12 @@ build( {
 ```js{3,6,8} [webpack ⚠️]
 // webpack.config.js
 
-const { SondaWebpackPlugin } = require( 'sonda' );
+const Sonda = require( 'sonda/webpack' );
 
 module.exports = {
   devtool: 'source-map',
   plugins: [
-    new SondaWebpackPlugin(),
+    new Sonda(),
   ],
 };
 ```
@@ -96,12 +96,12 @@ module.exports = {
 ```js{3,6,8} [Rspack ⚠️]
 // rspack.config.js
 
-import { SondaWebpackPlugin } from 'sonda';
+import Sonda from 'sonda/rspack';
 
 export default {
   devtool: 'source-map',
   plugins: [
-    new SondaWebpackPlugin(),
+    new Sonda(),
   ],
 };
 ```

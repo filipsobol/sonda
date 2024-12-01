@@ -1,5 +1,5 @@
 import { build } from 'esbuild';
-import { SondaEsbuildPlugin } from 'sonda';
+import Sonda from 'sonda/esbuild';
 
 build( {
 	entryPoints: [
@@ -11,8 +11,9 @@ build( {
 	sourcemap: true,
 	minify: true,
 	metafile: true,
+	logLevel: 'info',
 	plugins: [
-		SondaEsbuildPlugin( {
+		Sonda( {
 			gzip: true,
 			brotli: true,
 			detailed: true,

@@ -7,12 +7,14 @@ const mocks = vi.hoisted( () => ( {
 	generateHtmlReport: vi.fn(),
 	generateJsonReport: vi.fn(),
 	writeFileSync: vi.fn(),
+	readFileSync: vi.fn(),
 	existsSync: vi.fn(),
 	mkdirSync: vi.fn(),
 } ) );
 
 vi.mock( 'fs', () => ( {
 	writeFileSync: mocks.writeFileSync,
+	readFileSync: mocks.readFileSync,
 	existsSync: mocks.existsSync,
 	mkdirSync: mocks.mkdirSync,
 } ) );
@@ -21,7 +23,7 @@ vi.mock( 'open', () => ( {
 	default: mocks.open,
 } ) );
 
-vi.mock( '../src/report.js', () => ( {
+vi.mock( '../src/report/formats.js', () => ( {
 	generateHtmlReport: mocks.generateHtmlReport,
 	generateJsonReport: mocks.generateJsonReport,
 } ) );

@@ -1,5 +1,5 @@
 import { defineConfig } from '@rspack/cli';
-import { SondaWebpackPlugin } from 'sonda';
+import Sonda from 'sonda/rspack';
 
 export default defineConfig({
 	entry: './src/index.js',
@@ -9,7 +9,7 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new SondaWebpackPlugin( {
+		new Sonda( {
 			gzip: true,
 			brotli: true,
 			detailed: true,

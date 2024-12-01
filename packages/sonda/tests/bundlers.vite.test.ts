@@ -1,8 +1,8 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import { build } from 'vite';
-import { SondaRollupPlugin } from '../src/bundlers/rollup';
-import type { Options } from '../src/types';
+import Sonda from '../src/bundlers/rollup';
+import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {
 	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
@@ -27,7 +27,7 @@ describe( 'SondaRollupPlugin in Vite', () => {
 					},
 				},
 			},
-			plugins: [ SondaRollupPlugin() ],
+			plugins: [ Sonda() ],
 		} );
 
 		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
@@ -54,7 +54,7 @@ describe( 'SondaRollupPlugin in Vite', () => {
 	} );
 
 	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<Options> = {
+		const options: Partial<PluginOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -72,7 +72,7 @@ describe( 'SondaRollupPlugin in Vite', () => {
 					},
 				},
 			},
-			plugins: [ SondaRollupPlugin( options ) ],
+			plugins: [ Sonda( options ) ],
 		} );
 
 		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(

@@ -37,6 +37,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		});
 
@@ -49,6 +50,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		} );
 
@@ -61,6 +63,7 @@ describe('utils.ts', () => {
 				sources: true,
 				gzip: true,
 				brotli: true,
+				sourcesPathNormalizer: path => path,
 			} ) ).toEqual( {
 				format: 'json',
 				filename: __dirname + '/sonda-report.json',
@@ -69,6 +72,7 @@ describe('utils.ts', () => {
 				sources: true,
 				gzip: true,
 				brotli: true,
+				sourcesPathNormalizer: expect.any( Function ),
 			} );
 		} );
 
@@ -81,6 +85,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		} );
 
@@ -93,6 +98,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		} );
 
@@ -105,6 +111,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		} );
 
@@ -126,6 +133,7 @@ describe('utils.ts', () => {
 				sources: false,
 				gzip: false,
 				brotli: false,
+				sourcesPathNormalizer: null,
 			} );
 		} );
 	} );

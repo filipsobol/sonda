@@ -1,27 +1,28 @@
 import { join, relative, win32, posix, extname, isAbsolute, format, parse } from 'path';
-import type { Options } from './types';
+import type { PluginOptions } from './types.js';
 
 export const esmRegex: RegExp = /\.m[tj]sx?$/;
 export const cjsRegex: RegExp = /\.c[tj]sx?$/;
 export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
 
-export function normalizeOptions( options?: Partial<Options> ): Options {
+export function normalizeOptions( options?: Partial<PluginOptions> ): PluginOptions {
 	const format = options?.format
-		|| options?.filename?.split( '.' ).at( -1 ) as Options['format']
+		|| options?.filename?.split( '.' ).at( -1 ) as PluginOptions['format']
 		|| 'html';
 
-	const defaultOptions: Options = {
+	const defaultOptions: PluginOptions = {
 		format,
 		filename: 'sonda-report.' + format,
 		open: true,
 		detailed: false,
 		sources: false,
 		gzip: false,
-		brotli: false,
+		brotli: false, 
+		sourcesPathNormalizer: null,
 	};
 
 	// Merge user options with the defaults
-	const normalizedOptions = Object.assign( {}, defaultOptions, options ) satisfies Options;
+	const normalizedOptions = Object.assign( {}, defaultOptions, options ) satisfies PluginOptions;
 
 	normalizedOptions.filename = normalizeOutputPath( normalizedOptions );
 
@@ -39,7 +40,7 @@ export function normalizePath( pathToNormalize: string ): string {
 	return relativized.replaceAll( win32.sep, posix.sep );
 }
 
-function normalizeOutputPath( options: Options ): string {
+function normalizeOutputPath( options: PluginOptions ): string {
 	let path = options.filename;
 	const expectedExtension = '.' + options.format;
 

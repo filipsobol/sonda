@@ -1,8 +1,8 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import webpack from 'webpack';
-import { SondaWebpackPlugin } from '../src/bundlers/webpack';
-import type { Options } from '../src/types';
+import Sonda from '../src/bundlers/webpack';
+import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {
 	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
@@ -33,7 +33,7 @@ describe( 'SondaWebpackPlugin', () => {
 				path: distDir,
 				filename: 'webpack_1.js',
 			},
-			plugins: [ new SondaWebpackPlugin() ],
+			plugins: [ new Sonda() ],
 			devtool: 'source-map',
 		} );
 
@@ -62,7 +62,7 @@ describe( 'SondaWebpackPlugin', () => {
 	} );
 
 	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<Options> = {
+		const options: Partial<PluginOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -73,7 +73,7 @@ describe( 'SondaWebpackPlugin', () => {
 				path: distDir,
 				filename: 'webpack_2.js',
 			},
-			plugins: [ new SondaWebpackPlugin( options ) ],
+			plugins: [ new Sonda( options ) ],
 			devtool: 'source-map',
 		} );
 

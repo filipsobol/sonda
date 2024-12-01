@@ -1,10 +1,9 @@
 import { resolve } from 'path';
-import { addSourcesToInputs } from '../sourcemap/map';
-import { generateReportFromAssets } from '../report/generate';
+import { generateReportFromAssets, addSourcesToInputs } from '../index.js';
 import type { Plugin } from 'esbuild';
-import type { Options, JsonReport } from '../types';
+import type { JsonReport, UserOptions } from '../types.js';
 
-export function SondaEsbuildPlugin( options: Partial<Options> = {} ): Plugin {
+export default function SondaEsbuildPlugin( options: Partial<UserOptions> = {} ): Plugin {
 	return {
 		name: 'sonda',
 		setup( build ) {
@@ -31,9 +30,9 @@ export function SondaEsbuildPlugin( options: Partial<Options> = {} ): Plugin {
 
 						/**
 						 * Because esbuild already reads the existing source maps, there may be
-						 * cases where some report "outputs" include "inputs" don't exist in the
-						 * main "inputs" object. To avoid this, we parse each esbuild input and
-						 * add its sources to the "inputs" object.
+						 * cases where some report "outputs" include "inputs" that don't exist
+						 * in the main "inputs" object. To avoid this, we parse each esbuild
+						 * input and add its sources to the "inputs" object.
 						 */
 						addSourcesToInputs(
 							resolve( cwd, path ),

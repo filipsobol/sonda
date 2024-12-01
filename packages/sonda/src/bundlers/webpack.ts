@@ -1,13 +1,18 @@
 import { join } from 'path';
-import { normalizePath, jsRegexp } from '../utils';
-import { generateReportFromAssets } from '../report/generate';
+import {
+	generateReportFromAssets,
+	jsRegexp,
+	normalizePath,
+	type JsonReport,
+	type ModuleFormat,
+	type UserOptions
+} from '../index.js';
 import type { Compiler, StatsModule } from 'webpack';
-import type { Options, ModuleFormat, JsonReport } from '../types';
 
-export class SondaWebpackPlugin {
-	options: Partial<Options>;
+export default class SondaWebpackPlugin {
+	options: Partial<UserOptions>;
 
-	constructor ( options: Partial<Options> = {} ) {
+	constructor ( options: Partial<UserOptions> = {} ) {
 		this.options = options;
 	}
 
