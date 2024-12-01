@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path';
-import type { Config, Reporter as ReporterOpts, Transformer as TransformerOpts } from '@parcel/types';
+import type { Transformer as TransformerOpts } from '@parcel/types';
 import {
   generateReportFromAssets,
   normalizePath,
@@ -16,16 +16,12 @@ class Transformer {
 }
 
 const SondaParcelPlugin: Transformer = new Transformer( {
-  async loadConfig( { config, logger } ): Promise<UserOptions> {
+  async loadConfig( { config } ): Promise<UserOptions> {
     const conf = await config.getConfig<UserOptions>( [
-      resolve( '.markedrc' ),
-      resolve( '.markedrc.js' ),
-      resolve( 'marked.config.js' ),
+      resolve( '.sondarc' ),
+      resolve( '.sondarc.js' ),
+      resolve( 'sonda.config.js' ),
     ], {} );
-
-    logger.warn( {
-      message: 'This is a warning',
-    } );
 
     return conf!.contents;
   },
