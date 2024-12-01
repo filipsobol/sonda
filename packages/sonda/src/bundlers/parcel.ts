@@ -8,14 +8,14 @@ import {
   type UserOptions
 } from '../index.js';
 
-class Transformer {
+class Reporter {
   constructor ( opts: ReporterOpts ) {
     // @ts-ignore
     this[ Symbol.for( 'parcel-plugin-config' ) ] = opts;
   }
 }
 
-const SondaParcelPlugin: Transformer = new Transformer( {
+const SondaParcelPlugin: Reporter = new Reporter( {
   // @ts-ignore
   async loadConfig( { config } ): Promise<UserOptions> {
   // @ts-ignore
