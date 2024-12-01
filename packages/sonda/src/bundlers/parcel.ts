@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path';
-import type { Transformer as TransformerOpts } from '@parcel/types';
+import type { Reporter as ReporterOpts } from '@parcel/types';
 import {
   generateReportFromAssets,
   normalizePath,
@@ -9,14 +9,16 @@ import {
 } from '../index.js';
 
 class Transformer {
-  constructor ( opts: TransformerOpts<UserOptions> ) {
+  constructor ( opts: ReporterOpts ) {
     // @ts-ignore
     this[ Symbol.for( 'parcel-plugin-config' ) ] = opts;
   }
 }
 
 const SondaParcelPlugin: Transformer = new Transformer( {
+  // @ts-ignore
   async loadConfig( { config } ): Promise<UserOptions> {
+  // @ts-ignore
     const conf = await config.getConfig<UserOptions>( [
       resolve( '.sondarc' ),
       resolve( '.sondarc.js' ),
@@ -25,8 +27,6 @@ const SondaParcelPlugin: Transformer = new Transformer( {
 
     return conf!.contents;
   },
-
-  // @ts-ignore
   async report( { event, options } ) {
     if ( event.type !== 'buildSuccess' ) {
       return;
@@ -43,7 +43,7 @@ const SondaParcelPlugin: Transformer = new Transformer( {
         const input: ReportInput = {
           bytes: asset.stats.size,
 
-          // TODO: 'unknown'
+          // TODO: What abount 'unknown'?
           format: asset.meta.hasCJSExports ? 'cjs' : 'esm',
           imports: [],
           belongsTo: null,
@@ -61,12 +61,10 @@ const SondaParcelPlugin: Transformer = new Transformer( {
       } );
     }
 
-    // TODO: Weird paths in `sources` in source maps
-
     return generateReportFromAssets(
       assets,
       inputs,
-      // TODO
+      // TODO: Use user provided options
       {
         format: 'html',
         detailed: true,
