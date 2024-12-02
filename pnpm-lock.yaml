@@ -48,8 +48,8 @@ importers:
   packages/html-report:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^4.0.1
-        version: 4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
+        specifier: ^5.0.1
+        version: 5.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
@@ -244,13 +244,13 @@ importers:
     devDependencies:
       '@types/webpack':
         specifier: ^5.28.5
-        version: 5.28.5(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))
+        version: 5.28.5(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(@rspack/core@1.1.3(@swc/helpers@0.5.13))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
+        version: 7.1.2(@rspack/core@1.1.3(@swc/helpers@0.5.13))(webpack@5.96.1)
       mini-css-extract-plugin:
         specifier: ^2.9.2
-        version: 2.9.2(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
+        version: 2.9.2(webpack@5.96.1)
       sonda:
         specifier: workspace:^
         version: link:../../packages/sonda
@@ -1394,20 +1394,20 @@ packages:
   '@shikijs/vscode-textmate@9.3.0':
     resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
 
-  '@sveltejs/vite-plugin-svelte-inspector@3.0.1':
-    resolution: {integrity: sha512-2CKypmj1sM4GE7HjllT7UKmo4Q6L5xFRd7VMGEWhYnZ+wc6AUVU01IBd7yUi6WnFndEwWoMNOd6e8UjoN0nbvQ==}
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1':
+    resolution: {integrity: sha512-J/Nmb2Q2y7mck2hyCX4ckVHcR5tu2J+MtBEQqpDrrgELZ2uvraQcK/ioCV61AqkdXFgriksOKIceDcQmqnGhVw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22}
     peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^4.0.0-next.0||^4.0.0
-      svelte: ^5.0.0-next.96 || ^5.0.0
-      vite: ^5.0.0
+      '@sveltejs/vite-plugin-svelte': ^5.0.0
+      svelte: ^5.0.0
+      vite: ^6.0.0
 
-  '@sveltejs/vite-plugin-svelte@4.0.1':
-    resolution: {integrity: sha512-prXoAE/GleD2C4pKgHa9vkdjpzdYwCSw/kmjw6adIyu0vk5YKCfqIztkLg10m+kOYnzZu3bb0NaPTxlWre2a9Q==}
+  '@sveltejs/vite-plugin-svelte@5.0.1':
+    resolution: {integrity: sha512-D5l5+STmywGoLST07T9mrqqFFU+xgv5fqyTWM+VbxTvQ6jujNn4h3lQNCvlwVYs4Erov8i0K5Rwr3LQtmBYmBw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22}
     peerDependencies:
-      svelte: ^5.0.0-next.96 || ^5.0.0
-      vite: ^5.0.0
+      svelte: ^5.0.0
+      vite: ^6.0.0
 
   '@swc/core-darwin-arm64@1.7.26':
     resolution: {integrity: sha512-FF3CRYTg6a7ZVW4yT9mesxoVVZTrcSWtmZhxKCYJX9brH4CS/7PRPjAKNk6kzWgWuRoglP7hkjQcd6EpMcZEAw==}
@@ -3087,6 +3087,9 @@ packages:
 
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
+
+  magic-string@0.30.14:
+    resolution: {integrity: sha512-5c99P1WKTed11ZC0HMJOj6CDIue6F8ySu+bJL+85q1zBEIY8IklrJ1eiKC2NDRh3Ct3FcvmJPyQHb9erXMTJNw==}
 
   magicast@0.3.5:
     resolution: {integrity: sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ==}
@@ -6022,22 +6025,22 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.3.0': {}
 
-  '@sveltejs/vite-plugin-svelte-inspector@3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
       debug: 4.3.7
       svelte: 5.2.7
       vite: 5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
       debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       svelte: 5.2.7
       vite: 5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)
       vitefu: 1.0.3(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0))
@@ -6235,7 +6238,7 @@ snapshots:
 
   '@types/web-bluetooth@0.0.20': {}
 
-  '@types/webpack@5.28.5(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))':
+  '@types/webpack@5.28.5(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)':
     dependencies:
       '@types/node': 22.9.0
       tapable: 2.2.1
@@ -6286,7 +6289,7 @@ snapshots:
     dependencies:
       '@vitest/spy': 2.1.5
       estree-walker: 3.0.3
-      magic-string: 0.30.12
+      magic-string: 0.30.14
     optionalDependencies:
       vite: 5.4.11(@types/node@22.9.0)(lightningcss@1.27.0)(terser@5.36.0)
 
@@ -6302,7 +6305,7 @@ snapshots:
   '@vitest/snapshot@2.1.5':
     dependencies:
       '@vitest/pretty-format': 2.1.5
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       pathe: 1.1.2
 
   '@vitest/spy@2.1.5':
@@ -6336,7 +6339,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.13
       '@vue/shared': 3.5.13
       estree-walker: 2.0.2
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       postcss: 8.4.49
       source-map-js: 1.2.1
 
@@ -6493,17 +6496,17 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1)
@@ -6930,7 +6933,7 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
-  css-loader@7.1.2(@rspack/core@1.1.3(@swc/helpers@0.5.13))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)):
+  css-loader@7.1.2(@rspack/core@1.1.3(@swc/helpers@0.5.13))(webpack@5.96.1):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.49)
       postcss: 8.4.49
@@ -7832,6 +7835,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  magic-string@0.30.14:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+
   magicast@0.3.5:
     dependencies:
       '@babel/parser': 7.26.2
@@ -7913,7 +7920,7 @@ snapshots:
 
   mimic-fn@2.1.0: {}
 
-  mini-css-extract-plugin@2.9.2(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)):
+  mini-css-extract-plugin@2.9.2(webpack@5.96.1):
     dependencies:
       schema-utils: 4.2.0
       tapable: 2.2.1
@@ -8963,17 +8970,6 @@ snapshots:
       '@swc/core': 1.7.26(@swc/helpers@0.5.13)
       esbuild: 0.24.0
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.36.0
-      webpack: 5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
-    optionalDependencies:
-      '@swc/core': 1.7.26(@swc/helpers@0.5.13)
-
   terser-webpack-plugin@5.3.10(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -8985,6 +8981,17 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.26(@swc/helpers@0.5.13)
     optional: true
+
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack@5.96.1):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.36.0
+      webpack: 5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4)
+    optionalDependencies:
+      '@swc/core': 1.7.26(@swc/helpers@0.5.13)
 
   terser@5.36.0:
     dependencies:
@@ -9351,9 +9358,9 @@ snapshots:
   webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.10.2)(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.5
@@ -9511,7 +9518,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack@5.96.1(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack-cli@5.1.4))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26(@swc/helpers@0.5.13))(webpack@5.96.1)
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:

@@ -11,7 +11,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^4.0.1",
+    "@sveltejs/vite-plugin-svelte": "^5.0.1",
     "@tsconfig/svelte": "^5.0.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
