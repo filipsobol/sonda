@@ -54,7 +54,7 @@
     "@vitest/coverage-v8": "^2.1.5",
     "esbuild": "^0.24.0",
     "load-source-map": "workspace:^",
-    "rollup": "^4.27.4",
+    "rollup": "^4.28.1",
     "vite": "^5.4.11",
     "vitest": "^2.1.5",
     "webpack": "^5.96.1"
