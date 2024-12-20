@@ -21,7 +21,7 @@ export function generateJsonReport(
   inputs: Record<string, ReportInput>,
   options: PluginOptions
 ): JsonReport {
-  const acceptedExtensions = [ '.js', '.css' ];
+  const acceptedExtensions = [ '.js', '.mjs', '.cjs', '.css' ];
 
   const outputs = assets
     .filter( asset => acceptedExtensions.includes( extname( asset ) ) )

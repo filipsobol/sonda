@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.2
+
+### Patch Changes
+
+- ff135df: Add `mjs` and `cjs` as accepted asset extensions
+
 ## 0.6.1
 
 Sonda has a new home. You can now visit [https://sonda.dev](https://sonda.dev) for installation and usage instructions, or try it out at [https://sonda.dev/demo](https://sonda.dev/demo).
