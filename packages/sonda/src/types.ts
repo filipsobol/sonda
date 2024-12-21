@@ -84,6 +84,15 @@ export interface UserOptions {
   brotli: boolean;
 }
 
+export interface FrameworkUserOptions extends UserOptions {
+  /**
+   * Determines whether the plugin should generate report for the server build.
+   * 
+   * @default false
+   */
+  server: boolean;
+}
+
 export interface PluginOptions extends UserOptions {
   sourcesPathNormalizer: ( (path: string) => string ) | null;
 }

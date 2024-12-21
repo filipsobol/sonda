@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing webpack bundles with Sonda
+# Visualizing webpack bundles with Sonda
 
 To analyze and visualize your webpack bundles, you need to install the Sonda npm package and add the Sonda plugin to your webpack configuration.
 

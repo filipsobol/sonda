@@ -1,18 +1,9 @@
 import SondaWebpack from './webpack';
 import type { NextConfig } from 'next';
-import type { UserOptions } from '../types.js';
+import type { FrameworkUserOptions } from '../types.js';
 
-interface NextUserOptions extends UserOptions {
-  /**
-   * Determines whether the plugin should generate report for the server build.
-   * 
-   * @default false
-   */
-  server: boolean;
-}
-
-export default function SondaNextPlugin( options: Partial<NextUserOptions> = {} ) {
-  return function withSondaAnalyzer( nextConfig: NextConfig = {} ): NextConfig {
+export default function SondaNextPlugin( options: Partial<FrameworkUserOptions> = {} ) {
+  return function Sonda( nextConfig: NextConfig = {} ): NextConfig {
     if ( options.enabled === false ) {
       return nextConfig;
     }
@@ -45,7 +36,7 @@ export default function SondaNextPlugin( options: Partial<NextUserOptions> = {} 
         const sondaOptions = Object.assign( {}, options );
 
         // Replace the "[env]" token with the current build type
-        sondaOptions.filename = sondaOptions.filename!.replaceAll( '[env]', env );
+        sondaOptions.filename = sondaOptions.filename!.replace( '[env]', env );
 
         // Add the Sonda plugin to the Webpack configuration
         config.plugins.push(

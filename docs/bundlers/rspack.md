@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing Rspack bundles with Sonda
+# Visualizing Rspack bundles with Sonda
 
 To analyze and visualize your Rspack bundles, you need to install the Sonda npm package and add the Sonda plugin to your Rspack configuration.
 

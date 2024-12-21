@@ -11,6 +11,7 @@ const sharedOptions = defineConfig( {
 		'index': 'src/index.ts',
 		'entrypoints/esbuild': 'src/entrypoints/esbuild.ts',
 		'entrypoints/next': 'src/entrypoints/next.ts',
+		'entrypoints/nuxt': 'src/entrypoints/nuxt.ts',
 		'entrypoints/parcel': 'src/entrypoints/parcel.ts',
 		'entrypoints/rollup': 'src/entrypoints/rollup.ts',
 		'entrypoints/webpack': 'src/entrypoints/webpack.ts',

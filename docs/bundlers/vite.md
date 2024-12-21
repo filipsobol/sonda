@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing Vite bundles with Sonda
+# Visualizing Vite bundles with Sonda
 
 To analyze and visualize your Vite bundles, you need to install the Sonda npm package and add the Sonda plugin to your Vite configuration.
 

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing Rollup bundles with Sonda
+# Visualizing Rollup bundles with Sonda
 
 To analyze and visualize your Rollup bundles, you need to install the Sonda npm package and add the Sonda plugin to your Rollup configuration.
 

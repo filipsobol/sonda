@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing Next.js bundles with Sonda
+# Visualizing Next.js bundles with Sonda
 
 To analyze and visualize your Next.js bundles, you need to install the Sonda npm package and add the Sonda plugin to your Next.js configuration.
 
@@ -41,7 +41,7 @@ The steps above are enough to generate the first report. However, if you do not 
 
 #### Generating a report for the server bundle
 
-On top of the options listed on the [configuration](/configuration) page, there is one additional option specific to the Next.js integration, which is `server`. This option allows Sonda to generate a report for the server bundle as well and it requires the `serverSourceMaps` option to be enabled in the Next.js configuration.
+On top of the options listed on the [configuration](/configuration) page, there is one additional option specific to the Next.js integration, which is `server`. This option allows Sonda to generate a report for the server bundle as well and it requires the `experimental.serverSourceMaps` option to be enabled in the Next.js configuration.
 
 ```js{5,11}
 import Sonda from 'sonda/next';

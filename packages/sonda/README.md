@@ -13,6 +13,7 @@ Sonda works with the following tools:
   * Rspack
 * **Frameworks**
   * Next.js
+  * Nuxt
 
 ## Installation
 

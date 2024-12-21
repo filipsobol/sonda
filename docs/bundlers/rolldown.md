@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing Rolldown bundles with Sonda
+# Visualizing Rolldown bundles with Sonda
 
 To analyze and visualize your Rolldown bundles, you need to install the Sonda npm package and add the Sonda plugin to your Rolldown configuration.
 

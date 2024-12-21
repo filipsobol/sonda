@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Analyzing esbuild bundles with Sonda
+# Visualizing esbuild bundles with Sonda
 
 To analyze and visualize your esbuild bundles, you need to install the Sonda npm package and add the Sonda plugin to your esbuild configuration.
 

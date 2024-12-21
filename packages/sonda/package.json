@@ -39,6 +39,11 @@
       "import": "./dist/entrypoints/next.mjs",
       "require": "./dist/entrypoints/next.cjs"
     },
+    "./nuxt": {
+      "types": "./dist/entrypoints/nuxt.d.ts",
+      "import": "./dist/entrypoints/nuxt.mjs",
+      "require": "./dist/entrypoints/nuxt.cjs"
+    },
     "./rollup": {
       "types": "./dist/entrypoints/rollup.d.ts",
       "import": "./dist/entrypoints/rollup.mjs",
@@ -86,6 +91,7 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
+    "@nuxt/schema": "^3.14.1592",
     "@parcel/types": "^2.13.3",
     "@rspack/core": "^1.1.8",
     "@vitest/coverage-v8": "^2.1.8",

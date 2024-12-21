@@ -11,6 +11,7 @@
     "html-report",
     "playground-esbuild",
     "playground-nextjs",
+    "playground-nuxt",
     "playground-parcel",
     "playground-rollup",
     "playground-rolldown",
