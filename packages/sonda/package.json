@@ -86,14 +86,14 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
-    "@parcel/types": "^2.13.0",
-    "@rspack/core": "^1.1.6",
+    "@parcel/types": "^2.13.3",
+    "@rspack/core": "^1.1.8",
     "@vitest/coverage-v8": "^2.1.8",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.24.2",
     "load-source-map": "workspace:^",
     "next": "15.1.2",
-    "rollup": "^4.28.1",
-    "vite": "^6.0.3",
+    "rollup": "^4.29.1",
+    "vite": "^6.0.5",
     "vitest": "^2.1.8",
     "webpack": "^5.97.1"
   }
