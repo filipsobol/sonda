@@ -13,11 +13,6 @@ build( {
 	metafile: true,
 	logLevel: 'info',
 	plugins: [
-		Sonda( {
-			gzip: true,
-			brotli: true,
-			detailed: true,
-			sources: true,
-		} )
+		Sonda()
 	]
 } );

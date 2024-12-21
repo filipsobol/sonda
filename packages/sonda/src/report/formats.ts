@@ -70,7 +70,7 @@ function processAsset(
     ? mapSourceMap( map, dirname( asset ), inputs )
     : { ...map, mappings: decode( map.mappings ) };
 
-  mapped.sources = mapped.sources.map( source => normalizePath( source! ) );
+  mapped.sources = mapped.sources.map( source => source && normalizePath( source ) );
 
   const assetSizes = getSizes( code, options );
   const bytes = getBytesPerSource( code, mapped, assetSizes, options );

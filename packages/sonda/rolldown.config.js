@@ -9,10 +9,11 @@ await rm( 'dist', { recursive: true, force: true } );
 const sharedOptions = defineConfig( {
 	input: {
 		'index': 'src/index.ts',
-		'bundlers/esbuild': 'src/bundlers/esbuild.ts',
-		'bundlers/parcel': 'src/bundlers/parcel.ts',
-		'bundlers/rollup': 'src/bundlers/rollup.ts',
-		'bundlers/webpack': 'src/bundlers/webpack.ts',
+		'entrypoints/esbuild': 'src/entrypoints/esbuild.ts',
+		'entrypoints/next': 'src/entrypoints/next.ts',
+		'entrypoints/parcel': 'src/entrypoints/parcel.ts',
+		'entrypoints/rollup': 'src/entrypoints/rollup.ts',
+		'entrypoints/webpack': 'src/entrypoints/webpack.ts',
 	},
 	external: [
 		...builtinModules,

@@ -3,8 +3,7 @@
   "version": "0.6.2",
   "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild",
   "keywords": [
-    "bundle analyzer",
-    "bundle visualizer",
+    "bundle",
     "analyzer",
     "visualizer",
     "source-map",
@@ -12,7 +11,8 @@
     "rollup",
     "webpack",
     "rspack",
-    "esbuild"
+    "esbuild",
+    "nextjs"
   ],
   "license": "MIT",
   "type": "module",
@@ -29,34 +29,34 @@
       "require": "./dist/index.cjs"
     },
     "./esbuild": {
-      "types": "./dist/bundlers/esbuild.d.ts",
-      "import": "./dist/bundlers/esbuild.mjs",
-      "require": "./dist/bundlers/esbuild.cjs"
+      "types": "./dist/entrypoints/esbuild.d.ts",
+      "import": "./dist/entrypoints/esbuild.mjs",
+      "require": "./dist/entrypoints/esbuild.cjs"
     },
-    "./parcel": {
-      "types": "./dist/bundlers/parcel.d.ts",
-      "import": "./dist/bundlers/parcel.mjs",
-      "require": "./dist/bundlers/parcel.cjs"
+    "./next": {
+      "types": "./dist/entrypoints/next.d.ts",
+      "import": "./dist/entrypoints/next.mjs",
+      "require": "./dist/entrypoints/next.cjs"
     },
     "./rollup": {
-      "types": "./dist/bundlers/rollup.d.ts",
-      "import": "./dist/bundlers/rollup.mjs",
-      "require": "./dist/bundlers/rollup.cjs"
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
     },
     "./rspack": {
-      "types": "./dist/bundlers/webpack.d.ts",
-      "import": "./dist/bundlers/webpack.mjs",
-      "require": "./dist/bundlers/webpack.cjs"
+      "types": "./dist/entrypoints/webpack.d.ts",
+      "import": "./dist/entrypoints/webpack.mjs",
+      "require": "./dist/entrypoints/webpack.cjs"
     },
     "./vite": {
-      "types": "./dist/bundlers/rollup.d.ts",
-      "import": "./dist/bundlers/rollup.mjs",
-      "require": "./dist/bundlers/rollup.cjs"
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
     },
     "./webpack": {
-      "types": "./dist/bundlers/webpack.d.ts",
-      "import": "./dist/bundlers/webpack.mjs",
-      "require": "./dist/bundlers/webpack.cjs"
+      "types": "./dist/entrypoints/webpack.d.ts",
+      "import": "./dist/entrypoints/webpack.mjs",
+      "require": "./dist/entrypoints/webpack.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -85,6 +85,7 @@
     "@vitest/coverage-v8": "^2.1.8",
     "esbuild": "^0.24.0",
     "load-source-map": "workspace:^",
+    "next": "15.1.2",
     "rollup": "^4.28.1",
     "vite": "^6.0.3",
     "vitest": "^2.1.8",

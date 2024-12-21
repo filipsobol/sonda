@@ -1,7 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import webpack from 'webpack';
-import Sonda from '../src/bundlers/webpack';
+import Sonda from '../src/entrypoints/webpack';
 import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {

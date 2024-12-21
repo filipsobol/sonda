@@ -38,11 +38,6 @@ export default defineConfig( {
 		// 	gzipSize: true,
 		// 	brotliSize: true
 		// } ),
-		Sonda({
-			gzip: true,
-			brotli: true,
-			detailed: true,
-			sources: true
-		}),
+		Sonda(),
 	]
 } );

@@ -9,12 +9,7 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new Sonda( {
-			gzip: true,
-			brotli: true,
-			detailed: true,
-			sources: true,
-		} )
+		new Sonda()
 	],
 	experiments: {
 		css: true

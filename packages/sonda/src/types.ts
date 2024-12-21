@@ -2,6 +2,13 @@ import type { DecodedSourceMap, EncodedSourceMap } from '@ampproject/remapping';
 
 export interface UserOptions {
   /**
+   * Determines whether to enable the plugin.
+   *
+   * @default true
+   */
+  enabled: boolean;
+
+  /**
    * Determines the output format of the report.
    *
    * @default 'html'

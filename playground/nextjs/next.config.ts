@@ -1,26 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const withSondaAnalyzer = require( 'sonda/next' )();
+
+const config: NextConfig = {
   productionBrowserSourceMaps: true,
-  webpack: ( config, options ) => {
-    const { SondaWebpackPlugin } = require( 'sonda' );
-
-    if ( options.isServer ) {
-      config.devtool = 'source-map';
-    }
-
-    config.plugins.push(
-      new SondaWebpackPlugin( {
-        sources: true,
-        detailed: true,
-        filename: options.nextRuntime
-          ? `sonda-report-runtime-${ options.nextRuntime }.html`
-          : 'sonda-report-client.html',
-      } )
-    );
-
-    return config;
-  },
+  experimental: {
+    serverSourceMaps: true,
+  }
 };
 
-module.exports = nextConfig;
+module.exports = withSondaAnalyzer( config );

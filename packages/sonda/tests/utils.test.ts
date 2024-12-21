@@ -30,6 +30,7 @@ describe('utils.ts', () => {
 	describe( 'normalizeOptions', () => {
 		it( 'should return default options when no options are provided', () => {
 			expect( normalizeOptions() ).toEqual( {
+				enabled: true,
 				format: 'html',
 				filename: process.cwd() + '/sonda-report.html',
 				open: true,
@@ -43,6 +44,7 @@ describe('utils.ts', () => {
 
 		it( 'merges defaults with provided values', () => {
 			expect( normalizeOptions( { open: false } ) ).toEqual( {
+				enabled: true,
 				format: 'html',
 				filename: process.cwd() + '/sonda-report.html',
 				open: false,
@@ -56,6 +58,7 @@ describe('utils.ts', () => {
 
 		it( 'allows overriding all options', () => {
 			expect( normalizeOptions( {
+				enabled: false,
 				format: 'json',
 				filename: __dirname + '/sonda-report.json',
 				open: false,
@@ -65,6 +68,7 @@ describe('utils.ts', () => {
 				brotli: true,
 				sourcesPathNormalizer: path => path,
 			} ) ).toEqual( {
+				enabled: false,
 				format: 'json',
 				filename: __dirname + '/sonda-report.json',
 				open: false,
@@ -78,6 +82,7 @@ describe('utils.ts', () => {
 
 		it( 'ensures the `filename` is an absolute path', () => {
 			expect( normalizeOptions( { filename: './dist/sonda.json' } ) ).toEqual( {
+				enabled: true,
 				format: 'json',
 				filename: process.cwd() + '/dist/sonda.json',
 				open: true,
@@ -91,6 +96,7 @@ describe('utils.ts', () => {
 
 		it( 'matches the `filename` when `format` is provided', () => {
 			expect( normalizeOptions( { format: 'json' } ) ).toEqual( {
+				enabled: true,
 				format: 'json',
 				filename: process.cwd() + '/sonda-report.json',
 				open: true,
@@ -104,6 +110,7 @@ describe('utils.ts', () => {
 
 		it( 'matches the `format` when `filename` is provided', () => {
 			expect( normalizeOptions( { filename: 'sonda.json' } ) ).toEqual( {
+				enabled: true,
 				format: 'json',
 				filename: process.cwd() + '/sonda.json',
 				open: true,
@@ -126,6 +133,7 @@ describe('utils.ts', () => {
 			expect( spy ).toHaveBeenCalledOnce();
 			
 			expect( options ).toEqual( {
+				enabled: true,
 				format: 'json',
 				filename: __dirname + '/sonda-report.json',
 				open: true,

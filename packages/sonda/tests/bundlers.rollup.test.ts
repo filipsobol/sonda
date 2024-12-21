@@ -1,7 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import { rollup } from 'rollup';
-import Sonda from '../src/bundlers/rollup';
+import Sonda from '../src/entrypoints/rollup';
 import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {

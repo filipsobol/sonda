@@ -7,6 +7,10 @@ export default function SondaEsbuildPlugin( options: Partial<UserOptions> = {} )
 	return {
 		name: 'sonda',
 		setup( build ) {
+			if ( options.enabled === false ) {
+				return;
+			}
+
 			build.initialOptions.metafile = true;
 
 			// Esbuild already reads the existing source maps, so there's no need to do it again

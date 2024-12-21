@@ -11,6 +11,10 @@ import {
 import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
 
 export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ): Plugin {
+	if ( options.enabled === false ) {
+		return { name: 'sonda' };
+	}
+
 	let inputs: JsonReport[ 'inputs' ] = {};
 
 	return {

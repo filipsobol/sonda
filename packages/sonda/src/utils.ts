@@ -11,6 +11,7 @@ export function normalizeOptions( options?: Partial<PluginOptions> ): PluginOpti
 		|| 'html';
 
 	const defaultOptions: PluginOptions = {
+		enabled: true,
 		format,
 		filename: 'sonda-report.' + format,
 		open: true,

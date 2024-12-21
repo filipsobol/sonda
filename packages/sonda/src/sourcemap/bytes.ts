@@ -40,7 +40,7 @@ export function getBytesPerSource(
 				// Slice the code from startColumn to endColumn for assigned code
 				const sourceIndex = mapping?.[ 1 ];
 				const codeSlice = lineCode.slice( startColumn, endColumn );
-				const source = sourceIndex !== undefined ? map.sources[ sourceIndex ]! : UNASSIGNED;
+				const source = sourceIndex !== undefined && map.sources[ sourceIndex ] || UNASSIGNED;
 
 				contributions.set( source, contributions.get( source ) + codeSlice );
 				currentColumn = endColumn;

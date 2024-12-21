@@ -17,6 +17,10 @@ export default class SondaWebpackPlugin {
 	}
 
 	apply( compiler: Compiler ): void {
+		if (this.options.enabled === false ) {
+			return;
+		}
+
 		compiler.options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
 
 		compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', compilation => {

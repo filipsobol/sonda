@@ -10,11 +10,6 @@ export default defineConfig( {
 		minify: true
 	},
 	plugins: [
-		Sonda({
-			gzip: true,
-			brotli: true,
-			detailed: true,
-			sources: true
-		}),
+		Sonda(),
 	]
 } );

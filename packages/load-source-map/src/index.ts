@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, statSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
 
 export interface SourceMapV3 {
@@ -38,11 +38,22 @@ function parseSourceMapInput( str: string ): SourceMapV3 {
 */
 const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 
+/**
+ * Checks if the given path is a file.
+ */
+function isFile( path: string ): boolean {
+	try {
+		return statSync( path ).isFile();
+	} catch {
+		return false;
+	}
+}
+
 export function loadCodeAndMap(
 	codePath: string,
 	sourcesPathNormalizer?: ( ( path: string ) => string ) | null
 ): MaybeCodeMap {
-	if ( !existsSync( codePath ) ) {
+	if ( !isFile( codePath ) ) {
 		return null;
 	}
 

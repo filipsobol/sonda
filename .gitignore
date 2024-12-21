@@ -12,6 +12,6 @@ package-lock.json
 docs/.vitepress/dist
 docs/.vitepress/cache
 
-sonda-report.*
+sonda-report*
 *.backup
 .parcel-cache

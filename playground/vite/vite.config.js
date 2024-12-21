@@ -8,12 +8,7 @@ export default defineConfig( {
       'virtual:module': `export default { hello: 'world' }`,
       'virtual:config': { hello: 'world' }
     } ),
-    Sonda( {
-      gzip: true,
-      brotli: true,
-      detailed: true,
-      sources: true,
-    } ),
+    Sonda(),
   ],
   build: {
     sourcemap: true

@@ -10,6 +10,7 @@ These are the default options:
 
 ```js
 {
+  enabled: true,
   format: 'html',
   filename: 'sonda-report.html',
   open: true,
@@ -24,11 +25,18 @@ You may override these options by passing a configuration object to the plugin, 
 
 ```js
 Sonda( {
-  open: false
-} );
+  enabled: false
+} )
 ```
 
 ## Options
+
+### `enabled`
+
+* **Type:** `boolean`
+* **Default:** `true`
+
+Determines whether to enable the plugin.
 
 ### `format`
 

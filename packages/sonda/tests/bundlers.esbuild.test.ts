@@ -1,7 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import esbuild from 'esbuild';
-import Sonda from '../src/bundlers/esbuild';
+import Sonda from '../src/entrypoints/esbuild';
 import type { PluginOptions } from '../src/types';
 
 const mocks = vi.hoisted( () => ( {

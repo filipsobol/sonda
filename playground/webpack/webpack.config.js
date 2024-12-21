@@ -12,12 +12,7 @@ export default {
   plugins: [
     new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
-    new Sonda( {
-      gzip: true,
-      brotli: true,
-      detailed: true,
-      sources: true,
-    } ),
+    new Sonda(),
   ],
   module: {
     rules: [
