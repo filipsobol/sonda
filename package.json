@@ -25,7 +25,7 @@
     "@types/node": "^22.10.2",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
-    "pkg-pr-new": "^0.0.37",
+    "pkg-pr-new": "^0.0.39",
     "rolldown": "^0.15.1",
     "rollup": "^4.29.1",
     "typescript": "^5.7.2",
