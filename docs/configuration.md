@@ -31,16 +31,16 @@ Sonda( {
 
 ## Options
 
-### `enabled`
+### `enabled` <Badge type="tip" text="Introduced in 0.7.0" />
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `true`
 
 Determines whether to enable the plugin.
 
 ### `format`
 
-* **Type:** `string`
+* **Type:** string
 * **Default:** `'html'`
 
 Determines the output format of the report. The following formats are supported:
@@ -48,9 +48,9 @@ Determines the output format of the report. The following formats are supported:
 * `'html'` - HTML file with treemap
 * `'json'` - JSON file
 
-### `filename`
+### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
 
-* **Type:** `string`
+* **Type:** string
 * **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
 
 Determines the path of the generated report. The values can be either a filename, a relative path, or an absolute path.
@@ -59,14 +59,14 @@ By default, the report is saved in the current working directory.
 
 ### `open`
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `true`
 
 Determines whether to open the report in the default program for given file extension (`.html` or `.json` depending on the `format` option) after the build.
 
 ### `detailed`
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `false`
 
 Determines whether to read the source maps of imported modules.
@@ -77,9 +77,9 @@ Enabling this option will increase the time needed to generate the report and re
 
 See the [Detailed view](/features/detailed-view) section for more information.
 
-### `sources`
+### `sources` <Badge type="tip" text="Introduced in 0.5.0" />
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `false`
 
 Determines whether to include the source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
@@ -92,7 +92,7 @@ Enabling this option will significantly increase the size of the report and incl
 
 ### `gzip`
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `false`
 
 Determines whether to calculate the sizes of assets after compression with GZIP.
@@ -105,7 +105,7 @@ See the [Compression sizes](/features/compression-sizes) section for more inform
 
 ### `brotli`
 
-* **Type:** `boolean`
+* **Type:** boolean
 * **Default:** `false`
 
 Determines whether to calculate the sizes of assets after compression with Brotli.

@@ -1,6 +1,7 @@
+import Sonda from 'sonda/next';
 import type { NextConfig } from 'next';
 
-const withSondaAnalyzer = require( 'sonda/next' )();
+const withSondaAnalyzer = Sonda();
 
 const config: NextConfig = {
   productionBrowserSourceMaps: true,
@@ -9,4 +10,4 @@ const config: NextConfig = {
   }
 };
 
-module.exports = withSondaAnalyzer( config );
+export default withSondaAnalyzer( config );

@@ -27,6 +27,28 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Integrations',
+        items: [
+          {
+            text: 'Bundlers',
+            items: [
+              { text: 'Vite', link: '/bundlers/vite' },
+              { text: 'Rollup', link: '/bundlers/rollup' },
+              { text: 'Rolldown', link: '/bundlers/rolldown' },
+              { text: 'esbuild', link: '/bundlers/esbuild' },
+              { text: 'webpack', link: '/bundlers/webpack' },
+              { text: 'Rspack', link: '/bundlers/rspack' },
+            ]
+          },
+          {
+            text: 'Frameworks',
+            items: [
+              { text: 'Next.js', link: '/frameworks/nextjs' },
+            ]
+          }
+        ]
+      },
+      {
         text: 'Features',
         items: [
           { text: 'Treemap graph', link: '/features/treemap-graph' },

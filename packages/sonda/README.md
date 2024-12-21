@@ -1,14 +1,18 @@
 # Sonda
 
-Sonda is a universal visualizer and analyzer for JavaScript and CSS bundles. It analyzes the source maps and shows the size of each module after tree-shaking and minification to get the most accurate report.
+Sonda is a universal visualizer and analyzer for JavaScript and CSS bundles. It generates an interactive HTML report that is more accurate and detailed than some alternatives. The accuracy is achieved by analyzing source maps and showing the size of each module after tree-shaking and minification.
 
-Sonda is more accurate and detailed than some alternatives and works with the following bundlers:
+Sonda works with the following tools:
 
-* Vite
-* Rollup
-* esbuild
-* webpack
-* Rspack
+* **Bundlers**
+  * Vite
+  * Rollup
+  * Rolldown
+  * esbuild
+  * webpack
+  * Rspack
+* **Frameworks**
+  * Next.js
 
 ## Installation
 

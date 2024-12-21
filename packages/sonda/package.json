@@ -9,6 +9,7 @@
     "source-map",
     "vite",
     "rollup",
+    "rolldown",
     "webpack",
     "rspack",
     "esbuild",
@@ -39,6 +40,11 @@
       "require": "./dist/entrypoints/next.cjs"
     },
     "./rollup": {
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
+    },
+    "./rolldown": {
       "types": "./dist/entrypoints/rollup.d.ts",
       "import": "./dist/entrypoints/rollup.mjs",
       "require": "./dist/entrypoints/rollup.cjs"

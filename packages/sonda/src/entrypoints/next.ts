@@ -3,14 +3,6 @@ import type { NextConfig } from 'next';
 import type { UserOptions } from '../types.js';
 
 interface NextUserOptions extends UserOptions {
-
-  /**
-   * Determines whether the plugin should generate report for the client build.
-   * 
-   * @default true
-   */
-  client: boolean;
-
   /**
    * Determines whether the plugin should generate report for the server build.
    * 
@@ -32,7 +24,6 @@ export default function SondaNextPlugin( options: Partial<NextUserOptions> = {} 
       throw new Error( 'SondaNextPlugin: The "filename" option must include the "[env]" token.' );
     }
 
-    const generateForClient = options.client ?? true;
     const generateForServer = options.server ?? false;
 
     return Object.assign( {}, nextConfig, {
@@ -46,9 +37,6 @@ export default function SondaNextPlugin( options: Partial<NextUserOptions> = {} 
 
           // ... the server build unless explicitly enabled
           || ( isServer && !generateForServer )
-
-          // ... the client build unless explicitly disabled
-          || ( !isServer && !generateForClient )
         ) {
           return config;
         }
