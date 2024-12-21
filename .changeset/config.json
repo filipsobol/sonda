@@ -10,7 +10,10 @@
   "ignore": [
     "html-report",
     "playground-esbuild",
+    "playground-nextjs",
+    "playground-parcel",
     "playground-rollup",
+    "playground-rolldown",
     "playground-rspack",
     "playground-vite",
     "playground-webpack"
