@@ -13,6 +13,19 @@ vi.mock( '../src/report/generate.js', () => ( {
 } ) );
 
 describe( 'SondaEsbuildPlugin', () => {
+	it( 'should not do anything when enabled=false', async () => {
+		await esbuild.build( {
+			entryPoints: [ join( import.meta.dirname, 'fixtures/bundlers/index.js' ) ],
+			bundle: true,
+			outfile: join( import.meta.dirname, 'dist/esbuild_1.js' ),
+			sourcemap: true,
+			plugins: [ Sonda( { enabled: false } ) ],
+			format: 'esm',
+		} );
+
+		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+	} );
+
 	it( 'should transform the code correctly', async () => {
 		await esbuild.build( {
 			entryPoints: [ join( import.meta.dirname, 'fixtures/bundlers/index.js' ) ],

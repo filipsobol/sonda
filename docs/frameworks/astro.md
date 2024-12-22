@@ -32,9 +32,8 @@ export default defineConfig({
  },
  integrations: [
   Sonda() // [!code focus]
- ],
+ ]
 });
-
 ```
 
 Sonda requires source maps, but some other plugins may not support or generate them by default. If you see that Sonda is not working properly, check the documentation of other plugins you are using to enable source maps.
@@ -70,7 +69,6 @@ export default defineConfig({
   Sonda( {  // [!code focus]
    server: true  // [!code focus]
   } )  // [!code focus]
- ],
+ ]
 });
-
 ```

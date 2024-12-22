@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { resolve } from 'path';
 import {
 	generateReportFromAssets,
 	jsRegexp,
@@ -55,7 +55,7 @@ export default class SondaWebpackPlugin {
 			} );
 
 			return generateReportFromAssets(
-				stats.assets?.map( asset => join( outputPath, asset.name ) ) || [],
+				stats.assets?.map( asset => resolve( outputPath, asset.name ) ) || [],
 				inputs,
 				this.options
 			);

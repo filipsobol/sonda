@@ -13,6 +13,27 @@ vi.mock( '../src/report/generate.js', () => ( {
 } ) );
 
 describe( 'SondaRollupPlugin', () => {
+	it( 'should not do anything when enabled=false', async () => {
+		const bundle = await rollup( {
+			input: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
+			plugins: [
+				Sonda( { enabled: false } )
+			],
+		} );
+
+		/**
+		 * `write` method is used instead of the `generate`, because
+		 * the latter would not trigger the `writeBundle` hook.
+		 */
+		await bundle.write( {
+			file: join( import.meta.dirname, 'dist/rollup_1.js' ),
+			sourcemap: true,
+			format: 'es',
+		} );
+
+		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+	} );
+
 	it( 'should transform the code correctly', async () => {
 		const bundle = await rollup( {
 			input: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),

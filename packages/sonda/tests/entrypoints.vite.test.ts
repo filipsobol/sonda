@@ -13,6 +13,26 @@ vi.mock( '../src/report/generate.js', () => ( {
 } ) );
 
 describe( 'SondaRollupPlugin in Vite', () => {
+	it( 'should not do anything when enabled=false', async () => {
+		await build( {
+			logLevel: 'silent',
+			build: {
+				outDir: join( import.meta.dirname, 'dist' ),
+				sourcemap: true,
+				rollupOptions: {
+					input: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
+					output: {
+						format: 'es',
+						entryFileNames: 'vite_1.js',
+					},
+				},
+			},
+			plugins: [ Sonda( { enabled: false } ) ],
+		} );
+
+		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+	} );
+
 	it( 'should transform the code correctly', async () => {
 		await build( {
 			logLevel: 'silent',

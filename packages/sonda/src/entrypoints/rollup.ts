@@ -1,4 +1,4 @@
-import { join, resolve, dirname } from 'path';
+import { resolve, dirname } from 'path';
 import {
 	generateReportFromAssets,
 	cjsRegex,
@@ -20,20 +20,6 @@ export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ):
 	return {
 		name: 'sonda',
 
-		writeBundle(
-			{ dir, file }: NormalizedOutputOptions,
-			bundle: OutputBundle
-		) {
-			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
-			const assets = Object.keys( bundle ).map( name => join( outputDir, name ) );
-
-			return generateReportFromAssets(
-				assets,
-				inputs,
-				options
-			);
-		},
-
 		moduleParsed( module: ModuleInfo ) {
 			inputs[ normalizePath( module.id ) ] = {
 				bytes: module.code ? Buffer.byteLength( module.code ) : 0,
@@ -41,6 +27,20 @@ export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ):
 				imports: module.importedIds.map( id => normalizePath( id ) ),
 				belongsTo: null,
 			};
+		},
+
+		writeBundle(
+			{ dir, file }: NormalizedOutputOptions,
+			bundle: OutputBundle
+		) {
+			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
+			const assets = Object.keys( bundle ).map( name => resolve( outputDir, name ) );
+
+			return generateReportFromAssets(
+				assets,
+				inputs,
+				options
+			);
 		}
 	};
 }

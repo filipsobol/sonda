@@ -17,13 +17,9 @@ export default function SondaEsbuildPlugin( options: Partial<UserOptions> = {} )
 			options.detailed = false;
 
 			build.onEnd( result => {
-				if ( !result.metafile ) {
-					return console.error( 'Metafile is required for SondaEsbuildPlugin to work.' );
-				}
-
 				const cwd = process.cwd();
 				const inputs = Object
-					.entries( result.metafile.inputs )
+					.entries( result.metafile!.inputs )
 					.reduce( ( acc, [ path, data ] ) => {
 						acc[ path ] = {
 							bytes: data.bytes,
@@ -47,7 +43,7 @@ export default function SondaEsbuildPlugin( options: Partial<UserOptions> = {} )
 					}, {} as JsonReport[ 'inputs' ] );
 
 				return generateReportFromAssets(
-					Object.keys( result.metafile.outputs ).map( path => resolve( cwd, path ) ),
+					Object.keys( result.metafile!.outputs ).map( path => resolve( cwd, path ) ),
 					inputs,
 					options
 				);

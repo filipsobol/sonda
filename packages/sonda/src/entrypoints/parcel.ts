@@ -71,6 +71,7 @@ const SondaParcelPlugin: Reporter = new Reporter( {
         sources: true,
         gzip: true,
         brotli: true,
+        // TODO: `resolve` instead of `join`?
         sourcesPathNormalizer: ( path: string ) => join( options.projectRoot, path ),
       }
     );

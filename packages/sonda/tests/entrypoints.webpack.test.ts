@@ -1,6 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
-import { rspack, type Compiler } from '@rspack/core';
+import webpack from 'webpack';
 import Sonda from '../src/entrypoints/webpack';
 import type { PluginOptions } from '../src/types';
 
@@ -14,7 +14,7 @@ vi.mock( '../src/report/generate.js', () => ( {
 
 const distDir = join( import.meta.dirname, 'dist' );
 
-function runCompiler( compiler: Compiler ) {
+function runCompiler( compiler: webpack.Compiler ) {
 	return new Promise<void>( ( resolve, reject ) => {
 		compiler.run( ( err, stats ) => {
 			if ( err || stats?.hasErrors() ) {
@@ -25,13 +25,29 @@ function runCompiler( compiler: Compiler ) {
 	} );
 }
 
-describe( 'SondaWebpackPlugin in Rspack', () => {
-	it( 'should transform the code correctly', async () => {
-		const compiler = rspack( {
+describe( 'SondaWebpackPlugin', () => {
+	it( 'should not do anything when enabled=false', async () => {
+		const compiler = webpack( {
 			entry: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
 			output: {
 				path: distDir,
-				filename: 'rspack_1.js',
+				filename: 'webpack_1.js',
+			},
+			plugins: [ new Sonda( { enabled: false } ) ],
+			devtool: 'source-map',
+		} );
+
+		await runCompiler( compiler );
+
+		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+	} );
+
+	it( 'should transform the code correctly', async () => {
+		const compiler = webpack( {
+			entry: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
+			output: {
+				path: distDir,
+				filename: 'webpack_1.js',
 			},
 			plugins: [ new Sonda() ],
 			devtool: 'source-map',
@@ -41,7 +57,7 @@ describe( 'SondaWebpackPlugin in Rspack', () => {
 
 		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
 			[
-				join( import.meta.dirname, 'dist/rspack_1.js' )
+				join( import.meta.dirname, 'dist/webpack_1.js' )
 			],
 			{
 				'tests/fixtures/bundlers/index.js': {
@@ -67,11 +83,11 @@ describe( 'SondaWebpackPlugin in Rspack', () => {
 			open: false
 		};
 
-		const compiler = rspack( {
+		const compiler = webpack( {
 			entry: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
 			output: {
 				path: distDir,
-				filename: 'rspack_2.js',
+				filename: 'webpack_2.js',
 			},
 			plugins: [ new Sonda( options ) ],
 			devtool: 'source-map',

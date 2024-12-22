@@ -1,6 +1,6 @@
-import type { FrameworkUserOptions } from '../types';
 import Sonda from './rollup';
 import type { AstroIntegration } from 'astro';
+import type { FrameworkUserOptions } from '../types';
 
 export default function SondaAstroPlugin( options: Partial<FrameworkUserOptions> = {} ): AstroIntegration {
   return {
