@@ -31,7 +31,7 @@ export default function SondaNuxtPlugin( options: Partial<FrameworkUserOptions> 
       sondaOptions.filename = sondaOptions.filename!.replace( '[env]', env )
 
       // Add the Sonda plugin to the Vite configuration
-      config.plugins = config.plugins || [];
+      config.plugins ??= [];
       config.plugins.push( Sonda( sondaOptions ) );
     } )
   }

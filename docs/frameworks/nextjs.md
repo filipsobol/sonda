@@ -43,13 +43,13 @@ The steps above are enough to generate the first report. However, if you do not 
 
 On top of the options listed on the [configuration](/configuration) page, there is one additional option specific to the Next.js integration, which is `server`. This option allows Sonda to generate a report for the server bundle as well and it requires the `experimental.serverSourceMaps` option to be enabled in the Next.js configuration.
 
-```js{5,11}
+```js{4-6,11}
 import Sonda from 'sonda/next';
 import type { NextConfig } from 'next';
 
-const withSondaAnalyzer = Sonda( {
-  server: true // [!code focus]
-} );
+const withSondaAnalyzer = Sonda( { // [!code focus]
+  server: true  // [!code focus]
+} ); // [!code focus]
 
 const config: NextConfig = {
   productionBrowserSourceMaps: true,

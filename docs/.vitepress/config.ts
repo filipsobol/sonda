@@ -45,6 +45,7 @@ export default defineConfig({
             items: [
               { text: 'Next.js', link: '/frameworks/nextjs' },
               { text: 'Nuxt', link: '/frameworks/nuxtjs' },
+              { text: 'Astro', link: '/frameworks/astro' },
             ]
           }
         ]

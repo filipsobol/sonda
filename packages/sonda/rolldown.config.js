@@ -9,6 +9,7 @@ await rm( 'dist', { recursive: true, force: true } );
 const sharedOptions = defineConfig( {
 	input: {
 		'index': 'src/index.ts',
+		'entrypoints/astro': 'src/entrypoints/astro.ts',
 		'entrypoints/esbuild': 'src/entrypoints/esbuild.ts',
 		'entrypoints/next': 'src/entrypoints/next.ts',
 		'entrypoints/nuxt': 'src/entrypoints/nuxt.ts',

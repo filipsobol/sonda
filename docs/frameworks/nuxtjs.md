@@ -43,7 +43,7 @@ The steps above are enough to generate the first report. However, if you do not 
 
 On top of the options listed on the [configuration](/configuration) page, there is one additional option specific to the Nuxt integration, which is `server`. This option allows Sonda to generate a report for the server bundle as well and it requires the `sourcemap.server` option to be enabled in the Nuxt configuration.
 
-```js{6,10}
+```js{6,9-11}
 import Sonda from 'sonda/nuxt';
 
 export default defineNuxtConfig( {
@@ -52,9 +52,9 @@ export default defineNuxtConfig( {
     server: true // [!code focus]
   },
   modules: [
-    Sonda( {
+    Sonda( { // [!code focus]
       server: true // [!code focus]
-    } )
+    } ) // [!code focus]
   ]
 } );
 ```

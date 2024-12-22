@@ -14,6 +14,7 @@ Sonda works with the following tools:
 * **Frameworks**
   * Next.js
   * Nuxt
+  * Astro
 
 ## Installation
 

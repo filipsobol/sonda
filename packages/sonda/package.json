@@ -13,7 +13,9 @@
     "webpack",
     "rspack",
     "esbuild",
-    "nextjs"
+    "nextjs",
+    "nuxt",
+    "astro"
   ],
   "license": "MIT",
   "type": "module",
@@ -28,6 +30,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./astro": {
+      "types": "./dist/entrypoints/astro.d.ts",
+      "import": "./dist/entrypoints/astro.mjs",
+      "require": "./dist/entrypoints/astro.cjs"
     },
     "./esbuild": {
       "types": "./dist/entrypoints/esbuild.d.ts",
@@ -95,6 +102,7 @@
     "@parcel/types": "^2.13.3",
     "@rspack/core": "^1.1.8",
     "@vitest/coverage-v8": "^2.1.8",
+    "astro": "^5.1.1",
     "esbuild": "^0.24.2",
     "load-source-map": "workspace:^",
     "next": "15.1.2",

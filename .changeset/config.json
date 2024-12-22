@@ -9,6 +9,7 @@
   "updateInternalDependencies": "patch",
   "ignore": [
     "html-report",
+    "playground-astro",
     "playground-esbuild",
     "playground-nextjs",
     "playground-nuxt",
