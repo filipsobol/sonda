@@ -1,6 +1,6 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
-import type { Options, Sizes } from '../types';
+import type { PluginOptions, Sizes } from '../types.js';
 
 const UNASSIGNED = '[unassigned]';
 
@@ -8,7 +8,7 @@ export function getBytesPerSource(
 	code: string,
 	map: DecodedSourceMap,
 	assetSizes: Sizes,
-	options: Options
+	options: PluginOptions
 ): Map<string, Sizes> {
 	const contributions = getContributions( map.sources );
 
@@ -40,7 +40,7 @@ export function getBytesPerSource(
 				// Slice the code from startColumn to endColumn for assigned code
 				const sourceIndex = mapping?.[ 1 ];
 				const codeSlice = lineCode.slice( startColumn, endColumn );
-				const source = sourceIndex !== undefined ? map.sources[ sourceIndex ]! : UNASSIGNED;
+				const source = sourceIndex !== undefined && map.sources[ sourceIndex ] || UNASSIGNED;
 
 				contributions.set( source, contributions.get( source ) + codeSlice );
 				currentColumn = endColumn;
@@ -74,7 +74,7 @@ export function getBytesPerSource(
 
 export function getSizes(
 	code: string,
-	options: Options
+	options: PluginOptions
 ): Sizes {
 	return {
 		uncompressed: Buffer.byteLength( code ),
@@ -112,7 +112,7 @@ function adjustSizes(
 	sources: Map<string, Sizes>,
 	asset: Sizes,
 	sums: Sizes,
-	options: Options
+	options: PluginOptions
 ): Map<string, Sizes> {
 	const gzipDelta = options.gzip ? asset.gzip / sums.gzip : 0;
 	const brotliDelta = options.brotli ? asset.brotli / sums.brotli : 0;

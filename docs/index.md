@@ -5,27 +5,27 @@ layout: home
 hero:
   name:
   text: Universal visualizer and analyzer for JavaScript and CSS
-  tagline: Works with Vite, Rollup, webpack, Rspack, and esbuild.
+  tagline: Compatible with most bundlers and frameworks
   actions:
     - theme: brand
       text: Get started
-      link: /introduction
+      link: /getting-started
     - theme: alt
       text: Demo
       link: /demo
       target: _blank
 
 features:
-  - title: Works with all bundlers
-    details: Offers the same great experience and features no matter what bundler you use.
-  - title: More accurate
-    details: The most accurate visualization of the final bundles, after tree-shaking and minification.
-  - title: More detailed
-    details: Shows sizes before and after compression, dependency graph, download times, and more.
-  - title: Supports multiple formats
-    details: Generates reports in HTML (best for visualizing) and JSON (best for automation).
-  - title: Highlights used code
-    details: Highlights the code that's included in the final bundle.
-  - title: Warns about common issues
-    details: Warns about common issues like duplicated dependencies.
+  - title: Compatible with all bundlers
+    details: Delivers a consistent experience and feature set regardless of the bundler you use.
+  - title: Highly accurate
+    details: Provides the most precise visualization, reflecting tree-shaking and minification.
+  - title: In-depth insights
+    details: Displays sizes before and after compression, dependency graphs, download times, and more.
+  - title: Flexible formats
+    details: Offers reports in HTML (ideal for visualization) and JSON (perfect for automation).
+  - title: Code inclusion highlights
+    details: Identifies and highlights the code that's included in the final bundle.
+  - title: Issue detection
+    details: Alerts you to common issues, such as duplicated dependencies.
 ---

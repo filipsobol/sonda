@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { viteSingleFile } from 'vite-plugin-singlefile';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import simpleHtmlPlugin from 'vite-plugin-simple-html';
 import ViteRestart from 'vite-plugin-restart';
 
 let SONDA_REPORT_DATA = '__REPORT_DATA__';
@@ -24,15 +24,16 @@ export default defineConfig({
   plugins: [
     svelte(),
     viteSingleFile({
-      removeViteModuleLoader: true,
+      removeViteModuleLoader: true
     }),
-    createHtmlPlugin({
+    simpleHtmlPlugin( {
+      minify: true,
       inject: {
         data: {
-          SONDA_REPORT_DATA,
-        },
-      },
-    }),
+          SONDA_REPORT_DATA
+        }
+      }
+    } ),
     ViteRestart( {
       restart: [
         './sample_data.json'
@@ -42,6 +43,6 @@ export default defineConfig({
   build: {
     modulePreload: false,
     emptyOutDir: false,
-    outDir: resolve(import.meta.dirname, '../sonda/dist'),
+    outDir: resolve(import.meta.dirname, '../sonda/dist')
   },
 });

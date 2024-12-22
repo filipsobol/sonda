@@ -1,15 +1,15 @@
 import { dirname } from 'path';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { generateHtmlReport, generateJsonReport } from '../report.js';
-import type { Options, JsonReport } from '../types.js';
+import { generateHtmlReport, generateJsonReport } from './formats.js';
+import type { PluginOptions, JsonReport } from '../types.js';
 import { normalizeOptions } from '../utils.js';
 
 export async function generateReportFromAssets(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
-	userOptions: Partial<Options>
+	pluginOptions: Partial<PluginOptions>
 ): Promise<void> {
-	const options = normalizeOptions( userOptions );
+	const options = normalizeOptions( pluginOptions );
 	const handler = options.format === 'html' ? saveHtml : saveJson;
 	const report = handler( assets, inputs, options );
 	const outputDirectory = dirname( options.filename );
@@ -39,7 +39,7 @@ export async function generateReportFromAssets(
 function saveHtml(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
-	options: Options
+	options: PluginOptions
 ): string {
 	return generateHtmlReport( assets, inputs, options );
 }
@@ -47,7 +47,7 @@ function saveHtml(
 function saveJson(
 	assets: string[],
 	inputs: JsonReport[ 'inputs' ],
-	options: Options
+	options: PluginOptions
 ): string {
 	const report = generateJsonReport( assets, inputs, options );
 

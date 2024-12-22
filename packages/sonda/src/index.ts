@@ -1,13 +1,10 @@
-export { SondaEsbuildPlugin } from './bundlers/esbuild.js';
-export { SondaRollupPlugin } from './bundlers/rollup.js';
-export { SondaWebpackPlugin } from './bundlers/webpack.js';
+export { generateReportFromAssets } from './report/generate.js';
+export { addSourcesToInputs } from './sourcemap/map.js';
+export {
+	esmRegex,
+	cjsRegex,
+	jsRegexp,
+	normalizePath
+} from './utils.js';
 
-export type {
-	Options,
-	JsonReport,
-	ReportInput,
-	ReportOutput,
-	ReportOutputInput,
-	Sizes,
-	ModuleFormat
-} from './types.js';
+export type * from './types.js';

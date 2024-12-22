@@ -9,8 +9,13 @@
   "updateInternalDependencies": "patch",
   "ignore": [
     "html-report",
+    "playground-astro",
     "playground-esbuild",
+    "playground-nextjs",
+    "playground-nuxt",
+    "playground-parcel",
     "playground-rollup",
+    "playground-rolldown",
     "playground-rspack",
     "playground-vite",
     "playground-webpack"

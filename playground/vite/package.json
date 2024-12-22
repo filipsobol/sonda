@@ -8,12 +8,12 @@
     "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
-    "ckeditor5": "44.0.0"
+    "ckeditor5": "44.1.0"
   },
   "devDependencies": {
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^",
-    "vite": "^6.0.3",
+    "vite": "^6.0.5",
     "vite-plugin-virtual": "^0.3.0"
   }
 }

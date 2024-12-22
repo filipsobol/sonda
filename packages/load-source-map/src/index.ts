@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, statSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
 
 export interface SourceMapV3 {
@@ -38,8 +38,22 @@ function parseSourceMapInput( str: string ): SourceMapV3 {
 */
 const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 
-export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
-	if ( !existsSync( codePath ) ) {
+/**
+ * Checks if the given path is a file.
+ */
+function isFile( path: string ): boolean {
+	try {
+		return statSync( path ).isFile();
+	} catch {
+		return false;
+	}
+}
+
+export function loadCodeAndMap(
+	codePath: string,
+	sourcesPathNormalizer?: ( ( path: string ) => string ) | null
+): MaybeCodeMap {
+	if ( !isFile( codePath ) ) {
 		return null;
 	}
 
@@ -59,7 +73,11 @@ export function loadCodeAndMap( codePath: string ): MaybeCodeMap {
 
 	const { map, mapPath } = maybeMap;
 
-	map.sources = normalizeSourcesPaths( map, mapPath );
+	const mapDir = dirname( mapPath );
+
+	sourcesPathNormalizer ??= ( path: string ) => isAbsolute( path ) ? path : resolve( mapDir, map.sourceRoot ?? '.', path );
+
+	map.sources = normalizeSourcesPaths( map, sourcesPathNormalizer );
 	map.sourcesContent = loadMissingSourcesContent( map );
 
 	delete map.sourceRoot;
@@ -110,18 +128,11 @@ function parseDataUrl( url: string ): string {
 /**
  * Normalize the paths of the sources in the source map to be absolute paths.
  */
-function normalizeSourcesPaths( map: SourceMapV3, mapPath: string ): SourceMapV3[ 'sources' ] {
-	const mapDir = dirname( mapPath );
-
-	return map.sources.map( source => {
-		if ( !source ) {
-			return source;
-		}
-
-		return isAbsolute( source )
-			? source
-			: resolve( mapDir, map.sourceRoot ?? '.', source );
-	} );
+function normalizeSourcesPaths(
+	map: SourceMapV3,
+	sourcesPathNormalizer: ( path: string ) => string
+): SourceMapV3[ 'sources' ] {
+	return map.sources.map( source => source ? sourcesPathNormalizer( source ) : null );
 }
 
 /**

@@ -34,7 +34,7 @@
   "scripts": {
     "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
-    "build:dist": "rollup -c ../../rollup.config.js && tsc",
+    "build:dist": "rolldown -c && tsc",
     "build": "pnpm run build:load-source-map && pnpm run build:dist"
   },
   "dependencies": {

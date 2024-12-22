@@ -1,8 +1,8 @@
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
 import { loadCodeAndMap } from 'load-source-map';
 import { resolve } from 'path';
-import { normalizePath } from '../utils';
-import type { CodeMap, ReportInput } from '../types';
+import { normalizePath } from '../utils.js';
+import type { CodeMap, ReportInput } from '../types.js';
 
 export function mapSourceMap(
 	map: EncodedSourceMap,
