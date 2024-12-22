@@ -4,7 +4,7 @@ outline: deep
 
 # Configuration
 
-All Sonda plugins accept the same configuration options. The configuration object is optional and **it is recommended to only enable additional features when needed**, as they may affect the performance of the build process, the size of the generated report, or the information included in it.
+All Sonda plugins accept the same configuration options. The configuration object is optional, and **it is recommended to enable additional features only when necessary**, as they may impact the performance of the build process, the size of the generated report, or the amount of information included in it.
 
 These are the default options:
 
@@ -21,7 +21,7 @@ These are the default options:
 }
 ```
 
-You may override these options by passing a configuration object to the plugin, for example:
+You can override these options by passing a configuration object to the plugin. For example:
 
 ```js
 Sonda( {
@@ -36,58 +36,56 @@ Sonda( {
 * **Type:** boolean
 * **Default:** `true`
 
-Determines whether to enable the plugin.
+Specifies whether the plugin is enabled.
 
 ### `format`
 
 * **Type:** string
 * **Default:** `'html'`
 
-Determines the output format of the report. The following formats are supported:
+Specifies the output format of the report. Supported formats include:
 
-* `'html'` - HTML file with treemap
-* `'json'` - JSON file
+* `'html'` - An HTML file with a treemap visualization.
+* `'json'` - A JSON file.
 
 ### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
 
 * **Type:** string
 * **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
 
-Determines the path of the generated report. The values can be either a filename, a relative path, or an absolute path.
-
-By default, the report is saved in the current working directory.
+Specifies the path of the generated report. This can be a filename, a relative path, or an absolute path. By default, the report is saved in the current working directory.
 
 ### `open`
 
 * **Type:** boolean
 * **Default:** `true`
 
-Determines whether to open the report in the default program for given file extension (`.html` or `.json` depending on the `format` option) after the build.
+Specifies whether to automatically open the report in the default program for the given file extension (`.html` or `.json`, depending on the `format` option) after the build process.
 
 ### `detailed`
 
 * **Type:** boolean
 * **Default:** `false`
 
-Determines whether to read the source maps of imported modules.
+Specifies whether to read the source maps of imported modules.
 
-By default, external dependencies that are bundled into a single file appear as a single asset in the report. When this option is enabled, the report will instead include the source files of the imported modules, if they have source maps.
+By default, external dependencies bundled into a single file appear as a single asset in the report. When this option is enabled, the report includes the source files of imported modules, if source maps are available.
 
-Enabling this option will increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
+Enabling this option may increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
 
-See the [Detailed view](/features/detailed-view) section for more information.
+For more details, see the [Detailed view](/features/detailed-view) section.
 
 ### `sources` <Badge type="tip" text="Introduced in 0.5.0" />
 
 * **Type:** boolean
 * **Default:** `false`
 
-Determines whether to include the source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
+Specifies whether to include source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
 
-See the [Used code](/features/used-code) section for more information.
+For more details, see the [Used code](/features/used-code) section.
 
-::: danger ⚠️ Be careful when sharing the report with the `sources` option enabled
-Enabling this option will significantly increase the size of the report and include it in the **source code** of the assets. If you are working with proprietary code, be careful who you share the report with.
+::: danger ⚠️ Be cautious when sharing reports with the `sources` option enabled
+This option significantly increases the size of the report and embeds the **source code** of the assets. If you are working with proprietary code, ensure you share the report responsibly.
 :::
 
 ### `gzip`
@@ -95,23 +93,23 @@ Enabling this option will significantly increase the size of the report and incl
 * **Type:** boolean
 * **Default:** `false`
 
-Determines whether to calculate the sizes of assets after compression with GZIP.
+Specifies whether to calculate the sizes of assets after compression with GZIP.
 
-The report will include estimated compressed sizes for each file within an asset. However, unlike the compressed size of the entire asset, these individual file estimates are approximate and should be used as a general reference.
+The report includes estimated compressed sizes for each file within an asset. However, these estimates are approximate and should be used as a general reference.
 
-Enabling this option will increase the time needed to generate the report.
+Enabling this option may increase the time required to generate the report.
 
-See the [Compression sizes](/features/compression-sizes) section for more information.
+For more details, see the [Compression sizes](/features/compression-sizes) section.
 
 ### `brotli`
 
 * **Type:** boolean
 * **Default:** `false`
 
-Determines whether to calculate the sizes of assets after compression with Brotli.
+Specifies whether to calculate the sizes of assets after compression with Brotli.
 
-The report will include estimated compressed sizes for each file within an asset. However, unlike the compressed size of the entire asset, these individual file estimates are approximate and should be used as a general reference.
+The report includes estimated compressed sizes for each file within an asset. However, these estimates are approximate and should be used as a general reference.
 
-Enabling this option will increase the time needed to generate the report.
+Enabling this option may increase the time required to generate the report.
 
-See the [Compression sizes](/features/compression-sizes) section for more information.
+For more details, see the [Compression sizes](/features/compression-sizes) section.

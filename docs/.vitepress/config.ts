@@ -14,7 +14,7 @@ export default defineConfig({
     logo: '/sonda.jpg',
 
     nav: [
-      { text: 'Guide', link: '/introduction' },
+      { text: 'Guide', link: '/getting-started' },
       { text: 'Demo', link: '/demo.html', target: '_blank' },
     ],
 
@@ -23,6 +23,7 @@ export default defineConfig({
         text: 'Getting started',
         items: [
           { text: 'Introduction', link: '/introduction' },
+          { text: 'Getting started', link: '/getting-started' },
           { text: 'Configuration', link: '/configuration' },
         ]
       },
