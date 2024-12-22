@@ -2,4 +2,4 @@
 "sonda": minor
 ---
 
-Add the Nuxt integration
+Add Nuxt integration

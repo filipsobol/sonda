@@ -30,4 +30,3 @@ To get started, click on the bundler or framework of your choice below.
 * [Next.js](/frameworks/nextjs)
 * [Nuxt](/frameworks/nuxt)
 * [Astro](/frameworks/astro)
-

@@ -2,4 +2,4 @@
 "sonda": minor
 ---
 
-Add the Next.js integration
+Add Next.js integration

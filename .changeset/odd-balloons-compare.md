@@ -2,4 +2,4 @@
 "sonda": major
 ---
 
-Create individual export path for each integration
+Create an individual export path for each integration

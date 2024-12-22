@@ -2,4 +2,4 @@
 "sonda": minor
 ---
 
-Add `enabled` option to control whether to run the plugin
+Add the `enabled` option to control whether to run the plugin

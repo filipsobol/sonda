@@ -2,4 +2,4 @@
 "sonda": minor
 ---
 
-Add the Astro integration
+Add Astro integration
