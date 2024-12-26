@@ -35,7 +35,7 @@ export default defineConfig({
             items: [
               { text: 'Vite', link: '/bundlers/vite' },
               { text: 'Rollup', link: '/bundlers/rollup' },
-              { text: 'Rolldown', link: '/bundlers/rolldown' },
+              // { text: 'Rolldown', link: '/bundlers/rolldown' },
               { text: 'esbuild', link: '/bundlers/esbuild' },
               { text: 'webpack', link: '/bundlers/webpack' },
               { text: 'Rspack', link: '/bundlers/rspack' },
