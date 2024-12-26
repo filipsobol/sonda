@@ -1,5 +1,5 @@
 import { defineConfig } from 'rolldown';
-import Sonda from 'sonda/rollup';
+import Sonda from 'sonda/rolldown';
 
 export default defineConfig( {
 	input: 'src/index.ts',

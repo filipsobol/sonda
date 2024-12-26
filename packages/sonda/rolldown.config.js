@@ -22,6 +22,7 @@ const sharedOptions = defineConfig( {
 		...Object.keys( pkg.dependencies ),
 		'sonda',
 	],
+	platform: 'node',
 	resolve: {
 		extensionAlias: {
 			'.js': [ '.ts', '.js' ],
@@ -34,7 +35,6 @@ export default defineConfig( [
 		output: {
 			dir: 'dist',
 			format: 'esm',
-			platform: 'node',
 			sourcemap: true,
 			entryFileNames: '[name].mjs',
 			chunkFileNames: '[name].mjs',
@@ -45,7 +45,6 @@ export default defineConfig( [
 		output: {
 			dir: 'dist',
 			format: 'cjs',
-			platform: 'node',
 			sourcemap: true,
 			entryFileNames: '[name].cjs',
 			chunkFileNames: '[name].cjs',

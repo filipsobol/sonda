@@ -7,6 +7,7 @@ await rm( 'dist', { recursive: true, force: true } );
 
 const sharedOptions = defineConfig( {
 	input: 'src/index.ts',
+	platform: 'node',
 	external: builtinModules,
 	resolve: {
 		extensionAlias: {
@@ -18,17 +19,21 @@ const sharedOptions = defineConfig( {
 export default defineConfig( [
 	{
 		output: {
-			file: 'index.mjs',
+			dir: 'dist',
 			format: 'esm',
 			sourcemap: true,
+			entryFileNames: '[name].mjs',
+			chunkFileNames: '[name].mjs',
 		},
 		...sharedOptions
 	},
 	{
 		output: {
-			file: 'index.cjs',
+			dir: 'dist',
 			format: 'cjs',
 			sourcemap: true,
+			entryFileNames: '[name].cjs',
+			chunkFileNames: '[name].cjs',
 		},
 		...sharedOptions
 	}

@@ -11,23 +11,33 @@ const sharedOptions = defineConfig( {
 	external: [
 		...builtinModules,
 		...Object.keys( pkg.dependencies ),
-	]
+	],
+	platform: 'node',
+	resolve: {
+		extensionAlias: {
+			'.js': [ '.ts', '.js' ],
+		}
+	}
 } );
 
 export default defineConfig( [
 	{
 		output: {
-			file: 'index.js',
+			dir: 'dist',
 			format: 'esm',
 			sourcemap: true,
+			entryFileNames: '[name].mjs',
+			chunkFileNames: '[name].mjs',
 		},
 		...sharedOptions
 	},
 	{
 		output: {
-			file: 'index.cjs',
+			dir: 'dist',
 			format: 'cjs',
 			sourcemap: true,
+			entryFileNames: '[name].cjs',
+			chunkFileNames: '[name].cjs',
 		},
 		...sharedOptions
 	}
