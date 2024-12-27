@@ -8,6 +8,8 @@ export default defineConfig({
 	},
 	plugins: [
 		sveltekit(),
-		Sonda()
+		Sonda( {
+			server: true
+		} )
 	]
 });
