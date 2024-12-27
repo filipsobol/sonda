@@ -5,8 +5,9 @@
   "type": "module",
   "engines": {
     "node": ">=18.17",
-    "pnpm": ">=8.7"
+    "pnpm": ">=9.15.1"
   },
+  "packageManager": "pnpm@9.15.1",
   "scripts": {
     "test": "pnpm -r --stream run test",
     "build": "pnpm -r --stream run build",
@@ -20,14 +21,13 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@changesets/cli": "^2.27.10",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-swc": "^0.4.0",
+    "@changesets/cli": "^2.27.11",
     "@types/node": "^22.10.2",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
-    "pkg-pr-new": "^0.0.37",
-    "rollup": "^4.28.1",
+    "pkg-pr-new": "^0.0.39",
+    "rolldown": "^1.0.0-beta.1",
+    "rollup": "^4.29.1",
     "typescript": "^5.7.2",
     "vitepress": "^1.5.0",
     "vue": "^3.5.13"

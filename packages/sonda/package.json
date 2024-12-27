@@ -3,16 +3,19 @@
   "version": "0.6.2",
   "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild",
   "keywords": [
-    "bundle analyzer",
-    "bundle visualizer",
+    "bundle",
     "analyzer",
     "visualizer",
     "source-map",
     "vite",
     "rollup",
+    "rolldown",
     "webpack",
     "rspack",
-    "esbuild"
+    "esbuild",
+    "nextjs",
+    "nuxt",
+    "astro"
   ],
   "license": "MIT",
   "type": "module",
@@ -25,8 +28,58 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./astro": {
+      "types": "./dist/entrypoints/astro.d.ts",
+      "import": "./dist/entrypoints/astro.mjs",
+      "require": "./dist/entrypoints/astro.cjs"
+    },
+    "./esbuild": {
+      "types": "./dist/entrypoints/esbuild.d.ts",
+      "import": "./dist/entrypoints/esbuild.mjs",
+      "require": "./dist/entrypoints/esbuild.cjs"
+    },
+    "./next": {
+      "types": "./dist/entrypoints/next.d.ts",
+      "import": "./dist/entrypoints/next.mjs",
+      "require": "./dist/entrypoints/next.cjs"
+    },
+    "./nuxt": {
+      "types": "./dist/entrypoints/nuxt.d.ts",
+      "import": "./dist/entrypoints/nuxt.mjs",
+      "require": "./dist/entrypoints/nuxt.cjs"
+    },
+    "./rollup": {
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
+    },
+    "./rolldown": {
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
+    },
+    "./sveltekit": {
+      "types": "./dist/entrypoints/sveltekit.d.ts",
+      "import": "./dist/entrypoints/sveltekit.mjs",
+      "require": "./dist/entrypoints/sveltekit.cjs"
+    },
+    "./rspack": {
+      "types": "./dist/entrypoints/webpack.d.ts",
+      "import": "./dist/entrypoints/webpack.mjs",
+      "require": "./dist/entrypoints/webpack.cjs"
+    },
+    "./vite": {
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "import": "./dist/entrypoints/rollup.mjs",
+      "require": "./dist/entrypoints/rollup.cjs"
+    },
+    "./webpack": {
+      "types": "./dist/entrypoints/webpack.d.ts",
+      "import": "./dist/entrypoints/webpack.mjs",
+      "require": "./dist/entrypoints/webpack.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -41,7 +94,7 @@
     "prepack": "pnpm run test && pnpm run build && clean-package -rm devDependencies scripts",
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
-    "build:dist": "rollup -c ../../rollup.config.js && tsc",
+    "build:dist": "rolldown -c && tsc",
     "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html"
   },
   "dependencies": {
@@ -50,12 +103,16 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
-    "@rspack/core": "^1.1.6",
+    "@nuxt/schema": "^3.14.1592",
+    "@parcel/types": "^2.13.3",
+    "@rspack/core": "^1.1.8",
     "@vitest/coverage-v8": "^2.1.8",
-    "esbuild": "^0.24.0",
+    "astro": "^5.1.1",
+    "esbuild": "^0.24.2",
     "load-source-map": "workspace:^",
-    "rollup": "^4.28.1",
-    "vite": "^6.0.3",
+    "next": "15.1.2",
+    "rollup": "^4.29.1",
+    "vite": "^6.0.5",
     "vitest": "^2.1.8",
     "webpack": "^5.97.1"
   }

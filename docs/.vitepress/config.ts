@@ -14,7 +14,7 @@ export default defineConfig({
     logo: '/sonda.jpg',
 
     nav: [
-      { text: 'Guide', link: '/introduction' },
+      { text: 'Guide', link: '/getting-started' },
       { text: 'Demo', link: '/demo.html', target: '_blank' },
     ],
 
@@ -23,7 +23,33 @@ export default defineConfig({
         text: 'Getting started',
         items: [
           { text: 'Introduction', link: '/introduction' },
+          { text: 'Getting started', link: '/getting-started' },
           { text: 'Configuration', link: '/configuration' },
+        ]
+      },
+      {
+        text: 'Integrations',
+        items: [
+          {
+            text: 'Bundlers',
+            items: [
+              { text: 'Vite', link: '/bundlers/vite' },
+              { text: 'Rollup', link: '/bundlers/rollup' },
+              // { text: 'Rolldown', link: '/bundlers/rolldown' },
+              { text: 'esbuild', link: '/bundlers/esbuild' },
+              { text: 'webpack', link: '/bundlers/webpack' },
+              { text: 'Rspack', link: '/bundlers/rspack' },
+            ]
+          },
+          {
+            text: 'Frameworks',
+            items: [
+              { text: 'Next.js', link: '/frameworks/nextjs' },
+              { text: 'Nuxt', link: '/frameworks/nuxt' },
+              { text: 'Astro', link: '/frameworks/astro' },
+              { text: 'SvelteKit', link: '/frameworks/sveltekit' },
+            ]
+          }
         ]
       },
       {

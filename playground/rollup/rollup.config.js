@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import styles from 'rollup-plugin-styles';
-import { SondaRollupPlugin } from 'sonda';
+import Sonda from 'sonda/rollup';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig( {
@@ -13,7 +13,6 @@ export default defineConfig( {
 		sourcemap: true,
 		format: 'es'
 	},
-	external: ['open', 'fs', 'path', 'url', 'zlib'],
 	plugins: [
 		commonjs( {
 			sourceMap: true,
@@ -39,11 +38,6 @@ export default defineConfig( {
 		// 	gzipSize: true,
 		// 	brotliSize: true
 		// } ),
-		SondaRollupPlugin({
-			gzip: true,
-			brotli: true,
-			// detailed: true,
-			sources: true
-		}),
+		Sonda(),
 	]
 } );

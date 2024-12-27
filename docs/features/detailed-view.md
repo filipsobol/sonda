@@ -4,7 +4,7 @@ outline: deep
 
 # Detailed view
 
-By default, the report (in both `html` and `json` format) only includes the distribution files of the dependencies (the file used by the bundler). This is because in most cases it is only important to know if the dependency is in the bundle or how much space it takes. Including more information would only add noise to the report and increase build time.
+By default, the report (in both `html` and `json` formats) includes only the distribution files of the dependencies (the files used by the bundler). This is because, in most cases, it is sufficient to know whether the dependency is in the bundle and how much space it takes. Including more detailed information would add noise to the report and increase build time unnecessarily.
 
 <CustomImage
   src="/treemap.jpg"
@@ -17,9 +17,9 @@ However, if you need to inspect the contents of the dependencies, you can enable
 <CustomImage
   src="/treemap-detailed.jpg"
   alt="Tree map chart for a folder containing multiple source folders and files from the Sonda project itself"
-  caption="Detailed view does not show the distribution files, but source files instead"
+  caption="Detailed view replaces the distribution files with source files"
 />
 
-Note that this will only work for dependencies that include source maps.
+Note that this feature works only for dependencies that include source maps.
 
-If you would like to see the actual code that got included in the bundle, see the [Used code](/features/used-code) page.
+If you want to view the actual code that was included in the bundle, refer to the [Used code](/features/used-code) page.

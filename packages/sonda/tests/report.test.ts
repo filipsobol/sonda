@@ -1,6 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
-import { generateJsonReport, generateHtmlReport } from '../src/report';
+import { generateJsonReport, generateHtmlReport } from '../src/report/formats';
 import { normalizeOptions } from '../src/utils';
 import type { ReportInput } from '../src';
 

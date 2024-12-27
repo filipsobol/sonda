@@ -11,19 +11,19 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "sonda": "workspace:^",
-    "svelte": "^5.14.0",
+    "svelte": "^5.15.0",
     "svelte-check": "^4.1.1",
-    "tailwindcss": "^3.4.16",
+    "tailwindcss": "^3.4.17",
     "tslib": "^2.8.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3",
-    "vite-plugin-html": "^3.2.2",
+    "vite": "^6.0.5",
     "vite-plugin-restart": "^0.4.2",
+    "vite-plugin-simple-html": "^0.2.0",
     "vite-plugin-singlefile": "^2.1.0"
   }
 }
