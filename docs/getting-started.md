@@ -19,3 +19,4 @@ Sonda is compatible with a variety of bundlers and frameworks. Select your prefe
 - [Next.js](/frameworks/nextjs)
 - [Nuxt](/frameworks/nuxt)
 - [Astro](/frameworks/astro)
+- [SvelteKit](/frameworks/sveltekit)
