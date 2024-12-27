@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.7.0
+
+### Minor Changes
+
+- 519ddea: Add Nuxt integration
+- b450e5b: Add Astro integration
+- 215b289: Create an individual export path for each integration
+- dc237e5: Add SvelteKit integration
+- 215b289: Add Next.js integration
+- 215b289: Add the `enabled` option to control whether to run the plugin
+
+### Patch Changes
+
+- 215b289: Update dependencies
+
 ## 0.6.2
 
 ### Patch Changes

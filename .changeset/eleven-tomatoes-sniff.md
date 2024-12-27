@@ -1,5 +1,0 @@
----
-"sonda": patch
----
-
-Update dependencies
