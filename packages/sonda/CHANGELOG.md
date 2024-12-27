@@ -2,13 +2,39 @@
 
 ## 0.7.0
 
+### Changes
+
+#### New import paths
+
+This release includes a breaking change. Now every bundler and framework has its own unique import path. For example, if you are using Vite, this is how the import has changed:
+
+```diff
+- import { SondaRollupPlugin } from 'sonda';
++ import Sonda from 'sonda/vite';
+```
+
+Please refer to the [Getting started](https://sonda.dev/getting-started.html) page for more information.
+
+#### New integrations
+
+Sonda now has integrations for the following frameworks:
+
+* [Next.js](https://sonda.dev/frameworks/nextjs.html)
+* [Nuxt](https://sonda.dev/frameworks/nuxt.html)
+* [Astro](https://sonda.dev/frameworks/astro.html)
+* [SvelteKit](https://sonda.dev/frameworks/sveltekit.html)
+
+#### New `enabled` option
+
+You can now control whether the Sonda plugin is enabled or not using the `enabled` option.
+
 ### Minor Changes
 
+- 215b289: Create an individual export path for each integration
+- 215b289: Add Next.js integration
 - 519ddea: Add Nuxt integration
 - b450e5b: Add Astro integration
-- 215b289: Create an individual export path for each integration
 - dc237e5: Add SvelteKit integration
-- 215b289: Add Next.js integration
 - 215b289: Add the `enabled` option to control whether to run the plugin
 
 ### Patch Changes
