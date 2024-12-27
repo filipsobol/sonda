@@ -7,6 +7,7 @@ Sonda works with the following tools:
 * **Bundlers**
   * Vite
   * Rollup
+  * Rolldown
   * esbuild
   * webpack
   * Rspack
