@@ -8,7 +8,8 @@ export default function SondaNextPlugin( options: Partial<FrameworkUserOptions> 
       return nextConfig;
     }
 
-    options.filename ??= `sonda-report-[env].html`;
+    options.format ??= 'html';
+    options.filename ??= `sonda-report-[env].${ options.format }`;
 
     // Next.js runs few builds and each must generate a separate report
     if ( !options.filename.includes( '[env]' ) ) {

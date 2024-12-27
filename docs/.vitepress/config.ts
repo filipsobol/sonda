@@ -47,6 +47,7 @@ export default defineConfig({
               { text: 'Next.js', link: '/frameworks/nextjs' },
               { text: 'Nuxt', link: '/frameworks/nuxt' },
               { text: 'Astro', link: '/frameworks/astro' },
+              { text: 'SvelteKit', link: '/frameworks/sveltekit' },
             ]
           }
         ]

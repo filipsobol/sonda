@@ -25,14 +25,14 @@ import { defineConfig } from 'astro/config';
 import Sonda from 'sonda/astro'; // [!code focus]
 
 export default defineConfig({
- vite: {
-  build: {
-   sourcemap: true // [!code focus]
-  }
- },
- integrations: [
-  Sonda() // [!code focus]
- ]
+  vite: {
+    build: {
+    sourcemap: true // [!code focus]
+    }
+  },
+  integrations: [
+    Sonda() // [!code focus]
+  ]
 });
 ```
 
@@ -56,19 +56,19 @@ import node from '@astrojs/node';
 import Sonda from 'sonda/astro';
 
 export default defineConfig({
- output: 'server',
- adapter: node( {
-  mode: 'standalone'
- } ),
- vite: {
-  build: {
-   sourcemap: true
-  }
- },
- integrations: [
-  Sonda( {  // [!code focus]
-   server: true  // [!code focus]
-  } )  // [!code focus]
- ]
+  output: 'server',
+  adapter: node( {
+    mode: 'standalone'
+  } ),
+  vite: {
+    build: {
+    sourcemap: true
+    }
+  },
+  integrations: [
+    Sonda( {  // [!code focus]
+    server: true  // [!code focus]
+    } )  // [!code focus]
+  ]
 });
 ```

@@ -14,6 +14,7 @@ Sonda works with the following tools:
   * Next.js
   * Nuxt
   * Astro
+  * SvelteKit
 
 ## Installation
 

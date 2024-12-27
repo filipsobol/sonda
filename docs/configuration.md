@@ -55,6 +55,14 @@ Specifies the output format of the report. Supported formats include:
 
 Specifies the path of the generated report. This can be a filename, a relative path, or an absolute path. By default, the report is saved in the current working directory.
 
+::: tip 💡 Framework integrations
+Frameworks typically generate separate server and client bundles. Therefore, the `filename` option for frameworks must include a `[env]` token, which is replaced with the environment name (e.g., `'server'`, `'client'`, or similar).
+
+The default value for the `filename` option in frameworks is `'sonda-report-[env].html'` or `'sonda-report-[env].json'`, depending on the `format` option.
+
+This does not apply to bundler plugins, as they generate a single type of bundles.
+:::
+
 ### `open`
 
 * **Type:** boolean
@@ -113,3 +121,14 @@ The report includes estimated compressed sizes for each file within an asset. Ho
 Enabling this option may increase the time required to generate the report.
 
 For more details, see the [Compression sizes](/features/compression-sizes) section.
+
+### `server` <Badge type="tip" text="Introduced in 0.7.0" />
+
+* **Type:** boolean
+* **Default:** `false`
+
+Specifies whether to generate reports for server bundles in addition to client bundles.
+
+::: tip 💡 Framework integrations
+This option is available only in framework integrations.
+:::

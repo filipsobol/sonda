@@ -15,6 +15,7 @@ const sharedOptions = defineConfig( {
 		'entrypoints/nuxt': 'src/entrypoints/nuxt.ts',
 		'entrypoints/parcel': 'src/entrypoints/parcel.ts',
 		'entrypoints/rollup': 'src/entrypoints/rollup.ts',
+		'entrypoints/sveltekit': 'src/entrypoints/sveltekit.ts',
 		'entrypoints/webpack': 'src/entrypoints/webpack.ts',
 	},
 	external: [

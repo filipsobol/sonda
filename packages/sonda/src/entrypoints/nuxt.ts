@@ -8,7 +8,8 @@ export default function SondaNuxtPlugin( options: Partial<FrameworkUserOptions> 
       return;
     }
 
-    options.filename ??= `sonda-report-[env].html`;
+    options.format ??= 'html';
+    options.filename ??= `sonda-report-[env].${ options.format }`;
 
     // Nuxt runs few builds and each must generate a separate report
     if ( !options.filename.includes( '[env]' ) ) {

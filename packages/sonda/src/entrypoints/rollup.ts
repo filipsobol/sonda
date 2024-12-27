@@ -11,16 +11,16 @@ import {
 import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
 
 export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ): Plugin {
-	if ( options.enabled === false ) {
-		return { name: 'sonda' };
-	}
-
 	let inputs: JsonReport[ 'inputs' ] = {};
 
 	return {
 		name: 'sonda',
 
 		moduleParsed( module: ModuleInfo ) {
+			if ( options.enabled === false ) {
+				return;
+			}
+
 			inputs[ normalizePath( module.id ) ] = {
 				bytes: module.code ? Buffer.byteLength( module.code ) : 0,
 				format: getFormat( module.id, module.meta.commonjs?.isCommonJS ),
@@ -33,6 +33,10 @@ export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ):
 			{ dir, file }: NormalizedOutputOptions,
 			bundle: OutputBundle
 		) {
+			if ( options.enabled === false ) {
+				return;
+			}
+
 			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
 			const assets = Object.keys( bundle ).map( name => resolve( outputDir, name ) );
 

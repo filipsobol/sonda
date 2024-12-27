@@ -61,6 +61,11 @@
       "import": "./dist/entrypoints/rollup.mjs",
       "require": "./dist/entrypoints/rollup.cjs"
     },
+    "./sveltekit": {
+      "types": "./dist/entrypoints/sveltekit.d.ts",
+      "import": "./dist/entrypoints/sveltekit.mjs",
+      "require": "./dist/entrypoints/sveltekit.cjs"
+    },
     "./rspack": {
       "types": "./dist/entrypoints/webpack.d.ts",
       "import": "./dist/entrypoints/webpack.mjs",

@@ -17,6 +17,7 @@
     "playground-rollup",
     "playground-rolldown",
     "playground-rspack",
+    "playground-sveltekit",
     "playground-vite",
     "playground-webpack"
   ]
