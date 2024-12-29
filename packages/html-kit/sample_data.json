@@ -1,0 +1,1657 @@
+{
+  "inputs": {
+    "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom/dist/index.mjs": {
+      "bytes": 6494,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs": {
+      "bytes": 22732,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs": {
+      "bytes": 4784,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unhead@1.11.14/node_modules/unhead/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.f49591ad.mjs",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.8fc199ce.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.8fc199ce.mjs": {
+      "bytes": 1035,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.f49591ad.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.f49591ad.mjs": {
+      "bytes": 2729,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unhead@1.11.14/node_modules/unhead/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/api.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/app.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/component.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/context.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/hooks.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/index.js": {
+      "bytes": 169,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/api.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/app.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/component.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/context.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/hooks.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/util.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/util.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js": {
+      "bytes": 114,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/env.js": {
+      "bytes": 457,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/index.js": {
+      "bytes": 1021,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/env.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/proxy.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/index.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/plugin.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/plugin.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/proxy.js": {
+      "bytes": 3535,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js": {
+      "bytes": 652,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": {
+      "bytes": 48594,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": {
+      "bytes": 247840,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": {
+      "bytes": 55650,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js": {
+      "bytes": 22471,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs": {
+      "bytes": 6943,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs": {
+      "bytes": 2052,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs": {
+      "bytes": 2206,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/index.js": {
+      "bytes": 141,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/uneval.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/stringify.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js": {
+      "bytes": 2945,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js": {
+      "bytes": 183,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js": {
+      "bytes": 3919,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/stringify.js": {
+      "bytes": 5197,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/uneval.js": {
+      "bytes": 7830,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js": {
+      "bytes": 2373,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs": {
+      "bytes": 71029,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs",
+        "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs",
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs",
+        "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto/dist/crypto.web.mjs",
+        "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto/dist/index.js",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs": {
+      "bytes": 8302,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto/dist/index.js": {
+      "bytes": 11278,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs": {
+      "bytes": 1531,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/compat/idle-callback.js": {
+      "bytes": 430,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/client-only.js": {
+      "bytes": 4248,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/utils.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/server-placeholder.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-404.vue": {
+      "bytes": 5497,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-link.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-404.vue?vue&type=style&index=0&scoped=ff5b2ed3&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-404.vue?vue&type=style&index=0&scoped=ff5b2ed3&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-500.vue": {
+      "bytes": 4498,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-500.vue?vue&type=style&index=0&scoped=05cec90a&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-500.vue?vue&type=style&index=0&scoped=05cec90a&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-dev.vue": {
+      "bytes": 5016,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-dev.vue?vue&type=style&index=0&scoped=03718c5d&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-dev.vue?vue&type=style&index=0&scoped=03718c5d&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/index.js": {
+      "bytes": 49,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-link.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/injections.js": {
+      "bytes": 103,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/island-renderer.js": {
+      "bytes": 871,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/components.islands.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-error-page.vue": {
+      "bytes": 2294,
+      "format": "unknown",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-link.js": {
+      "bytes": 13350,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/compat/idle-callback.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/router.options.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-root.vue": {
+      "bytes": 3798,
+      "format": "unknown",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/injections.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/app-component.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/error-component.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js": {
+      "bytes": 1230,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/route-announcer.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/server-placeholder.js": {
+      "bytes": 180,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/test-component-wrapper.js": {
+      "bytes": 941,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.2_/node_modules/vue-router/dist/vue-router.mjs",
+        "../../node_modules/.pnpm/pathe@1.1.2/node_modules/pathe/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/utils.js": {
+      "bytes": 3723,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/pages.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/welcome.vue": {
+      "bytes": 93876,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/welcome.vue?vue&type=style&index=0&scoped=b4c2d0db&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/welcome.vue?vue&type=style&index=0&scoped=b4c2d0db&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/asyncData.js": {
+      "bytes": 9538,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/utils.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/chunk.js": {
+      "bytes": 876,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/component.js": {
+      "bytes": 2130,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/cookie.js": {
+      "bytes": 6405,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs",
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs",
+        "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ssr.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js": {
+      "bytes": 1303,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/fetch.js": {
+      "bytes": 3640,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ssr.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/hydrate.js": {
+      "bytes": 340,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/id.js": {
+      "bytes": 68,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/index.js": {
+      "bytes": 1500,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/component.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/hydrate.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/once.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/state.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/fetch.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/cookie.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ssr.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/chunk.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/url.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preview.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/id.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/route-announcer.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/runtime-hook.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js": {
+      "bytes": 1968,
+      "format": "esm",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/paths.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/once.js": {
+      "bytes": 944,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/payload.js": {
+      "bytes": 4420,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/index.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preload.js": {
+      "bytes": 1685,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/utils.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preview.js": {
+      "bytes": 1941,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/state.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js": {
+      "bytes": 415,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/compat/idle-callback.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/route-announcer.js": {
+      "bytes": 1687,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/index.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js": {
+      "bytes": 6559,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/injections.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/runtime-hook.js": {
+      "bytes": 231,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ssr.js": {
+      "bytes": 3322,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/state.js": {
+      "bytes": 1434,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/url.js": {
+      "bytes": 230,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ssr.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/config.js": {
+      "bytes": 1691,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        ".nuxt/app.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/entry.js": {
+      "bytes": 2758,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/fetch.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/css.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/plugins.client.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/root-component.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/index.js": {
+      "bytes": 1389,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/index.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/index.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/config.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/compat/idle-callback.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js": {
+      "bytes": 792,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js": {
+      "bytes": 8759,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs",
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js": {
+      "bytes": 925,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/paths.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js": {
+      "bytes": 1042,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/chunk.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js": {
+      "bytes": 472,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/payload.client.js": {
+      "bytes": 1144,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/revive-payload.client.js": {
+      "bytes": 1892,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/router.js": {
+      "bytes": 7842,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/middleware.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/utils.js": {
+      "bytes": 84,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/head/runtime/plugins/unhead.js": {
+      "bytes": 1288,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/unhead-plugins.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs": {
+      "bytes": 930,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs": {
+      "bytes": 10269,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs": {
+      "bytes": 21150,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/pathe@1.1.2/node_modules/pathe/dist/index.mjs": {
+      "bytes": 272,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/pathe@1.1.2/node_modules/pathe/dist/shared/pathe.ff20891b.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/pathe@1.1.2/node_modules/pathe/dist/shared/pathe.ff20891b.mjs": {
+      "bytes": 6539,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs": {
+      "bytes": 7778,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs": {
+      "bytes": 19705,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto/dist/crypto.web.mjs": {
+      "bytes": 348,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs": {
+      "bytes": 3827,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/_internal/utils.mjs": {
+      "bytes": 895,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/mock/proxy.mjs": {
+      "bytes": 872,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/events/_events.mjs": {
+      "bytes": 6481,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/events/index.mjs": {
+      "bytes": 218,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/events/_events.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_consts.mjs": {
+      "bytes": 2171,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_request.mjs": {
+      "bytes": 1129,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/net/socket.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/readable.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/_internal/utils.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_response.mjs": {
+      "bytes": 2193,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/writable.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/index.mjs": {
+      "bytes": 1293,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/_internal/utils.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/mock/proxy.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_consts.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_request.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/http/_response.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/net/socket.mjs": {
+      "bytes": 1425,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/duplex.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/duplex.mjs": {
+      "bytes": 678,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/_internal/utils.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/readable.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/writable.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/readable.mjs": {
+      "bytes": 2741,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/_internal/utils.mjs",
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/events/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/stream/writable.mjs": {
+      "bytes": 2357,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/node/events/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unhead@1.11.14/node_modules/unhead/dist/index.mjs": {
+      "bytes": 23551,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs",
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.2_/node_modules/vue-router/dist/vue-router.mjs": {
+      "bytes": 94029,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/index.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js": {
+      "bytes": 497,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    ".nuxt/app.config.mjs": {
+      "bytes": 267,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/config.js",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs"
+      ],
+      "belongsTo": null
+    },
+    ".nuxt/manifest/meta/8539555f-3a38-4b10-8a16-e68bc9aa9b76.json": {
+      "bytes": 20,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "app.vue": {
+      "bytes": 1331,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/client-only.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/welcome.vue",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "plugin-vue:export-helper"
+      ],
+      "belongsTo": null
+    },
+    "plugin-vue:export-helper": {
+      "bytes": 155,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/app-component.mjs": {
+      "bytes": 77,
+      "format": "esm",
+      "imports": [
+        "app.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/components.islands.mjs": {
+      "bytes": 91,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/components.plugin.mjs": {
+      "bytes": 117,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/css.mjs": {
+      "bytes": 0,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/error-component.mjs": {
+      "bytes": 251,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-error-page.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/fetch.mjs": {
+      "bytes": 172,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/paths.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/middleware.mjs": {
+      "bytes": 362,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nitro.client.mjs": {
+      "bytes": 69,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs": {
+      "bytes": 1769,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/pages.mjs": {
+      "bytes": 112,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/paths.mjs": {
+      "bytes": 632,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nitro.client.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/plugins.client.mjs": {
+      "bytes": 2263,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/revive-payload.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/head/runtime/plugins/unhead.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/payload.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js",
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/components.plugin.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/root-component.mjs": {
+      "bytes": 245,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-root.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/router.options.mjs": {
+      "bytes": 47,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/test-component-wrapper.mjs": {
+      "bytes": 254,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/test-component-wrapper.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/unhead-plugins.mjs": {
+      "bytes": 223,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "vite/preload-helper.js": {
+      "bytes": 2300,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    }
+  },
+  "outputs": {
+    ".nuxt/dist/client/_nuxt/B4rxMIo5.js": {
+      "uncompressed": 3425,
+      "gzip": 0,
+      "brotli": 0,
+      "inputs": {
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-500.vue": {
+          "uncompressed": 2831,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "[unassigned]": {
+          "uncompressed": 594,
+          "gzip": 0,
+          "brotli": 0
+        }
+      }
+    },
+    ".nuxt/dist/client/_nuxt/C_E7rgi3.js": {
+      "uncompressed": 9451,
+      "gzip": 0,
+      "brotli": 0,
+      "inputs": {
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/error-404.vue": {
+          "uncompressed": 3039,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-link.js": {
+          "uncompressed": 5618,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/preload.js": {
+          "uncompressed": 518,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "[unassigned]": {
+          "uncompressed": 276,
+          "gzip": 0,
+          "brotli": 0
+        }
+      }
+    },
+    ".nuxt/dist/client/_nuxt/DRdYo1xP.js": {
+      "uncompressed": 219543,
+      "gzip": 0,
+      "brotli": 0,
+      "inputs": {
+        "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom/dist/index.mjs": {
+          "uncompressed": 3394,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared/dist/index.mjs": {
+          "uncompressed": 4543,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.8fc199ce.mjs": {
+          "uncompressed": 1424,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue/dist/shared/vue.f49591ad.mjs": {
+          "uncompressed": 1036,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": {
+          "uncompressed": 16363,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": {
+          "uncompressed": 45660,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": {
+          "uncompressed": 6012,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js": {
+          "uncompressed": 3137,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs": {
+          "uncompressed": 667,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs": {
+          "uncompressed": 1252,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js": {
+          "uncompressed": 609,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js": {
+          "uncompressed": 42,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js": {
+          "uncompressed": 1530,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs": {
+          "uncompressed": 1715,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs": {
+          "uncompressed": 2927,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/compat/idle-callback.js": {
+          "uncompressed": 216,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/client-only.js": {
+          "uncompressed": 1372,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/injections.js": {
+          "uncompressed": 25,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-error-page.vue": {
+          "uncompressed": 786,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-root.vue": {
+          "uncompressed": 708,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js": {
+          "uncompressed": 1926,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/utils.js": {
+          "uncompressed": 593,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/components/welcome.vue": {
+          "uncompressed": 91049,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/chunk.js": {
+          "uncompressed": 509,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/error.js": {
+          "uncompressed": 439,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/manifest.js": {
+          "uncompressed": 507,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/payload.js": {
+          "uncompressed": 1316,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/ready.js": {
+          "uncompressed": 106,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/route-announcer.js": {
+          "uncompressed": 839,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/composables/router.js": {
+          "uncompressed": 1186,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/entry.js": {
+          "uncompressed": 966,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js": {
+          "uncompressed": 184,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/nuxt.js": {
+          "uncompressed": 2790,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js": {
+          "uncompressed": 254,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js": {
+          "uncompressed": 378,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js": {
+          "uncompressed": 151,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/payload.client.js": {
+          "uncompressed": 394,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/revive-payload.client.js": {
+          "uncompressed": 462,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/app/plugins/router.js": {
+          "uncompressed": 2892,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt/dist/head/runtime/plugins/unhead.js": {
+          "uncompressed": 398,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs": {
+          "uncompressed": 415,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs": {
+          "uncompressed": 5230,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs": {
+          "uncompressed": 660,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs": {
+          "uncompressed": 4304,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs": {
+          "uncompressed": 1238,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "../../node_modules/.pnpm/unhead@1.11.14/node_modules/unhead/dist/index.mjs": {
+          "uncompressed": 6019,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "[unassigned]": {
+          "uncompressed": 204,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "app.vue": {
+          "uncompressed": 125,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/components.plugin.mjs": {
+          "uncompressed": 39,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/fetch.mjs": {
+          "uncompressed": 65,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/middleware.mjs": {
+          "uncompressed": 8,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nitro.client.mjs": {
+          "uncompressed": 83,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/nuxt.config.mjs": {
+          "uncompressed": 141,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/paths.mjs": {
+          "uncompressed": 220,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/plugins.client.mjs": {
+          "uncompressed": 29,
+          "gzip": 0,
+          "brotli": 0
+        },
+        "virtual:nuxt:/home/filip/Projects/sonda/playground/nuxt/.nuxt/unhead-plugins.mjs": {
+          "uncompressed": 6,
+          "gzip": 0,
+          "brotli": 0
+        }
+      }
+    },
+    ".nuxt/dist/test/123.js": {
+      "uncompressed": 0,
+      "gzip": 0,
+      "brotli": 0,
+      "inputs": {}
+    }
+  },
+  "dependecies": {
+    "@unhead/dom": [
+      "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom"
+    ],
+    "@unhead/shared": [
+      "../../node_modules/.pnpm/@unhead+shared@1.11.14/node_modules/@unhead/shared"
+    ],
+    "@unhead/vue": [
+      "../../node_modules/.pnpm/@unhead+vue@1.11.14_vue@3.5.13_typescript@5.7.2_/node_modules/@unhead/vue"
+    ],
+    "@vue/devtools-api": [
+      "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api"
+    ],
+    "@vue/reactivity": [
+      "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity"
+    ],
+    "@vue/runtime-core": [
+      "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core"
+    ],
+    "@vue/runtime-dom": [
+      "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom"
+    ],
+    "@vue/shared": [
+      "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared"
+    ],
+    "cookie-es": [
+      "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es"
+    ],
+    "defu": [
+      "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu"
+    ],
+    "destr": [
+      "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr"
+    ],
+    "devalue": [
+      "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue"
+    ],
+    "h3": [
+      "../../node_modules/.pnpm/h3@1.13.0/node_modules/h3"
+    ],
+    "hookable": [
+      "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable"
+    ],
+    "iron-webcrypto": [
+      "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto"
+    ],
+    "klona": [
+      "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona"
+    ],
+    "nuxt": [
+      "../../node_modules/.pnpm/nuxt@3.15.0_@parcel+watcher@2.5.0_@types+node@22.10.2_db0@0.2.1_ioredis@5.4.2_lightningcss@1._a5ah4axf4wljkt65rkpqrqtr7e/node_modules/nuxt"
+    ],
+    "ofetch": [
+      "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch"
+    ],
+    "ohash": [
+      "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash"
+    ],
+    "pathe": [
+      "../../node_modules/.pnpm/pathe@1.1.2/node_modules/pathe"
+    ],
+    "radix3": [
+      "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3"
+    ],
+    "ufo": [
+      "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo"
+    ],
+    "uncrypto": [
+      "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto"
+    ],
+    "unctx": [
+      "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx"
+    ],
+    "unenv": [
+      "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv"
+    ],
+    "unhead": [
+      "../../node_modules/.pnpm/unhead@1.11.14/node_modules/unhead"
+    ],
+    "vue-router": [
+      "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.2_/node_modules/vue-router"
+    ],
+    "vue": [
+      "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.2/node_modules/vue"
+    ]
+  },
+  "issues": {}
+}

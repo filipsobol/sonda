@@ -1,6 +1,5 @@
 
 import type { JsonReport } from 'sonda';
-import type { TileData } from '../TreeMapGenerator';
 
 declare module 'svelte/elements' {
 	interface HTMLAttributes<T> {
