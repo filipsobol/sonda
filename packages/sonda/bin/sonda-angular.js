@@ -6,7 +6,7 @@ import Sonda from 'sonda/angular';
 const { values } = parseArgs( {
   options: {
     config: { type: 'string' },
-    project: { type: 'string', multiple: true },
+    projects: { type: 'string', multiple: true },
     format: { type: 'string' },
     filename: { type: 'string' },
     'no-open': { type: 'boolean' },

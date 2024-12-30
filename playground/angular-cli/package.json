@@ -8,7 +8,6 @@
     "build:angular-cli": "ng build angular-cli",
     "build:subproject": "ng build subproject",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "serve:ssr:angular-cli": "node dist/angular-cli/server/server.mjs",
     "serve:ssr:subproject": "node dist/subproject/server/server.mjs",
     "sonda": "sonda-angular"
