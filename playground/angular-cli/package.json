@@ -10,7 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "serve:ssr:angular-cli": "node dist/angular-cli/server/server.mjs",
     "serve:ssr:subproject": "node dist/subproject/server/server.mjs",
-    "sonda": "sonda-angular"
+    "sonda": "sonda-angular --projects=angular-cli"
   },
   "private": true,
   "dependencies": {

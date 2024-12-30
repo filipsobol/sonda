@@ -1,5 +1,5 @@
-import { relative, resolve } from 'path';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
+import { basename, relative, resolve } from 'path';
 import type { UserOptions } from '../types';
 import type { Metafile } from 'esbuild';
 import { processEsbuildMetaFile } from './esbuild';
@@ -7,6 +7,12 @@ import { processEsbuildMetaFile } from './esbuild';
 interface AngularUserOptions extends UserOptions {
   config: string;
   projects: string[];
+}
+
+interface Paths {
+  base: string;
+  browser: string;
+  server: string;
 }
 
 export default function SondaAngular( options: Partial<AngularUserOptions> = {} ): void {
@@ -30,7 +36,7 @@ export default function SondaAngular( options: Partial<AngularUserOptions> = {} 
 
   for ( const project of projectsToGenerate ) {
     const { outputPath } = angularConfig.projects[ project ].architect.build.options;
-    const paths: Record<'base' | 'browser' | 'server', string> = typeof outputPath === 'object'
+    const paths: Paths = typeof outputPath === 'object'
       ? outputPath
       : { base: outputPath };
 
@@ -38,16 +44,10 @@ export default function SondaAngular( options: Partial<AngularUserOptions> = {} 
     paths.browser = resolve( paths.base, paths.browser || 'browser' );
     paths.server = resolve( paths.base, paths.server || 'server' );
 
-    const metafile = loadJson<Metafile>( resolve( paths.base, 'stats.json' ) );
-
-    for ( const [ output, data ] of Object.entries( metafile.outputs ) ) {
-      // Paths in outputs don't include the server and browser directories, so we need to add them
-      const isBrowserFile = existsSync( resolve( paths.browser, output ) );
-      const newOutput = relative( cwd, resolve( isBrowserFile ? paths.browser : paths.server, output ) );
-
-      metafile.outputs[ newOutput ] = data;
-      delete metafile.outputs[ output ];
-    }
+    const metafile = updateMetafile(
+      loadJson<Metafile>( resolve( paths.base, 'stats.json' ) ),
+      paths
+    );
 
     // Because this configuration is shared between multiple projects, we need to clone it
     const sondaOptions = Object.assign( {}, opts );
@@ -63,4 +63,36 @@ function loadJson<T extends any = any>( path: string ): T {
   return JSON.parse(
     readFileSync( resolve( process.cwd(), path ), 'utf8' )
   );
+}
+
+/**
+ * Output paths in metafile only include file name, without the relative path from the current
+ * working directory. For example, in the metafile the output path is "main-xxx.js", but in the
+ * file system it's "dist/project/browser/en/main-xxx.js". This function updates the output paths
+ * to include the relative path from the current working directory.
+ */
+function updateMetafile(
+  metafile: Metafile,
+  paths: Paths
+): Metafile {
+  const cwd = process.cwd();
+
+  // Clone the original outputs object
+  const outputs = Object.assign( {}, metafile.outputs );
+
+  // Reset the outputs
+  metafile.outputs = {};
+
+  for ( const path of readdirSync( paths.base, { encoding: 'utf8', recursive: true } ) ) {
+    const absolutePath = resolve( paths.base, path );
+    const filename = basename( absolutePath );
+    const originalOutput = outputs[ filename ];
+
+    // If the output file name exists in the original outputs, add the updated relative path
+    if ( originalOutput ) {
+      metafile.outputs[ relative( cwd, absolutePath ) ] = originalOutput;
+    }
+  }
+
+  return metafile;
 }
