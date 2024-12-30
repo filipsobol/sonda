@@ -29,12 +29,7 @@ export default function SondaAngular( options: Partial<AngularUserOptions> = {} 
   const projectsToGenerate = projects.length ? projects : Object.keys( angularConfig.projects );
 
   for ( const project of projectsToGenerate ) {
-    const { statsJson, outputPath } = angularConfig.projects[ project ].architect.build.options;
-
-    if ( !statsJson ) {
-      continue;
-    }
-
+    const { outputPath } = angularConfig.projects[ project ].architect.build.options;
     const paths: Record<'base' | 'browser' | 'server', string> = typeof outputPath === 'object'
       ? outputPath
       : { base: outputPath };
