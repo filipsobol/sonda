@@ -4,7 +4,7 @@
 	<div class="relative flex min-h-svh flex-1 flex-col { !collapsed && 'w-[calc(100%-300px)]' }">
 		<Header bind:collapsed={ collapsed } />
 
-		<main class="w-full h-full flex flex-col">
+		<main class="w-full h-full flex flex-col p-4">
 			{@render children()}
 		</main>
 	</div>
