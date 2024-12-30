@@ -1,4 +1,4 @@
-'use strict';
+#!/usr/bin/env node
 
 import { parseArgs } from 'util';
 import Sonda from 'sonda/angular';
