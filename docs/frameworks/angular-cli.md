@@ -27,12 +27,12 @@ Next, enable JSON stats and source maps in the `angular.json` file:
       "architect": {
         "build": {
           "options": {
-            "statsJson": true,
-            "sourceMap": {
-              "scripts": true,
-              "styles": true,
-              "vendor": true
-            }
+            "statsJson": true, // [!code focus]
+            "sourceMap": { // [!code focus]
+              "scripts": true, // [!code focus]
+              "styles": true, // [!code focus]
+              "vendor": true // [!code focus]
+            } // [!code focus]
           }
         }
       }
@@ -41,7 +41,9 @@ Next, enable JSON stats and source maps in the `angular.json` file:
 }
 ```
 
-You may need to repeat this step for every project in your workspace. The `sourceMap.styles` and `sourceMap.vendor` options are optional. Enable them if you want to analyze styles and vendor scripts.
+You may need to repeat this step for every project in your workspace.
+
+The `sourceMap.styles` and `sourceMap.vendor` options are optional. Enable them if you want to analyze styles and vendor scripts.
 
 Sonda requires source maps to function correctly, but some other plugins may not support or generate them by default. If Sonda does not work as expected, check the documentation for the other plugins you are using to ensure source maps are enabled.
 
@@ -101,7 +103,7 @@ The steps above will allow you to generate your first report. However, if the re
 
 #### Additional configuration options
 
-In addition to the options listed on the configuration page, the Angular CLI integration has additional options.
+In addition to the options listed on the configuration page, the Angular CLI integration accepts two additional options.
 
 ##### `config`
 
