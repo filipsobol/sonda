@@ -48,6 +48,7 @@ export default defineConfig({
               { text: 'Nuxt', link: '/frameworks/nuxt' },
               { text: 'Astro', link: '/frameworks/astro' },
               { text: 'SvelteKit', link: '/frameworks/sveltekit' },
+              { text: 'Angular CLI', link: '/frameworks/angular-cli' },
             ]
           }
         ]
