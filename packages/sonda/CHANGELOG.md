@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1
+
+### Patch Changes
+
+- e05d444: Add Angular CLI integration
+
 ## 0.7.0
 
 ### Changes
@@ -19,10 +25,10 @@ Please refer to the [Getting started](https://sonda.dev/getting-started.html) pa
 
 Sonda now has integrations for the following frameworks:
 
-* [Next.js](https://sonda.dev/frameworks/nextjs.html)
-* [Nuxt](https://sonda.dev/frameworks/nuxt.html)
-* [Astro](https://sonda.dev/frameworks/astro.html)
-* [SvelteKit](https://sonda.dev/frameworks/sveltekit.html)
+- [Next.js](https://sonda.dev/frameworks/nextjs.html)
+- [Nuxt](https://sonda.dev/frameworks/nuxt.html)
+- [Astro](https://sonda.dev/frameworks/astro.html)
+- [SvelteKit](https://sonda.dev/frameworks/sveltekit.html)
 
 #### New `enabled` option
 
