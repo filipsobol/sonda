@@ -16,6 +16,7 @@ Sonda works with the following tools:
   * Nuxt
   * Astro
   * SvelteKit
+  * Angular CLI
 
 ## Installation
 

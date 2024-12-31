@@ -1,0 +1,48 @@
+{
+  "name": "playground-angular-cli",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "pnpm run build:angular-cli && pnpm run build:subproject",
+    "build:angular-cli": "ng build angular-cli",
+    "build:subproject": "ng build subproject",
+    "watch": "ng build --watch --configuration development",
+    "serve:ssr:angular-cli": "node dist/angular-cli/server/server.mjs",
+    "serve:ssr:subproject": "node dist/subproject/server/server.mjs",
+    "sonda": "sonda-angular --projects=angular-cli"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/platform-server": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "@angular/ssr": "^19.0.6",
+    "express": "^4.18.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.6",
+    "@angular/cli": "^19.0.6",
+    "@angular/compiler-cli": "^19.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "jasmine-core": "~5.4.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "sonda": "workspace:^",
+    "typescript": "~5.6.2"
+  }
+}
