@@ -1,12 +1,11 @@
 {
   "name": "sonda",
   "version": "0.7.0",
-  "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild",
+  "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with most popular bundlers and frameworks.",
   "keywords": [
     "bundle",
-    "analyzer",
     "visualizer",
-    "source-map",
+    "analyzer",
     "vite",
     "rollup",
     "rolldown",
@@ -15,7 +14,11 @@
     "esbuild",
     "nextjs",
     "nuxt",
-    "astro"
+    "withastro",
+    "sveltekit",
+    "angular",
+    "performance",
+    "devtools"
   ],
   "license": "MIT",
   "type": "module",
@@ -30,6 +33,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./angular": {
+      "types": "./dist/entrypoints/angular.d.ts",
+      "import": "./dist/entrypoints/angular.mjs",
+      "require": "./dist/entrypoints/angular.cjs"
     },
     "./astro": {
       "types": "./dist/entrypoints/astro.d.ts",
@@ -84,9 +92,13 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "bin",
     "dist",
     "CHANGELOG.md"
   ],
+  "bin": {
+    "sonda-angular": "./bin/sonda-angular.js"
+  },
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
