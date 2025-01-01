@@ -1,7 +1,7 @@
-<div class={ [ 'flex bg-stone-50 border-r border-r-stone-200 overflow-hidden', classes ] } { ...props }>
+<div class={ [ 'flex bg-gray-50 border-r border-r-gray-200 text-gray-700 overflow-hidden', classes ] } { ...props }>
   <div class="flex h-full w-full flex-col">
     <div class="flex flex-col h-14">
-      <a href="https://sonda.dev/" target="_blank" class="p-4 text-center text-stone-700 hover:text-stone-900">
+      <a href="https://sonda.dev/" target="_blank" class="p-4 text-center text-gray-700 hover:text-gray-900">
         <svg
           width="24"
           height="24"
@@ -18,35 +18,104 @@
       </a>
     </div>
 
-    <div class="flex-min-h-0 flex-1 flex-col overflow-auto p-2">
+    <div class="flex-min-h-0 flex-1 flex-col p-2">
       <!-- <div class="mt-4">
         <Button variant="white" align="start">
-        <Search size={ 16 } class="-mt-1/2 mr-2 text-stone-400" />
+        <Search size={ 16 } class="-mt-1/2 mr-2 text-gray-400" />
 
           Search
         </Button>
       </div> -->
 
-      <div class="mt-4">
-        <p class="ml-2 py-2 text-sm font-semibold text-stone-500">Assets</p>
-        <List items={ [ tree ] } />
-      </div>
-    </div>
+      <div class="mt-4 flex flex-col gap-2">
+        <Button
+          element="link"
+          variant="ghost"
+          align="start"
+          full={ true }
+          href="/#/"
+        >
+          <LayoutGrid
+            size={ 16 }
+            class="flex-shrink-0 text-gray--600 pointer-events-none"
+          />
 
-    <div class="flex flex-col">
-      <div class="mt-8">
-        <p class="ml-2 py-2 text-sm font-semibold text-stone-500">Settings</p>
-        <p>Compression switch</p>
-        <p>Warnings</p>
-        <p>Dependencies</p>
+          <span class="truncate pointer-events-none">Home</span>
+        </Button>
+
+        <div>
+          <Button
+            variant="ghost"
+            align="start"
+            full={ true }
+          >
+            <Boxes
+              size={ 16 }
+              class="flex-shrink-0 text-gray--600 pointer-events-none"
+            />
+
+            <span class="truncate pointer-events-none">Assets</span>
+          </Button>
+
+          <div class="ml-6">
+            <List items={ [ tree ] } />
+          </div>
+        </div>
+
+        <Button
+          element="link"
+          variant="ghost"
+          align="start"
+          full={ true }
+          href="/#/inputs"
+        >
+          <FileInput
+            size={ 16 }
+            class="flex-shrink-0 text-gray--600 pointer-events-none"
+          />
+
+          <span class="truncate pointer-events-none">Inputs</span>
+        </Button>
+
+        <Button
+          element="link"
+          variant="ghost"
+          align="start"
+          full={ true }
+          href="/#/warnings"
+        >
+          <CircleAlert
+            size={ 16 }
+            class="flex-shrink-0 text-gray--600 pointer-events-none"
+          />
+
+          <span class="truncate pointer-events-none">Warnings</span>
+        </Button>
+
+        <Button
+          element="link"
+          variant="ghost"
+          align="start"
+          full={ true }
+          href="/#/dependencies"
+        >
+          <Share2
+            size={ 16 }
+            class="flex-shrink-0 text-gray--600 pointer-events-none"
+          />
+
+          <span class="truncate pointer-events-none">Dependencies</span>
+        </Button>
       </div>
     </div>
   </div>
 </div>
 
 <script lang="ts">
+import { LayoutGrid, Boxes, FileInput, CircleAlert, Share2 } from 'lucide-svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import List from '$lib/Sidebar/List.svelte';
+import Button from '$lib/Button/Button.svelte';
 import { store } from '$lib/store.svelte';
 import { getTrie } from '$lib/helpers/OutputTrie';
 

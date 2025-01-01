@@ -2,7 +2,7 @@
 	<button
 		title="See duplicated modules found in the build"
 		aria-label="List of duplicated modules found in the build output"
-		class="text-gray-900 bg-red-50 border border-red-400 focus:outline-none hover:bg-red-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
+		class="text-gray-900 bg-red-50 border border-red-400 focus:outline-none hover:bg-red-100 focus:ring-1 focus:ring-blue-300 rounded-lg text-sm px-5 h-10"
 		{ onclick }
 	>
 		<TriangleAlert />

@@ -1,4 +1,4 @@
-<ul class="text-stone-700">
+<ul>
   {#each items as item }
     <li>
       {#if isFolder(item) }

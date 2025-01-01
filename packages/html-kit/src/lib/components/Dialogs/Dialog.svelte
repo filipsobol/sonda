@@ -17,7 +17,7 @@
 		class:h-[95vh]={ large }
 	>
 		<div class="mb-4">
-			<h2 class="py-2 pr-6 block align-text-bottom font-semibold leading-none tracking-tight text-base border-b-2 border-gray-300 border-dashed">{ heading }</h2>
+			<h2 class="py-2 pr-6 block align-text-bottom font-bold leading-none tracking-tight text-base border-b-2 border-gray-300 border-dashed">{ heading }</h2>
 			<button
 				onclick={ () => console.log( 'TODO' ) }
 				aria-label="Close dialog"

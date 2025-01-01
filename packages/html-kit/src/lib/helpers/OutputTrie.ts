@@ -17,7 +17,7 @@ export function getTrie( items: Array<string> ): Folder {
   items.forEach( item => trie.insert( item ) );
   trie.optimize();
 
-  return trie.get();
+  return trie.root;
 }
 
 export function isFolder( content: Content ): content is Folder {
@@ -27,7 +27,7 @@ export function isFolder( content: Content ): content is Folder {
 export class FileSystemTrie {
   root: Folder;
 
-  constructor () {
+  constructor() {
     this.root = this.createNode( '', '' ) as Folder;
   }
 
@@ -69,17 +69,13 @@ export class FileSystemTrie {
       while ( node.items.length === 1 && isFolder( node.items[ 0 ] ) ) {
         const child = node.items[ 0 ];
 
-        node.name = `${ node.name }/${ child.name }`;
-        node.path = node.name;
+        node.path = `${ node.path }/${ child.name }`;
+        node.name = child.name;
         node.items = child.items;
       }
 
       // Repeat for child folders
       node.items.forEach( item => isFolder( item ) && stack.push( item ) );
     }
-  }
-
-  get(): Folder {
-    return this.root;
   }
 }

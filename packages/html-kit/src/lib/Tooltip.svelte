@@ -10,12 +10,12 @@
 	bind:clientWidth={ width }
 	bind:clientHeight={ height }
 	role="tooltip"
-	class="fixed z-10 px-2 py-1 bg-gray-800 text-gray-100 rounded-md whitespace-nowrap pointer-events-none"
+	class="fixed z-10 max-w-[400px] px-2 py-1 bg-gray-800 text-gray-100 rounded-md break-words pointer-events-none"
 	class:invisible={ !content }
 	style:--x={ x }
 	style:--y={ y }
 >
-	{ content }
+	{@html content }
 </div>
 
 <script lang="ts">

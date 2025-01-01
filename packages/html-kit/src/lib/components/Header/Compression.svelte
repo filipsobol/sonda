@@ -3,7 +3,7 @@
 		{#each compressions as [ type, name ] ( type )}
 			<button
 				type="button"
-				class="px-4 py-2 text-sm font-medium bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 first:rounded-s-lg last:rounded-e-lg focus:ring-1 focus:ring-blue-300 focus:z-10"
+				class="px-4 py-2 text-sm bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 first:rounded-s-lg last:rounded-e-lg focus:ring-1 focus:ring-blue-300 focus:z-10"
 				class:active={ type === store.compression }
 				onclick={ () => store.compression = type }
 				title={ `Show the ${ name } file size in diagram` }

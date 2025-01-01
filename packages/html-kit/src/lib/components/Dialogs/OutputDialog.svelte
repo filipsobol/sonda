@@ -42,22 +42,22 @@
 			<div class="flex justify-between mt-2">
 				<div class="flex items-center space-x-2">
 					<div class="inline-block w-4 h-4 bg-yellow-300"></div>
-					<p>ESM: <span class="font-semibold">{ esmPercentage }%</span></p>
+					<p>ESM: <span class="font-bold">{ esmPercentage }%</span></p>
 				</div>
 
 				<div class="flex items-center space-x-2">
 					<div class="inline-block w-4 h-4 bg-blue-300"></div>
-					<p>CJS: <span class="font-semibold">{ cjsPercentage }%</span></p>
+					<p>CJS: <span class="font-bold">{ cjsPercentage }%</span></p>
 				</div>
 
 				<div class="flex items-center space-x-2">
 					<div class="inline-block w-4 h-4 bg-gray-300"></div>
-					<p>Unknown: <span class="font-semibold">{ unknownPercentage }%</span></p>
+					<p>Unknown: <span class="font-bold">{ unknownPercentage }%</span></p>
 				</div>
 			</div>
 		{/if}
 
-		<p class="mt-12">This asset includes <span class="font-semibold">{ dependencies.length }</span> external dependencies</p>
+		<p class="mt-12">This asset includes <span class="font-bold">{ dependencies.length }</span> external dependencies</p>
 
 		{#if dependencies.length > 0}
 			<pre class="mt-2 p-4 w-max leading-5 bg-slate-100 rounded overflow-auto min-w-full"><code>{ dependencyTree }</code></pre>
