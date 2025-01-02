@@ -45,9 +45,11 @@
 
         <div>
           <Button
+            element="link"
             variant="ghost"
             align="start"
             full={ true }
+            href="/#/assets"
           >
             <Boxes
               size={ 16 }

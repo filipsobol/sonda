@@ -26,7 +26,7 @@
 >
 	{#if store.trie[assetPath]}
 		{#if activeTab === 'summary'}
-			<h1 class="text-2xl font-bold">Summary</h1>
+			<h1 class="text-2xl font-bold mb-4 text-gray-900">Summary</h1>
 			<p class="text-gray-500">This is a summary of the asset.</p>
 		{:else if activeTab === 'treemap'}
 			<Treemap
@@ -71,10 +71,7 @@ let activeTab = $state( 'summary' );
 let activeSize = $state( 'uncompressed' );
 let activeColor = $state( 'size' );
 
-$inspect(activeTab);
-
 const assetPath = $derived( page.params.assetPath );
-
 
 function onclick( { target }: Event ) {
 	const path = target instanceof Element && target.getAttribute( 'data-tile' );

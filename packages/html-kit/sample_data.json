@@ -1559,12 +1559,6 @@
           "brotli": 0
         }
       }
-    },
-    ".nuxt/dist/test/123.js": {
-      "uncompressed": 0,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {}
     }
   },
   "dependecies": {

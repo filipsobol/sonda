@@ -3,7 +3,7 @@
   variant="ghost"
   align="start"
   full={ true }
-  href="/#/asset/{ item.path }"
+  href="/#/assets/{ item.path }"
   data-hover={ item.path }
 >
   <span class="truncate pointer-events-none">{ item.name }</span>
