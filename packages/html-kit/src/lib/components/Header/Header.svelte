@@ -1,20 +1,25 @@
-<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-between bg-gray-50 shadow">
-	<div class="flex flex-row space-x-2">
-		<Output />
-		<Details />
-		<Duplicates />
-	</div>
-	
-	<div class="flex flex-row space-x-2">
-		<Compression />
-		<Repository />
-	</div>
-</div>
+<header class="flex h-14 items-center gap-2 border-b px-4 py-2">
+  <div class="w-10 mr-2 flex-shrink-0">
+    <Button variant="ghost" onclick={ () => collapsed = !collapsed }>
+      <PanelLeft size={ 16 } class="text-gray-800" />
+    </Button>
+  </div>
+
+  <div class="w-px h-full flex-shrink-0 bg-gray-200"></div>
+
+  <div class="ml-4 flex-shrink-0">
+    <Breadcrumbs />
+  </div>
+</header>
 
 <script lang="ts">
-import Compression from './Compression.svelte';
-import Details from './Details.svelte';
-import Duplicates from './Duplicates.svelte';
-import Output from './Output.svelte';
-import Repository from './Repository.svelte';
+import { PanelLeft } from 'lucide-svelte';
+import Breadcrumbs from './Breadcrumbs.svelte';
+import Button from '$lib/components/Button/Button.svelte';
+
+interface Props {
+  collapsed: boolean;
+}
+
+let { collapsed = $bindable() }: Props = $props();
 </script>

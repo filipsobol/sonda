@@ -21,7 +21,7 @@
     <div class="flex-min-h-0 flex-1 flex-col p-2">
       <!-- <div class="mt-4">
         <Button variant="white" align="start">
-        <Search size={ 16 } class="-mt-1/2 mr-2 text-gray-400" />
+        <Search size={ 18 } class="-mt-1/2 mr-2 text-gray-400" />
 
           Search
         </Button>
@@ -33,10 +33,10 @@
           variant="ghost"
           align="start"
           full={ true }
-          href="/#/"
+          href="#/"
         >
           <LayoutGrid
-            size={ 16 }
+            size={ 18 }
             class="flex-shrink-0 text-gray--600 pointer-events-none"
           />
 
@@ -49,17 +49,17 @@
             variant="ghost"
             align="start"
             full={ true }
-            href="/#/assets"
+            href="#/assets"
           >
             <Boxes
-              size={ 16 }
+              size={ 18 }
               class="flex-shrink-0 text-gray--600 pointer-events-none"
             />
 
             <span class="truncate pointer-events-none">Assets</span>
           </Button>
 
-          <div class="ml-6">
+          <div class="ml-6 mt-2">
             <List items={ [ tree ] } />
           </div>
         </div>
@@ -69,10 +69,10 @@
           variant="ghost"
           align="start"
           full={ true }
-          href="/#/inputs"
+          href="#/inputs"
         >
           <FileInput
-            size={ 16 }
+            size={ 18 }
             class="flex-shrink-0 text-gray--600 pointer-events-none"
           />
 
@@ -84,10 +84,10 @@
           variant="ghost"
           align="start"
           full={ true }
-          href="/#/warnings"
+          href="#/warnings"
         >
           <CircleAlert
-            size={ 16 }
+            size={ 18 }
             class="flex-shrink-0 text-gray--600 pointer-events-none"
           />
 
@@ -99,10 +99,10 @@
           variant="ghost"
           align="start"
           full={ true }
-          href="/#/dependencies"
+          href="#/dependencies"
         >
           <Share2
-            size={ 16 }
+            size={ 18 }
             class="flex-shrink-0 text-gray--600 pointer-events-none"
           />
 
@@ -116,12 +116,12 @@
 <script lang="ts">
 import { LayoutGrid, Boxes, FileInput, CircleAlert, Share2 } from 'lucide-svelte';
 import type { HTMLAttributes } from 'svelte/elements';
-import List from '$lib/Sidebar/List.svelte';
-import Button from '$lib/Button/Button.svelte';
+import List from '$lib/components/Sidebar/List.svelte';
+import Button from '$lib/components/Button/Button.svelte';
 import { store } from '$lib/store.svelte';
 import { getTrie } from '$lib/helpers/OutputTrie';
 
-const tree = getTrie( Object.keys( store.report.outputs ) );
-
 const { class: classes, ...props }: HTMLAttributes<HTMLDivElement> = $props();
+
+const tree = getTrie( Object.keys( store.report.outputs ) );
 </script>

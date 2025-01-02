@@ -3,49 +3,53 @@
 	{ onkeydown }
 />
 
-<div class="flex mb-4">
-	<div class="flex-grow flex gap-4">
-		<Tabs values={ tabs } bind:active={ activeTab } />
+{#if store.trie[assetPath]}
+	<div class="flex mb-4">
+		<div class="flex-grow flex gap-4">
+			<Tabs values={ tabs } bind:active={
+				() => page.state.tab ??= tabs[ 0 ][ 0 ],
+				v => pushState( page.url.hash, { tab: v } )
+			} />
 
-  	<Button variant="outline">Search</Button>
+			<Button variant="outline">Search</Button>
+		</div>
+
+		{#if page.state.tab === 'treemap'}
+			<div class="flex gap-4">
+				<Tabs values={ colors } bind:active={ activeColor } />
+				<Tabs values={ sizes } bind:active={ activeSize } />
+			</div>
+		{/if}
 	</div>
 
-	{#if activeTab === 'treemap'}
-		<div class="flex gap-4">
-			<Tabs values={ colors } bind:active={ activeColor } />
-			<Tabs values={ sizes } bind:active={ activeSize } />
-		</div>
-	{/if}
-</div>
-
-<div
-	role="application"
-	bind:clientWidth={ width }
-	bind:clientHeight={ height }
-	class="flex-grow overflow-hidden w-full h-full"
->
-	{#if store.trie[assetPath]}
-		{#if activeTab === 'summary'}
+	<div
+		role="application"
+		bind:clientWidth={ width }
+		bind:clientHeight={ height }
+		class="flex-grow overflow-hidden w-full h-full"
+	>
+		{#if page.state.tab === 'summary'}
 			<h1 class="text-2xl font-bold mb-4 text-gray-900">Summary</h1>
 			<p class="text-gray-500">This is a summary of the asset.</p>
-		{:else if activeTab === 'treemap'}
+		{:else if page.state.tab === 'treemap'}
 			<Treemap
 				content={ store.trie[assetPath].root }
 				{ width }
 				{ height }
 			/>
 		{/if}
-	{:else}
-		<NoData />
-	{/if}
-</div>
+	</div>
+{:else}
+	<NoData />
+{/if}
 
 <script lang="ts">
 import { page } from '$app/state';
+import { pushState } from '$app/navigation';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
-import NoData from '$lib/components/NoData.svelte';
-import Tabs from '$lib/Tabs/Tabs.svelte';
-import Button from '$lib/Button/Button.svelte';
+import NoData from '$lib/components/NoData/NoData.svelte';
+import Tabs from '$lib/components/Tabs/Tabs.svelte';
+import Button from '$lib/components/Button/Button.svelte';
 import { store } from '$lib/store.svelte.js';
 
 const tabs: Array<[ string, string ]> = [
@@ -67,9 +71,8 @@ const sizes: Array<[ string, string ]> = [
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeTab = $state( 'summary' );
-let activeSize = $state( 'uncompressed' );
-let activeColor = $state( 'size' );
+let activeColor = $state( colors[ 0 ][ 0 ] );
+let activeSize = $state( sizes[ 0 ][ 0 ] );
 
 const assetPath = $derived( page.params.assetPath );
 

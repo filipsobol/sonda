@@ -14,7 +14,6 @@
 </div>
 
 <script lang="ts">
-import { page } from '$app/state';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
 import { FileSystemTrie } from '$lib/helpers/FileSystemTrie';
 import { store } from '$lib/store.svelte.js';
