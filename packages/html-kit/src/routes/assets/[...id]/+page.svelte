@@ -3,21 +3,22 @@
 	{ onkeydown }
 />
 
-{#if store.trie[assetPath]}
-	<div class="flex mb-4">
+{#if trie}
+	<div class="flex mb-4 items-center">
 		<div class="flex-grow flex gap-4">
-			<Tabs values={ tabs } bind:active={
-				() => page.state.tab ??= tabs[ 0 ][ 0 ],
-				v => pushState( page.url.hash, { tab: v } )
-			} />
-
-			<Button variant="outline">Search</Button>
+			<Tabs
+				values={ tabs }
+				bind:active={
+					() => page.state.tab ??= tabs[ 0 ][ 0 ],
+					v => pushState( page.url.hash, { tab: v } )
+				}
+			/>
 		</div>
 
 		{#if page.state.tab === 'treemap'}
 			<div class="flex gap-4">
 				<Tabs values={ colors } bind:active={ activeColor } />
-				<Tabs values={ sizes } bind:active={ activeSize } />
+    		<Tabs values={ store.compressions } bind:active={ store.compression } />
 			</div>
 		{/if}
 	</div>
@@ -33,7 +34,7 @@
 			<p class="text-gray-500">This is a summary of the asset.</p>
 		{:else if page.state.tab === 'treemap'}
 			<Treemap
-				content={ store.trie[assetPath].root }
+				content={ trie.root }
 				{ width }
 				{ height }
 			/>
@@ -49,8 +50,8 @@ import { pushState } from '$app/navigation';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
 import NoData from '$lib/components/NoData/NoData.svelte';
 import Tabs from '$lib/components/Tabs/Tabs.svelte';
-import Button from '$lib/components/Button/Button.svelte';
 import { store } from '$lib/store.svelte.js';
+import { getOutputTrie } from '$lib/helpers/FileSystemTrie';
 
 const tabs: Array<[ string, string ]> = [
 	[ 'summary', 'Summary' ],
@@ -63,18 +64,11 @@ const colors: Array<[ string, string ]> = [
 	[ 'duplicate', 'Duplicate' ],
 ];
 
-const sizes: Array<[ string, string ]> = [
-	[ 'uncompressed', 'Uncompressed' ],
-	[ 'gzip', 'GZIP' ],
-	[ 'brotli', 'Brotli' ],
-];
-
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
 let activeColor = $state( colors[ 0 ][ 0 ] );
-let activeSize = $state( sizes[ 0 ][ 0 ] );
 
-const assetPath = $derived( page.params.assetPath );
+const trie = $derived( getOutputTrie( page.params.id, store.report ) );
 
 function onclick( { target }: Event ) {
 	const path = target instanceof Element && target.getAttribute( 'data-tile' );
@@ -83,7 +77,7 @@ function onclick( { target }: Event ) {
 		return;
 	}
 
-	const content = store.trie[assetPath]?.get( path );
+	const content = trie?.get( path );
 
 	if ( !content ) {
 		return;

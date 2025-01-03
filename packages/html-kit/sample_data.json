@@ -1561,7 +1561,7 @@
       }
     }
   },
-  "dependecies": {
+  "dependencies": {
     "@unhead/dom": [
       "../../node_modules/.pnpm/@unhead+dom@1.11.14/node_modules/@unhead/dom"
     ],

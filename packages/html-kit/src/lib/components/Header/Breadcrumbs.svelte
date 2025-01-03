@@ -30,7 +30,7 @@ const segments = $derived.by( () => {
   }
 
   if ( path.length ) {
-    parts.push( [ path.join( '#/' ), page.url.pathname ] );
+    parts.push( [ path.join( '/' ), page.url.hash ] );
   }
 
   return parts;

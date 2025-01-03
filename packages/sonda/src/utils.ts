@@ -4,6 +4,7 @@ import type { PluginOptions } from './types.js';
 export const esmRegex: RegExp = /\.m[tj]sx?$/;
 export const cjsRegex: RegExp = /\.c[tj]sx?$/;
 export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
+export const cssRegexp: RegExp = /\.css$/;
 
 export function normalizeOptions( options?: Partial<PluginOptions> ): PluginOptions {
 	const format = options?.format

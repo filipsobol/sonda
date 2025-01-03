@@ -17,26 +17,50 @@ export interface Root extends Folder {
 
 export type Content = Folder | File;
 
-export function getTrie( report: JsonReport ): Record<string, FileSystemTrie> {
-	return Object.entries( report.outputs ).reduce( ( result, [ outputPath, output ] ) => {
-		const trie = new FileSystemTrie();
+/**
+ * Returns a trie of a specific output files from a report.
+ */
+export function getOutputTrie( path: string, report: JsonReport ): FileSystemTrie {
+	const output = report.outputs[ path ];
+	const trie = new FileSystemTrie();
 
-		Object
-			.entries( output.inputs )
-			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
+	Object
+		.entries( output.inputs )
+		.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
 
-		trie.root.name = outputPath;
-		trie.root.map = output.map;
-		trie.root.uncompressed = output.uncompressed;
-		trie.root.gzip = output.gzip;
-		trie.root.brotli = output.brotli;
+	trie.root.name = path;
+	trie.root.map = output.map;
+	trie.root.uncompressed = output.uncompressed;
+	trie.root.gzip = output.gzip;
+	trie.root.brotli = output.brotli;
 
-		trie.optimize();
+	trie.optimize();
 
-		result[ outputPath ] = trie;
+	return trie;
+}
 
-		return result;
-	}, {} as Record<string, FileSystemTrie> );
+/**
+ * Returns a trie of all output files from a report.
+ */
+export function getBuildTrie( outputs: JsonReport[ 'outputs' ] ): FileSystemTrie {
+	const trie = new FileSystemTrie();
+
+	trie.root.name = '';
+	trie.root.uncompressed = 0;
+	trie.root.gzip = 0;
+	trie.root.brotli = 0;
+
+	for ( const [ path, data ] of Object.entries( outputs ) ) {
+		trie.insert( path, data );
+
+		trie.root.uncompressed += data.uncompressed;
+		trie.root.gzip += data.gzip;
+		trie.root.brotli += data.brotli;
+	}
+
+	trie.optimize();
+
+	return trie;
 }
 
 export function isFolder( content: Content ): content is Folder {
