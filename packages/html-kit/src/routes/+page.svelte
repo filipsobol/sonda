@@ -2,7 +2,7 @@
   <p class="col-span-12 text-2xl font-bold text-gray-900">Assets by type</p>
 
   <button
-    class="flex flex-col col-span-12 rounded-xl border shadow p-6 cursor-pointer hover:bg-gray-100"
+    class="flex flex-col col-span-12 rounded-xl border shadow p-6 cursor-pointer hover:bg-gray-50"
     onclick={ () => goto( '#/assets', { state: { outputType: 'all' } } ) }
   >
     <span class="text-gray-900">All</span>
@@ -10,38 +10,35 @@
     <span class="mt-4 text-3xl text-gray-800">{ sizeAll } <span class="text-gray-400">({ all.length })</span></span>
   </button>
 
-  {#if js.length}
-    <button
-      class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-100"
-      onclick={ () => goto( '#/assets', { state: { outputType: 'js' } } ) }
-    >
-      <p class="text-gray-900">JavaScript</p>
-      <p class="text-gray-500 text-sm">Size of all JavaScript files</p>
-      <p class="mt-4 text-3xl text-gray-800">{ sizeJs } <span class="text-gray-400">({ js.length })</span></p>
-    </button>
-  {/if}
+  <button
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    onclick={ () => goto( '#/assets', { state: { outputType: 'js' } } ) }
+    disabled={ !js.length }
+  >
+    <p class="text-gray-900">JavaScript</p>
+    <p class="text-gray-500 text-sm">Size of all JavaScript files</p>
+    <p class="mt-4 text-3xl text-gray-800">{ sizeJs } <span class="text-gray-400">({ js.length })</span></p>
+  </button>
 
-  {#if css.length}
-    <button
-      class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-100"
-      onclick={ () => goto( '#/assets', { state: { outputType: 'css' } } ) }
-    >
-      <p class="text-gray-900">CSS</p>
-      <p class="text-gray-500 text-sm">Size of all CSS files</p>
-      <p class="mt-4 text-3xl text-gray-800">{ sizeCss } <span class="text-gray-400">({ css.length })</span></p>
-    </button>
-  {/if}
+  <button
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    onclick={ () => goto( '#/assets', { state: { outputType: 'css' } } ) }
+    disabled={ !css.length }
+  >
+    <p class="text-gray-900">CSS</p>
+    <p class="text-gray-500 text-sm">Size of all CSS files</p>
+    <p class="mt-4 text-3xl text-gray-800">{ sizeCss } <span class="text-gray-400">({ css.length })</span></p>
+  </button>
 
-  {#if other.length}
-    <button
-      class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-100"
-      onclick={ () => goto( '#/assets', { state: { outputType: 'other' } } ) }
-    >
-      <p class="text-gray-900">Other assets</p>
-      <p class="text-gray-500 text-sm">Size of all other assets</p>
-      <p class="mt-4 text-3xl text-gray-800">{ sizeOther } <span class="text-gray-400">({ other.length })</span></p>
-    </button>
-  {/if}
+  <button
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    onclick={ () => goto( '#/assets', { state: { outputType: 'other' } } ) }
+    disabled={ !other.length }
+  >
+    <p class="text-gray-900">Other assets</p>
+    <p class="text-gray-500 text-sm">Size of all other assets</p>
+    <p class="mt-4 text-3xl text-gray-800">{ sizeOther } <span class="text-gray-400">({ other.length })</span></p>
+  </button>
 
   <p class="col-span-12 text-2xl font-bold mt-12 text-gray-900">Dependencies</p>
 
@@ -59,9 +56,9 @@
 </div>
 
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { store } from '$lib/store.svelte';
 import { formatSize } from '$lib/helpers/format';
-    import { goto, pushState } from '$app/navigation';
 
 const all = $derived( Object.values( store.report.outputs ) );
 const js = $derived( Object.values( store.outputTypes.js ) );

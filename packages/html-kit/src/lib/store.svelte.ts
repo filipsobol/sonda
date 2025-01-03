@@ -1,7 +1,11 @@
 import type { Sizes, JsonReport } from 'sonda';
 
 export type CompressionType = keyof Sizes;
-export type Compressions = Array<[ CompressionType, string ]>;
+export type Compressions = Array< {
+  value: CompressionType;
+  label: string;
+  active: boolean;
+} >;
 
 export type OutputType = 'all' | 'js' | 'css' | 'other';
 
@@ -40,13 +44,12 @@ function Store(): Store {
  * Returns the compressions available in the report.
  */
 function getCompressions( report: JsonReport ): Compressions {
-  const compressions: Compressions = [ [ 'uncompressed', 'Uncompressed' ] ];
+  const compressions: Compressions = [];
   const output = Object.values( report.outputs )[ 0 ];
 
-  if ( output ) {
-    output.gzip && compressions.push( [ 'gzip', 'Gzip' ] );
-    output.brotli && compressions.push( [ 'brotli', 'Brotli' ] );
-  }
+  compressions.push( { value: 'uncompressed',   label: 'Uncompressed',  active: true } );
+  compressions.push( { value: 'gzip',           label: 'GZIP',          active: !!output.gzip } );
+  compressions.push( { value: 'brotli',         label: 'Brotli',        active: !!output.brotli } );
 
   return compressions;
 }

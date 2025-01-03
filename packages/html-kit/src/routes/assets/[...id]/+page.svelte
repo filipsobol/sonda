@@ -6,19 +6,12 @@
 {#if trie}
 	<div class="flex mb-4 items-center">
 		<div class="flex-grow flex gap-4">
-			<Tabs
-				values={ tabs }
-				bind:active={
-					() => page.state.tab ??= tabs[ 0 ][ 0 ],
-					v => pushState( page.url.hash, { tab: v } )
-				}
-			/>
+			<Tabs values={ tabType.options } bind:current={ tabType.value } />
 		</div>
 
 		{#if page.state.tab === 'treemap'}
 			<div class="flex gap-4">
-				<Tabs values={ colors } bind:active={ activeColor } />
-    		<Tabs values={ store.compressions } bind:active={ store.compression } />
+    		<Tabs values={ store.compressions } bind:current={ store.compression } />
 			</div>
 		{/if}
 	</div>
@@ -52,21 +45,25 @@ import NoData from '$lib/components/NoData/NoData.svelte';
 import Tabs from '$lib/components/Tabs/Tabs.svelte';
 import { store } from '$lib/store.svelte.js';
 import { getOutputTrie } from '$lib/helpers/FileSystemTrie';
+import type { Tab } from '$lib/types';
 
-const tabs: Array<[ string, string ]> = [
-	[ 'summary', 'Summary' ],
-	[ 'treemap', 'Treemap' ],
-];
+const tabType = {
+	options: [
+		{ value: 'summary', label: 'Summary' },
+		{ value: 'treemap', label: 'Treemap' },
+	] satisfies Array<Tab>,
+	
+	get value() {
+		return page.state.tab ??= tabType.options[ 0 ].value;
+	},
 
-const colors: Array<[ string, string ]> = [
-	[ 'size', 'Size' ],
-	[ 'difference', 'Difference' ],
-	[ 'duplicate', 'Duplicate' ],
-];
+	set value( v: string ) {
+		pushState( page.url.hash, { tab: v } )
+	}
+};
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeColor = $state( colors[ 0 ][ 0 ] );
 
 const trie = $derived( getOutputTrie( page.params.id, store.report ) );
 

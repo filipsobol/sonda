@@ -4,15 +4,8 @@
   </div>
 
   <div class="flex gap-4">
-    <Tabs values={ colors } bind:active={ activeColor } />
-    <Tabs
-      values={ types }
-      bind:active={
-        () => page.state.outputType ??= types[ 0 ][ 0 ],
-        v => pushState( page.url.hash, { outputType: v } )
-      }
-    />
-    <Tabs values={ store.compressions } bind:active={ store.compression } />
+    <Tabs values={ assetType.options } bind:current={ assetType.value } />
+    <Tabs values={ store.compressions } bind:current={ store.compression } />
   </div>
 </div>
 
@@ -36,23 +29,28 @@ import Treemap from '$lib/components/Treemap/Treemap.svelte';
 import Tabs from '$lib/components/Tabs/Tabs.svelte';
 import { store, type OutputType } from '$lib/store.svelte.js';
 import { getBuildTrie } from '$lib/helpers/FileSystemTrie';
+import type { Tab } from '$lib/types';
 
-const colors: Array<[ string, string ]> = [
-	[ 'size', 'Size' ],
-	[ 'difference', 'Difference' ],
-	[ 'duplicate', 'Duplicate' ],
-];
+const { js, css, other } = store.outputTypes;
 
-const types: Array<[ OutputType, string ]> = [
-  [ 'all', 'All' ],
-	[ 'js', 'JavaScript' ],
-	[ 'css', 'CSS' ],
-	[ 'other', 'Other' ],
-];
+const assetType = {
+  options: [
+    { value: 'all',     label: 'All',           active: true },
+    { value: 'js',      label: 'JavaScript',    active: !!Object.keys( js ).length },
+    { value: 'css',     label: 'CSS',           active: !!Object.keys( css ).length },
+    { value: 'other',   label: 'Other',         active: !!Object.keys( other ).length },
+  ] satisfies Array<Tab<OutputType>>,
+
+  get value() {
+    return page.state.outputType ??= assetType.options[ 0 ].value;
+  },
+  set value( v: OutputType ) {
+    pushState( page.url.hash, { outputType: v } );
+  }
+};
 
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
-let activeColor = $state( colors[ 0 ][ 0 ] );
 
 const trie = $derived( getBuildTrie( store.outputTypes[ page.state.outputType! ] ) );
 </script>
