@@ -13,7 +13,7 @@
 	role="application"
 	bind:clientWidth={ width }
 	bind:clientHeight={ height }
-	class="flex-grow overflow-hidden w-full h-full"
+	class="overflow-hidden w-full h-full"
 >
   <Treemap
     content={ trie.root }
@@ -42,7 +42,7 @@ const assetType = {
   ] satisfies Array<Tab<OutputType>>,
 
   get value() {
-    return page.state.outputType ??= assetType.options[ 0 ].value;
+    return activeType;
   },
   set value( v: OutputType ) {
     pushState( page.url.hash, { outputType: v } );
@@ -52,5 +52,6 @@ const assetType = {
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
 
-const trie = $derived( getBuildTrie( store.outputTypes[ page.state.outputType! ] ) );
+const activeType = $derived( page.state.outputType || assetType.options[ 0 ].value );
+const trie = $derived( getBuildTrie( store.outputTypes[ activeType ] ) );
 </script>

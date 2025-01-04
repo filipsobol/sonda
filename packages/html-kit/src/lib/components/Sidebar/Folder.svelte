@@ -13,7 +13,7 @@
   <span class="truncate pointer-events-none">{ item.name }</span>
 </Button>
 
-<div class="mt-1 ml-4 pl-3 border-l border-l-gray-200 { !open && 'hidden' }">
+<div class="mt-1 ml-6 pl-1 border-l border-l-gray-200 { !open && 'hidden' }">
   <List items={ item.items } />
 </div>
 

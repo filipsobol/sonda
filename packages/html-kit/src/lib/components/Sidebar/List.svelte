@@ -1,4 +1,4 @@
-<ul>
+<ul class="flex flex-col gap-1">
   {#each items as item }
     <li>
       {#if isFolder(item) }

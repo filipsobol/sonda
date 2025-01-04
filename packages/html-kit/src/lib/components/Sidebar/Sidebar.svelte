@@ -1,4 +1,4 @@
-<div class={ [ 'flex bg-gray-50 border-r border-r-gray-200 text-gray-700 overflow-hidden', classes ] } { ...props }>
+<div class={ [ 'flex bg-gray-50 border-r border-r-gray-200 text-gray-700 text-sm overflow-hidden', classes ] } { ...props }>
   <div class="flex h-full w-full flex-col">
     <div class="flex flex-col h-14">
       <a href="https://sonda.dev/" target="_blank" class="p-4 text-center text-gray-700 hover:text-gray-900">
@@ -19,6 +19,7 @@
     </div>
 
     <div class="flex-min-h-0 flex-1 flex-col p-2">
+      <p class="px-2 font-bold text-gray-500">Pages</p>
       <!-- <div class="mt-4">
         <Button variant="white" align="start">
         <Search size={ 18 } class="-mt-1/2 mr-2 text-gray-400" />
@@ -27,7 +28,7 @@
         </Button>
       </div> -->
 
-      <div class="mt-4 flex flex-col gap-2">
+      <div class="mt-4 flex flex-col gap-1">
         <Button
           element="link"
           variant="ghost"
@@ -43,26 +44,20 @@
           <span class="truncate pointer-events-none">Home</span>
         </Button>
 
-        <div>
-          <Button
-            element="link"
-            variant="ghost"
-            align="start"
-            full={ true }
-            href="#/assets"
-          >
-            <Boxes
-              size={ 18 }
-              class="flex-shrink-0 text-gray--600 pointer-events-none"
-            />
+        <Button
+          element="link"
+          variant="ghost"
+          align="start"
+          full={ true }
+          href="#/assets"
+        >
+          <Boxes
+            size={ 18 }
+            class="flex-shrink-0 text-gray--600 pointer-events-none"
+          />
 
-            <span class="truncate pointer-events-none">Assets</span>
-          </Button>
-
-          <div class="ml-6 mt-2">
-            <List items={ [ tree ] } />
-          </div>
-        </div>
+          <span class="truncate pointer-events-none">Assets</span>
+        </Button>
 
         <Button
           element="link"
@@ -109,6 +104,10 @@
           <span class="truncate pointer-events-none">Dependencies</span>
         </Button>
       </div>
+
+      <p class="mt-12 px-2 font-bold text-gray-500">Assets</p>
+
+      <List items={ [ tree ] } />
     </div>
   </div>
 </div>

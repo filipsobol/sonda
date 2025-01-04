@@ -2,7 +2,7 @@
   { ...props }
   this={ element === 'link' ? 'a' : 'button' }
   class={ [
-    'py-3 px-4 flex gap-2 items-center rounded-md',
+    'py-2 px-3 flex gap-2 items-center rounded-md',
     aligns[ align ],
     variants[variant],
     full && 'w-full',
@@ -45,8 +45,8 @@ const variants: Record<Variant, string> = {
   secondary: 'bg-gray-300 text-gray-800 hover:bg-gray-400 data-[active=true]:bg-gray-300',
   white: 'bg-white text-gray-800 border hover:border-gray-300 hover:bg-gray-200',
   destructive: 'bg-red-600 text-red-100 hover:bg-red-700 data-[active=true]:bg-red-600',
-  outline: 'border hover:bg-gray-300 hover:text-gray-800 hover:border-gray-300 data-[active=true]:bg-gray-200',
-  ghost: 'hover:bg-gray-300 hover:text-gray-800 data-[active=true]:bg-gray-200',
+  outline: 'border hover:bg-gray-900/5 hover:text-gray-800 hover:border-gray-300 data-[active=true]:bg-gray-900/10',
+  ghost: 'hover:bg-gray-900/5 hover:text-gray-800 data-[active=true]:bg-gray-900/10',
   link: 'text-gray-800 underline-offset-4 hover:underline data-[active=true]:underline'
 };
 
@@ -56,5 +56,5 @@ const aligns: Record<Align, string> = {
   end: 'justify-end'
 };
 
-const active = $derived( element === 'link' && page.url.pathname === ( props as LinkProps ).href );
+const active = $derived( element === 'link' && page.url.hash === ( props as LinkProps ).href );
 </script>

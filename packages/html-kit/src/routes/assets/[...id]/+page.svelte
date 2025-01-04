@@ -6,14 +6,13 @@
 {#if trie}
 	<div class="flex mb-4 items-center">
 		<div class="flex-grow flex gap-4">
-			<Tabs values={ tabType.options } bind:current={ tabType.value } />
+			<p class="col-span-12 text-2xl font-bold text-gray-900">Bundle overview</p>
 		</div>
 
-		{#if page.state.tab === 'treemap'}
-			<div class="flex gap-4">
-    		<Tabs values={ store.compressions } bind:current={ store.compression } />
-			</div>
-		{/if}
+		<div class="flex gap-4">
+			<Tabs values={ tabType.options } bind:current={ tabType.value } />
+			<Tabs values={ store.compressions } bind:current={ store.compression } />
+		</div>
 	</div>
 
 	<div
@@ -49,8 +48,8 @@ import type { Tab } from '$lib/types';
 
 const tabType = {
 	options: [
-		{ value: 'summary', label: 'Summary' },
 		{ value: 'treemap', label: 'Treemap' },
+		{ value: 'summary', label: 'Summary' },
 	] satisfies Array<Tab>,
 	
 	get value() {
