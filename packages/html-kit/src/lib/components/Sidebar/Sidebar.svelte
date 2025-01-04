@@ -1,7 +1,7 @@
 <div class={ [ 'flex bg-gray-50 border-r border-r-gray-200 text-gray-700 text-sm overflow-hidden', classes ] } { ...props }>
   <div class="flex h-full w-full flex-col">
     <div class="flex flex-col h-14">
-      <a href="https://sonda.dev/" target="_blank" class="p-4 text-center text-gray-700 hover:text-gray-900">
+      <a href="https://sonda.dev/" target="_blank" class="p-3 text-center text-gray-700 hover:text-gray-900">
         <svg
           width="24"
           height="24"
