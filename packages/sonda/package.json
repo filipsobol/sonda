@@ -119,7 +119,7 @@
     "@parcel/types": "^2.13.3",
     "@rspack/core": "^1.1.8",
     "@vitest/coverage-v8": "^2.1.8",
-    "astro": "^5.1.1",
+    "astro": "^5.1.2",
     "esbuild": "^0.24.2",
     "load-source-map": "workspace:^",
     "next": "15.1.2",
