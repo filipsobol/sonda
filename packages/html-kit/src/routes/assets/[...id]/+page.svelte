@@ -36,6 +36,16 @@
 	<NoData />
 {/if}
 
+<script module lang="ts">
+declare global {
+	namespace App {
+		interface PageState {
+			tab?: string;
+		}
+	}
+}
+</script>
+
 <script lang="ts">
 import { page } from '$app/state';
 import { pushState } from '$app/navigation';

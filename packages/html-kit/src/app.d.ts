@@ -1,5 +1,3 @@
-import type { OutputType } from '$lib/store.svelte';
-
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -7,10 +5,7 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		interface PageState {
-			tab?: string;
-			outputType?: OutputType;
-		}
+		// interface PageState {}
 		// interface Platform {}
 	}
 }

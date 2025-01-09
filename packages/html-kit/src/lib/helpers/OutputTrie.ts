@@ -49,7 +49,7 @@ export class FileSystemTrie {
       let childNode = node.items.find( ( item ): item is Folder => isFolder( item ) && item.name === part );
 
       if ( !childNode ) {
-        childNode = this.createNode( part, parts.join( '/' ) );
+        childNode = this.createNode( part, node.path ? `${ node.path }/${ part }` : part );
         node.items.push( childNode );
       }
 
@@ -69,7 +69,7 @@ export class FileSystemTrie {
       while ( node.items.length === 1 && isFolder( node.items[ 0 ] ) ) {
         const child = node.items[ 0 ];
 
-        node.path = `${ node.path }/${ child.name }`;
+        node.path = child.path;
         node.name = child.name;
         node.items = child.items;
       }

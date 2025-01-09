@@ -14,17 +14,29 @@
 	bind:clientWidth={ width }
 	bind:clientHeight={ height }
 	class="overflow-hidden w-full h-full"
+  { onclick }
 >
   <Treemap
-    content={ trie.root }
+    content={ trie }
     { width }
     { height }
   />
 </div>
 
+<script module lang="ts">
+declare global {
+	namespace App {
+		interface PageState {
+      outputType?: OutputType;
+			triePath?: string;
+		}
+	}
+}
+</script>
+
 <script lang="ts">
 import { page } from '$app/state';
-import { pushState } from '$app/navigation';
+import { goto, pushState } from '$app/navigation';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
 import Tabs from '$lib/components/Tabs/Tabs.svelte';
 import { store, type OutputType } from '$lib/store.svelte.js';
@@ -52,6 +64,23 @@ const assetType = {
 let width = $state<number>( 0 );
 let height = $state<number>( 0 );
 
+const triePath = $derived( page.state.triePath || '' );
 const activeType = $derived( page.state.outputType || assetType.options[ 0 ].value );
-const trie = $derived( getBuildTrie( store.outputTypes[ activeType ] ) );
+const trie = $derived( getBuildTrie( store.outputTypes[ activeType ] ).get( triePath ) );
+
+function onclick( { target }: Event ) {
+	const path = target instanceof Element && target.getAttribute( 'data-tile' );
+
+	if ( !path ) {
+		return;
+	}
+
+  isFile( path )
+    ? goto( '#/assets/' + path )
+    : pushState( page.url.hash, { ...page.state, triePath: path } );
+}
+
+function isFile( path: string ) {
+  return path.split( '/' ).pop()!.includes( '.' );
+}
 </script>

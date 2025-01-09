@@ -140,7 +140,7 @@ export class FileSystemTrie {
 	get( path: string ): Content | null {
 		let content: Content | null = this.root;
 
-		while ( content && content.path !== path ) {
+		while ( path && content && content.path !== path ) {
 			content = isFolder( content ) && content.items.find( item => path.startsWith( item.path ) ) || null;
 		}
 
