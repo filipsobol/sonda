@@ -13,7 +13,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"sonda": "workspace:^",
-		"svelte": "^5.0.0",
+		"svelte": "^5.17.3",
 		"vite": "^5.4.11"
 	}
 }
