@@ -82,10 +82,10 @@ const children = $derived.by(() => {
 
 <style>
 rect {
-	fill: color-mix(in oklch, theme('colors.red.100') var(--percentage), theme('colors.green.100'));
+	fill: color-mix(in oklch, var(--color-red-100) var(--percentage), var(--color-green-100));
 }
 
 rect:hover {
-	fill: color-mix(in oklch, theme('colors.red.200') var(--percentage), theme('colors.green.200'));
+	fill: color-mix(in oklch, var(--color-red-200) var(--percentage), var(--color-green-200));
 }
 </style>

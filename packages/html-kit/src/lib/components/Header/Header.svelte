@@ -1,4 +1,4 @@
-<header class="flex items-center gap-2 border-b px-4 py-2">
+<header class="flex items-center gap-2 border-b border-gray-200 px-4 py-2">
   <div class="w-10 mr-2 flex-shrink-0">
     <Button variant="ghost" onclick={ () => collapsed = !collapsed }>
       <PanelLeft size={ 16 } class="text-gray-800" />

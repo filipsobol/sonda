@@ -1,6 +1,4 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
 
 /* base64 encoded JetBrains Mono font from https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap */
 @font-face {

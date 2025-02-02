@@ -43,9 +43,9 @@ let {
 const variants: Record<Variant, string> = {
   primary: 'bg-gray-800 text-gray-100 hover:bg-gray-900 data-[active=true]:bg-gray-800',
   secondary: 'bg-gray-300 text-gray-800 hover:bg-gray-400 data-[active=true]:bg-gray-300',
-  white: 'bg-white text-gray-800 border hover:border-gray-300 hover:bg-gray-200',
+  white: 'bg-white text-gray-800 border border-gray-200 hover:border-gray-300 hover:bg-gray-200',
   destructive: 'bg-red-600 text-red-100 hover:bg-red-700 data-[active=true]:bg-red-600',
-  outline: 'border hover:bg-gray-900/5 hover:text-gray-800 hover:border-gray-300 data-[active=true]:bg-gray-900/10',
+  outline: 'border border-gray-200 hover:bg-gray-900/5 hover:text-gray-800 hover:border-gray-300 data-[active=true]:bg-gray-900/10',
   ghost: 'hover:bg-gray-900/5 hover:text-gray-800 data-[active=true]:bg-gray-900/10',
   link: 'text-gray-800 underline-offset-4 hover:underline data-[active=true]:underline'
 };
