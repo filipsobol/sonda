@@ -1,4 +1,4 @@
-<div class="flex-grow flex flex-col mt-24 items-center w-full h-full">
+<div class="grow flex flex-col mt-24 items-center w-full h-full">
 	<MoodWrrrIcon
 		width={ 96 }
 		height={ 96 }

@@ -35,6 +35,6 @@ const compressions = $derived.by( () => {
 <style>
 button.active,
 button.active:hover {
-	background-color: theme('colors.gray.200');
+	background-color: var(--color-gray-200);
 }
 </style>

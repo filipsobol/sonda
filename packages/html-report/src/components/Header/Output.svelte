@@ -3,7 +3,7 @@
 		<select
 			value={ activeOutput.index }
 			{ onchange }
-			class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm pl-4 pr-8 h-10 min-w-80"
+			class="text-gray-900 bg-white border border-gray-300 focus:outline-hidden hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm pl-4 pr-8 h-10 min-w-80"
 			title="Select the active output"
 		>
 			{#each outputs as output, index}

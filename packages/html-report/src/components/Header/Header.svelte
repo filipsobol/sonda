@@ -1,4 +1,4 @@
-<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-between bg-gray-50 shadow">
+<div class="flex flex-row p-4 items-center space-y-0 h-16 justify-between bg-gray-50 shadow-sm">
 	<div class="flex flex-row space-x-2">
 		<Output />
 		<Details />

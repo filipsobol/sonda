@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import simpleHtmlPlugin from 'vite-plugin-simple-html';
@@ -23,6 +24,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
 export default defineConfig({
   plugins: [
     svelte(),
+    tailwindcss(),
     viteSingleFile({
       removeViteModuleLoader: true
     }),

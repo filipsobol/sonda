@@ -26,14 +26,14 @@
 
 			{#if dependencyTree}
 				<p class="mt-8">This file is in the bundle, because it is:</p>
-				<pre class="mt-2 p-4 w-full leading-5 bg-slate-100 rounded overflow-auto text-sm"><code>{ dependencyTree }</code></pre>
+				<pre class="mt-2 p-4 w-full leading-5 bg-slate-100 rounded-sm overflow-auto text-sm"><code>{ dependencyTree }</code></pre>
 			{/if}
 
 			{#if hasSource}
 				<div class="mt-8">
 					<button
 						type="button"
-						class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
+						class="text-gray-900 bg-white border border-gray-300 focus:outline-hidden hover:bg-gray-100 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 h-10"
 						onclick={ () => dialog.open( 'code', file ) }
 					>
 						Show used code

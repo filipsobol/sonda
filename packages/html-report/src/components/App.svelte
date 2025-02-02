@@ -12,7 +12,7 @@
 	<div
 		bind:clientWidth={ width }
 		bind:clientHeight={ height }
-		class="flex-grow overflow-hidden"
+		class="grow overflow-hidden"
 	>
 		{#if activeOutput.output}
 			<Treemap

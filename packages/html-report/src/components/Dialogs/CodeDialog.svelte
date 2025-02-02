@@ -16,8 +16,8 @@
 			{:else if sourceCode}
       	<p>Code included in the bundle is highlighted</p>
 
-				<pre class="h-full mt-2 p-4 w-full leading-5 bg-slate-100 text-slate-600 rounded overflow-auto text-xs flex">
-					<div class="line-numbers flex flex-col flex-shrink mr-2 select-none text-slate-400">
+				<pre class="h-full mt-2 p-4 w-full leading-5 bg-slate-100 text-slate-600 rounded-sm overflow-auto text-xs flex">
+					<div class="line-numbers flex flex-col shrink mr-2 select-none text-slate-400">
 						{#each sourceCodeLines as _, index}
 							<span class="border-r border-slate-300 text-right pr-2">{ index }</span>
 						{/each}
@@ -87,7 +87,7 @@ $effect( () => {
 
 <style>
 ::highlight(used-code) {
-	background-color: theme( 'colors.orange.200' );
-	color: theme( 'colors.orange.900' );
+	background-color: var(--color-orange-200);
+	color: var(--color-orange-900);
 }
 </style>

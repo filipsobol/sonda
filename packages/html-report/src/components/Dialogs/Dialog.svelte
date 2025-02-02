@@ -6,13 +6,13 @@
 >
 	<div
 		bind:this={ backdrop }
-		class="fixed bg-gray-200/70 w-full h-full backdrop-blur-sm"
+		class="fixed bg-gray-200/70 w-full h-full backdrop-blur-xs"
 		aria-hidden="true"
 	>
 	</div>
 
 	<div
-		class="bg-white relative flex flex-col rounded-lg border p-6 shadow-lg overflow-hidden max-h-[95vh] max-w-[95vw]"
+		class="bg-white relative flex flex-col rounded-lg border border-gray-200 p-6 shadow-lg overflow-hidden max-h-[95vh] max-w-[95vw]"
 		class:w-[95vw]={ large }
 		class:h-[95vh]={ large }
 	>
