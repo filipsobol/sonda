@@ -21,15 +21,15 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@changesets/cli": "^2.27.11",
-    "@types/node": "^22.10.2",
+    "@changesets/cli": "^2.27.12",
+    "@types/node": "^22.13.0",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
     "pkg-pr-new": "^0.0.39",
-    "rolldown": "^1.0.0-beta.1",
-    "rollup": "^4.29.1",
-    "typescript": "^5.7.2",
-    "vitepress": "^1.5.0",
+    "rolldown": "1.0.0-beta.3",
+    "rollup": "^4.34.0",
+    "typescript": "^5.7.3",
+    "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   }
 }
