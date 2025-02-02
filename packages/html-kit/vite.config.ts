@@ -1,8 +1,8 @@
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
-import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { sveltekit } from '@sveltejs/kit/vite';
 
 process.env.VITE_SONDA_REPORT_DATA = '__REPORT_DATA__';
 

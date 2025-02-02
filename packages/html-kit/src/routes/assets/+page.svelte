@@ -1,5 +1,5 @@
 <div class="flex mb-4 items-center">
-  <div class="flex-grow flex gap-4">
+  <div class="grow flex gap-4">
     <p class="col-span-12 text-2xl font-bold text-gray-900">Build overview</p>
   </div>
 

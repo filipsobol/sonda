@@ -5,7 +5,7 @@
 
 {#if trie}
 	<div class="flex mb-4 items-center">
-		<div class="flex-grow flex gap-4">
+		<div class="grow flex gap-4">
 			<p class="col-span-12 text-2xl font-bold text-gray-900">Bundle overview</p>
 		</div>
 
@@ -19,7 +19,7 @@
 		role="application"
 		bind:clientWidth={ width }
 		bind:clientHeight={ height }
-		class="flex-grow overflow-hidden w-full h-full"
+		class="grow overflow-hidden w-full h-full"
 	>
 		{#if page.state.tab === 'summary'}
 			<h1 class="text-2xl font-bold mb-4 text-gray-900">Summary</h1>

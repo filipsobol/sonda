@@ -5,7 +5,7 @@
         'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1',
         // Value is selected
         value === current
-          ? 'bg-gray-700 shadow text-gray-100'
+          ? 'bg-gray-700 shadow-sm text-gray-100'
           // Value is available
           : active === false
           ? 'cursor-not-allowed text-gray-400'

@@ -7,7 +7,7 @@
 >
   <ChevronRight
     size={ 16 }
-    class="flex-shrink-0 text-gray-600 { open && 'rotate-90' }"
+    class="shrink-0 text-gray-600 { open && 'rotate-90' }"
   />
 
   <span class="truncate pointer-events-none">{ item.name }</span>

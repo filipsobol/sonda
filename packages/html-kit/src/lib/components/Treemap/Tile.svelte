@@ -25,9 +25,9 @@
 				class="@container px-2 py-1 size-full flex justify-center flex-nowrap text-sm gap-1"
 			>
 				<!-- https://stackoverflow.com/a/42551367/4617687 -->
-				<p dir="rtl" class="text-gray-900 flex-shrink truncate">&lrm;{ content.name }</p>
-				<p class="text-gray-600 flex-shrink-0 hidden @2xs:block">—</p>
-				<p class="text-gray-600 flex-shrink-0 hidden @2xs:block">{ formattedSize }</p>
+				<p dir="rtl" class="text-gray-900 shrink truncate">&lrm;{ content.name }</p>
+				<p class="text-gray-600 shrink-0 hidden @2xs:block">—</p>
+				<p class="text-gray-600 shrink-0 hidden @2xs:block">{ formattedSize }</p>
 			</div>
 		</foreignObject>
 	{/if}

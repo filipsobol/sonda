@@ -38,7 +38,7 @@
         >
           <LayoutGrid
             size={ 18 }
-            class="flex-shrink-0 text-gray--600 pointer-events-none"
+            class="shrink-0 text-gray--600 pointer-events-none"
           />
 
           <span class="truncate pointer-events-none">Home</span>
@@ -53,7 +53,7 @@
         >
           <Boxes
             size={ 18 }
-            class="flex-shrink-0 text-gray--600 pointer-events-none"
+            class="shrink-0 text-gray--600 pointer-events-none"
           />
 
           <span class="truncate pointer-events-none">Assets</span>
@@ -68,7 +68,7 @@
         >
           <FileInput
             size={ 18 }
-            class="flex-shrink-0 text-gray--600 pointer-events-none"
+            class="shrink-0 text-gray--600 pointer-events-none"
           />
 
           <span class="truncate pointer-events-none">Inputs</span>
@@ -83,7 +83,7 @@
         >
           <CircleAlert
             size={ 18 }
-            class="flex-shrink-0 text-gray--600 pointer-events-none"
+            class="shrink-0 text-gray--600 pointer-events-none"
           />
 
           <span class="truncate pointer-events-none">Warnings</span>
@@ -98,7 +98,7 @@
         >
           <Share2
             size={ 18 }
-            class="flex-shrink-0 text-gray--600 pointer-events-none"
+            class="shrink-0 text-gray--600 pointer-events-none"
           />
 
           <span class="truncate pointer-events-none">Dependencies</span>

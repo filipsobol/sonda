@@ -2,7 +2,7 @@
   <p class="col-span-12 text-2xl font-bold text-gray-900">Assets by type</p>
 
   <button
-    class="flex flex-col col-span-12 rounded-xl border border-gray-200 shadow p-6 cursor-pointer hover:bg-gray-50"
+    class="flex flex-col col-span-12 rounded-xl border border-gray-200 shadow-sm p-6 cursor-pointer hover:bg-gray-50"
     onclick={ () => goto( '#/assets', { state: { outputType: 'all' } } ) }
   >
     <span class="text-gray-900">All</span>
@@ -11,7 +11,7 @@
   </button>
 
   <button
-    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-50 disabled:bg-gray-100"
     onclick={ () => goto( '#/assets', { state: { outputType: 'js' } } ) }
     disabled={ !js.length }
   >
@@ -21,7 +21,7 @@
   </button>
 
   <button
-    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-50 disabled:bg-gray-100"
     onclick={ () => goto( '#/assets', { state: { outputType: 'css' } } ) }
     disabled={ !css.length }
   >
@@ -31,7 +31,7 @@
   </button>
 
   <button
-    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow p-6 hover:bg-gray-50 disabled:bg-gray-100"
+    class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-50 disabled:bg-gray-100"
     onclick={ () => goto( '#/assets', { state: { outputType: 'other' } } ) }
     disabled={ !other.length }
   >
@@ -42,13 +42,13 @@
 
   <p class="col-span-12 text-2xl font-bold mt-12 text-gray-900">Dependencies</p>
 
-  <div class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow p-6 hover:bg-gray-100">
+  <div class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-100">
     <p class="text-gray-900">External Dependencies</p>
     <p class="text-gray-500 text-sm">Size of external dependencies</p>
     <p class="mt-4 text-3xl text-gray-800">{ sizeDependencies } <span class="text-gray-400">({ Object.keys( store.report.dependencies ).length })</span></p>
   </div>
 
-  <div class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow p-6 hover:bg-gray-100">
+  <div class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-100">
     <p class="text-gray-900">Duplicate dependencies</p>
     <p class="text-gray-500 text-sm">Number of duplicate dependencies</p>
     <p class="mt-4 text-3xl text-gray-800">0</p>

@@ -1,4 +1,4 @@
-<div class="flex-grow flex flex-col mt-24 items-center w-full h-full">
+<div class="grow flex flex-col mt-24 items-center w-full h-full">
 	<Meh
 		size={ 96 }
 		class="text-yellow-400 fill-yellow-100"
