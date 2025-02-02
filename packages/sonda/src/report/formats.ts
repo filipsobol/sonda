@@ -15,6 +15,8 @@ import type {
   PluginOptions
 } from '../types.js';
 import { normalizePath } from '../utils.js';
+import { getDependencies } from './dependencies.js';
+import { getIssues } from './issues.js';
 
 export function generateJsonReport(
   assets: Array<string>,
@@ -35,10 +37,17 @@ export function generateJsonReport(
       return carry;
     }, {} as Record<string, ReportOutput> );
 
-  return {
+  const report: JsonReport = {
     inputs: sortObjectKeys( inputs ),
-    outputs: sortObjectKeys( outputs )
+    outputs: sortObjectKeys( outputs ),
+    dependencies: {},
+    issues: {}
   };
+
+  report.dependencies = getDependencies( report );
+  report.issues = getIssues( report );
+
+  return report as JsonReport;
 }
 
 export function generateHtmlReport(

@@ -4,6 +4,7 @@ export {
 	esmRegex,
 	cjsRegex,
 	jsRegexp,
+	cssRegexp,
 	normalizePath
 } from './utils.js';
 

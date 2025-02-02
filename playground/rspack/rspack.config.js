@@ -1,5 +1,6 @@
 import { defineConfig } from '@rspack/cli';
 import Sonda from 'sonda/rspack';
+import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 
 export default defineConfig({
 	entry: './src/index.js',
@@ -9,7 +10,18 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new Sonda()
+		new Sonda(),
+		// new RsdoctorRspackPlugin( {
+		// 	disableClientServer: true,
+		// 	mode: 'brief',
+		// 	brief: {
+		// 		reportHtmlName: 'rsdoctor-report.html',
+		// 		writeDataJson: true
+		// 	},
+		// 	supports: {
+		// 		generateTileGraph: true
+		// 	}
+		// } )
 	],
 	experiments: {
 		css: true

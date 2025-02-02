@@ -113,6 +113,10 @@ export interface ReportOutputInput extends Sizes {}
 export interface JsonReport {
   inputs: Record<string, ReportInput>;
   outputs: Record<string, ReportOutput>;
+  dependencies: Record<string, Array<string>>;
+  issues: {
+    duplicateDependencies?: Array<string>
+  }
 }
 
 export interface Sizes {
