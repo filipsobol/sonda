@@ -112,9 +112,26 @@ export interface ReportOutput extends Sizes {
 export interface ReportOutputInput extends Sizes {}
 
 export interface JsonReport {
+  /**
+   * List of all source input files.
+   */
   inputs: Record<string, ReportInput>;
+
+  /**
+   * List of all generated output files.
+   */
   outputs: Record<string, ReportOutput>;
+
+  /**
+   * List of all detected external dependencies and their paths. If
+   * a dependency has more than one path, it's likely duplicated and
+   * bundled in multiple copies.
+   */
   dependencies: Record<string, Array<string>>;
+
+  /**
+   * List of issues detected in the outputs.
+   */
   issues: {
     duplicateDependencies?: Array<string>
   }

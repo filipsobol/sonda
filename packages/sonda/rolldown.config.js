@@ -6,7 +6,14 @@ import pkg from './package.json' with { type: 'json' };
 // Remove old build folder
 await rm( 'dist', { recursive: true, force: true } );
 
-const sharedOptions = defineConfig( {
+export default defineConfig( {
+	output: {
+		dir: 'dist',
+		format: 'esm',
+		sourcemap: true,
+		entryFileNames: '[name].mjs',
+		chunkFileNames: '[name].mjs',
+	},
 	input: {
 		'index': 'src/index.ts',
 		'entrypoints/angular': 'src/entrypoints/angular.ts',
@@ -31,26 +38,3 @@ const sharedOptions = defineConfig( {
 		}
 	}
 } );
-
-export default defineConfig( [
-	{
-		output: {
-			dir: 'dist',
-			format: 'esm',
-			sourcemap: true,
-			entryFileNames: '[name].mjs',
-			chunkFileNames: '[name].mjs',
-		},
-		...sharedOptions
-	},
-	{
-		output: {
-			dir: 'dist',
-			format: 'cjs',
-			sourcemap: true,
-			entryFileNames: '[name].cjs',
-			chunkFileNames: '[name].cjs',
-		},
-		...sharedOptions
-	}
-] );
