@@ -1,3 +1,11 @@
 packages:
-  - 'packages/**'
-  - 'playground/**'
+  - packages/**
+  - playground/**
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+ignoredBuiltDependencies:
+  - lmdb
+  - msgpackr-extract
+  - sharp
