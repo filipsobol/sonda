@@ -3,6 +3,7 @@ import { join } from 'path';
 import { generateJsonReport, generateHtmlReport } from '../src/report/formats';
 import { normalizeOptions } from '../src/utils';
 import type { ReportInput } from '../src';
+import { dependencies } from 'webpack';
 
 vi.mock( 'fs', async ( originalImport ) => {
 	const fs: any = await originalImport();
@@ -29,6 +30,8 @@ describe( 'report.ts', () => {
 			expect( generateJsonReport( [], {}, defaultOptions ) ).toEqual( {
 				inputs: {},
 				outputs: {},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -45,6 +48,8 @@ describe( 'report.ts', () => {
 			expect( generateJsonReport( [], inputs, defaultOptions ) ).toEqual( {
 				inputs,
 				outputs: {},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -54,6 +59,8 @@ describe( 'report.ts', () => {
 			expect( generateJsonReport( assets, {}, defaultOptions ) ).toEqual( {
 				inputs: {},
 				outputs: {},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -63,6 +70,8 @@ describe( 'report.ts', () => {
 			expect( generateJsonReport( assets, {}, defaultOptions ) ).toEqual( {
 				inputs: {},
 				outputs: {},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -73,6 +82,7 @@ describe( 'report.ts', () => {
 				inputs: {},
 				outputs: {
 					'fixtures/hasMapping/index.js': {
+						type: 'script',
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 79,
@@ -90,6 +100,8 @@ describe( 'report.ts', () => {
 						}
 					}
 				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -103,6 +115,8 @@ describe( 'report.ts', () => {
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 60,
+						map: undefined,
+						type: 'style',
 						inputs: {
 							'[unassigned]': {
 								brotli: 0,
@@ -116,7 +130,9 @@ describe( 'report.ts', () => {
 							}
 						}
 					}
-				}
+				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -131,6 +147,8 @@ describe( 'report.ts', () => {
 						brotli: 71,
 						gzip: 99,
 						uncompressed: 79,
+						map: undefined,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								brotli: 31,
@@ -145,6 +163,8 @@ describe( 'report.ts', () => {
 						}
 					}
 				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -159,6 +179,7 @@ describe( 'report.ts', () => {
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 79,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								brotli: 0,
@@ -184,6 +205,8 @@ describe( 'report.ts', () => {
 						}
 					}
 				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -197,6 +220,8 @@ describe( 'report.ts', () => {
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 238,
+						map: undefined,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								brotli: 0,
@@ -215,7 +240,9 @@ describe( 'report.ts', () => {
 							}
 						}
 					}
-				}
+				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -255,6 +282,8 @@ describe( 'report.ts', () => {
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 238,
+						map: undefined,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								brotli: 0,
@@ -288,7 +317,9 @@ describe( 'report.ts', () => {
 							}
 						}
 					}
-				}
+				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 
@@ -342,6 +373,8 @@ describe( 'report.ts', () => {
 						brotli: 0,
 						gzip: 0,
 						uncompressed: 238,
+						map: undefined,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								brotli: 0,
@@ -375,14 +408,21 @@ describe( 'report.ts', () => {
 							}
 						}
 					}
-				}
+				},
+				dependencies: {},
+				issues: {}
 			} );
 		} );
 	} );
 
 	describe( 'generateHtmlReport', () => {
 		it( 'should return report in HTML format', () => {
-			const stringifiedEmptyReport = encodeURIComponent( JSON.stringify( { inputs: {}, outputs: {} } ) );
+			const stringifiedEmptyReport = encodeURIComponent( JSON.stringify( {
+				inputs: {},
+				outputs: {},
+				dependencies: {},
+				issues: {}
+			} ) );
 
 			expect( generateHtmlReport( [], {}, defaultOptions ) ).toContain( stringifiedEmptyReport );
 		} );
@@ -395,6 +435,7 @@ describe( 'report.ts', () => {
 						uncompressed: 79,
 						gzip: 0,
 						brotli: 0,
+						type: 'script',
 						inputs: {
 							'[unassigned]': {
 								uncompressed: 34, // Length of the sourceMappingURL comment
@@ -409,6 +450,8 @@ describe( 'report.ts', () => {
 						}
 					}
 				},
+				dependencies: {},
+				issues: {}
 			} ) );
 
 			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];

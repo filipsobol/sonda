@@ -1,1713 +1,1591 @@
 {
-  "inputs": {},
+  "inputs": {
+    "../../node_modules/.pnpm/@unhead+dom@1.11.19/node_modules/@unhead/dom/dist/index.mjs": {
+      "bytes": 6494,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs": {
+      "bytes": 19803,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/packrup@0.1.2/node_modules/packrup/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs": {
+      "bytes": 4784,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unhead@1.11.19/node_modules/unhead/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.ziyDaVMR.mjs",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.-sixQ7xP.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.-sixQ7xP.mjs": {
+      "bytes": 1035,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.ziyDaVMR.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.ziyDaVMR.mjs": {
+      "bytes": 2729,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unhead@1.11.19/node_modules/unhead/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/api.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/app.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/component.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/context.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/hooks.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/index.js": {
+      "bytes": 169,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/api.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/app.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/component.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/context.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/hooks.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/util.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/util.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js": {
+      "bytes": 114,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/env.js": {
+      "bytes": 457,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/index.js": {
+      "bytes": 1021,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/env.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/proxy.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/api/index.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/plugin.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/plugin.js": {
+      "bytes": 11,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/proxy.js": {
+      "bytes": 3535,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/const.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/time.js": {
+      "bytes": 652,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": {
+      "bytes": 48594,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": {
+      "bytes": 247840,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": {
+      "bytes": 55650,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js": {
+      "bytes": 22471,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs": {
+      "bytes": 6943,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs": {
+      "bytes": 2052,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs": {
+      "bytes": 2206,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/index.js": {
+      "bytes": 141,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/uneval.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/stringify.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js": {
+      "bytes": 2945,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js": {
+      "bytes": 183,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js": {
+      "bytes": 3919,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/stringify.js": {
+      "bytes": 5197,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/uneval.js": {
+      "bytes": 7830,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/utils.js": {
+      "bytes": 2373,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs": {
+      "bytes": 70728,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs",
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs",
+        "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto/dist/crypto.web.mjs",
+        "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto/dist/index.js",
+        "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs": {
+      "bytes": 8302,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto/dist/index.js": {
+      "bytes": 11278,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs": {
+      "bytes": 1531,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/_polyfill/buffer/nodeless.mjs": {
+      "bytes": 27428,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/_polyfill/events/nodeless.mjs": {
+      "bytes": 11360,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/index.mjs": {
+      "bytes": 7432,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/_polyfill/events/nodeless.mjs",
+        "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http/dist/_polyfill/buffer/nodeless.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/compat/idle-callback.js": {
+      "bytes": 430,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/client-only.js": {
+      "bytes": 3923,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/server-placeholder.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-404.vue": {
+      "bytes": 5497,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-link.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-404.vue?vue&type=style&index=0&scoped=1d6792a6&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-404.vue?vue&type=style&index=0&scoped=1d6792a6&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-500.vue": {
+      "bytes": 4498,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-500.vue?vue&type=style&index=0&scoped=67303fbf&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-500.vue?vue&type=style&index=0&scoped=67303fbf&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-dev.vue": {
+      "bytes": 5016,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-dev.vue?vue&type=style&index=0&scoped=32df2643&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-dev.vue?vue&type=style&index=0&scoped=32df2643&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/index.js": {
+      "bytes": 49,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-link.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/injections.js": {
+      "bytes": 103,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/island-renderer.js": {
+      "bytes": 871,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcomponents.islands.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-error-page.vue": {
+      "bytes": 2294,
+      "format": "unknown",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-link.js": {
+      "bytes": 13500,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/compat/idle-callback.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Frouter.options.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-root.vue": {
+      "bytes": 3798,
+      "format": "unknown",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/injections.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fapp-component.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ferror-component.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js": {
+      "bytes": 1230,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/route-announcer.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/server-placeholder.js": {
+      "bytes": 180,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/test-component-wrapper.js": {
+      "bytes": 941,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.3_/node_modules/vue-router/dist/vue-router.mjs",
+        "../../node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/utils.js": {
+      "bytes": 4004,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpages.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/welcome.vue": {
+      "bytes": 93876,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/welcome.vue?vue&type=style&index=0&scoped=1d9db107&lang.css",
+        "plugin-vue:export-helper",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/welcome.vue?vue&type=style&index=0&scoped=1d9db107&lang.css": {
+      "bytes": 0,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/asyncData.js": {
+      "bytes": 9538,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/utils.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/chunk.js": {
+      "bytes": 876,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/component.js": {
+      "bytes": 2130,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/cookie.js": {
+      "bytes": 6405,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es/dist/index.mjs",
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs",
+        "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ssr.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js": {
+      "bytes": 1303,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/fetch.js": {
+      "bytes": 3640,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ssr.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/hydrate.js": {
+      "bytes": 340,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/id.js": {
+      "bytes": 68,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/index.js": {
+      "bytes": 1500,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/component.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/hydrate.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/once.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/state.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/fetch.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/cookie.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ssr.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/chunk.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/url.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preview.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/id.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/route-announcer.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/runtime-hook.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js": {
+      "bytes": 1968,
+      "format": "esm",
+      "imports": [
+        "vite/preload-helper.js",
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpaths.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/once.js": {
+      "bytes": 929,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/payload.js": {
+      "bytes": 4420,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/index.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preload.js": {
+      "bytes": 1685,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/utils.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preview.js": {
+      "bytes": 1941,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/state.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/asyncData.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js": {
+      "bytes": 415,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/compat/idle-callback.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/route-announcer.js": {
+      "bytes": 1687,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/index.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js": {
+      "bytes": 6584,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/injections.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/runtime-hook.js": {
+      "bytes": 231,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ssr.js": {
+      "bytes": 3322,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/state.js": {
+      "bytes": 1434,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/utils.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/url.js": {
+      "bytes": 230,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ssr.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/config.js": {
+      "bytes": 1691,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        ".nuxt/app.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/entry.js": {
+      "bytes": 2758,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ffetch.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcss.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fplugins.client.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Froot-component.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/index.js": {
+      "bytes": 1389,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/index.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/index.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/config.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/compat/idle-callback.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js": {
+      "bytes": 792,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js": {
+      "bytes": 8759,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs",
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js": {
+      "bytes": 925,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpaths.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js": {
+      "bytes": 1042,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/chunk.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js": {
+      "bytes": 472,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/payload.client.js": {
+      "bytes": 1144,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/revive-payload.client.js": {
+      "bytes": 1892,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/payload.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/router.js": {
+      "bytes": 7842,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fmiddleware.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/utils.js": {
+      "bytes": 84,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/head/runtime/plugins/unhead.js": {
+      "bytes": 1288,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+dom@1.11.19/node_modules/@unhead/dom/dist/index.mjs",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Funhead-plugins.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs": {
+      "bytes": 930,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs",
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs": {
+      "bytes": 10269,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs",
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs": {
+      "bytes": 21150,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/packrup@0.1.2/node_modules/packrup/dist/index.mjs": {
+      "bytes": 3492,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/index.mjs": {
+      "bytes": 876,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs": {
+      "bytes": 12786,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs": {
+      "bytes": 7778,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs": {
+      "bytes": 19705,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto/dist/crypto.web.mjs": {
+      "bytes": 348,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs": {
+      "bytes": 3827,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/mock/empty.mjs": {
+      "bytes": 97,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/unhead@1.11.19/node_modules/unhead/dist/index.mjs": {
+      "bytes": 23551,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+dom@1.11.19/node_modules/@unhead/dom/dist/index.mjs",
+        "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs",
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.3_/node_modules/vue-router/dist/vue-router.mjs": {
+      "bytes": 94029,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/index.js"
+      ],
+      "belongsTo": null
+    },
+    "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js": {
+      "bytes": 497,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    ".nuxt/app.config.mjs": {
+      "bytes": 267,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/config.js",
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs"
+      ],
+      "belongsTo": null
+    },
+    "app.vue": {
+      "bytes": 1331,
+      "format": "unknown",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/client-only.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/welcome.vue",
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+        "plugin-vue:export-helper"
+      ],
+      "belongsTo": null
+    },
+    "plugin-vue:export-helper": {
+      "bytes": 155,
+      "format": "unknown",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fapp-component.mjs": {
+      "bytes": 77,
+      "format": "esm",
+      "imports": [
+        "app.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcomponents.islands.mjs": {
+      "bytes": 91,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcomponents.plugin.mjs": {
+      "bytes": 117,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcss.mjs": {
+      "bytes": 0,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ferror-component.mjs": {
+      "bytes": 251,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-error-page.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ffetch.mjs": {
+      "bytes": 172,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpaths.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fmiddleware.mjs": {
+      "bytes": 362,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnitro.client.mjs": {
+      "bytes": 69,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs": {
+      "bytes": 1769,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpages.mjs": {
+      "bytes": 112,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpaths.mjs": {
+      "bytes": 632,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnitro.client.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fplugins.client.mjs": {
+      "bytes": 2263,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/revive-payload.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/head/runtime/plugins/unhead.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/router.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/payload.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js",
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js",
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcomponents.plugin.mjs"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Froot-component.mjs": {
+      "bytes": 245,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-root.vue"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Frouter.options.mjs": {
+      "bytes": 47,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ftest-component-wrapper.mjs": {
+      "bytes": 254,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/test-component-wrapper.js"
+      ],
+      "belongsTo": null
+    },
+    "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Funhead-plugins.mjs": {
+      "bytes": 223,
+      "format": "esm",
+      "imports": [
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/index.mjs"
+      ],
+      "belongsTo": null
+    },
+    "vite/preload-helper.js": {
+      "bytes": 2300,
+      "format": "esm",
+      "imports": [],
+      "belongsTo": null
+    }
+  },
   "outputs": {
-    ".next/static/chunks/24416b0d-a4c5a5597813fb5a.js": {
-      "uncompressed": 167144,
+    ".nuxt/dist/client/_nuxt/Bf2Msifs.js": {
+      "uncompressed": 3425,
       "gzip": 0,
       "brotli": 0,
+      "type": "script",
       "inputs": {
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.production.js": {
-          "uncompressed": 166996,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-500.vue": {
+          "uncompressed": 2831,
           "gzip": 0,
           "brotli": 0
         },
         "[unassigned]": {
-          "uncompressed": 148,
+          "uncompressed": 594,
           "gzip": 0,
           "brotli": 0
         }
       }
     },
-    ".next/static/chunks/47-5487c3c93359b4eb.js": {
-      "uncompressed": 200142,
+    ".nuxt/dist/client/_nuxt/C6dpuJv1.js": {
+      "uncompressed": 9451,
       "gzip": 0,
       "brotli": 0,
+      "type": "script",
       "inputs": {
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/attach-hydration-error-state.ts": {
-          "uncompressed": 877,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/error-404.vue": {
+          "uncompressed": 3039,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/console-error.ts": {
-          "uncompressed": 754,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-link.js": {
+          "uncompressed": 5618,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/enqueue-client-error.ts": {
-          "uncompressed": 554,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/preload.js": {
+          "uncompressed": 518,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/hydration-error-info.ts": {
-          "uncompressed": 1975,
+        "[unassigned]": {
+          "uncompressed": 276,
           "gzip": 0,
           "brotli": 0
-        },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/stitched-error.ts": {
-          "uncompressed": 929,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/use-error-handler.ts": {
-          "uncompressed": 1655,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/find-head-in-cache.ts": {
-          "uncompressed": 569,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/get-segment-value.ts": {
-          "uncompressed": 531,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/has-interception-route-in-current-tree.ts": {
-          "uncompressed": 580,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/hmr-refresh-reducer.ts": {
-          "uncompressed": 528,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/navigate-reducer.ts": {
-          "uncompressed": 3294,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/prefetch-reducer.ts": {
-          "uncompressed": 670,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/refresh-reducer.ts": {
-          "uncompressed": 1708,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/restore-reducer.ts": {
-          "uncompressed": 757,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/server-action-reducer.ts": {
-          "uncompressed": 4077,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/server-patch-reducer.ts": {
-          "uncompressed": 1003,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/router-reducer/reducers/server-reference-info.ts": {
-          "uncompressed": 932,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/add-path-prefix.ts": {
-          "uncompressed": 338,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/app-paths.ts": {
-          "uncompressed": 353,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/handle-smooth-scroll.ts": {
-          "uncompressed": 464,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/is-bot.ts": {
-          "uncompressed": 447,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/parse-path.ts": {
-          "uncompressed": 457,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/path-has-prefix.ts": {
-          "uncompressed": 200,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/remove-trailing-slash.ts": {
-          "uncompressed": 210,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/globals/handle-global-errors.ts": {
-          "uncompressed": 409,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/globals/intercept-console-error.ts": {
-          "uncompressed": 642,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/globals/patch-console.ts": {
-          "uncompressed": 406,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/http-access-fallback/error-boundary.tsx": {
-          "uncompressed": 1770,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/http-access-fallback/http-access-fallback.ts": {
-          "uncompressed": 1072,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/aliased-prefetch-navigations.ts": {
-          "uncompressed": 2046,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/apply-flight-data.ts": {
-          "uncompressed": 771,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/apply-router-state-patch-to-tree.ts": {
-          "uncompressed": 1141,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/clear-cache-node-data-for-segment-path.ts": {
-          "uncompressed": 1176,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/compute-changed-path.ts": {
-          "uncompressed": 1570,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/create-href-from-url.ts": {
-          "uncompressed": 555,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/create-initial-router-state.ts": {
-          "uncompressed": 1666,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/create-router-cache-key.ts": {
-          "uncompressed": 574,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/fetch-server-response.ts": {
-          "uncompressed": 2595,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/fill-cache-with-new-subtree-data.ts": {
-          "uncompressed": 1438,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/fill-lazy-items-till-leaf-with-head.ts": {
-          "uncompressed": 1620,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/handle-mutable.ts": {
-          "uncompressed": 1504,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/handle-segment-mismatch.ts": {
-          "uncompressed": 485,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/invalidate-cache-below-flight-segmentpath.ts": {
-          "uncompressed": 870,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/invalidate-cache-by-router-state.ts": {
-          "uncompressed": 576,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/is-navigating-to-new-root-layout.ts": {
-          "uncompressed": 664,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/ppr-navigations.ts": {
-          "uncompressed": 4788,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/prefetch-cache-utils.ts": {
-          "uncompressed": 3240,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/refetch-inactive-parallel-segments.ts": {
-          "uncompressed": 1331,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/router-reducer-types.ts": {
-          "uncompressed": 968,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/router-reducer.ts": {
-          "uncompressed": 994,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/router-reducer/should-hard-navigate.ts": {
-          "uncompressed": 449,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/cache-key.ts": {
-          "uncompressed": 586,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/cache.ts": {
-          "uncompressed": 4303,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/lru.ts": {
-          "uncompressed": 1165,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/navigation.ts": {
-          "uncompressed": 2495,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/prefetch.ts": {
-          "uncompressed": 589,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/scheduler.ts": {
-          "uncompressed": 2265,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/segment-cache/tuple-map.ts": {
-          "uncompressed": 1418,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/lazy-dynamic/bailout-to-csr.ts": {
-          "uncompressed": 341,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/page-path/ensure-leading-slash.ts": {
-          "uncompressed": 312,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/router/action-queue.ts": {
-          "uncompressed": 1322,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/utils/warn-once.ts": {
-          "uncompressed": 81,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/app-router-announcer.tsx": {
-          "uncompressed": 1524,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/app-router-headers.ts": {
-          "uncompressed": 1206,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/app-router.tsx": {
-          "uncompressed": 7001,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/bailout-to-client-rendering.ts": {
-          "uncompressed": 551,
+        }
+      }
+    },
+    ".nuxt/dist/client/_nuxt/PKBAfjzO.js": {
+      "uncompressed": 219192,
+      "gzip": 0,
+      "brotli": 0,
+      "type": "script",
+      "inputs": {
+        "../../node_modules/.pnpm/@unhead+dom@1.11.19/node_modules/@unhead/dom/dist/index.mjs": {
+          "uncompressed": 3394,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/client-page.tsx": {
-          "uncompressed": 964,
+        "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared/dist/index.mjs": {
+          "uncompressed": 4543,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/client-segment.tsx": {
-          "uncompressed": 894,
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.-sixQ7xP.mjs": {
+          "uncompressed": 1424,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/error-boundary.tsx": {
-          "uncompressed": 2389,
+        "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue/dist/shared/vue.ziyDaVMR.mjs": {
+          "uncompressed": 1036,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/forbidden.ts": {
-          "uncompressed": 595,
+        "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": {
+          "uncompressed": 16363,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/hooks-server-context.ts": {
-          "uncompressed": 668,
+        "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": {
+          "uncompressed": 45414,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/is-hydration-error.ts": {
-          "uncompressed": 1544,
+        "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": {
+          "uncompressed": 6012,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/is-next-router-error.ts": {
-          "uncompressed": 474,
+        "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.esm-bundler.js": {
+          "uncompressed": 3137,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/layout-router.tsx": {
-          "uncompressed": 4833,
+        "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs": {
+          "uncompressed": 667,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/match-segments.ts": {
-          "uncompressed": 691,
+        "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs": {
+          "uncompressed": 1252,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/nav-failure-handler.ts": {
-          "uncompressed": 796,
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/base64.js": {
+          "uncompressed": 609,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/navigation-untracked.ts": {
-          "uncompressed": 672,
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/constants.js": {
+          "uncompressed": 42,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/navigation.react-server.ts": {
-          "uncompressed": 1074,
+        "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/src/parse.js": {
+          "uncompressed": 1530,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/navigation.ts": {
-          "uncompressed": 2445,
+        "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3/dist/index.mjs": {
+          "uncompressed": 1550,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/not-found.ts": {
-          "uncompressed": 476,
+        "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs": {
+          "uncompressed": 2927,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/promise-queue.ts": {
-          "uncompressed": 1322,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/compat/idle-callback.js": {
+          "uncompressed": 216,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/redirect-boundary.tsx": {
-          "uncompressed": 1285,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/client-only.js": {
+          "uncompressed": 1194,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/redirect-error.ts": {
-          "uncompressed": 826,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/injections.js": {
+          "uncompressed": 25,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/redirect-status-code.ts": {
-          "uncompressed": 575,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-error-page.vue": {
+          "uncompressed": 786,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/redirect.ts": {
-          "uncompressed": 1394,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-root.vue": {
+          "uncompressed": 708,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/render-from-template-context.tsx": {
-          "uncompressed": 565,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/nuxt-route-announcer.js": {
+          "uncompressed": 1926,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/static-generation-bailout.ts": {
-          "uncompressed": 504,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/utils.js": {
+          "uncompressed": 662,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/unauthorized.ts": {
-          "uncompressed": 641,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/components/welcome.vue": {
+          "uncompressed": 91049,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/unresolved-thenable.ts": {
-          "uncompressed": 398,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/chunk.js": {
+          "uncompressed": 509,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/unstable-rethrow.ts": {
-          "uncompressed": 640,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/error.js": {
+          "uncompressed": 439,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/components/use-reducer.ts": {
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/manifest.js": {
           "uncompressed": 507,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/lib/console.ts": {
-          "uncompressed": 1555,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/payload.js": {
+          "uncompressed": 1316,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/react-client-callbacks/app-router.ts": {
-          "uncompressed": 660,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/ready.js": {
+          "uncompressed": 106,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/react-client-callbacks/report-global-error.ts": {
-          "uncompressed": 458,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/route-announcer.js": {
+          "uncompressed": 839,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/client/react-client-callbacks/shared.ts": {
-          "uncompressed": 492,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/composables/router.js": {
+          "uncompressed": 1186,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/lib/metadata/metadata-boundary.tsx": {
-          "uncompressed": 481,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/entry.js": {
+          "uncompressed": 966,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/app-router-context.shared-runtime.ts": {
-          "uncompressed": 420,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js": {
+          "uncompressed": 184,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/encode-uri-path.ts": {
-          "uncompressed": 232,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/nuxt.js": {
+          "uncompressed": 2790,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/hash.ts": {
-          "uncompressed": 471,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js": {
+          "uncompressed": 254,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/head-manager-context.shared-runtime.ts": {
-          "uncompressed": 256,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/hooks-client-context.shared-runtime.ts": {
-          "uncompressed": 334,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/invariant-error.ts": {
-          "uncompressed": 215,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/is-plain-object.ts": {
-          "uncompressed": 427,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/is-thenable.ts": {
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js": {
           "uncompressed": 378,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/segment.ts": {
-          "uncompressed": 737,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/navigation-repaint.client.js": {
+          "uncompressed": 151,
           "gzip": 0,
           "brotli": 0
         },
-        "../../../src/shared/lib/server-inserted-html.shared-runtime.tsx": {
-          "uncompressed": 308,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/payload.client.js": {
+          "uncompressed": 394,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_class_private_field_loose_base.js": {
-          "uncompressed": 214,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/revive-payload.client.js": {
+          "uncompressed": 462,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_class_private_field_loose_key.js": {
-          "uncompressed": 81,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/app/plugins/router.js": {
+          "uncompressed": 2892,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-dom/cjs/react-dom.production.js": {
-          "uncompressed": 3294,
+        "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt/dist/head/runtime/plugins/unhead.js": {
+          "uncompressed": 398,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-dom/client.js": {
-          "uncompressed": 252,
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/index.mjs": {
+          "uncompressed": 415,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-dom/index.js": {
-          "uncompressed": 249,
+        "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/shared/ofetch.03887fc3.mjs": {
+          "uncompressed": 5230,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.production.js": {
-          "uncompressed": 20444,
+        "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs": {
+          "uncompressed": 660,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-server-dom-webpack/client.browser.js": {
-          "uncompressed": 46,
+        "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs": {
+          "uncompressed": 4304,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react-server-dom-webpack/client.js": {
-          "uncompressed": 46,
+        "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx/dist/index.mjs": {
+          "uncompressed": 1238,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react/cjs/react-jsx-runtime.production.js": {
-          "uncompressed": 365,
+        "../../node_modules/.pnpm/unhead@1.11.19/node_modules/unhead/dist/index.mjs": {
+          "uncompressed": 6019,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react/cjs/react.production.js": {
-          "uncompressed": 7397,
+        "[unassigned]": {
+          "uncompressed": 373,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react/index.js": {
-          "uncompressed": 47,
+        "app.vue": {
+          "uncompressed": 125,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/react/jsx-runtime.js": {
-          "uncompressed": 47,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fcomponents.plugin.mjs": {
+          "uncompressed": 39,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/scheduler/cjs/scheduler.production.js": {
-          "uncompressed": 3628,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Ffetch.mjs": {
+          "uncompressed": 65,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/compiled/scheduler/index.js": {
-          "uncompressed": 48,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fmiddleware.mjs": {
+          "uncompressed": 8,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/export/helpers/is-dynamic-usage-error.js": {
-          "uncompressed": 331,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnitro.client.mjs": {
+          "uncompressed": 83,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/metadata/metadata-constants.js": {
-          "uncompressed": 396,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fnuxt.config.mjs": {
+          "uncompressed": 141,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/scheduler.js": {
-          "uncompressed": 503,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/action-async-storage-instance.js": {
-          "uncompressed": 215,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/action-async-storage.external.js": {
-          "uncompressed": 206,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/after-task-async-storage-instance.js": {
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fpaths.mjs": {
           "uncompressed": 220,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/after-task-async-storage.external.js": {
-          "uncompressed": 210,
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Fplugins.client.mjs": {
+          "uncompressed": 29,
           "gzip": 0,
           "brotli": 0
         },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/async-local-storage.js": {
-          "uncompressed": 694,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/dynamic-rendering.js": {
-          "uncompressed": 9081,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/get-segment-param.js": {
-          "uncompressed": 572,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/work-async-storage-instance.js": {
-          "uncompressed": 215,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/work-async-storage.external.js": {
-          "uncompressed": 201,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/work-unit-async-storage-instance.js": {
-          "uncompressed": 200,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/work-unit-async-storage.external.js": {
-          "uncompressed": 1472,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/create-deduped-by-callsite-server-error-logger.js": {
-          "uncompressed": 965,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/dynamic-rendering-utils.js": {
-          "uncompressed": 578,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/lib/router-utils/is-postpone.js": {
-          "uncompressed": 258,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/request/params.browser.js": {
-          "uncompressed": 405,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/request/params.js": {
-          "uncompressed": 3711,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/request/search-params.browser.js": {
-          "uncompressed": 403,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/request/search-params.js": {
-          "uncompressed": 6040,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/request/utils.js": {
-          "uncompressed": 1544,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/web/spec-extension/adapters/reflect.js": {
-          "uncompressed": 537,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/add-base-path.ts": {
-          "uncompressed": 390,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-bootstrap.ts": {
-          "uncompressed": 957,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-build-id.ts": {
-          "uncompressed": 499,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-call-server.ts": {
-          "uncompressed": 723,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-find-source-map-url.ts": {
-          "uncompressed": 303,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-index.tsx": {
-          "uncompressed": 2742,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-next.ts": {
-          "uncompressed": 376,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/app-webpack.ts": {
-          "uncompressed": 484,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/assign-location.ts": {
-          "uncompressed": 545,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/flight-data-helpers.ts": {
-          "uncompressed": 899,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/has-base-path.ts": {
-          "uncompressed": 344,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/normalize-trailing-slash.ts": {
-          "uncompressed": 573,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/remove-base-path.ts": {
-          "uncompressed": 405,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_interop_require_default.js?96d0": {
-          "uncompressed": 104,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_interop_require_wildcard.js?a75b": {
-          "uncompressed": 616,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/build/deployment-id.js?e738": {
-          "uncompressed": 184,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/build/polyfills/polyfill-module.js?041d": {
-          "uncompressed": 1493,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/is-error.js?9f49": {
-          "uncompressed": 667,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/app-render/async-local-storage.js?fa79": {
-          "uncompressed": 695,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/lib/interception-routes.js?daf7": {
-          "uncompressed": 1287,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js?7a1b": {
-          "uncompressed": 1669,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 135,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/app/_not-found/page-6fa5b46cf2822492.js": {
-      "uncompressed": 2286,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "../../../../src/client/components/http-access-fallback/error-fallback.tsx": {
-          "uncompressed": 1478,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/not-found-error.tsx": {
-          "uncompressed": 461,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/app/_not-found/webpack:/_N_E/?1496": {
-          "uncompressed": 220,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 127,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/app/layout-0b0e17a2c85c2dcf.js": {
-      "uncompressed": 654,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/font/google/target.css?{\"path\":\"src/app/layout.tsx\",\"import\":\"Geist\",\"arguments\":[{\"variable\":\"--font-geist-sans\",\"subsets\":[\"latin\"]}],\"variableName\":\"geistSans\"}": {
-          "uncompressed": 148,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/font/google/target.css?{\"path\":\"src/app/layout.tsx\",\"import\":\"Geist_Mono\",\"arguments\":[{\"variable\":\"--font-geist-mono\",\"subsets\":[\"latin\"]}],\"variableName\":\"geistMono\"}": {
-          "uncompressed": 223,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/app/webpack:/_N_E/?4b77": {
-          "uncompressed": 154,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 129,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "src/app/globals.css": {
-          "uncompressed": 0,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/app/page-0dd1dd41c263fa54.js": {
-      "uncompressed": 454,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        ".next/static/chunks/app/webpack:/_N_E/?c978": {
-          "uncompressed": 54,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 126,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "src/app/page.module.css": {
-          "uncompressed": 274,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/framework-f8533ee8228e6c64.js": {
-      "uncompressed": 181662,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "../../node_modules/.pnpm/react-dom@19.0.0_react@19.0.0/node_modules/react-dom/cjs/react-dom-client.production.js": {
-          "uncompressed": 166434,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react-dom@19.0.0_react@19.0.0/node_modules/react-dom/cjs/react-dom.production.js": {
-          "uncompressed": 3260,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react-dom@19.0.0_react@19.0.0/node_modules/react-dom/client.js": {
-          "uncompressed": 238,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react-dom@19.0.0_react@19.0.0/node_modules/react-dom/index.js": {
-          "uncompressed": 236,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react@19.0.0/node_modules/react/cjs/react-jsx-runtime.production.js": {
-          "uncompressed": 349,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react@19.0.0/node_modules/react/cjs/react.production.js": {
-          "uncompressed": 7298,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react@19.0.0/node_modules/react/index.js": {
-          "uncompressed": 30,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/react@19.0.0/node_modules/react/jsx-runtime.js": {
-          "uncompressed": 31,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/scheduler@0.25.0/node_modules/scheduler/cjs/scheduler.production.js": {
-          "uncompressed": 3616,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/scheduler@0.25.0/node_modules/scheduler/index.js": {
-          "uncompressed": 22,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 148,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/main-827fcac7fc03865e.js": {
-      "uncompressed": 116621,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/get-socket-url.ts": {
-          "uncompressed": 688,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../../src/client/components/react-dev-overlay/internal/helpers/stitched-error.ts": {
-          "uncompressed": 799,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/client/components/react-dev-overlay/pages/websocket.ts": {
-          "uncompressed": 1363,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/add-locale.ts": {
-          "uncompressed": 366,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/add-path-prefix.ts": {
-          "uncompressed": 293,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/add-path-suffix.ts": {
-          "uncompressed": 338,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/app-paths.ts": {
-          "uncompressed": 353,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/as-path-to-search-params.ts": {
-          "uncompressed": 221,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/compare-states.ts": {
-          "uncompressed": 636,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/format-next-pathname-info.ts": {
-          "uncompressed": 685,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/format-url.ts": {
-          "uncompressed": 907,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/get-asset-path-from-route.ts": {
-          "uncompressed": 350,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/get-next-pathname-info.ts": {
-          "uncompressed": 967,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/handle-smooth-scroll.ts": {
-          "uncompressed": 519,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/index.ts": {
-          "uncompressed": 313,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/interpolate-as.ts": {
-          "uncompressed": 589,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/is-bot.ts": {
-          "uncompressed": 539,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/is-dynamic.ts": {
-          "uncompressed": 330,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/is-local-url.ts": {
-          "uncompressed": 265,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/omit.ts": {
-          "uncompressed": 239,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/parse-path.ts": {
-          "uncompressed": 460,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/parse-relative-url.ts": {
-          "uncompressed": 591,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/path-has-prefix.ts": {
-          "uncompressed": 200,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/querystring.ts": {
-          "uncompressed": 946,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/remove-path-prefix.ts": {
-          "uncompressed": 195,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/remove-trailing-slash.ts": {
-          "uncompressed": 303,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/route-matcher.ts": {
-          "uncompressed": 549,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/route-regex.ts": {
-          "uncompressed": 2565,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../../src/shared/lib/router/utils/sorted-routes.ts": {
-          "uncompressed": 3234,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/client/components/http-access-fallback/http-access-fallback.ts": {
-          "uncompressed": 1031,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/i18n/normalize-locale-path.ts": {
-          "uncompressed": 442,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/lazy-dynamic/bailout-to-csr.ts": {
-          "uncompressed": 341,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/page-path/denormalize-page-path.ts": {
-          "uncompressed": 227,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/page-path/ensure-leading-slash.ts": {
-          "uncompressed": 210,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/page-path/normalize-path-sep.ts": {
-          "uncompressed": 294,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/router/adapters.tsx": {
-          "uncompressed": 1341,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/router/router.ts": {
-          "uncompressed": 22370,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../../src/shared/lib/utils/warn-once.ts": {
-          "uncompressed": 81,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/is-next-router-error.ts": {
-          "uncompressed": 479,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/redirect-error.ts": {
-          "uncompressed": 826,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/components/redirect-status-code.ts": {
-          "uncompressed": 533,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/portal/index.tsx": {
-          "uncompressed": 632,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/react-client-callbacks/report-global-error.ts": {
-          "uncompressed": 458,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/react-client-callbacks/shared.ts": {
-          "uncompressed": 490,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/tracing/report-to-socket.ts": {
-          "uncompressed": 605,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/client/tracing/tracer.ts": {
-          "uncompressed": 916,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/amp-context.shared-runtime.ts": {
-          "uncompressed": 120,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/amp-mode.ts": {
-          "uncompressed": 382,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/app-router-context.shared-runtime.ts": {
-          "uncompressed": 507,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/bloom-filter.ts": {
-          "uncompressed": 1174,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/constants.ts": {
-          "uncompressed": 5286,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/encode-uri-path.ts": {
-          "uncompressed": 326,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/escape-regexp.ts": {
-          "uncompressed": 272,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/head-manager-context.shared-runtime.ts": {
-          "uncompressed": 270,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/head.tsx": {
-          "uncompressed": 2203,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/hooks-client-context.shared-runtime.ts": {
-          "uncompressed": 244,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/image-config-context.shared-runtime.ts": {
-          "uncompressed": 286,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/image-config.ts": {
-          "uncompressed": 566,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/is-plain-object.ts": {
-          "uncompressed": 561,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/mitt.ts": {
-          "uncompressed": 404,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/modern-browserslist-target.js": {
-          "uncompressed": 98,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/normalized-asset-prefix.ts": {
-          "uncompressed": 445,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/router-context.shared-runtime.ts": {
-          "uncompressed": 258,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/runtime-config.external.ts": {
-          "uncompressed": 256,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/segment.ts": {
-          "uncompressed": 686,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/side-effect.tsx": {
-          "uncompressed": 816,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../../src/shared/lib/utils.ts": {
-          "uncompressed": 2270,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_interop_require_default.js": {
-          "uncompressed": 104,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers/esm/_interop_require_wildcard.js": {
-          "uncompressed": 675,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/build/deployment-id.js": {
-          "uncompressed": 184,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/build/polyfills/polyfill-module.js": {
-          "uncompressed": 1493,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/constants.js": {
-          "uncompressed": 5798,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/is-api-route.js": {
-          "uncompressed": 230,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/lib/is-error.js": {
-          "uncompressed": 532,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/dev/hot-reloader-types.js": {
-          "uncompressed": 709,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/server/lib/interception-routes.js": {
-          "uncompressed": 1270,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js": {
-          "uncompressed": 1681,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/add-base-path.ts": {
-          "uncompressed": 477,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/add-locale.ts": {
-          "uncompressed": 532,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/detect-domain-locale.ts": {
-          "uncompressed": 459,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/has-base-path.ts": {
-          "uncompressed": 350,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/head-manager.ts": {
-          "uncompressed": 2039,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/index.tsx": {
-          "uncompressed": 9115,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/next.ts": {
-          "uncompressed": 514,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/normalize-trailing-slash.ts": {
-          "uncompressed": 560,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/page-loader.ts": {
-          "uncompressed": 1629,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/remove-base-path.ts": {
-          "uncompressed": 407,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/remove-locale.ts": {
-          "uncompressed": 539,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/request-idle-callback.ts": {
-          "uncompressed": 787,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/resolve-href.ts": {
-          "uncompressed": 1497,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/route-announcer.tsx": {
-          "uncompressed": 1084,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/route-loader.ts": {
-          "uncompressed": 3852,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/router.ts": {
-          "uncompressed": 2509,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/script.tsx": {
-          "uncompressed": 3541,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/set-attributes-from-props.ts": {
-          "uncompressed": 943,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/trusted-types.ts": {
-          "uncompressed": 687,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/webpack.ts": {
-          "uncompressed": 374,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/client/with-router.tsx": {
-          "uncompressed": 617,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/pages/_app.tsx": {
-          "uncompressed": 673,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../../src/pages/_error.tsx": {
-          "uncompressed": 2113,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/ignored|/home/filip/Projects/sonda/node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/dist/shared/lib/router|./utils/resolve-rewrites": {
-          "uncompressed": 0,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 138,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/main-app-4c22d1d1fbf2f320.js": {
-      "uncompressed": 515,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        ".next/static/chunks/webpack:/_N_E/?512b": {
-          "uncompressed": 384,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 131,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/pages/_app-7d468d26d372b882.js": {
-      "uncompressed": 286,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "[unassigned]": {
-          "uncompressed": 286,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/pages/_error-da0ff992654f6c40.js": {
-      "uncompressed": 284,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        ".next/static/chunks/pages/webpack:/_N_E/?107b": {
-          "uncompressed": 155,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 129,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/chunks/webpack-1cec38a70ebadaa9.js": {
-      "uncompressed": 3231,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        ".next/static/chunks/webpack/after-startup": {
-          "uncompressed": 0,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/before-startup": {
-          "uncompressed": 0,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/bootstrap": {
-          "uncompressed": 171,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/chunk loaded": {
-          "uncompressed": 347,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/create fake namespace object": {
-          "uncompressed": 426,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/define property getters": {
-          "uncompressed": 101,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/ensure chunk": {
-          "uncompressed": 78,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/get javascript chunk filename": {
-          "uncompressed": 10,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/get mini-css chunk filename": {
-          "uncompressed": 17,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/hasOwnProperty shorthand": {
-          "uncompressed": 59,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/jsonp chunk loading": {
-          "uncompressed": 807,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/load script": {
-          "uncompressed": 735,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/make namespace object": {
-          "uncompressed": 173,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/publicPath": {
-          "uncompressed": 20,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/trusted types policy": {
-          "uncompressed": 173,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/runtime/trusted types script url": {
-          "uncompressed": 34,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/chunks/webpack/startup": {
-          "uncompressed": 0,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 80,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/css/8f027f6fd41faa73.css": {
-      "uncompressed": 2457,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        "../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/font/google/%3Cinput%20css%20MxYI3h%3E": {
-          "uncompressed": 667,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "../node_modules/.pnpm/next@15.1.2_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.80.7/node_modules/next/font/google/%3Cinput%20css%20muD_CW%3E": {
-          "uncompressed": 677,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/css/8f027f6fd41faa73.css": {
+        "virtual:nuxt:%2Fhome%2Ffilip%2FProjects%2Fsonda%2Fplayground%2Fnuxt%2F.nuxt%2Funhead-plugins.mjs": {
           "uncompressed": 6,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/css/<no source>": {
-          "uncompressed": 581,
-          "gzip": 0,
-          "brotli": 0
-        },
-        ".next/static/css/src/app/globals.css": {
-          "uncompressed": 479,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 47,
-          "gzip": 0,
-          "brotli": 0
-        }
-      }
-    },
-    ".next/static/css/c92f6ec60942efe4.css": {
-      "uncompressed": 2486,
-      "gzip": 0,
-      "brotli": 0,
-      "inputs": {
-        ".next/static/css/src/app/page.module.css": {
-          "uncompressed": 2439,
-          "gzip": 0,
-          "brotli": 0
-        },
-        "[unassigned]": {
-          "uncompressed": 47,
           "gzip": 0,
           "brotli": 0
         }
       }
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@unhead/dom": [
+      "../../node_modules/.pnpm/@unhead+dom@1.11.19/node_modules/@unhead/dom"
+    ],
+    "@unhead/shared": [
+      "../../node_modules/.pnpm/@unhead+shared@1.11.19/node_modules/@unhead/shared"
+    ],
+    "@unhead/vue": [
+      "../../node_modules/.pnpm/@unhead+vue@1.11.19_vue@3.5.13_typescript@5.7.3_/node_modules/@unhead/vue"
+    ],
+    "@vue/devtools-api": [
+      "../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api"
+    ],
+    "@vue/reactivity": [
+      "../../node_modules/.pnpm/@vue+reactivity@3.5.13/node_modules/@vue/reactivity"
+    ],
+    "@vue/runtime-core": [
+      "../../node_modules/.pnpm/@vue+runtime-core@3.5.13/node_modules/@vue/runtime-core"
+    ],
+    "@vue/runtime-dom": [
+      "../../node_modules/.pnpm/@vue+runtime-dom@3.5.13/node_modules/@vue/runtime-dom"
+    ],
+    "@vue/shared": [
+      "../../node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared"
+    ],
+    "cookie-es": [
+      "../../node_modules/.pnpm/cookie-es@1.2.2/node_modules/cookie-es"
+    ],
+    "defu": [
+      "../../node_modules/.pnpm/defu@6.1.4/node_modules/defu"
+    ],
+    "destr": [
+      "../../node_modules/.pnpm/destr@2.0.3/node_modules/destr"
+    ],
+    "devalue": [
+      "../../node_modules/.pnpm/devalue@5.1.1/node_modules/devalue"
+    ],
+    "h3": [
+      "../../node_modules/.pnpm/h3@1.15.1/node_modules/h3"
+    ],
+    "hookable": [
+      "../../node_modules/.pnpm/hookable@5.5.3/node_modules/hookable"
+    ],
+    "iron-webcrypto": [
+      "../../node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto"
+    ],
+    "klona": [
+      "../../node_modules/.pnpm/klona@2.0.6/node_modules/klona"
+    ],
+    "node-mock-http": [
+      "../../node_modules/.pnpm/node-mock-http@1.0.0/node_modules/node-mock-http"
+    ],
+    "nuxt": [
+      "../../node_modules/.pnpm/nuxt@3.15.4_@parcel+watcher@2.5.1_@types+node@22.13.5_db0@0.2.4_encoding@0.1.13_ioredis@5.5.0_oz25by3ukc7vggcswbuvqwm4uq/node_modules/nuxt"
+    ],
+    "ofetch": [
+      "../../node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch"
+    ],
+    "ohash": [
+      "../../node_modules/.pnpm/ohash@1.1.4/node_modules/ohash"
+    ],
+    "packrup": [
+      "../../node_modules/.pnpm/packrup@0.1.2/node_modules/packrup"
+    ],
+    "pathe": [
+      "../../node_modules/.pnpm/pathe@2.0.3/node_modules/pathe"
+    ],
+    "radix3": [
+      "../../node_modules/.pnpm/radix3@1.1.2/node_modules/radix3"
+    ],
+    "ufo": [
+      "../../node_modules/.pnpm/ufo@1.5.4/node_modules/ufo"
+    ],
+    "uncrypto": [
+      "../../node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto"
+    ],
+    "unctx": [
+      "../../node_modules/.pnpm/unctx@2.4.1/node_modules/unctx"
+    ],
+    "unenv": [
+      "../../node_modules/.pnpm/unenv@1.10.0/node_modules/unenv"
+    ],
+    "unhead": [
+      "../../node_modules/.pnpm/unhead@1.11.19/node_modules/unhead"
+    ],
+    "vue-router": [
+      "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.3_/node_modules/vue-router"
+    ],
+    "vue": [
+      "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue"
+    ]
+  },
   "issues": {}
 }

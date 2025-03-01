@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
 import { dirname, extname, resolve } from 'path';
 import { loadCodeAndMap } from 'load-source-map';
 import { decode } from '@jridgewell/sourcemap-codec';
@@ -14,7 +13,7 @@ import type {
   ReportOutputInput,
   PluginOptions
 } from '../types.js';
-import { normalizePath } from '../utils.js';
+import { normalizePath, getTypeByName } from '../utils.js';
 import { getDependencies } from './dependencies.js';
 import { getIssues } from './issues.js';
 
@@ -56,9 +55,7 @@ export function generateHtmlReport(
   options: PluginOptions
 ): string {
   const json = generateJsonReport( assets, inputs, options );
-  // Replace with `import.meta.dirname` after upgrading to Node 20
-  const __dirname = dirname( fileURLToPath( import.meta.url ) );
-  const template = readFileSync( resolve( __dirname, './index.html' ), 'utf-8' );
+  const template = readFileSync( resolve( import.meta.dirname, './index.html' ), 'utf-8' );
 
   return template.replace( '__REPORT_DATA__', encodeURIComponent( JSON.stringify( json ) ) );
 }
@@ -93,6 +90,7 @@ function processAsset(
 
   return {
     ...assetSizes,
+    type: getTypeByName( asset ),
     inputs: sortObjectKeys( outputInputs ),
     map: options.sources ? {
       version: 3,

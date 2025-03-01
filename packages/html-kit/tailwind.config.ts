@@ -5,9 +5,6 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
 
   theme: {
-    fontFamily: {
-      'mono': ['"JetBrains Mono"', 'monospace']
-    },
     extend: {
       containers: {
         '3xs': '10rem',

@@ -1,5 +1,5 @@
 import { join, relative, win32, posix, extname, isAbsolute, format, parse } from 'path';
-import type { PluginOptions } from './types.js';
+import type { PluginOptions, SourceType } from './types.js';
 
 export const esmRegex: RegExp = /\.m[tj]sx?$/;
 export const cjsRegex: RegExp = /\.c[tj]sx?$/;
@@ -63,4 +63,19 @@ function normalizeOutputPath( options: PluginOptions ): string {
 	}
 
 	return path;
+}
+
+/**
+ * Returns the type of a given file based on its name.
+ */
+export function getTypeByName( name: string ): SourceType {
+	if ( jsRegexp.test( name ) ) {
+		return 'script';
+	}
+
+	if ( cssRegexp.test( name ) ) {
+		return 'style';
+	}
+
+	return 'other';
 }

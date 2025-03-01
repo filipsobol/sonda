@@ -38,7 +38,7 @@
     "build": "pnpm run build:load-source-map && pnpm run build:dist"
   },
   "dependencies": {
-    "unplugin": "^2.1.2"
+    "unplugin": "^2.2.0"
   },
   "devDependencies": {
     "load-source-map": "workspace:^"

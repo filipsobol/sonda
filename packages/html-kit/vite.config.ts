@@ -20,11 +20,15 @@ if ( process.env.NODE_ENV !== 'production' ) {
 export default defineConfig({
 	build: {
 		modulePreload: false,
+		target: 'esnext',
 		// emptyOutDir: false,
 		// outDir: resolve( import.meta.dirname, '../sonda/dist' )
 	},
 	plugins: [
 		sveltekit(),
 		tailwindcss()
-	]
+	],
+	esbuild: {
+		legalComments: 'none'
+	}
 });

@@ -104,6 +104,7 @@ export interface ReportInput {
 }
 
 export interface ReportOutput extends Sizes {
+  type: SourceType;
   inputs: Record<string, ReportOutputInput>;
   map?: DecodedSourceMap;
 }
@@ -130,5 +131,6 @@ export interface CodeMap {
   map?: EncodedSourceMap;
 }
 
+export type SourceType = 'script' | 'style' | 'other';
 export type ModuleFormat = 'esm' | 'cjs' | 'unknown';
 export type MaybeCodeMap = CodeMap | null;
