@@ -17,9 +17,11 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          check-latest: true
-          node-version: 20
+          node-version: 20.18.3
           cache: "pnpm"
+      
+      # https://github.com/nodejs/corepack/issues/627
+      - run: npm i -g --force corepack && corepack enable
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
