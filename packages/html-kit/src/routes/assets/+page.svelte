@@ -43,14 +43,12 @@ import { store, type OutputType } from '$lib/store.svelte.js';
 import { getBuildTrie } from '$lib/helpers/FileSystemTrie';
 import type { Tab } from '$lib/types';
 
-const { js, css, other } = store.outputTypes;
-
 const assetType = {
   options: [
-    { value: 'all',     label: 'All',           active: true },
-    { value: 'js',      label: 'JavaScript',    active: !!Object.keys( js ).length },
-    { value: 'css',     label: 'CSS',           active: !!Object.keys( css ).length },
-    { value: 'other',   label: 'Other',         active: !!Object.keys( other ).length },
+    { value: 'all',     label: 'All',       active: true },
+    { value: 'script',  label: 'Script',    active: !!Object.keys( store.outputTypes.script ).length },
+    { value: 'style',   label: 'Style',     active: !!Object.keys( store.outputTypes.style ).length },
+    { value: 'other',   label: 'Other',     active: !!Object.keys( store.outputTypes.other ).length },
   ] satisfies Array<Tab<OutputType>>,
 
   get value() {

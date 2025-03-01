@@ -1,23 +1,20 @@
-import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 
-process.env.VITE_SONDA_REPORT_DATA = '__REPORT_DATA__';
-
-if ( process.env.NODE_ENV !== 'production' ) {
-	const sampleDataPath = resolve(
-		process.cwd(),
-		'sample_data.json'
-	);
-
-	process.env.VITE_SONDA_REPORT_DATA = encodeURIComponent(
-		readFileSync( sampleDataPath, 'utf-8' )
-	);
+declare global {
+	const SONDA_REPORT_DATA: string;
 }
 
+const SONDA_REPORT_DATA = process.env.NODE_ENV === 'production'
+	? '__REPORT_DATA__'
+	: readFileSync( './sample_data.json', 'utf-8' );
+
 export default defineConfig({
+	define: {
+		SONDA_REPORT_DATA: JSON.stringify( encodeURIComponent( SONDA_REPORT_DATA ) )
+	},
 	build: {
 		modulePreload: false,
 		target: 'esnext',

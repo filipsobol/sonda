@@ -107,7 +107,9 @@
 
       <p class="mt-12 px-2 font-bold text-gray-500">Assets</p>
 
-      <List items={ [ tree ] } />
+      <div class="mt-4 flex flex-col gap-1">
+        <List items={ [ tree ] } />
+      </div>
     </div>
   </div>
 </div>

@@ -1,15 +1,16 @@
-import type { Sizes, JsonReport } from 'sonda';
+import type { Sizes, JsonReport, SourceType } from 'sonda';
 
-export type CompressionType = keyof Sizes;
-export type Compressions = Array< {
+type CompressionType = keyof Sizes;
+
+type Compressions = Array< {
   value: CompressionType;
   label: string;
   active: boolean;
 } >;
 
-export type OutputType = 'all' | 'js' | 'css' | 'other';
+export type OutputType = SourceType | 'all';
 
-export type OutputsByTypes = {
+type OutputsByTypes = {
   [ type in OutputType ]: JsonReport[ 'outputs' ];
 };
 
@@ -20,11 +21,8 @@ interface Store {
   compression: CompressionType;
 }
 
-export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
-export const cssRegexp: RegExp = /\.css$/;
-
 function Store(): Store {
-  const report: JsonReport = JSON.parse( decodeURIComponent( import.meta.env.VITE_SONDA_REPORT_DATA ) );
+  const report: JsonReport = JSON.parse( decodeURIComponent( SONDA_REPORT_DATA ) );
   const outputTypes = getOutputTypes( report );
   const compressions = getCompressions( report );
 
@@ -60,21 +58,14 @@ function getCompressions( report: JsonReport ): Compressions {
 function getOutputTypes( report: JsonReport ): OutputsByTypes {
   const outputTypes: OutputsByTypes = {
     all: {},
-    js: {},
-    css: {},
+    script: {},
+    style: {},
     other: {}
   };
 
   for ( const [ name, output ] of Object.entries( report.outputs ) ) {
     outputTypes.all[ name ] = output
-
-    if ( jsRegexp.test( name ) ) {
-      outputTypes.js[ name ] = output;
-    } else if ( cssRegexp.test( name ) ) {
-      outputTypes.css[ name ] = output;
-    } else {
-      outputTypes.other[ name ] = output;
-    }
+    outputTypes[ output.type ][ name ] = output;
   }
 
   return outputTypes;

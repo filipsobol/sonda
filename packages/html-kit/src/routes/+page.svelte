@@ -12,7 +12,7 @@
 
   <button
     class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-50 disabled:bg-gray-100"
-    onclick={ () => goto( '#/assets', { state: { outputType: 'js' } } ) }
+    onclick={ () => goto( '#/assets', { state: { outputType: 'script' } } ) }
     disabled={ !js.length }
   >
     <p class="text-gray-900">JavaScript</p>
@@ -22,7 +22,7 @@
 
   <button
     class="flex flex-col col-span-12 lg:col-span-6 rounded-xl border border-gray-200 shadow-sm p-6 hover:bg-gray-50 disabled:bg-gray-100"
-    onclick={ () => goto( '#/assets', { state: { outputType: 'css' } } ) }
+    onclick={ () => goto( '#/assets', { state: { outputType: 'style' } } ) }
     disabled={ !css.length }
   >
     <p class="text-gray-900">CSS</p>
@@ -61,8 +61,8 @@ import { store } from '$lib/store.svelte';
 import { formatSize } from '$lib/helpers/format';
 
 const all = $derived( Object.values( store.report.outputs ) );
-const js = $derived( Object.values( store.outputTypes.js ) );
-const css = $derived( Object.values( store.outputTypes.css ) );
+const js = $derived( Object.values( store.outputTypes.script ) );
+const css = $derived( Object.values( store.outputTypes.style ) );
 const other = $derived( Object.values( store.outputTypes.other ) );
 
 const sizeAll = $derived( formatSize( all.reduce( ( acc, output ) => acc + output[ store.compression ], 0 ) ) );
