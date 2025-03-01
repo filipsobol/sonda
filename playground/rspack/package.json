@@ -9,11 +9,11 @@
     "preview": "rspack preview"
   },
   "dependencies": {
-    "ckeditor5": "44.1.0"
+    "ckeditor5": "44.2.1"
   },
   "devDependencies": {
     "@rsdoctor/rspack-plugin": "^0.4.13",
-    "@rspack/cli": "^1.2.5",
+    "@rspack/cli": "^1.2.6",
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^"
   }

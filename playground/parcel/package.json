@@ -9,7 +9,7 @@
     "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
-    "ckeditor5": "44.1.0"
+    "ckeditor5": "44.2.1"
   },
   "devDependencies": {
     "@parcel/core": "^2.13.3",
