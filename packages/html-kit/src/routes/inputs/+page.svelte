@@ -20,16 +20,20 @@
     <tbody class="align-top">
       {#each mappedInputs as input}
         <tr class="bg-white border-b border-gray-200">
-          <th class="px-6 py-4 font-medium text-gray-900">
+          <td class="px-6 py-4 font-medium text-gray-900">
             <span data-hover={ input.path }>{ input.name }</span>
-          </th>
+          </td>
+
           <td class="px-6 py-4 whitespace-nowrap text-gray-900">{ input.formattedBytes }</td>
+
           <td class="px-6 py-4 whitespace-nowrap">
             <Badge variant={ formatVariant[ input.format ] }>{ input.format }</Badge>
           </td>
+
           <td class="px-6 py-4 whitespace-nowrap">
             <Badge variant={ sourceVariant[ input.source ] }>{ input.source }</Badge>
           </td>
+
           <td class="px-6 py-4 whitespace-nowrap">
             <ul>
               {#each input.usedIn as path}
@@ -44,6 +48,7 @@
               {/each}
             </ul>
           </td>
+
           <td class="px-6 py-4">
             <ul>
               {#each input.imports as path}
@@ -53,6 +58,7 @@
               {/each}
             </ul>
           </td>
+
           <td class="px-6 py-4">
             <ul>
               {#each input.importedBy as path}

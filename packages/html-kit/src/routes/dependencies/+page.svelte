@@ -16,7 +16,8 @@
     <tbody class="align-top">
       {#each mappedDependencies as dependency}
         <tr class="bg-white border-b border-gray-200">
-          <th class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{ dependency.name }</th>
+          <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{ dependency.name }</td>
+
           <td class="px-6 py-4">
             <ul>
               {#each dependency.paths as path}
@@ -24,6 +25,7 @@
               {/each}
             </ul>
           </td>
+
           <td class="px-6 py-4 text-gray-900 whitespace-nowrap">
             <ul>
               {#each dependency.usedIn as path}
