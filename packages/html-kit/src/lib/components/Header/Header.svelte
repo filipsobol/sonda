@@ -15,7 +15,7 @@
 <script lang="ts">
 import { PanelLeft } from 'lucide-svelte';
 import Breadcrumbs from './Breadcrumbs.svelte';
-import Button from '$lib/components/Button/Button.svelte';
+import Button from '$lib/components/Button.svelte';
 
 interface Props {
   collapsed: boolean;

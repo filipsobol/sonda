@@ -15,7 +15,7 @@
 <script lang="ts">
 import Sidebar from '$lib/components/Sidebar/Sidebar.svelte';
 import Header from '$lib/components/Header/Header.svelte';
-import Tooltip from '$lib/components/Tooltip/Tooltip.svelte';
+import Tooltip from '$lib/components/Tooltip.svelte';
 import '../app.css';
 
 let { children } = $props();

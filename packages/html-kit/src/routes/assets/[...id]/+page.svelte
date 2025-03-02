@@ -50,8 +50,8 @@ declare global {
 import { page } from '$app/state';
 import { pushState } from '$app/navigation';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
-import NoData from '$lib/components/NoData/NoData.svelte';
-import Tabs from '$lib/components/Tabs/Tabs.svelte';
+import NoData from '$lib/components/NoData.svelte';
+import Tabs from '$lib/components/Tabs.svelte';
 import { store } from '$lib/store.svelte.js';
 import { getOutputTrie } from '$lib/helpers/FileSystemTrie';
 import type { Tab } from '$lib/types';

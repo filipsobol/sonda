@@ -1,4 +1,4 @@
-<div class="flex mb-4 items-center">
+<div class="flex mb-4 items-center h-12">
   <div class="grow flex gap-4">
     <p class="col-span-12 text-2xl font-bold text-gray-900">Build overview</p>
   </div>
@@ -38,7 +38,7 @@ declare global {
 import { page } from '$app/state';
 import { goto, pushState } from '$app/navigation';
 import Treemap from '$lib/components/Treemap/Treemap.svelte';
-import Tabs from '$lib/components/Tabs/Tabs.svelte';
+import Tabs from '$lib/components/Tabs.svelte';
 import { store, type OutputType } from '$lib/store.svelte.js';
 import { getBuildTrie } from '$lib/helpers/FileSystemTrie';
 import type { Tab } from '$lib/types';

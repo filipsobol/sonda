@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import List from '$lib/components/Sidebar/List.svelte';
-import Button from '$lib/components/Button/Button.svelte';
+import Button from '$lib/components/Button.svelte';
 import { ChevronRight } from 'lucide-svelte';
 import type { Folder as Item } from '$lib/helpers/OutputTrie';
 

@@ -10,7 +10,7 @@
 </Button>
 
 <script lang="ts">
-import Button from '$lib/components/Button/Button.svelte';
+import Button from '$lib/components/Button.svelte';
 import type { File as Item } from '$lib/helpers/OutputTrie';
 
 interface Props {

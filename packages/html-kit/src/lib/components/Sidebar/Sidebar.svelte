@@ -118,7 +118,7 @@
 import { LayoutGrid, Boxes, FileInput, CircleAlert, Share2 } from 'lucide-svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import List from '$lib/components/Sidebar/List.svelte';
-import Button from '$lib/components/Button/Button.svelte';
+import Button from '$lib/components/Button.svelte';
 import { store } from '$lib/store.svelte';
 import { getTrie } from '$lib/helpers/OutputTrie';
 
