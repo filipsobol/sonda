@@ -1,9 +1,5 @@
 @import 'tailwindcss';
 
-html {
-  font-size: 14px;
-}
-
 * {
   scrollbar-width: thin;
 }

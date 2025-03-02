@@ -40,7 +40,7 @@ export function generateJsonReport(
     inputs: sortObjectKeys( inputs ),
     outputs: sortObjectKeys( outputs ),
     dependencies: {},
-    issues: {}
+    issues: []
   };
 
   report.dependencies = getDependencies( report );

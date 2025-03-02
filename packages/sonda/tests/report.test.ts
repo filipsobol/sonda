@@ -31,7 +31,7 @@ describe( 'report.ts', () => {
 				inputs: {},
 				outputs: {},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -49,7 +49,7 @@ describe( 'report.ts', () => {
 				inputs,
 				outputs: {},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -60,7 +60,7 @@ describe( 'report.ts', () => {
 				inputs: {},
 				outputs: {},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -71,7 +71,7 @@ describe( 'report.ts', () => {
 				inputs: {},
 				outputs: {},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -101,7 +101,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -132,7 +132,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -164,7 +164,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -206,7 +206,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -242,7 +242,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -319,7 +319,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 
@@ -410,7 +410,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} );
 		} );
 	} );
@@ -421,7 +421,7 @@ describe( 'report.ts', () => {
 				inputs: {},
 				outputs: {},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} ) );
 
 			expect( generateHtmlReport( [], {}, defaultOptions ) ).toContain( stringifiedEmptyReport );
@@ -451,7 +451,7 @@ describe( 'report.ts', () => {
 					}
 				},
 				dependencies: {},
-				issues: {}
+				issues: []
 			} ) );
 
 			const assets = [ join( import.meta.dirname, 'fixtures/hasMapping/index.js' ) ];

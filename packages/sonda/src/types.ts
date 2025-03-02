@@ -132,15 +132,27 @@ export interface JsonReport {
   /**
    * List of issues detected in the outputs.
    */
-  issues: {
-    duplicateDependencies?: Array<string>
-  }
+  issues: Issues;
 }
 
 export interface Sizes {
   uncompressed: number;
   gzip: number;
   brotli: number;
+}
+
+export type Issues = Array<IssueDuplicateDependency>;
+
+export interface IssueDuplicateDependency extends Issue {
+  type: 'duplicate-dependency';
+  data: {
+    name: string;
+  }
+}
+
+export interface Issue {
+  type: string;
+  data: unknown;
 }
 
 export interface CodeMap {

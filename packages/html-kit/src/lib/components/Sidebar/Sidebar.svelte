@@ -79,21 +79,6 @@
           variant="ghost"
           align="start"
           full={ true }
-          href="#/warnings"
-        >
-          <CircleAlert
-            size={ 18 }
-            class="shrink-0 text-gray--600 pointer-events-none"
-          />
-
-          <span class="truncate pointer-events-none">Warnings</span>
-        </Button>
-
-        <Button
-          element="link"
-          variant="ghost"
-          align="start"
-          full={ true }
           href="#/dependencies"
         >
           <Share2
@@ -103,6 +88,23 @@
 
           <span class="truncate pointer-events-none">Dependencies</span>
         </Button>
+
+        {#if store.report.issues.length > 0}
+          <Button
+            element="link"
+            variant="ghost"
+            align="start"
+            full={ true }
+            href="#/issues"
+          >
+            <CircleAlert
+              size={ 18 }
+              class="shrink-0 text-gray--600 pointer-events-none"
+            />
+
+            <span class="truncate pointer-events-none">Issues</span>
+          </Button>
+        {/if}
       </div>
 
       <p class="mt-12 px-2 font-bold text-gray-500">Assets</p>

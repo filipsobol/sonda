@@ -30,7 +30,6 @@
                 <li>
                   <a
                     href={ '#/assets/' + path }
-                    data-hover={ path }
                     class="text-blue-500 hover:underline underline-offset-4"
                   >
                     { path }
