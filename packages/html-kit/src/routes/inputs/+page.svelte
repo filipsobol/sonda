@@ -12,7 +12,7 @@
         <th class="px-6 py-3">Bytes</th>
         <th class="px-6 py-3">Format</th>
         <th class="px-6 py-3">Source</th>
-        <th class="px-6 py-3">Used by</th>
+        <th class="px-6 py-3">Used in</th>
         <th class="px-6 py-3">Imports</th>
         <th class="px-6 py-3">Imported by</th>
       </tr>
@@ -23,7 +23,7 @@
           <th class="px-6 py-4 font-medium text-gray-900">
             <span data-hover={ input.path }>{ input.name }</span>
           </th>
-          <td class="px-6 py-4 text-gray-900 whitespace-nowrap">{ input.formattedBytes }</td>
+          <td class="px-6 py-4 whitespace-nowrap text-gray-900">{ input.formattedBytes }</td>
           <td class="px-6 py-4 whitespace-nowrap">
             <Badge variant={ formatVariant[ input.format ] }>{ input.format }</Badge>
           </td>
@@ -32,7 +32,7 @@
           </td>
           <td class="px-6 py-4 whitespace-nowrap">
             <ul>
-              {#each input.usedBy as path}
+              {#each input.usedIn as path}
                 <li>
                   <a
                     href={ '#/assets/' + path }
@@ -76,19 +76,18 @@ import Badge from '$lib/components/Badge.svelte';
 
 const modules = 'node_modules';
 
-const mappedInputs = Object.entries( store.report.inputs )
-  .map( ( [ path, input ] ) => {
-    return {
-      path,
-      ...input,
-      name: removeNodeModulesPath( path ),
-      formattedBytes: formatSize( input.bytes ),
-      usedBy: getUsedBy( path ),
-      imports: input.imports.map( removeNodeModulesPath ),
-      importedBy: getImportedBy( path ),
-      source: path.includes( modules ) ? 'external' : 'internal'
-    };
-  } )
+const mappedInputs = Object
+  .entries( store.report.inputs )
+  .map( ( [ path, input ] ) => ({
+    path,
+    ...input,
+    name: removeNodeModulesPath( path ),
+    formattedBytes: formatSize( input.bytes ),
+    usedIn: getUsedIn( path ),
+    imports: input.imports.map( removeNodeModulesPath ),
+    importedBy: getImportedBy( path ),
+    source: path.includes( modules ) ? 'external' : 'internal'
+  }) )
   .toSorted( ( a, b ) => a.path.localeCompare( b.path ) );
 
 const sourceVariant: Record<any, any> = {
@@ -110,7 +109,7 @@ function removeNodeModulesPath( path: string ): string {
     : path;
 }
 
-function getUsedBy( path: string ): Array<string> {
+function getUsedIn( path: string ): Array<string> {
   return Object.entries( store.report.outputs )
     .filter( ( [ , output ] ) => output.inputs[ path ] )
     .map( ( [ path ] ) => path );
