@@ -24,6 +24,6 @@
     "vite": "^6.2.1",
     "vite-plugin-restart": "^0.4.2",
     "vite-plugin-simple-html": "^0.2.0",
-    "vite-plugin-singlefile": "^2.1.0"
+    "vite-plugin-singlefile": "^2.2.0"
   }
 }
