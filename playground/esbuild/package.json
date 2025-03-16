@@ -8,7 +8,7 @@
     "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
-    "ckeditor5": "44.2.1"
+    "ckeditor5": "44.3.0"
   },
   "devDependencies": {
     "esbuild": "^0.25.1",
