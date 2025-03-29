@@ -1,0 +1,48 @@
+<template>
+  <div class="flex min-h-screen w-screen overflow-y-scroll">
+    <Sidebar />
+
+    <div class="flex-grow flex flex-col w-full overflow-hidden">
+      <Breadcrumbs />
+
+      <div class="p-4 flex-grow">
+        <transition
+          mode="out-in"
+          enter-active-class="transition-opacity duration-150"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-opacity duration-150 absolute inset-0"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <component :is="currentPage" class="relative" />
+        </transition>
+      </div>
+    </div>
+  </div>
+
+  <MobileOverlay />
+</template>
+
+<script setup lang="ts">
+import { computed, defineAsyncComponent } from 'vue';
+import { router } from '@router';
+import Breadcrumbs from '@components/Layout/Breadcrumbs.vue';
+import Sidebar from '@layout/Sidebar.vue';
+import MobileOverlay from '@layout/MobileOverlay.vue';
+
+const components = import.meta.glob( './components/Pages/*.vue' );
+
+const pages: Record<string, any> = Object.fromEntries(
+  Object.entries( components ).map( ( [ path, component ] ) => {
+    const name = path
+      .replace( './components/Pages/', '' )
+      .replace( '.vue', '' )
+      .toLowerCase();
+
+    return [ name, component ];
+  } )
+);
+
+const currentPage = computed( () => defineAsyncComponent( pages[ router.path || 'index' ] ) )
+</script>
