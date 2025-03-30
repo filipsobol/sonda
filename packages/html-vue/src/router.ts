@@ -144,6 +144,8 @@ class Router {
 
 		this.#path.value = path;
 
+		Object.keys( this.#query ).forEach( key => delete this.#query[ key ] );
+
 		queryString
 			.split( '&' )
 			.map( pair => pair.split( '=' ).map( decodeURIComponent ) )
