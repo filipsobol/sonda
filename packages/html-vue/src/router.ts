@@ -1,4 +1,4 @@
-import { ref, readonly, type WritableComputedOptions } from 'vue';
+import { ref, reactive, readonly, type WritableComputedOptions } from 'vue';
 
 type QueryValue = string | number | Array<unknown>;
 type Query = Record<string, string>;
@@ -12,7 +12,7 @@ class Router {
 	/**
 	 * The current query parameters.
 	 */
-	#query = ref<Query>( {} );
+	#query = reactive<Query>( {} );
 
 	constructor() {
 		window.addEventListener( 'hashchange', () => this.#parseHash() );
@@ -31,7 +31,7 @@ class Router {
 	 * The read-only query parameters.
 	 */
 	get query(): Readonly<Query> {
-		return readonly( this.#query ).value;
+		return readonly( this.#query );
 	}
 
 	/**
@@ -39,7 +39,20 @@ class Router {
 	 */
 	navigate( path: string, query: Query = {} ): void {
 		this.#path.value = path;
-		this.#query.value = query;
+
+		// Only update queries that have changed
+		Object.keys( query ).forEach( key => {
+			if ( !areParamsEqual( query[ key ], this.#query[ key ] ) ) {
+				this.#query[ key ] = query[ key ];
+			}
+		} );
+
+		// Remove queries that are no longer present
+		Object.keys( this.#query ).forEach( key => {
+			if ( !Object.hasOwn( query, key ) ) {
+				delete this.#query[ key ];
+			}
+		} );
 
 		window.history.replaceState( null, '', this.getUrl( path, query ) );
 	}
@@ -49,7 +62,7 @@ class Router {
 	 */
 	updateQuery( key: string, value: QueryValue ): void {
 		this.navigate( this.#path.value, {
-			...this.#query.value,
+			...this.#query,
 			[ key ]: value.toString()
 		} );
 	}
@@ -66,25 +79,23 @@ class Router {
 	computedQuery( key: string, defaults: any ): WritableComputedOptions<any> {
 		if ( typeof defaults === 'string' ) {
 			return {
-				get: () => this.#query.value[ key ] || defaults,
-				set: ( value: string ) => value === defaults ? this.removeQuery( key ) : this.updateQuery( key, value ),
+				get: () => this.#query[ key ] || defaults,
+				set: value => areParamsEqual( value, defaults ) ? this.removeQuery( key ) : this.updateQuery( key, value ),
 			};
 		}
 
 		if ( typeof defaults === 'number' ) {
 			return {
-				get: () => Number( this.#query.value[ key ] ) || defaults,
-				set: ( value: number ) => value === defaults ? this.removeQuery( key ) : this.updateQuery( key, value )
+				get: () => Number( this.#query[ key ] ) || defaults,
+				set: value => areParamsEqual( value, defaults ) ? this.removeQuery( key ) : this.updateQuery( key, value )
 			};
 		}
 
 		if ( Array.isArray( defaults ) ) {
 			return {
-				get: () => this.#query.value[ key ]?.split( ',' ).filter( Boolean ) || defaults,
-				set: ( value: Array<any> ) => value.length === defaults.length && value.every( v => defaults.includes( v ) )
-					? this.removeQuery( key )
-					: this.updateQuery( key, value.join( ',' ) )
-				}
+				get: () => this.#query[ key ]?.split( ',' ).filter( Boolean ) || defaults,
+				set: value => areParamsEqual( value, defaults ) ? this.removeQuery( key ) : this.updateQuery( key, value.join( ',' ) )
+			};
 		}
 	
 		throw new Error( `Unsupported type for query parameter: ${typeof defaults}` );
@@ -94,7 +105,7 @@ class Router {
 	 * Removes a query parameter from the current path.
 	 */
 	removeQuery( key: string ): void {
-		const { [ key ]: _, ...rest } = this.#query.value;
+		const { [ key ]: _, ...rest } = this.#query;
 
 		this.navigate( this.#path.value, rest );
 	}
@@ -122,7 +133,7 @@ class Router {
 
 		return Object
 			.keys( query )
-			.every( key => this.#query.value[ key ] === query[ key ] );
+			.every( key => this.#query[ key ] === query[ key ] );
 	}
 
 	/**
@@ -133,13 +144,29 @@ class Router {
 
 		this.#path.value = path;
 
-		this.#query.value = Object.fromEntries(
-			queryString
-				.split( '&' )
-				.map( pair => pair.split( '=' ).map( decodeURIComponent ) )
-				.filter( pair => pair[ 0 ] )
-		);
+		queryString
+			.split( '&' )
+			.map( pair => pair.split( '=' ).map( decodeURIComponent ) )
+			.filter( pair => pair[ 0 ] )
+			.forEach( ( [ key, value ] ) => this.#query[ key ] = value );
 	}
+}
+function areParamsEqual( a: string, b: string ): boolean;
+function areParamsEqual( a: number, b: number ): boolean;
+function areParamsEqual( a: Array<unknown>, b: Array<unknown> ): boolean;
+function areParamsEqual( a: any, b: any ): boolean {
+	if ( typeof a === 'string' ) {
+		return a === b;
+	}
+
+	if ( typeof a === 'number' ) {
+		return a === b;
+	}
+	if ( Array.isArray( a ) ) {
+		return a.length === b.length && a.every( ( v, i ) => v === b[ i ] );
+	}
+
+	throw new Error( `Unsupported type for query parameter: ${typeof a}` );
 }
 
 export const router = new Router();

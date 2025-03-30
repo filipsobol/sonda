@@ -1,9 +1,9 @@
 <template>
-  <div class="flex min-h-screen w-screen overflow-y-scroll">
+  <div class="flex min-h-screen w-screen overflow-y-scroll text-gray-900">
     <Sidebar />
 
     <div class="flex-grow flex flex-col w-full overflow-hidden">
-      <Breadcrumbs />
+      <Breadcrumbs class="p-4" />
 
       <div class="p-4 flex-grow">
         <transition
@@ -11,7 +11,7 @@
           enter-active-class="transition-opacity duration-150"
           enter-from-class="opacity-0"
           enter-to-class="opacity-100"
-          leave-active-class="transition-opacity duration-150 absolute inset-0"
+          leave-active-class="transition-opacity duration-150 absolute"
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >

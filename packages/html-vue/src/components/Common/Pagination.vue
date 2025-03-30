@@ -7,40 +7,36 @@
 
 			<ul class="flex space-x-2">
 				<li>
-					<button
+					<BaseButton
 						:disabled="isFirstPage"
-						:class="classes"
 						@click="() => model = 1"
 					>
 						<IconChevronsLeft :size="16" />
-					</button>
+					</BaseButton>
 				</li>
 				<li>
-					<button
+					<BaseButton
 						:disabled="isFirstPage"
-						:class="classes"
 						@click="() => model -= 1"
 					>
 						<IconChevronLeft :size="16" />
-					</button>
+					</BaseButton>
 				</li>
 				<li>
-					<button
+					<BaseButton
 						:disabled="isLastPage"
-						:class="classes"
 						@click="() => model += 1"
 					>
 						<IconChevronLeft :size="16" class="rotate-180" />
-					</button>
+					</BaseButton>
 				</li>
 				<li>
-					<button
+					<BaseButton
 						:disabled="isLastPage"
-						:class="classes"
 						@click="() => model = lastPage"
 					>
 						<IconChevronsLeft :size="16" class="rotate-180" />
-					</button>
+					</BaseButton>
 				</li>
 			</ul>
 		</div>
@@ -49,24 +45,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import BaseButton from '@components/Common/Button.vue';
 import IconChevronLeft from '@components/Icon/ChevronLeft.vue';
 import IconChevronsLeft from '@components/Icon/ChevronsLeft.vue';
-
-const classes = `
-	flex items-center justify-center p-2 text-gray-500 border border-gray-300 rounded-lg shadow-xs cursor-pointer
-	transition-opacity transition-colors duration-150
-	hover:bg-gray-100 hover:text-gray-700
-	disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed
-`;
 
 interface Props {
 	count: number;
 	itemsPerPage: number;
 }
-
-defineEmits<{
-  (e: 'pageChange', pageNumber: number): void;
-}>()
 
 const model = defineModel<number>( { default: 1 } );
 const props = defineProps<Props>();

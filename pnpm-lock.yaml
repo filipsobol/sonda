@@ -142,6 +142,9 @@ importers:
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
+      sonda:
+        specifier: workspace:^
+        version: link:../sonda
       tailwindcss:
         specifier: ^4.0.15
         version: 4.0.15

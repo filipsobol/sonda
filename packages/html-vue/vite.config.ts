@@ -1,11 +1,20 @@
+import { gzipSync } from 'zlib';
+import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import { fileURLToPath } from 'url';
 
+const REPORT_DATA = process.env.NODE_ENV === 'production'
+	? '__REPORT_DATA__'
+	: readFileSync( './sample_data.json', 'utf-8' );
+
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig( {
+	define: {
+		SONDA_REPORT_DATA: JSON.stringify( gzipSync( REPORT_DATA ).toString('base64') )
+	},
   plugins: [
     vue(),
     tailwindcss(),
@@ -22,10 +31,12 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
+			'@': fileURLToPath( new URL( './src', import.meta.url ) ),
 			'@components': fileURLToPath( new URL( './src/components', import.meta.url ) ),
 			'@icon': fileURLToPath( new URL( './src/components/Icon', import.meta.url ) ),
 			'@layout': fileURLToPath( new URL( './src/components/Layout', import.meta.url ) ),
+			'@report': fileURLToPath( new URL( './src/report.js', import.meta.url ) ),
 			'@router': fileURLToPath( new URL( './src/router.js', import.meta.url ) )
 		}
 	}
-});
+} );

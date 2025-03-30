@@ -3,14 +3,11 @@
 		v-click-outside="() => open = false"
 		class="relative"
 	>
-		<button
-			class="flex items-center justify-center space-x-2 py-1.5 px-2 text-sm text-gray-500 border border-gray-300 rounded-lg outline-hidden shadow-xs focus:ring focus:ring-gray-500 focus:border-gray-500"
-			@click="() => open = !open"
-		>
+		<BaseButton @click="() => open = !open">
 			<slot name="icon" />
 
 			<span>{{ title }}</span>
-		</button>
+		</BaseButton>
 
 		<transition
 			enter-active-class="transition-opacity duration-150"
@@ -60,6 +57,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import BaseButton from '@components/Common/Button.vue';
 
 interface Option {
 	label: string;

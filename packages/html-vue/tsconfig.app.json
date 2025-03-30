@@ -2,6 +2,14 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
 
     /* Linting */
     "strict": true,
@@ -10,9 +18,11 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@icon/*": ["./src/components/Icon/*"],
       "@layout/*": ["./src/components/Layout/*"],
+      "@report": ["./src/report.ts"],
       "@router": ["./src/router.ts"],
     }
   },

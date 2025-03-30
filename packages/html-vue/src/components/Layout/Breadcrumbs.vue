@@ -1,5 +1,5 @@
 <template>
-	<nav class="p-4 text-gray-700 w-full" aria-label="Breadcrumb">
+	<nav class="text-gray-700 w-full" aria-label="Breadcrumb">
 		<ol class="inline-flex items-center space-x-2 w-full">
 			<li>
 				<a href="#/" class="text-sm font-medium text-gray-700 underline-offset-2 hover:underline">Home</a>

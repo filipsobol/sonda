@@ -17,7 +17,7 @@
 				<input
 					v-model="search"
 					type="text"
-					class="py-1.5 ps-10 w-80 text-sm text-gray-900 border border-gray-300 rounded-lg outline-hidden shadow-xs placeholder:text-gray-500 focus:ring focus:ring-gray-500 focus:border-gray-500"
+					class="py-1.25 ps-10 w-80 text-sm text-gray-900 border border-gray-300 bg-white rounded-lg outline-hidden shadow-xs placeholder:text-gray-500 focus:ring focus:ring-gray-500 focus:border-gray-500"
 					placeholder="Filter input files"
 				>
 			</div>
@@ -44,11 +44,14 @@
 		</div>
 
 		<div class="rounded-lg border border-gray-300 overflow-hidden shadow-xs">
-			<table class="w-full text-sm text-left">
+			<table class="table-fixed w-full text-sm text-left">
 				<colgroup>
-					<col span="1" style="width: 1px">
-					<col span="2">
-					<col span="3" style="width: 1px">
+					<col style="width: 58px">
+					<col style="width: 66.6%">
+					<col style="width: 33.3%">
+					<col style="width: 106px">
+					<col style="width: 106px">
+					<col style="width: 106px">
 				</colgroup>
 				<thead class="text-xs text-gray-900 uppercase bg-gray-50">
 					<tr>
@@ -64,24 +67,32 @@
 				<tbody class="text-gray-500">
 					<template
 						v-for="item in paginatedData"
-						:key="item.id"
+						:key="item.path"
 					>
 						<tr class="bg-white border-t border-gray-200">
 							<td class="p-3 font-normal whitespace-nowrap">
-								<button
-									class="flex items-center justify-center border border-gray-300 rounded-lg p-2 outline-hidden shadow-xs hover:bg-gray-100 focus:ring focus:ring-gray-500 focus:border-gray-500"
-									@click="() => active = active === item.id ? '' : item.id"
-								>
+								<BaseButton @click="() => active = active === item.path ? '' : item.path">
 									<IconChevronLeft
 										:size="16"
-										:class="[ active === item.id ? 'rotate-90' : 'rotate-270' ]"
+										:class="[ active === item.path ? 'rotate-90' : 'rotate-270' ]"
 										class="text-gray-500 transition-[rotate] duration-150 ease-linear"
 									/>
-								</button>
+								</BaseButton>
 							</td>
-							<th class="p-3 font-normal text-gray-900">{{ item.path }}</th>
-							<td class="p-3 font-normal">{{ item.usedIn }}</td>
-							<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.size }}</td>
+							<td class="p-3 font-normal text-gray-900">
+								<p :title="item.path" class="truncate">{{ item.name }}</p>
+							</td>
+							<td class="p-3 font-normal">
+								<p
+									v-for="output in item.outputs"
+									:key="output"
+									:title="output"
+									class="truncate"
+								>
+									{{ output }}
+								</p>
+							</td>
+							<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.bytes }}</td>
 							<td class="p-3 font-normal text-center whitespace-nowrap">
 								<Badge v-if="item.format === 'esm'" variant="yellow">esm</Badge>
 								<Badge v-else-if="item.format === 'cjs'" variant="primary">cjs</Badge>
@@ -94,10 +105,10 @@
 						</tr>
 
 						<tr class="bg-gray-50">
-							<th colspan="1"></th>
-							<th colspan="5">
+							<td colspan="1"></td>
+							<td colspan="5">
 								<div
-									:class="{ 'grid-rows-[1fr]': active === item.id }"
+									:class="{ 'grid-rows-[1fr]': active === item.path }"
 									class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-150 ease-linear"
 								>
 									<div class="overflow-hidden">
@@ -130,7 +141,7 @@
 										</div>
 									</div>
 								</div>
-							</th>
+							</td>
 						</tr>
 					</template>
 				</tbody>
@@ -146,8 +157,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { router } from '@router'
+import { report } from '@report';
+import { formatSize, formatPath } from '@/format.js';
+import BaseButton from '@components/Common/Button.vue';
 import Dropdown from '@components/Common/Dropdown.vue';
 import Pagination from '@components/Common/Pagination.vue';
 import Badge from '@components/Common/Badge.vue';
@@ -168,39 +182,37 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' },
 ];
 
-const FORMAT_DEFAULTS = FORMAT_OPTIONS.map( option => option.value );
-const SOURCE_DEFAULTS = SOURCE_OPTIONS.map( option => option.value );
+const inputs = Object.entries( report.inputs );
+const outputs = Object.entries( report.outputs );
 
-const data = ref( [
-	{ id: 'Apple MacBook Pro 17"', path: 'Apple MacBook Pro 17"', usedIn: '$2999', size: '256.58 KiB', format: 'esm', source: 'internal' },
-	{ id: 'Microsoft Surface Pro', path: 'Microsoft Surface Pro', usedIn: '$1999', size: 'White', format: 'cjs', source: 'external' },
-	{ id: 'Magic Mouse 2', path: 'Magic Mouse 2', usedIn: '$99', size: 'Black', format: 'unknown', source: 'external' },
-	{ id: 'Apple Watch', path: 'Apple Watch', usedIn: '$179', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'iPad', path: 'iPad', usedIn: '$699', size: 'Gold', format: 'unknown', source: 'external' },
-	{ id: 'Apple iMac 27"', path: 'Apple iMac 27"', usedIn: '$3999', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'Apple MacBook Pro 17"2', path: 'Apple MacBook Pro 17"', usedIn: '$2999', size: '256.58 KiB', format: 'esm', source: 'internal' },
-	{ id: 'Microsoft Surface Pro2', path: 'Microsoft Surface Pro', usedIn: '$1999', size: 'White', format: 'cjs', source: 'external' },
-	{ id: 'Magic Mouse 22', path: 'Magic Mouse 2', usedIn: '$99', size: 'Black', format: 'unknown', source: 'external' },
-	{ id: 'Apple Watch2', path: 'Apple Watch', usedIn: '$179', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'iPad2', path: 'iPad', usedIn: '$699', size: 'Gold', format: 'unknown', source: 'external' },
-	{ id: 'Apple iMac 27"2', path: 'Apple iMac 27"', usedIn: '$3999', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'Apple MacBook Pro 17"3', path: 'Apple MacBook Pro 17"', usedIn: '$2999', size: '256.58 KiB', format: 'esm', source: 'internal' },
-	{ id: 'Microsoft Surface Pro3', path: 'Microsoft Surface Pro', usedIn: '$1999', size: 'White', format: 'cjs', source: 'external' },
-	{ id: 'Magic Mouse 23', path: 'Magic Mouse 2', usedIn: '$99', size: 'Black', format: 'unknown', source: 'external' },
-	{ id: 'Apple Watch3', path: 'Apple Watch', usedIn: '$179', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'iPad3', path: 'iPad', usedIn: '$699', size: 'Gold', format: 'unknown', source: 'external' },
-	{ id: 'Apple iMac 27"3', path: 'Apple iMac 27"', usedIn: '$3999', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'Apple MacBook Pro 17"4', path: 'Apple MacBook Pro 17"', usedIn: '$2999', size: '256.58 KiB', format: 'esm', source: 'internal' },
-	{ id: 'Microsoft Surface Pro4', path: 'Microsoft Surface Pro', usedIn: '$1999', size: 'White', format: 'cjs', source: 'external' },
-	{ id: 'Magic Mouse 24', path: 'Magic Mouse 2', usedIn: '$99', size: 'Black', format: 'unknown', source: 'external' },
-	{ id: 'Apple Watch4', path: 'Apple Watch', usedIn: '$179', size: 'Silver', format: 'unknown', source: 'external' },
-	{ id: 'iPad4', path: 'iPad', usedIn: '$699', size: 'Gold', format: 'unknown', source: 'external' },
-	{ id: 'Apple iMac 27"4', path: 'Apple iMac 27"', usedIn: '$3999', size: 'Silver', format: 'unknown', source: 'external' },
-] );
+// const imports = inputs.reduce( ( carry, [ name, input ] ) => {
+// 	input.imports.forEach( importPath => {
+// 		if ( !carry[ importPath ] ) {
+// 			carry[ importPath ] = [];
+// 		}
+
+// 		carry[ importPath ].push( name );
+// 	} );
+
+// 	return carry;
+// }, {} );
+
+const data = ref(
+	inputs.map( ( [ path, input ] ) => ( {
+		path,
+		name: formatPath( path ),
+		bytes: formatSize( input.bytes ),
+		format: input.format,
+		source: path.includes( 'node_modules' ) ? 'external' : 'internal',
+		outputs: outputs
+			.filter( ( [ , output ] ) => output.inputs[ path ] )
+			.map( ( [ outputPath ] ) => outputPath )
+	} ) )
+);
 
 const search = computed( router.computedQuery( 'search', '' ) );
-const formats = computed( router.computedQuery( 'formats', FORMAT_DEFAULTS ) );
-const sources = computed( router.computedQuery( 'sources', SOURCE_DEFAULTS ) );
+const formats = computed( router.computedQuery( 'formats', FORMAT_OPTIONS.map( o => o.value ) ) );
+const sources = computed( router.computedQuery( 'sources', SOURCE_OPTIONS.map( o => o.value ) ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 const active = computed( router.computedQuery( 'active', '' ) );
 
@@ -219,5 +231,10 @@ const paginatedData = computed( () => {
 	const end = start + ITEMS_PER_PAGE;
 
 	return filteredData.value.slice( start, end );
+} );
+
+watch( [ search, formats, sources ], () => {
+	currentPage.value = 1;
+	active.value = '';
 } );
 </script>
