@@ -27,7 +27,7 @@
     "medium-zoom": "^1.1.0",
     "pkg-pr-new": "^0.0.41",
     "rolldown": "1.0.0-beta.6",
-    "rollup": "^4.36.0",
+    "rollup": "^4.38.0",
     "typescript": "^5.8.2",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"
