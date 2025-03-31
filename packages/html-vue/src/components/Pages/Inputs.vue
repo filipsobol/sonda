@@ -200,8 +200,11 @@ const paginatedData = computed( () => {
 	return filteredData.value.slice( start, end );
 } );
 
+watch( [ search, formats, sources, currentPage ], () => {
+	active.value = '';
+} );
+
 watch( [ search, formats, sources ], () => {
 	currentPage.value = 1;
-	active.value = '';
 } );
 </script>
