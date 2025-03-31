@@ -119,7 +119,7 @@
   },
   "devDependencies": {
     "@nuxt/schema": "^3.16.1",
-    "@parcel/types": "^2.14.1",
+    "@parcel/types": "^2.14.4",
     "@rspack/core": "^1.2.8",
     "@vitest/coverage-v8": "^3.0.9",
     "astro": "^5.5.4",
