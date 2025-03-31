@@ -12,7 +12,7 @@
     "ckeditor5": "44.3.0"
   },
   "devDependencies": {
-    "@parcel/core": "^2.14.1",
+    "@parcel/core": "^2.14.4",
     "parcel": "^2.14.1",
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^"
