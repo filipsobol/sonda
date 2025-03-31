@@ -43,110 +43,69 @@
 			</Dropdown>
 		</div>
 
-		<div class="rounded-lg border border-gray-300 overflow-hidden shadow-xs">
-			<table class="table-fixed w-full text-sm text-left">
-				<colgroup>
-					<col style="width: 58px">
-					<col style="width: 66.6%">
-					<col style="width: 33.3%">
-					<col style="width: 106px">
-					<col style="width: 106px">
-					<col style="width: 106px">
-				</colgroup>
-				<thead class="text-xs text-gray-900 uppercase bg-gray-50">
-					<tr>
-						<th class="p-3"></th>
-						<th class="p-3 font-bold">Path</th>
-						<th class="p-3 font-bold">Used in</th>
-						<th class="p-3 font-bold text-right">Size</th>
-						<th class="p-3 font-bold text-center">Format</th>
-						<th class="p-3 font-bold text-center">Source</th>
-					</tr>
-				</thead>
+		<DataTable
+			v-model="active"
+			:columns="columns"
+			:data="paginatedData"
+		>
+			<template #row="{ item }">
+				<td class="p-3 font-normal text-gray-900">
+					<p :title="item.path" class="truncate">{{ item.name }}</p>
+				</td>
 
-				<tbody class="text-gray-500">
-					<template
-						v-for="item in paginatedData"
-						:key="item.path"
+				<td class="p-3 font-normal">
+					<p
+						v-for="output in item.outputs"
+						:key="output"
+						:title="output"
+						class="truncate"
 					>
-						<tr class="bg-white border-t border-gray-200">
-							<td class="p-3 font-normal whitespace-nowrap">
-								<BaseButton @click="() => active = active === item.path ? '' : item.path">
-									<IconChevronLeft
-										:size="16"
-										:class="[ active === item.path ? 'rotate-90' : 'rotate-270' ]"
-										class="text-gray-500 transition-[rotate] duration-150 ease-linear"
-									/>
-								</BaseButton>
-							</td>
-							<td class="p-3 font-normal text-gray-900">
-								<p :title="item.path" class="truncate">{{ item.name }}</p>
-							</td>
-							<td class="p-3 font-normal">
-								<p
-									v-for="output in item.outputs"
-									:key="output"
-									:title="output"
-									class="truncate"
-								>
-									{{ output }}
-								</p>
-							</td>
-							<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.bytes }}</td>
-							<td class="p-3 font-normal text-center whitespace-nowrap">
-								<Badge v-if="item.format === 'esm'" variant="yellow">esm</Badge>
-								<Badge v-else-if="item.format === 'cjs'" variant="primary">cjs</Badge>
-								<Badge v-else variant="dark">unknown</Badge>
-							</td>
-							<td class="p-3 font-normal text-center whitespace-nowrap">
-								<Badge v-if="item.source ==='internal'" variant="dark">internal</Badge>
-								<Badge v-else variant="primary">external</Badge>
-							</td>
-						</tr>
+						{{ output }}
+					</p>
+				</td>
 
-						<tr class="bg-gray-50">
-							<td colspan="1"></td>
-							<td colspan="5">
-								<div
-									:class="{ 'grid-rows-[1fr]': active === item.path }"
-									class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-150 ease-linear"
-								>
-									<div class="overflow-hidden">
-										<div class="p-4 border-t border-gray-100 font-normal">
-											<p class="mb-2 font-bold">Imports</p>
+				<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.bytes }}</td>
 
-											<ul class="space-y-1">
-												<li>@ckeditor/ckeditor5-core/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-utils/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-engine/dist/index.js</li>
-												<li>lodash-es/lodash.js</li>
-												<li>@ckeditor/ckeditor5-widget/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-ui/dist/index.js</li>
-											</ul>
+				<td class="p-3 font-normal text-center whitespace-nowrap">
+					<Badge v-if="item.format === 'esm'" variant="yellow">esm</Badge>
+					<Badge v-else-if="item.format === 'cjs'" variant="primary">cjs</Badge>
+					<Badge v-else variant="dark">unknown</Badge>
+				</td>
 
-											<p class="mt-8 mb-2 font-bold">Imported by</p>
+				<td class="p-3 font-normal text-center whitespace-nowrap">
+					<Badge v-if="item.source ==='internal'" variant="dark">internal</Badge>
+					<Badge v-else variant="primary">external</Badge>
+				</td>
+			</template>
 
-											<ul class="space-y-1">
-												<li>@ckeditor/ckeditor5-code-block/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-essentials/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-image/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-link/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-list/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-markdown-gfm/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-media-embed/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-paste-from-office/dist/index.js</li>
-												<li>@ckeditor/ckeditor5-table/dist/index.js</li>
-												<li>ckeditor5/dist/ckeditor5.js</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</template>
-				</tbody>
-			</table>
-		</div>
+			<template #collapsible="{ item }">
+				<p class="mb-2 font-bold">Imports</p>
+
+				<ul class="space-y-1">
+					<li>@ckeditor/ckeditor5-core/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-utils/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-engine/dist/index.js</li>
+					<li>lodash-es/lodash.js</li>
+					<li>@ckeditor/ckeditor5-widget/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-ui/dist/index.js</li>
+				</ul>
+
+				<p class="mt-8 mb-2 font-bold">Imported by</p>
+
+				<ul class="space-y-1">
+					<li>@ckeditor/ckeditor5-code-block/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-essentials/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-image/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-link/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-list/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-markdown-gfm/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-media-embed/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-paste-from-office/dist/index.js</li>
+					<li>@ckeditor/ckeditor5-table/dist/index.js</li>
+					<li>ckeditor5/dist/ckeditor5.js</li>
+				</ul>
+			</template>
+		</DataTable>
 
 		<Pagination
 			v-model="currentPage"
@@ -161,15 +120,14 @@ import { ref, computed, watch } from 'vue';
 import { router } from '@router'
 import { report } from '@report';
 import { formatSize, formatPath } from '@/format.js';
-import BaseButton from '@components/Common/Button.vue';
+import DataTable, { type Column } from '@components/Common/DataTable.vue';
 import Dropdown from '@components/Common/Dropdown.vue';
 import Pagination from '@components/Common/Pagination.vue';
 import Badge from '@components/Common/Badge.vue';
 import IconSearch from '@components/Icon/Search.vue';
 import IconFunnel from '@components/Icon/Funnel.vue';
-import IconChevronLeft from '@components/Icon/ChevronLeft.vue';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 12;
 
 const FORMAT_OPTIONS = [
 	{ label: 'ESM', subLabel: 'ES Module', value: 'esm' },
@@ -185,6 +143,14 @@ const SOURCE_OPTIONS = [
 const inputs = Object.entries( report.inputs );
 const outputs = Object.entries( report.outputs );
 
+const columns: Array<Column> = [
+	{ name: 'Path', align: 'left', width: '66.6%' },
+	{ name: 'Used in', align: 'left', width: '33.3%' },
+	{ name: 'Size', align: 'right', width: '106px' },
+	{ name: 'Format', align: 'center', width: '106px' },
+	{ name: 'Source', align: 'center', width: '106px' }
+];
+
 // const imports = inputs.reduce( ( carry, [ name, input ] ) => {
 // 	input.imports.forEach( importPath => {
 // 		if ( !carry[ importPath ] ) {
@@ -199,6 +165,7 @@ const outputs = Object.entries( report.outputs );
 
 const data = ref(
 	inputs.map( ( [ path, input ] ) => ( {
+		id: path,
 		path,
 		name: formatPath( path ),
 		bytes: formatSize( input.bytes ),

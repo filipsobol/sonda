@@ -23,39 +23,21 @@
 			</div>
 		</div>
 
-		<div class="rounded-lg border border-gray-300 overflow-hidden shadow-xs">
-			<table class="w-full text-sm text-left">
-				<thead class="text-xs text-gray-900 uppercase bg-gray-50">
-					<tr>
-						<th class="p-3 font-bold">Name</th>
-						<th class="p-3 font-bold">Paths</th>
-						<th class="p-3 font-bold text-right">Used in</th>
-					</tr>
-				</thead>
+		<DataTable
+			v-model="active"
+			:columns="columns"
+			:data="paginatedData"
+		>
+			<template #row="{ item }">
+				<td class="p-3 font-normal text-gray-900">{{ item.name }}</td>
 
-				<tbody class="text-gray-500">
-					<template
-						v-for="item in paginatedData"
-						:key="item.id"
-					>
-						<tr class="bg-white border-t border-gray-200">
-							<td class="p-3 font-normal text-gray-900">{{ item.name }}</td>
-							<td class="p-3 font-normal">
-								<ul>
-									<li
-										v-for="path in item.paths"
-										:key="path"
-									>
-										{{ path }}
-									</li>
-								</ul>
-							</td>
-							<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.usedIn }}</td>
-						</tr>
-					</template>
-				</tbody>
-			</table>
-		</div>
+				<td class="p-3 font-normal whitespace-nowrap">{{ item.usedIn }}</td>
+			</template>
+
+			<template #collapsible="{ item }">
+				<p class="mb-2 font-bold">Hello world!</p>
+			</template>
+		</DataTable>
 
 		<Pagination
 			v-model="currentPage"
@@ -67,41 +49,34 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { router } from '@router'
+import { router } from '@router';
+import { report } from '@report';
+import DataTable, { type Column } from '@components/Common/DataTable.vue';
 import Pagination from '@components/Common/Pagination.vue';
 import IconSearch from '@components/Icon/Search.vue';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 12;
 
-const data = ref( [
-	{ id: 'Apple MacBook Pro 17"', name: 'Apple MacBook Pro 17"', usedIn: '$2999', paths: [ '256.58 KiB' ] },
-	{ id: 'Microsoft Surface Pro', name: 'Microsoft Surface Pro', usedIn: '$1999', paths: [ 'White' ] },
-	{ id: 'Magic Mouse 2', name: 'Magic Mouse 2', usedIn: '$99', paths: [ 'Black' ] },
-	{ id: 'Apple Watch', name: 'Apple Watch', usedIn: '$179', paths: [ 'Silver' ] },
-	{ id: 'iPad', name: 'iPad', usedIn: '$699', paths: [ 'Gold' ] },
-	{ id: 'Apple iMac 27"', name: 'Apple iMac 27"', usedIn: '$3999', paths: [ 'Silver' ] },
-	{ id: 'Apple MacBook Pro 17"2', name: 'Apple MacBook Pro 17"', usedIn: '$2999', paths: [ '256.58 KiB' ] },
-	{ id: 'Microsoft Surface Pro2', name: 'Microsoft Surface Pro', usedIn: '$1999', paths: [ 'White' ] },
-	{ id: 'Magic Mouse 22', name: 'Magic Mouse 2', usedIn: '$99', paths: [ 'Black' ] },
-	{ id: 'Apple Watch2', name: 'Apple Watch', usedIn: '$179', paths: [ 'Silver' ] },
-	{ id: 'iPad2', name: 'iPad', usedIn: '$699', paths: [ 'Gold' ] },
-	{ id: 'Apple iMac 27"2', name: 'Apple iMac 27"', usedIn: '$3999', paths: [ 'Silver' ] },
-	{ id: 'Apple MacBook Pro 17"3', name: 'Apple MacBook Pro 17"', usedIn: '$2999', paths: [ '256.58 KiB' ] },
-	{ id: 'Microsoft Surface Pro3', name: 'Microsoft Surface Pro', usedIn: '$1999', paths: [ 'White' ] },
-	{ id: 'Magic Mouse 23', name: 'Magic Mouse 2', usedIn: '$99', paths: [ 'Black' ] },
-	{ id: 'Apple Watch3', name: 'Apple Watch', usedIn: '$179', paths: [ 'Silver' ] },
-	{ id: 'iPad3', name: 'iPad', usedIn: '$699', paths: [ 'Gold' ] },
-	{ id: 'Apple iMac 27"3', name: 'Apple iMac 27"', usedIn: '$3999', paths: [ 'Silver' ] },
-	{ id: 'Apple MacBook Pro 17"4', name: 'Apple MacBook Pro 17"', usedIn: '$2999', paths: [ '256.58 KiB' ] },
-	{ id: 'Microsoft Surface Pro4', name: 'Microsoft Surface Pro', usedIn: '$1999', paths: [ 'White' ] },
-	{ id: 'Magic Mouse 24', name: 'Magic Mouse 2', usedIn: '$99', paths: [ 'Black' ] },
-	{ id: 'Apple Watch4', name: 'Apple Watch', usedIn: '$179', paths: [ 'Silver' ] },
-	{ id: 'iPad4', name: 'iPad', usedIn: '$699', paths: [ 'Gold' ] },
-	{ id: 'Apple iMac 27"4', name: 'Apple iMac 27"', usedIn: '$3999', paths: [ 'Silver' ] },
-] );
+const columns: Array<Column> = [
+	{ name: 'Name', align: 'left' },
+	{ name: 'Used in', align: 'left' },
+];
+
+const dependencies = Object.entries( report.dependencies );
+
+const data = ref(
+	dependencies.map( ( [ name, dependency ] ) => ( {
+		id: name,
+		name,
+		// TODO
+		usedIn: [],
+		paths: dependency
+	} ) )
+);
 
 const search = computed( router.computedQuery( 'search', '' ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
+const active = computed( router.computedQuery( 'active', '' ) );
 
 const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
