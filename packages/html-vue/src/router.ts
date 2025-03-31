@@ -39,20 +39,7 @@ class Router {
 	 */
 	navigate( path: string, query: Query = {} ): void {
 		this.#path.value = path;
-
-		// Only update queries that have changed
-		Object.keys( query ).forEach( key => {
-			if ( !areParamsEqual( query[ key ], this.#query[ key ] ) ) {
-				this.#query[ key ] = query[ key ];
-			}
-		} );
-
-		// Remove queries that are no longer present
-		Object.keys( this.#query ).forEach( key => {
-			if ( !Object.hasOwn( query, key ) ) {
-				delete this.#query[ key ];
-			}
-		} );
+		this.#updateQueryParams( query );
 
 		window.history.replaceState( null, '', this.getUrl( path, query ) );
 	}
@@ -144,15 +131,36 @@ class Router {
 
 		this.#path.value = path;
 
-		Object.keys( this.#query ).forEach( key => delete this.#query[ key ] );
+		this.#updateQueryParams(
+			Object.fromEntries(
+				queryString
+					.split( '&' )
+					.map( pair => pair.split( '=' ).map( decodeURIComponent ) )
+					.filter( pair => pair[ 0 ] )
+			)
+		);
+	}
 
-		queryString
-			.split( '&' )
-			.map( pair => pair.split( '=' ).map( decodeURIComponent ) )
-			.filter( pair => pair[ 0 ] )
-			.forEach( ( [ key, value ] ) => this.#query[ key ] = value );
+	/**
+	 * Updates parameters that have changed and removes those that are no longer present.
+	 */
+	#updateQueryParams( query: Query ) {
+		// Only update queries that have changed
+		Object.keys( query ).forEach( key => {
+			if ( !areParamsEqual( query[ key ], this.#query[ key ] ) ) {
+				this.#query[ key ] = query[ key ];
+			}
+		} );
+
+		// Remove queries that are no longer present
+		Object.keys( this.#query ).forEach( key => {
+			if ( !Object.hasOwn( query, key ) ) {
+				delete this.#query[ key ];
+			}
+		} );
 	}
 }
+
 function areParamsEqual( a: string, b: string ): boolean;
 function areParamsEqual( a: number, b: number ): boolean;
 function areParamsEqual( a: Array<unknown>, b: Array<unknown> ): boolean;
@@ -164,6 +172,7 @@ function areParamsEqual( a: any, b: any ): boolean {
 	if ( typeof a === 'number' ) {
 		return a === b;
 	}
+
 	if ( Array.isArray( a ) ) {
 		return a.length === b.length && a.every( ( v, i ) => v === b[ i ] );
 	}
