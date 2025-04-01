@@ -1,14 +1,14 @@
 <template>
-	<nav class="text-gray-700 w-full" aria-label="Breadcrumb">
-		<ol class="inline-flex items-center space-x-2 w-full">
+	<nav class="-mx-2 text-gray-700 w-full" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 w-full">
 			<li>
-				<a href="#/" class="text-sm font-medium text-gray-700 underline-offset-2 hover:underline">Home</a>
+				<a href="#/" class="px-2 py-1 text-sm font-medium text-gray-700 underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline">Home</a>
 			</li>
 
 			<li><IconChevronLeft :size="16" class="rotate-180" /></li>
 
 			<li aria-current="page">
-				<a href="#/" class="text-sm font-medium text-gray-700 underline-offset-2 hover:underline">Assets</a>
+				<a href="#/" class="px-2 py-1 text-sm font-medium text-gray-700 underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline">Assets</a>
 			</li>
 
 			<li><IconChevronLeft :size="16" class="rotate-180" /></li>

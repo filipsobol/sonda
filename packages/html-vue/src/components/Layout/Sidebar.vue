@@ -1,7 +1,7 @@
 <template>
 	<aside class="flex-shrink-0 w-72" aria-label="Sidebar">
-		<div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 border-r border-gray-200">
-			<a href="https://sonda.dev/" target="_blank" class="flex items-center justify-center space-x-2 text-gray-700 hover:text-gray-900">
+		<div class="h-full px-2 py-3 overflow-y-auto bg-gray-50 border-r border-gray-200">
+			<a href="https://sonda.dev/" target="_blank" class="px-2 py-1 flex items-center justify-center space-x-2 text-gray-700 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:text-gray-900">
 				<svg
 					width="24"
 					height="24"
@@ -25,7 +25,7 @@
 					<a
 						:href="router.getUrl( item.link )"
 						:class="[ router.isActive( item.link ) ? 'bg-white border-gray-300 shadow-xs' : 'border-transparent hover:border-gray-300' ]"
-						class="flex items-center px-3 py-2 text-gray-800 rounded-lg border transition-colors duration-150"
+						class="flex items-center px-3 py-2 text-gray-800 rounded-lg border transition-colors duration-150 outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500"
 					>
 						<component :is="item.icon" :size="18" class="flex-shrink-0 text-gray-400" />
 						<span class="flex-grow ms-3 truncate text-gray-900">{{ item.title }}</span>
