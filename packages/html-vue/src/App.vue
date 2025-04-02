@@ -31,18 +31,23 @@ import Breadcrumbs from '@components/Layout/Breadcrumbs.vue';
 import Sidebar from '@layout/Sidebar.vue';
 import MobileOverlay from '@layout/MobileOverlay.vue';
 
-const components = import.meta.glob( './components/Pages/*.vue' );
+const components = import.meta.glob( './pages/**/*.vue' );
 
 const pages: Record<string, any> = Object.fromEntries(
   Object.entries( components ).map( ( [ path, component ] ) => {
-    const name = path
-      .replace( './components/Pages/', '' )
+    const parts = path
+      .replace( './pages/', '' )
       .replace( '.vue', '' )
-      .toLowerCase();
+      .toLowerCase()
+      .split( '/' );
+    
+    if ( parts.at( -1 ) === 'index' ) {
+      parts.pop();
+    }
 
-    return [ name, component ];
+    return [ parts.join( '/' ) , component ];
   } )
 );
 
-const currentPage = computed( () => defineAsyncComponent( pages[ router.path || 'index' ] ) )
+const currentPage = computed( () => defineAsyncComponent( pages[ router.path ] ) )
 </script>

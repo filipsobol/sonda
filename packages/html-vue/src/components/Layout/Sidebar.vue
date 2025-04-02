@@ -25,7 +25,7 @@
 					<a
 						:href="router.getUrl( item.link )"
 						:class="[ router.isActive( item.link ) ? 'bg-white border-gray-300 shadow-xs' : 'border-transparent hover:border-gray-300' ]"
-						class="flex items-center px-3 py-2 text-gray-800 rounded-lg border transition-colors duration-150 outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500"
+					class="flex items-center px-3 py-2 text-gray-800 rounded-lg border transition-colors duration-150 outline-hidden focus:border-gray-300"
 					>
 						<component :is="item.icon" :size="18" class="flex-shrink-0 text-gray-400" />
 						<span class="flex-grow ms-3 truncate text-gray-900">{{ item.title }}</span>
@@ -59,10 +59,35 @@ interface Link {
 }
 
 const items: Array<Link> = [
-	{ title: 'Home', 						link: '', 								icon: IconGrid, 								count: 0 },
-	{ title: 'Assets', 					link: 'assets', 					icon: IconBoxes,								count: 5 },
-	{ title: 'Inputs', 					link: 'inputs', 					icon: IconFileInput, 						count: 86 },
-	{ title: 'Dependencies', 		link: 'dependencies', 		icon: IconShare2, 							count: 12 },
-	{ title: 'Issues', 					link: 'issues', 					icon: IconCircleAlert, 					count: 1 },
+	{
+		title: 'Home',
+		link: '',
+		icon: IconGrid,
+		count: 0
+	},
+	{
+		title: 'Assets',
+		link: 'assets',
+		icon: IconBoxes,
+		count: 5
+	},
+	{
+		title: 'Inputs',
+		link: 'inputs',
+		icon: IconFileInput,
+		count: 86
+	},
+	{
+		title: 'Dependencies',
+		link: 'dependencies',
+		icon: IconShare2,
+		count: 12
+	},
+	{
+		title: 'Issues',
+		link: 'issues',
+		icon: IconCircleAlert,
+		count: 1
+	}
 ];
 </script>

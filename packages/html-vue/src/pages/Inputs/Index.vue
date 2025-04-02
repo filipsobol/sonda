@@ -49,8 +49,23 @@
 			:data="paginatedData"
 		>
 			<template #row="{ item }">
+				<td class="p-3 font-normal text-center whitespace-nowrap">
+					<BaseButton
+						:link="true"
+						:href="router.getUrl( 'inputs/details', { item: item.path } )"
+						class="flex rounded border border-gray-300 p-2"
+					>
+						<IconSearch :size="16" class="text-gray-500" />	
+					</BaseButton>
+				</td>
+	
 				<td class="p-3 font-normal text-gray-900">
-					<p :title="item.path" class="truncate">{{ item.name }}</p>
+					<p
+						:title="item.path"
+						class="truncate"
+					>
+						{{ item.name }}
+					</p>
 				</td>
 
 				<td class="p-3 font-normal">
@@ -77,34 +92,6 @@
 					<Badge v-else variant="primary">external</Badge>
 				</td>
 			</template>
-
-			<template #collapsible="{ item }">
-				<p class="mb-2 font-bold">Imports</p>
-
-				<ul class="space-y-1">
-					<li>@ckeditor/ckeditor5-core/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-utils/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-engine/dist/index.js</li>
-					<li>lodash-es/lodash.js</li>
-					<li>@ckeditor/ckeditor5-widget/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-ui/dist/index.js</li>
-				</ul>
-
-				<p class="mt-8 mb-2 font-bold">Imported by</p>
-
-				<ul class="space-y-1">
-					<li>@ckeditor/ckeditor5-code-block/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-essentials/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-image/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-link/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-list/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-markdown-gfm/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-media-embed/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-paste-from-office/dist/index.js</li>
-					<li>@ckeditor/ckeditor5-table/dist/index.js</li>
-					<li>ckeditor5/dist/ckeditor5.js</li>
-				</ul>
-			</template>
 		</DataTable>
 
 		<Pagination
@@ -122,6 +109,7 @@ import { report } from '@report';
 import { formatSize, formatPath } from '@/format.js';
 import DataTable, { type Column } from '@components/Common/DataTable.vue';
 import Dropdown from '@components/Common/Dropdown.vue';
+import BaseButton from '@/components/Common/Button.vue';
 import Pagination from '@components/Common/Pagination.vue';
 import Badge from '@components/Common/Badge.vue';
 import IconSearch from '@components/Icon/Search.vue';
@@ -144,11 +132,36 @@ const inputs = Object.entries( report.inputs );
 const outputs = Object.entries( report.outputs );
 
 const columns: Array<Column> = [
-	{ name: 'Path', align: 'left', width: '66.6%' },
-	{ name: 'Used in', align: 'left', width: '33.3%' },
-	{ name: 'Size', align: 'right', width: '106px' },
-	{ name: 'Format', align: 'center', width: '106px' },
-	{ name: 'Source', align: 'center', width: '106px' }
+	{
+		name: '',
+		align: 'center',
+		width: '58px'
+	},
+	{
+		name: 'Path',
+		align: 'left',
+		width: '66.6%'
+	},
+	{
+		name: 'Used in',
+		align: 'left',
+		width: '33.3%'
+	},
+	{
+		name: 'Size',
+		align: 'right',
+		width: '106px'
+	},
+	{
+		name: 'Format',
+		align: 'center',
+		width: '106px'
+	},
+	{
+		name: 'Source',
+		align: 'center',
+		width: '106px'
+	}
 ];
 
 // const imports = inputs.reduce( ( carry, [ name, input ] ) => {

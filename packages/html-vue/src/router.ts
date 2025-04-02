@@ -114,7 +114,8 @@ class Router {
 	 * If the query object is not provided, only the path is checked.
 	 */
 	isActive( path: string, query: Query = {} ): boolean {
-		if ( this.#path.value !== path ) {
+		// Matches if first part of the path is the same, e.g. foo/bar matches foo
+		if ( this.#path.value.split( '/' ).at( 0 ) !== path.split( '/' ).at( 0 ) ) {
 			return false;
 		}
 
