@@ -34,63 +34,51 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.mjs"
+      "default": "./dist/index.mjs"
     },
     "./angular": {
       "types": "./dist/entrypoints/angular.d.ts",
-      "import": "./dist/entrypoints/angular.mjs",
-      "require": "./dist/entrypoints/angular.mjs"
+      "default": "./dist/entrypoints/angular.mjs"
     },
     "./astro": {
       "types": "./dist/entrypoints/astro.d.ts",
-      "import": "./dist/entrypoints/astro.mjs",
-      "require": "./dist/entrypoints/astro.mjs"
+      "default": "./dist/entrypoints/astro.mjs"
     },
     "./esbuild": {
       "types": "./dist/entrypoints/esbuild.d.ts",
-      "import": "./dist/entrypoints/esbuild.mjs",
-      "require": "./dist/entrypoints/esbuild.mjs"
+      "default": "./dist/entrypoints/esbuild.mjs"
     },
     "./next": {
       "types": "./dist/entrypoints/next.d.ts",
-      "import": "./dist/entrypoints/next.mjs",
-      "require": "./dist/entrypoints/next.mjs"
+      "default": "./dist/entrypoints/next.mjs"
     },
     "./nuxt": {
       "types": "./dist/entrypoints/nuxt.d.ts",
-      "import": "./dist/entrypoints/nuxt.mjs",
-      "require": "./dist/entrypoints/nuxt.mjs"
+      "default": "./dist/entrypoints/nuxt.mjs"
     },
     "./rollup": {
       "types": "./dist/entrypoints/rollup.d.ts",
-      "import": "./dist/entrypoints/rollup.mjs",
-      "require": "./dist/entrypoints/rollup.mjs"
+      "default": "./dist/entrypoints/rollup.mjs"
     },
     "./rolldown": {
       "types": "./dist/entrypoints/rollup.d.ts",
-      "import": "./dist/entrypoints/rollup.mjs",
-      "require": "./dist/entrypoints/rollup.mjs"
+      "default": "./dist/entrypoints/rollup.mjs"
     },
     "./sveltekit": {
       "types": "./dist/entrypoints/sveltekit.d.ts",
-      "import": "./dist/entrypoints/sveltekit.mjs",
-      "require": "./dist/entrypoints/sveltekit.mjs"
+      "default": "./dist/entrypoints/sveltekit.mjs"
     },
     "./rspack": {
       "types": "./dist/entrypoints/webpack.d.ts",
-      "import": "./dist/entrypoints/webpack.mjs",
-      "require": "./dist/entrypoints/webpack.mjs"
+      "default": "./dist/entrypoints/webpack.mjs"
     },
     "./vite": {
       "types": "./dist/entrypoints/rollup.d.ts",
-      "import": "./dist/entrypoints/rollup.mjs",
-      "require": "./dist/entrypoints/rollup.mjs"
+      "default": "./dist/entrypoints/rollup.mjs"
     },
     "./webpack": {
       "types": "./dist/entrypoints/webpack.d.ts",
-      "import": "./dist/entrypoints/webpack.mjs",
-      "require": "./dist/entrypoints/webpack.mjs"
+      "default": "./dist/entrypoints/webpack.mjs"
     },
     "./package.json": "./package.json"
   },
