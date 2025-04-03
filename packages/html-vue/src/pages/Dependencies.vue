@@ -35,7 +35,7 @@
 			</template>
 
 			<template #collapsible="{ item }">
-				<p class="mb-2 font-bold">Hello world!</p>
+				<p class="mb-2 font-bold">{{ item }}</p>
 			</template>
 		</DataTable>
 
