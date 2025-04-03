@@ -21,7 +21,7 @@
     "devtools"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19"
   },
   "license": "MIT",
   "type": "module",
@@ -32,54 +32,18 @@
   },
   "homepage": "https://sonda.dev",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.mjs"
-    },
-    "./angular": {
-      "types": "./dist/entrypoints/angular.d.ts",
-      "default": "./dist/entrypoints/angular.mjs"
-    },
-    "./astro": {
-      "types": "./dist/entrypoints/astro.d.ts",
-      "default": "./dist/entrypoints/astro.mjs"
-    },
-    "./esbuild": {
-      "types": "./dist/entrypoints/esbuild.d.ts",
-      "default": "./dist/entrypoints/esbuild.mjs"
-    },
-    "./next": {
-      "types": "./dist/entrypoints/next.d.ts",
-      "default": "./dist/entrypoints/next.mjs"
-    },
-    "./nuxt": {
-      "types": "./dist/entrypoints/nuxt.d.ts",
-      "default": "./dist/entrypoints/nuxt.mjs"
-    },
-    "./rollup": {
-      "types": "./dist/entrypoints/rollup.d.ts",
-      "default": "./dist/entrypoints/rollup.mjs"
-    },
-    "./rolldown": {
-      "types": "./dist/entrypoints/rollup.d.ts",
-      "default": "./dist/entrypoints/rollup.mjs"
-    },
-    "./sveltekit": {
-      "types": "./dist/entrypoints/sveltekit.d.ts",
-      "default": "./dist/entrypoints/sveltekit.mjs"
-    },
-    "./rspack": {
-      "types": "./dist/entrypoints/webpack.d.ts",
-      "default": "./dist/entrypoints/webpack.mjs"
-    },
-    "./vite": {
-      "types": "./dist/entrypoints/rollup.d.ts",
-      "default": "./dist/entrypoints/rollup.mjs"
-    },
-    "./webpack": {
-      "types": "./dist/entrypoints/webpack.d.ts",
-      "default": "./dist/entrypoints/webpack.mjs"
-    },
+    ".": "./dist/index.js",
+    "./angular": "./dist/entrypoints/angular.js",
+    "./astro": "./dist/entrypoints/astro.js",
+    "./esbuild": "./dist/entrypoints/esbuild.js",
+    "./next": "./dist/entrypoints/next.js",
+    "./nuxt": "./dist/entrypoints/nuxt.js",
+    "./rollup": "./dist/entrypoints/rollup.js",
+    "./rolldown": "./dist/entrypoints/rollup.js",
+    "./sveltekit": "./dist/entrypoints/sveltekit.js",
+    "./rspack": "./dist/entrypoints/webpack.js",
+    "./vite": "./dist/entrypoints/rollup.js",
+    "./webpack": "./dist/entrypoints/webpack.js",
     "./package.json": "./package.json"
   },
   "files": [

@@ -11,8 +11,8 @@ export default defineConfig( {
 		dir: 'dist',
 		format: 'esm',
 		sourcemap: true,
-		entryFileNames: '[name].mjs',
-		chunkFileNames: '[name].mjs',
+		entryFileNames: '[name].js',
+		chunkFileNames: '[name].js',
 	},
 	input: {
 		'index': 'src/index.ts',
