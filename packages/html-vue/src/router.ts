@@ -175,7 +175,7 @@ function areParamsEqual( a: any, b: any ): boolean {
 	}
 
 	if ( Array.isArray( a ) ) {
-		return a.length === b.length && a.every( ( v, i ) => v === b[ i ] );
+		return a.length === b.length && a.every( v => b.includes( v ) );
 	}
 
 	throw new Error( `Unsupported type for query parameter: ${typeof a}` );
