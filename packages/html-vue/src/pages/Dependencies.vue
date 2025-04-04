@@ -8,7 +8,7 @@
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
-		<div class="flex space-x-2 mb-4">
+		<div class="flex gap-2 mb-4">
 			<div class="relative flex">
 				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 					<IconSearch :size="16" class="text-gray-500" />
@@ -51,9 +51,9 @@
 import { ref, computed } from 'vue';
 import { router } from '@router';
 import { report } from '@report';
-import DataTable, { type Column } from '@components/Common/DataTable.vue';
-import Pagination from '@components/Common/Pagination.vue';
-import IconSearch from '@components/Icon/Search.vue';
+import DataTable, { type Column } from '@components/common/DataTable.vue';
+import Pagination from '@components/common/Pagination.vue';
+import IconSearch from '@components/icon/Search.vue';
 
 const ITEMS_PER_PAGE = 12;
 

@@ -115,7 +115,7 @@ import IconBox from '@icon/Box.vue';
 import IconCode from '@icon/Code.vue';
 import IconBrush from '@icon/Brush.vue';
 import IconImage from '@icon/Image.vue';
-import IconFileInput from '@components/Icon/FileInput.vue';
-import IconShare2 from '@components/Icon/Share2.vue';
-import IconCircleAlert from '@components/Icon/CircleAlert.vue';
+import IconFileInput from '@components/icon/FileInput.vue';
+import IconShare2 from '@components/icon/Share2.vue';
+import IconCircleAlert from '@components/icon/CircleAlert.vue';
 </script>

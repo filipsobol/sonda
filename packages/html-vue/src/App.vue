@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent } from 'vue';
 import { router } from '@router';
-import Breadcrumbs from '@components/Layout/Breadcrumbs.vue';
+import Breadcrumbs from '@components/layout/Breadcrumbs.vue';
 import Sidebar from '@layout/Sidebar.vue';
 import MobileOverlay from '@layout/MobileOverlay.vue';
 

@@ -8,7 +8,7 @@
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
-		<div class="flex space-x-2 mb-4">
+		<div class="flex gap-2 mb-4">
 			<div class="relative flex">
 				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 					<IconSearch :size="16" class="text-gray-500" />
@@ -79,8 +79,6 @@
 					</p>
 				</td>
 
-				<td class="p-3 font-normal text-right whitespace-nowrap">{{ item.bytes }}</td>
-
 				<td class="p-3 font-normal text-center whitespace-nowrap">
 					<Badge v-if="item.format === 'esm'" variant="yellow">esm</Badge>
 					<Badge v-else-if="item.format === 'cjs'" variant="primary">cjs</Badge>
@@ -106,14 +104,14 @@
 import { ref, computed, watch } from 'vue';
 import { router } from '@router'
 import { report } from '@report';
-import { formatSize, formatPath } from '@/format.js';
-import DataTable, { type Column } from '@components/Common/DataTable.vue';
-import Dropdown from '@components/Common/Dropdown.vue';
-import BaseButton from '@/components/Common/Button.vue';
-import Pagination from '@components/Common/Pagination.vue';
-import Badge from '@components/Common/Badge.vue';
-import IconSearch from '@components/Icon/Search.vue';
-import IconFunnel from '@components/Icon/Funnel.vue';
+import { formatPath } from '@/format.js';
+import DataTable, { type Column } from '@components/common/DataTable.vue';
+import Dropdown from '@components/common/Dropdown.vue';
+import BaseButton from '@/components/common/Button.vue';
+import Pagination from '@components/common/Pagination.vue';
+import Badge from '@components/common/Badge.vue';
+import IconSearch from '@components/icon/Search.vue';
+import IconFunnel from '@components/icon/Funnel.vue';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -129,7 +127,6 @@ const SOURCE_OPTIONS = [
 ];
 
 const inputs = Object.entries( report.inputs );
-const outputs = Object.entries( report.outputs );
 
 const columns: Array<Column> = [
 	{
@@ -148,11 +145,6 @@ const columns: Array<Column> = [
 		width: '33.3%'
 	},
 	{
-		name: 'Size',
-		align: 'right',
-		width: '106px'
-	},
-	{
 		name: 'Format',
 		align: 'center',
 		width: '106px'
@@ -164,29 +156,13 @@ const columns: Array<Column> = [
 	}
 ];
 
-// const imports = inputs.reduce( ( carry, [ name, input ] ) => {
-// 	input.imports.forEach( importPath => {
-// 		if ( !carry[ importPath ] ) {
-// 			carry[ importPath ] = [];
-// 		}
-
-// 		carry[ importPath ].push( name );
-// 	} );
-
-// 	return carry;
-// }, {} );
-
 const data = ref(
 	inputs.map( ( [ path, input ] ) => ( {
 		id: path,
 		path,
 		name: formatPath( path ),
-		bytes: formatSize( input.bytes ),
 		format: input.format,
-		source: path.includes( 'node_modules' ) ? 'external' : 'internal',
-		outputs: outputs
-			.filter( ( [ , output ] ) => output.inputs[ path ] )
-			.map( ( [ outputPath ] ) => outputPath )
+		source: path.includes( 'node_modules' ) ? 'external' : 'internal'
 	} ) )
 );
 

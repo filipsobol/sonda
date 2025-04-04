@@ -33,8 +33,8 @@ export default defineConfig( {
 		alias: {
 			'@': fileURLToPath( new URL( './src', import.meta.url ) ),
 			'@components': fileURLToPath( new URL( './src/components', import.meta.url ) ),
-			'@icon': fileURLToPath( new URL( './src/components/Icon', import.meta.url ) ),
-			'@layout': fileURLToPath( new URL( './src/components/Layout', import.meta.url ) ),
+			'@icon': fileURLToPath( new URL( './src/components/icon', import.meta.url ) ),
+			'@layout': fileURLToPath( new URL( './src/components/layout', import.meta.url ) ),
 			'@report': fileURLToPath( new URL( './src/report.js', import.meta.url ) ),
 			'@router': fileURLToPath( new URL( './src/router.js', import.meta.url ) )
 		}

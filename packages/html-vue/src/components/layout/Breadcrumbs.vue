@@ -1,6 +1,6 @@
 <template>
 	<nav class="-mx-2 text-gray-700 w-full" aria-label="Breadcrumb">
-		<ol class="inline-flex items-center space-x-1 w-full">
+		<ol class="inline-flex items-center gap-1 w-full">
 			<li>
 				<a href="#/" class="px-2 py-1 text-sm font-medium text-gray-700 underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline">Home</a>
 			</li>

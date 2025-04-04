@@ -2,10 +2,10 @@
 	<nav class="flex items-center justify-between mt-4">
 		<p class="text-gray-600">Showing {{ firstItemNumber }} to {{ lastItemNumber }} of {{ count }} entries</p>
 	
-		<div class="flex items-center space-x-2">
+		<div class="flex items-center gap-2">
 			<p class="text-gray-600">Page {{ currentPage }} of {{ lastPage }}</p>
 
-			<ul class="flex space-x-2">
+			<ul class="flex gap-2">
 				<li>
 					<BaseButton
 						:disabled="isFirstPage"
@@ -45,9 +45,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import BaseButton from '@components/Common/Button.vue';
-import IconChevronLeft from '@components/Icon/ChevronLeft.vue';
-import IconChevronsLeft from '@components/Icon/ChevronsLeft.vue';
+import BaseButton from '@components/common/Button.vue';
+import IconChevronLeft from '@components/icon/ChevronLeft.vue';
+import IconChevronsLeft from '@components/icon/ChevronsLeft.vue';
 
 interface Props {
 	count: number;

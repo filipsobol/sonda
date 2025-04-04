@@ -21,7 +21,7 @@
 				v-show="open"
 				class="absolute mt-1 z-10 w-48 bg-white border border-gray-300 rounded-lg shadow-lg"
 			>
-			<ul class="p-3 space-y-3 text-sm text-gray-900">
+			<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
 				<li
 					v-for="option in props.options"
 					:key="option.value"
@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import BaseButton from '@components/Common/Button.vue';
+import BaseButton from '@components/common/Button.vue';
 
 interface Option {
 	label: string;

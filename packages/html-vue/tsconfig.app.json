@@ -20,8 +20,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@icon/*": ["./src/components/Icon/*"],
-      "@layout/*": ["./src/components/Layout/*"],
+      "@icon/*": ["./src/components/icon/*"],
+      "@layout/*": ["./src/components/layout/*"],
       "@report": ["./src/report.ts"],
       "@router": ["./src/router.ts"],
     }

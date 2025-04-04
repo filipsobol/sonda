@@ -1,5 +1,5 @@
 <template>
-	<div class="rounded-lg border border-gray-300 overflow-hidden shadow-xs">
+	<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
 		<table class="table-fixed w-full text-sm text-left">
 			<colgroup>
 				<col
@@ -34,7 +34,7 @@
 					v-for="item in data"
 					:key="item.id"
 				>
-					<tr class="bg-white border-t border-gray-200">
+					<tr class="bg-white border-t border-gray-100">
 						<td
 							v-if="$slots.collapsible"
 							class="p-3 font-normal whitespace-nowrap"
@@ -43,7 +43,7 @@
 								<IconChevronLeft
 									:size="16"
 									:class="[ model === item.id ? 'rotate-90' : 'rotate-270' ]"
-									class="text-gray-500 transition-[rotate] duration-150 ease-linear"
+									class="text-gray-500 transition-[rotate] duration-150"
 								/>
 							</BaseButton>
 						</td>
@@ -76,8 +76,8 @@
 </template>
 
 <script setup lang="ts" generic="const T extends { id: string } & Record<string, any>">
-import BaseButton from '@components/Common/Button.vue';
-import IconChevronLeft from '@components/Icon/ChevronLeft.vue';
+import BaseButton from '@components/common/Button.vue';
+import IconChevronLeft from '@components/icon/ChevronLeft.vue';
 
 export interface Column {
 	name: string;
