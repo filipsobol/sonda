@@ -22,7 +22,7 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
     "@changesets/cli": "^2.28.1",
-    "@types/node": "^22.13.11",
+    "@types/node": "^22.14.1",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
     "pkg-pr-new": "^0.0.41",
