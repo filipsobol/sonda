@@ -1,78 +1,84 @@
-import { resolve } from 'path';
 import {
-	generateReportFromAssets,
-	jsRegexp,
+	generateReport,
+	getTypeByName,
 	normalizePath,
+	Config,
 	type JsonReport,
 	type ModuleFormat,
 	type UserOptions
 } from '../index.js';
-import type { Compiler, StatsModule } from 'webpack';
+import type { Compiler, Module } from 'webpack';
 
 export default class SondaWebpackPlugin {
-	options: Partial<UserOptions>;
+	options: Config;
 
-	constructor ( options: Partial<UserOptions> = {} ) {
-		this.options = options;
+	constructor ( userOptions: UserOptions = {} ) {
+		this.options = new Config( userOptions, {
+			integration: 'webpack'
+		} );
 	}
 
 	apply( compiler: Compiler ): void {
-		if (this.options.enabled === false ) {
+		if ( !this.options.enabled ) {
 			return;
 		}
 
 		compiler.options.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]';
 
-		compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', compilation => {
+		compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', async ( { modules, moduleGraph, outputOptions } ) => {
 			const inputs: JsonReport[ 'inputs' ] = {};
-			const stats = compilation.getStats().toJson( {
-				modules: true,
-				providedExports: true,
-			} );
 
-			const outputPath = stats.outputPath || compiler.outputPath;
-			const modules: Array<StatsModule> = stats.modules
-				?.flatMap( mod => mod.modules ? [ mod, ...mod.modules ] : mod )
-				.filter( mod => mod.nameForCondition && !mod.codeGenerated )
-				.filter( ( mod, index, self ) => self.findIndex( m => m.nameForCondition === mod.nameForCondition ) === index )
-				|| [];
+			for ( const mod of modules ) {
+				const name = mod.nameForCondition();
 
-			modules.forEach( module => {
-				const imports = modules.reduce( ( acc, { nameForCondition, issuerName, reasons } ) => {
-					if ( issuerName === module.name || reasons?.some( reason => reason.resolvedModule === module.name ) ) {
-						acc.push( normalizePath( nameForCondition! ) );
-					}
+				if ( !name || name.startsWith( 'data:' ) ) {
+					continue;
+				}
 
-					return acc;
-				}, [] as Array<string> );
+				const imports = Array
+					// Get all the connections from the current module
+					.from( moduleGraph.getOutgoingConnections( mod ) )
 
-				inputs[ normalizePath( module.nameForCondition! ) ] = {
-					bytes: module.size || 0,
-					format: getFormat( module ),
+					// Get the module name for each connection
+					.map( connection => connection.module?.nameForCondition() )
+
+					// Filter out connections without a name, or that are the same as the current module, or that are data URLs
+					.filter( ( path ): path is string => {
+						return !!path
+							&& path !== name
+							&& !path.startsWith( 'data:' )
+					} )
+
+					// Normalize module path
+					.map( path => normalizePath( path ) )
+
+					// Remove duplicates
+					.filter( ( path, index, self ) => self.indexOf( path ) === index );
+
+				inputs[ normalizePath( name ) ] = {
+					bytes: mod.size() || 0,
+					type: getTypeByName( name ),
+					format: getFormat( name, mod ),
 					imports,
 					belongsTo: null
 				};
-			} );
+			}
 
-			return generateReportFromAssets(
-				stats.assets?.map( asset => resolve( outputPath, asset.name ) ) || [],
+			await generateReport(
+				outputOptions.path || compiler.outputPath,
+				this.options,
 				inputs,
-				this.options
 			);
 		} );
 	}
 }
 
-function getFormat( module: StatsModule ): ModuleFormat {
-	if ( !jsRegexp.test( module.nameForCondition! ) ) {
+function getFormat( name: string, module: Module ): ModuleFormat {
+	if ( getTypeByName( name ) !== 'script' ) {
 		return 'unknown';
 	}
 
-	/**
-	 * Sometimes ESM modules have `moduleType` set as `javascript/auto`, so we
-	 * also need to check if the module has exports to determine if it's ESM.
-	 */
-	if ( module.moduleType === 'javascript/esm' || !!module.providedExports?.length ) {
+	if ( module.type === 'javascript/esm' ) {
 		return 'esm';
 	}
 

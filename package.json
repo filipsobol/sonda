@@ -21,14 +21,13 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
-    "@changesets/cli": "^2.28.1",
-    "@types/node": "^22.13.11",
+    "@changesets/cli": "^2.29.2",
+    "@types/node": "^22.14.1",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
-    "pkg-pr-new": "^0.0.41",
-    "rolldown": "1.0.0-beta.6",
-    "rollup": "^4.36.0",
-    "typescript": "^5.8.2",
+    "pkg-pr-new": "^0.0.42",
+    "rolldown": "1.0.0-beta.7",
+    "typescript": "^5.8.3",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   }

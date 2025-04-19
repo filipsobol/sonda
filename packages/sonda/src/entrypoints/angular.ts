@@ -1,8 +1,8 @@
 import { readFileSync, readdirSync } from 'fs';
 import { basename, relative, resolve } from 'path';
-import type { UserOptions } from '../types';
+import { Config, type UserOptions } from '../index.js';
+import { processEsbuildBuild } from './esbuild.js';
 import type { Metafile } from 'esbuild';
-import { processEsbuildMetaFile } from './esbuild';
 
 interface AngularUserOptions extends UserOptions {
   config: string;
@@ -15,21 +15,15 @@ interface Paths {
   server: string;
 }
 
-export default function SondaAngular( options: Partial<AngularUserOptions> = {} ): void {
-  const cwd = process.cwd();
-  const {
-    config = 'angular.json',
-    projects = [],
-    ...opts
-  } = options;
-
-  opts.format ??= 'html';
-  opts.filename ??= `sonda-report-[project].${ opts.format }`;
-
-  // Angular workspaces can have multiple projects, so we need to generate a report for each
-  if ( !opts.filename.includes( '[project]' ) ) {
-    throw new Error( 'SondaAngular: The "filename" option must include the "[project]" token.' );
-  }
+export default async function SondaAngular( {
+  config = 'angular.json',
+  projects = [],
+  ...userOptions
+}: AngularUserOptions ): Promise<void> {
+  const options = new Config( userOptions, {
+    integration: 'angular',
+    filename: 'sonda_[project]'
+  } );
 
   const angularConfig = loadJson( config );
   const projectsToGenerate = projects.length ? projects : Object.keys( angularConfig.projects );
@@ -40,22 +34,26 @@ export default function SondaAngular( options: Partial<AngularUserOptions> = {} 
       ? outputPath
       : { base: outputPath };
 
-    paths.base = resolve( cwd, paths.base );
+    paths.base = resolve( process.cwd(), paths.base );
     paths.browser = resolve( paths.base, paths.browser || 'browser' );
     paths.server = resolve( paths.base, paths.server || 'server' );
 
     const metafile = updateMetafile(
       loadJson<Metafile>( resolve( paths.base, 'stats.json' ) ),
-      paths
+      paths.base
     );
 
     // Because this configuration is shared between multiple projects, we need to clone it
-    const sondaOptions = Object.assign( {}, opts );
+    const sondaOptions = options.clone();
 
     // Replace the "[project]" token with the current project name
-    sondaOptions.filename = sondaOptions.filename!.replace( '[project]', project );
+    sondaOptions.filename = sondaOptions.filename.replace( '[project]', project );
 
-    processEsbuildMetaFile( metafile, sondaOptions );
+    await processEsbuildBuild(
+      paths.base,
+      metafile,
+      sondaOptions
+    );
   }
 }
 
@@ -73,7 +71,7 @@ function loadJson<T extends any = any>( path: string ): T {
  */
 function updateMetafile(
   metafile: Metafile,
-  paths: Paths
+  basePath: string
 ): Metafile {
   const cwd = process.cwd();
 
@@ -83,8 +81,8 @@ function updateMetafile(
   // Reset the outputs
   metafile.outputs = {};
 
-  for ( const path of readdirSync( paths.base, { encoding: 'utf8', recursive: true } ) ) {
-    const absolutePath = resolve( paths.base, path );
+  for ( const path of readdirSync( basePath, { encoding: 'utf8', recursive: true } ) ) {
+    const absolutePath = resolve( basePath, path );
     const filename = basename( absolutePath );
     const originalOutput = outputs[ filename ];
 

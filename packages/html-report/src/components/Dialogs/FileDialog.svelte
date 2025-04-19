@@ -58,7 +58,7 @@ interface Props {
 let { file }: Props = $props();
 
 const input = $derived( window.SONDA_JSON_REPORT.inputs[ file.path ] );
-const format = $derived( input?.format.toUpperCase() ?? 'UNKNOWN' );
+const format = $derived( input?.format?.toUpperCase() ?? 'UNKNOWN' );
 const hasSource = $derived( activeOutput.output!.root.map?.sources.includes( file.path ) );
 
 function getImporters(
@@ -72,7 +72,7 @@ function getImporters(
 
 	return Object
 		.entries( window.SONDA_JSON_REPORT.inputs )
-		.filter( ( [ , file ] ) => file.imports.includes( key ) )
+		.filter( ( [ , file ] ) => file.imports?.includes( key ) )
 		.map( ( [ path ] ) => [ path, `imported by ${ path }` ] );
 }
 

@@ -4,7 +4,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import styles from 'rollup-plugin-styles';
 import Sonda from 'sonda/rollup';
-// import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig( {
 	input: 'src/index.js',
@@ -27,17 +26,9 @@ export default defineConfig( {
 			sourceMap: true,
 			// minimize: true
 		} ),
-		terser( {
-			// format: {
-			// 	comments: false
-			// }
+		terser(),
+		Sonda( {
+			format: 'html'
 		} ),
-		// visualizer( {
-		// 	open: true,
-		// 	sourcemap: true,
-		// 	gzipSize: true,
-		// 	brotliSize: true
-		// } ),
-		Sonda(),
 	]
 } );

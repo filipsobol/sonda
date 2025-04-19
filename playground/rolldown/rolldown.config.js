@@ -10,6 +10,8 @@ export default defineConfig( {
 		minify: true
 	},
 	plugins: [
-		Sonda(),
+		Sonda( {
+			format: 'html'
+		} ),
 	]
 } );

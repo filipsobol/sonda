@@ -90,12 +90,13 @@ const formats = $derived.by( () => {
 	const formats: Record<ModuleFormat, number> = {
 		esm: 0,
 		cjs: 0,
-		unknown: 0
+		unknown: 0,
+		other: 0
 	};
 	const sources = window.SONDA_JSON_REPORT.inputs;
 	
 	Object
-		.entries( data!.inputs )
+		.entries( data!.inputs || {} )
 		.forEach( ( [ name, sizes ] ) => {
 			const format = sources[ name ]?.format ?? 'unknown';
 
@@ -113,7 +114,7 @@ const dependencies = $derived.by<Array<string>>( () => {
 	const packageNameRegExp = /(?:.*node_modules\/)(@[^\/]+\/[^\/]+|[^\/]+)/;
 
 	return Object
-		.keys( data.inputs )
+		.keys( data.inputs || {} )
 		.map( name => name.match( packageNameRegExp )?.[ 1 ] ?? null )
 		.filter( ( value, index, self ): value is string => value !== null && self.indexOf( value ) === index )
 		.sort();

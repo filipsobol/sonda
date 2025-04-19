@@ -21,7 +21,6 @@ export default defineConfig( {
 		'entrypoints/esbuild': 'src/entrypoints/esbuild.ts',
 		'entrypoints/next': 'src/entrypoints/next.ts',
 		'entrypoints/nuxt': 'src/entrypoints/nuxt.ts',
-		'entrypoints/parcel': 'src/entrypoints/parcel.ts',
 		'entrypoints/rollup': 'src/entrypoints/rollup.ts',
 		'entrypoints/sveltekit': 'src/entrypoints/sveltekit.ts',
 		'entrypoints/webpack': 'src/entrypoints/webpack.ts',

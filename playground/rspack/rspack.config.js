@@ -10,7 +10,9 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new Sonda(),
+		new Sonda( {
+			format: 'json'
+		} ),
 		// new RsdoctorRspackPlugin( {
 		// 	disableClientServer: true,
 		// 	mode: 'brief',

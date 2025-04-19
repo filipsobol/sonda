@@ -1,33 +1,59 @@
-import { resolve } from 'path';
-import { generateReportFromAssets, addSourcesToInputs } from '../index.js';
-import type { Metafile, Plugin } from 'esbuild';
-import type { JsonReport, UserOptions } from '../types.js';
+import { dirname, resolve } from 'path';
+import {
+	generateReport,
+	addSourcesToInputs,
+	getTypeByName,
+	Config,
+	type UserOptions,
+	type JsonReport
+} from '../index.js';
+import type { BuildOptions, Metafile, Plugin } from 'esbuild';
 
-export default function SondaEsbuildPlugin( options: Partial<UserOptions> = {} ): Plugin {
+export default function SondaEsbuildPlugin( userOptions: UserOptions = {} ): Plugin {
+	const options = new Config( userOptions, {
+		integration: 'esbuild'
+	} );
+
 	return {
-		name: 'sonda',
+		name: 'sonda-esbuild',
 		setup( build ) {
-			if ( options.enabled === false ) {
+			if ( !options.enabled ) {
 				return;
 			}
 
 			build.initialOptions.metafile = true;
 
-			// Esbuild already reads the existing source maps, so there's no need to do it again
-			options.detailed = false;
-
-			build.onEnd( result => processEsbuildMetaFile( result.metafile!, options ) );
+			build.onEnd( async result => {
+				await processEsbuildBuild(
+					getBuildDir( build.initialOptions ),
+					result.metafile!,
+					options
+				);
+			} );
 		}
 	};
 }
 
-export function processEsbuildMetaFile( metafile: Metafile, options: Partial<UserOptions> ): void {
+function getBuildDir( options: BuildOptions ): string {
+	const workingDir = options.absWorkingDir || process.cwd();
+
+	return options.outfile
+		? dirname( resolve( workingDir, options.outfile ) )
+		: resolve( workingDir, options.outdir! )
+}
+
+export function processEsbuildBuild(
+	buildDir: string,
+	metafile: Metafile,
+	options: Config
+): Promise<string> {
 	const cwd = process.cwd();
 	const inputs = Object
 		.entries( metafile.inputs )
 		.reduce( ( acc, [ path, data ] ) => {
 			acc[ path ] = {
 				bytes: data.bytes,
+				type: getTypeByName( path ),
 				format: data.format ?? 'unknown',
 				imports: data.imports.map( data => data.path ),
 				belongsTo: null,
@@ -47,9 +73,9 @@ export function processEsbuildMetaFile( metafile: Metafile, options: Partial<Use
 			return acc;
 		}, {} as JsonReport[ 'inputs' ] );
 
-	generateReportFromAssets(
-		Object.keys( metafile!.outputs ).map( path => resolve( cwd, path ) ),
-		inputs,
-		options
+	return generateReport(
+		buildDir,
+		options,
+		inputs
 	);
 }

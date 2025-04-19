@@ -12,18 +12,18 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.20.2",
+		"@sveltejs/kit": "^2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tailwindcss/container-queries": "^0.1.1",
-		"@tailwindcss/vite": "^4.0.15",
+		"@tailwindcss/vite": "^4.1.4",
 		"sonda": "workspace:^",
-		"svelte": "^5.25.2",
-		"svelte-check": "^4.1.5",
-		"tailwindcss": "^4.0.15",
-		"typescript": "^5.8.2",
-		"vite": "^6.2.2"
+		"svelte": "^5.28.1",
+		"svelte-check": "^4.1.6",
+		"tailwindcss": "^4.1.4",
+		"typescript": "^5.8.3",
+		"vite": "^6.3.2"
 	},
 	"dependencies": {
-		"lucide-svelte": "^0.483.0"
+		"lucide-svelte": "^0.501.0"
 	}
 }

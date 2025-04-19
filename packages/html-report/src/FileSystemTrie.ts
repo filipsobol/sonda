@@ -1,4 +1,4 @@
-import type { JsonReport, ReportOutput, ReportOutputInput, Sizes } from 'sonda';
+import type { JsonReport, Output, OutputInput, Sizes } from 'sonda';
 
 export interface File extends Sizes {
 	name: string;
@@ -12,7 +12,7 @@ export interface Folder extends Sizes {
 }
 
 export interface Root extends Folder {
-	map: ReportOutput[ 'map' ];
+	map: Output[ 'map' ];
 }
 
 export type Content = Folder | File;
@@ -22,7 +22,7 @@ export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
 		const trie = new FileSystemTrie();
 
 		Object
-			.entries( output.inputs )
+			.entries( output.inputs || {} )
 			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
 
 		trie.root.name = outputPath;
@@ -59,7 +59,7 @@ export class FileSystemTrie {
 		};
 	}
 
-	insert( filePath: string, metadata: ReportOutputInput ): void {
+	insert( filePath: string, metadata: OutputInput ): void {
 		const parts = filePath.split( '/' );
 		const name = parts.pop()!;
 

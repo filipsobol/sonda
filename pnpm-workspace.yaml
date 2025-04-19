@@ -6,6 +6,7 @@ onlyBuiltDependencies:
   - '@swc/core'
   - esbuild
 ignoredBuiltDependencies:
+  - protobufjs
   - lmdb
   - msgpackr-extract
   - sharp

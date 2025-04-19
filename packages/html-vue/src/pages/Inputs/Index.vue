@@ -69,14 +69,14 @@
 				</td>
 
 				<td class="p-3 font-normal">
-					<p
+					<!-- <p
 						v-for="output in item.outputs"
 						:key="output"
 						:title="output"
 						class="truncate"
 					>
 						{{ output }}
-					</p>
+					</p> -->
 				</td>
 
 				<td class="p-3 font-normal text-center whitespace-nowrap">
@@ -119,6 +119,7 @@ const FORMAT_OPTIONS = [
 	{ label: 'ESM', subLabel: 'ES Module', value: 'esm' },
 	{ label: 'CJS', subLabel: 'CommonJS', value: 'cjs' },
 	{ label: 'Unknown', value: 'unknown' },
+	{ label: 'Other', value: 'other' }
 ];
 
 const SOURCE_OPTIONS = [

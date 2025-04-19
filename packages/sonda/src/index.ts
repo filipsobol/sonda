@@ -1,11 +1,21 @@
-export { generateReportFromAssets } from './report/generate.js';
-export { addSourcesToInputs } from './sourcemap/map.js';
 export {
-	esmRegex,
-	cjsRegex,
-	jsRegexp,
-	cssRegexp,
-	normalizePath
-} from './utils.js';
+	generateReport,
+	type JsonReport,
+	type Metadata,
+	type Input,
+	type Output,
+	type OutputInput,
+	type SourceType,
+	type ModuleFormat,
+	type Sizes
+} from './report.js';
+export { addSourcesToInputs } from './sourcemap/map.js';
+export { normalizePath, getTypeByName } from './utils.js';
 
-export type * from './types.js';
+export {
+	Config,
+	type UserOptions,
+	type IntegrationOptions,
+	type Integration
+} from './Config.js';
+

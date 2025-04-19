@@ -8,9 +8,8 @@ const { values } = parseArgs( {
     config: { type: 'string' },
     projects: { type: 'string', multiple: true },
     format: { type: 'string' },
-    filename: { type: 'string' },
-    'no-open': { type: 'boolean' },
-    detailed: { type: 'boolean' },
+    outputDir: { type: 'string' },
+    deep: { type: 'boolean' },
     sources: { type: 'boolean' },
     gzip: { type: 'boolean' },
     brotli: { type: 'boolean' }
@@ -22,10 +21,5 @@ const { values } = parseArgs( {
   // Fail when unknown argument is used
   strict: true
 } );
-
-if ( values[ 'no-open' ] ) {
-  values.open = false;
-  delete values[ 'no-open' ];
-}
 
 Sonda( values );

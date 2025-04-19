@@ -1,60 +1,55 @@
-import { resolve, dirname } from 'path';
+import { resolve, dirname, extname } from 'path';
 import {
-	generateReportFromAssets,
-	cjsRegex,
-	jsRegexp,
+	generateReport,
 	normalizePath,
+	getTypeByName,
+	Config,
 	type JsonReport,
 	type ModuleFormat,
 	type UserOptions
 } from '../index.js';
-import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
+import type { Plugin, ModuleInfo, NormalizedOutputOptions } from 'rollup';
 
-export default function SondaRollupPlugin( options: Partial<UserOptions> = {} ): Plugin {
+export default function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
+	const options = new Config( userOptions, {
+		integration: 'rollup'
+	} );
+
+	if ( !options.enabled ) {
+		return { name: 'sonda-rollup' };
+	}
+
 	let inputs: JsonReport[ 'inputs' ] = {};
 
 	return {
-		name: 'sonda',
-
+		name: 'sonda-rollup',
 		moduleParsed( module: ModuleInfo ) {
-			if ( options.enabled === false ) {
-				return;
-			}
-
 			inputs[ normalizePath( module.id ) ] = {
 				bytes: module.code ? Buffer.byteLength( module.code ) : 0,
-				format: getFormat( module.id, module.meta.commonjs?.isCommonJS ),
+				type: getTypeByName( module.id ),
+				format: getFormat( module ),
 				imports: module.importedIds.map( id => normalizePath( id ) ),
 				belongsTo: null,
 			};
 		},
-
-		writeBundle(
-			{ dir, file }: NormalizedOutputOptions,
-			bundle: OutputBundle
-		) {
-			if ( options.enabled === false ) {
-				return;
-			}
-
-			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
-			const assets = Object.keys( bundle ).map( name => resolve( outputDir, name ) );
-
-			return generateReportFromAssets(
-				assets,
-				inputs,
-				options
+		async writeBundle( { dir, file }: NormalizedOutputOptions ) {
+			await generateReport(
+				resolve( process.cwd(), dir ?? dirname( file! ) ),
+				options,
+				inputs
 			);
 		}
 	};
 }
 
-function getFormat( moduleId: string, isCommonJS: boolean | undefined ): ModuleFormat {
-	if ( isCommonJS === true || cjsRegex.test( moduleId ) ) {
+function getFormat( module: ModuleInfo ): ModuleFormat {
+	const ext = extname( module.id );
+
+	if ( module.meta.commonjs?.isCommonJS === true || ext === '.cjs' || ext === '.cts' ) {
 		return 'cjs';
 	}
 
-	if ( isCommonJS === false || jsRegexp.test( moduleId ) ) {
+	if ( module.meta.commonjs?.isCommonJS === false || ext === '.mjs' || ext === '.mts' ) {
 		return 'esm';
 	}
 

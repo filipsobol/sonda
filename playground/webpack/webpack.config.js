@@ -1,6 +1,5 @@
 import Sonda from 'sonda/webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default {
   entry: './src/index.js',
@@ -11,8 +10,9 @@ export default {
   },
   plugins: [
     new MiniCssExtractPlugin(),
-    // new BundleAnalyzerPlugin(),
-    new Sonda(),
+    new Sonda( {
+			format: 'json'
+    } ),
   ],
   module: {
     rules: [

@@ -3,7 +3,9 @@ import Sonda from 'sonda/vite';
 
 export default defineConfig( {
   plugins: [
-    Sonda(),
+    Sonda( {
+			format: 'html'
+    } ),
   ],
   build: {
     sourcemap: true
