@@ -21,35 +21,35 @@
 				v-show="open"
 				class="absolute mt-1 z-10 w-48 bg-white border border-gray-300 rounded-lg shadow-lg"
 			>
-			<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
-				<li
-					v-for="option in props.options"
-					:key="option.value"
-					class="cursor-pointer"
-				>
-					<div class="flex items-center">
-						<input
-							v-model="model"
-							:value="option.value"
-							:id="'checkbox-' + option.value"
-							type="checkbox"
-							class="size-4"
-						>
-						<label
-							:for="'checkbox-' + option.value"
-							class="ps-2 w-full"
-						>
-							{{ option.label }}
-							<span
-								v-if="option.subLabel"
-								class="text-gray-500"
+				<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
+					<li
+						v-for="option in props.options"
+						:key="option.value"
+						class="cursor-pointer"
+					>
+						<div class="flex items-center">
+							<input
+								v-model="model"
+								:value="option.value"
+								:id="'checkbox-' + option.value"
+								type="checkbox"
+								class="size-4"
 							>
-								({{ option.subLabel }})
-							</span>
-						</label>
-					</div>
-				</li>
-			</ul>
+							<label
+								:for="'checkbox-' + option.value"
+								class="ps-2 w-full select-none"
+							>
+								{{ option.label }}
+								<span
+									v-if="option.subLabel"
+									class="text-gray-500"
+								>
+									({{ option.subLabel }})
+								</span>
+							</label>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</transition>
 	</div>
