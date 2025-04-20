@@ -3,7 +3,13 @@
 		<h2 class="text-2xl font-bold">Dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt purus non hendrerit commodo. Nunc sit amet nisi vel sapien feugiat egestas in eu ligula. Mauris iaculis maximus nisi, at viverra velit sodales nec. Nunc placerat, erat eu consectetur pulvinar, lorem odio rutrum purus, et bibendum ex velit id erat. Fusce nec pellentesque orci, pretium placerat elit. Pellentesque accumsan et turpis ut porttitor. Suspendisse tincidunt ut leo ac finibus. Proin viverra consectetur est.
+			List of all external dependencies used in your project. Click the button next to a dependency to see:
+
+			<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
+				<li><span class="font-bold">Paths</span>: Relative path to the dependency. If there's more than one path, the dependency is likely duplicated, which could <span class="underline">lead to increased bundle size</span>.</li>
+				<li><span class="font-bold">Used in</span>: Assets that include this dependency.</li>
+				<li><span class="font-bold">Imported by</span>: Inputs that imported given dependency, which are also the reason it got bundled.</li>
+			</ul>
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">
@@ -55,7 +61,7 @@
 					</li>
 				</ul>
 
-				<p class="mt-8 font-bold">Used in following assets</p>
+				<p class="mt-8 font-bold">Used in</p>
 
 				<ul class="mt-2 list-disc list-inside">
 					<li
@@ -72,7 +78,7 @@
 					</li>
 				</ul>
 
-				<p class="mt-8 font-bold">Imported by following inputs</p>
+				<p class="mt-8 font-bold">Imported by</p>
 
 				<ul class="mt-2 list-disc list-inside">
 					<li
