@@ -14,7 +14,7 @@ build( {
 	logLevel: 'info',
 	plugins: [
 		Sonda( {
-			format: 'html'
+			format: 'json'
 		} )
 	]
 } );
