@@ -29,13 +29,55 @@
 			:data="paginatedData"
 		>
 			<template #row="{ item }">
-				<td class="p-3 font-normal text-gray-900">{{ item.name }}</td>
-
-				<td class="p-3 font-normal whitespace-nowrap">{{ item.usedIn }}</td>
+				<td class="p-3 font-normal text-gray-900">{{ item.id }}</td>
 			</template>
 
 			<template #collapsible="{ item }">
-				<p class="mb-2 font-bold">{{ item }}</p>
+				<p class="font-bold">Paths</p>
+
+				<ul class="mt-2 list-disc list-inside">
+					<li
+						v-for="path in item.paths"
+						:key="path"
+						class="text-gray-700 ml-2"
+					>
+						{{ path }}
+					</li>
+				</ul>
+
+				<p class="mt-8 font-bold">Used in following assets</p>
+
+				<ul class="mt-2 list-disc list-inside">
+					<li
+						v-for="path in item.usedIn"
+						:key="path"
+						class="text-gray-700 ml-2"
+					>
+						<a
+							:href="router.getUrl( 'assets/details', { item: path } )"
+							class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+						>
+							{{ path }}
+						</a>
+					</li>
+				</ul>
+
+				<p class="mt-8 font-bold">Imported by following inputs</p>
+
+				<ul class="mt-2 list-disc list-inside">
+					<li
+						v-for="path in item.importedBy"
+						:key="path"
+						class="text-gray-700 ml-2"
+					>
+						<a
+							:href="router.getUrl( 'inputs/details', { item: path } )"
+							class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+						>
+							{{ path }}
+						</a>
+					</li>
+				</ul>
 			</template>
 		</DataTable>
 
@@ -58,19 +100,37 @@ import IconSearch from '@components/icon/Search.vue';
 const ITEMS_PER_PAGE = 12;
 
 const columns: Array<Column> = [
-	{ name: 'Name', align: 'left' },
-	{ name: 'Used in', align: 'left' },
+	{ name: 'Name', align: 'left' }
 ];
 
 const dependencies = Object.entries( report.dependencies );
 
+const assetInputs = Object
+	.entries( report.outputs )
+	.reduce( ( carry, [ path, output ] ) => {
+		carry.push( [ path, Object.keys( output.inputs || {} ) ] )
+		return carry;
+	}, [] as Array<[ asset: string, inputs: Array<string> ]> );
+
+const inputImports = Object
+	.entries( report.inputs )
+	.reduce( ( carry, [ path, input ] ) => {
+		carry.push( [ path, input.imports || [] ] )
+		return carry;
+	}, [] as Array<[ input: string, imports: Array<string> ]> );
+
 const data = ref(
-	dependencies.map( ( [ name, dependency ] ) => ( {
-		id: name,
-		name,
-		// TODO
-		usedIn: [],
-		paths: dependency
+	dependencies.map( ( [ id, paths ] ) => ( {
+		id,
+		paths,
+		usedIn: assetInputs
+			.filter( ( [ _, output ] ) => output.some( path => path.includes( id ) ) )
+			.map( ( [ id ] ) => id ),
+		
+		importedBy: inputImports
+			.filter( ( [ _, input ] ) => input.some( path => path.includes( id ) ) )
+			.map( ( [ id ] ) => id )
+			.filter( path => !path.includes( id ) )
 	} ) )
 );
 
@@ -81,7 +141,7 @@ const active = computed( router.computedQuery( 'active', '' ) );
 const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
-	return data.value.filter( item => item.name.toLowerCase().includes( lowercaseSearch ) );
+	return data.value.filter( item => item.id.toLowerCase().includes( lowercaseSearch ) );
 } );
 
 const paginatedData = computed( () => {
