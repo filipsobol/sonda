@@ -20,7 +20,7 @@
 					<IconBox :size="16" class="text-gray-400" />
 				</div>
 
-				<p class="text-xl mt-1">1006.31 KiB <span class="text-gray-500">(6)</span></p>
+				<p class="text-xl mt-1">{{ formatSize( totalSize ) }} <span class="text-gray-500">({{ totalCount }})</span></p>
 			</a>
 
 			<a
@@ -32,7 +32,7 @@
 					<IconCode :size="16" class="text-gray-400" />
 				</div>
 
-				<p class="text-xl mt-1">1006.31 KiB <span class="text-gray-500">(6)</span></p>
+				<p class="text-xl mt-1">{{ formatSize( scriptSize ) }} <span class="text-gray-500">({{ scriptCount }})</span></p>
 			</a>
 
 			<a
@@ -44,7 +44,7 @@
 					<IconBrush :size="16" class="text-gray-400" />
 				</div>
 
-				<p class="text-xl mt-1">0 b <span class="text-gray-500">(0)</span></p>
+				<p class="text-xl mt-1">{{ formatSize( styleSize ) }} <span class="text-gray-500">({{ styleCount }})</span></p>
 			</a>
 
 			<a
@@ -56,66 +56,34 @@
 					<IconImage :size="16" class="text-gray-400" />
 				</div>
 
-				<p class="text-xl mt-1">0 b <span class="text-gray-500">(0)</span></p>
-			</a>
-		</div>
-
-		<h3 class="text-xl font-bold mt-12 mb-4">Inputs</h3>
-
-		<div class="grid grid-cols-4 gap-2">
-			<a
-				href="#"
-				class="col-span-2 xl:col-span-1 p-4 flex flex-col border border-gray-300 rounded-lg shadow-xs transition-colors duration-150 hover:bg-gray-50"
-			>
-				<div class="flex items-start justify-between">
-					<p class="text-gray-500">Total size</p>
-					<IconFileInput :size="16" class="text-gray-400" />
-				</div>
-
-				<p class="text-xl mt-1">5008.71 KiB <span class="text-gray-500">(86)</span></p>
-			</a>
-		</div>
-
-		<h3 class="text-xl font-bold mt-12 mb-4">Dependencies</h3>
-
-		<div class="grid grid-cols-4 gap-2">
-			<a
-				href="#"
-				class="col-span-2 xl:col-span-1 p-4 flex flex-col border border-gray-300 rounded-lg shadow-xs transition-colors duration-150 hover:bg-gray-50"
-			>
-				<div class="flex items-start justify-between">
-					<p class="text-gray-500">Dependencies</p>
-					<IconShare2 :size="16" class="text-gray-400" />
-				</div>
-
-				<p class="text-xl mt-1">12</p>
-			</a>
-		</div>
-
-		<h3 class="text-xl font-bold mt-12 mb-4">Issues</h3>
-
-		<div class="grid grid-cols-4 gap-2">
-			<a
-				href="#"
-				class="col-span-2 xl:col-span-1 p-4 flex flex-col border border-gray-300 rounded-lg shadow-xs transition-colors duration-150 hover:bg-gray-50"
-			>
-				<div class="flex items-start justify-between">
-					<p class="text-gray-500">Issues</p>
-					<IconCircleAlert :size="16" class="text-gray-400" />
-				</div>
-
-				<p class="text-xl mt-1">1</p>
+				<p class="text-xl mt-1">{{ formatSize( otherSize ) }} <span class="text-gray-500">({{ otherCount }})</span></p>
 			</a>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { report } from '@/report.js';
+import { formatSize } from '@/format.js';
 import IconBox from '@icon/Box.vue';
 import IconCode from '@icon/Code.vue';
 import IconBrush from '@icon/Brush.vue';
 import IconImage from '@icon/Image.vue';
-import IconFileInput from '@components/icon/FileInput.vue';
-import IconShare2 from '@components/icon/Share2.vue';
-import IconCircleAlert from '@components/icon/CircleAlert.vue';
+
+const totalOutputs = Object.values( report.outputs );
+
+const totalCount = totalOutputs.length;
+const totalSize = totalOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
+
+const scriptOutputs = totalOutputs.filter( output => output.type === 'script' );
+const scriptCount = scriptOutputs.length;
+const scriptSize = scriptOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
+
+const styleOutputs = totalOutputs.filter( output => output.type === 'style' );
+const styleCount = styleOutputs.length;
+const styleSize = styleOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
+
+const otherOutputs = totalOutputs.filter( output => output.type === 'other' );
+const otherCount = otherOutputs.length;
+const otherSize = otherOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
 </script>

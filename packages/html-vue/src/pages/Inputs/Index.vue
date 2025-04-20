@@ -102,8 +102,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { router } from '@router'
-import { report } from '@report';
+import { router } from '@/router.js'
+import { report } from '@/report.js';
 import { formatPath } from '@/format.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import Dropdown from '@components/common/Dropdown.vue';

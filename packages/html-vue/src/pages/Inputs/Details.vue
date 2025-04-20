@@ -91,8 +91,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { formatPath } from '@/format';
-import { router } from '@router';
+import { formatPath } from '@/format.js';
+import { router } from '@/router.js';
 import BaseSelect from '@components/common/Select.vue';
 
 const FORMAT_OPTIONS = [

@@ -49,8 +49,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { router } from '@router';
-import { report } from '@report';
+import { router } from '@/router.js';
+import { report } from '@/report.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import Pagination from '@components/common/Pagination.vue';
 import IconSearch from '@components/icon/Search.vue';

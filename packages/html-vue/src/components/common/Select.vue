@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, useTemplateRef } from 'vue';
 import BaseButton from '@components/common/Button.vue';
-import IconChevronLeft from '../icon/ChevronLeft.vue';
+import IconChevronLeft from '@icon/ChevronLeft.vue';
 
 interface Option {
 	label: string;

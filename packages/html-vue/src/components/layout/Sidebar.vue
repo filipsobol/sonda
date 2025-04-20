@@ -30,7 +30,7 @@
 						<component :is="item.icon" :size="18" class="flex-shrink-0 text-gray-400" />
 						<span class="flex-grow ms-3 truncate text-gray-900">{{ item.title }}</span>
 						<span
-							v-if="item.count"
+							v-if="item.count !== undefined"
 							class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-lg"
 						>
 							{{ item.count }}
@@ -44,7 +44,8 @@
 
 <script setup lang="ts">
 import type { Component } from 'vue';
-import { router } from '@router';
+import { report } from '@/report.js';
+import { router } from '@/router.js';
 import IconGrid from '@icon/Grid.vue';
 import IconBoxes from '@icon/Boxes.vue';
 import IconFileInput from '@icon/FileInput.vue';
@@ -62,32 +63,31 @@ const items: Array<Link> = [
 	{
 		title: 'Home',
 		link: '',
-		icon: IconGrid,
-		count: 0
+		icon: IconGrid
 	},
 	{
 		title: 'Assets',
 		link: 'assets',
 		icon: IconBoxes,
-		count: 5
+		count: Object.values( report.outputs ).length
 	},
 	{
 		title: 'Inputs',
 		link: 'inputs',
 		icon: IconFileInput,
-		count: 86
+		count: Object.values( report.inputs ).length
 	},
 	{
 		title: 'Dependencies',
 		link: 'dependencies',
 		icon: IconShare2,
-		count: 12
+		count: Object.values( report.dependencies ).length
 	},
 	{
 		title: 'Issues',
 		link: 'issues',
 		icon: IconCircleAlert,
-		count: 1
+		count: report.issues.length
 	}
 ];
 </script>

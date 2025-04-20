@@ -21,9 +21,7 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@icon/*": ["./src/components/icon/*"],
-      "@layout/*": ["./src/components/layout/*"],
-      "@report": ["./src/report.ts"],
-      "@router": ["./src/router.ts"],
+      "@layout/*": ["./src/components/layout/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]

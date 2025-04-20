@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
 	options: Array<{
 		label: string;
