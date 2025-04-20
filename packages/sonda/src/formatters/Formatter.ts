@@ -1,7 +1,7 @@
 import { basename, dirname, format } from 'path';
 import { mkdir, writeFile } from 'fs/promises';
 import { getAllFiles } from '../utils.js';
-import type { Config } from '../Config.js';
+import type { Config } from '../config.js';
 import type { JsonReport } from '../report.js';
 
 export abstract class Formatter {

@@ -14,6 +14,7 @@ export class Config implements Required<IntegrationOptions> {
 			enabled: true,
 			format: 'html',
 			outputDir: '.sonda',
+			open: false,
 			deep: false,
 			sources: false,
 			gzip: false,
@@ -38,6 +39,10 @@ export class Config implements Required<IntegrationOptions> {
 
 	public get outputDir(): string {
 		return this.#options.outputDir;
+	}
+
+	public get open(): boolean {
+		return this.#options.open;
 	}
 
 	public get deep(): boolean {
@@ -98,6 +103,15 @@ export interface UserOptions {
 	 * @default '.sonda'
 	 */
 	outputDir?: string;
+
+	/**
+	 * Specifies whether to automatically open the report in the default program for
+	 * the given file extension (`.html` or `.json`, depending on the `format` option)
+	 * after the build process.
+	 *
+	 * @default false
+	 */
+	open?: boolean;
 
 	/**
    * Specifies whether to read the source maps of imported modules.

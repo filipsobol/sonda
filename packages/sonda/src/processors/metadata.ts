@@ -1,6 +1,6 @@
 import packageJson from 'sonda/package.json' with { type: 'json' };
 import type { JsonReport } from '../report.js';
-import type { Config } from '../Config.js';
+import type { Config } from '../config.js';
 
 export function getMetadata( config: Config ): JsonReport[ 'metadata' ] {
 	return {

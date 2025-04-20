@@ -1,3 +1,4 @@
+import open from 'tiny-open';
 import { getMetadata } from './processors/metadata.js';
 import { getInputs } from './processors/inputs.js';
 import { getOutputs } from './processors/outputs.js';
@@ -7,7 +8,7 @@ import { getAllFiles } from './utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import type { DecodedSourceMap } from '@ampproject/remapping';
-import type { Config, Integration, Format } from './Config.js';
+import type { Config, Integration, Format } from './config.js';
 import type { Formatter } from './formatters/Formatter.js';
 
 const formatters: Record<Format, new ( config: Config ) => Formatter> = {
@@ -19,7 +20,7 @@ export async function generateReport(
 	buildDir: string,
 	config: Config,
 	inputs: JsonReport[ 'inputs' ]
-): Promise<string> {
+): Promise<void> {
 	const assets = await getAllFiles( buildDir );
 
 	const data: JsonReport = {
@@ -37,7 +38,11 @@ export async function generateReport(
 
 	const formatter = new formatters[ config.format ]( config );
 
-	return formatter.write( data );
+	const path = await formatter.write( data );
+
+	if ( config.open ) {
+		open( path );
+	}
 }
 
 export interface JsonReport {

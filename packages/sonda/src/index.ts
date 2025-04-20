@@ -17,5 +17,5 @@ export {
 	type UserOptions,
 	type IntegrationOptions,
 	type Integration
-} from './Config.js';
+} from './config.js';
 

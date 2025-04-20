@@ -5,7 +5,7 @@ import { loadCodeAndMap } from 'load-source-map';
 import { mapSourceMap } from '../sourcemap/map.js';
 import { getBytesPerSource, getSizes } from '../sourcemap/bytes.js';
 import { getTypeByName, sortObjectKeys, normalizePath } from '../utils.js';
-import type { Config } from '../Config.js';
+import type { Config } from '../config.js';
 import type { CodeMap, MaybeCodeMap } from '../types.js';
 import type { Input, Output, OutputInput, JsonReport, Sizes } from '../report.js';
 

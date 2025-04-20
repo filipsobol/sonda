@@ -42,11 +42,11 @@ function getBuildDir( options: BuildOptions ): string {
 		: resolve( workingDir, options.outdir! )
 }
 
-export function processEsbuildBuild(
+export async function processEsbuildBuild(
 	buildDir: string,
 	metafile: Metafile,
 	options: Config
-): Promise<string> {
+): Promise<void> {
 	const cwd = process.cwd();
 	const inputs = Object
 		.entries( metafile.inputs )
@@ -73,7 +73,7 @@ export function processEsbuildBuild(
 			return acc;
 		}, {} as JsonReport[ 'inputs' ] );
 
-	return generateReport(
+	await generateReport(
 		buildDir,
 		options,
 		inputs

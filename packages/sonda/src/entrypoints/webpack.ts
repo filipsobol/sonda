@@ -35,9 +35,13 @@ export default class SondaWebpackPlugin {
 					continue;
 				}
 
+				// ConcatenatedModule is a special case in Webpack where multiple modules are combined into one.
+				// We only want to get the module that is the entry point for the concatenated module.
+				const module = ( mod as any).modules?.find( ( module: Module ) => module.nameForCondition() === name ) || mod;
+				
 				const imports = Array
 					// Get all the connections from the current module
-					.from( moduleGraph.getOutgoingConnections( mod ) )
+					.from( moduleGraph.getOutgoingConnections( module ) )
 
 					// Get the module name for each connection
 					.map( connection => connection.module?.nameForCondition() )
@@ -56,9 +60,9 @@ export default class SondaWebpackPlugin {
 					.filter( ( path, index, self ) => self.indexOf( path ) === index );
 
 				inputs[ normalizePath( name ) ] = {
-					bytes: mod.size() || 0,
+					bytes: module.size() || 0,
 					type: getTypeByName( name ),
-					format: getFormat( name, mod ),
+					format: getFormat( name, module ),
 					imports,
 					belongsTo: null
 				};

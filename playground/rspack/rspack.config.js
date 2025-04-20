@@ -1,6 +1,5 @@
 import { defineConfig } from '@rspack/cli';
 import Sonda from 'sonda/rspack';
-import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 
 export default defineConfig({
 	entry: './src/index.js',
