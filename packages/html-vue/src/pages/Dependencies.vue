@@ -90,7 +90,7 @@
 							:href="router.getUrl( 'inputs/details', { item: path } )"
 							class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
 						>
-							{{ path }}
+							{{ formatPath( path ) }}
 						</a>
 					</li>
 				</ul>
@@ -107,6 +107,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
+import { formatPath } from '@/format';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
