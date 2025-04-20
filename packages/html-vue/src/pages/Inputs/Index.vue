@@ -45,7 +45,7 @@
 
 		<DataTable
 			v-model="active"
-			:columns="columns"
+			:columns="COLUMNS"
 			:data="paginatedData"
 		>
 			<template #row="{ item }">
@@ -127,9 +127,7 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' },
 ];
 
-const inputs = Object.entries( report.inputs );
-
-const columns: Array<Column> = [
+const COLUMNS: Array<Column> = [
 	{
 		name: '',
 		align: 'center',
@@ -156,6 +154,8 @@ const columns: Array<Column> = [
 		width: '106px'
 	}
 ];
+
+const inputs = Object.entries( report.inputs );
 
 const data = ref(
 	inputs.map( ( [ path, input ] ) => ( {

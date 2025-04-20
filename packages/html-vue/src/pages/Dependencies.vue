@@ -21,11 +21,21 @@
 					placeholder="Filter dependencies"
 				>
 			</div>
+
+			<Dropdown
+				v-model="usedIn"
+				:options="USED_IN_OPTIONS"
+				title="Used in"
+			>
+				<template #icon>
+					<IconFunnel :size="16" />
+				</template>
+			</Dropdown>
 		</div>
 
 		<DataTable
 			v-model="active"
-			:columns="columns"
+			:columns="COLUMNS"
 			:data="paginatedData"
 		>
 			<template #row="{ item }">
@@ -90,16 +100,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
+import Dropdown from '@components/common/Dropdown.vue';
 import Pagination from '@components/common/Pagination.vue';
 import IconSearch from '@components/icon/Search.vue';
+import IconFunnel from '@components/icon/Funnel.vue';
 
 const ITEMS_PER_PAGE = 12;
 
-const columns: Array<Column> = [
+const USED_IN_OPTIONS = Object
+	.keys( report.outputs )
+	.map( output => ( {
+		label: output,
+		value: output
+	} ) );
+
+const COLUMNS: Array<Column> = [
 	{ name: 'Name', align: 'left' }
 ];
 
@@ -135,13 +154,16 @@ const data = ref(
 );
 
 const search = computed( router.computedQuery( 'search', '' ) );
+const usedIn = computed( router.computedQuery( 'formats', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 const active = computed( router.computedQuery( 'active', '' ) );
 
 const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
-	return data.value.filter( item => item.id.toLowerCase().includes( lowercaseSearch ) );
+	return data.value
+		.filter( item => item.id.toLowerCase().includes( lowercaseSearch ) )
+		.filter( item => !usedIn.value.length || item.usedIn.some( path => usedIn.value.includes( path ) ) );
 } );
 
 const paginatedData = computed( () => {
@@ -149,5 +171,13 @@ const paginatedData = computed( () => {
 	const end = start + ITEMS_PER_PAGE;
 
 	return filteredData.value.slice( start, end );
+} );
+
+watch( [ search, usedIn, currentPage ], () => {
+	active.value = '';
+} );
+
+watch( [ search, usedIn ], () => {
+	currentPage.value = 1;
 } );
 </script>
