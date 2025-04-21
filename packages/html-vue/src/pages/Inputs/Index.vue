@@ -3,7 +3,7 @@
 		<h2 class="text-2xl font-bold">Input files</h2>
 
 		<p class="text-gray-500 mt-4">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt purus non hendrerit commodo. Nunc sit amet nisi vel sapien feugiat egestas in eu ligula. Mauris iaculis maximus nisi, at viverra velit sodales nec. Nunc placerat, erat eu consectetur pulvinar, lorem odio rutrum purus, et bibendum ex velit id erat. Fusce nec pellentesque orci, pretium placerat elit. Pellentesque accumsan et turpis ut porttitor. Suspendisse tincidunt ut leo ac finibus. Proin viverra consectetur est.
+			List of input (source) files used in the generated bundles. This includes all internal files in your project as well as external files from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code>.
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">

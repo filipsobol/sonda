@@ -3,7 +3,7 @@
 		<h2 class="text-2xl font-bold">Dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of all external dependencies used in your project. Click the button next to a dependency name to see:
+			List of external dependencies used in the generated bundles. Click the button next to a dependency name to see:
 		</p>
 
 		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
