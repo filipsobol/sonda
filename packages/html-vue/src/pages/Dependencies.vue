@@ -3,14 +3,14 @@
 		<h2 class="text-2xl font-bold">Dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of all external dependencies used in your project. Click the button next to a dependency to see:
-
-			<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
-				<li><span class="font-bold">Paths</span>: Relative path to the dependency. If there's more than one path, the dependency is likely duplicated, which could <span class="underline">lead to increased bundle size</span>.</li>
-				<li><span class="font-bold">Used in</span>: Assets that include this dependency.</li>
-				<li><span class="font-bold">Imported by</span>: Inputs that imported given dependency, which are also the reason it got bundled.</li>
-			</ul>
+			List of all external dependencies used in your project. Click the button next to a dependency name to see:
 		</p>
+
+		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
+			<li><span class="font-bold">Paths</span>: Relative path to the dependency. If there's more than one path, the dependency is likely duplicated, which can <span class="underline">increase the bundle size</span>.</li>
+			<li><span class="font-bold">Used in</span>: Assets containing this dependency. If this value is empty, it means that the dependency has been tree-shaken.</li>
+			<li><span class="font-bold">Imported by</span>: Inputs importing this dependency, which are also the reason the dependency was bundled.</li>
+		</ul>
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
