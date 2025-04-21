@@ -29,7 +29,7 @@ export default function SondaNuxtPlugin( userOptions: UserOptions = {} ): NuxtMo
 
       // Add the Sonda plugin to the Vite configuration
       config.plugins ??= [];
-      config.plugins.push( VitePlugin( sondaOptions ) );
+      config.plugins.push( VitePlugin( sondaOptions ) as any );
     } )
   }
 }

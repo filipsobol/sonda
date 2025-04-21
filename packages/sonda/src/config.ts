@@ -202,7 +202,9 @@ export type Integration =
 	'esbuild' |
 	'next' |
 	'nuxt' |
+	'rolldown' |
 	'rollup' |
+	'rspack' |
 	'sveltekit' |
 	'vite' |
 	'webpack' |
