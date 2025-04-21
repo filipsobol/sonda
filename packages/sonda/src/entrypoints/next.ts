@@ -1,4 +1,4 @@
-import SondaWebpack from './webpack';
+import SondaWebpack from './webpack.js';
 import { Config, type UserOptions } from '../index.js';
 import type { NextConfig } from 'next';
 

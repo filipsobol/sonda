@@ -1,4 +1,4 @@
-import VitePlugin from './vite';
+import VitePlugin from './vite.js';
 import { Config, type UserOptions } from '../index.js';
 import type { NuxtModule, Nuxt } from '@nuxt/schema';
 

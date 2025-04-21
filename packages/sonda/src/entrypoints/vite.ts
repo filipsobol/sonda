@@ -1,4 +1,4 @@
-import RollupPlugin from './rollup';
+import RollupPlugin from './rollup.js';
 import { Config, type UserOptions } from '../index.js';
 import type { PluginOption } from 'vite';
 

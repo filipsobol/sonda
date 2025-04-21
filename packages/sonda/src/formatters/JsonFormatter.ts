@@ -1,5 +1,5 @@
-import { Formatter } from './Formatter';
-import type { JsonReport } from '../report';
+import { Formatter } from './Formatter.js';
+import type { JsonReport } from '../report.js';
 
 export class JsonFormatter extends Formatter {
 	protected extension = '.json';

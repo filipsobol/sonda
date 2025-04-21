@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { readFile } from 'fs/promises';
-import { Formatter } from './Formatter';
-import type { JsonReport } from '../report';
+import { Formatter } from './Formatter.js';
+import type { JsonReport } from '../report.js';
 
 export class HtmlFormatter extends Formatter {
 	protected extension = '.html';
