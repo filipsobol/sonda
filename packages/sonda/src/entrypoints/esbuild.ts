@@ -1,13 +1,11 @@
-import { dirname, resolve } from 'path';
+import { resolve } from 'path';
 import {
-	generateReport,
-	addSourcesToInputs,
-	getTypeByName,
 	Config,
-	type UserOptions,
-	type JsonReport
+	Report,
+	getTypeByName,
+	type UserOptions
 } from '../index.js';
-import type { BuildOptions, Metafile, Plugin } from 'esbuild';
+import type { Metafile, Plugin } from 'esbuild';
 
 export default function SondaEsbuildPlugin( userOptions: UserOptions = {} ): Plugin {
 	const options = new Config( userOptions, {
@@ -23,59 +21,29 @@ export default function SondaEsbuildPlugin( userOptions: UserOptions = {} ): Plu
 
 			build.initialOptions.metafile = true;
 
-			build.onEnd( async result => {
-				await processEsbuildBuild(
-					getBuildDir( build.initialOptions ),
-					result.metafile!,
-					options
-				);
-			} );
+			build.onEnd( result => processEsbuildBuild( result.metafile!, options ) );
 		}
 	};
 }
 
-function getBuildDir( options: BuildOptions ): string {
-	const workingDir = options.absWorkingDir || process.cwd();
-
-	return options.outfile
-		? dirname( resolve( workingDir, options.outfile ) )
-		: resolve( workingDir, options.outdir! )
-}
-
 export async function processEsbuildBuild(
-	buildDir: string,
 	metafile: Metafile,
 	options: Config
 ): Promise<void> {
+	const report = new Report( options );
 	const cwd = process.cwd();
-	const inputs = Object
-		.entries( metafile.inputs )
-		.reduce( ( acc, [ path, data ] ) => {
-			acc[ path ] = {
-				bytes: data.bytes,
-				type: getTypeByName( path ),
-				format: data.format ?? 'unknown',
-				imports: data.imports.map( data => data.path ),
-				belongsTo: null,
-			};
 
-			/**
-			 * Because esbuild already reads the existing source maps, there may be
-			 * cases where some report "outputs" include "inputs" that don't exist
-			 * in the main "inputs" object. To avoid this, we parse each esbuild
-			 * input and add its sources to the "inputs" object.
-			 */
-			addSourcesToInputs(
-				resolve( cwd, path ),
-				acc
-			);
+	for ( const [ path, data ] of Object.entries( metafile.inputs ) ) {
+		report.addInput( path, {
+			bytes: data.bytes,
+			type: getTypeByName( path ),
+			format: data.format ?? 'unknown',
+			imports: data.imports.map( data => data.path ).filter( path => !path.startsWith( 'data:' ) ),
+			belongsTo: null,
+		} );
+	};
 
-			return acc;
-		}, {} as JsonReport[ 'inputs' ] );
-
-	await generateReport(
-		buildDir,
-		options,
-		inputs
+	await report.generate(
+		Object.keys( metafile!.outputs ).map( path => resolve( cwd, path ) )
 	);
 }

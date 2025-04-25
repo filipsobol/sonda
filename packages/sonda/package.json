@@ -62,11 +62,11 @@
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
     "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rolldown -c && tsc",
-    "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html"
+    "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html",
+    "watch": "rolldown -w -c"
   },
   "dependencies": {
     "@ampproject/remapping": "^2.3.0",
-    "@jridgewell/sourcemap-codec": "^1.5.0",
     "tiny-open": "^1.2.0"
   },
   "devDependencies": {

@@ -1,3 +1,5 @@
+import type { SourcesPathNormalizer } from 'load-source-map';
+
 export class Config implements Required<IntegrationOptions> {
 	#options: Required<IntegrationOptions>;
 
@@ -21,7 +23,7 @@ export class Config implements Required<IntegrationOptions> {
 			brotli: false,
 			server: false,
 			filename: 'sonda',
-			sourcesPathNormalizer: null,
+			sourcesPathNormalizer: null
 		}, defaults, options );
 	}
 
@@ -73,12 +75,16 @@ export class Config implements Required<IntegrationOptions> {
 		return this.#options.filename;
 	}
 
-	public get sourcesPathNormalizer(): ( ( path: string ) => string ) | null {
+	public get sourcesPathNormalizer(): SourcesPathNormalizer {
 		return this.#options.sourcesPathNormalizer;
 	}
 
 	public set filename( filename: string ) {
 		this.#options.filename = filename;
+	}
+
+	public set sourcesPathNormalizer( normalizer: SourcesPathNormalizer ) {
+		this.#options.sourcesPathNormalizer = normalizer;
 	}
 }
 
@@ -191,7 +197,7 @@ export interface IntegrationOptions extends UserOptions {
 	 *
 	 * @default null
 	 */
-	sourcesPathNormalizer?: ( ( path: string ) => string ) | null;
+	sourcesPathNormalizer?: SourcesPathNormalizer;
 }
 
 export type Format = 'html' | 'json';

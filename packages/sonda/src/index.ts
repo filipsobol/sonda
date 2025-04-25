@@ -1,5 +1,5 @@
 export {
-	generateReport,
+	Report,
 	type JsonReport,
 	type Metadata,
 	type Input,
@@ -9,7 +9,6 @@ export {
 	type ModuleFormat,
 	type Sizes
 } from './report.js';
-export { addSourcesToInputs } from './sourcemap/map.js';
 export { normalizePath, getTypeByName } from './utils.js';
 
 export {

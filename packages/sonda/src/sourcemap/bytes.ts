@@ -1,9 +1,9 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
-import type { Sizes } from '../report.js';
 import type { Config } from '../config.js';
+import type { Sizes, Metadata } from '../report.js';
 
-const UNASSIGNED = '[unassigned]';
+export const UNASSIGNED = '[unassigned]';
 
 export function getBytesPerSource(
 	code: string,
@@ -75,7 +75,7 @@ export function getBytesPerSource(
 
 export function getSizes(
 	code: string,
-	config: Config
+	config: Config | Metadata
 ): Sizes {
 	return {
 		uncompressed: Buffer.byteLength( code ),

@@ -1,47 +1,134 @@
+import { version } from 'sonda/package.json' with { type: 'json' };
 import open from 'tiny-open';
-import { getMetadata } from './processors/metadata.js';
-import { getInputs } from './processors/inputs.js';
-import { getOutputs } from './processors/outputs.js';
-import { getDependencies } from './processors/dependencies.js';
-import { getIssues } from './processors/issues.js';
-import { getAllFiles } from './utils.js';
+import { sortObjectKeys } from './utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
+import { updateOutputs } from './processors/outputs.js';
+import { updateInputs } from './processors/inputs.js';
+import { updateDependencies } from './processors/dependencies.js';
 import type { DecodedSourceMap } from '@ampproject/remapping';
-import type { Config, Integration, Format } from './config.js';
 import type { Formatter } from './formatters/Formatter.js';
+import type { Config, Integration, Format } from './config.js';
 
 const formatters: Record<Format, new ( config: Config ) => Formatter> = {
 	'html': HtmlFormatter,
 	'json': JsonFormatter
 };
 
-export async function generateReport(
-	buildDir: string,
-	config: Config,
-	inputs: JsonReport[ 'inputs' ]
-): Promise<void> {
-	const assets = await getAllFiles( buildDir );
+export class Report implements JsonReport {
+	#config: Config;
+	#metadata: Metadata;
+	#inputs: Record<string, Input>;
+	#outputs: Record<string, Output>;
+	#dependencies: Record<string, Array<string>>;
+	#issues: Array<Issue>;
 
-	const data: JsonReport = {
-		metadata: getMetadata( config ),
-		inputs: {},
-		outputs: {},
-		dependencies: {},
-		issues: []
-	};
+	constructor( config: Config ) {
+		this.#config = config;
 
-	data.inputs = getInputs( inputs );
-	data.outputs = await getOutputs( assets, inputs, config );
-	data.dependencies = getDependencies( data );
-	data.issues = getIssues( data );
+		this.#metadata = {
+			version,
+			integration: config.integration,
+			sources: config.sources,
+			gzip: config.gzip,
+			brotli: config.brotli
+		};
 
-	const formatter = new formatters[ config.format ]( config );
+		this.#inputs = {};
+		this.#outputs = {};
+		this.#dependencies = {};
+		this.#issues = [];
+	}
 
-	const path = await formatter.write( data );
+	addInput( name: string, input: Input ): void {
+		this.#inputs[ name ] = input;
+	}
 
-	if ( config.open ) {
-		open( path );
+	addOutput( name: string, output: Output ): void {
+		this.#outputs[ name ] = output;
+	}
+
+	addDependency( name: string, path: string ): void {
+		const paths = this.#dependencies[ name ] ??= [];
+
+		if ( paths.includes( path ) ) {
+			return;
+		}
+
+		paths.push( path );
+
+		// If the dependency has more than one path, it's likely duplicated and bundled in multiple copies.
+		// Only add the issue on the second path, to avoid duplicates, if there are more than two paths.
+		if ( paths.length === 2 ) {
+			this.#addIssue( {
+				type: 'duplicate-dependency',
+				data: { name }
+			} );
+		}
+	}
+
+	#addIssue( issue: Issue ): void {
+		this.#issues.push( issue );
+	}
+
+	get config(): Config {
+		return this.#config;
+	}
+
+	get metadata(): Metadata {
+		return this.#metadata;
+	}
+
+	get inputs(): Record<string, Input> {
+		return this.#inputs;
+	}
+
+	get outputs(): Record<string, Output> {
+		return this.#outputs;
+	}
+
+	get dependencies(): Record<string, Array<string>> {
+		return this.#dependencies;
+	}
+
+	get issues(): Array<Issue> {
+		return this.#issues;
+	}
+
+	getInput( name: string ): Input | undefined {
+		return this.#inputs[ name ];
+	}
+
+	getOutput( name: string ): Output | undefined {
+		return this.#outputs[ name ];
+	}
+
+	removeInput( name: string ): void {
+		delete this.#inputs[ name ];
+	}
+
+	async generate( assets: Array<string> ): Promise<void> {
+		await updateOutputs( this, assets );
+		updateInputs( this );
+		updateDependencies( this );
+
+		const config = this.#config;
+		const formatter = new formatters[ config.format ]( config );
+		const path = await formatter.write( this.#getData() );
+
+		if ( config.open ) {
+			await open( path );
+		}
+	}
+
+	#getData(): JsonReport {
+		return {
+			metadata: this.#metadata,
+			inputs: sortObjectKeys( this.#inputs ),
+			outputs: sortObjectKeys( this.#outputs ),
+			dependencies: sortObjectKeys( this.#dependencies ),
+			issues: this.#issues
+		};
 	}
 }
 

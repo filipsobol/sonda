@@ -49,11 +49,10 @@ export default async function SondaAngular( {
     // Replace the "[project]" token with the current project name
     sondaOptions.filename = sondaOptions.filename.replace( '[project]', project );
 
-    await processEsbuildBuild(
-      paths.base,
-      metafile,
-      sondaOptions
-    );
+    // Resolve the source map paths relative to the current working directory, not the path of the file itself
+    sondaOptions.sourcesPathNormalizer = ( path: string ) => resolve( process.cwd(), path );
+
+    await processEsbuildBuild( metafile, sondaOptions );
   }
 }
 

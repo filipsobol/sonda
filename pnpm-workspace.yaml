@@ -5,6 +5,7 @@ onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
   - esbuild
+  - rolldown
 ignoredBuiltDependencies:
   - protobufjs
   - lmdb
