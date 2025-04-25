@@ -42,8 +42,8 @@ importers:
   packages/html-kit:
     dependencies:
       lucide-svelte:
-        specifier: ^0.501.0
-        version: 0.501.0(svelte@5.28.2)
+        specifier: ^0.503.0
+        version: 0.503.0(svelte@5.28.2)
     devDependencies:
       '@sveltejs/adapter-static':
         specifier: ^3.0.8
@@ -7396,8 +7396,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-svelte@0.501.0:
-    resolution: {integrity: sha512-I/Z/iiTxPMX/JsyhhP2W8h+M6xF2w/7RMSxoSYme6WYZpb2mn9+wvP4IrvfyNtvnvYww+wvG0liEim07jSUoLQ==}
+  lucide-svelte@0.503.0:
+    resolution: {integrity: sha512-oT1idMbgJKCCLWI4U7bdUYUZqxS78fiTGJuKGZ5u0NJNyuiUErDu3G7sXkYpfDwwspeid7gZSjrlJbTINEfErw==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
 
@@ -12365,10 +12365,6 @@ snapshots:
       '@ckeditor/ckeditor5-ui': 45.0.0
       '@ckeditor/ckeditor5-utils': 45.0.0
       ckeditor5: 45.0.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
 
   '@ckeditor/ckeditor5-collaboration-core@45.0.0':
     dependencies:
@@ -12435,10 +12431,6 @@ snapshots:
       '@ckeditor/ckeditor5-upload': 45.0.0
       '@ckeditor/ckeditor5-utils': 45.0.0
       ckeditor5: 45.0.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
 
   '@ckeditor/ckeditor5-editor-balloon@45.0.0':
     dependencies:
@@ -19223,7 +19215,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-svelte@0.501.0(svelte@5.28.2):
+  lucide-svelte@0.503.0(svelte@5.28.2):
     dependencies:
       svelte: 5.28.2
 
