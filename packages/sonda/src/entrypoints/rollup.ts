@@ -1,13 +1,18 @@
-import { resolve, dirname, extname } from 'path';
+import { extname, resolve, dirname } from 'path';
 import {
 	Config,
-	Report,
+	ReportProducer,
 	getTypeByName,
 	normalizePath,
-	type ModuleFormat,
-	type UserOptions
+	type UserOptions,
+	type ModuleFormat
 } from '../index.js';
-import type { Plugin, ModuleInfo, NormalizedOutputOptions, OutputBundle } from 'rollup';
+import type {
+	Plugin,
+	ModuleInfo,
+	OutputBundle,
+	NormalizedOutputOptions
+} from 'rollup';
 
 export default function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 	const options = new Config( userOptions, {
@@ -18,7 +23,7 @@ export default function SondaRollupPlugin( userOptions: UserOptions = {} ): Plug
 		return { name: 'sonda-rollup' };
 	}
 
-	const report = new Report( options );
+	const report = new ReportProducer( options );
 
 	return {
 		name: 'sonda-rollup',
@@ -26,13 +31,23 @@ export default function SondaRollupPlugin( userOptions: UserOptions = {} ): Plug
 		moduleParsed( module: ModuleInfo ) {
 			const name = normalizePath( module.id );
 
-			report.addInput( name, {
-				bytes: module.code ? Buffer.byteLength( module.code ) : 0,
-				type: getTypeByName( module.id ),
-				format: getFormat( name, module ),
-				imports: module.importedIds.map( id => normalizePath( id ) ),
-				belongsTo: null,
+			report.resources.push( {
+				kind: 'source',
+				name,
+				type: getTypeByName( name ),
+				format: getModuleFormat( name, module ),
+				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0,
+				gzip: 0,
+				brotli: 0,
+				parent: null,
+				content: options.sources ? module.code : null,
+				mappings: null,
 			} );
+
+			module.importedIds.forEach( id => report.edges.push( {
+				source: name,
+				target: normalizePath( id )
+			} ) );
 		},
 
 		async writeBundle(
@@ -50,16 +65,14 @@ export default function SondaRollupPlugin( userOptions: UserOptions = {} ): Plug
 	};
 }
 
-function getFormat( name: string, module: ModuleInfo ): ModuleFormat {
+function getModuleFormat( name: string, module: ModuleInfo ): ModuleFormat | null {
 	if ( getTypeByName( name ) !== 'script' ) {
-		return 'unknown';
+		return null;
 	}
 
 	const ext = extname( module.id );
 
-	if ( module.meta.commonjs?.isCommonJS === true || ext === '.cjs' || ext === '.cts' ) {
-		return 'cjs';
-	}
-
-	return'esm';
+	return module.meta.commonjs?.isCommonJS === true || ext === '.cjs' || ext === '.cts'
+		? 'cjs'
+		: 'esm';
 }

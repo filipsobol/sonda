@@ -1,8 +1,8 @@
 import { basename, dirname, format } from 'path';
 import { mkdir, writeFile } from 'fs/promises';
-import { getAllFiles } from '../utils.js';
-import type { Config } from '../config.js';
-import type { JsonReport } from '../report.js';
+import { getAllFiles } from '../../utils.js';
+import type { Config } from '../../config.js';
+import type { JsonReport } from '../producer.js';
 
 export abstract class Formatter {
 	protected config: Config;

@@ -1,15 +1,25 @@
 export {
-	Report,
+	ReportProducer,
 	type JsonReport,
 	type Metadata,
-	type Input,
-	type Output,
-	type OutputInput,
-	type SourceType,
+	type Resource,
+	type Edge,
+	type Dependency,
+	type Issue,
+	type ResourceKind,
+	type FileType,
 	type ModuleFormat,
-	type Sizes
-} from './report.js';
-export { normalizePath, getTypeByName } from './utils.js';
+	type SourceResource,
+	type AssetResource,
+	type ChunkResource,
+	type SourceMapResource
+} from './report/producer.js';
+
+export {
+	normalizePath,
+	getTypeByName,
+	parseSourceMap
+} from './utils.js';
 
 export {
 	Config,

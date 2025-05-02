@@ -1,8 +1,10 @@
 import { readdir, access } from 'fs/promises';
-import { relative, win32, posix, extname, join } from 'path';
-import type { SourceType } from './report.js';
+import { relative, win32, posix, extname, join, resolve } from 'path';
+import { loadCodeAndMap } from 'load-source-map';
+import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
+import type { FileType } from './report/producer.js';
 
-export const extensions: Record<string, SourceType> = {
+export const extensions: Record<string, FileType> = {
 	// Scripts
 	'.js': 'script',
 	'.jsx': 'script',
@@ -69,17 +71,25 @@ export function normalizePath( pathToNormalize: string ): string {
 /**
  * Returns the type of a given file based on its name.
  */
-export function getTypeByName( name: string ): SourceType {
-	return extensions[ extname( name ) ] ?? 'unknown';
+export function getTypeByName( name: string ): FileType {
+	return extensions[ extname( name ) ] ?? 'other';
 }
 
 /**
- * Sorts the keys of an object in alphabetical order.
+ * Returns only the object keys which have a string value.
  */
-export function sortObjectKeys<T>(object: Record<string, T>): Record<string, T> {
-  return Object.fromEntries(
-    Object.entries( object ).sort( ( [ a ], [ b ] ) => a.localeCompare( b ) )
-  );
+type StringKeys<T> = keyof {
+  [P in keyof T as T[P] extends string ? P : never]: unknown
+};
+
+/**
+ * Sort an array of objects by a specific key.
+ */
+export function sortByKey<
+	T extends object,
+	K extends StringKeys<T>
+>( data: Array<T>, key: K ): Array<T> {
+	return data.toSorted( ( a, b ) => ( a[ key ] as string ).localeCompare( b[ key ] as string ));
 }
 
 /**
@@ -102,4 +112,36 @@ export async function getAllFiles( dir: string, recursive = true ): Promise<stri
 		// Directory does not exist or is inaccessible
 		return [];
 	}
+}
+
+/**
+ * Parse the source map. If `options.deep` is set to `true`, it will
+ * recursively load the source maps of the sources until it finds
+ * the original source. Otherwise, it will only decode the source map.
+ */
+export function parseSourceMap(
+	map: EncodedSourceMap,
+	deep: boolean = false
+): DecodedSourceMap {
+	const alreadyRemapped = new Set<string>();
+
+	return remapping( map, ( file, ctx ) => {
+		if ( !deep || alreadyRemapped.has( file ) ) {
+			return;
+		}
+
+		alreadyRemapped.add( file );
+
+		// TODO: Update how path is resolved.
+		// Replace `process.cwd()` with `dirPath`?
+		const codeMap = loadCodeAndMap( resolve( process.cwd(), file ) );
+
+		if ( !codeMap ) {
+			return;
+		}
+
+		ctx.content ??= codeMap.code;
+
+		return codeMap.map;
+	}, { decodedMappings: true } ) as DecodedSourceMap;
 }

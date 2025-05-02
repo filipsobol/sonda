@@ -1,32 +1,32 @@
 import { join, resolve } from 'path';
 import {
-	Config,
-	Report,
-	getTypeByName,
-	normalizePath,
-	type ModuleFormat,
-	type UserOptions,
+  Config,
+  ReportProducer,
+  getTypeByName,
+  normalizePath,
+  type ModuleFormat,
+  type UserOptions
 } from '../index.js';
 import { UNASSIGNED } from '../sourcemap/bytes.js';
 import type { Compiler, Module } from 'webpack';
 
 export default class SondaWebpackPlugin {
-	options: Config;
+  options: Config;
 
-	constructor ( userOptions: UserOptions = {} ) {
-		this.options = new Config( userOptions, {
-			integration: 'webpack'
-		} );
-	}
+  constructor( userOptions: UserOptions = {} ) {
+    this.options = new Config( userOptions, {
+      integration: 'webpack'
+    } );
+  }
 
-	apply( compiler: Compiler ): void {
-		if ( !this.options.enabled ) {
-			return;
-		}
+  apply( compiler: Compiler ): void {
+    if ( !this.options.enabled ) {
+      return;
+    }
 
-		const report = new Report( this.options );
+    const report = new ReportProducer( this.options );
 
-		const namespace = compiler.options.output.devtoolNamespace
+    const namespace = compiler.options.output.devtoolNamespace
 			|| compiler.options.output.library?.name
 			|| '[^/]+/';
 
@@ -48,9 +48,9 @@ export default class SondaWebpackPlugin {
 		 * - (?:${ namespace })? - Non-capturing group that matches the optional namespace
 		 * - ([^?]*) - Matches the path, which is everything up to the first "?" (if present)
 		 */
-		const sourceMapFilenameRegex = new RegExp( `(?:webpack://)?(?:${ namespace })?([^?]*)` );
+    const sourceMapFilenameRegex = new RegExp( `(?:webpack://)?(?:${ namespace })?([^?]*)` );
 
-		compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', async ( compilation ) => {
+    compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', async compilation => {
 			for ( const mod of compilation.modules ) {
 				const name = mod.nameForCondition();
 
@@ -61,8 +61,22 @@ export default class SondaWebpackPlugin {
 				// ConcatenatedModule is a special case in Webpack where multiple modules are combined into one.
 				// We only want to get the module that is the entry point for the concatenated module.
 				const module = ( mod as any).modules?.find( ( module: Module ) => module.nameForCondition() === name ) || mod;
-				
-				const imports = Array
+				const normalized = normalizePath( name );
+
+				report.resources.push( {
+					kind: 'source',
+					name: normalized,
+					type: getTypeByName( normalized ),
+					format: getFormat( normalized, module ),
+					uncompressed: module.size(),
+					gzip: 0,
+					brotli: 0,
+					parent: null,
+					content: this.options.sources && module.originalSource()?.source().toString() || null,
+					mappings: null
+				} );
+
+				Array
 					// Get all the connections from the current module
 					.from( compilation.moduleGraph.getOutgoingConnections( module ) )
 
@@ -80,15 +94,10 @@ export default class SondaWebpackPlugin {
 					.map( path => normalizePath( path ) )
 
 					// Remove duplicates
-					.filter( ( path, index, self ) => self.indexOf( path ) === index );
-				
-				report.addInput( normalizePath( name ), {
-					bytes: module.size() || 0,
-					type: getTypeByName( name ),
-					format: getFormat( name, module ),
-					imports,
-					belongsTo: null
-				} );
+					.filter( ( path, index, self ) => self.indexOf( path ) === index )
+
+					// Add connection to the report
+					.forEach( target => report.edges.push( { source: normalized, target } ) );
 			}
 
 			const assets = Object
@@ -103,26 +112,22 @@ export default class SondaWebpackPlugin {
 
 				const [ , filePath ] = path.match( sourceMapFilenameRegex )!;
 
-				if ( filePath ) {
-					return resolve( process.cwd(), filePath );
-				}
-
-				return UNASSIGNED;
+				return filePath
+					? resolve( process.cwd(), filePath )
+					: UNASSIGNED;
 			}
 
 			await report.generate( assets );
 		} );
-	}
+  }
 }
 
-function getFormat( name: string, module: Module ): ModuleFormat {
+function getFormat( name: string, module: Module ): ModuleFormat | null {
 	if ( getTypeByName( name ) !== 'script' ) {
-		return 'unknown';
-	}
+    return null;
+  }
 
-	if ( module.type === 'javascript/esm' ) {
-		return 'esm';
-	}
-
-	return 'cjs';
+	return module.type === 'javascript/esm'
+		? 'esm'
+		: 'cjs';
 }

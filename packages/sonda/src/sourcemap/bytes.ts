@@ -1,7 +1,7 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
 import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
 import type { Config } from '../config.js';
-import type { Sizes, Metadata } from '../report.js';
+import type { Sizes, Metadata } from '../report/producer.js';
 
 export const UNASSIGNED = '[unassigned]';
 
