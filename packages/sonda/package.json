@@ -63,7 +63,7 @@
     "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rolldown -c && tsc",
     "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html",
-    "watch": "rolldown -w -c"
+    "dev": "rolldown -w -c"
   },
   "dependencies": {
     "@ampproject/remapping": "^2.3.0",

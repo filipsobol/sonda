@@ -1,8 +1,6 @@
 import { readdir, access } from 'fs/promises';
-import { relative, win32, posix, extname, join, resolve } from 'path';
-import { loadCodeAndMap } from 'load-source-map';
-import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
-import type { FileType } from './report/producer.js';
+import { relative, win32, posix, extname, join } from 'path';
+import type { FileType } from './report/types.js';
 
 export const extensions: Record<string, FileType> = {
 	// Scripts
@@ -112,36 +110,4 @@ export async function getAllFiles( dir: string, recursive = true ): Promise<stri
 		// Directory does not exist or is inaccessible
 		return [];
 	}
-}
-
-/**
- * Parse the source map. If `options.deep` is set to `true`, it will
- * recursively load the source maps of the sources until it finds
- * the original source. Otherwise, it will only decode the source map.
- */
-export function parseSourceMap(
-	map: EncodedSourceMap,
-	deep: boolean = false
-): DecodedSourceMap {
-	const alreadyRemapped = new Set<string>();
-
-	return remapping( map, ( file, ctx ) => {
-		if ( !deep || alreadyRemapped.has( file ) ) {
-			return;
-		}
-
-		alreadyRemapped.add( file );
-
-		// TODO: Update how path is resolved.
-		// Replace `process.cwd()` with `dirPath`?
-		const codeMap = loadCodeAndMap( resolve( process.cwd(), file ) );
-
-		if ( !codeMap ) {
-			return;
-		}
-
-		ctx.content ??= codeMap.code;
-
-		return codeMap.map;
-	}, { decodedMappings: true } ) as DecodedSourceMap;
 }
