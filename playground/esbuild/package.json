@@ -11,7 +11,7 @@
     "ckeditor5": "45.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.25.2",
+    "esbuild": "^0.25.3",
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^"
   }
