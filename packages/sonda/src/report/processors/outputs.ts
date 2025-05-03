@@ -29,29 +29,29 @@ export function updateOutputs(
 		const { code, map } = getSource( type, asset, report.config );
 		const sizes = getSizes( code, report.metadata );
 		const sourcesSizes = map ? getBytesPerSource( code, map, sizes, report.config ) : [];
+		const sourcemap = report.config.sources && map
+			? { mappings: map.mappings, sources: map.sources, sourcesContent: map.sourcesContent }
+			: null
 
 		report.resources.push( {
 			kind: 'asset',
 			name: assetName,
 			type,
-			format: null,
 			...sizes,
-			parent: null,
-			content: report.config.sources ? code : null,
-			mappings: report.config.sources && map?.mappings ? JSON.stringify( map?.mappings ) : null
+			sourcemap
 		} );
 
 		for ( const [ source, sizes ] of sourcesSizes ) {
 			const sourceName = normalizePath( source );
+			const existingSource = report.resources.find( resource => resource.name === sourceName );
+
 			report.resources.push( {
 				kind: 'chunk',
 				name: sourceName,
 				type: getTypeByName( source ),
-				format: null,
+				format: existingSource?.format || null,
 				...sizes,
-				parent: assetName,
-				content: report.config.sources && map!.sourcesContent?.[ map!.sources.indexOf( source ) ] || null,
-				mappings: null
+				parent: assetName
 			} );
 
 			report.edges.push( {

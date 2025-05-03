@@ -68,12 +68,7 @@ export default class SondaWebpackPlugin {
 					name: normalized,
 					type: getTypeByName( normalized ),
 					format: getFormat( normalized, module ),
-					uncompressed: module.size(),
-					gzip: 0,
-					brotli: 0,
-					parent: null,
-					content: this.options.sources && module.originalSource()?.source().toString() || null,
-					mappings: null
+					uncompressed: module.size()
 				} );
 
 				Array

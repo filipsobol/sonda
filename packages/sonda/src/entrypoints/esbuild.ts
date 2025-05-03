@@ -1,5 +1,3 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
 import {
   Config,
   ReportProducer,
@@ -33,32 +31,16 @@ export async function processEsbuildBuild(
 	options: Config
 ): Promise<void> {
   const report = new ReportProducer( options );
-  const cwd = process.cwd();
 
   for ( const [ path, input ] of Object.entries( metafile.inputs ) ) {
 		const name = normalizePath( path );
-    const type = getTypeByName( path );
-    let content: string | null = null;
-
-    if ( options.sources ) {
-      try {
-        content = readFileSync( resolve( cwd, path ), 'utf8' );
-      } catch {
-        content = null;
-      }
-    }
 
     report.resources.push( {
 			kind: 'source',
       name,
-      type,
+      type: getTypeByName( path ),
       format: input.format || null,
-      uncompressed: input.bytes,
-      gzip: 0,
-      brotli: 0,
-      parent: null,
-      content,
-      mappings: null
+      uncompressed: input.bytes
     } );
 
 		input.imports.forEach( imp => report.edges.push( {

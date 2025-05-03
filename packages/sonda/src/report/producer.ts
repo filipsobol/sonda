@@ -133,11 +133,10 @@ export interface SourceResource extends ResourceBase {
 	type: FileType;
 	format: ModuleFormat | null;
 	uncompressed: number;
-	gzip: 0;
-	brotli: 0;
-	parent: null;
-	content: string | null;
-	mappings: null;
+	gzip?: never;
+	brotli?: never;
+	parent?: never;
+	sourcemap?: never;
 }
 
 /**
@@ -149,13 +148,12 @@ export interface AssetResource extends ResourceBase {
 	kind: 'asset'
 	name: string;
 	type: FileType;
-	format: null;
+	format?: never;
 	uncompressed: number;
 	gzip: number;
-	brotli: number;
-	parent: null;
-	content: string | null;
-	mappings: string | null;
+	brotli?: number;
+	parent?: never;
+	sourcemap: Record<string, any> | null;
 }
 
 /**
@@ -174,8 +172,7 @@ export interface ChunkResource extends ResourceBase {
 	gzip: number;
 	brotli: number;
 	parent: string;
-	content: string | null;
-	mappings: null;
+	sourcemap?: never;
 }
 
 /**
@@ -186,13 +183,12 @@ export interface SourceMapResource extends ResourceBase {
 	kind: 'sourcemap';
 	name: string;
 	type: FileType;
-	format: ModuleFormat | null;
+	format?: never;
 	uncompressed: number;
 	gzip: number;
 	brotli: number;
 	parent: string;
-	content: string | null;
-	mappings: null;
+	sourcemap?: never;
 }
 
 export interface ResourceBase {
@@ -216,7 +212,7 @@ export interface ResourceBase {
 	/**
 	 * Format of the module, if the resource type is `script`.
 	 */
-	format: ModuleFormat | null;
+	format?: ModuleFormat | null;
 
 	/**
 	 * Size of the resource without any compression.
@@ -228,14 +224,14 @@ export interface ResourceBase {
 	 * 
 	 * This value is only available when the `gzip` option is enabled.
 	 */
-	gzip: number;
+	gzip?: number;
 
 	/**
 	 * Size of the resource after Brotli compression.
 	 * 
 	 * This value is only available when the `brotli` option is enabled.
 	 */
-	brotli: number;
+	brotli?: number;
 
 	/**
 	 * Parent of the resource.
@@ -246,24 +242,17 @@ export interface ResourceBase {
 	 * If the `source` is `sourcemap`, this resource is a part of the source
 	 * map of other resource and value of `parent` is the name of that resource.
 	 */
-	parent: string | null;
+	parent?: string | null;
 
 	/**
-	 * Content of the resource.
-	 * 
-	 * This value is only available when the `deep` option is enabled.
-	 */
-	content: string | null;
-
-	/**
-	 * If the resource has a source map, this values includes decoded mappings from it.
+	 * Source map of the resource.
 	 *
 	 * This value is only available when the `deep` option is enabled.
 	 */
-	mappings: string | null;
+	sourcemap?: Record<string, any> | null;
 }
 
-export type Sizes = Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>;
+export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
 
 export interface Edge {
 	source: string;
