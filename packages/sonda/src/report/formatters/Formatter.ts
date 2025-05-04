@@ -2,7 +2,7 @@ import { basename, dirname, format } from 'path';
 import { mkdir, writeFile } from 'fs/promises';
 import { getAllFiles } from '../../utils.js';
 import type { Config } from '../../config.js';
-import type { JsonReport } from '../producer.js';
+import type { JsonReport } from '../types.js';
 
 export abstract class Formatter {
 	protected config: Config;

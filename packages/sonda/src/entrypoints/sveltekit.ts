@@ -1,5 +1,4 @@
-import VitePlugin from './vite.js';
-import { Config, type UserOptions } from '../index.js';
+import { SondaVitePlugin, Config, type UserOptions } from 'sonda';
 import type { PluginOption } from 'vite';
 
 export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): PluginOption {
@@ -13,7 +12,7 @@ export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): P
   }
 
   return {
-    ...VitePlugin( options ),
+    ...SondaVitePlugin( options ),
     name: 'sonda-sveltekit',
     configResolved( config ) {
       const env = config.build.ssr ? 'server' : 'client';

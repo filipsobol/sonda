@@ -1,7 +1,6 @@
 import { readFileSync, readdirSync } from 'fs';
 import { basename, relative, resolve } from 'path';
-import { Config, type UserOptions } from '../index.js';
-import { processEsbuildBuild } from './esbuild.js';
+import { processEsbuildMetafile, Config, type UserOptions } from 'sonda';
 import type { Metafile } from 'esbuild';
 
 interface AngularUserOptions extends UserOptions {
@@ -52,7 +51,7 @@ export default async function SondaAngular( {
     // Resolve the source map paths relative to the current working directory, not the path of the file itself
     sondaOptions.sourcesPathNormalizer = ( path: string ) => resolve( process.cwd(), path );
 
-    await processEsbuildBuild( metafile, sondaOptions );
+    await processEsbuildMetafile( metafile, sondaOptions );
   }
 }
 

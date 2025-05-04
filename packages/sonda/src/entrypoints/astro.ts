@@ -1,5 +1,4 @@
-import VitePlugin from './vite.js';
-import { Config, type UserOptions } from '../index.js';
+import { SondaVitePlugin, Config, type UserOptions } from 'sonda';
 import type { AstroIntegration } from 'astro';
 
 export default function SondaAstroPlugin( userOptions: UserOptions = {} ): AstroIntegration {
@@ -28,7 +27,7 @@ export default function SondaAstroPlugin( userOptions: UserOptions = {} ): Astro
         sondaOptions.filename = sondaOptions.filename!.replace( '[env]', target );
 
         vite.plugins ??= [];
-        vite.plugins.push( VitePlugin( sondaOptions ) );
+        vite.plugins.push( SondaVitePlugin( sondaOptions ) );
       }
     }
   };

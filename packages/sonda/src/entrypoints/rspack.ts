@@ -1,7 +1,6 @@
-import { Config, type UserOptions } from '../index.js';
-import WebpackPlugin from './webpack.js';
+import { SondaWebpackPlugin, Config, type UserOptions } from 'sonda';
 
-export default class SondaRspackPlugin extends WebpackPlugin {
+export default class SondaRspackPlugin extends SondaWebpackPlugin {
 	constructor ( userOptions: UserOptions = {} ) {
 		super( userOptions );
 

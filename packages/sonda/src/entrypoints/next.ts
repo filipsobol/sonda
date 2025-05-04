@@ -1,5 +1,4 @@
-import SondaWebpack from './webpack.js';
-import { Config, type UserOptions } from '../index.js';
+import { SondaWebpackPlugin, Config, type UserOptions } from 'sonda';
 import type { NextConfig } from 'next';
 
 export default function SondaNextPlugin( userOptions: UserOptions = {} ) {
@@ -35,7 +34,7 @@ export default function SondaNextPlugin( userOptions: UserOptions = {} ) {
         sondaOptions.filename = sondaOptions.filename!.replace( '[env]', env );
 
         // Add the Sonda plugin to the Webpack configuration
-        config.plugins.push( new SondaWebpack( sondaOptions ) );
+        config.plugins.push( new SondaWebpackPlugin( sondaOptions ) );
 
         return config;
       }

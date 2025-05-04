@@ -1,5 +1,12 @@
-export { ReportProducer } from './report/producer.js';
+// Integrations
+export { SondaEsbuildPlugin, processEsbuildMetafile } from './integrations/esbuild.js';
+export { SondaRollupPlugin } from './integrations/rollup.js';
+export { SondaVitePlugin } from './integrations/vite.js';
+export { SondaWebpackPlugin } from './integrations/webpack.js';
 
+// Report
+export { ReportProducer } from './report/producer.js';
+export { ReportConsumer } from './report/consumer.js';
 export type {
 	JsonReport,
 	Metadata,
@@ -16,11 +23,7 @@ export type {
 	SourceMapResource
 } from './report/types.js';
 
-export {
-	normalizePath,
-	getTypeByName
-} from './utils.js';
-
+// Config
 export {
 	Config,
 	type UserOptions,
@@ -28,3 +31,5 @@ export {
 	type Integration
 } from './config.js';
 
+// Utils
+export { normalizePath, getTypeByName } from './utils.js';

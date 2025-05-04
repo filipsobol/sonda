@@ -7,7 +7,7 @@
 //   type Report,
 //   type Input,
 //   type UserOptions
-// } from '../index.js';
+// } from 'sonda';
 
 // class Reporter {
 //   constructor ( opts: ReporterOpts ) {

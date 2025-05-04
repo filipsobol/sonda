@@ -1,6 +1,7 @@
 import { rm } from 'fs/promises';
 import { builtinModules } from 'module';
 import { defineConfig } from 'rolldown';
+import { dts } from 'rolldown-plugin-dts';
 import pkg from './package.json' with { type: 'json' };
 
 // Remove old build folder
@@ -10,7 +11,6 @@ export default defineConfig( {
 	output: {
 		dir: 'dist',
 		format: 'esm',
-		sourcemap: true,
 		entryFileNames: '[name].js',
 		chunkFileNames: '[name].js',
 	},
@@ -31,12 +31,15 @@ export default defineConfig( {
 	external: [
 		...builtinModules,
 		...Object.keys( pkg.dependencies ),
-		'sonda',
+		'sonda'
 	],
 	platform: 'node',
 	resolve: {
 		extensionAlias: {
 			'.js': [ '.ts', '.js' ],
 		}
-	}
+	},
+	plugins: [
+		dts()
+	]
 } );

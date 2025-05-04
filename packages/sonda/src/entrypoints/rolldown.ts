@@ -1,5 +1,4 @@
-import RollupPlugin from './rollup.js';
-import { Config, type UserOptions } from '../index.js';
+import { SondaRollupPlugin, Config, type UserOptions } from 'sonda';
 import type { Plugin } from 'rolldown';
 
 export default function RolldownPlugin( userOptions: UserOptions = {} ): Plugin {
@@ -12,7 +11,7 @@ export default function RolldownPlugin( userOptions: UserOptions = {} ): Plugin 
 	}
 
 	return {
-		...RollupPlugin( options ) as any,
+		...SondaRollupPlugin( options ) as any,
 		name: 'sonda-rolldown'
 	};
 }
