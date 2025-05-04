@@ -113,9 +113,9 @@ export class SondaWebpackPlugin {
   }
 }
 
-function getFormat( name: string, module: Module ): ModuleFormat | null {
+function getFormat( name: string, module: Module ): ModuleFormat {
 	if ( getTypeByName( name ) !== 'script' ) {
-    return null;
+    return 'other';
   }
 
 	return module.type === 'javascript/esm'

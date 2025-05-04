@@ -35,7 +35,7 @@ export async function processEsbuildMetafile(
 			kind: 'source',
       name,
       type: getTypeByName( path ),
-      format: input.format || null,
+      format: input.format || 'other',
       uncompressed: input.bytes
     } );
 

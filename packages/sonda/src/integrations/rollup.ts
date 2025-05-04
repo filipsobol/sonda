@@ -56,9 +56,9 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 	};
 }
 
-function getModuleFormat( name: string, module: ModuleInfo ): ModuleFormat | null {
+function getModuleFormat( name: string, module: ModuleInfo ): ModuleFormat {
 	if ( getTypeByName( name ) !== 'script' ) {
-		return null;
+		return 'other';
 	}
 
 	const ext = extname( module.id );

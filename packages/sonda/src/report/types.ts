@@ -1,3 +1,4 @@
+import type { DecodedSourceMap } from '@ampproject/remapping';
 import type { Integration } from '../config.js';
 
 export interface JsonReport {
@@ -129,7 +130,7 @@ export interface ResourceBase {
 	/**
 	 * Format of the module, if the resource type is `script`.
 	 */
-	format?: ModuleFormat | null;
+	format?: ModuleFormat;
 
 	/**
 	 * Size of the resource without any compression.
@@ -166,7 +167,7 @@ export interface ResourceBase {
 	 *
 	 * This value is only available when the `deep` option is enabled.
 	 */
-	sourcemap?: Record<string, any> | null;
+	sourcemap?: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
 /**
@@ -178,7 +179,7 @@ export interface SourceResource extends ResourceBase {
 	kind: 'source';
 	name: string;
 	type: FileType;
-	format: ModuleFormat | null;
+	format: ModuleFormat;
 	uncompressed: number;
 	gzip?: never;
 	brotli?: never;
@@ -200,7 +201,7 @@ export interface AssetResource extends ResourceBase {
 	gzip: number;
 	brotli?: number;
 	parent?: never;
-	sourcemap: Record<string, any> | null;
+	sourcemap: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
 /**
@@ -213,7 +214,7 @@ export interface ChunkResource extends ResourceBase {
 	kind: 'chunk';
 	name: string;
 	type: FileType;
-	format: ModuleFormat | null;
+	format: ModuleFormat;
 	uncompressed: number;
 	gzip: number;
 	brotli: number;
@@ -231,7 +232,7 @@ export interface SourceMapResource extends ResourceBase {
 	kind: 'sourcemap-source';
 	name: string;
 	type: FileType;
-	format: ModuleFormat | null;
+	format: ModuleFormat;
 	uncompressed: number;
 	gzip: number;
 	brotli: number;
@@ -302,4 +303,4 @@ export type ModuleFormat =
 	| 'umd'
 	| 'iife'
 	| 'system'
-	| 'unknown';
+	| 'other';

@@ -6,7 +6,7 @@ import { ReportProducer } from '../producer.js';
 import { Config } from '../../config.js';
 import { getBytesPerSource, getSizes } from '../../sourcemap/bytes.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
-import type { FileType } from '../types.js';
+import type { AssetResource, FileType } from '../types.js';
 
 const RESOURCE_TYPES_TO_ANALYZE: Array<FileType> = [
 	'script',
@@ -56,9 +56,7 @@ function addAnalyzableType( report: ReportProducer, path: string, type: FileType
 	const { code, map } = getSource( path, report.config );
 	const sizes = getSizes( code, report.metadata );
 	const sourcesSizes = getBytesPerSource( code, map, sizes, report.config );
-	const sourcemap = report.config.sources
-		? { mappings: map.mappings, sources: map.sources, sourcesContent: map.sourcesContent }
-		: null
+	const sourcemap = report.config.sources ? normalizeSourceMap( map ) : null;
 
 	report.resources.push( {
 		kind: 'asset',
@@ -79,7 +77,7 @@ function addAnalyzableType( report: ReportProducer, path: string, type: FileType
 			kind,
 			name: sourceName,
 			type: getTypeByName( source ),
-			format: existingSource?.format || null,
+			format: existingSource?.format || 'other',
 			...sizes,
 			parent: parentName
 		} );
@@ -89,6 +87,17 @@ function addAnalyzableType( report: ReportProducer, path: string, type: FileType
 			source: sourceName,
 		} );
 	}
+}
+
+/**
+ * Normalize the source map to a format expected by the report.
+ */
+function normalizeSourceMap( map: DecodedSourceMap ): AssetResource[ 'sourcemap' ] {
+	return {
+		mappings: map.mappings,
+		sources: map.sources.map( source => source && normalizePath( source ) ),
+		sourcesContent: map.sourcesContent
+	};
 }
 
 /**
