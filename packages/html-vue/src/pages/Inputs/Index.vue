@@ -155,16 +155,16 @@ const COLUMNS: Array<Column> = [
 	}
 ];
 
-const inputs = Object.entries( report.inputs );
-
 const data = ref(
-	inputs.map( ( [ path, input ] ) => ( {
-		id: path,
-		path,
-		name: formatPath( path ),
-		format: input.format,
-		source: path.includes( 'node_modules' ) ? 'external' : 'internal'
-	} ) )
+	report.resources
+		.filter( ( { kind } ) => kind === 'source' || kind === 'sourcemap-source' )
+		.map( input => ( {
+			id: input.name,
+			path: input.name,
+			name: formatPath( input.name ),
+			format: input.format,
+			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal'
+		} ) )
 );
 
 const search = computed( router.computedQuery( 'search', '' ) );
@@ -177,7 +177,7 @@ const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
 	return data.value.filter( item => {
-		return formats.value.includes( item.format )
+		return formats.value.includes( item.format! )
 			&& sources.value.includes( item.source )
 			&& item.path.toLowerCase().includes( lowercaseSearch );
 	} );

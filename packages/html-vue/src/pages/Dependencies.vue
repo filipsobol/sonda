@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, type Ref } from 'vue';
 import { formatPath } from '@/format';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
@@ -118,46 +118,48 @@ import IconFunnel from '@components/icon/Funnel.vue';
 
 const ITEMS_PER_PAGE = 12;
 
-const USED_IN_OPTIONS = Object
-	.keys( report.outputs )
+const USED_IN_OPTIONS = report.resources
+	.filter( resource => resource.kind === 'asset' )
 	.map( output => ( {
-		label: output,
-		value: output
+		label: output.name,
+		value: output.name
 	} ) );
 
 const COLUMNS: Array<Column> = [
 	{ name: 'Name', align: 'left' }
 ];
 
-const dependencies = Object.entries( report.dependencies );
+interface Item {
+	id: string;
+	paths: Array<string>;
+	usedIn: Array<string>;
+	importedBy: Array<string>;
+}
 
-const assetInputs = Object
-	.entries( report.outputs )
-	.reduce( ( carry, [ path, output ] ) => {
-		carry.push( [ path, Object.keys( output.inputs || {} ) ] )
-		return carry;
-	}, [] as Array<[ asset: string, inputs: Array<string> ]> );
+const data: Ref<Array<Item>> = ref(
+	report.dependencies.map( dependency => {
+		// Get edges where the dependency is the target
+		const importingResources = report.edges.filter( ( { target } ) => target.includes( dependency.name ) )
 
-const inputImports = Object
-	.entries( report.inputs )
-	.reduce( ( carry, [ path, input ] ) => {
-		carry.push( [ path, input.imports || [] ] )
-		return carry;
-	}, [] as Array<[ input: string, imports: Array<string> ]> );
+		const importedBy = importingResources
+			.map(( { source } ) => report.resources.find( resource => resource.name === source && resource.kind === 'source' ) )
+			.filter( resource => resource !== undefined )
+			.map( resource => resource.name )
+			.filter( ( value, index, self ) => self.indexOf( value ) === index );
 
-const data = ref(
-	dependencies.map( ( [ id, paths ] ) => ( {
-		id,
-		paths,
-		usedIn: assetInputs
-			.filter( ( [ _, output ] ) => output.some( path => path.includes( id ) ) )
-			.map( ( [ id ] ) => id ),
-		
-		importedBy: inputImports
-			.filter( ( [ _, input ] ) => input.some( path => path.includes( id ) ) )
-			.map( ( [ id ] ) => id )
-			.filter( path => !path.includes( id ) )
-	} ) )
+		const usedIn = importingResources
+			.map( ( { source } ) => report.resources.find( resource => resource.name === source && resource.kind === 'chunk' ) )
+			.filter( resource => resource !== undefined )
+			.map( resource => resource.parent! )
+			.filter( ( value, index, self ) => self.indexOf( value ) === index )
+
+		return {
+			id: dependency.name,
+			paths: dependency.paths,
+			usedIn,
+			importedBy
+		};
+	} )
 );
 
 const search = computed( router.computedQuery( 'search', '' ) );

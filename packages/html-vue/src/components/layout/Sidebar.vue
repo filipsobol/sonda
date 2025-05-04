@@ -69,13 +69,13 @@ const items: Array<Link> = [
 		title: 'Assets',
 		link: 'assets',
 		icon: IconBoxes,
-		count: Object.values( report.outputs ).length
+		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'asset' ) ).length
 	},
 	{
 		title: 'Inputs',
 		link: 'inputs',
 		icon: IconFileInput,
-		count: Object.values( report.inputs ).length
+		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'source' || kind === 'sourcemap-source' ) ).length
 	},
 	{
 		title: 'Dependencies',

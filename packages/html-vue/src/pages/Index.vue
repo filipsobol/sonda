@@ -70,7 +70,7 @@ import IconCode from '@icon/Code.vue';
 import IconBrush from '@icon/Brush.vue';
 import IconImage from '@icon/Image.vue';
 
-const totalOutputs = Object.values( report.outputs );
+const totalOutputs = Object.values( report.resources.filter( resource => resource.kind === 'asset' ) );
 
 const totalCount = totalOutputs.length;
 const totalSize = totalOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );

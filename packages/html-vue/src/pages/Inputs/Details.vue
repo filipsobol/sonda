@@ -25,11 +25,11 @@
 						</tr>
 						<tr class="border-t border-gray-100">
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">File type</td>
-							<td class="p-3 font-normal capitalize">{{ input.type }}</td>
+							<td class="p-3 font-normal capitalize">{{ source.type }}</td>
 						</tr>
 						<tr class="border-t border-gray-100">
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Module format</td>
-							<td class="p-3 font-normal uppercase">{{ input.format }}</td>
+							<td class="p-3 font-normal uppercase">{{ source.format }}</td>
 						</tr>
 						<tr class="border-t border-gray-100">
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Source</td>
@@ -37,7 +37,7 @@
 						</tr>
 						<tr class="border-t border-gray-100">
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Original file size</td>
-							<td class="p-3 font-normal">{{ formatSize( input.bytes ) }}</td>
+							<td class="p-3 font-normal">{{ formatSize( source.uncompressed ) }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -65,15 +65,15 @@
 						<tbody class="text-gray-500">
 							<tr>
 								<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Bundled size</td>
-								<td class="p-3 font-normal">{{ formatSize( assetInput!.uncompressed ) }}</td>
+								<td class="p-3 font-normal">{{ formatSize( chunk!.uncompressed ) }}</td>
 							</tr>
 							<tr class="border-t border-gray-100">
 								<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Approx. GZIP size</td>
-								<td class="p-3 font-normal">{{ report.metadata.gzip ? formatSize( assetInput!.gzip ) : '-' }}</td>
+								<td class="p-3 font-normal">{{ report.metadata.gzip ? formatSize( chunk!.gzip! ) : '-' }}</td>
 							</tr>
 							<tr class="border-t border-gray-100">
 								<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Approx. Brotli size</td>
-								<td class="p-3 font-normal">{{ report.metadata.brotli ? formatSize( assetInput!.brotli ) : '-' }}</td>
+								<td class="p-3 font-normal">{{ report.metadata.brotli ? formatSize( chunk!.brotli! ) : '-' }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -93,7 +93,7 @@
 
 				<div
 					v-else
-					class="p-4 mb-8 text-sm rounded-lg bg-red-50 rounded-lg border border-red-200 shadow-xs"
+					class="p-4 mb-8 text-sm rounded-lg bg-red-50 border border-red-200 shadow-xs"
 					role="alert"
 				>
           <p class="font-bold text-red-900">Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>.</p>
@@ -115,25 +115,33 @@ import { report } from '@/report.js';
 import { formatPath, formatSize } from '@/format.js';
 import BaseSelect from '@components/common/Select.vue';
 
+const codeElement = useTemplateRef( 'codeElement' );
+
 const name = computed( () => router.query.item );
-const input = computed( () => report.inputs[ name.value ] );
+const source = computed( () => report.resources.find( resource => resource.name === name.value && ( resource.kind === 'source' || resource.kind === 'sourcemap-source' ) )! );
 const usedIn = computed( () => {
-	return Object
-		.entries( report.outputs )
-		.filter( ( [ _, output ] ) => output.inputs?.[ name.value ] )
-		.map( ( [ path ] ) => ( {
-			label: path,
-			value: path
+	return report.resources
+		.filter( resource => resource.name === name.value && resource.kind === 'chunk' )
+		.map( resource => ( {
+			label: resource.parent!,
+			value: resource.parent!
 		} ) );
 } );
 
-const codeElement = useTemplateRef( 'codeElement' );
 const assetId = computed( router.computedQuery( 'formats', usedIn.value.length > 0 ? usedIn.value[ 0 ].value : '' ) );
-const assetInput = computed( () => assetId.value ? report.outputs[ assetId.value ].inputs![ name.value ] : null );
+const chunk = computed( () => {
+	return assetId.value
+		? report.resources.find( resource => resource.parent === assetId.value && resource.kind === 'chunk' )
+		: null;
+} );
 
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
-const sourceMap = computed( () => assetId.value ? report.outputs[ assetId.value ].map : null );
+const sourceMap = computed( () => {
+	return assetId.value
+		? report.resources.find( resource => resource.name === assetId.value && resource.kind === 'asset' )?.sourcemap
+		: null;
+} );
 const sourceIndex = computed( () => sourceMap.value?.sources.indexOf( name.value ) ?? -1 );
 const sourceCode = computed( () => sourceIndex.value > 0 ? sourceMap.value!.sourcesContent![ sourceIndex.value ] : null );
 const sourceCodeLines = computed( () => sourceCode.value?.split( /(?<=\r?\n)/ ) ?? [] );
