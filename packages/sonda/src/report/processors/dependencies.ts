@@ -1,4 +1,4 @@
-import type { ReportProducer } from '../producer.js';
+import type { Report } from '../report.js';
 
 const packageNameRegExp = /(.*)(?:.*node_modules\/)(@[^\/]+\/[^\/]+|[^\/]+)/;
 
@@ -6,7 +6,7 @@ const packageNameRegExp = /(.*)(?:.*node_modules\/)(@[^\/]+\/[^\/]+|[^\/]+)/;
  * Finds all external dependencies based on the filesystem resources
  * and adds them to the report with their paths.
  */
-export function updateDependencies( report: ReportProducer ): void {
+export function updateDependencies( report: Report ): void {
 	const dependencies: Record<string, Array<string>> = {};
 
 	report.resources

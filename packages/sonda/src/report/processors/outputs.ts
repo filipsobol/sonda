@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { loadCodeAndMap } from 'load-source-map';
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
-import { ReportProducer } from '../producer.js';
+import { Report } from '../report.js';
 import { Config } from '../../config.js';
 import { getBytesPerSource, getSizes } from '../../sourcemap/bytes.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
@@ -19,7 +19,7 @@ const parentMap: Record< string, string> = {};
  * Update the report with the output assets and their sources from the source map.
  */
 export function updateOutputs(
-	report: ReportProducer,
+	report: Report,
 	assets: Array<string>,
 ): void {
 	for ( const asset of assets ) {
@@ -34,7 +34,7 @@ export function updateOutputs(
 /**
  * Adds simple assets like fonts, images, etc. to the report without analyzing their content or dependencies.
  */
-function addNonAnalyzableType( report: ReportProducer, path: string, type: FileType ): void {
+function addNonAnalyzableType( report: Report, path: string, type: FileType ): void {
 	const content = readFileSync( path );
 	const sizes = getSizes( content, report.metadata );
 
@@ -51,7 +51,7 @@ function addNonAnalyzableType( report: ReportProducer, path: string, type: FileT
  * Adds code assets like scripts and styles to the report and analyzes their content
  * to find their sources and dependencies.
  */
-function addAnalyzableType( report: ReportProducer, path: string, type: FileType ): void {
+function addAnalyzableType( report: Report, path: string, type: FileType ): void {
 	const assetName = normalizePath( path );
 	const { code, map } = getSource( path, report.config );
 	const sizes = getSizes( code, report.metadata );

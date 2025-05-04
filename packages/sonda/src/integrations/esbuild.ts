@@ -1,6 +1,6 @@
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
-import { ReportProducer } from '../report/producer.js';
+import { Report } from '../report/report.js';
 import type { Metafile, Plugin } from 'esbuild';
 
 export function SondaEsbuildPlugin( userOptions: UserOptions = {} ): Plugin {
@@ -26,7 +26,7 @@ export async function processEsbuildMetafile(
 	metafile: Metafile,
 	options: Config
 ): Promise<void> {
-  const report = new ReportProducer( options );
+  const report = new Report( options );
 
   for ( const [ path, input ] of Object.entries( metafile.inputs ) ) {
 		const name = normalizePath( path );

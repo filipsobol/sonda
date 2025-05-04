@@ -15,7 +15,7 @@ const formatters: Record<Format, new ( config: Config ) => Formatter> = {
 	'json': JsonFormatter
 };
 
-export class ReportProducer {
+export class Report {
 	public metadata: Metadata;
 
 	constructor(

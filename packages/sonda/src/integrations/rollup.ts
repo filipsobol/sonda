@@ -1,7 +1,7 @@
 import { extname, resolve, dirname } from 'path';
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
-import { ReportProducer } from '../report/producer.js';
+import { Report } from '../report/report.js';
 import type {
 	Plugin,
 	ModuleInfo,
@@ -19,7 +19,7 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 		return { name: 'sonda-rollup' };
 	}
 
-	const report = new ReportProducer( options );
+	const report = new Report( options );
 
 	return {
 		name: 'sonda-rollup',

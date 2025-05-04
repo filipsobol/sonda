@@ -2,7 +2,7 @@ import { join, resolve } from 'path';
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
 import { UNASSIGNED } from '../sourcemap/bytes.js';
-import { ReportProducer } from '../report/producer.js';
+import { Report } from '../report/report.js';
 import type { Compiler, Module } from 'webpack';
 import type { ModuleFormat } from '../report/types.js';
 
@@ -20,7 +20,7 @@ export class SondaWebpackPlugin {
       return;
     }
 
-    const report = new ReportProducer( this.options );
+    const report = new Report( this.options );
 
     const namespace = compiler.options.output.devtoolNamespace
 			|| compiler.options.output.library?.name

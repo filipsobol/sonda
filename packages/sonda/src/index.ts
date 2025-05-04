@@ -5,8 +5,7 @@ export { SondaVitePlugin } from './integrations/vite.js';
 export { SondaWebpackPlugin } from './integrations/webpack.js';
 
 // Report
-export { ReportProducer } from './report/producer.js';
-export { ReportConsumer } from './report/consumer.js';
+export { Report } from './report/report.js';
 export type {
 	JsonReport,
 	Metadata,
