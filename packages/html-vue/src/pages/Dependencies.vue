@@ -138,20 +138,20 @@ interface Item {
 
 const data: Ref<Array<Item>> = ref(
 	report.dependencies.map( dependency => {
-		// Get edges where the dependency is the target
-		const importingResources = report.edges.filter( ( { target } ) => target.includes( dependency.name ) )
+		const importedBy = report.edges
+			// Get the edges where the target is the dependency, but the source itself is not.
+			// This is to skip sources found in source maps, because in such cases both edges will include the dependency name.
+			.filter( ( { source, target } ) => !source.includes( dependency.name) && target.includes( dependency.name ) )
+			.map( ( { source } ) => source )
+			.filter( ( value, index, self ) => self.indexOf( value ) === index )
+			.toSorted();
 
-		const importedBy = importingResources
-			.map(( { source } ) => report.resources.find( resource => resource.name === source && resource.kind === 'source' ) )
-			.filter( resource => resource !== undefined )
-			.map( resource => resource.name )
-			.filter( ( value, index, self ) => self.indexOf( value ) === index );
-
-		const usedIn = importingResources
-			.map( ( { source } ) => report.resources.find( resource => resource.name === source && resource.kind === 'chunk' ) )
-			.filter( resource => resource !== undefined )
+		const usedIn = report.resources
+			// Get all chunks that include the dependency name.
+			.filter( resource => resource.name.includes( dependency.name ) && resource.kind === 'chunk' )
 			.map( resource => resource.parent! )
 			.filter( ( value, index, self ) => self.indexOf( value ) === index )
+			.toSorted();
 
 		return {
 			id: dependency.name,
