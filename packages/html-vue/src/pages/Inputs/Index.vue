@@ -69,14 +69,14 @@
 				</td>
 
 				<td class="p-3 font-normal">
-					<!-- <p
-						v-for="output in item.outputs"
-						:key="output"
-						:title="output"
+					<p
+						v-for="output in item.usedIn"
+						:key="output.parent"
+						:title="output.parent"
 						class="truncate"
 					>
-						{{ output }}
-					</p> -->
+						{{ output.parent }}
+					</p>
 				</td>
 
 				<td class="p-3 font-normal text-center whitespace-nowrap">
@@ -163,7 +163,8 @@ const data = ref(
 			path: input.name,
 			name: formatPath( input.name ),
 			format: input.format,
-			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal'
+			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal',
+			usedIn: report.resources.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
 		} ) )
 );
 
