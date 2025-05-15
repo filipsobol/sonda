@@ -24,7 +24,7 @@
 
 			<Dropdown
 				v-model="formats"
-				:options="FORMAT_OPTIONS"
+				:options="availableFormatOptions"
 				title="Format"
 			>
 				<template #icon>
@@ -34,7 +34,7 @@
 
 			<Dropdown
 				v-model="sources"
-				:options="SOURCE_OPTIONS"
+				:options="availableSourceOptions"
 				title="Source"
 			>
 				<template #icon>
@@ -112,13 +112,23 @@ import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
+import type { ModuleFormat } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
-const FORMAT_OPTIONS = [
+interface FormatOption {
+	label: string;
+	subLabel?: string;
+	value: ModuleFormat;
+}
+
+const FORMAT_OPTIONS: Array<FormatOption> = [
 	{ label: 'ESM', subLabel: 'ES Module', value: 'esm' },
 	{ label: 'CJS', subLabel: 'CommonJS', value: 'cjs' },
-	{ label: 'Unknown', value: 'unknown' },
+	{ label: 'AMD', value: 'amd' },
+	{ label: 'UMD', value: 'umd' },
+	{ label: 'IIFE', value: 'iife' },
+	{ label: 'SystemJS', value: 'system' },
 	{ label: 'Other', value: 'other' }
 ];
 
@@ -168,9 +178,11 @@ const data = ref(
 		} ) )
 );
 
+const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => data.value.some( item => item.format === option.value ) ) );
+const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( item => item.source === option.value ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
-const formats = computed( router.computedQuery( 'formats', FORMAT_OPTIONS.map( o => o.value ) ) );
-const sources = computed( router.computedQuery( 'sources', SOURCE_OPTIONS.map( o => o.value ) ) );
+const formats = computed( router.computedQuery( 'formats', availableFormatOptions.value.map( o => o.value ) ) );
+const sources = computed( router.computedQuery( 'sources', availableSourceOptions.value.map( o => o.value ) ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 const active = computed( router.computedQuery( 'active', '' ) );
 

@@ -30,7 +30,7 @@
 
 			<Dropdown
 				v-model="usedIn"
-				:options="USED_IN_OPTIONS"
+				:options="availableUsedIn"
 				title="Used in"
 			>
 				<template #icon>
@@ -162,6 +162,7 @@ const data: Ref<Array<Item>> = ref(
 	} )
 );
 
+const availableUsedIn = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( dependency => dependency.usedIn.includes( option.value ) ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
 const usedIn = computed( router.computedQuery( 'formats', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
