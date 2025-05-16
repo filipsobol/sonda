@@ -32,17 +32,17 @@
 			<tbody class="text-gray-500">
 				<template
 					v-for="item in data"
-					:key="item.id"
+					:key="item[ id ]"
 				>
 					<tr class="bg-white border-t border-gray-100">
 						<td
 							v-if="$slots.collapsible"
 							class="p-3 font-normal whitespace-nowrap"
 						>
-							<BaseButton @click="() => model = model === item.id ? '' : item.id">
+							<BaseButton @click="() => model = model === item[ id ] ? '' : item[ id ]">
 								<IconChevronLeft
 									:size="16"
-									:class="[ model === item.id ? 'rotate-90' : 'rotate-270' ]"
+									:class="[ model === item[ id ] ? 'rotate-90' : 'rotate-270' ]"
 									class="text-gray-500 transition-[rotate] duration-150"
 								/>
 							</BaseButton>
@@ -58,7 +58,7 @@
 						<td colspan="1"></td>
 						<td colspan="5">
 							<div
-								:class="{ 'grid-rows-[1fr]': model === item.id }"
+								:class="{ 'grid-rows-[1fr]': model === item[ id ] }"
 								class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-150 ease-linear"
 							>
 								<div class="overflow-hidden">
@@ -75,7 +75,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" generic="const T extends { id: string } & Record<string, any>">
+<script setup lang="ts" generic="const T extends Record<string, any>">
 import BaseButton from '@components/common/Button.vue';
 import IconChevronLeft from '@components/icon/ChevronLeft.vue';
 
@@ -88,6 +88,7 @@ export interface Column {
 interface Props {
 	columns: Column[];
 	data: T[];
+	id: keyof T;
 }
 
 const model = defineModel();

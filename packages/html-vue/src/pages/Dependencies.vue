@@ -3,13 +3,13 @@
 		<h2 class="text-2xl font-bold">Dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of external dependencies used in the generated bundles. Click the button next to a dependency name to see:
+			List of all external dependencies discovered during the build process. For each dependency, you can click the adjacent button to view additional details:
 		</p>
 
 		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
-			<li><span class="font-bold">Paths</span>: Relative path to the dependency. If there's more than one path, the dependency is likely duplicated, which can <span class="underline">increase the bundle size</span>.</li>
-			<li><span class="font-bold">Used in</span>: Assets containing this dependency. If this value is empty, it means that the dependency has been tree-shaken.</li>
-			<li><span class="font-bold">Imported by</span>: Inputs importing this dependency, which are also the reason the dependency was bundled.</li>
+			<li><span class="font-bold">Paths</span>: Relative paths to the dependency package. Multiple paths may indicate duplication, which can <span class="underline">increase bundle size</span>.</li>
+			<li><span class="font-bold">Used in</span>: Output assets that include this dependency. If this section is empty, the dependency has been removed via tree-shaking.</li>
+			<li><span class="font-bold">Imported by</span>: Inputs that import this dependency.</li>
 		</ul>
 
 		<hr class="mt-4 mb-6 border-gray-100">
@@ -43,9 +43,10 @@
 			v-model="active"
 			:columns="COLUMNS"
 			:data="paginatedData"
+			id="name"
 		>
 			<template #row="{ item }">
-				<td class="p-3 font-normal text-gray-900">{{ item.id }}</td>
+				<td class="p-3 font-normal text-gray-900">{{ item.name }}</td>
 			</template>
 
 			<template #collapsible="{ item }">
@@ -130,7 +131,7 @@ const COLUMNS: Array<Column> = [
 ];
 
 interface Item {
-	id: string;
+	name: string;
 	paths: Array<string>;
 	usedIn: Array<string>;
 	importedBy: Array<string>;
@@ -154,7 +155,7 @@ const data: Ref<Array<Item>> = ref(
 			.toSorted();
 
 		return {
-			id: dependency.name,
+			name: dependency.name,
 			paths: dependency.paths,
 			usedIn,
 			importedBy
@@ -172,7 +173,7 @@ const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
 	return data.value
-		.filter( item => item.id.toLowerCase().includes( lowercaseSearch ) )
+		.filter( item => item.name.toLowerCase().includes( lowercaseSearch ) )
 		.filter( item => !usedIn.value.length || item.usedIn.some( path => usedIn.value.includes( path ) ) );
 } );
 

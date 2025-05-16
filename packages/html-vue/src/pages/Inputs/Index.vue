@@ -1,9 +1,20 @@
 <template>
 	<div class="max-w-7xl flex flex-col">
-		<h2 class="text-2xl font-bold">Input files</h2>
+		<h2 class="text-2xl font-bold">Inputs</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of input (source) files used in the generated bundles. This includes all internal files in your project as well as external files from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code>.
+			List of all source inputs discovered during the build process. The table includes the following information for each input:
+		</p>
+
+		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
+			<li><span class="font-bold">Path</span>: Relative path to the input. If the path is from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code>, it starts from the package name.</li>
+			<li><span class="font-bold">Used in</span>: Output assets that include this source. If this value is empty, the source has been removed via tree-shaking.</li>
+			<li><span class="font-bold">Format</span>: Indicates the module format if the source is a script. Otherwise, the value is <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">other</code>.</li>
+			<li><span class="font-bold">Source</span>: Specifies whether the source is from your project (<code class="text-xs py-0.5 px-1 bg-gray-100 rounded">internal</code>) or from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code> (<code class="text-xs py-0.5 px-1 bg-gray-100 rounded">external</code>).</li>
+		</ul>
+
+		<p class="text-gray-500 mt-4">
+			Click on the adjacent button to view additional details about the input.
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">
@@ -18,7 +29,7 @@
 					v-model="search"
 					type="text"
 					class="py-1.25 ps-10 w-80 text-sm text-gray-900 border border-gray-300 bg-white rounded-lg outline-hidden shadow-xs placeholder:text-gray-500 focus:ring focus:ring-gray-500 focus:border-gray-500"
-					placeholder="Filter input files"
+					placeholder="Filter inputs"
 				>
 			</div>
 
@@ -44,9 +55,9 @@
 		</div>
 
 		<DataTable
-			v-model="active"
 			:columns="COLUMNS"
 			:data="paginatedData"
+			id="path"
 		>
 			<template #row="{ item }">
 				<td class="p-3 font-normal text-center whitespace-nowrap">
@@ -82,7 +93,7 @@
 				<td class="p-3 font-normal text-center whitespace-nowrap">
 					<Badge v-if="item.format === 'esm'" variant="yellow">esm</Badge>
 					<Badge v-else-if="item.format === 'cjs'" variant="primary">cjs</Badge>
-					<Badge v-else variant="dark">unknown</Badge>
+					<Badge v-else variant="dark">{{ item.format }}</Badge>
 				</td>
 
 				<td class="p-3 font-normal text-center whitespace-nowrap">
@@ -106,7 +117,7 @@ import { router } from '@/router.js'
 import { report } from '@/report.js';
 import { formatPath } from '@/format.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
-import Dropdown from '@components/common/Dropdown.vue';
+import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
 import BaseButton from '@/components/common/Button.vue';
 import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
@@ -116,13 +127,8 @@ import type { ModuleFormat } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
-interface FormatOption {
-	label: string;
-	subLabel?: string;
-	value: ModuleFormat;
-}
 
-const FORMAT_OPTIONS: Array<FormatOption> = [
+const FORMAT_OPTIONS: Array<DropdownOption<ModuleFormat>> = [
 	{ label: 'ESM', subLabel: 'ES Module', value: 'esm' },
 	{ label: 'CJS', subLabel: 'CommonJS', value: 'cjs' },
 	{ label: 'AMD', value: 'amd' },
@@ -169,7 +175,6 @@ const data = ref(
 	report.resources
 		.filter( ( { kind } ) => kind === 'source' || kind === 'sourcemap-source' )
 		.map( input => ( {
-			id: input.name,
 			path: input.name,
 			name: formatPath( input.name ),
 			format: input.format,
@@ -178,22 +183,20 @@ const data = ref(
 		} ) )
 );
 
-const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => data.value.some( item => item.format === option.value ) ) );
-const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( item => item.source === option.value ) ) );
+const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => data.value.some( source => source.format === option.value ) ) );
+const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( source => source.source === option.value ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
-const formats = computed( router.computedQuery( 'formats', availableFormatOptions.value.map( o => o.value ) ) );
-const sources = computed( router.computedQuery( 'sources', availableSourceOptions.value.map( o => o.value ) ) );
+const formats = computed( router.computedQuery( 'formats', [] as Array<string> ) );
+const sources = computed( router.computedQuery( 'sources', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
-const active = computed( router.computedQuery( 'active', '' ) );
 
 const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
-	return data.value.filter( item => {
-		return formats.value.includes( item.format! )
-			&& sources.value.includes( item.source )
-			&& item.path.toLowerCase().includes( lowercaseSearch );
-	} );
+	return data.value
+		.filter( item => item.path.toLowerCase().includes( lowercaseSearch ) )
+		.filter( item => !formats.value.length || formats.value.includes( item.format! ) )
+		.filter( item => !sources.value.length || sources.value.includes( item.source ) );
 } );
 
 const paginatedData = computed( () => {
@@ -201,10 +204,6 @@ const paginatedData = computed( () => {
 	const end = start + ITEMS_PER_PAGE;
 
 	return filteredData.value.slice( start, end );
-} );
-
-watch( [ search, formats, sources, currentPage ], () => {
-	active.value = '';
 } );
 
 watch( [ search, formats, sources ], () => {

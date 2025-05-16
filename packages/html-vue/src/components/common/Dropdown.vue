@@ -59,15 +59,15 @@
 import { ref } from 'vue';
 import BaseButton from '@components/common/Button.vue';
 
-interface Option {
+export interface DropdownOption<T extends string = string> {
 	label: string;
 	subLabel?: string;
-	value: string;
+	value: T;
 }
 
 interface Props {
 	title: string;
-	options: Array<Option>;
+	options: Array<DropdownOption>;
 }
 
 const model = defineModel();
