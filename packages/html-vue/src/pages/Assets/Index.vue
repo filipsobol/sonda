@@ -98,7 +98,7 @@ import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
-import { AssetResource, type FileType } from 'sonda';
+import type { FileType } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
