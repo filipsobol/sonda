@@ -41,6 +41,16 @@
 					<IconFunnel :size="16" />
 				</template>
 			</Dropdown>
+
+			<Dropdown
+				v-model="usedIn"
+				:options="availableUsedInOptions"
+				title="Used in"
+			>
+				<template #icon>
+					<IconFunnel :size="16" />
+				</template>
+			</Dropdown>
 		</div>
 
 		<DataTable
@@ -71,12 +81,12 @@
 				<td class="p-3 font-normal">
 					<template v-if="item.usedIn.length">
 						<p
-							v-for="output in item.usedIn"
-							:key="output.parent"
-							:title="output.parent"
+							v-for="parent in item.usedIn"
+							:key="parent"
+							:title="parent"
 							class="truncate text-gray-900"
 						>
-							{{ output.parent }}
+							{{ parent }}
 						</p>
 					</template>
 
@@ -141,6 +151,13 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' },
 ];
 
+const USED_IN_OPTIONS = report.resources
+	.filter( ( { kind } ) => kind === 'asset' )
+	.map( input => ( {
+		label: input.name,
+		value: input.name
+	} ) );
+
 const COLUMNS: Array<Column> = [
 	{
 		name: '',
@@ -155,7 +172,7 @@ const COLUMNS: Array<Column> = [
 	{
 		name: 'Used in',
 		align: 'left',
-		width: '33.3%'
+		width: '33.4%'
 	},
 	{
 		name: 'Format',
@@ -177,24 +194,30 @@ const data = ref(
 			name: formatPath( input.name ),
 			format: input.format,
 			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal',
-			usedIn: report.resources.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
+			usedIn: report.resources
+				.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
+				.map( resource => resource.parent! )
 		} ) )
 );
 
 const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => data.value.some( source => source.format === option.value ) ) );
 const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( source => source.source === option.value ) ) );
+const availableUsedInOptions = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( source => source.usedIn.includes( option.value ) ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
 const formats = computed( router.computedQuery( 'formats', [] as Array<string> ) );
 const sources = computed( router.computedQuery( 'sources', [] as Array<string> ) );
+const usedIn = computed( router.computedQuery( 'usedIn', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 
 const filteredData = computed( () => {
 	const lowercaseSearch = search.value.toLowerCase();
 
-	return data.value
-		.filter( item => item.path.toLowerCase().includes( lowercaseSearch ) )
-		.filter( item => !formats.value.length || formats.value.includes( item.format! ) )
-		.filter( item => !sources.value.length || sources.value.includes( item.source ) );
+	return data.value.filter( item => {
+		return item.path.toLowerCase().includes( lowercaseSearch )
+		  && ( !formats.value.length || formats.value.includes( item.format! ) )
+			&& ( !sources.value.length || sources.value.includes( item.source ) )
+			&& ( !usedIn.value.length || item.usedIn.some( usedInItem => usedIn.value.includes( usedInItem ) ) );
+	} );
 } );
 
 const paginatedData = computed( () => {
@@ -204,7 +227,7 @@ const paginatedData = computed( () => {
 	return filteredData.value.slice( start, end );
 } );
 
-watch( [ search, formats, sources ], () => {
+watch( [ search, formats, sources, usedIn ], () => {
 	currentPage.value = 1;
 } );
 </script>
