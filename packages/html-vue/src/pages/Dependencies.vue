@@ -1,6 +1,6 @@
 <template>
 	<div class="max-w-7xl flex flex-col">
-		<h2 class="text-2xl font-bold">Dependencies</h2>
+		<h2 class="text-2xl font-bold">External dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
 			List of external dependencies discovered during the build process, including those that were tree-shaken.

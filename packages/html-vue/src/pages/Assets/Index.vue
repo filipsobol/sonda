@@ -1,19 +1,9 @@
 <template>
 	<div class="max-w-7xl flex flex-col">
-		<h2 class="text-2xl font-bold">Assets</h2>
+		<h2 class="text-2xl font-bold">Output assets</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of all output assets generated during the build process. The table includes the following information for each input:
-		</p>
-
-		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
-			<li><span class="font-bold">Path</span>: Relative path to the asset.</li>
-			<li><span class="font-bold">Uncompressed size</span>: Original file size on the disk before compression.</li>
-			<li><span class="font-bold">Type</span>: File type of the asset.</li>
-		</ul>
-
-		<p class="text-gray-500 mt-4">
-			Click on the adjacent button to view additional details about the asset.
+			List of all output assets generated during the build process.
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">

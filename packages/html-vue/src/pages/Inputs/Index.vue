@@ -1,6 +1,6 @@
 <template>
 	<div class="max-w-7xl flex flex-col">
-		<h2 class="text-2xl font-bold">Inputs</h2>
+		<h2 class="text-2xl font-bold">Source inputs</h2>
 
 		<p class="text-gray-500 mt-4">
 			List of all source inputs discovered during the build process, including those that were tree-shaken
