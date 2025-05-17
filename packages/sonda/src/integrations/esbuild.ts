@@ -36,7 +36,8 @@ export async function processEsbuildMetafile(
       name,
       type: getTypeByName( path ),
       format: input.format || 'other',
-      uncompressed: input.bytes
+      uncompressed: input.bytes,
+      parent: null
     } );
 
 		input.imports.forEach( imp => report.edges.push( {

@@ -214,14 +214,7 @@ const data = ref(
 			type: input.type,
 			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal',
 			usedIn: report.resources
-				.filter( resource => {
-					// Get only chunks...
-					return resource.kind === 'chunk'
-						// that have the same name as the source input...
-						&& resource.name === input.name
-						// and who's parent is an asset, not other source
-						&& ASSETS.includes( resource.parent! )
-				} )
+				.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
 				.map( resource => resource.parent! )
 		} ) )
 );

@@ -183,7 +183,7 @@ export interface SourceResource extends ResourceBase {
 	uncompressed: number;
 	gzip?: never;
 	brotli?: never;
-	parent?: never;
+	parent: string | null;
 	sourcemap?: never;
 }
 
@@ -199,7 +199,7 @@ export interface AssetResource extends ResourceBase {
 	format?: never;
 	uncompressed: number;
 	gzip: number;
-	brotli?: number;
+	brotli: number;
 	parent?: never;
 	sourcemap: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }

@@ -32,7 +32,8 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 				name,
 				type: getTypeByName( name ),
 				format: getModuleFormat( name, module ),
-				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0
+				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0,
+				parent: null
 			} );
 
 			module.importedIds.forEach( id => report.edges.push( {

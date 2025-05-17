@@ -64,7 +64,8 @@ export class SondaWebpackPlugin {
 					name: normalized,
 					type: getTypeByName( normalized ),
 					format: getFormat( normalized, module ),
-					uncompressed: module.size()
+					uncompressed: module.size(),
+					parent: null
 				} );
 
 				Array

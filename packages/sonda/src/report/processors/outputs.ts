@@ -90,7 +90,8 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 			name: normalizePath( path ),
 			type: getTypeByName( path ),
 			format: 'other',
-			uncompressed: uncompressed
+			uncompressed: uncompressed,
+			parent: parentMap[ path ]
 		} )
 	}
 
@@ -98,8 +99,6 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 	for ( const [ source, sizes ] of sourcesSizes ) {
 		const name = normalizePath( source );
 		const type = getTypeByName( source );
-		const isDeepDependency = !!parentMap[ source ];
-		const parentName = isDeepDependency ? normalizePath( parentMap[ source ] ) : assetName;
 		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
 
 		report.resources.push( {
@@ -108,11 +107,11 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 			type,
 			format: existingSource?.format || 'other',
 			...sizes,
-			parent: parentName
+			parent: assetName
 		} );
 
 		report.edges.push( {
-			target: parentName,
+			target: assetName,
 			source: name,
 		} );
 	}
