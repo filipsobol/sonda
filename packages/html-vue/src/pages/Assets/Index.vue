@@ -92,7 +92,6 @@ import type { FileType } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
-
 const TYPE_OPTIONS: Array<DropdownOption<FileType>> = [
 	{ label: 'Script', value: 'script' },
 	{ label: 'Style', value: 'style' },

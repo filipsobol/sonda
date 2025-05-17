@@ -75,7 +75,7 @@ const items: Array<Link> = [
 		title: 'Inputs',
 		link: 'inputs',
 		icon: IconFileInput,
-		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'source' || kind === 'sourcemap-source' ) ).length
+		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'source' ) ).length
 	},
 	{
 		title: 'Dependencies',

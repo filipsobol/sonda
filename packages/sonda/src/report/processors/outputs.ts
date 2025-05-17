@@ -66,17 +66,46 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 		sourcemap
 	} );
 
-	for ( const [ source, sizes ] of sourcesSizes ) {
-		const sourceName = normalizePath( source );
-		const isDeepDependency = !!parentMap[ source ];
-		const kind = isDeepDependency ? 'sourcemap-source' : 'chunk';
-		const parentName = isDeepDependency ? normalizePath( parentMap[ source ] ) : assetName;
-		const existingSource = report.resources.find( ( { name } ) => isDeepDependency ? name === parentName : name === sourceName );
+	// If not already present, add each source map source as report "source"
+	for ( const [ index, path ] of map.sources.entries() ) {
+		if ( path === null ) {
+			// Skip if the source is null
+			continue;
+		}
+
+		const existingSource = report.resources.find( resource => resource.name === path && resource.kind === 'source' );
+
+		if ( existingSource ) {
+			// Skip if the source is already in the report
+			continue;
+		}
+
+		const { uncompressed } = getSizes(
+			map.sourcesContent?.[ index ] || '',
+			{ gzip: false, brotli: false }
+		);
 
 		report.resources.push( {
-			kind,
-			name: sourceName,
-			type: getTypeByName( source ),
+			kind: 'source',
+			name: normalizePath( path ),
+			type: getTypeByName( path ),
+			format: 'other',
+			uncompressed: uncompressed
+		} )
+	}
+
+	// Add each source map source as a report "chunk"
+	for ( const [ source, sizes ] of sourcesSizes ) {
+		const name = normalizePath( source );
+		const type = getTypeByName( source );
+		const isDeepDependency = !!parentMap[ source ];
+		const parentName = isDeepDependency ? normalizePath( parentMap[ source ] ) : assetName;
+		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
+
+		report.resources.push( {
+			kind: 'chunk',
+			name,
+			type,
 			format: existingSource?.format || 'other',
 			...sizes,
 			parent: parentName
@@ -84,7 +113,7 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 
 		report.edges.push( {
 			target: parentName,
-			source: sourceName,
+			source: name,
 		} );
 	}
 }

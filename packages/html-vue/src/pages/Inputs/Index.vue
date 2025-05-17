@@ -23,6 +23,16 @@
 			</div>
 
 			<Dropdown
+				v-model="types"
+				:options="availableTypeOptions"
+				title="Type"
+			>
+				<template #icon>
+					<IconFunnel :size="16" />
+				</template>
+			</Dropdown>
+
+			<Dropdown
 				v-model="formats"
 				:options="availableFormatOptions"
 				title="Format"
@@ -131,10 +141,20 @@ import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
-import type { ModuleFormat } from 'sonda';
+import type { FileType, ModuleFormat } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
+const ASSETS = report.resources.filter( ( { kind } ) => kind === 'asset' ).map( input => input.name );
+
+const TYPE_OPTIONS: Array<DropdownOption<FileType>> = [
+	{ label: 'Script', value: 'script' },
+	{ label: 'Style', value: 'style' },
+	{ label: 'Component', value: 'component' },
+	{ label: 'Font', value: 'font' },
+	{ label: 'Image', value: 'image' },
+	{ label: 'Other', value: 'other' },
+];
 
 const FORMAT_OPTIONS: Array<DropdownOption<ModuleFormat>> = [
 	{ label: 'ESM', subLabel: 'ES Module', value: 'esm' },
@@ -151,12 +171,10 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' },
 ];
 
-const USED_IN_OPTIONS = report.resources
-	.filter( ( { kind } ) => kind === 'asset' )
-	.map( input => ( {
-		label: input.name,
-		value: input.name
-	} ) );
+const USED_IN_OPTIONS = ASSETS.map( asset => ( {
+	label: asset,
+	value: asset
+} ) );
 
 const COLUMNS: Array<Column> = [
 	{
@@ -188,22 +206,32 @@ const COLUMNS: Array<Column> = [
 
 const data = ref(
 	report.resources
-		.filter( ( { kind } ) => kind === 'source' || kind === 'sourcemap-source' )
+		.filter( ( { kind } ) => kind === 'source' )
 		.map( input => ( {
 			path: input.name,
 			name: formatPath( input.name ),
 			format: input.format,
+			type: input.type,
 			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal',
 			usedIn: report.resources
-				.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
+				.filter( resource => {
+					// Get only chunks...
+					return resource.kind === 'chunk'
+						// that have the same name as the source input...
+						&& resource.name === input.name
+						// and who's parent is an asset, not other source
+						&& ASSETS.includes( resource.parent! )
+				} )
 				.map( resource => resource.parent! )
 		} ) )
 );
 
+const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => data.value.some( source => source.type === option.value ) ) );
 const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => data.value.some( source => source.format === option.value ) ) );
 const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( source => source.source === option.value ) ) );
 const availableUsedInOptions = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( source => source.usedIn.includes( option.value ) ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
+const types = computed( router.computedQuery( 'type', [] as Array<string> ) );
 const formats = computed( router.computedQuery( 'formats', [] as Array<string> ) );
 const sources = computed( router.computedQuery( 'sources', [] as Array<string> ) );
 const usedIn = computed( router.computedQuery( 'usedIn', [] as Array<string> ) );
@@ -214,6 +242,7 @@ const filteredData = computed( () => {
 
 	return data.value.filter( item => {
 		return item.path.toLowerCase().includes( lowercaseSearch )
+			&& ( !types.value.length || types.value.includes( item.type ) )
 		  && ( !formats.value.length || formats.value.includes( item.format! ) )
 			&& ( !sources.value.length || sources.value.includes( item.source ) )
 			&& ( !usedIn.value.length || item.usedIn.some( usedInItem => usedIn.value.includes( usedInItem ) ) );
@@ -227,7 +256,7 @@ const paginatedData = computed( () => {
 	return filteredData.value.slice( start, end );
 } );
 
-watch( [ search, formats, sources, usedIn ], () => {
+watch( [ search, types, formats, sources, usedIn ], () => {
 	currentPage.value = 1;
 } );
 </script>

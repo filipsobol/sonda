@@ -18,8 +18,7 @@ export type {
 	ModuleFormat,
 	SourceResource,
 	AssetResource,
-	ChunkResource,
-	SourceMapResource
+	ChunkResource
 } from './report/types.js';
 
 // Config

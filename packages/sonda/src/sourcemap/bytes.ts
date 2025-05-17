@@ -76,7 +76,10 @@ export function getBytesPerSource(
 /**
  * Returns the sizes of the given code based on the configuration.
  */
-export function getSizes( code: string | Buffer, config: Config | Metadata ): Sizes {
+export function getSizes(
+	code: string | Buffer,
+	config: Record<'gzip' | 'brotli', boolean>
+): Sizes {
 	return {
 		uncompressed: Buffer.byteLength( code ),
 		gzip: config.gzip ? gzipSync( code ).length : 0,

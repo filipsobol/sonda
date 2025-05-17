@@ -223,31 +223,12 @@ export interface ChunkResource extends ResourceBase {
 }
 
 /**
- * Resources that  was not directly used by the bundler, but was
- * used to create one of the used sources.
- *
- * See OPTIONAL EXTERNAL SOURCE in the diagram above.
- */
-export interface SourceMapResource extends ResourceBase {
-	kind: 'sourcemap-source';
-	name: string;
-	type: FileType;
-	format: ModuleFormat;
-	uncompressed: number;
-	gzip: number;
-	brotli: number;
-	parent: string;
-	sourcemap?: never;
-}
-
-/**
  * All types of resources.
  */
 export type Resource = 
 	| SourceResource
 	| AssetResource
-	| ChunkResource
-	| SourceMapResource;
+	| ChunkResource;
 
 export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
 

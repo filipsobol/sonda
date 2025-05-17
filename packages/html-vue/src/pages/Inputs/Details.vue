@@ -119,7 +119,7 @@ const codeElement = useTemplateRef( 'codeElement' );
 
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
-const source = computed( () => report.resources.find( resource => resource.name === name.value && ( resource.kind === 'source' || resource.kind === 'sourcemap-source' ) )! );
+const source = computed( () => report.resources.find( resource => resource.name === name.value && ( resource.kind === 'source' ) )! );
 const usedIn = computed( () => {
 	return report.resources
 		.filter( resource => resource.name === name.value && resource.kind === 'chunk' )
@@ -144,7 +144,7 @@ const sourceMap = computed( () => {
 		: null;
 } );
 const sourceIndex = computed( () => sourceMap.value?.sources.indexOf( name.value ) ?? -1 );
-const sourceCode = computed( () => sourceIndex.value > 0 ? sourceMap.value!.sourcesContent![ sourceIndex.value ] : null );
+const sourceCode = computed( () => sourceIndex.value > -1 ? sourceMap.value!.sourcesContent![ sourceIndex.value ] : null );
 const sourceCodeLines = computed( () => sourceCode.value?.split( /(?<=\r?\n)/ ) ?? [] );
 const lineNumbers = computed( () => sourceCodeLines.value.map( ( _, index ) => index + 1 ).join( '\n' ) );
 
