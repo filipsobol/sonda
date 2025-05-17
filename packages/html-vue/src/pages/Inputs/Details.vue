@@ -1,9 +1,9 @@
 <template>
 	<div class="max-w-7xl flex flex-col">
-		<h2 class="text-2xl font-bold">{{ formatPath( router.query.item ) }}</h2>
+		<h2 class="text-2xl font-bold">{{ formattedName }}</h2>
 
 		<p class="text-gray-500 mt-4">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt purus non hendrerit commodo. Nunc sit amet nisi vel sapien feugiat egestas in eu ligula. Mauris iaculis maximus nisi, at viverra velit sodales nec. Nunc placerat, erat eu consectetur pulvinar, lorem odio rutrum purus, et bibendum ex velit id erat. Fusce nec pellentesque orci, pretium placerat elit. Pellentesque accumsan et turpis ut porttitor. Suspendisse tincidunt ut leo ac finibus. Proin viverra consectetur est.
+			Details of the source input and how it is used. If there is no "Usage in" section, it means that the source was tree-shaken and not included in any of the assets.
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">
@@ -118,6 +118,7 @@ import BaseSelect from '@components/common/Select.vue';
 const codeElement = useTemplateRef( 'codeElement' );
 
 const name = computed( () => router.query.item );
+const formattedName = computed( () => formatPath( name.value ) );
 const source = computed( () => report.resources.find( resource => resource.name === name.value && ( resource.kind === 'source' || resource.kind === 'sourcemap-source' ) )! );
 const usedIn = computed( () => {
 	return report.resources

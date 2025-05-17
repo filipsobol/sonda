@@ -3,18 +3,7 @@
 		<h2 class="text-2xl font-bold">Inputs</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of all source inputs discovered during the build process. The table includes the following information for each input:
-		</p>
-
-		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
-			<li><span class="font-bold">Path</span>: Relative path to the input. If the path is from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code>, it starts from the package name.</li>
-			<li><span class="font-bold">Used in</span>: Output assets that include this source. If this value is empty, the source has been removed via tree-shaking.</li>
-			<li><span class="font-bold">Format</span>: Indicates the module format if the source is a script. Otherwise, the value is <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">other</code>.</li>
-			<li><span class="font-bold">Source</span>: Specifies whether the source is from your project (<code class="text-xs py-0.5 px-1 bg-gray-100 rounded">internal</code>) or from <code class="text-xs py-0.5 px-1 bg-gray-100 rounded">node_modules</code> (<code class="text-xs py-0.5 px-1 bg-gray-100 rounded">external</code>).</li>
-		</ul>
-
-		<p class="text-gray-500 mt-4">
-			Click on the adjacent button to view additional details about the input.
+			List of all source inputs discovered during the build process, including those that were tree-shaken
 		</p>
 
 		<hr class="mt-4 mb-6 border-gray-100">
@@ -80,13 +69,22 @@
 				</td>
 
 				<td class="p-3 font-normal">
+					<template v-if="item.usedIn.length">
+						<p
+							v-for="output in item.usedIn"
+							:key="output.parent"
+							:title="output.parent"
+							class="truncate text-gray-900"
+						>
+							{{ output.parent }}
+						</p>
+					</template>
+
 					<p
-						v-for="output in item.usedIn"
-						:key="output.parent"
-						:title="output.parent"
-						class="truncate"
+						v-else
+						class="mt-2 text-gray-400 italic"
 					>
-						{{ output.parent }}
+						(Tree-shaken)
 					</p>
 				</td>
 

@@ -3,14 +3,8 @@
 		<h2 class="text-2xl font-bold">Dependencies</h2>
 
 		<p class="text-gray-500 mt-4">
-			List of all external dependencies discovered during the build process. For each dependency, you can click the adjacent button to view additional details:
+			List of external dependencies discovered during the build process, including those that were tree-shaken.
 		</p>
-
-		<ul class="mt-2 ms-2 list-disc list-inside text-gray-500">
-			<li><span class="font-bold">Paths</span>: Relative paths to the dependency package. Multiple paths may indicate duplication, which can <span class="underline">increase bundle size</span>.</li>
-			<li><span class="font-bold">Used in</span>: Output assets that include this dependency. If this section is empty, the dependency has been removed via tree-shaking.</li>
-			<li><span class="font-bold">Imported by</span>: Inputs that import this dependency.</li>
-		</ul>
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
@@ -64,7 +58,10 @@
 
 				<p class="mt-8 font-bold">Used in</p>
 
-				<ul class="mt-2 list-disc list-inside">
+				<ul
+					v-if="item.usedIn.length"
+					class="mt-2 list-disc list-inside"
+				>
 					<li
 						v-for="path in item.usedIn"
 						:key="path"
@@ -78,6 +75,13 @@
 						</a>
 					</li>
 				</ul>
+
+				<p
+					v-else
+					class="mt-2 text-gray-400 italic"
+				>
+					(Tree-shaken)
+				</p>
 
 				<p class="mt-8 font-bold">Imported by</p>
 
