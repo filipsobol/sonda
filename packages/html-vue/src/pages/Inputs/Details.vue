@@ -81,6 +81,8 @@
 
 				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Dependency graph</h4>
 
+				<pre><code ref="codeElement">{{ graph }}</code></pre>
+
 				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Code</h4>
 
 				<div
@@ -114,35 +116,41 @@ import { router } from '@/router.js';
 import { report } from '@/report.js';
 import { formatPath, formatSize } from '@/format.js';
 import BaseSelect from '@components/common/Select.vue';
+import type { AssetResource, ChunkResource, SourceResource } from 'sonda';
 
 const codeElement = useTemplateRef( 'codeElement' );
 
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
-const source = computed( () => report.resources.find( resource => resource.name === name.value && ( resource.kind === 'source' ) )! );
+const source = computed( () => report.resources.find( ( resource ): resource is SourceResource => resource.kind === 'source' && resource.name === name.value )! );
 const usedIn = computed( () => {
 	return report.resources
-		.filter( resource => resource.name === name.value && resource.kind === 'chunk' )
+		.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === name.value )
 		.map( resource => ( {
 			label: resource.parent!,
 			value: resource.parent!
 		} ) );
 } );
 
+// Selected asset
 const assetId = computed( router.computedQuery( 'formats', usedIn.value.length > 0 ? usedIn.value[ 0 ].value : '' ) );
+const asset = computed( () => {
+	return assetId.value
+		&& report.resources.find( ( resource ): resource is AssetResource => resource.kind === 'asset' && resource.name === assetId.value )
+		|| null;
+} );
 const chunk = computed( () => {
 	return assetId.value
-		? report.resources.find( resource => resource.parent === assetId.value && resource.kind === 'chunk' )
-		: null;
+		&& report.resources.find( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.parent === assetId.value )
+		|| null;
 } );
+
+// Dependency graph
+const graph = computed( () => assetId.value && findShortestPath( asset.value?.parent!, name.value ) || null );
 
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
-const sourceMap = computed( () => {
-	return assetId.value
-		? report.resources.find( resource => resource.name === assetId.value && resource.kind === 'asset' )?.sourcemap
-		: null;
-} );
+const sourceMap = computed( () => asset.value?.sourcemap );
 const sourceIndex = computed( () => sourceMap.value?.sources.indexOf( name.value ) ?? -1 );
 const sourceCode = computed( () => sourceIndex.value > -1 ? sourceMap.value!.sourcesContent![ sourceIndex.value ] : null );
 const sourceCodeLines = computed( () => sourceCode.value?.split( /(?<=\r?\n)/ ) ?? [] );
@@ -182,6 +190,38 @@ watchPostEffect( () => {
 
 	CSS.highlights.set('used-code', highlight);
 } );
+
+/**
+ * Finds the shortest directed path from any of the given start nodes to the target node using BFS.
+ */
+function findShortestPath(
+  startNodes: Array<string>,
+  targetNode: string
+): Array<string> | null {
+	const adjacencyList = Object.groupBy( report.edges, edge => edge.source );
+  const queue: Array<Array<string>> = startNodes.map( node => [ node ] );
+  const visited = new Set<string>( startNodes );
+
+  while ( queue.length > 0 ) {
+    const path = queue.shift()!;
+    const node = path[ path.length - 1 ];
+
+    if ( node === targetNode ) {
+      return path;
+    }
+
+    for ( const { target, original } of ( adjacencyList[ node ] ?? [] ) ) {
+			if ( visited.has( target ) ) {
+				continue;
+			}
+
+			visited.add( target );
+			queue.push( [ ...path, target ] );
+    }
+  }
+
+  return null;
+}
 </script>
 
 <style>

@@ -3,7 +3,7 @@ import open from 'tiny-open';
 import { sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
-import { updateOutputs } from './processors/outputs.js';
+import { updateOutputs, type AssetsWithEntrypoints } from './processors/outputs.js';
 import { updateInputs } from './processors/inputs.js';
 import { updateDependencies } from './processors/dependencies.js';
 import type { JsonReport, Metadata, Resource, Edge, Dependency, Issue } from './types.js';
@@ -34,7 +34,7 @@ export class Report {
 		};
 	}
 
-	async generate( assets: Array<string> ): Promise<void> {
+	async generate( assets: AssetsWithEntrypoints ): Promise<void> {
 		updateOutputs( this, assets );
 		// TODO: This may not be needed
 		// updateInputs( this );

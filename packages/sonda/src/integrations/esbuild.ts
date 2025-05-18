@@ -42,9 +42,14 @@ export async function processEsbuildMetafile(
 
 		input.imports.forEach( imp => report.edges.push( {
 			source: name,
-			target: normalizePath( imp.path )
+			target: normalizePath( imp.path ),
+      original: imp.original || null
 		} ) );
   }
 
-  await report.generate( Object.keys( metafile.outputs ) );
+  const assets = Object
+    .entries( metafile.outputs )
+    .map( ( [ path, output ] ) => [ path, output.entryPoint ? [ output.entryPoint ] : undefined ] as [ string, Array<string> | undefined ] )
+
+  await report.generate( assets );
 }

@@ -160,7 +160,7 @@ export interface ResourceBase {
 	 * If the `source` is `sourcemap`, this resource is a part of the source
 	 * map of other resource and value of `parent` is the name of that resource.
 	 */
-	parent?: string | null;
+	parent?: string | Array<string> | null;
 
 	/**
 	 * Source map of the resource.
@@ -200,7 +200,7 @@ export interface AssetResource extends ResourceBase {
 	uncompressed: number;
 	gzip: number;
 	brotli: number;
-	parent?: never;
+	parent: Array<string> | null;
 	sourcemap: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
@@ -235,6 +235,7 @@ export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotl
 export interface Edge {
 	source: string;
 	target: string;
+	original: string | null;
 }
 
 export interface Dependency {

@@ -8,6 +8,8 @@ import { getBytesPerSource, getSizes } from '../../sourcemap/bytes.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
 import type { AssetResource, FileType } from '../types.js';
 
+export type AssetsWithEntrypoints = Array<[ string, Array<string> | undefined ]>;
+
 const RESOURCE_TYPES_TO_ANALYZE: Array<FileType> = [
 	'script',
 	'style'
@@ -20,14 +22,14 @@ const parentMap: Record< string, string> = {};
  */
 export function updateOutputs(
 	report: Report,
-	assets: Array<string>,
+	assets: AssetsWithEntrypoints,
 ): void {
-	for ( const asset of assets ) {
-		const type = getTypeByName( asset );
+	for ( const [ path, entrypoints ] of assets ) {
+		const type = getTypeByName( path );
 
 		RESOURCE_TYPES_TO_ANALYZE.includes( type )
-			? addAnalyzableType( report, asset, type )
-			: addNonAnalyzableType( report, asset, type );
+			? addAnalyzableType( report, path, entrypoints, type )
+			: addNonAnalyzableType( report, path, type );
 	}
 }
 
@@ -43,7 +45,8 @@ function addNonAnalyzableType( report: Report, path: string, type: FileType ): v
 		name: normalizePath( path ),
 		type,
 		...sizes,
-		sourcemap: null
+		sourcemap: null,
+		parent: null
 	} );
 }
 
@@ -51,7 +54,7 @@ function addNonAnalyzableType( report: Report, path: string, type: FileType ): v
  * Adds code assets like scripts and styles to the report and analyzes their content
  * to find their sources and dependencies.
  */
-function addAnalyzableType( report: Report, path: string, type: FileType ): void {
+function addAnalyzableType( report: Report, path: string, entrypoints: Array<string> | undefined, type: FileType ): void {
 	const assetName = normalizePath( path );
 	const { code, map } = getSource( path, report.config );
 	const sizes = getSizes( code, report.metadata );
@@ -63,7 +66,8 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 		name: assetName,
 		type,
 		...sizes,
-		sourcemap
+		sourcemap,
+		parent: entrypoints ? entrypoints.map( entry => normalizePath( entry ) ) : null
 	} );
 
 	// If not already present, add each source map source as report "source"
@@ -73,7 +77,14 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 			continue;
 		}
 
-		const existingSource = report.resources.find( resource => resource.name === path && resource.kind === 'source' );
+		const name = normalizePath( path );
+		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
+
+		report.edges.push( {
+			source: assetName,
+			target: name,
+			original: null
+		} );
 
 		if ( existingSource ) {
 			// Skip if the source is already in the report
@@ -85,13 +96,15 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 			{ gzip: false, brotli: false }
 		);
 
+		const parent = parentMap[ path ];
+
 		report.resources.push( {
 			kind: 'source',
-			name: normalizePath( path ),
+			name,
 			type: getTypeByName( path ),
 			format: 'other',
 			uncompressed: uncompressed,
-			parent: parentMap[ path ]
+			parent: parent ? normalizePath( parent ) : null // TODO: Checking if `parent` exists wouldn't be necessary if CSS paths were resolved correctly
 		} )
 	}
 
@@ -99,6 +112,7 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 	for ( const [ source, sizes ] of sourcesSizes ) {
 		const name = normalizePath( source );
 		const type = getTypeByName( source );
+		const parent = parentMap[ source ];
 		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
 
 		report.resources.push( {
@@ -110,10 +124,13 @@ function addAnalyzableType( report: Report, path: string, type: FileType ): void
 			parent: assetName
 		} );
 
-		report.edges.push( {
-			target: assetName,
-			source: name,
-		} );
+		if ( parent ) {
+			report.edges.push( {
+				source: normalizePath( parent ),
+				target: name,
+				original: null
+			} );
+		}
 	}
 }
 

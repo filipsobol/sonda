@@ -24,6 +24,22 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 	return {
 		name: 'sonda-rollup',
 
+		async resolveId( source: string, importer: string | undefined ) {
+			if ( !importer ) {
+				return;
+			}
+
+			const resolved = await this.resolve( source, importer, { skipSelf: true } );
+
+			if ( resolved ) {
+				report.edges.push( {
+					source: normalizePath( importer ),
+					target: normalizePath( resolved.id ),
+					original: source
+				} );
+			}
+		},
+
 		moduleParsed( module: ModuleInfo ) {
 			const name = normalizePath( module.id );
 
@@ -35,11 +51,6 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0,
 				parent: null
 			} );
-
-			module.importedIds.forEach( id => report.edges.push( {
-				source: name,
-				target: normalizePath( id )
-			} ) );
 		},
 
 		async writeBundle(
@@ -47,10 +58,13 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 			bundle: OutputBundle
 		) {
 			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
-			const assets = Object
-				.keys( bundle )
-				.map( name => resolve( outputDir, name ) )
-				.filter( name => !name.endsWith( '.map' ) );
+			const assets: Array<[ string, Array<string> | undefined ]> = Object
+				.entries( bundle )
+				.filter( ( [ name ] ) => !name.endsWith( '.map' ) )
+				.map( ( [ name, bundle ] ) => [
+					resolve( outputDir, name ),
+					bundle.type === 'chunk' && bundle.facadeModuleId ? [ bundle.facadeModuleId ] : undefined
+				] );
 
 			await report.generate( assets );
 		}

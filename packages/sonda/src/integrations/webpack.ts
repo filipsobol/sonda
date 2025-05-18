@@ -73,29 +73,50 @@ export class SondaWebpackPlugin {
 					.from( compilation.moduleGraph.getOutgoingConnections( module ) )
 
 					// Get the module name for each connection
-					.map( connection => connection.module?.nameForCondition() )
+					.map( connection => ( {
+						target: connection.module?.nameForCondition(),
+						original: (connection.dependency as any)?.request
+					} ) )
 
 					// Filter out connections without a name, or that are the same as the current module, or that are data URLs
-					.filter( ( path ): path is string => {
-						return !!path
-							&& path !== name
-							&& !path.startsWith( 'data:' )
+					.filter( ( { target } ) => {
+						return !!target
+							&& target !== name
+							&& !target.startsWith( 'data:' )
 					} )
 
 					// Normalize module path
-					.map( path => normalizePath( path ) )
+					.map( ( { target, original } ) => ( {
+						target: normalizePath( target! ),
+						original
+					} ) )
 
 					// Remove duplicates
-					.filter( ( path, index, self ) => self.indexOf( path ) === index )
+					.filter( ( { target }, index, self ) => self.findIndex( c => c.target === target ) === index )
 
 					// Add connection to the report
-					.forEach( target => report.edges.push( { source: normalized, target } ) );
+					.forEach( ( { target, original } ) => report.edges.push( { source: normalized, target, original } ) );
 			}
-
 			const assets = Object
 				.keys( compilation.assets )
-				.map( name => join( compilation.outputOptions.path!, name ) )
-				.filter( name => !name.endsWith( '.map' ) );
+				.filter( name => !name.endsWith( '.map' ) )
+				.map( name => {
+					const path = join( compilation.outputOptions.path!, name );
+					let entry: Array<string> | undefined = undefined;
+
+					for ( const chunk of compilation.chunks ) {
+						if ( !chunk.files.has( name ) ) {
+							continue;
+						}
+
+						entry = Array
+							.from( compilation.chunkGraph.getChunkEntryModulesIterable( chunk ) )
+							.map( module => module.nameForCondition()! );
+					}
+					
+					
+					return [ path, entry ] as [ string, Array<string> | undefined ];
+				} );
 
 			this.options.sourcesPathNormalizer = ( path: string ) => {
 				if ( !path.startsWith( 'webpack://' ) ) {

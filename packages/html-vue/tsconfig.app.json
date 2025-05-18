@@ -2,9 +2,9 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2023",
+    "target": "ES2024",
     "lib": [
-      "ES2023",
+      "ES2024",
       "DOM",
       "DOM.Iterable"
     ],
