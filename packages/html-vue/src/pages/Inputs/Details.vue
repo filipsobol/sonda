@@ -79,9 +79,44 @@
 					</table>
 				</div>
 
-				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Dependency graph</h4>
+				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
 
-				<pre><code ref="codeElement">{{ graph }}</code></pre>
+				<div class="flex flex-col gap-y-8 border-l-2 border-gray-300 pl-5 ml-3">
+					<div
+						v-for="( node, index) in graph"
+						:key="node.source.name"
+						class="flex flex-col relative py-1"
+					>
+						<div class="absolute z-10 left-[-27px] top-[14px] flex justify-center items-center">
+							<div class="size-3 rounded-full bg-gray-300"></div>
+						</div>
+
+						<p class="text-sm/7 font-semibold">
+							<template v-if="index === 0">
+								Entry point
+							</template>
+
+							<template v-else>
+								File
+							</template>
+
+							<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+
+							<template v-if="node.target.parent">
+								contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+							</template>
+
+							<template v-else>
+								imports
+								<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.edge.original || node.target.name }}</span>
+							</template>
+						</p>
+
+						<p v-if="!node.target.parent" class="text-gray-600 pt-2">
+							This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+						</p>
+					</div>
+				</div>
 
 				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Code</h4>
 
@@ -113,16 +148,16 @@
 <script setup lang="ts">
 import { computed, useTemplateRef, watchPostEffect } from 'vue';
 import { router } from '@/router.js';
-import { report } from '@/report.js';
+import { getAssetResource, getChunkResource, getSourceResource, report } from '@/report.js';
 import { formatPath, formatSize } from '@/format.js';
 import BaseSelect from '@components/common/Select.vue';
-import type { AssetResource, ChunkResource, SourceResource } from 'sonda';
+import type { ChunkResource, Edge } from 'sonda';
 
 const codeElement = useTemplateRef( 'codeElement' );
 
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
-const source = computed( () => report.resources.find( ( resource ): resource is SourceResource => resource.kind === 'source' && resource.name === name.value )! );
+const source = computed( () => getSourceResource( name.value ) );
 const usedIn = computed( () => {
 	return report.resources
 		.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === name.value )
@@ -133,20 +168,28 @@ const usedIn = computed( () => {
 } );
 
 // Selected asset
-const assetId = computed( router.computedQuery( 'formats', usedIn.value.length > 0 ? usedIn.value[ 0 ].value : '' ) );
-const asset = computed( () => {
-	return assetId.value
-		&& report.resources.find( ( resource ): resource is AssetResource => resource.kind === 'asset' && resource.name === assetId.value )
-		|| null;
-} );
-const chunk = computed( () => {
-	return assetId.value
-		&& report.resources.find( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.parent === assetId.value )
-		|| null;
-} );
+const assetId = computed( router.computedQuery( 'formats', usedIn.value[ 0 ]?.value || '' ) );
+const asset = computed( () => assetId.value && getAssetResource( assetId.value ) || null );
+const chunk = computed( () => assetId.value && getChunkResource( name.value, assetId.value ) || null );
 
 // Dependency graph
-const graph = computed( () => assetId.value && findShortestPath( asset.value?.parent!, name.value ) || null );
+const graph = computed( () => {
+	if ( !asset.value ) {
+		return null;
+	}
+
+	const shortestPath = findShortestPath( asset.value.parent!, name.value );
+
+	if ( !shortestPath ) {
+		return null;
+	}
+	
+	return shortestPath.map( edge => ( {
+		edge,
+		source: getSourceResource( edge.source )!,
+		target: getSourceResource( edge.target )!,
+	} ) );
+} );
 
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
@@ -197,26 +240,29 @@ watchPostEffect( () => {
 function findShortestPath(
   startNodes: Array<string>,
   targetNode: string
-): Array<string> | null {
+): Array<Edge> | null {
 	const adjacencyList = Object.groupBy( report.edges, edge => edge.source );
-  const queue: Array<Array<string>> = startNodes.map( node => [ node ] );
   const visited = new Set<string>( startNodes );
+  const queue: Array<Array<Edge>> = startNodes
+		.flatMap( node => adjacencyList[ node ] )
+		.filter( edge => edge !== undefined )
+		.map( edge => [ edge ] );
 
   while ( queue.length > 0 ) {
     const path = queue.shift()!;
     const node = path[ path.length - 1 ];
 
-    if ( node === targetNode ) {
+    if ( node.target === targetNode ) {
       return path;
     }
 
-    for ( const { target, original } of ( adjacencyList[ node ] ?? [] ) ) {
-			if ( visited.has( target ) ) {
+    for ( const edge of ( adjacencyList[ node.target ] ?? [] ) ) {
+			if ( visited.has( edge.target ) ) {
 				continue;
 			}
 
-			visited.add( target );
-			queue.push( [ ...path, target ] );
+			visited.add( edge.target );
+			queue.push( [ ...path, edge ] );
     }
   }
 

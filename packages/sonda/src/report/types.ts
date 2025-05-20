@@ -111,12 +111,12 @@ export interface Metadata {
  */
 export interface ResourceBase {
 	/**
-	 * Information where the resource is from.
+	 * Information where the resource comes from.
 	 */
 	kind: ResourceKind;
 
 	/**
-	 * Path to the resource.
+	 * Relative path to the resource.
 	 *
 	 * If the `source` is `sourcemap`, the file may not exist in the filesystem.
 	 */
