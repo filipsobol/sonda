@@ -9,12 +9,12 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex flex-col mb-4">
-			<h3 class="mb-4 text-xl font-bold">Asset details</h3>
+			<h3 class="mb-4 text-xl font-bold">Input details</h3>
 
 			<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
 				<table class="table-fixed w-full text-sm text-left">
 					<colgroup>
-						<col style="width: 200px">
+						<col style="width: 210px">
 						<col style="width: 100%">
 					</colgroup>
 
@@ -44,7 +44,9 @@
 			</div>
 
 			<template v-if="usedIn.length > 0">
-				<div class="mt-12 mb-2 flex gap-3">
+				<hr class="mt-12 mb-6 border-gray-100">
+
+				<div class="mt-4 mb-2 flex gap-3">
 					<span class="text-xl font-bold">Usage in</span>
 
 					<BaseSelect
@@ -53,12 +55,12 @@
 					/>
 				</div>
 
-				<h4 class="mt-2 mb-4 text-lg font-bold text-gray-700">Size</h4>
+				<h4 class="mt-4 mb-4 text-lg font-bold text-gray-700">Size</h4>
 
 				<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
 					<table class="table-fixed w-full text-sm text-left">
 						<colgroup>
-							<col style="width: 200px">
+							<col style="width: 210px">
 							<col style="width: 100%">
 						</colgroup>
 
@@ -79,16 +81,18 @@
 					</table>
 				</div>
 
-				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
+				<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
 
-				<div class="flex flex-col gap-y-8 border-l-2 border-gray-300 pl-5 ml-3">
+				<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
 					<div
 						v-for="( node, index) in graph"
 						:key="node.source.name"
 						class="flex flex-col relative py-1"
 					>
-						<div class="absolute z-10 left-[-27px] top-[14px] flex justify-center items-center">
-							<div class="size-3 rounded-full bg-gray-300"></div>
+						<div class="absolute z-10 left-[-2.5rem] top-[0.5rem] flex justify-center items-center">
+							<div class="size-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-900 font-bold">
+								{{ index + 1 }}
+							</div>
 						</div>
 
 						<p class="text-sm/7 font-semibold">
@@ -118,7 +122,7 @@
 					</div>
 				</div>
 
-				<h4 class="mt-8 mb-4 text-lg font-bold text-gray-700">Code</h4>
+				<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Code</h4>
 
 				<div
 					v-if="supportsHighlight"
@@ -157,7 +161,7 @@ const codeElement = useTemplateRef( 'codeElement' );
 
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
-const source = computed( () => getSourceResource( name.value ) );
+const source = computed( () => getSourceResource( name.value )! );
 const usedIn = computed( () => {
 	return report.resources
 		.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === name.value )
