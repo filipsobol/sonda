@@ -2,15 +2,16 @@ import { markRaw } from 'vue';
 import type { AssetResource, ChunkResource, JsonReport, SourceResource } from 'sonda';
 
 declare global {
+  const SONDA_REPORT_DATA: string;
+
   interface Window {
-    SONDA_REPORT_DATA: string;
     SONDA_DECOMPRESSED_DATA: JsonReport;
   }
 }
 
 export async function decompressData(): Promise<any> {
   // Decode base64 string
-  const data = await fetch( 'data:application/octet-stream;base64,' + window.SONDA_REPORT_DATA );
+  const data = await fetch( 'data:application/octet-stream;base64,' + SONDA_REPORT_DATA );
   const arrayBuffer = await ( data ).arrayBuffer();
 
   // Decompress data
