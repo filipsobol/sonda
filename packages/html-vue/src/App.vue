@@ -19,6 +19,8 @@
         </transition>
       </div>
     </div>
+
+    <Tooltip />
   </div>
 
   <MobileOverlay />
@@ -30,6 +32,7 @@ import { router } from '@/router.js';
 import Breadcrumbs from '@components/layout/Breadcrumbs.vue';
 import Sidebar from '@layout/Sidebar.vue';
 import MobileOverlay from '@layout/MobileOverlay.vue';
+import Tooltip from '@layout/Tooltip.vue';
 
 const components = import.meta.glob( './pages/**/*.vue' );
 
