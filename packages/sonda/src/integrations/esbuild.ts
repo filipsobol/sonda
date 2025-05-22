@@ -32,7 +32,7 @@ export async function processEsbuildMetafile(
 		const name = normalizePath( path );
 
     report.resources.push( {
-			kind: 'source',
+			kind: 'filesystem',
       name,
       type: getTypeByName( path ),
       format: input.format || 'other',

@@ -23,9 +23,32 @@
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Path</td>
 							<td class="p-3 font-normal">{{ name }}</td>
 						</tr>
+
 						<tr class="border-t border-gray-100">
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">File type</td>
 							<td class="p-3 font-normal capitalize">{{ asset.type }}</td>
+						</tr>
+
+						<tr
+							v-if="asset.parent"
+							class="border-t border-gray-100"
+						>
+							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Entrypoint(s)</td>
+							<td class="p-3 font-normal">
+								<ul>
+									<li
+										v-for="entrypoint in asset.parent"
+										:key="entrypoint"
+									>
+										<a
+											:href="router.getUrl( 'inputs/details', { item: entrypoint } )"
+											class="py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+										>
+											{{ entrypoint }}
+										</a>
+									</li>
+								</ul>
+							</td>
 						</tr>
 
 						<!-- Uncompressed -->
@@ -96,7 +119,7 @@
 		<div class="flex flex-col mt-16 mb-4">
 			<h3 class="mb-4 text-xl font-bold">Inputs ({{ inputs.length }})</h3>
 
-			<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[450px] shadow-xs">
+			<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[475px] shadow-xs">
 				<table class="table-fixed w-full text-sm text-left">
 					<colgroup>
 					</colgroup>
@@ -127,7 +150,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { router } from '@/router.js';
-import { getAssetResource, report } from '@/report.js';
+import { getAssetResource, getChunks } from '@/report.js';
 import { formatPath, formatSize, formatTime } from '@/format.js';
 import IconInfo from '@icon/Info.vue';
 
@@ -144,8 +167,8 @@ const downloadTimeBrotli = computed( () => Math.round( asset.value.brotli / SLOW
 
 // Inputs
 const inputs = computed( () => {
-	return report.resources
-		.filter( resource => resource.kind === 'chunk' && resource.parent === name.value && resource.name !== '[unassigned]' )
+	return getChunks( name.value )
+		.filter( chunk => chunk.name !== '[unassigned]' )
 		.toSorted();
 } );
 </script>

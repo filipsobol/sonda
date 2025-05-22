@@ -12,5 +12,5 @@ export function updateInputs( report: Report ): void {
 		.map( edge => edge.target );
 
 	// Remove filesystem resources that are not used by the assets
-	report.resources = report.resources.filter( resource => resource.kind !== 'source' || usedResources.includes( resource.name ) );
+	report.resources = report.resources.filter( resource => resource.kind !== 'filesystem' || usedResources.includes( resource.name ) );
 }

@@ -120,6 +120,7 @@ import Dropdown from '@components/common/Dropdown.vue';
 import Pagination from '@components/common/Pagination.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
+import type { ChunkResource } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -153,7 +154,7 @@ const data: Ref<Array<Item>> = ref(
 
 		const usedIn = report.resources
 			// Get all chunks that include the dependency name.
-			.filter( resource => resource.name.includes( dependency.name ) && resource.kind === 'chunk' )
+			.filter( ( resource ): resource is ChunkResource => resource.name.includes( dependency.name ) && resource.kind === 'chunk' )
 			.map( resource => resource.parent! )
 			.filter( ( value, index, self ) => self.indexOf( value ) === index )
 			.toSorted();

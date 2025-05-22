@@ -16,7 +16,8 @@ export type {
 	ResourceKind,
 	FileType,
 	ModuleFormat,
-	SourceResource,
+	FilesystemResource,
+	SourcemapResource,
 	AssetResource,
 	ChunkResource
 } from './report/types.js';

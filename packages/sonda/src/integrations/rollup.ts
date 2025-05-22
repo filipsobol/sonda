@@ -25,7 +25,7 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 		name: 'sonda-rollup',
 
 		async resolveId( source: string, importer: string | undefined ) {
-			if ( !importer ) {
+			if ( !importer || source.startsWith( 'data:' ) ) {
 				return;
 			}
 
@@ -44,7 +44,7 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 			const name = normalizePath( module.id );
 
 			report.resources.push( {
-				kind: 'source',
+				kind: 'filesystem',
 				name,
 				type: getTypeByName( name ),
 				format: getModuleFormat( name, module ),

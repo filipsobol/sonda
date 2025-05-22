@@ -78,7 +78,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 		}
 
 		const name = normalizePath( path );
-		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
+		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
 
 		report.edges.push( {
 			source: assetName,
@@ -99,7 +99,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 		const parent = parentMap[ path ];
 
 		report.resources.push( {
-			kind: 'source',
+			kind: 'sourcemap',
 			name,
 			type: getTypeByName( path ),
 			format: 'other',
@@ -113,7 +113,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 		const name = normalizePath( source );
 		const type = getTypeByName( source );
 		const parent = parentMap[ source ];
-		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'source' );
+		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
 
 		report.resources.push( {
 			kind: 'chunk',

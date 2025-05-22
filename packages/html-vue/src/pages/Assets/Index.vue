@@ -79,7 +79,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { router } from '@/router.js'
-import { report } from '@/report.js';
+import { getAssets } from '@/report.js';
 import { formatSize } from '@/format.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
@@ -124,7 +124,7 @@ const COLUMNS: Array<Column> = [
 	}
 ];
 
-const data = ref( report.resources.filter( ( { kind } ) => kind === 'asset' ) );
+const data = ref( getAssets() );
 
 const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => data.value.some( asset => asset.type === option.value ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );

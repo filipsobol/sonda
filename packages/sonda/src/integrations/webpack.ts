@@ -60,7 +60,7 @@ export class SondaWebpackPlugin {
 				const normalized = normalizePath( name );
 
 				report.resources.push( {
-					kind: 'source',
+					kind: 'filesystem',
 					name: normalized,
 					type: getTypeByName( normalized ),
 					format: getFormat( normalized, module ),

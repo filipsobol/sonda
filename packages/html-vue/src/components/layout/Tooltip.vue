@@ -22,9 +22,9 @@ const width = ref(0);
 const height = ref(0);
 
 // tooltip state
-const content = ref('Hello world!');
-const x = ref('100px');
-const y = ref('100px');
+const content = ref( '' );
+const x = ref( '0px' );
+const y = ref( '0px' );
 
 // tooltip DOM ref
 const tooltipRef = ref<HTMLElement | null>(null);

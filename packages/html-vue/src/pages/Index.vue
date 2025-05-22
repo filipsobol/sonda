@@ -63,27 +63,27 @@
 </template>
 
 <script setup lang="ts">
-import { report } from '@/report.js';
+import { getAssets } from '@/report.js';
 import { formatSize } from '@/format.js';
 import IconBox from '@icon/Box.vue';
 import IconCode from '@icon/Code.vue';
 import IconBrush from '@icon/Brush.vue';
 import IconImage from '@icon/Image.vue';
 
-const totalOutputs = Object.values( report.resources.filter( resource => resource.kind === 'asset' ) );
+const assets = Object.values( getAssets() );
 
-const totalCount = totalOutputs.length;
-const totalSize = totalOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
+const totalCount = assets.length;
+const totalSize = assets.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
 
-const scriptOutputs = totalOutputs.filter( output => output.type === 'script' );
+const scriptOutputs = assets.filter( output => output.type === 'script' );
 const scriptCount = scriptOutputs.length;
 const scriptSize = scriptOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
 
-const styleOutputs = totalOutputs.filter( output => output.type === 'style' );
+const styleOutputs = assets.filter( output => output.type === 'style' );
 const styleCount = styleOutputs.length;
 const styleSize = styleOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
 
-const otherOutputs = totalOutputs.filter( output => output.type === 'other' );
+const otherOutputs = assets.filter( output => output.type === 'other' );
 const otherCount = otherOutputs.length;
 const otherSize = otherOutputs.reduce( ( acc, output ) => output.uncompressed + acc, 0 );
 </script>

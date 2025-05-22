@@ -106,7 +106,7 @@
 
 							<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
 
-							<template v-if="node.target.parent">
+							<template v-if="node.target.kind === 'sourcemap'">
 								contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
 							</template>
 
@@ -116,7 +116,7 @@
 							</template>
 						</p>
 
-						<p v-if="!node.target.parent" class="text-gray-600 pt-2">
+						<p v-if="node.target.kind !== 'sourcemap'" class="text-gray-600 pt-2">
 							This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
 						</p>
 					</div>
@@ -182,15 +182,16 @@ const graph = computed( () => {
 		return null;
 	}
 
-	const shortestPath = findShortestPath( asset.value.parent!, name.value );
+	const sourceType = asset.value.parent ? 'source' : 'asset'
+	const shortestPath = findShortestPath( sourceType === 'source' ? asset.value.parent! : [ asset.value.name ], name.value );
 
 	if ( !shortestPath ) {
 		return null;
 	}
-	
+
 	return shortestPath.map( edge => ( {
 		edge,
-		source: getSourceResource( edge.source )!,
+		source: sourceType === 'source' ? getSourceResource( edge.source )! : getAssetResource( edge.source )!,
 		target: getSourceResource( edge.target )!,
 	} ) );
 } );

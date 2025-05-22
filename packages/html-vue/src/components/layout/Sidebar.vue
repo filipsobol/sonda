@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import type { Component } from 'vue';
-import { report } from '@/report.js';
+import { getAssets, getSources, report } from '@/report.js';
 import { router } from '@/router.js';
 import IconGrid from '@icon/Grid.vue';
 import IconBoxes from '@icon/Boxes.vue';
@@ -69,13 +69,13 @@ const items: Array<Link> = [
 		title: 'Assets',
 		link: 'assets',
 		icon: IconBoxes,
-		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'asset' ) ).length
+		count: Object.values( getAssets() ).length
 	},
 	{
 		title: 'Inputs',
 		link: 'inputs',
 		icon: IconFileInput,
-		count: Object.values( report.resources.filter( ( { kind } ) => kind === 'source' ) ).length
+		count: Object.values( getSources() ).length
 	},
 	{
 		title: 'Dependencies',

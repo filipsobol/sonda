@@ -132,7 +132,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { router } from '@/router.js'
-import { report } from '@/report.js';
+import { getSources, report } from '@/report.js';
 import { formatPath } from '@/format.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
@@ -141,7 +141,7 @@ import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
-import type { FileType, ModuleFormat } from 'sonda';
+import type { ChunkResource, FileType, ModuleFormat } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -205,8 +205,7 @@ const COLUMNS: Array<Column> = [
 ];
 
 const data = ref(
-	report.resources
-		.filter( ( { kind } ) => kind === 'source' )
+	getSources()
 		.map( input => ( {
 			path: input.name,
 			name: formatPath( input.name ),
@@ -214,7 +213,7 @@ const data = ref(
 			type: input.type,
 			source: input.name.includes( 'node_modules' ) ? 'external' : 'internal',
 			usedIn: report.resources
-				.filter( resource => resource.kind === 'chunk' && resource.name === input.name )
+				.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === input.name )
 				.map( resource => resource.parent! )
 		} ) )
 );
