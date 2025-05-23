@@ -112,6 +112,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, type Ref } from 'vue';
+import fuzzysort from 'fuzzysort';
 import { formatPath } from '@/format';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
@@ -175,11 +176,15 @@ const currentPage = computed( router.computedQuery( 'page', 1 ) );
 const active = computed( router.computedQuery( 'active', '' ) );
 
 const filteredData = computed( () => {
-	const lowercaseSearch = search.value.toLowerCase();
+	const filtered = data.value.filter( item => !usedIn.value.length || item.usedIn.some( path => usedIn.value.includes( path ) ) )
 
-	return data.value
-		.filter( item => item.name.toLowerCase().includes( lowercaseSearch ) )
-		.filter( item => !usedIn.value.length || item.usedIn.some( path => usedIn.value.includes( path ) ) );
+	return fuzzysort
+		.go( search.value, filtered, {
+			key: 'name',
+			all: true,
+			threshold: 0.5
+		} )
+		.map( dependency => dependency.obj );
 } );
 
 const paginatedData = computed( () => {

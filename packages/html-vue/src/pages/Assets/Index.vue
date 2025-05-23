@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
+import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js'
 import { getAssets } from '@/report.js';
 import { formatSize } from '@/format.js';
@@ -132,11 +133,15 @@ const types = computed( router.computedQuery( 'types', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 
 const filteredData = computed( () => {
-	const lowercaseSearch = search.value.toLowerCase();
+	const filtered = data.value.filter( item => !types.value.length || types.value.includes( item.type ) );
 
-	return data.value
-		.filter( item => item.name.toLowerCase().includes( lowercaseSearch ) )
-		.filter( item => !types.value.length || types.value.includes( item.type ) );
+	return fuzzysort
+		.go( search.value, filtered, {
+			key: 'name',
+			all: true,
+			threshold: 0.5
+		} )
+		.map( dependency => dependency.obj );
 } );
 
 const paginatedData = computed( () => {
