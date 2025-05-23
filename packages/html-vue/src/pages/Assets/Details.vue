@@ -117,6 +117,35 @@
 		</div>
 
 		<div class="flex flex-col mt-16 mb-4">
+			<h3 class="mb-4 text-xl font-bold">Dependencies ({{ dependencies.length }})</h3>
+
+			<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[475px] shadow-xs">
+				<table class="table-fixed w-full text-sm text-left">
+					<colgroup>
+					</colgroup>
+
+					<tbody class="text-gray-700">
+						<tr
+							v-for="( dependency, index ) in dependencies"
+							:key="dependency"
+							class="[&:not(:first-child)]:border-t border-gray-100"
+						>
+							<td class="p-3 font-normal">
+								<span class="select-none mr-2">{{ index + 1 }}.</span>
+								<a
+									:href="router.getUrl( 'dependencies', { search: dependency, active: dependency } )"
+									class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+								>
+									{{ dependency }}
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="flex flex-col mt-16 mb-4">
 			<h3 class="mb-4 text-xl font-bold">Inputs ({{ inputs.length }})</h3>
 
 			<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[475px] shadow-xs">
@@ -127,16 +156,16 @@
 					<tbody class="text-gray-700">
 						<tr
 							v-for="( input, index ) in inputs"
-							:key="input.name"
+							:key="input"
 							class="[&:not(:first-child)]:border-t border-gray-100"
 						>
 							<td class="p-3 font-normal">
 								<span class="select-none mr-2">{{ index + 1 }}.</span>
 								<a
-									:href="router.getUrl( 'inputs/details', { item: input.name } )"
+									:href="router.getUrl( 'inputs/details', { item: input } )"
 									class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
 								>
-									{{ input.name }}
+									{{ input }}
 								</a>
 							</td>
 						</tr>
@@ -150,7 +179,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { router } from '@/router.js';
-import { getAssetResource, getChunks } from '@/report.js';
+import { getAssetResource, getChunks, report } from '@/report.js';
 import { formatPath, formatSize, formatTime } from '@/format.js';
 import IconInfo from '@icon/Info.vue';
 
@@ -169,6 +198,14 @@ const downloadTimeBrotli = computed( () => Math.round( asset.value.brotli / SLOW
 const inputs = computed( () => {
 	return getChunks( name.value )
 		.filter( chunk => chunk.name !== '[unassigned]' )
+		.map( chunk => chunk.name )
 		.toSorted();
 } );
+
+const dependencies = computed( () => {
+	return report.dependencies
+		.filter( dependency => dependency.paths.some( path => inputs.value.some( input => input.includes( path ) ) ) )
+		.map( dependency => dependency.name )
+		.toSorted();
+} )
 </script>
