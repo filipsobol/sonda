@@ -43,6 +43,38 @@
 				</table>
 			</div>
 
+			<div
+				v-if="imports.length"
+				class="flex flex-col mt-16 mb-4"
+			>
+				<h3 class="mb-4 text-xl font-bold">Imports ({{ imports.length }})</h3>
+
+				<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[475px] shadow-xs">
+					<table class="table-fixed w-full text-sm text-left">
+						<colgroup>
+						</colgroup>
+
+						<tbody class="text-gray-700">
+							<tr
+								v-for="( item, index ) in imports"
+								:key="item.target"
+								class="[&:not(:first-child)]:border-t border-gray-100"
+							>
+								<td class="p-3 font-normal">
+									<span class="select-none mr-2">{{ index + 1 }}.</span>
+									<a
+										:href="router.getUrl( 'inputs/details', { item: item.target } )"
+										class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+									>
+										{{ item.original || item.target }}
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 			<template v-if="usedIn.length > 0">
 				<hr class="mt-12 mb-6 border-gray-100">
 
@@ -108,7 +140,7 @@
 								<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
 
 								<template v-if="node.target.kind === 'sourcemap'">
-									contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+									contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
 								</template>
 
 								<template v-else>
@@ -173,6 +205,8 @@ const usedIn = computed( () => {
 		} ) );
 } );
 
+const imports = computed( () => report.edges.filter( edge => edge.source === name.value ) );
+
 // Selected asset
 const assetId = computed( router.computedQuery( 'formats', usedIn.value[ 0 ]?.value || '' ) );
 const asset = computed( () => assetId.value && getAssetResource( assetId.value ) || null );
@@ -184,16 +218,27 @@ const graph = computed( () => {
 		return null;
 	}
 
-	const sourceType = asset.value.parent ? 'source' : 'asset'
-	const shortestPath = findShortestPath( sourceType === 'source' ? asset.value.parent! : [ asset.value.name ], name.value );
+	const shortestPath = findShortestPath(
+		asset.value.parent || [ asset.value.name ],
+		source.value.parent || source.value.name
+	);
 
 	if ( !shortestPath ) {
 		return null;
 	}
 
+	if ( source.value.kind === 'sourcemap' ) {
+		// If current source is from sourcemap, we need to add an edge between it and the bundle
+		shortestPath.push( {
+			source: source.value.parent!,
+			target: source.value.name,
+			original: null
+		} );
+	}
+
 	return shortestPath.map( edge => ( {
 		edge,
-		source: sourceType === 'source' ? getSourceResource( edge.source )! : getAssetResource( edge.source )!,
+		source: getSourceResource( edge.source )!,
 		target: getSourceResource( edge.target )!,
 	} ) );
 } );

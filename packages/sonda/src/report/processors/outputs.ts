@@ -103,14 +103,6 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 			...sizes,
 			parent: assetName
 		} );
-
-		if ( parent ) {
-			report.edges.push( {
-				source: normalizePath( parent ),
-				target: name,
-				original: null
-			} );
-		}
 	}
 }
 
