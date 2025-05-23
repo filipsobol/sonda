@@ -4,7 +4,7 @@ import { loadCodeAndMap } from 'load-source-map';
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
 import { Report } from '../report.js';
 import { Config } from '../../config.js';
-import { getBytesPerSource, getSizes } from '../../sourcemap/bytes.js';
+import { getBytesPerSource, getSizes, UNASSIGNED } from '../../sourcemap/bytes.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
 import type { AssetResource, FileType } from '../types.js';
 
@@ -70,50 +70,30 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 		parent: entrypoints ? entrypoints.map( entry => normalizePath( entry ) ) : null
 	} );
 
-	// If not already present, add each source map source as report "source"
-	for ( const [ index, path ] of map.sources.entries() ) {
-		if ( path === null ) {
-			// Skip if the source is null
-			continue;
-		}
-
-		const name = normalizePath( path );
-		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
-
-		report.edges.push( {
-			source: assetName,
-			target: name,
-			original: null
-		} );
-
-		if ( existingSource ) {
-			// Skip if the source is already in the report
-			continue;
-		}
-
-		const { uncompressed } = getSizes(
-			map.sourcesContent?.[ index ] || '',
-			{ gzip: false, brotli: false }
-		);
-
-		const parent = parentMap[ path ];
-
-		report.resources.push( {
-			kind: 'sourcemap',
-			name,
-			type: getTypeByName( path ),
-			format: 'other',
-			uncompressed: uncompressed,
-			parent: parent ? normalizePath( parent ) : null // TODO: Checking if `parent` exists wouldn't be necessary if CSS paths were resolved correctly
-		} )
-	}
-
 	// Add each source map source as a report "chunk"
 	for ( const [ source, sizes ] of sourcesSizes ) {
 		const name = normalizePath( source );
 		const type = getTypeByName( source );
 		const parent = parentMap[ source ];
 		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
+
+		// If source was not already added from "filesystem" then add it as a "sourcemap"
+		if ( !existingSource && source !== UNASSIGNED ) {
+			const index = map.sources.indexOf( source );
+			const { uncompressed } = getSizes(
+				map.sourcesContent?.[ index ] || '',
+				{ gzip: false, brotli: false }
+			);
+
+			report.resources.push( {
+				kind: 'sourcemap',
+				name,
+				type,
+				format: 'other',
+				uncompressed,
+				parent: parent ? normalizePath( parent ) : null
+			} );
+		}
 
 		report.resources.push( {
 			kind: 'chunk',

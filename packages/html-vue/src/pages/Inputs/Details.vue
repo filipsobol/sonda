@@ -81,46 +81,48 @@
 					</table>
 				</div>
 
-				<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
+				<template v-if="graph?.length">
+					<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
 
-				<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
-					<div
-						v-for="( node, index) in graph"
-						:key="node.source.name"
-						class="flex flex-col relative py-1"
-					>
-						<div class="absolute z-10 left-[-2.5rem] top-[0.5rem] flex justify-center items-center">
-							<div class="size-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-900 font-bold">
-								{{ index + 1 }}
+					<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
+						<div
+							v-for="( node, index) in graph"
+							:key="node.source.name"
+							class="flex flex-col relative py-1"
+						>
+							<div class="absolute z-10 left-[-2.5rem] top-[0.5rem] flex justify-center items-center">
+								<div class="size-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-900 font-bold select-none">
+									{{ index + 1 }}
+								</div>
 							</div>
+
+							<p class="text-sm/7 font-semibold">
+								<template v-if="index === 0">
+									Entry point
+								</template>
+
+								<template v-else>
+									File
+								</template>
+
+								<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+
+								<template v-if="node.target.kind === 'sourcemap'">
+									contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+								</template>
+
+								<template v-else>
+									imports
+									<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.edge.original || node.target.name }}</span>
+								</template>
+							</p>
+
+							<p v-if="node.target.kind !== 'sourcemap'" class="text-gray-600 pt-2">
+								This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+							</p>
 						</div>
-
-						<p class="text-sm/7 font-semibold">
-							<template v-if="index === 0">
-								Entry point
-							</template>
-
-							<template v-else>
-								File
-							</template>
-
-							<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
-
-							<template v-if="node.target.kind === 'sourcemap'">
-								contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
-							</template>
-
-							<template v-else>
-								imports
-								<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.edge.original || node.target.name }}</span>
-							</template>
-						</p>
-
-						<p v-if="node.target.kind !== 'sourcemap'" class="text-gray-600 pt-2">
-							This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
-						</p>
 					</div>
-				</div>
+				</template>
 
 				<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Code</h4>
 
