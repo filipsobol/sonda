@@ -125,7 +125,7 @@
 					<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
 						<div
 							v-for="( node, index) in graph"
-							:key="node.target.name"
+							:key="node.target"
 							class="flex flex-col relative py-1"
 						>
 							<div class="absolute z-10 left-[-2.5rem] top-[0.5rem] flex justify-center items-center">
@@ -134,56 +134,81 @@
 								</div>
 							</div>
 
-							<template v-if="node.connection.kind === 'entrypoint'">
+							<template v-if="node.kind === 'entrypoint'">
 								<p class="text-sm/7 font-semibold">
 									Entry point for the
-									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'assets/details', { item: node.source } )">
+										<InlineCodeBlock>{{ node.source }}</InlineCodeBlock>
+									</a>
 									asset is
-									<InlineCodeBlock>{{ node.connection.target }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 							</template>
 
-							<template v-else-if="node.connection.kind === 'import'">
+							<template v-else-if="node.kind === 'import'">
 								<p class="text-sm/7 font-semibold">
 									It imports
-									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.original || node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 
 								<p class="text-gray-600 pt-2">
-									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+									This import was resolved to
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target }}</span>
+									</a>
 								</p>
 							</template>
 
-							<template v-else-if="node.connection.kind === 'require'">
+							<template v-else-if="node.kind === 'require'">
 								<p class="text-sm/7 font-semibold">
 									File
-									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.source } )">
+										<InlineCodeBlock>{{ node.source }}</InlineCodeBlock>
+									</a>
 									requires
-									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.original || node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 
 								<p class="text-gray-600 pt-2">
-									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+									This import was resolved to
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target }}</span>
+									</a>
 								</p>
 							</template>
 
-							<template v-else-if="node.connection.kind === 'dynamic-import'">
+							<template v-else-if="node.kind === 'dynamic-import'">
 								<p class="text-sm/7 font-semibold">
 									File
-									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.source } )">
+										<InlineCodeBlock>{{ node.source }}</InlineCodeBlock>
+									</a>
 									dynamically imports
-									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.original || node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 
 								<p class="text-gray-600 pt-2">
-									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+									This import was resolved to
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 							</template>
 
-							<template v-else-if="node.connection.kind === 'sourcemap'">
+							<template v-else-if="node.kind === 'sourcemap'">
 								<p class="text-sm/7 font-semibold">
 									It has a source map that contains
-									<InlineCodeBlock>{{ node.connection.target }}</InlineCodeBlock>
+									<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
+										<InlineCodeBlock>{{ node.target }}</InlineCodeBlock>
+									</a>
 								</p>
 							</template>
 						</div>
@@ -240,7 +265,7 @@ const usedIn = computed( () => {
 		} ) );
 } );
 
-const imports = computed( () => report.connections.filter( connection => connection.source === name.value ) );
+const imports = computed( () => report.connections.filter( ( { kind, source } ) => kind !== 'sourcemap' && kind !== 'entrypoint' && source === name.value ) );
 
 // Selected asset
 const assetId = computed( router.computedQuery( 'formats', usedIn.value[ 0 ]?.value || '' ) );
@@ -248,23 +273,7 @@ const asset = computed( () => assetId.value && getAssetResource( assetId.value )
 const chunk = computed( () => assetId.value && getChunkResource( name.value, assetId.value ) || null );
 
 // Dependency graph
-const graph = computed( () => {
-	if ( !asset.value ) {
-		return null;
-	}
-
-	const shortestPath = findShortestPath( asset.value.name, source.value.name );
-
-	if ( !shortestPath ) {
-		return null;
-	}
-
-	return shortestPath.map( connection => ( {
-		connection,
-		source: getSourceResource( connection.source )!,
-		target: getSourceResource( connection.target )!,
-	} ) );
-} );
+const graph = computed( () => asset.value ? findShortestPath( asset.value.name, source.value.name ) : null );
 
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
