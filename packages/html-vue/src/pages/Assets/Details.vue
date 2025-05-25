@@ -30,14 +30,14 @@
 						</tr>
 
 						<tr
-							v-if="asset.parent"
+							v-if="entrypoints.length"
 							class="border-t border-gray-100"
 						>
 							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Entrypoint(s)</td>
 							<td class="p-3 font-normal">
 								<ul>
 									<li
-										v-for="entrypoint in asset.parent"
+										v-for="entrypoint in entrypoints"
 										:key="entrypoint"
 									>
 										<a
@@ -188,6 +188,11 @@ const SLOW_3G = 50 * 1024 * 8;
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
 const asset = computed( () => getAssetResource( name.value )! );
+const entrypoints = computed( () => {
+	return report.connections
+		.filter( connection => connection.kind === 'entrypoint' && connection.source === name.value )
+		.map( connection => connection.target )
+} );
 
 // Download times
 const downloadTimeOriginal = computed( () => Math.round( asset.value.uncompressed / SLOW_3G * 1000 ) );

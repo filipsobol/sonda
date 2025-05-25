@@ -25,14 +25,15 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 		name: 'sonda-rollup',
 
 		async resolveId( source: string, importer: string | undefined ) {
-			if ( !importer || source.startsWith( 'data:' ) ) {
+			if ( !importer ) {
 				return;
 			}
 
 			const resolved = await this.resolve( source, importer, { skipSelf: true } );
 
 			if ( resolved ) {
-				report.edges.push( {
+				report.addConnection( {
+					kind: 'import',
 					source: normalizePath( importer ),
 					target: normalizePath( resolved.id ),
 					original: source
@@ -43,13 +44,12 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 		moduleParsed( module: ModuleInfo ) {
 			const name = normalizePath( module.id );
 
-			report.resources.push( {
+			report.addResource( {
 				kind: 'filesystem',
 				name,
 				type: getTypeByName( name ),
 				format: getModuleFormat( name, module ),
-				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0,
-				parent: null
+				uncompressed: module.code ? Buffer.byteLength( module.code ) : 0
 			} );
 		},
 
@@ -58,15 +58,15 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 			bundle: OutputBundle
 		) {
 			const outputDir = resolve( process.cwd(), dir ?? dirname( file! ) );
-			const assets: Array<[ string, Array<string> | undefined ]> = Object
-				.entries( bundle )
-				.filter( ( [ name ] ) => !name.endsWith( '.map' ) )
-				.map( ( [ name, bundle ] ) => [
-					resolve( outputDir, name ),
-					bundle.type === 'chunk' && bundle.facadeModuleId ? [ bundle.facadeModuleId ] : undefined
-				] );
 
-			await report.generate( assets );
+			for ( const [ path, asset ] of Object.entries( bundle ) ) {
+				report.addAsset(
+					resolve( outputDir, path ),
+					asset.type === 'chunk' && asset.facadeModuleId ? [ asset.facadeModuleId ] : undefined
+				)
+			}
+
+			await report.generate();
 		}
 	};
 }

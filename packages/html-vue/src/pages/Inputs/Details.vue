@@ -66,7 +66,13 @@
 										:href="router.getUrl( 'inputs/details', { item: item.target } )"
 										class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
 									>
-										{{ item.original || item.target }}
+										<template v-if="item.original">
+											{{ item.original }} <span class="text-gray-500">({{ item.target }})</span>
+										</template>
+
+										<template v-else>
+											{{ item.target }}
+										</template>
 									</a>
 								</td>
 							</tr>
@@ -119,7 +125,7 @@
 					<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
 						<div
 							v-for="( node, index) in graph"
-							:key="node.source.name"
+							:key="node.target.name"
 							class="flex flex-col relative py-1"
 						>
 							<div class="absolute z-10 left-[-2.5rem] top-[0.5rem] flex justify-center items-center">
@@ -128,30 +134,58 @@
 								</div>
 							</div>
 
-							<p class="text-sm/7 font-semibold">
-								<template v-if="index === 0">
-									Entry point
-								</template>
+							<template v-if="node.connection.kind === 'entrypoint'">
+								<p class="text-sm/7 font-semibold">
+									Entry point for the
+									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									asset is
+									<InlineCodeBlock>{{ node.connection.target }}</InlineCodeBlock>
+								</p>
+							</template>
 
-								<template v-else>
+							<template v-else-if="node.connection.kind === 'import'">
+								<p class="text-sm/7 font-semibold">
+									It imports
+									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+								</p>
+
+								<p class="text-gray-600 pt-2">
+									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+								</p>
+							</template>
+
+							<template v-else-if="node.connection.kind === 'require'">
+								<p class="text-sm/7 font-semibold">
 									File
-								</template>
+									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									requires
+									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+								</p>
 
-								<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.source.name }}</span>
+								<p class="text-gray-600 pt-2">
+									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+								</p>
+							</template>
 
-								<template v-if="node.target.kind === 'sourcemap'">
-									contains source file <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
-								</template>
+							<template v-else-if="node.connection.kind === 'dynamic-import'">
+								<p class="text-sm/7 font-semibold">
+									File
+									<InlineCodeBlock>{{ node.connection.source }}</InlineCodeBlock>
+									dynamically imports
+									<InlineCodeBlock>{{ node.connection.original || node.connection.target }}</InlineCodeBlock>
+								</p>
 
-								<template v-else>
-									imports
-									<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.edge.original || node.target.name }}</span>
-								</template>
-							</p>
+								<p class="text-gray-600 pt-2">
+									This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
+								</p>
+							</template>
 
-							<p v-if="node.target.kind !== 'sourcemap'" class="text-gray-600 pt-2">
-								This import was resolved to <span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">{{ node.target.name }}</span>
-							</p>
+							<template v-else-if="node.connection.kind === 'sourcemap'">
+								<p class="text-sm/7 font-semibold">
+									It has a source map that contains
+									<InlineCodeBlock>{{ node.connection.target }}</InlineCodeBlock>
+								</p>
+							</template>
 						</div>
 					</div>
 				</template>
@@ -189,7 +223,8 @@ import { router } from '@/router.js';
 import { getAssetResource, getChunkResource, getSourceResource, report } from '@/report.js';
 import { formatPath, formatSize } from '@/format.js';
 import BaseSelect from '@components/common/Select.vue';
-import type { ChunkResource, Edge } from 'sonda';
+import InlineCodeBlock from '@components/common/InlineCodeBlock.vue';
+import type { ChunkResource, Connection } from 'sonda';
 
 const codeElement = useTemplateRef( 'codeElement' );
 
@@ -205,7 +240,7 @@ const usedIn = computed( () => {
 		} ) );
 } );
 
-const imports = computed( () => report.edges.filter( edge => edge.source === name.value ) );
+const imports = computed( () => report.connections.filter( connection => connection.source === name.value ) );
 
 // Selected asset
 const assetId = computed( router.computedQuery( 'formats', usedIn.value[ 0 ]?.value || '' ) );
@@ -218,28 +253,16 @@ const graph = computed( () => {
 		return null;
 	}
 
-	const shortestPath = findShortestPath(
-		asset.value.parent || [ asset.value.name ],
-		source.value.parent || source.value.name
-	);
+	const shortestPath = findShortestPath( asset.value.name, source.value.name );
 
 	if ( !shortestPath ) {
 		return null;
 	}
 
-	if ( source.value.kind === 'sourcemap' ) {
-		// If current source is from sourcemap, we need to add an edge between it and the bundle
-		shortestPath.push( {
-			source: source.value.parent!,
-			target: source.value.name,
-			original: null
-		} );
-	}
-
-	return shortestPath.map( edge => ( {
-		edge,
-		source: getSourceResource( edge.source )!,
-		target: getSourceResource( edge.target )!,
+	return shortestPath.map( connection => ( {
+		connection,
+		source: getSourceResource( connection.source )!,
+		target: getSourceResource( connection.target )!,
 	} ) );
 } );
 
@@ -290,15 +313,12 @@ watchPostEffect( () => {
  * Finds the shortest directed path from any of the given start nodes to the target node using BFS.
  */
 function findShortestPath(
-  startNodes: Array<string>,
+  startNode: string,
   targetNode: string
-): Array<Edge> | null {
-	const adjacencyList = Object.groupBy( report.edges, edge => edge.source );
-  const visited = new Set<string>( startNodes );
-  const queue: Array<Array<Edge>> = startNodes
-		.flatMap( node => adjacencyList[ node ] )
-		.filter( edge => edge !== undefined )
-		.map( edge => [ edge ] );
+): Array<Connection> | null {
+  const adjacencyList = Object.groupBy( report.connections, connection => connection.source );
+  const visited = new Set<string>( [ startNode ] );
+  const queue: Array<Array<Connection>> = ( adjacencyList[startNode] ?? [] ).map( connection  => [ connection ] );
 
   while ( queue.length > 0 ) {
     const path = queue.shift()!;
@@ -308,13 +328,13 @@ function findShortestPath(
       return path;
     }
 
-    for ( const edge of ( adjacencyList[ node.target ] ?? [] ) ) {
-			if ( visited.has( edge.target ) ) {
-				continue;
-			}
+    for ( const connection of adjacencyList[ node.target ] ?? [] ) {
+      if ( visited.has( connection.target ) ) {
+        continue;
+      }
 
-			visited.add( edge.target );
-			queue.push( [ ...path, edge ] );
+      visited.add( connection.target );
+      queue.push( [ ...path, connection ] );
     }
   }
 

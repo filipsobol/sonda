@@ -145,7 +145,7 @@ interface Item {
 
 const data: Ref<Array<Item>> = ref(
 	report.dependencies.map( dependency => {
-		const importedBy = report.edges
+		const importedBy = report.connections
 			// Get the edges where the target is the dependency, but the source itself is not.
 			// This is to skip sources found in source maps, because in such cases both edges will include the dependency name.
 			.filter( ( { source, target } ) => !source.includes( dependency.name ) && target.includes( dependency.name ) )

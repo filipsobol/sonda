@@ -16,7 +16,7 @@ export interface JsonReport {
 	/**
 	 * List of all connections between resources.
 	 */
-	edges: Array<Edge>;
+	connections: Array<Connection>;
 
 	/**
 	 * List of all detected external dependencies and their paths. If
@@ -217,7 +217,7 @@ export interface AssetResource extends ResourceBase {
 	uncompressed: number;
 	gzip: number;
 	brotli: number;
-	parent: Array<string> | null;
+	parent?: never;
 	sourcemap: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
@@ -250,7 +250,8 @@ export type Resource =
 
 export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
 
-export interface Edge {
+export interface Connection {
+	kind: ConnectionKind;
 	source: string;
 	target: string;
 	original: string | null;
@@ -287,6 +288,32 @@ export type ResourceKind =
 	 * This is source after tree-shaking, minification, etc.
 	 */
 	| 'chunk';
+
+export type ConnectionKind =
+	/**
+	 * Source is an asset and the target is a entry point file,
+	 */
+	| 'entrypoint'
+
+	/**
+	 * Source uses a static import to access the target resource.
+	 */
+	| 'import'
+
+	/**
+	 * Source uses a `require()` call to access the target resource.
+	 */
+	| 'require'
+
+	/**
+	 * Source uses a dynamic `import()` to access the target resource.
+	 */
+	| 'dynamic-import'
+
+	/**
+	 * Source has a sourcemap that includes the target resource.
+	 */
+	| 'sourcemap';
 
 export type FileType = 
 	| 'component'

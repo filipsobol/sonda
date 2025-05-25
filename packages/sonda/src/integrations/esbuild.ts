@@ -1,7 +1,8 @@
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
 import { Report } from '../report/report.js';
-import type { Metafile, Plugin } from 'esbuild';
+import type { ImportKind, Metafile, Plugin } from 'esbuild';
+import type { ConnectionKind } from '../report/types.js';
 
 export function SondaEsbuildPlugin( userOptions: UserOptions = {} ): Plugin {
   const options = new Config( userOptions, {
@@ -31,25 +32,47 @@ export async function processEsbuildMetafile(
   for ( const [ path, input ] of Object.entries( metafile.inputs ) ) {
 		const name = normalizePath( path );
 
-    report.resources.push( {
+    report.addResource(  {
 			kind: 'filesystem',
       name,
       type: getTypeByName( path ),
       format: input.format || 'other',
-      uncompressed: input.bytes,
-      parent: null
+      uncompressed: input.bytes
     } );
 
-		input.imports.forEach( imp => report.edges.push( {
-			source: name,
-			target: normalizePath( imp.path ),
-      original: imp.original || null
-		} ) );
+    input.imports.forEach( imp => {
+      report.addConnection( {
+        kind: connectionKindMapper( imp.kind ),
+        source: name,
+        target: normalizePath( imp.path ),
+        original: imp.original || null
+      } );
+    } );
   }
 
-  const assets = Object
-    .entries( metafile.outputs )
-    .map( ( [ path, output ] ) => [ path, output.entryPoint ? [ output.entryPoint ] : undefined ] as [ string, Array<string> | undefined ] )
+  for ( const [ path, output ] of Object.entries( metafile.outputs ) ) {
+    report.addAsset( path, output.entryPoint ? [ output.entryPoint ] : undefined );
+  }
 
-  await report.generate( assets );
+  await report.generate();
+}
+
+/**
+ * Maps esbuild's ImportKind to Sonda's ConnectionKind.
+ */
+function connectionKindMapper( kind: ImportKind | undefined ): ConnectionKind {
+  switch( kind ) {
+    case 'entry-point':
+      return 'entrypoint';
+    case 'import-statement':
+    case 'import-rule':
+      return 'import';
+    case 'require-call':
+    case 'require-resolve':
+      return 'require';
+    case 'dynamic-import':
+      return 'dynamic-import';
+    default:
+      return 'import';
+  }
 }

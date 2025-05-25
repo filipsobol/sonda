@@ -4,7 +4,7 @@ import { loadCodeAndMap } from 'load-source-map';
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
 import { Report } from '../report.js';
 import { Config } from '../../config.js';
-import { getBytesPerSource, getSizes, UNASSIGNED } from '../../sourcemap/bytes.js';
+import { getBytesPerSource, getSizes, UNASSIGNED } from './sourcemap.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
 import type { AssetResource, FileType } from '../types.js';
 
@@ -20,17 +20,16 @@ const parentMap: Record< string, string> = {};
 /**
  * Update the report with the output assets and their sources from the source map.
  */
-export function updateOutputs(
+export function updateOutput(
 	report: Report,
-	assets: AssetsWithEntrypoints,
+	path: string,
+	entrypoints: Array<string> | undefined,
 ): void {
-	for ( const [ path, entrypoints ] of assets ) {
-		const type = getTypeByName( path );
+	const type = getTypeByName( path );
 
-		RESOURCE_TYPES_TO_ANALYZE.includes( type )
-			? addAnalyzableType( report, path, entrypoints, type )
-			: addNonAnalyzableType( report, path, type );
-	}
+	RESOURCE_TYPES_TO_ANALYZE.includes( type )
+		? addAnalyzableType( report, path, entrypoints, type )
+		: addNonAnalyzableType( report, path, type );
 }
 
 /**
@@ -38,15 +37,14 @@ export function updateOutputs(
  */
 function addNonAnalyzableType( report: Report, path: string, type: FileType ): void {
 	const content = readFileSync( path );
-	const sizes = getSizes( content, report.metadata );
+	const sizes = getSizes( content, report.config );
 
-	report.resources.push( {
+	report.addResource( {
 		kind: 'asset',
 		name: normalizePath( path ),
 		type,
 		...sizes,
-		sourcemap: null,
-		parent: null
+		sourcemap: null
 	} );
 }
 
@@ -57,18 +55,25 @@ function addNonAnalyzableType( report: Report, path: string, type: FileType ): v
 function addAnalyzableType( report: Report, path: string, entrypoints: Array<string> | undefined, type: FileType ): void {
 	const assetName = normalizePath( path );
 	const { code, map } = getSource( path, report.config );
-	const sizes = getSizes( code, report.metadata );
+	const sizes = getSizes( code, report.config );
 	const sourcesSizes = getBytesPerSource( code, map, sizes, report.config );
 	const sourcemap = report.config.sources ? normalizeSourceMap( map ) : null;
 
-	report.resources.push( {
+	report.addResource( {
 		kind: 'asset',
 		name: assetName,
 		type,
 		...sizes,
-		sourcemap,
-		parent: entrypoints ? entrypoints.map( entry => normalizePath( entry ) ) : null
+		sourcemap
 	} );
+
+	// Add `asset => entrypoint` connections
+	entrypoints?.forEach( entry => report.addConnection( {
+		kind: 'entrypoint',
+		source: assetName,
+		target: normalizePath( entry ),
+		original: null
+	} ) );
 
 	// Add each source map source as a report "chunk"
 	for ( const [ source, sizes ] of sourcesSizes ) {
@@ -85,7 +90,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 				{ gzip: false, brotli: false }
 			);
 
-			report.resources.push( {
+			report.addResource( {
 				kind: 'sourcemap',
 				name,
 				type,
@@ -95,7 +100,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 			} );
 		}
 
-		report.resources.push( {
+		report.addResource( {
 			kind: 'chunk',
 			name,
 			type,
@@ -103,6 +108,16 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 			...sizes,
 			parent: assetName
 		} );
+
+		if ( parent ) {
+			// Add `bundle => sourcemap` connection
+			report.addConnection( {
+				kind: 'sourcemap',
+				source: normalizePath( parent ),
+				target: name,
+				original: null
+			} );
+		}
 	}
 }
 
