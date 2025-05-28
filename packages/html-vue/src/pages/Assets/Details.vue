@@ -9,22 +9,19 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex flex-col mb-4">
-			<Tabs
-				v-model="activeTab"
-				:options="TABS"
-			>
-				<template #details>
-					<Details :name="name" />
-				</template>
+			<Details :name />
 
-				<template #dependencies>
-					<Dependencies :name="name" :inputs="inputs" />
-				</template>
+			<Dependencies
+				:name
+				:inputs="inputs"
+				class="mt-4"
+			/>
 
-				<template #inputs>
-					<Inputs :name="name" :inputs="inputs" />
-				</template>
-			</Tabs>
+			<Inputs
+				:name
+				:inputs="inputs"
+				class="mt-4"
+			/>
 		</div>
 	</div>
 </template>
@@ -34,18 +31,10 @@ import { computed } from 'vue';
 import { router } from '@/router.js';
 import { getChunks } from '@/report.js';
 import { formatPath } from '@/format.js';
-import Tabs from '@/components/common/Tabs.vue';
-import Details from '@/components/assets/Details.vue';
-import Dependencies from '@/components/assets/Dependencies.vue';
-import Inputs from '@/components/assets/Inputs.vue';
+import Details from '@/components/sections/Assets/Details.vue';
+import Dependencies from '@/components/sections/Assets/Dependencies.vue';
+import Inputs from '@/components/sections/Assets/Inputs.vue';
 
-const TABS = [
-	{ label: 'Details', value: 'details' },
-	{ label: 'Dependencies', value: 'dependencies' },
-	{ label: 'Inputs', value: 'inputs' }
-];
-
-const activeTab = computed( router.computedQuery( 'tab', TABS[ 0 ].value ) );
 const name = computed( () => router.query.item );
 const formattedName = computed( () => formatPath( name.value ) );
 

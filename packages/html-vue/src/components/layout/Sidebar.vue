@@ -50,7 +50,7 @@ import IconGrid from '@icon/Grid.vue';
 import IconBoxes from '@icon/Boxes.vue';
 import IconFileInput from '@icon/FileInput.vue';
 import IconShare2 from '@icon/Share2.vue';
-import IconCircleAlert from '@icon/CircleAlert.vue';
+// import IconCircleAlert from '@icon/CircleAlert.vue';
 
 interface Link {
 	title: string;
@@ -83,11 +83,13 @@ const items: Array<Link> = [
 		icon: IconShare2,
 		count: Object.values( report.dependencies ).length
 	},
+	/*
 	{
 		title: 'Issues',
 		link: 'issues',
 		icon: IconCircleAlert,
 		count: report.issues.length
 	}
+	*/
 ];
 </script>

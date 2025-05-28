@@ -61,6 +61,7 @@ class Router {
 	 * If the query parameter is equal to the default value, it removes the query parameter from the URL.
 	 */
 	computedQuery( key: string, defaults: string ): WritableComputedOptions<string>;
+	computedQuery( key: string, defaults: boolean ): WritableComputedOptions<boolean>;
 	computedQuery( key: string, defaults: number ): WritableComputedOptions<number>;
 	computedQuery<T extends unknown>( key: string, defaults: Array<T> ): WritableComputedOptions<Array<T>>;
 	computedQuery( key: string, defaults: any ): WritableComputedOptions<any> {
@@ -68,6 +69,13 @@ class Router {
 			return {
 				get: () => this.#query[ key ] || defaults,
 				set: value => areParamsEqual( value, defaults ) ? this.removeQuery( key ) : this.updateQuery( key, value ),
+			};
+		}
+
+		if ( typeof defaults === 'boolean' ) {
+			return {
+				get: () => JSON.parse( this.#query[ key ] ?? defaults ),
+				set: value => areParamsEqual( value, defaults ) ? this.removeQuery( key ) : this.updateQuery( key, value.toString() )
 			};
 		}
 
@@ -163,14 +171,11 @@ class Router {
 }
 
 function areParamsEqual( a: string, b: string ): boolean;
+function areParamsEqual( a: boolean, b: boolean ): boolean;
 function areParamsEqual( a: number, b: number ): boolean;
 function areParamsEqual( a: Array<unknown>, b: Array<unknown> ): boolean;
 function areParamsEqual( a: any, b: any ): boolean {
-	if ( typeof a === 'string' ) {
-		return a === b;
-	}
-
-	if ( typeof a === 'number' ) {
+	if ( typeof a === 'string' || typeof a === 'boolean' || typeof a === 'number' ) {
 		return a === b;
 	}
 
