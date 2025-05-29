@@ -9,18 +9,7 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex gap-2 mb-4">
-			<div class="relative flex">
-				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-					<IconSearch :size="16" class="text-gray-500" />
-				</div>
-
-				<input
-					v-model="search"
-					type="text"
-					class="py-1.25 ps-10 w-80 text-sm text-gray-900 border border-gray-300 bg-white rounded-lg outline-hidden shadow-xs placeholder:text-gray-500 focus:ring focus:ring-gray-500 focus:border-gray-500"
-					placeholder="Filter dependencies"
-				>
-			</div>
+			<SearchInput v-model="search" />
 
 			<Dropdown
 				v-model="usedIn"
@@ -116,10 +105,10 @@ import fuzzysort from 'fuzzysort';
 import { formatPath } from '@/format';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
+import SearchInput from '@/components/common/SearchInput.vue';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import Dropdown from '@components/common/Dropdown.vue';
 import Pagination from '@components/common/Pagination.vue';
-import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
 import type { ChunkResource } from 'sonda';
 
@@ -171,7 +160,7 @@ const data: Ref<Array<Item>> = ref(
 
 const availableUsedIn = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( dependency => dependency.usedIn.includes( option.value ) ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
-const usedIn = computed( router.computedQuery( 'formats', [] as Array<string> ) );
+const usedIn = computed( router.computedQuery( 'usage', [] as Array<string> ) );
 const currentPage = computed( router.computedQuery( 'page', 1 ) );
 const active = computed( router.computedQuery( 'active', '' ) );
 

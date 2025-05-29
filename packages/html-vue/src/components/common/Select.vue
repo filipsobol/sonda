@@ -5,6 +5,7 @@
 	>
 		<BaseButton
 			class="ps-3 pe-2 min-w-48"
+			:active="!!model"
 			@click="() => open = !open"
 		>
 			<span ref="select-button">{{ title }}</span>
@@ -80,7 +81,9 @@ interface Props {
 }
 
 const element = useTemplateRef<HTMLButtonElement>( 'select-button' );
-const model = defineModel();
+const model = defineModel<string>( {
+	default: ''
+} );
 const props = defineProps<Props>();
 
 const open = ref( false );

@@ -3,7 +3,10 @@
 		v-click-outside="() => open = false"
 		class="relative"
 	>
-		<BaseButton @click="() => open = !open">
+		<BaseButton
+			:active="model.length > 0"
+			@click="() => open = !open"
+		>
 			<slot name="icon" />
 
 			<span>{{ title }}</span>
@@ -70,7 +73,9 @@ interface Props {
 	options: Array<DropdownOption>;
 }
 
-const model = defineModel();
+const model = defineModel<Array<string>>( {
+	default: () => [],
+} );
 const props = defineProps<Props>();
 
 const open = ref( false );

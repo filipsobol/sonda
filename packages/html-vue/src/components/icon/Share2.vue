@@ -1,4 +1,5 @@
 <template>
+	<!-- https://lucide.dev/license -->
 	<Icon>
 		<circle cx="18" cy="5" r="3"/>
 		<circle cx="6" cy="12" r="3"/>

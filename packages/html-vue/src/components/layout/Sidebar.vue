@@ -46,6 +46,7 @@
 import type { Component } from 'vue';
 import { getAssets, getSources, report } from '@/report.js';
 import { router } from '@/router.js';
+import IconHome from '@icon/Home.vue';
 import IconGrid from '@icon/Grid.vue';
 import IconBoxes from '@icon/Boxes.vue';
 import IconFileInput from '@icon/FileInput.vue';
@@ -63,6 +64,11 @@ const items: Array<Link> = [
 	{
 		title: 'Home',
 		link: '',
+		icon: IconHome
+	},
+	{
+		title: 'Treemap',
+		link: 'treemap',
 		icon: IconGrid
 	},
 	{

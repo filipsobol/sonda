@@ -17,7 +17,7 @@
 						<td class="p-3 font-normal">
 							<span class="select-none mr-2">{{ index + 1 }}.</span>
 							<a
-								:href="router.getUrl( 'dependencies', { search: dependency, active: dependency } )"
+								:href="router.getUrl( 'dependencies', { search: dependency, usage: name, active: dependency } )"
 								class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
 							>
 								{{ dependency }}
