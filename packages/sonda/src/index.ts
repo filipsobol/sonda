@@ -9,18 +9,20 @@ export { Report } from './report/report.js';
 export type {
 	JsonReport,
 	Metadata,
-	Resource,
-	Connection,
-	Dependency,
-	Issue,
-	ResourceKind,
-	ConnectionKind,
-	FileType,
-	ModuleFormat,
+	ResourceBase,
 	FilesystemResource,
 	SourcemapResource,
 	AssetResource,
-	ChunkResource
+	ChunkResource,
+	Connection,
+	Dependency,
+	Issue,
+	Resource,
+	Sizes,
+	ResourceKind,
+	ConnectionKind,
+	FileType,
+	ModuleFormat
 } from './report/types.js';
 
 // Config

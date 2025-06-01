@@ -239,17 +239,6 @@ export interface ChunkResource extends ResourceBase {
 	sourcemap?: never;
 }
 
-/**
- * All types of resources.
- */
-export type Resource = 
-	| FilesystemResource
-	| SourcemapResource
-	| AssetResource
-	| ChunkResource;
-
-export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
-
 export interface Connection {
 	kind: ConnectionKind;
 	source: string;
@@ -266,6 +255,17 @@ export interface Issue {
 	type: string;
 	data: unknown;
 }
+
+/**
+ * All types of resources.
+ */
+export type Resource = 
+	| FilesystemResource
+	| SourcemapResource
+	| AssetResource
+	| ChunkResource;
+
+export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
 
 export type ResourceKind =
 	/**
