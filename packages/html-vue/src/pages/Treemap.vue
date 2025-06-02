@@ -14,7 +14,6 @@
 			ref="container"
 			role="application"
 			class="flex-grow w-full overflow-hidden"
-			@click="onClick"
 		>
 			<Treemap
     		:key
@@ -43,25 +42,12 @@ const height = ref( 0 );
 
 const key = computed( () => `${content.value!.path}-${width.value}-${height.value}` );
 const content = computed( () => {
-	const asset = router.query.asset;
+	const asset = router.query.item;
 
 	return asset
 		? getOutputTrie( asset ).get( router.query.chunk || '' ) as Folder
 		: getBuildTrie().get( '' ) as Folder;
 } );
-
-function onClick( event: MouseEvent ) {
-  const target = event.target as Element;
-  const item = target.getAttribute( 'data-tile' );
-
-  if ( !item ) {
-		return;
-	}
-
-	return router.query.asset
-		? router.navigate( 'treemap', { asset: router.query.asset, chunk: item } )
-		: router.navigate( 'treemap', { asset: item } );
-}
 
 onMounted( () => {
 	resizeObserver.observe( container.value! );
