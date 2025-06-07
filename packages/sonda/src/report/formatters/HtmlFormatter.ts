@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { gzipSync } from 'zlib';
 import { readFile } from 'fs/promises';
 import { Formatter } from './Formatter.js';
 import type { JsonReport } from '../types.js';
@@ -14,7 +15,7 @@ export class HtmlFormatter extends Formatter {
 
 		return template.replace(
 			'__REPORT_DATA__',
-			encodeURIComponent( JSON.stringify( data ) )
+			gzipSync( JSON.stringify( data ) ).toString('base64')
 		);
 	}
 }

@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { gzipSync } from 'zlib';
 import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
@@ -6,14 +7,13 @@ import tailwindcss from '@tailwindcss/vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import { fileURLToPath } from 'url';
 
-const REPORT_DATA = process.env.NODE_ENV === 'production'
+const SONDA_REPORT_DATA = process.env.NODE_ENV === 'production'
 	? '__REPORT_DATA__'
-	: readFileSync( './sample_data.json', 'utf-8' );
+	: gzipSync( readFileSync( './sample_data.json', 'utf-8' ) ).toString('base64')
 
-// https://vite.dev/config/
 export default defineConfig( {
 	define: {
-		SONDA_REPORT_DATA: JSON.stringify( gzipSync( REPORT_DATA ).toString('base64') )
+		SONDA_REPORT_DATA: JSON.stringify( SONDA_REPORT_DATA ),
 	},
   plugins: [
     vue(),
@@ -23,8 +23,8 @@ export default defineConfig( {
 	build: {
 		modulePreload: false,
 		target: 'esnext',
-		// emptyOutDir: false,
-		// outDir: resolve( import.meta.dirname, '../sonda/dist' )
+		emptyOutDir: false,
+		outDir: resolve( import.meta.dirname, '../sonda/dist' )
 	},
 	esbuild: {
 		legalComments: 'none'

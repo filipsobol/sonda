@@ -18,7 +18,7 @@ export default {
   plugins: [
     new MiniCssExtractPlugin(),
     new Sonda( {
-			format: 'json'
+			format: 'html'
     } )
   ],
   module: {

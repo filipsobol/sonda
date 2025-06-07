@@ -21,7 +21,7 @@
 				]"
 				:href="type.href"
 				:tabindex="type.size === 0 ? -1 : 0"
-				class="p-4 col-span-3 flex flex-col border border-gray-300 rounded-lg shadow-xs transition-colors duration-150"
+				class="p-4 col-span-3 flex flex-col border border-gray-300 rounded-lg shadow-xs transition-colors duration-150 outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500"
 			>
 				<div class="flex items-start justify-between">
 					<p class="text-gray-500 font-semibold">{{ type.label }}</p>

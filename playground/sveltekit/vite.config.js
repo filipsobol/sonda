@@ -9,7 +9,7 @@ export default defineConfig({
 	plugins: [
 		sveltekit(),
 		Sonda( {
-			format: 'json',
+			format: 'html',
 			server: true
 		} )
 	]

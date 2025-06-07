@@ -1,6 +1,7 @@
+import { extname } from 'path';
+import open from 'open';
 import { version } from 'sonda/package.json' with { type: 'json' };
-import open from 'tiny-open';
-import { sortByKey } from '../utils.js';
+import { ignoredExtensions, sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import { updateOutput } from './processors/outputs.js';
@@ -75,8 +76,7 @@ export class Report {
 	}
 
 	addAsset( name: string, entrypoints?: Array<string> ): void {
-		if ( name.endsWith( '.map' ) ) {
-			// Ignore source maps
+		if ( ignoredExtensions.includes( extname( name ) ) ){
 			return;
 		}
 

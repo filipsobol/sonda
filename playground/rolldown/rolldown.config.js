@@ -11,7 +11,7 @@ export default defineConfig( {
 	},
 	plugins: [
 		Sonda( {
-			format: 'json'
+			format: 'html'
 		} )
 	]
 } );

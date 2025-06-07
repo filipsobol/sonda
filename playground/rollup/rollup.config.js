@@ -28,7 +28,7 @@ export default defineConfig( {
 		} ),
 		terser(),
 		Sonda( {
-			format: 'json'
+			format: 'html'
 		} )
 	]
 } );

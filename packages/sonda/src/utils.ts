@@ -52,6 +52,11 @@ export const extensions: Record<string, FileType> = {
 	'.riot': 'component'
 };
 
+export const ignoredExtensions: Array<string> = [
+	'.map',
+	'.d.ts',
+];
+
 /**
  * Normalizes a given path by removing leading null characters and converting it to a relative POSIX path.
  */
@@ -104,7 +109,7 @@ export async function getAllFiles( dir: string, recursive = true ): Promise<stri
 	
 		return files
 			.filter( file => file.isFile() )
-			.filter( file => extname( file.name ) !== '.map' )
+			.filter( file => !ignoredExtensions.includes( extname( file.name ) ) )
 			.map( file => join( relative( process.cwd(), file.parentPath ), file.name ) );
 	} catch {
 		// Directory does not exist or is inaccessible

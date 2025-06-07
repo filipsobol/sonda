@@ -23,7 +23,7 @@ export default defineConfig({
 		sitemap(),
 		vue(),
 		Sonda( {
-			format: 'json',
+			format: 'html',
 			server: true
 		} )
 	],

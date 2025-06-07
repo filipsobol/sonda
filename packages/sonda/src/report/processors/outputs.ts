@@ -54,7 +54,13 @@ function addNonAnalyzableType( report: Report, path: string, type: FileType ): v
  */
 function addAnalyzableType( report: Report, path: string, entrypoints: Array<string> | undefined, type: FileType ): void {
 	const assetName = normalizePath( path );
-	const { code, map } = getSource( path, report.config );
+	const codeMap = getSource( path, report.config );
+
+	if ( !codeMap ) {
+		return addNonAnalyzableType( report, path, type );
+	}
+
+	const { code, map } = codeMap;
 	const sizes = getSizes( code, report.config );
 	const sourcesSizes = getBytesPerSource( code, map, sizes, report.config );
 	const sourcemap = report.config.sources ? normalizeSourceMap( map ) : null;
@@ -137,12 +143,16 @@ function normalizeSourceMap( map: DecodedSourceMap ): AssetResource[ 'sourcemap'
  * is enabled, it will recursively load the source maps of the sources
  * until it finds the original source.
  */
-function getSource( path: string, config: Config ): { code: string, map: DecodedSourceMap } {
-	const { code, map } = loadCodeAndMap( path, config.sourcesPathNormalizer )!;
+function getSource( path: string, config: Config ): { code: string, map: DecodedSourceMap } | null {
+	const codeMap = loadCodeAndMap( path, config.sourcesPathNormalizer );
+
+	if ( !codeMap || !codeMap.map ) {
+		return null;
+	}
 
 	return {
-		code,
-		map: parseSourceMap( map!, config.deep )
+		code: codeMap.code,
+		map: parseSourceMap( codeMap.map, config.deep )
 	};
 }
 

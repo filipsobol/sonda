@@ -41,7 +41,7 @@ const container = useTemplateRef( 'container' );
 const width = ref( 0 );
 const height = ref( 0 );
 
-const key = computed( () => `${content.value!.path}-${width.value}-${height.value}` );
+const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 const content = computed( () => {
 	// `router.query.item` maybe not be a complete path, so we need to find the asset in the report
 	const activeAsset = report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item );

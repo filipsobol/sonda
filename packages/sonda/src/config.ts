@@ -16,7 +16,7 @@ export class Config implements Required<IntegrationOptions> {
 			enabled: true,
 			format: 'html',
 			outputDir: '.sonda',
-			open: false,
+			open: true,
 			deep: false,
 			sources: false,
 			gzip: false,
