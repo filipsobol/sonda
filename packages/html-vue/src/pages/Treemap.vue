@@ -26,10 +26,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount } from 'vue'
-import Treemap from '@/components/treemap/Treemap.vue'
+import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount } from 'vue';
+import Treemap from '@/components/treemap/Treemap.vue';
 import { getOutputTrie, getBuildTrie, type Folder } from '@/FileSystemTrie';
 import { router } from '@/router';
+import { report } from '@/report';
 
 const resizeObserver = new ResizeObserver( entries => {
 	width.value = entries[ 0 ].contentRect.width;
@@ -42,10 +43,14 @@ const height = ref( 0 );
 
 const key = computed( () => `${content.value!.path}-${width.value}-${height.value}` );
 const content = computed( () => {
-	const asset = router.query.item;
+	// `router.query.item` maybe not be a complete path, so we need to find the asset in the report
+	const activeAsset = report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item );
 
-	return asset
-		? getOutputTrie( asset ).get( router.query.chunk || '' ) as Folder
+	return activeAsset
+		// Show details of a specific asset
+		? getOutputTrie( activeAsset.name ).get( router.query.chunk || '' ) as Folder
+
+		// Show the entire build
 		: getBuildTrie().get( '' ) as Folder;
 } );
 

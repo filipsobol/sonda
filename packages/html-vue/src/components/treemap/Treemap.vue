@@ -20,17 +20,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import Level from './Level.vue'
-import type { Folder } from '@/FileSystemTrie'
+import { computed } from 'vue';
+import Level from './Level.vue';
+import type { Folder } from '@/FileSystemTrie';
 
 interface Props {
-  width: number
-  height: number
-  content: Folder
+  width: number;
+  height: number;
+  content: Folder;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const totalBytes = computed( () => props.content.uncompressed );
 const innerWidth = computed( () => props.width - 1 );

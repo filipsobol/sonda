@@ -25,7 +25,7 @@
     >
       <div
         xmlns="http://www.w3.org/1999/xhtml"
-        class="@container px-2 py-1 size-full flex justify-center flex-nowrap text-sm gap-1"
+        class="@container px-2 py-0.5 size-full flex justify-center flex-nowrap text-sm gap-1"
       >
         <!-- https://stackoverflow.com/a/42551367/4617687 -->
         <p dir="rtl" class="text-gray-900 shrink truncate">&lrm;{{ content.name }}</p>
@@ -49,6 +49,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import Level from './Level.vue';
+import { report } from '@/report';
 import { router } from '@/router';
 import { formatSize } from '@/format';
 import { isFolder, type Content } from '@/FileSystemTrie';
@@ -69,21 +70,22 @@ const props = defineProps<Props>();
 const width = computed( () => props.tile.width - padding * 2 );
 const height = computed( () => props.tile.height - padding - paddingTop );
 const link = computed( () => {
-  const asset = router.query.item;
+	// `router.query.item` maybe not be a complete path, so we need to find the asset in the report
+	const activeAsset = report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item );
   const path = props.content.path;
 
-  if ( !asset ) {
+  if ( !activeAsset ) {
     // Tile is an asset
     return router.getUrl( 'treemap', { item: path } );
   }
 
   if ( isFolder( props.content ) ) {
     // Tile is a folder
-    return router.getUrl( 'treemap', { item: asset, chunk: path } );
+    return router.getUrl( 'treemap', { item: activeAsset.name, chunk: path } );
   }
 
   // Tile is a file
-  return router.getUrl( 'inputs/details', { item: path } );
+  return router.getUrl( 'inputs/details', { item: path, usedIn: activeAsset.name } );
 } );
 const formattedSize = computed( () => formatSize( props.content.uncompressed ) );
 const percentageOfTotal = computed( () => Math.min( ( props.content.uncompressed / props.totalBytes ) * 100, 100 ) );

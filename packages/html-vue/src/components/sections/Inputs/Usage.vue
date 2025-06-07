@@ -1,6 +1,6 @@
 <template>
 	<Collapsible
-		v-if="usedIn.length"
+		v-if="parentAssets.length"
 		v-model="show"
 	>
 		<template #title>Usage</template>
@@ -11,7 +11,7 @@
 
 			<BaseSelect
 				v-model="assetId"
-				:options="usedIn"
+				:options="parentAssets"
 			/>
 		</div>
 
@@ -64,7 +64,9 @@ interface Props {
 const props = defineProps<Props>();
 
 const show = computed( router.computedQuery( 'usage', false ) );
-const usedIn = computed( () => {
+const usedIn = computed( router.computedQuery( 'usedIn', '' ) );
+
+const parentAssets = computed( () => {
 	return report.resources
 		.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name )
 		.map( resource => ( {
@@ -73,7 +75,16 @@ const usedIn = computed( () => {
 		} ) );
 } );
 
-// Selected asset
-const assetId = computed( () => usedIn.value[ 0 ]?.value || '' );
+const assetId = computed( () => {
+	return usedIn.value
+		// If usedIn is set, find the asset in parentAssets
+		&& parentAssets.value.find( asset => asset.value === usedIn.value )?.value
+
+		// Otherwise, use the first asset in parentAssets
+		|| parentAssets.value[ 0 ]?.value
+
+		// If no assets are available, return an empty string
+		|| '';
+} );
 const chunk = computed( () => assetId.value && getChunkResource( props.name, assetId.value ) || null );
 </script>

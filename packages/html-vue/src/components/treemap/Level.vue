@@ -11,22 +11,22 @@
 import { computed } from 'vue';
 import Tile from './Tile.vue';
 import { generateTreeMap } from '@/treemap.js';
-import type { Content } from '@/FileSystemTrie'
+import type { Content } from '@/FileSystemTrie';
 
 interface Props {
-  content: Content | Content[]
-  totalBytes: number
-  width: number
-  height: number
-  xStart: number
-  yStart: number
+  content: Content | Content[];
+  totalBytes: number;
+  width: number;
+  height: number;
+  xStart: number;
+  yStart: number;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const children = computed<Content[]>( () => Array.isArray( props.content ) ? props.content: [ props.content ] );
 const tiles = computed(() => generateTreeMap(
-  children.value.map( child => child.uncompressed) ,
+  children.value.map( child => child.uncompressed),
   props.width,
   props.height,
   props.xStart,
