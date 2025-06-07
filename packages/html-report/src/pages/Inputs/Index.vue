@@ -214,7 +214,7 @@ const availableFormatOptions = computed( () => FORMAT_OPTIONS.filter( option => 
 const availableSourceOptions = computed( () => SOURCE_OPTIONS.filter( option => data.value.some( source => source.source === option.value ) ) );
 const availableUsedInOptions = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( source => source.usedIn.includes( option.value ) ) ) );
 const search = computed( router.computedQuery( 'search', '' ) );
-const types = computed( router.computedQuery( 'type', [] as Array<string> ) );
+const types = computed( router.computedQuery( 'types', [] as Array<string> ) );
 const formats = computed( router.computedQuery( 'formats', [] as Array<string> ) );
 const sources = computed( router.computedQuery( 'sources', [] as Array<string> ) );
 const usedIn = computed( router.computedQuery( 'usedIn', [] as Array<string> ) );

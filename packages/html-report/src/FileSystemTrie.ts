@@ -1,10 +1,9 @@
-import { getAssetResource, getAssets, getChunks } from './report';
 import type { AssetResource, ChunkResource, Sizes } from 'sonda';
 
 export interface File extends Sizes {
 	name: string;
 	path: string;
-
+	kind: 'chunk' | 'asset';
 }
 
 export interface Folder extends Sizes {
@@ -14,48 +13,29 @@ export interface Folder extends Sizes {
 }
 
 export interface Root extends Folder {
-	sourcemap: AssetResource[ 'sourcemap' ];
+	root: true;
 }
 
 export type Content = Folder | File;
 
 /**
- * Returns a trie of a specific output files from a report.
+ * Returns a trie structure representing the structure of the provided resources.
  */
-export function getOutputTrie( path: string ): FileSystemTrie {
-	const output = getAssetResource( path )!;
-	const trie = new FileSystemTrie();
-
-	getChunks( path ).forEach( chunk => trie.insert( chunk.name, chunk ) );
-
-	trie.root.name = path;
-	trie.root.sourcemap = output.sourcemap;
-	trie.root.uncompressed = output.uncompressed;
-	trie.root.gzip = output.gzip;
-	trie.root.brotli = output.brotli;
-
-	trie.optimize();
-
-	return trie;
-}
-
-/**
- * Returns a trie of all output files from a report.
- */
-export function getBuildTrie(): FileSystemTrie {
+export function getTrie( resources: Array<ChunkResource | AssetResource> ): FileSystemTrie {
 	const trie = new FileSystemTrie();
 
 	trie.root.name = '';
 	trie.root.uncompressed = 0;
 	trie.root.gzip = 0;
 	trie.root.brotli = 0;
+	trie.root.root = true;
 
-	for ( const data of getAssets() ) {
-		trie.insert( data.name, data );
+	for ( const resource of resources ) {
+		trie.insert( resource.name, resource );
 
-		trie.root.uncompressed += data.uncompressed;
-		trie.root.gzip += data.gzip;
-		trie.root.brotli += data.brotli;
+		trie.root.uncompressed += resource.uncompressed;
+		trie.root.gzip += resource.gzip;
+		trie.root.brotli += resource.brotli;
 	}
 
 	trie.optimize();
@@ -110,7 +90,8 @@ export class FileSystemTrie {
 			path: node.path ? `${ node.path }/${ name }` : name,
 			uncompressed: chunk.uncompressed,
 			gzip: chunk.gzip,
-			brotli: chunk.brotli
+			brotli: chunk.brotli,
+			kind: chunk.kind
 		} );
 	}
 

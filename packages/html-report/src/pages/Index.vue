@@ -65,7 +65,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'all',
 		label: 'Total size',
 		icon: IconBox,
-		href: router.getUrl( 'assets' ),
+		href: router.getUrl( 'treemap' ),
 		size: 0,
 		count: 0
 	},
@@ -73,7 +73,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'script',
 		label: 'JavaScript',
 		icon: IconCode,
-		href: router.getUrl( 'assets', { types: 'script' } ),
+		href: router.getUrl( 'treemap', { types: 'script' } ),
 		size: 0,
 		count: 0
 	},
@@ -81,7 +81,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'style',
 		label: 'CSS',
 		icon: IconBrush,
-		href: router.getUrl( 'assets', { types: 'style' } ),
+		href: router.getUrl( 'treemap', { types: 'style' } ),
 		size: 0,
 		count: 0
 	},
@@ -89,7 +89,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'image',
 		label: 'Image',
 		icon: IconImage,
-		href: router.getUrl( 'assets', { types: 'image' } ),
+		href: router.getUrl( 'treemap', { types: 'image' } ),
 		size: 0,
 		count: 0
 	},
@@ -97,7 +97,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'font',
 		label: 'Font',
 		icon: IconTypeOutline,
-		href: router.getUrl( 'assets', { types: 'font' } ),
+		href: router.getUrl( 'treemap', { types: 'font' } ),
 		size: 0,
 		count: 0
 	},
@@ -105,7 +105,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'component',
 		label: 'Component',
 		icon: IconComponent,
-		href: router.getUrl( 'assets', { types: 'component' } ),
+		href: router.getUrl( 'treemap', { types: 'component' } ),
 		size: 0,
 		count: 0
 	},
@@ -113,7 +113,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 		type: 'other',
 		label: 'Other',
 		icon: IconFileQuestion,
-		href: router.getUrl( 'assets', { types: 'other' } ),
+		href: router.getUrl( 'treemap', { types: 'other' } ),
 		size: 0,
 		count: 0
 	}

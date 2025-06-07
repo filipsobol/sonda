@@ -111,6 +111,7 @@ class Router {
 	getUrl( path: string, query: Query = {} ): string {
 		const queryParams = Object
 			.entries( query )
+			.filter( pair => pair[ 1 ] !== undefined && pair[ 1 ] !== null )
 			.map( pair => pair.map( encodeURIComponent ).join( '=' ) )
 			.join( '&' )
 

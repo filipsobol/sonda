@@ -1,6 +1,6 @@
 <template>
   <g>
-    <a :xlink:href="link">
+    <a :xlink:href="url">
       <rect
         :data-hover="hoverData"
         :x="tile.x"
@@ -49,7 +49,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import Level from './Level.vue';
-import { report } from '@/report';
+import { getChunks } from '@/report';
 import { router } from '@/router';
 import { formatSize } from '@/format';
 import { isFolder, type Content } from '@/FileSystemTrie';
@@ -67,26 +67,29 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const width = computed( () => props.tile.width - padding * 2 );
-const height = computed( () => props.tile.height - padding - paddingTop );
-const link = computed( () => {
-	// `router.query.item` maybe not be a complete path, so we need to find the asset in the report
-	const activeAsset = report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item );
+const url = computed( () => {
   const path = props.content.path;
-
-  if ( !activeAsset ) {
-    // Tile is an asset
-    return router.getUrl( 'treemap', { item: path } );
-  }
 
   if ( isFolder( props.content ) ) {
     // Tile is a folder
-    return router.getUrl( 'treemap', { item: activeAsset.name, chunk: path } );
+    return router.getUrl( 'treemap', { item: router.query.item, chunk: path } );
   }
 
-  // Tile is a file
-  return router.getUrl( 'inputs/details', { item: path, usedIn: activeAsset.name } );
+  if ( props.content.kind === 'chunk' ) {
+    // Tile is a chunk
+    return router.getUrl( 'inputs/details', { item: path, usedIn: router.query.item } );
+  }
+
+  if ( !getChunks( path ).length ) {
+    // Tile is an asset, but without chunks
+    return router.getUrl( 'assets/details', { item: path } );
+  }
+
+  // Tile is an asset
+  return router.getUrl( 'treemap', { item: path } );
 } );
+const width = computed( () => props.tile.width - padding * 2 );
+const height = computed( () => props.tile.height - padding - paddingTop );
 const formattedSize = computed( () => formatSize( props.content.uncompressed ) );
 const percentageOfTotal = computed( () => Math.min( ( props.content.uncompressed / props.totalBytes ) * 100, 100 ) );
 const hoverData = computed( () => `${props.content.name} — <b>${formattedSize.value} (${percentageOfTotal.value.toFixed(2)}%)</b>` );

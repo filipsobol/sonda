@@ -5,6 +5,7 @@
 	>
 		<BaseButton
 			:active="model.length > 0"
+			:disabled
 			@click="() => open = !open"
 		>
 			<slot name="icon" />
@@ -22,7 +23,7 @@
 		>
 			<div
 				v-show="open"
-				class="absolute mt-1 z-10 w-48 bg-white border border-gray-300 rounded-lg shadow-lg"
+				class="absolute mt-1 z-10 w-48 max-h-64 overflow-x-scroll bg-white border border-gray-300 rounded-lg shadow-lg"
 			>
 				<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
 					<li
@@ -70,6 +71,7 @@ export interface DropdownOption<T extends string = string> {
 
 interface Props {
 	title: string;
+	disabled?: boolean;
 	options: Array<DropdownOption>;
 }
 
