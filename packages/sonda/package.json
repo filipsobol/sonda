@@ -60,7 +60,7 @@
     "test:coverage": "vitest run --coverage",
     "prepack": "pnpm run test && pnpm run build && clean-package -rm devDependencies scripts",
     "build:load-source-map": "cd ../load-source-map && pnpm run build",
-    "build:html": "cd ../html-vue && pnpm run build",
+    "build:html": "cd ../html-report && pnpm run build",
     "build:dist": "rolldown -c",
     "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html",
     "dev": "rolldown -w -c"

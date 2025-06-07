@@ -39,7 +39,7 @@ importers:
         specifier: ^3.5.13
         version: 3.5.16(typescript@5.8.3)
 
-  packages/html-vue:
+  packages/html-report:
     dependencies:
       fuzzysort:
         specifier: ^3.1.0
@@ -12171,6 +12171,10 @@ snapshots:
       '@ckeditor/ckeditor5-typing': 45.0.0
       '@ckeditor/ckeditor5-utils': 45.0.0
       ckeditor5: 45.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-autosave@45.0.0':
     dependencies:
