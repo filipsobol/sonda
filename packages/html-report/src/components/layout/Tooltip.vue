@@ -6,7 +6,7 @@
     role="tooltip"
     class="fixed z-10 max-w-[400px] px-2 py-1 bg-gray-800 text-gray-100 rounded-md break-words pointer-events-none"
   >
-    <span v-html="content"></span>
+    <span>{{ content }}</span>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ function resetContent() {
 
 function onMouseMove(event: MouseEvent) {
   const target = event.target as Element;
-  content.value = target.getAttribute('data-hover') || '';
+  content.value = target.getAttribute( 'data-hover' ) || '';
   if (!content.value) return;
 
   const { clientX, clientY } = event;

@@ -92,7 +92,7 @@ const width = computed( () => props.tile.width - padding * 2 );
 const height = computed( () => props.tile.height - padding - paddingTop );
 const formattedSize = computed( () => formatSize( props.content.uncompressed ) );
 const percentageOfTotal = computed( () => Math.min( ( props.content.uncompressed / props.totalBytes ) * 100, 100 ) );
-const hoverData = computed( () => `${props.content.name} — <b>${formattedSize.value} (${percentageOfTotal.value.toFixed(2)}%)</b>` );
+const hoverData = computed( () => `${props.content.name} — ${formattedSize.value} (${percentageOfTotal.value.toFixed(2)}%)` );
 const percentage = computed( () => Math.round(percentageOfTotal.value) + '%' );
 const shouldDisplayText = computed(  () => props.tile.width >= paddingTop * 1.75 && props.tile.height >= paddingTop );
 
