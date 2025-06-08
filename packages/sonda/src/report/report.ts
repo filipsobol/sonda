@@ -5,7 +5,6 @@ import { ignoredExtensions, sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import { updateOutput } from './processors/outputs.js';
-// import { updateInputs } from './processors/inputs.js';
 import { updateDependencies } from './processors/dependencies.js';
 import type { JsonReport, Metadata, Resource, Connection, Dependency, Issue } from './types.js';
 import type { Formatter } from './formatters/Formatter.js';
@@ -100,9 +99,7 @@ export class Report {
 		for ( const [ path, entrypoints ] of Object.entries( this.assets ) ) {
 			updateOutput( this, path, entrypoints );
 		}
-		
-		// TODO: This may not be needed
-		// this.resources = updateInputs( this );
+
 		this.dependencies = updateDependencies( this );
 
 		const formatter = new formatters[ this.config.format ]( this.config );
