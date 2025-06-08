@@ -14,6 +14,7 @@ export function SondaVitePlugin( userOptions: UserOptions = {} ): PluginOption {
   return {
     ...SondaRollupPlugin( options ),
     name: 'sonda-vite',
+    enforce: 'pre',
     apply: 'build'
   };
 }
