@@ -8,6 +8,18 @@
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
+		<Alert v-if="!hasChunks">
+			<template #header>
+				<p>Have you enabled source maps in the bundler configuration?</p>
+			</template>
+
+			<template #body>
+				<p>It appears that source map generation was not enabled, causing the report to omit a lot of information. <span class="font-bold">Please enable source maps and rebuild your project.</span></p>
+
+				<p class="mt-2">For more information, refer to the <a class="underline" href="https://sonda.dev/">documentation</a>.</p>
+			</template>
+		</Alert>
+
 		<h3 class="text-xl font-bold mb-4">Assets</h3>
 
 		<div class="grid grid-cols-3 gap-2">
@@ -40,8 +52,9 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue';
 import { router } from '@/router.js';
-import { getAssets } from '@/report.js';
+import { getAssets, report } from '@/report.js';
 import { formatSize } from '@/format.js';
+import Alert from '@/components/common/Alert.vue';
 import IconBox from '@icon/Box.vue';
 import IconCode from '@icon/Code.vue';
 import IconBrush from '@icon/Brush.vue';
@@ -133,5 +146,7 @@ const types = computed( () => {
 		}, ASSET_TYPES );
 	
 	return Object.values( countedTypes );
-} )
+} );
+
+const hasChunks = computed( () => report.resources.some( resource => resource.kind === 'chunk' ) );
 </script>

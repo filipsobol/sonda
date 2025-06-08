@@ -1,5 +1,6 @@
 <template>
 	<div
+		v-if="options.length > 0"
 		v-click-outside="() => open = false"
 		class="relative"
 	>

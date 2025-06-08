@@ -9,22 +9,25 @@
 		<pre><code ref="codeElement">{{ sourceCode }}</code></pre>
 	</div>
 
-	<div
-		v-else
-		class="p-4 mb-8 text-sm rounded-lg bg-red-50 border border-red-200 shadow-xs"
-		role="alert"
-	>
-		<p class="font-bold text-red-900">Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>.</p>
+	<Alert v-else>
+		<template #header>
+			<p>
+				Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>.
+			</p>
+		</template>
 
-		<p class="mt-4 text-red-900/70">
-			To use this feature, please update your browser to a version that supports it, or use a different browser. See the
-			<a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility" target="_blank">Browser Compatibility page</a> for more information.
-		</p>
-	</div>
+		<template #body>
+			<p>
+				To use this feature, please update your browser to a version that supports it, or use a different browser. See the
+				<a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility" target="_blank">Browser Compatibility page</a> for more information.
+			</p>
+		</template>
+	</Alert>
 </template>
 
 <script setup lang="ts">
 import { computed, useTemplateRef, watchPostEffect } from 'vue';
+import Alert from '@/components/common/Alert.vue';
 import { getAssetResource, report } from '@/report.js';
 import type { ChunkResource } from 'sonda';
 
