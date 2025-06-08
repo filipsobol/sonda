@@ -63,16 +63,29 @@ export class Report {
 		const existing = this.connections.find( c => {
 			return c.kind === connection.kind
 				&& c.source === connection.source
-				&& c.target === connection.target
-				&& c.original === connection.original;
+				&& c.target === connection.target;
 		} );
 
-		if ( existing ) {
-			// Ignore duplicate connections
+		if ( !existing ) {
+			// Add the new connection if it doesn't exist
+			this.connections.push( connection );
 			return;
 		}
 
-		this.connections.push( connection );
+		/**
+		 * If a connection already exists, update the `original` property if either connection has it.
+		 * If both connections have the `original` property, prioritize the shorter one because it is
+		 * more likely to be the original source than the absolute path.
+		 */
+		existing.original = [ connection.original, existing.original ]
+			// Filter out null values
+			.filter( original => original !== null )
+			// Sort by length to prioritize the shorter one
+			.sort( ( a, b ) => a.length - b.length )
+			// Take the first one, which is the shortest
+			[ 0 ]
+			// Fallback to null
+			|| null;
 	}
 
 	addAsset( name: string, entrypoints?: Array<string> ): void {

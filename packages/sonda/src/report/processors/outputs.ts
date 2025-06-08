@@ -85,7 +85,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 	for ( const [ source, sizes ] of sourcesSizes ) {
 		const name = normalizePath( source );
 		const type = getTypeByName( source );
-		const parent = parentMap[ source ];
+		const parent = parentMap[ source ] ? normalizePath( parentMap[ source ] ) : null;
 		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
 
 		// If source was not already added from "filesystem" then add it as a "sourcemap"
@@ -102,7 +102,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 				type,
 				format: 'other',
 				uncompressed,
-				parent: parent ? normalizePath( parent ) : null
+				parent: parent || null
 			} );
 		}
 
@@ -117,12 +117,12 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 
 		if ( parent ) {
 			// Add `bundle => sourcemap` connection
-			report.addConnection( {
-				kind: 'sourcemap',
-				source: normalizePath( parent ),
-				target: name,
-				original: null
-			} );
+		report.addConnection( {
+			kind: 'sourcemap',
+			source: parent,
+			target: name,
+			original: null
+		} );
 		}
 	}
 }
