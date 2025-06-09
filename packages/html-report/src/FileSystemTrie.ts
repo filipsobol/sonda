@@ -21,10 +21,10 @@ export type Content = Folder | File;
 /**
  * Returns a trie structure representing the structure of the provided resources.
  */
-export function getTrie( resources: Array<ChunkResource | AssetResource> ): FileSystemTrie {
+export function getTrie( name: string, resources: Array<ChunkResource | AssetResource> ): FileSystemTrie {
 	const trie = new FileSystemTrie();
 
-	trie.root.name = '';
+	trie.root.name = name;
 	trie.root.uncompressed = 0;
 	trie.root.gzip = 0;
 	trie.root.brotli = 0;
@@ -96,7 +96,13 @@ export class FileSystemTrie {
 	}
 
 	optimize(): void {
-		const stack: Array<Folder> = [ this.root ];
+		const rootFolders = this.root.items.filter( item => isFolder( item ) );
+		/**
+		 * This is a starting point for path collapsing. However, we don't want to collapse root element
+		 * if it has a name (likely an asset name). In such case we skip it and start collapsing from
+		 * its children elements.
+		 */
+		const stack: Array<Folder> = this.root.name && rootFolders.length ? rootFolders : [ this.root ];
 
 		while( stack.length ) {
 			const node = stack.pop()!;

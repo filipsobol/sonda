@@ -86,13 +86,13 @@ const content = computed( () => {
 		// Show details of a specific asset
 		const resources = getChunks( router.query.item );
 
-		return getTrie( resources ).get( router.query.chunk || '' ) as Folder;
+		return getTrie( router.query.item, resources ).get( router.query.chunk || '' ) as Folder;
 	}
 
 	// Show assets
 	const resources = assets.value.filter( asset => types.value.length === 0 || types.value.includes( asset.type ) );
 		
-	return getTrie( resources ).get( router.query.chunk || '' ) as Folder;
+	return getTrie( '', resources ).get( router.query.chunk || '' ) as Folder;
 } );
 
 onMounted( () => {
