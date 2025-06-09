@@ -1,7 +1,7 @@
 import { extname } from 'path';
 import open from 'open';
 import { version } from 'sonda/package.json' with { type: 'json' };
-import { ignoredExtensions, sortByKey } from '../utils.js';
+import { hasIgnoredExtension, sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import { updateOutput } from './processors/outputs.js';
@@ -88,7 +88,7 @@ export class Report {
 	}
 
 	addAsset( name: string, entrypoints?: Array<string> ): void {
-		if ( ignoredExtensions.includes( extname( name ) ) ){
+		if ( hasIgnoredExtension( name ) ) {
 			return;
 		}
 

@@ -52,7 +52,7 @@ export const extensions: Record<string, FileType> = {
 	'.riot': 'component'
 };
 
-export const ignoredExtensions: Array<string> = [
+const ignoredExtensions: Array<string> = [
 	'.map',
 	'.d.ts',
 ];
@@ -109,10 +109,18 @@ export async function getAllFiles( dir: string, recursive = true ): Promise<stri
 	
 		return files
 			.filter( file => file.isFile() )
-			.filter( file => !ignoredExtensions.includes( extname( file.name ) ) )
+			.filter( file => !hasIgnoredExtension( file.name ) )
 			.map( file => join( relative( process.cwd(), file.parentPath ), file.name ) );
 	} catch {
 		// Directory does not exist or is inaccessible
 		return [];
 	}
+}
+
+/**
+ * Checks if a file name has an ignored extension. Using `endsWith` ensures that extensions like `.d.ts` are
+ * correctly identified as ignored, even though `extname` would return `.ts`.
+ */
+export function hasIgnoredExtension( name: string ): boolean {
+	return ignoredExtensions.some( ext => name.endsWith( ext ) );
 }
