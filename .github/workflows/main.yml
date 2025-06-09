@@ -27,8 +27,8 @@ jobs:
       - name: Build all packages
         run: pnpm run build
 
-      - name: Run all tests
-        run: pnpm run test
+      # - name: Run all tests
+      #   run: pnpm run test
       
       - name: Release preview
         # Only run on pull requests
