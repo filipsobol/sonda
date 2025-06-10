@@ -38,7 +38,10 @@ export class Report {
 	}
 
 	addResource( resource: Resource ): void {
-		if ( resource.name.startsWith( 'data:' ) ) {
+		if (
+			resource.name.startsWith( 'data:' )
+			|| hasIgnoredExtension( resource.name )
+		) {
 			// Ignore data URIs
 			return;
 		}
@@ -54,7 +57,11 @@ export class Report {
 	}
 
 	addConnection( connection: Connection ): void {
-		if ( connection.target.startsWith( 'data:' ) ) {
+		if (
+			connection.target.startsWith( 'data:' )
+			|| hasIgnoredExtension( connection.source )
+			|| hasIgnoredExtension( connection.target )
+		) {
 			// Ignore data URIs
 			return;
 		}
