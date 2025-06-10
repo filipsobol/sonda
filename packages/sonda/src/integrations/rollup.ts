@@ -24,12 +24,16 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 	return {
 		name: 'sonda-rollup',
 
-		async resolveId( source: string, importer: string | undefined ) {
+		async resolveId( source: string, importer: string | undefined, options ) {
 			if ( !importer ) {
 				return;
 			}
 
-			const resolved = await this.resolve( source, importer, { skipSelf: true } );
+			const resolved = await this.resolve(
+				source,
+				importer,
+				{ ...options, skipSelf: true }
+			);
 
 			if ( resolved ) {
 				report.addConnection( {
