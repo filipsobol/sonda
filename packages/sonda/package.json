@@ -21,7 +21,7 @@
     "devtools"
   ],
   "engines": {
-    "node": ">=20.19"
+    "node": ">=20.19 || >=22.12"
   },
   "license": "MIT",
   "type": "module",
