@@ -9,6 +9,7 @@ const { values } = parseArgs( {
     projects: { type: 'string', multiple: true },
     format: { type: 'string' },
     outputDir: { type: 'string' },
+    'no-open': { type: 'boolean' },
     deep: { type: 'boolean' },
     sources: { type: 'boolean' },
     gzip: { type: 'boolean' },
@@ -21,5 +22,10 @@ const { values } = parseArgs( {
   // Fail when unknown argument is used
   strict: true
 } );
+
+if ( values[ 'no-open' ] ) {
+  values.open = false;
+  delete values[ 'no-open' ];
+}
 
 Sonda( values );
