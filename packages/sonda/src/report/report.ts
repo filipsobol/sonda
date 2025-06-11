@@ -1,4 +1,4 @@
-import { extname } from 'path';
+import { isBuiltin } from 'module';
 import open from 'open';
 import { version } from 'sonda/package.json' with { type: 'json' };
 import { hasIgnoredExtension, sortByKey } from '../utils.js';
@@ -61,6 +61,7 @@ export class Report {
 			connection.target.startsWith( 'data:' )
 			|| hasIgnoredExtension( connection.source )
 			|| hasIgnoredExtension( connection.target )
+			|| isBuiltin( connection.target )
 		) {
 			// Ignore data URIs
 			return;
