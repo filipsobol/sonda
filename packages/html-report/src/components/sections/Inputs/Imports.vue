@@ -6,7 +6,7 @@
 		<template #title>Imports</template>
 		<template #description>List of other inputs imported from this input</template>
 
-		<div class="rounded-lg border border-gray-200 overflow-scroll max-h-[475px] shadow-xs">
+		<div class="rounded-lg border border-gray-200 overflow-y-scroll max-h-[475px] shadow-xs">
 			<table class="table-fixed w-full text-sm text-left">
 				<tbody class="text-gray-700">
 						<tr
