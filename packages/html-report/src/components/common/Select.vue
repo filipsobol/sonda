@@ -6,6 +6,7 @@
 		<BaseButton
 			class="ps-3 pe-2 min-w-48"
 			:active="!!model"
+			:disabled
 			@click="() => open = !open"
 		>
 			<span ref="select-button">{{ title }}</span>
@@ -77,6 +78,7 @@ interface Option {
 }
 
 interface Props {
+	disabled?: boolean;
 	options: Array<Option>;
 }
 

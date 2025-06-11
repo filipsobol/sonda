@@ -2,6 +2,7 @@
   <Tile
     v-for="(tile, index) in tiles"
     :totalBytes
+    :compressionType
     :tile
     :content="children[ index ]"
   />
@@ -20,13 +21,14 @@ interface Props {
   height: number;
   xStart: number;
   yStart: number;
+  compressionType: 'uncompressed' | 'gzip' | 'brotli';
 }
 
 const props = defineProps<Props>();
 
 const children = computed<Content[]>( () => Array.isArray( props.content ) ? props.content: [ props.content ] );
 const tiles = computed(() => generateTreeMap(
-  children.value.map( child => child.uncompressed),
+  children.value.map( child => child[ props.compressionType ]),
   props.width,
   props.height,
   props.xStart,

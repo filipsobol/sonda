@@ -60,9 +60,9 @@ class Router {
 	 * If the parameter is not present, it returns the default value.
 	 * If the query parameter is equal to the default value, it removes the query parameter from the URL.
 	 */
-	computedQuery( key: string, defaults: string ): WritableComputedOptions<string>;
-	computedQuery( key: string, defaults: boolean ): WritableComputedOptions<boolean>;
-	computedQuery( key: string, defaults: number ): WritableComputedOptions<number>;
+	computedQuery<T extends string>( key: string, defaults: T ): WritableComputedOptions<T>;
+	computedQuery<T extends boolean>( key: string, defaults: T ): WritableComputedOptions<T>;
+	computedQuery<T extends number>( key: string, defaults: T ): WritableComputedOptions<T>;
 	computedQuery<T extends unknown>( key: string, defaults: Array<T> ): WritableComputedOptions<Array<T>>;
 	computedQuery( key: string, defaults: any ): WritableComputedOptions<any> {
 		if ( typeof defaults === 'string' ) {

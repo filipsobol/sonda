@@ -38,6 +38,7 @@
       v-if="children.length"
       :content="children"
       :totalBytes
+      :compressionType
       :width
       :height
       :xStart="tile.x + padding"
@@ -63,6 +64,7 @@ interface Props {
   tile: TileData;
   content: Content;
   totalBytes: number;
+  compressionType: 'uncompressed' | 'gzip' | 'brotli';
 }
 
 const props = defineProps<Props>();
@@ -86,12 +88,12 @@ const url = computed( () => {
   }
 
   // Tile is an asset
-  return router.getUrl( 'treemap', { item: path } );
+  return router.getUrl( 'treemap', { item: path, compression: props.compressionType } );
 } );
 const width = computed( () => props.tile.width - padding * 2 );
 const height = computed( () => props.tile.height - padding - paddingTop );
-const formattedSize = computed( () => formatSize( props.content.uncompressed ) );
-const percentageOfTotal = computed( () => Math.min( ( props.content.uncompressed / props.totalBytes ) * 100, 100 ) );
+const formattedSize = computed( () => formatSize( props.content[ props.compressionType ] ) );
+const percentageOfTotal = computed( () => Math.min( ( props.content[ props.compressionType ] / props.totalBytes ) * 100, 100 ) );
 const hoverData = computed( () => `${props.content.name} — ${formattedSize.value} (${percentageOfTotal.value.toFixed(2)}%)` );
 const percentage = computed( () => Math.round(percentageOfTotal.value) + '%' );
 const shouldDisplayText = computed(  () => props.tile.width >= paddingTop * 1.75 && props.tile.height >= paddingTop );

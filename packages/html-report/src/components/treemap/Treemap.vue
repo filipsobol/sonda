@@ -7,8 +7,9 @@
   >
     <!-- Subtract 1 and start at 0.5 to prevent stroke clipping at viewport edges -->
     <Level
-      :content="content"
-      :totalBytes="totalBytes"
+      :content
+      :totalBytes
+      :compressionType
       :width="innerWidth"
       :height="innerHeight"
       :xStart="0.5"
@@ -28,11 +29,12 @@ interface Props {
   width: number;
   height: number;
   content: Folder;
+  compressionType: 'uncompressed' | 'gzip' | 'brotli';
 }
 
 const props = defineProps<Props>();
 
-const totalBytes = computed( () => props.content.uncompressed );
+const totalBytes = computed( () => props.content[ props.compressionType ] );
 const innerWidth = computed( () => props.width - 1 );
 const innerHeight = computed( () => props.height - 1 );
 </script>

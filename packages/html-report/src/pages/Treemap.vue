@@ -21,6 +21,12 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex gap-2 mb-4">
+			<BaseSelect
+				v-model="compressionType"
+				:options="availableCompressionOptions"
+				:disabled="availableCompressionOptions.length === 1"
+			/>
+
 			<Dropdown
 				v-model="types"
 				:disabled="!!activeAsset"
@@ -41,6 +47,7 @@
 			<Treemap
     		:key
 				:content
+				:compressionType
 				:width
 				:height
 			/>
@@ -52,11 +59,14 @@
 import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount } from 'vue';
 import IconFunnel from '@components/icon/Funnel.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
+import BaseSelect from '@components/common/Select.vue';
 import Treemap from '@/components/treemap/Treemap.vue';
 import { getTrie, type Folder } from '@/FileSystemTrie';
 import { router } from '@/router';
 import { getAssets, getChunks, report } from '@/report';
 import type { FileType } from 'sonda';
+
+type CompressionType = 'uncompressed' | 'gzip' | 'brotli';
 
 const resizeObserver = new ResizeObserver( entries => {
 	width.value = entries[ 0 ].contentRect.width;
@@ -72,6 +82,12 @@ const TYPE_OPTIONS: Array<DropdownOption<FileType>> = [
 	{ label: 'Other', value: 'other' },
 ];
 
+const COMPRESSION_TYPES: Array<DropdownOption<CompressionType>> = [
+	{ label: 'Uncompressed', value: 'uncompressed' },
+	{ label: 'GZIP', value: 'gzip' },
+	{ label: 'Brotli', value: 'brotli' },
+];
+
 const container = useTemplateRef( 'container' );
 const width = ref( 0 );
 const height = ref( 0 );
@@ -79,7 +95,9 @@ const height = ref( 0 );
 const assets = computed( () => getAssets() );
 const activeAsset = computed( () => report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item ) );
 const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => assets.value.some( asset => asset.type === option.value ) ) );
+const availableCompressionOptions = computed( () => COMPRESSION_TYPES.filter( option => option.value === 'uncompressed' || report.metadata[ option.value ] ) );
 const types = computed( router.computedQuery( 'types', [] as Array<FileType> ) );
+const compressionType = computed( router.computedQuery( 'compression', COMPRESSION_TYPES[ 0 ].value ) );
 const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 const content = computed( () => {
 	if ( router.query.item ) {
