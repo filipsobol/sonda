@@ -23,5 +23,5 @@ In the example above, the selected file is in the bundle because:
 
 There are two types of nodes in the dependency tree:
 
-1. The root node may state that it is `part of the X bundle`. This only occurs if the [Detailed view](/features/detailed-view) feature is enabled and the selected file was identified by inspecting the dependency's source maps. In this case, it was the bundle that was imported, not the selected file directly.
+1. The root node may state that it is `part of the X bundle`. This only occurs if the [Deep view](/features/deep-view) feature is enabled and the selected file was identified by inspecting the dependency's source maps. In this case, it was the bundle that was imported, not the selected file directly.
 2. In all other cases, the node will state that it is `imported by X`, meaning the selected file (or a file higher in the chain) was explicitly imported by that file.

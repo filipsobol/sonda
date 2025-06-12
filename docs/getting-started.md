@@ -10,7 +10,7 @@ Sonda is compatible with a variety of bundlers and frameworks. Select your prefe
 
 - [Vite](/bundlers/vite)
 - [Rollup](/bundlers/rollup)
-- [Rolldown](/bundlers/Rolldown)
+- [Rolldown](/bundlers/rolldown)
 - [esbuild](/bundlers/esbuild)
 - [webpack](/bundlers/webpack)
 - [Rspack](/bundlers/rspack)
