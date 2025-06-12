@@ -35,10 +35,6 @@ Now, every time you build your project, Sonda will generate a report with inform
 
 Sonda requires source maps to function correctly, but some other plugins may not support or generate them by default. If Sonda does not work as expected, check the documentation for the other plugins you are using to ensure source maps are enabled.
 
-::: warning ⚠️ Rspack plugin
-Currently, the Sonda plugin for Rspack modifies the default configuration to use absolute paths in the generated source maps instead of webpack-specific paths (`devtoolModuleFilenameTemplate: '[absolute-resource-path]'`). This change may affect how paths appear in browser devtools.
-:::
-
 ### Configure the plugin
 
 The steps above will allow you to generate your first report. However, if the report does not contain the information you need, refer to the [Configuration](/configuration) page to explore additional options and learn how to enable them.

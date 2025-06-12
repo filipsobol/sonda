@@ -4,7 +4,7 @@ outline: deep
 
 # Treemap chart
 
-The tree map chart visualizes the contents of the selected asset, with each tile representing a single source file or folder.
+The tree map page helps you visualize the size of your assets and their contents. By default, it displays the size of the entire build, with each tile representing a file or folder in the build.
 
 <CustomImage
   src="/treemap.jpg"
@@ -12,17 +12,19 @@ The tree map chart visualizes the contents of the selected asset, with each tile
   caption="Tree map chart of the Sonda project itself"
 />
 
+Clicking on the folder file will zoom in on that folder, showing its contents. Clicking on an asset file will show a new tree map for that file, where each tile represents a single source file that contributed to the asset. Clicking on a source file will open a page showing its details, including file type, size, source, and more.
+
+This allows you to quickly find the largest assets and zoom in on specific parts of your codebase to understand how each individual file contributes to the overall size of your build.
+
 ## Reading the tree map
 
-The size and color of each tile represent the amount of code it contributed to the asset. Larger and redder tiles indicate a greater contribution of code. The actual size of the file or folder is displayed next to its name and reflects the currently selected size option (Uncompressed, GZIP, or Brotli). By default, the tree map shows uncompressed sizes.
+The size and color of each tile represent the size of the file or input it represents. Larger and redder tiles indicate a greater size. The actual size of the file or folder is displayed next to its name and reflects the currently selected compression option (Uncompressed, GZIP, or Brotli). By default, the tree map shows uncompressed sizes.
 
 <CustomImage
   src="/sizes-switcher.jpg"
   alt="Switches containing three options - Uncompressed, GZIP, and Brotli"
-  caption="Size toggle is only available if the compression settings are enabled"
+  caption="Dropdown is only available if the compression settings are enabled"
 />
-
-Clicking a tile opens a modal. If the tile represents a file, the modal contains detailed information about that file. If the tile represents a folder, the modal displays a new tree map for the files within that folder, allowing you to “zoom in” on specific parts of the asset.
 
 ## The `[unassigned]` tile
 

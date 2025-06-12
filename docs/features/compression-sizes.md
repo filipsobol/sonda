@@ -13,7 +13,7 @@ By default, Sonda displays the uncompressed sizes of assets and the individual s
 <CustomImage
   src="/sizes-asset.jpg"
   alt="Table containing sizes of an asset before and after compression and estimated download times"
-  caption="Modal showing asset data also contains the estimated download times using slow 3G"
+  caption="Table showing asset data also contains the estimated download times using slow 3G"
 />
 
 The GZIP and Brotli sizes displayed in the assets modal closely reflect the actual sizes you would see when serving files with these compression methods enabled on a server. While there may be slight variations due to specific compression settings, these differences are generally minimal.

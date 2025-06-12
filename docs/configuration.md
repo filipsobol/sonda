@@ -12,9 +12,9 @@ These are the default options:
 {
   enabled: true,
   format: 'html',
-  filename: 'sonda-report.html',
+  outputDir: '.sonda',
   open: true,
-  detailed: false,
+  deep: false,
   sources: false,
   gzip: false,
   brotli: false,
@@ -48,20 +48,14 @@ Specifies the output format of the report. Supported formats include:
 * `'html'` - An HTML file with a treemap visualization.
 * `'json'` - A JSON file.
 
-### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
-
+### `outputDir`
 * **Type:** string
-* **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
+* **Default:** `'.sonda'`
+* **Description:** The directory where the report will be saved.
 
-Specifies the path of the generated report. This can be a filename, a relative path, or an absolute path. By default, the report is saved in the current working directory.
+Specifies the directory where the report will be saved. This can be a relative path or an absolute path. By default, the report is saved in a directory named `.sonda` relative to the current working directory.
 
-::: tip 💡 Framework integrations
-Frameworks typically generate separate server and client bundles. Therefore, the `filename` option for frameworks must include a `[env]` token, which is replaced with the environment name (e.g., `'server'`, `'client'`, or similar).
-
-The default value for the `filename` option in frameworks is `'sonda-report-[env].html'` or `'sonda-report-[env].json'`, depending on the `format` option.
-
-This does not apply to bundler plugins, as they generate a single type of bundles.
-:::
+The directory is created if it does not exist.
 
 ### `open`
 
@@ -70,7 +64,7 @@ This does not apply to bundler plugins, as they generate a single type of bundle
 
 Specifies whether to automatically open the report in the default program for the given file extension (`.html` or `.json`, depending on the `format` option) after the build process.
 
-### `detailed`
+### `deep`
 
 * **Type:** boolean
 * **Default:** `false`
@@ -81,7 +75,7 @@ By default, external dependencies bundled into a single file appear as a single 
 
 Enabling this option may increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
 
-For more details, see the [Detailed view](/features/detailed-view) section.
+For more details, see the [Deep view](/features/deep-view) section.
 
 ### `sources` <Badge type="tip" text="Introduced in 0.5.0" />
 
@@ -129,6 +123,30 @@ For more details, see the [Compression sizes](/features/compression-sizes) secti
 
 Specifies whether to generate reports for server bundles in addition to client bundles.
 
-::: tip 💡 Framework integrations
-This option is available only in framework integrations.
+::: tip 💡 Only available in framework integrations
+This option is available only in **framework** integrations.
 :::
+
+## Deprecated options
+
+### `filename` <Badge type="danger" text="Removed in 0.8.0" />
+
+* **Type:** string
+* **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
+
+Specifies the path of the generated report. This can be a filename, a relative path, or an absolute path. By default, the report is saved in the current working directory.
+
+::: tip 💡 Framework integrations
+Frameworks typically generate separate server and client bundles. Therefore, the `filename` option for frameworks must include a `[env]` token, which is replaced with the environment name (e.g., `'server'`, `'client'`, or similar).
+
+The default value for the `filename` option in frameworks is `'sonda-report-[env].html'` or `'sonda-report-[env].json'`, depending on the `format` option.
+
+This does not apply to bundler plugins, as they generate a single type of bundles.
+:::
+
+### `detailed`
+
+* **Type:** boolean
+* **Default:** `false`
+
+Renamed to `deep` in version 0.8.0.
