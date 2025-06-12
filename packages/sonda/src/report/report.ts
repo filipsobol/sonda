@@ -42,11 +42,15 @@ export class Report {
 			resource.name.startsWith( 'data:' )
 			|| hasIgnoredExtension( resource.name )
 		) {
-			// Ignore data URIs
+			// Ignore data URIs or resources with ignored extensions
 			return;
 		}
 
-		const existing = this.resources.find( r => r.kind === resource.kind && r.name === resource.name );
+		const existing = this.resources.find( r =>
+			r.kind === resource.kind
+			&& r.name === resource.name
+			&& r.parent === resource.parent
+		);
 
 		if ( existing ) {
 			// Ignore duplicate resources
@@ -63,7 +67,7 @@ export class Report {
 			|| hasIgnoredExtension( connection.target )
 			|| isBuiltin( connection.target )
 		) {
-			// Ignore data URIs
+			// Ignore data URIs, resources with ignored extensions, and built-in modules
 			return;
 		}
 
