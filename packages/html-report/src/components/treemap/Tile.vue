@@ -79,7 +79,7 @@ const url = computed( () => {
 
   if ( props.content.kind === 'chunk' ) {
     // Tile is a chunk
-    return router.getUrl( 'inputs/details', { item: path, usedIn: router.query.item } );
+    return router.getUrl( 'inputs/details', { item: path, usage: 'true', usedIn: router.query.item } );
   }
 
   if ( !getChunks( path ).length ) {

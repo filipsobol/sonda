@@ -10,7 +10,7 @@
 			<span class="text-xl font-bold">Usage in</span>
 
 			<BaseSelect
-				v-model="assetId"
+				v-model="usedIn"
 				:options="parentAssets"
 			/>
 		</div>
@@ -64,7 +64,6 @@ interface Props {
 const props = defineProps<Props>();
 
 const show = computed( router.computedQuery( 'usage', false ) );
-const usedIn = computed( router.computedQuery( 'usedIn', '' ) );
 
 const parentAssets = computed( () => {
 	return report.resources
@@ -75,16 +74,7 @@ const parentAssets = computed( () => {
 		} ) );
 } );
 
-const assetId = computed( () => {
-	return usedIn.value
-		// If usedIn is set, find the asset in parentAssets
-		&& parentAssets.value.find( asset => asset.value === usedIn.value )?.value
+const usedIn = computed( router.computedQuery( 'usedIn', parentAssets.value[ 0 ]?.value || '' ) );
 
-		// Otherwise, use the first asset in parentAssets
-		|| parentAssets.value[ 0 ]?.value
-
-		// If no assets are available, return an empty string
-		|| '';
-} );
-const chunk = computed( () => assetId.value && getChunkResource( props.name, assetId.value ) || null );
+const chunk = computed( () => usedIn.value && getChunkResource( props.name, usedIn.value ) || null );
 </script>

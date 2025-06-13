@@ -11,8 +11,8 @@
 
 			<div class="flex flex-col mt-4">
 				<Details :name />
-				<Imports :name class="mt-4" />
 				<Usage :name class="mt-4" />
+				<Imports :name class="mt-4" />
 			</div>
 		</template>
 

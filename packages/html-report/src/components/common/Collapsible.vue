@@ -1,5 +1,5 @@
 <template>
-	<div class="rounded-lg border border-gray-200 overflow-hidden">
+	<div class="rounded-lg border border-gray-200">
 		<div class="flex items-center gap-4 py-2 px-4">
 			<div class="flex-shrink-0">
 				<BaseButton @click="() => model = !model">

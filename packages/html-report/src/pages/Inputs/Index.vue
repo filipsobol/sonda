@@ -78,20 +78,24 @@
 				</td>
 
 				<td class="p-3 font-normal">
-					<template v-if="item.usedIn.length">
-						<p
-							v-for="parent in item.usedIn"
-							:key="parent"
-							:title="parent"
-							class="truncate text-gray-900"
-						>
-							{{ parent }}
-						</p>
-					</template>
+					<p
+						v-if="item.usedIn.length === 1"
+						:title="item.usedIn[ 0 ]"
+						class="truncate text-gray-900"
+					>
+						{{ item.usedIn[ 0 ] }}
+					</p>
+
+					<p
+						v-else-if="item.usedIn.length > 1"
+						class="text-gray-400 italic"
+					>
+						Used in {{ item.usedIn.length }} assets
+					</p>
 
 					<p
 						v-else
-						class="mt-2 text-gray-400 italic"
+						class="text-gray-400 italic"
 					>
 						(Tree-shaken)
 					</p>

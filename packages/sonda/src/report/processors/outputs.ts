@@ -89,7 +89,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 		const existingSource = report.resources.find( resource => resource.name === name && resource.kind === 'filesystem' );
 
 		// If source was not already added from "filesystem" then add it as a "sourcemap"
-		if ( !existingSource && source !== UNASSIGNED ) {
+		if ( !existingSource ) {
 			const index = map.sources.indexOf( source );
 			const { uncompressed } = getSizes(
 				map.sourcesContent?.[ index ] || '',

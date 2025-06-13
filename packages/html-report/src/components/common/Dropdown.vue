@@ -24,7 +24,7 @@
 		>
 			<div
 				v-show="open"
-				class="absolute mt-1 z-10 w-max min-w-3xs max-w-sm max-h-64 overflow-x-scroll bg-white border border-gray-300 rounded-lg shadow-lg"
+				class="absolute mt-1 z-10 w-max min-w-3xs max-w-sm max-h-64 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg"
 			>
 				<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
 					<li
