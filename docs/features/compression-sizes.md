@@ -4,7 +4,7 @@ outline: deep
 
 # Compression sizes
 
-By default, Sonda displays the uncompressed sizes of assets and the individual source files that make up each asset. However, you can enable the [`gzip`](/configuration#gzip) and [`brotli`](/configuration#brotli) options to view the compressed sizes as well.
+By default, Sonda displays the **uncompressed** sizes of assets and the individual source files that make up each asset. To compare how compression affects bundle size, you can enable the [`gzip`](/configuration#gzip) and [`brotli`](/configuration#brotli) options.
 
 ## Accuracy
 
@@ -12,20 +12,21 @@ By default, Sonda displays the uncompressed sizes of assets and the individual s
 
 <CustomImage
   src="/sizes-asset.jpg"
-  alt="Table containing sizes of an asset before and after compression and estimated download times"
-  caption="Table showing asset data also contains the estimated download times using slow 3G"
+  alt="Asset sizes before and after compression, with estimated download times on slow 3G and other information about the asset"
+  caption="Assets page shows original and compressed sizes and download-time estimates (slow 3G)"
 />
 
-The GZIP and Brotli sizes displayed in the assets modal closely reflect the actual sizes you would see when serving files with these compression methods enabled on a server. While there may be slight variations due to specific compression settings, these differences are generally minimal.
+The GZIP and Brotli **sizes displayed on the Assets page closely reflect the actual sizes** you would see when serving files with these compression methods enabled on a server. While there may be slight variations due to specific compression settings, these differences are generally minimal.
 
 ### Source sizes
 
 <CustomImage
   src="/sizes-source.jpg"
-  alt="Table containing sizes of an individual source before and after compression"
+  alt="Sizes of the individual source file before and after compression"
+  caption="Estimated sizes for individual source files in the currently selected asset"
 />
 
-The GZIP and Brotli sizes shown for individual source files are estimates rather than exact measurements. This is because compression algorithms like GZIP and Brotli are more effective when applied to larger datasets. Larger assets benefit from more opportunities to identify and compress repeated patterns, whereas smaller, isolated files tend to compress less efficiently.
+The GZIP and Brotli **sizes shown for individual source files are estimates rather than exact measurements**. This is because compression algorithms like GZIP and Brotli are more effective when applied to larger datasets. Larger assets benefit from more opportunities to identify and compress repeated patterns, whereas smaller, isolated files tend to compress less efficiently.
 
 To estimate the compressed size of each source file:
 

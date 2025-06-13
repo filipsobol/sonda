@@ -41,7 +41,7 @@
 			</table>
 		</div>
 
-		<DependencyChain :name />
+		<DependencyTree :name />
 		<SourceCode :name />
 	</Collapsible>
 </template>
@@ -53,7 +53,7 @@ import { getChunkResource, report } from '@/report.js';
 import { formatSize } from '@/format.js';
 import BaseSelect from '@components/common/Select.vue';
 import Collapsible from '@/components/common/Collapsible.vue';
-import DependencyChain from './DependencyChain.vue';
+import DependencyTree from './DependencyTree.vue';
 import SourceCode from './SourceCode.vue';
 import type { ChunkResource } from 'sonda';
 

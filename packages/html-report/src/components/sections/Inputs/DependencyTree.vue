@@ -1,6 +1,6 @@
 <template>
 	<template v-if="graph?.length">
-		<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Dependency chain</h4>
+		<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Dependency tree</h4>
 
 		<div class="flex flex-col gap-y-8 border-l-2 border-gray-200 pl-7 ml-3">
 			<div
@@ -45,11 +45,7 @@
 
 				<template v-else-if="node.kind === 'require'">
 					<p class="text-sm/7 font-semibold">
-						File
-						<a :href="router.getUrl( 'inputs/details', { item: node.source } )">
-							<InlineCodeBlock>{{ node.source }}</InlineCodeBlock>
-						</a>
-						requires
+						It requires
 						<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
 							<InlineCodeBlock>{{ node.original || node.target }}</InlineCodeBlock>
 						</a>
@@ -65,11 +61,7 @@
 
 				<template v-else-if="node.kind === 'dynamic-import'">
 					<p class="text-sm/7 font-semibold">
-						File
-						<a :href="router.getUrl( 'inputs/details', { item: node.source } )">
-							<InlineCodeBlock>{{ node.source }}</InlineCodeBlock>
-						</a>
-						dynamically imports
+						It dynamically imports
 						<a :href="router.getUrl( 'inputs/details', { item: node.target } )">
 							<InlineCodeBlock>{{ node.original || node.target }}</InlineCodeBlock>
 						</a>

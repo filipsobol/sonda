@@ -4,24 +4,51 @@ outline: deep
 
 # Dependency tree
 
-Clicking on a file tile in the tree map chart opens a modal with detailed information about that file. Among other details, the modal includes a dependency tree that shows the files that imported it, explaining why it is included in the bundle.
+The **Usage** section on the Input details page explains why a specific file is included in your bundle. A core element is the **Dependency tree**, which traces the import tree from the selected file back to the selected asset.
 
 <CustomImage
   src="/dependency-tree.jpg"
-  alt="Dependency tree showing the import chain from the selected file up to the project file that imported it"
+  alt="Dependency tree showing the import chain from the selected file up to the asset it is part of"
 />
 
-In the example above, the selected file is in the bundle because:
+In this example, the selected file appears in the bundle because:
 
-1. The file `src/main.ts` imports `sonda` (or more specifically, its distribution file `sonda/dist/index.js`).
-2. Sonda imports the `@ampproject/remapping` package.
-3. That package imports the `@jridgewell/gen-mapping` package.
-4. That package imports the `@jridgewell/set-array` package.
-5. That package contains the selected file.
+1. The file `src/index.ts` is the entry point for the asset,
+2. it imports `./report/report.js`,
+3. it imports `./processors/outputs.js`,
+4. it imports `@ampproject/remapping`,
+5. it imports `@jridgewell/trace-mapping`,
+6. it imports `@jridgewell/sourcemap-codec`,
+7. its source map references `[...]/src/sourcemap-codec.ts` which is the inspected file.
 
 ## Types of nodes
 
-There are two types of nodes in the dependency tree:
+There are three node types in the dependency tree:
 
-1. The root node may state that it is `part of the X bundle`. This only occurs if the [Deep view](/features/deep-view) feature is enabled and the selected file was identified by inspecting the dependency's source maps. In this case, it was the bundle that was imported, not the selected file directly.
-2. In all other cases, the node will state that it is `imported by X`, meaning the selected file (or a file higher in the chain) was explicitly imported by that file.
+1. **Entry point**: Represents the entry point of the currently selected asset. It is the root of the dependency tree and shows the file that starts the import chain.
+
+    :::info Example
+    "Entry point for the `dist/index.js` asset is `src/index.ts`"
+    :::
+
+2. **Imported, dynamically imported or required file**: Represents a file that is imported or required by another file in the chain. It shows the original path used to import the file and the resolved path to the file in the project.
+
+    :::info Examples
+    "It imports `./report/report.js`"
+
+    "It requires `./report/report.js`"
+
+    "It dynamically imports `./report/report.js`"
+    :::
+
+    :::warning Some integrations always show "imported by" nodes
+    Some bundlers don't track the information whether a file was imported, dynamically imported or required. In this case, all nodes in the dependency tree will be marked as "imported by" nodes.
+
+    It's best to assume that this type of node always means that there is a dependency on that file, not how it was pulled.
+    :::
+
+3. **Source map file**: Only shows when [Deep view](/features/deep-view) feature is enabled. Represents a file that was not directly used during the build process, but was found in the source map of a file that was used.
+
+    :::info Examples
+    "It has a source map that contains `[...]/node_modules/jridgewell/sourcemap-codec/src/sourcemap-codec.ts`"
+    :::

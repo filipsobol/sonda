@@ -25,7 +25,7 @@ You can override these options by passing a configuration object to the plugin. 
 
 ```js
 Sonda( {
-  enabled: false
+  open: false
 } )
 ```
 
@@ -48,7 +48,7 @@ Specifies the output format of the report. Supported formats include:
 * `'html'` - An HTML file with a treemap visualization.
 * `'json'` - A JSON file.
 
-### `outputDir`
+### `outputDir` <Badge type="tip" text="Introduced in 0.8.0" />
 * **Type:** string
 * **Default:** `'.sonda'`
 * **Description:** The directory where the report will be saved.
@@ -144,9 +144,9 @@ The default value for the `filename` option in frameworks is `'sonda-report-[env
 This does not apply to bundler plugins, as they generate a single type of bundles.
 :::
 
-### `detailed`
+### `detailed` <Badge type="danger" text="Removed in 0.8.0" />
 
 * **Type:** boolean
 * **Default:** `false`
 
-Renamed to `deep` in version 0.8.0.
+Renamed to `deep`.
