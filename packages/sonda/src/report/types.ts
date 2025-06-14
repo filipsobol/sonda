@@ -29,6 +29,13 @@ export interface JsonReport {
 	 * List of issues detected in the outputs.
 	 */
 	issues: Array<Issue>;
+
+	/**
+	 * Partial source maps of the "asset" resources.
+	 *
+	 * This value is only available when the `deep` option is enabled.
+	 */
+	sourcemaps: Array<SourceMap>;
 }
 
 export interface Metadata {
@@ -161,13 +168,6 @@ export interface ResourceBase {
 	 * map of other resource and value of `parent` is the name of that resource.
 	 */
 	parent?: string | Array<string> | null;
-
-	/**
-	 * Source map of the resource.
-	 *
-	 * This value is only available when the `deep` option is enabled.
-	 */
-	sourcemap?: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
 /**
@@ -184,7 +184,6 @@ export interface FilesystemResource extends ResourceBase {
 	gzip?: never;
 	brotli?: never;
 	parent?: never;
-	sourcemap?: never;
 }
 
 /**
@@ -201,7 +200,6 @@ export interface SourcemapResource extends ResourceBase {
 	gzip?: never;
 	brotli?: never;
 	parent: string | null;
-	sourcemap?: never;
 }
 
 /**
@@ -218,7 +216,6 @@ export interface AssetResource extends ResourceBase {
 	gzip: number;
 	brotli: number;
 	parent?: never;
-	sourcemap: Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'> | null;
 }
 
 /**
@@ -236,7 +233,6 @@ export interface ChunkResource extends ResourceBase {
 	gzip: number;
 	brotli: number;
 	parent: string;
-	sourcemap?: never;
 }
 
 export interface Connection {
@@ -331,3 +327,23 @@ export type ModuleFormat =
 	| 'iife'
 	| 'system'
 	| 'other';
+
+/**
+ * Type for the source map strings from the report after decoding.
+ */
+export interface SourceMap {
+	/**
+	 * Name of the asset file that the source map belongs to.
+	 */
+	name: string;
+
+	/**
+	 * Stringified source map.
+	 * 
+	 * Use the `DecodedMap` type for the decoded version of this map (after `JSON.parse()`).
+	 */
+	map: string;
+};
+
+
+export type DecodedReportSourceMap = Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'>;

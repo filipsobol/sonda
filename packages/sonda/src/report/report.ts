@@ -6,7 +6,16 @@ import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import { updateOutput } from './processors/outputs.js';
 import { updateDependencies } from './processors/dependencies.js';
-import type { JsonReport, Metadata, Resource, Connection, Dependency, Issue } from './types.js';
+import type {
+	JsonReport,
+	Metadata,
+	Resource,
+	Connection,
+	Dependency,
+	Issue,
+	SourceMap,
+	DecodedReportSourceMap
+} from './types.js';
 import type { Formatter } from './formatters/Formatter.js';
 import type { Config, Format } from '../config.js';
 
@@ -24,6 +33,7 @@ export class Report {
 	protected metadata: Metadata;
 	protected dependencies: Array<Dependency> = [];
 	protected issues: Array<Issue> = []
+	protected sourcemaps: Array<SourceMap> = [];
 
 	constructor( config: Config ) {
 		this.config = config;
@@ -122,13 +132,26 @@ export class Report {
 		}
 	}
 
+	addSourceMap( asset: string, sourcemap: DecodedReportSourceMap ): void {
+		if ( this.sourcemaps.some( sm => sm.name === asset ) ) {
+			// Ignore duplicate sourcemaps for the same asset
+			return;
+		}
+
+		this.sourcemaps.push( {
+			name: asset,
+			map: JSON.stringify( sourcemap ),
+		} );
+	}
+
 	#getFormattedData(): JsonReport {
 		return {
 			metadata: this.metadata,
 			resources: sortByKey( this.resources, 'name' ),
 			connections: this.connections,
 			dependencies: sortByKey( this.dependencies, 'name' ),
-			issues: this.issues
+			issues: this.issues,
+			sourcemaps: this.sourcemaps
 		};
 	}
 }

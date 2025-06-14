@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 const SONDA_REPORT_DATA = process.env.NODE_ENV === 'production'
 	? '__REPORT_DATA__'
-	: gzipSync( readFileSync( './sample_data.json', 'utf-8' ) ).toString('base64')
+	: gzipSync( readFileSync( './sample_data.json', 'utf-8' ) ).toString('base64');
 
 export default defineConfig( {
 	define: {

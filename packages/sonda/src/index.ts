@@ -22,7 +22,9 @@ export type {
 	ResourceKind,
 	ConnectionKind,
 	FileType,
-	ModuleFormat
+	ModuleFormat,
+	SourceMap,
+	DecodedReportSourceMap
 } from './report/types.js';
 
 // Config

@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@source not '../sample_data.json'; /* Otherwise Tailwind hands on this large JSON file */
 
 /* latin-ext */
 @font-face {

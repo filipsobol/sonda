@@ -43,8 +43,7 @@ function addNonAnalyzableType( report: Report, path: string, type: FileType ): v
 		kind: 'asset',
 		name: normalizePath( path ),
 		type,
-		...sizes,
-		sourcemap: null
+		...sizes
 	} );
 }
 
@@ -63,15 +62,17 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 	const { code, map } = codeMap;
 	const sizes = getSizes( code, report.config );
 	const sourcesSizes = getBytesPerSource( code, map, sizes, report.config );
-	const sourcemap = report.config.sources ? normalizeSourceMap( map ) : null;
 
 	report.addResource( {
 		kind: 'asset',
 		name: assetName,
 		type,
-		...sizes,
-		sourcemap
+		...sizes
 	} );
+
+	if ( report.config.sources ) {
+		report.addSourceMap( assetName, normalizeSourceMap( map ) )
+	}
 
 	// Add `asset => entrypoint` connections
 	entrypoints?.forEach( entry => report.addConnection( {

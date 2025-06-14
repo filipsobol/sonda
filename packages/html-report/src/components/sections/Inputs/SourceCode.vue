@@ -31,7 +31,7 @@
 import { computed, useTemplateRef, watchPostEffect } from 'vue';
 import Alert from '@/components/common/Alert.vue';
 import { getAssetResource, report } from '@/report.js';
-import type { ChunkResource } from 'sonda';
+import type { ChunkResource, DecodedReportSourceMap } from 'sonda';
 
 interface Props {
 	name: string;
@@ -55,7 +55,15 @@ const asset = computed( () => usedIn.value[ 0 ]?.value && getAssetResource( used
 
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
-const sourceMap = computed( () => asset.value?.sourcemap );
+const sourceMap = computed<DecodedReportSourceMap | null>( () => {
+	const encodedSourceMap = report.sourcemaps.find( sm => sm.name === asset.value?.name );
+
+	if ( !encodedSourceMap ) {
+		return null;
+	}
+
+	return JSON.parse( encodedSourceMap.map );
+} );
 const sourceIndex = computed( () => sourceMap.value?.sources.indexOf( props.name ) ?? -1 );
 const sourceCode = computed( () => sourceIndex.value > -1 ? sourceMap.value!.sourcesContent![ sourceIndex.value ] : null );
 const sourceCodeLines = computed( () => sourceCode.value?.split( /(?<=\r?\n)/ ) ?? [] );
