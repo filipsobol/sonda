@@ -41,14 +41,14 @@ There are three node types in the dependency tree:
     "It dynamically imports `./report/report.js`"
     :::
 
-    :::warning Some integrations always show "imported by" nodes
-    Some bundlers don't track the information whether a file was imported, dynamically imported or required. In this case, all nodes in the dependency tree will be marked as "imported by" nodes.
+    :::warning Some integrations always show "import" nodes
+    Some bundlers don't track whether a file was imported, dynamically imported, or required. In this case, all nodes in the dependency tree are marked as "import" nodes.
 
-    It's best to assume that this type of node always means that there is a dependency on that file, not how it was pulled.
+    It's best to assume that these node types just indicate a dependency on the file rather than how it was pulled.
     :::
 
 3. **Source map file**: Only shows when [Deep view](/features/deep-view) feature is enabled. Represents a file that was not directly used during the build process, but was found in the source map of a file that was used.
 
-    :::info Examples
+    :::info Example
     "It has a source map that contains `[...]/node_modules/jridgewell/sourcemap-codec/src/sourcemap-codec.ts`"
     :::
