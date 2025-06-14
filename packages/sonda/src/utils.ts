@@ -1,35 +1,65 @@
-import { join, relative, win32, posix, extname, isAbsolute, format, parse } from 'path';
-import type { PluginOptions } from './types.js';
+import { readdir, access } from 'fs/promises';
+import { relative, win32, posix, extname, join } from 'path';
+import type { FileType } from './report/types.js';
 
-export const esmRegex: RegExp = /\.m[tj]sx?$/;
-export const cjsRegex: RegExp = /\.c[tj]sx?$/;
-export const jsRegexp: RegExp = /\.[cm]?[tj]s[x]?$/;
+export const extensions: Record<string, FileType> = {
+	// Scripts
+	'.js': 'script',
+	'.jsx': 'script',
+	'.mjs': 'script',
+	'.cjs': 'script',
+	'.ts': 'script',
+	'.tsx': 'script',
+	'.cts': 'script',
+	'.mts': 'script',
+	'.json': 'script',
+	'.node': 'script',
+	'.wasm': 'script',
 
-export function normalizeOptions( options?: Partial<PluginOptions> ): PluginOptions {
-	const format = options?.format
-		|| options?.filename?.split( '.' ).at( -1 ) as PluginOptions['format']
-		|| 'html';
+	// Styles
+	'.css': 'style',
+	'.scss': 'style',
+	'.sass': 'style',
+	'.less': 'style',
+	'.styl': 'style',
+	'.pcss': 'style',
+	'.postcss': 'style',
 
-	const defaultOptions: PluginOptions = {
-		enabled: true,
-		format,
-		filename: 'sonda-report.' + format,
-		open: true,
-		detailed: false,
-		sources: false,
-		gzip: false,
-		brotli: false, 
-		sourcesPathNormalizer: null,
-	};
+	// Fonts
+	'.woff': 'font',
+	'.woff2': 'font',
+	'.ttf': 'font',
+	'.otf': 'font',
+	'.eot': 'font',
 
-	// Merge user options with the defaults
-	const normalizedOptions = Object.assign( {}, defaultOptions, options ) satisfies PluginOptions;
+	// Images
+	'.jpg': 'image',
+	'.jpeg': 'image',
+	'.png': 'image',
+	'.gif': 'image',
+	'.svg': 'image',
+	'.webp': 'image',
+	'.jxl': 'image',
+	'.avif': 'image',
+	'.ico': 'image',
+	'.bmp': 'image',
 
-	normalizedOptions.filename = normalizeOutputPath( normalizedOptions );
+	// Components
+	'.vue': 'component',
+	'.svelte': 'component',
+	'.astro': 'component',
+	'.marko': 'component',
+	'.riot': 'component'
+};
 
-	return normalizedOptions;
-}
+const ignoredExtensions: Array<string> = [
+	'.map',
+	'.d.ts',
+];
 
+/**
+ * Normalizes a given path by removing leading null characters and converting it to a relative POSIX path.
+ */
 export function normalizePath( pathToNormalize: string ): string {
 	// Unicode escape sequences used by Rollup and Vite to identify virtual modules
 	const normalized = pathToNormalize.replace( /^\0/, '' )
@@ -41,25 +71,56 @@ export function normalizePath( pathToNormalize: string ): string {
 	return relativized.replaceAll( win32.sep, posix.sep );
 }
 
-function normalizeOutputPath( options: PluginOptions ): string {
-	let path = options.filename;
-	const expectedExtension = '.' + options.format;
+/**
+ * Returns the type of a given file based on its name.
+ */
+export function getTypeByName( name: string ): FileType {
+	return extensions[ extname( name ) ] ?? 'other';
+}
 
-	// Ensure the filename is an absolute path
-	if ( !isAbsolute( path ) ) {
-		path = join( process.cwd(), path );
+/**
+ * Returns only the object keys which have a string value.
+ */
+type StringKeys<T> = keyof {
+  [P in keyof T as T[P] extends string ? P : never]: unknown
+};
+
+/**
+ * Sort an array of objects by a specific key.
+ */
+export function sortByKey<
+	T extends object,
+	K extends StringKeys<T>
+>( data: Array<T>, key: K ): Array<T> {
+	return data.toSorted( ( a, b ) => ( a[ key ] as string ).localeCompare( b[ key ] as string ));
+}
+
+/**
+ * Returns relative paths to all files in the given directory. The files are filtered to exclude source maps.
+ */
+export async function getAllFiles( dir: string, recursive = true ): Promise<string[]> {
+	try {
+		await access( dir );
+
+		const files = await readdir( dir, {
+			withFileTypes: true,
+			recursive
+		} );
+	
+		return files
+			.filter( file => file.isFile() )
+			.filter( file => !hasIgnoredExtension( file.name ) )
+			.map( file => join( relative( process.cwd(), file.parentPath ), file.name ) );
+	} catch {
+		// Directory does not exist or is inaccessible
+		return [];
 	}
+}
 
-	// Ensure that the `filename` extension matches the `format` option
-	if ( expectedExtension !== extname( path ) ) {
-		console.warn(
-			'\x1b[0;33m' + // Make the message yellow
-			`Sonda: The file extension specified in the 'filename' does not match the 'format' option. ` +
-			`The extension will be changed to '${ expectedExtension }'.`
-		);
-
-		path = format( { ...parse( path ), base: '', ext: expectedExtension } )
-	}
-
-	return path;
+/**
+ * Checks if a file name has an ignored extension. Using `endsWith` ensures that extensions like `.d.ts` are
+ * correctly identified as ignored, even though `extname` would return `.ts`.
+ */
+export function hasIgnoredExtension( name: string ): boolean {
+	return ignoredExtensions.some( ext => name.endsWith( ext ) );
 }

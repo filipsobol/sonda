@@ -1,5 +1,4 @@
 import 'ckeditor5';
-import '@ckeditor/ckeditor5-engine/dist/index.js';
 
 import './styles.css';
 

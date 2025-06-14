@@ -1,11 +1,18 @@
 import { rm } from 'fs/promises';
 import { builtinModules } from 'module';
 import { defineConfig } from 'rolldown';
+import { dts } from 'rolldown-plugin-dts';
 
 // Remove old build folder
 await rm( 'dist', { recursive: true, force: true } );
 
-const sharedOptions = defineConfig( {
+export default defineConfig( {
+	output: {
+		dir: 'dist',
+		format: 'esm',
+		entryFileNames: '[name].js',
+		chunkFileNames: '[name].js',
+	},
 	input: 'src/index.ts',
 	platform: 'node',
 	external: builtinModules,
@@ -13,28 +20,8 @@ const sharedOptions = defineConfig( {
 		extensionAlias: {
 			'.js': [ '.ts', '.js' ],
 		}
-	}
-} );
-
-export default defineConfig( [
-	{
-		output: {
-			dir: 'dist',
-			format: 'esm',
-			sourcemap: true,
-			entryFileNames: '[name].mjs',
-			chunkFileNames: '[name].mjs',
-		},
-		...sharedOptions
 	},
-	{
-		output: {
-			dir: 'dist',
-			format: 'cjs',
-			sourcemap: true,
-			entryFileNames: '[name].cjs',
-			chunkFileNames: '[name].cjs',
-		},
-		...sharedOptions
-	}
-] );
+	plugins: [
+		dts()
+	]
+} );

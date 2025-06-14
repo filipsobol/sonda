@@ -1,15 +1,15 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import { build } from 'vite';
-import Sonda from '../src/entrypoints/rollup';
-import type { PluginOptions } from '../src/types';
+import Sonda from '../src/entrypoints/rollup.js';
+import { Config, type IntegrationOptions } from '../src/config.js';
 
 const mocks = vi.hoisted( () => ( {
-	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
+	generateReport: vi.fn().mockResolvedValue( undefined )
 } ) );
 
-vi.mock( '../src/report/generate.js', () => ( {
-	generateReportFromAssets: mocks.generateReportFromAssets
+vi.mock( '../src/report.js', () => ( {
+	generateReport: mocks.generateReport
 } ) );
 
 describe( 'SondaRollupPlugin in Vite', () => {
@@ -30,14 +30,16 @@ describe( 'SondaRollupPlugin in Vite', () => {
 			plugins: [ Sonda( { enabled: false } ) ],
 		} );
 
-		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+		expect( mocks.generateReport ).not.toHaveBeenCalled();
 	} );
 
 	it( 'should transform the code correctly', async () => {
+		const outDir = join( import.meta.dirname, 'dist' );
+
 		await build( {
 			logLevel: 'silent',
 			build: {
-				outDir: join( import.meta.dirname, 'dist' ),
+				outDir,
 				sourcemap: true,
 				rollupOptions: {
 					input: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
@@ -50,39 +52,40 @@ describe( 'SondaRollupPlugin in Vite', () => {
 			plugins: [ Sonda() ],
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			[
-				join( import.meta.dirname, 'dist/vite_1.js' ),
-				join( import.meta.dirname, 'dist/vite_1.js.map' )
-			],
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			outDir,
+			expect.any( Config ),
 			{
 				'tests/fixtures/bundlers/index.js': {
 					belongsTo: null,
 					bytes: 66,
 					format: 'esm',
+					type: 'script',
 					imports: [ 'tests/fixtures/detailed/index.js' ]
 				},
 				'tests/fixtures/detailed/index.js': {
 					belongsTo: null,
 					bytes: 238,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				}
-			},
-			{}
+			}
 		);
 	} );
 
-	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<PluginOptions> = {
+	it( 'passes options to the `generateReport` function', async () => {
+		const options: Partial<IntegrationOptions> = {
 			format: 'json',
 			open: false
 		};
 
+		const outDir = join( import.meta.dirname, 'dist' );
+
 		await build( {
 			logLevel: 'silent',
 			build: {
-				outDir: join( import.meta.dirname, 'dist' ),
+				outDir,
 				sourcemap: true,
 				rollupOptions: {
 					input: join( import.meta.dirname, 'fixtures/bundlers/index.js' ),
@@ -95,10 +98,10 @@ describe( 'SondaRollupPlugin in Vite', () => {
 			plugins: [ Sonda( options ) ],
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			expect.any( Array ),
-			expect.any( Object ),
-			options
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			outDir,
+			expect.any( Config ),
+			expect.any( Object )
 		);
 	} );
 } );

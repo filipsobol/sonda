@@ -1,15 +1,15 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import { rollup } from 'rollup';
-import Sonda from '../src/entrypoints/rollup';
-import type { PluginOptions } from '../src/types';
+import Sonda from '../src/entrypoints/rollup.js';
+import { Config, type IntegrationOptions } from '../src/config.js';
 
 const mocks = vi.hoisted( () => ( {
-	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
+	generateReport: vi.fn().mockResolvedValue( undefined )
 } ) );
 
-vi.mock( '../src/report/generate.js', () => ( {
-	generateReportFromAssets: mocks.generateReportFromAssets
+vi.mock( '../src/report.js', () => ( {
+	generateReport: mocks.generateReport
 } ) );
 
 describe( 'SondaRollupPlugin', () => {
@@ -31,7 +31,7 @@ describe( 'SondaRollupPlugin', () => {
 			format: 'es',
 		} );
 
-		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+		expect( mocks.generateReport ).not.toHaveBeenCalled();
 	} );
 
 	it( 'should transform the code correctly', async () => {
@@ -52,31 +52,30 @@ describe( 'SondaRollupPlugin', () => {
 			format: 'es',
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			[
-				join( import.meta.dirname, 'dist/rollup_1.js' ),
-				join( import.meta.dirname, 'dist/rollup_1.js.map' )
-			],
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			join( import.meta.dirname, 'dist' ),
+			expect.any( Config ),
 			{
 				'tests/fixtures/bundlers/index.js': {
 					belongsTo: null,
 					bytes: 66,
 					format: 'esm',
+					type: 'script',
 					imports: [ 'tests/fixtures/detailed/index.js' ]
 				},
 				'tests/fixtures/detailed/index.js': {
 					belongsTo: null,
 					bytes: 238,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				}
-			},
-			{}
+			}
 		);
 	} );
 
-	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<PluginOptions> = {
+	it( 'passes options to the `generateReport` function', async () => {
+		const options: Partial<IntegrationOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -96,10 +95,10 @@ describe( 'SondaRollupPlugin', () => {
 			format: 'es',
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			expect.any( Array ),
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			join( import.meta.dirname, 'dist' ),
+			expect.any( Config ),
 			expect.any( Object ),
-			options
 		);
 	} );
 } );

@@ -1,0 +1,2 @@
+# Exclude playground directory from GitHub's language statistics
+playground/* linguist-vendored

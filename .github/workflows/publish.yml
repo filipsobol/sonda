@@ -24,12 +24,13 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Enable corepack
-        run: corepack enable
+        # https://github.com/nodejs/corepack/issues/627
+        run: npm i -g --force corepack && corepack enable
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: "20.19.0"
           cache: "pnpm"
 
       - name: Install dependencies

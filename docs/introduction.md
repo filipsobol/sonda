@@ -12,13 +12,13 @@ To see a sample report, check out the <a href="/demo.html" target="_blank">demo<
 
 ## Key features
 
-- **Works with major bundlers:** It is compatible with Vite, Rollup, Rolldown, webpack, Rspack, and esbuild delivering the same great experience regardless of your toolchain.
+- **Works with major bundlers:** It has integrations for Vite, Rollup, Rolldown, webpack, Rspack, and esbuild delivering the same great experience regardless of your toolchain.
 - **Works with major frameworks:** It supports Next.js, Nuxt, Astro, and other popular frameworks.
 - **Highly accurate:** By using source maps, it provides precise insights into your final bundles, reflecting tree-shaking and minification.
-- **Detailed insights:** View sizes before and after compression, dependency graphs, download time estimates, and more.
-- **Flexible report formats:** Generate reports in HTML for visualization or JSON for automation.
-- **Used code highlights:** Identify the exact code included in your final bundles.
-- **Issue detection:** Spot and resolve common issues like duplicated dependencies.
+- **Detailed insights:** It can show sizes before and after compression, dependency graphs, download time estimates, and more.
+- **Flexible report formats:** It can generate reports in HTML for visualization or JSON for automation.
+- **Used code highlights:** It allows you to inspect the codes included in your final bundles.
+- **Issue detection:** It can spot and help you resolve common issues like duplicated dependencies.
 
 ## Why choose Sonda?
 

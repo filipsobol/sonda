@@ -10,6 +10,7 @@ export default defineNuxtConfig( {
   },
   modules: [
     Sonda( {
+			format: 'html',
       server: true
     } )
   ]

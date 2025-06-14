@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.3",
-    "@astrojs/node": "^9.0.0",
-    "@astrojs/rss": "^4.0.10",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/vue": "^5.0.3",
-    "astro": "^5.1.1",
+    "@astrojs/mdx": "^4.2.6",
+    "@astrojs/node": "^9.2.1",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.3.1",
+    "@astrojs/vue": "^5.0.13",
+    "astro": "^5.7.10",
     "vue": "^3.5.13"
   },
   "devDependencies": {

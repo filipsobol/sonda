@@ -1,8 +1,9 @@
-import { mount } from 'svelte';
-import App from './components/App.svelte';
+import { createApp } from 'vue';
+import App from './App.vue';
+import vClickOutside from './directives/click-outside';
 
-import './app.css';
+import './style.css';
 
-mount(App, {
-  target: document.getElementById('app')!,
-});
+createApp(App)
+	.directive( 'click-outside', vClickOutside )
+	.mount('#app');

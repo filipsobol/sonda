@@ -1,15 +1,15 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import esbuild from 'esbuild';
-import Sonda from '../src/entrypoints/esbuild';
-import type { PluginOptions } from '../src/types';
+import Sonda from '../src/entrypoints/esbuild.js';
+import { Config, type IntegrationOptions } from '../src/config.js';
 
 const mocks = vi.hoisted( () => ( {
-	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
+	generateReport: vi.fn().mockResolvedValue( undefined )
 } ) );
 
-vi.mock( '../src/report/generate.js', () => ( {
-	generateReportFromAssets: mocks.generateReportFromAssets
+vi.mock( '../src/report.js', () => ( {
+	generateReport: mocks.generateReport
 } ) );
 
 describe( 'SondaEsbuildPlugin', () => {
@@ -23,7 +23,7 @@ describe( 'SondaEsbuildPlugin', () => {
 			format: 'esm',
 		} );
 
-		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+		expect( mocks.generateReport ).not.toHaveBeenCalled();
 	} );
 
 	it( 'should transform the code correctly', async () => {
@@ -36,45 +36,44 @@ describe( 'SondaEsbuildPlugin', () => {
 			format: 'esm',
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			[
-				join( import.meta.dirname, 'dist/esbuild_1.js.map' ),
-				join( import.meta.dirname, 'dist/esbuild_1.js' )
-			],
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			join( import.meta.dirname, 'dist' ),
+			expect.any( Config ),
 			{
 				'tests/fixtures/bundlers/index.js': {
 					belongsTo: null,
 					bytes: 66,
 					format: 'esm',
+					type: 'script',
 					imports: [ 'tests/fixtures/detailed/index.js' ]
 				},
 				'tests/fixtures/detailed/index.js': {
 					belongsTo: null,
 					bytes: 238,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				},
 				'tests/fixtures/detailed/src/maths.js': {
 					belongsTo: 'tests/fixtures/detailed/index.js',
 					bytes: 201,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				},
 				'tests/fixtures/detailed/src/pow.js': {
 					belongsTo: 'tests/fixtures/detailed/index.js',
 					bytes: 67,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				}
-			},
-			{
-				detailed: false
 			}
 		);
 	} );
 
-	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<PluginOptions> = {
+	it( 'passes options to the `generateReport` function', async () => {
+		const options: Partial<IntegrationOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -88,10 +87,10 @@ describe( 'SondaEsbuildPlugin', () => {
 			format: 'esm',
 		} );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			expect.any( Array ),
-			expect.any( Object ),
-			{ ...options, detailed: false }
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			join( import.meta.dirname, 'dist' ),
+			expect.any( Config ),
+			expect.any( Object )
 		);
 	} );
 } );
