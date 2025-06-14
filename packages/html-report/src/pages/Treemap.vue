@@ -45,6 +45,7 @@
 			class="flex-grow w-full overflow-hidden"
 		>
 			<Treemap
+				v-if="width > 0 && height > 0"
     		:key
 				:content
 				:compressionType
