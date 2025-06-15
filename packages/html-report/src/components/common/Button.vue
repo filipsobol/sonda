@@ -1,7 +1,6 @@
 <template>
 	<component
 		:is="elementType"
-		:href="link"
 		:disabled
 		:class="[
 			'flex items-center justify-between gap-2 h-8 px-2 text-sm text-gray-500 border border-gray-300 rounded-lg shadow-xs outline-hidden cursor-pointer',
@@ -20,7 +19,7 @@
 import { computed } from 'vue';
 
 interface Props {
-	link?: string;
+	link?: boolean;
 	active?: boolean;
 	disabled?: boolean;
 }

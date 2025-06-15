@@ -14,7 +14,12 @@
 				:options="parentAssets"
 			/>
 
-			<BaseButton :link="router.getUrl( 'assets/details', { item: usedIn } )">Asset details</BaseButton>
+			<BaseButton
+				:link="true"
+				:href="router.getUrl( 'assets/details', { item: usedIn } )"
+			>
+				Asset details
+			</BaseButton>
 		</div>
 
 		<h4 class="mt-4 mb-4 text-lg font-bold text-gray-700">Size</h4>

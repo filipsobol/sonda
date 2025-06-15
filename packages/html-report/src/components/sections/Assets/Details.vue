@@ -21,7 +21,8 @@
 						<td class="p-3 font-normal">
 							<span class="inline-flex">
 								<BaseButton
-									:link="router.getUrl( 'treemap', { item: name } )"
+									:link="true"
+									:href="router.getUrl( 'treemap', { item: name } )"
 									:active="true"
 								>
 									Treemap view
