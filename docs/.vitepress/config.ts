@@ -35,7 +35,7 @@ export default defineConfig({
             items: [
               { text: 'Vite', link: '/bundlers/vite' },
               { text: 'Rollup', link: '/bundlers/rollup' },
-              // { text: 'Rolldown', link: '/bundlers/rolldown' },
+              { text: 'Rolldown', link: '/bundlers/rolldown' },
               { text: 'esbuild', link: '/bundlers/esbuild' },
               { text: 'webpack', link: '/bundlers/webpack' },
               { text: 'Rspack', link: '/bundlers/rspack' },
@@ -59,9 +59,10 @@ export default defineConfig({
           { text: 'Treemap graph', link: '/features/treemap-graph' },
           { text: 'Compression sizes', link: '/features/compression-sizes' },
           { text: 'Dependency tree', link: '/features/dependency-tree' },
-          { text: 'Detailed view', link: '/features/detailed-view' },
-          { text: 'Used code', link: '/features/used-code' },
-          { text: 'Dependency warnings', link: '/features/dependency-warnings' },
+          { text: 'Deep view', link: '/features/deep-view' },
+          { text: 'Inspect code', link: '/features/used-code' },
+          { text: 'JSON report', link: '/features/json-report' },
+          // { text: 'Dependency warnings', link: '/features/dependency-warnings' },
         ]
       },
       {

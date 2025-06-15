@@ -1,22 +1,16 @@
-import SondaWebpack from './webpack';
+import { SondaWebpackPlugin, Config, type UserOptions } from 'sonda';
 import type { NextConfig } from 'next';
-import type { FrameworkUserOptions } from '../types.js';
 
-export default function SondaNextPlugin( options: Partial<FrameworkUserOptions> = {} ) {
+export default function SondaNextPlugin( userOptions: UserOptions = {} ) {
   return function Sonda( nextConfig: NextConfig = {} ): NextConfig {
-    if ( options.enabled === false ) {
+    const options = new Config( userOptions, {
+      integration: 'next',
+      filename: 'sonda_[env]'
+    } );
+
+    if ( !options.enabled ) {
       return nextConfig;
     }
-
-    options.format ??= 'html';
-    options.filename ??= `sonda-report-[env].${ options.format }`;
-
-    // Next.js runs few builds and each must generate a separate report
-    if ( !options.filename.includes( '[env]' ) ) {
-      throw new Error( 'SondaNextPlugin: The "filename" option must include the "[env]" token.' );
-    }
-
-    const generateForServer = options.server ?? false;
 
     return Object.assign( {}, nextConfig, {
       webpack( config, { nextRuntime, isServer } ) {
@@ -28,21 +22,19 @@ export default function SondaNextPlugin( options: Partial<FrameworkUserOptions> 
           env === 'edge'
 
           // ... the server build unless explicitly enabled
-          || ( isServer && !generateForServer )
+          || ( isServer && !options.server )
         ) {
           return config;
         }
 
         // Because this configuration is shared between multiple builds, we need to clone it
-        const sondaOptions = Object.assign( {}, options );
+        const sondaOptions = options.clone();
 
         // Replace the "[env]" token with the current build type
         sondaOptions.filename = sondaOptions.filename!.replace( '[env]', env );
 
         // Add the Sonda plugin to the Webpack configuration
-        config.plugins.push(
-          new SondaWebpack( sondaOptions )
-        );
+        config.plugins.push( new SondaWebpackPlugin( sondaOptions ) );
 
         return config;
       }

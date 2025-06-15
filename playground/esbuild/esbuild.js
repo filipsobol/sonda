@@ -13,6 +13,8 @@ build( {
 	metafile: true,
 	logLevel: 'info',
 	plugins: [
-		Sonda()
+		Sonda( {
+			format: 'html'
+		} )
 	]
 } );

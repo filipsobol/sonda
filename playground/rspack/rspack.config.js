@@ -9,7 +9,20 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new Sonda()
+		new Sonda( {
+			format: 'html'
+		} ),
+		// new RsdoctorRspackPlugin( {
+		// 	disableClientServer: true,
+		// 	mode: 'brief',
+		// 	brief: {
+		// 		reportHtmlName: 'rsdoctor-report.html',
+		// 		writeDataJson: true
+		// 	},
+		// 	supports: {
+		// 		generateTileGraph: true
+		// 	}
+		// } )
 	],
 	experiments: {
 		css: true

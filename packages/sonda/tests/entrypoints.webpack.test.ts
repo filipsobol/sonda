@@ -1,15 +1,15 @@
 import { vi, describe, it, expect } from 'vitest';
 import { join } from 'path';
 import webpack from 'webpack';
-import Sonda from '../src/entrypoints/webpack';
-import type { PluginOptions } from '../src/types';
+import Sonda from '../src/entrypoints/webpack.js';
+import { Config, type UserOptions } from '../src/config.js';
 
 const mocks = vi.hoisted( () => ( {
-	generateReportFromAssets: vi.fn().mockResolvedValue( undefined )
+	generateReport: vi.fn().mockResolvedValue( undefined )
 } ) );
 
-vi.mock( '../src/report/generate.js', () => ( {
-	generateReportFromAssets: mocks.generateReportFromAssets
+vi.mock( '../src/report.js', () => ( {
+	generateReport: mocks.generateReport
 } ) );
 
 const distDir = join( import.meta.dirname, 'dist' );
@@ -39,7 +39,7 @@ describe( 'SondaWebpackPlugin', () => {
 
 		await runCompiler( compiler );
 
-		expect( mocks.generateReportFromAssets ).not.toHaveBeenCalled();
+		expect( mocks.generateReport ).not.toHaveBeenCalled();
 	} );
 
 	it( 'should transform the code correctly', async () => {
@@ -55,30 +55,30 @@ describe( 'SondaWebpackPlugin', () => {
 
 		await runCompiler( compiler );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			[
-				join( import.meta.dirname, 'dist/webpack_1.js' )
-			],
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			distDir,
+			expect.any( Config ),
 			{
 				'tests/fixtures/bundlers/index.js': {
 					belongsTo: null,
 					bytes: 66,
 					format: 'esm',
+					type: 'script',
 					imports: [ 'tests/fixtures/detailed/index.js' ]
 				},
 				'tests/fixtures/detailed/index.js': {
 					belongsTo: null,
 					bytes: 238,
 					format: 'esm',
+					type: 'script',
 					imports: []
 				}
-			},
-			{}
+			}
 		);
 	} );
 
-	it( 'passes options to the `generateReportFromAssets` function', async () => {
-		const options: Partial<PluginOptions> = {
+	it( 'passes options to the `generateReport` function', async () => {
+		const options: Partial<UserOptions> = {
 			format: 'json',
 			open: false
 		};
@@ -95,10 +95,10 @@ describe( 'SondaWebpackPlugin', () => {
 
 		await runCompiler( compiler );
 
-		expect( mocks.generateReportFromAssets ).toHaveBeenCalledWith(
-			expect.any( Array ),
+		expect( mocks.generateReport ).toHaveBeenCalledWith(
+			distDir,
+			expect.any( Config ),
 			expect.any( Object ),
-			options
 		);
 	} );
 } );

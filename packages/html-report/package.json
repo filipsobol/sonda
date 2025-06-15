@@ -5,25 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run check && npm run build-only",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "fuzzysort": "^3.1.0",
+    "vue": "^3.5.16"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "@tsconfig/svelte": "^5.0.4",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
+    "@tailwindcss/vite": "^4.1.10",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "@vue/tsconfig": "^0.7.0",
     "sonda": "workspace:^",
-    "svelte": "^5.15.0",
-    "svelte-check": "^4.1.1",
-    "tailwindcss": "^3.4.17",
-    "tslib": "^2.8.1",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.5",
-    "vite-plugin-restart": "^0.4.2",
-    "vite-plugin-simple-html": "^0.2.0",
-    "vite-plugin-singlefile": "^2.1.0"
+    "tailwindcss": "^4.1.10",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-singlefile": "^2.2.0",
+    "vue-tsc": "^2.2.10"
   }
 }

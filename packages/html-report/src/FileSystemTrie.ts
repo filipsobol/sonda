@@ -1,8 +1,9 @@
-import type { JsonReport, ReportOutput, ReportOutputInput, Sizes } from 'sonda';
+import type { AssetResource, ChunkResource, Sizes } from 'sonda';
 
 export interface File extends Sizes {
 	name: string;
 	path: string;
+	kind: 'chunk' | 'asset';
 }
 
 export interface Folder extends Sizes {
@@ -12,29 +13,34 @@ export interface Folder extends Sizes {
 }
 
 export interface Root extends Folder {
-	map: ReportOutput[ 'map' ];
+	root: true;
 }
 
 export type Content = Folder | File;
 
-export function getTrie( report: JsonReport ): Array<FileSystemTrie> {
-	return Object.entries( report.outputs ).map( ( [ outputPath, output ] ) => {
-		const trie = new FileSystemTrie();
+/**
+ * Returns a trie structure representing the structure of the provided resources.
+ */
+export function getTrie( name: string, resources: Array<ChunkResource | AssetResource> ): FileSystemTrie {
+	const trie = new FileSystemTrie();
 
-		Object
-			.entries( output.inputs )
-			.forEach( ( [ path, input ] ) => trie.insert( path, input ) );
+	trie.root.name = name;
+	trie.root.uncompressed = 0;
+	trie.root.gzip = 0;
+	trie.root.brotli = 0;
+	trie.root.root = true;
 
-		trie.root.name = outputPath;
-		trie.root.map = output.map;
-		trie.root.uncompressed = output.uncompressed;
-		trie.root.gzip = output.gzip;
-		trie.root.brotli = output.brotli;
+	for ( const resource of resources ) {
+		trie.insert( resource.name, resource );
 
-		trie.optimize();
+		trie.root.uncompressed += resource.uncompressed;
+		trie.root.gzip += resource.gzip;
+		trie.root.brotli += resource.brotli;
+	}
 
-		return trie;
-	} );
+	trie.optimize();
+
+	return trie;
 }
 
 export function isFolder( content: Content ): content is Folder {
@@ -59,7 +65,7 @@ export class FileSystemTrie {
 		};
 	}
 
-	insert( filePath: string, metadata: ReportOutputInput ): void {
+	insert( filePath: string, chunk: ChunkResource | AssetResource ): void {
 		const parts = filePath.split( '/' );
 		const name = parts.pop()!;
 
@@ -74,22 +80,29 @@ export class FileSystemTrie {
 			}
 
 			node = childNode;
-			node.uncompressed += metadata.uncompressed;
-			node.gzip += metadata.gzip;
-			node.brotli += metadata.brotli;
+			node.uncompressed += chunk.uncompressed;
+			node.gzip += chunk.gzip;
+			node.brotli += chunk.brotli;
 		} );
 
 		node.items.push( {
 			name,
 			path: node.path ? `${ node.path }/${ name }` : name,
-			uncompressed: metadata.uncompressed,
-			gzip: metadata.gzip,
-			brotli: metadata.brotli
+			uncompressed: chunk.uncompressed,
+			gzip: chunk.gzip,
+			brotli: chunk.brotli,
+			kind: chunk.kind
 		} );
 	}
 
 	optimize(): void {
-		const stack: Array<Folder> = [ this.root ];
+		const rootFolders = this.root.items.filter( item => isFolder( item ) );
+		/**
+		 * This is a starting point for path collapsing. However, we don't want to collapse root element
+		 * if it has a name (likely an asset name). In such case we skip it and start collapsing from
+		 * its children elements.
+		 */
+		const stack: Array<Folder> = this.root.name && rootFolders.length ? rootFolders : [ this.root ];
 
 		while( stack.length ) {
 			const node = stack.pop()!;
@@ -114,7 +127,7 @@ export class FileSystemTrie {
 	get( path: string ): Content | null {
 		let content: Content | null = this.root;
 
-		while ( content && content.path !== path ) {
+		while ( path && content && content.path !== path ) {
 			content = isFolder( content ) && content.items.find( item => path.startsWith( item.path ) ) || null;
 		}
 

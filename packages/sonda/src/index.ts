@@ -1,10 +1,39 @@
-export { generateReportFromAssets } from './report/generate.js';
-export { addSourcesToInputs } from './sourcemap/map.js';
-export {
-	esmRegex,
-	cjsRegex,
-	jsRegexp,
-	normalizePath
-} from './utils.js';
+// Integrations
+export { SondaEsbuildPlugin, processEsbuildMetafile } from './integrations/esbuild.js';
+export { SondaRollupPlugin } from './integrations/rollup.js';
+export { SondaVitePlugin } from './integrations/vite.js';
+export { SondaWebpackPlugin } from './integrations/webpack.js';
 
-export type * from './types.js';
+// Report
+export { Report } from './report/report.js';
+export type {
+	JsonReport,
+	Metadata,
+	ResourceBase,
+	FilesystemResource,
+	SourcemapResource,
+	AssetResource,
+	ChunkResource,
+	Connection,
+	Dependency,
+	Issue,
+	Resource,
+	Sizes,
+	ResourceKind,
+	ConnectionKind,
+	FileType,
+	ModuleFormat,
+	SourceMap,
+	DecodedReportSourceMap
+} from './report/types.js';
+
+// Config
+export {
+	Config,
+	type UserOptions,
+	type IntegrationOptions,
+	type Integration
+} from './config.js';
+
+// Utils
+export { normalizePath, getTypeByName } from './utils.js';

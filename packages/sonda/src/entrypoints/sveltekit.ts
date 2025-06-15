@@ -1,34 +1,28 @@
-import Sonda from './rollup';
+import { SondaVitePlugin, Config, type UserOptions } from 'sonda';
 import type { PluginOption } from 'vite';
-import type { FrameworkUserOptions } from '../types';
 
-export default function SondaSvelteKitPlugin( options: Partial<FrameworkUserOptions> = {} ): PluginOption {
-  if ( options.enabled === false ) {
-    return { name: 'sonda' };
-  }
+export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): PluginOption {
+  const options = new Config( userOptions, {
+    integration: 'sveltekit',
+    filename: 'sonda_[env]'
+  } );
 
-  options.format ??= 'html';
-  options.filename ??= `sonda-report-[env].${ options.format }`;
-
-  // SvelteKit runs few builds and each must generate a separate report
-  if ( !options.filename.includes( '[env]' ) ) {
-    throw new Error( 'SondaSvelteKitPlugin: The "filename" option must include the "[env]" token.' );
+  if ( !options.enabled ) {
+    return { name: 'sonda-sveltekit' };
   }
 
   return {
-    apply: 'build',
-
+    ...SondaVitePlugin( options ),
+    name: 'sonda-sveltekit',
     configResolved( config ) {
       const env = config.build.ssr ? 'server' : 'client';
-      const generateForServer = options.server ?? false;
+      const generateForServer = userOptions.server ?? false;
 
       if ( env === 'server' && !generateForServer ) {
-        options.enabled = false;
+        userOptions.enabled = false;
       }
 
-      options.filename = options.filename!.replace( '[env]', env );
-    },
-
-    ...Sonda( options )
+      options.filename = options.filename.replace( '[env]', env );
+    }
   };
 }

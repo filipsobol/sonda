@@ -1,4 +1,4 @@
-const sizeUnits = [
+const SIZE_UNITS = [
 	'b',
 	'KiB',
 	'MiB',
@@ -7,10 +7,12 @@ const sizeUnits = [
 	'PiB',
 ];
 
-const timeUnits = [
+const TIME_UNITS = [
 	'ms',
 	's'
 ];
+
+const MODULES = 'node_modules';
 
 function format( units: Array<string>, distance: number, value: number ): string {
 	let size = value;
@@ -26,9 +28,18 @@ function format( units: Array<string>, distance: number, value: number ): string
 }
 
 export function formatSize( bytes: number ): string {
-	return format( sizeUnits, 1024, bytes );
+	return format( SIZE_UNITS, 1024, bytes );
 }
 
 export function formatTime( ms: number ): string {
-	return format( timeUnits, 1000, ms );
+	return format( TIME_UNITS, 1000, ms );
+}
+
+export function formatPath( path: string ): string {
+	// Path may containg multiple `node_modules` directories, so we need to find the last one.
+	const index = path.lastIndexOf( MODULES );
+
+	return index >= 0
+		? path.slice( index + MODULES.length + 1 )
+		: path;
 }

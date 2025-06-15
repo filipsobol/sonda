@@ -20,7 +20,7 @@ npm install sonda --save-dev
 
 Next, register the Sonda plugin for Rolldown and enable source maps in the `rolldown.config.js` file:
 
-```js{2,6,9}
+```js{2,6,9-10}
 import { defineConfig } from 'rolldown';
 import Sonda from 'sonda/rolldown'; // [!code focus]
 
@@ -29,6 +29,7 @@ export default defineConfig( {
     sourcemap: true // [!code focus]
   },
   plugins: [
+    // Place Sonda at the beginning of the array // [!code focus]
     Sonda() // [!code focus]
   ]
 } );

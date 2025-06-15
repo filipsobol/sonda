@@ -2,6 +2,7 @@ import Sonda from 'sonda/next';
 import type { NextConfig } from 'next';
 
 const withSondaAnalyzer = Sonda( {
+  format: 'html',
   server: true
 } );
 

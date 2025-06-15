@@ -1,6 +1,6 @@
 import Sonda from 'sonda/webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 export default {
   entry: './src/index.js',
@@ -9,17 +9,24 @@ export default {
     filename: 'index.js',
     clean: true
   },
+  optimization: {
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin()
+    ]
+  },
   plugins: [
     new MiniCssExtractPlugin(),
-    // new BundleAnalyzerPlugin(),
-    new Sonda(),
+    new Sonda( {
+			format: 'html'
+    } )
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader' ],
-      },
-    ],
-  },
+        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
+      }
+    ]
+  }
 };

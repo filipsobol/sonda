@@ -2,30 +2,36 @@
 outline: deep
 ---
 
-# Treemap chart
+# Treemap Chart
 
-The tree map chart visualizes the contents of the selected asset, with each tile representing a single source file or folder.
+The Treemap page visualizes the sizes of your build's assets and their contents relative to each other. By default, it shows a treemap for the entire build, with each tile representing an output asset or a folder.
 
 <CustomImage
   src="/treemap.jpg"
-  alt="Tree map chart for a folder containing multiple folders and files from the Sonda project itself"
-  caption="Tree map chart of the Sonda project itself"
+  alt="Treemap chart for a folder containing multiple folders and files from the Sonda project itself"
+  caption="Treemap chart for the main JavaScript bundle of Sonda"
 />
 
-## Reading the tree map
+Clicking on a **folder tile** zooms into that folder's contents. Clicking on an **asset tile** drills down to a treemap of its source files, where each tile represents a single source file. Finally, clicking on a **source file tile** opens a detail view showing its file type, size, origin, and other metadata.
 
-The size and color of each tile represent the amount of code it contributed to the asset. Larger and redder tiles indicate a greater contribution of code. The actual size of the file or folder is displayed next to its name and reflects the currently selected size option (Uncompressed, GZIP, or Brotli). By default, the tree map shows uncompressed sizes.
+This workflow helps you quickly identify the largest assets and explore how individual files contribute to your build size.
+
+## Reading the Treemap
+
+The size and color of each tile is proportional to the file or folder size. Larger and warmer (redder) colors indicate larger sizes. The actual size of the file or folder is displayed next to its name and reflects the currently selected compression option (Uncompressed, GZIP, or Brotli). By default, the tree map shows uncompressed sizes.
 
 <CustomImage
   src="/sizes-switcher.jpg"
-  alt="Switches containing three options - Uncompressed, GZIP, and Brotli"
-  caption="Size toggle is only available if the compression settings are enabled"
+  alt="Dropdown menu offering Uncompressed, GZIP, and Brotli options"
+  caption="Compression selector (available only if extra compression settings are enabled)"
 />
 
-Clicking a tile opens a modal. If the tile represents a file, the modal contains detailed information about that file. If the tile represents a folder, the modal displays a new tree map for the files within that folder, allowing you to “zoom in” on specific parts of the asset.
+## The `[unassigned]` Tile
 
-## The `[unassigned]` tile
+A `[unassigned]` tile represents bundle content that couldn't be mapped to a specific source file, typically including:
 
-Occasionally, the tree map may include a tile labeled `[unassigned]`. This tile represents parts of the bundle that could not be mapped to a specific file. These are typically code comments or code added during the build process by bundler plugins without proper source map support. Some plugins may require additional configuration to correctly generate or update source maps.
+- Comments
+- Code injected by the bundler at build time  
+- Plugin-generated code without proper source-map support  
 
-If you notice a large `[unassigned]` tile, it may be worth investigating its source. For this purpose, you can use a tool like the [Source Map Visualizer](https://evanw.github.io/source-map-visualization/).
+If you see a large `[unassigned]` tile, consider investigating its origin using a tool like the [Source Map Visualizer](https://evanw.github.io/source-map-visualization/).

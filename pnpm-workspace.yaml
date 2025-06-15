@@ -1,3 +1,16 @@
 packages:
-  - 'packages/**'
-  - 'playground/**'
+  - packages/**
+  - playground/**
+
+ignoredBuiltDependencies:
+  - protobufjs
+  - lmdb
+  - msgpackr-extract
+  - sharp
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - rolldown

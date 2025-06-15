@@ -4,12 +4,14 @@ import Sonda from 'sonda/rolldown';
 export default defineConfig( {
 	input: 'src/index.ts',
 	output: {
-		file: 'dist/index.js',
+		dir: 'dist',
 		sourcemap: true,
 		format: 'es',
 		minify: true
 	},
 	plugins: [
-		Sonda(),
+		Sonda( {
+			format: 'html'
+		} )
 	]
 } );

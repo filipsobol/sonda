@@ -2,19 +2,20 @@
 outline: deep
 ---
 
-# Used code
+# Inspect code
 
-Usually, a list of the modules that make up an asset and how much code they contribute is sufficient. However, in rare cases, you may need to inspect the specific code from modules that is included in the final bundle. This is where the `sources` option becomes useful.
+If you need to inspect the exact source code included in the final bundle, you can enable the `sources` option in your Sonda configuration.
 
 When enabled, the `sources` option adds source maps to the report, allowing you to visualize which parts of the code contribute to the final asset size.
 
-::: danger ⚠️ Be cautious when sharing the report with the `sources` option enabled
-Enabling this option significantly increases the size of the report and embeds the **source code** of the assets. If you are working with proprietary code, ensure you share the report responsibly.
+::: danger ⚠️ Be cautious sharing reports with `sources` enabled
+Enabling this option significantly increases report size and embeds the **source code** of your assets. If your code is proprietary, share these reports responsibly.
 :::
 
-Clicking on a file tile in the tree map opens a modal with a `Show Used Code` button. Clicking this button opens another modal that displays the code of the selected file, with the portions included in the final bundle highlighted.
+To view used code, open the Input details page for a file and expand the **Usage** section. This view displays the file's source code with the portions included in the bundle highlighted.
 
 <CustomImage
   src="/used-code-highlighting.jpg"
-  alt="Modal containing the code of the selected file with the code included in the final bundle highlighted"
+  alt="Code block showing source code with some parts highlighted"
+  caption="Code used in the bundle is highlighted"
 />
