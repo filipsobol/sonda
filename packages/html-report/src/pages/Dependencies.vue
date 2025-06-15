@@ -170,8 +170,7 @@ const filteredData = computed( () => {
 	return fuzzysort
 		.go( search.value, filtered, {
 			key: 'name',
-			all: true,
-			threshold: 0.5
+			all: true
 		} )
 		.map( dependency => dependency.obj );
 } );
