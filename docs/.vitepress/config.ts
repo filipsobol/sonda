@@ -60,7 +60,8 @@ export default defineConfig({
           { text: 'Compression sizes', link: '/features/compression-sizes' },
           { text: 'Dependency tree', link: '/features/dependency-tree' },
           { text: 'Deep view', link: '/features/deep-view' },
-          { text: 'Used code', link: '/features/used-code' },
+          { text: 'Inspect code', link: '/features/used-code' },
+          { text: 'JSON report', link: '/features/json-report' },
           // { text: 'Dependency warnings', link: '/features/dependency-warnings' },
         ]
       },

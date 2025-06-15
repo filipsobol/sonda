@@ -4,9 +4,9 @@ import { loadCodeAndMap } from 'load-source-map';
 import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
 import { Report } from '../report.js';
 import { Config } from '../../config.js';
-import { getBytesPerSource, getSizes, UNASSIGNED } from './sourcemap.js';
+import { getBytesPerSource, getSizes } from './sourcemap.js';
 import { getTypeByName, normalizePath } from '../../utils.js';
-import type { AssetResource, FileType } from '../types.js';
+import type { DecodedReportSourceMap, FileType } from '../types.js';
 
 export type AssetsWithEntrypoints = Array<[ string, Array<string> | undefined ]>;
 
@@ -118,12 +118,12 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 
 		if ( parent ) {
 			// Add `bundle => sourcemap` connection
-		report.addConnection( {
-			kind: 'sourcemap',
-			source: parent,
-			target: name,
-			original: null
-		} );
+			report.addConnection( {
+				kind: 'sourcemap',
+				source: parent,
+				target: name,
+				original: null
+			} );
 		}
 	}
 }
@@ -131,7 +131,7 @@ function addAnalyzableType( report: Report, path: string, entrypoints: Array<str
 /**
  * Normalize the source map to a format expected by the report.
  */
-function normalizeSourceMap( map: DecodedSourceMap ): AssetResource[ 'sourcemap' ] {
+function normalizeSourceMap( map: DecodedSourceMap ): DecodedReportSourceMap {
 	return {
 		mappings: map.mappings,
 		sources: map.sources.map( source => source && normalizePath( source ) ),

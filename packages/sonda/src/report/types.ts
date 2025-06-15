@@ -161,10 +161,10 @@ export interface ResourceBase {
 	/**
 	 * Parent of the resource.
 	 *
-	 * If the `source` is `bundler`, this resource is a part of the output
+	 * If the `kind` is `chunk`, this resource is a part of the output
 	 * asset and value of `parent` is the name of the output asset.
 	 * 
-	 * If the `source` is `sourcemap`, this resource is a part of the source
+	 * If the `kind` is `sourcemap`, this resource is a part of the source
 	 * map of other resource and value of `parent` is the name of that resource.
 	 */
 	parent?: string | Array<string> | null;
