@@ -34,7 +34,7 @@ Available import paths:
 - `sonda/next`
 - `sonda/nuxt`
 - `sonda/rolldown`
-- `sonda/rollup`
+- `sonda/rollup` (make sure that Sonda is at the top of the `plugins` array)
 - `sonda/rspack`
 - `sonda/sveltekit`
 - `sonda/vite`

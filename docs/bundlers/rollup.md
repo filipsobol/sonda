@@ -20,7 +20,7 @@ npm install sonda --save-dev
 
 Next, register the Sonda plugin for Rollup and enable source maps in the `rollup.config.js` file:
 
-```js{2,6,9-10}
+```js{2,6,9}
 import { defineConfig } from 'rollup';
 import Sonda from 'sonda/rollup'; // [!code focus]
 
@@ -29,11 +29,14 @@ export default defineConfig( {
     sourcemap: true // [!code focus]
   },
   plugins: [
-    // Place Sonda at the beginning of the array // [!code focus]
     Sonda() // [!code focus]
   ]
 } );
 ```
+
+:::warning Placement of the Sonda plugin
+When adding the Sonda plugin to your Rollup configuration, it is important to **place it at the beginning of the `plugins` array**. This allows Sonda to properly analyze the connections between modules before the other plugins process them.
+:::
 
 Now, every time you build your project, Sonda will generate a report with information about your bundles.
 
