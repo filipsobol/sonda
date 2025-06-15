@@ -75,7 +75,7 @@ By default, external dependencies bundled into a single file appear as a single 
 
 Enabling this option may increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
 
-For more details, see the [Deep view](/features/deep-view) section.
+For more details, see the [Deep view](/features/deep-view) page.
 
 ### `sources` <Badge type="tip" text="Introduced in 0.5.0" />
 
@@ -84,7 +84,7 @@ For more details, see the [Deep view](/features/deep-view) section.
 
 Specifies whether to include source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
 
-For more details, see the [Used code](/features/used-code) section.
+For more details, see the [Inspect code](/features/used-code) page.
 
 ::: danger ⚠️ Be cautious when sharing reports with the `sources` option enabled
 This option significantly increases the size of the report and embeds the **source code** of the assets. If you are working with proprietary code, ensure you share the report responsibly.
@@ -101,7 +101,7 @@ The report includes estimated compressed sizes for each file within an asset. Ho
 
 Enabling this option may increase the time required to generate the report.
 
-For more details, see the [Compression sizes](/features/compression-sizes) section.
+For more details, see the [Compression sizes](/features/compression-sizes) page.
 
 ### `brotli`
 
@@ -114,7 +114,7 @@ The report includes estimated compressed sizes for each file within an asset. Ho
 
 Enabling this option may increase the time required to generate the report.
 
-For more details, see the [Compression sizes](/features/compression-sizes) section.
+For more details, see the [Compression sizes](/features/compression-sizes) page.
 
 ### `server` <Badge type="tip" text="Introduced in 0.7.0" />
 

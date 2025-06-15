@@ -4,7 +4,7 @@ outline: deep
 
 # Deep view
 
-By default, Sonda includes only the files the bundler loads during the build. This applies to both your project’s own files and any external dependencies.
+By default, Sonda includes only the files the bundler loads during the build. This applies to both your project's own files and any external dependencies.
 
 <CustomImage
   src="/treemap.jpg"
@@ -12,11 +12,11 @@ By default, Sonda includes only the files the bundler loads during the build. Th
   caption="Treemap chart for the main JavaScript bundle of Sonda"
 />
 
-Many npm packages ship only their compiled distribution files to improve performance. As a result, Sonda can’t inspect their original source code, so only the distribution files appear in the report.
+Many npm packages ship only their compiled distribution files to improve performance. As a result, Sonda can't inspect their original source code, so only the distribution files appear in the report.
 
 In most cases, knowing which dependencies are included and how much space they occupy is sufficient. Including every source file would add noise and slow down report generation.
 
-There are cases when you need to inspect dependencies as if the bundler had used their original source code. To do so, enable the [`deep`](/configuration#deep) option. Sonda will read each dependency’s source maps and map used code back to its original source files.
+There are cases when you need to inspect dependencies as if the bundler had used their original source code. To do so, enable the [`deep`](/configuration#deep) option. Sonda will read each dependency's source maps and map used code back to its original source files.
 
 <CustomImage
   src="/treemap-detailed.jpg"

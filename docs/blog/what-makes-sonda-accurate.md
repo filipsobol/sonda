@@ -6,13 +6,13 @@ It's the source maps.
 
 Would you use a measurement tool if you knew it provided inaccurate results? Of course not. You need reliable and accurate information.
 
-That’s why one of the key features of Sonda is its accuracy. But what makes Sonda accurate? The answer is straightforward, but first, let's examine why other bundle analyzers often provided inaccurate results in the past.
+That's why one of the key features of Sonda is its accuracy. But what makes Sonda accurate? The answer is straightforward, but first, let's examine why other bundle analyzers often provided inaccurate results in the past.
 
 ## Why are (some) other bundle analyzers inaccurate?
 
-If you’ve used other bundle analyzers, you may have noticed results that were significantly off, often showing bundle sizes much larger than they actually were on disk. Why does this happen?
+If you've used other bundle analyzers, you may have noticed results that were significantly off, often showing bundle sizes much larger than they actually were on disk. Why does this happen?
 
-Web bundlers like webpack and Rollup have various hooks that allow plugins to access or modify data at different stages of the bundling process. It’s crucial for these plugins to execute at the correct stages; otherwise, they could interfere with or break other plugins.
+Web bundlers like webpack and Rollup have various hooks that allow plugins to access or modify data at different stages of the bundling process. It's crucial for these plugins to execute at the correct stages; otherwise, they could interfere with or break other plugins.
 
 <CustomImage
   src="/blog/rollup_hooks.jpg"
