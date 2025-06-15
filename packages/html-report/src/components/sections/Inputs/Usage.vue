@@ -13,6 +13,8 @@
 				v-model="usedIn"
 				:options="parentAssets"
 			/>
+
+			<BaseButton :link="router.getUrl( 'assets/details', { item: usedIn } )">Asset details</BaseButton>
 		</div>
 
 		<h4 class="mt-4 mb-4 text-lg font-bold text-gray-700">Size</h4>
@@ -51,6 +53,7 @@ import { computed } from 'vue';
 import { router } from '@/router.js';
 import { getChunkResource, report } from '@/report.js';
 import { formatSize } from '@/format.js';
+import BaseButton from '@components/common/Button.vue';
 import BaseSelect from '@components/common/Select.vue';
 import Collapsible from '@/components/common/Collapsible.vue';
 import DependencyTree from './DependencyTree.vue';

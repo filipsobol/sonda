@@ -17,6 +17,20 @@
 					</tr>
 
 					<tr class="border-t border-gray-100">
+						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Treemap</td>
+						<td class="p-3 font-normal">
+							<span class="inline-flex">
+								<BaseButton
+									:link="router.getUrl( 'treemap', { item: name } )"
+									:active="true"
+								>
+									Treemap view
+								</BaseButton>
+							</span>
+						</td>
+					</tr>
+
+					<tr class="border-t border-gray-100">
 						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">File type</td>
 						<td class="p-3 font-normal capitalize">{{ asset.type }}</td>
 					</tr>
@@ -115,6 +129,7 @@ import { router } from '@/router.js';
 import { getAssetResource, report } from '@/report.js';
 import { formatSize, formatTime } from '@/format.js';
 import IconInfo from '@icon/Info.vue';
+import BaseButton from '@components/common/Button.vue';
 import Collapsible from '@/components/common/Collapsible.vue';
 
 const SLOW_3G = 50 * 1024 * 8;
