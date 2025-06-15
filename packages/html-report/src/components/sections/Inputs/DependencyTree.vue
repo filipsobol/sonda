@@ -124,7 +124,13 @@ function findShortestPath(
   startNode: string,
   targetNode: string
 ): Array<Connection> | null {
-  const adjacencyList = Object.groupBy( report.connections, connection => connection.source );
+  // Use `Object.groupBy( report.connections, connection => connection.source );` when it has better browser support.
+	const adjacencyList = report.connections.reduce( ( acc, connection ) => {
+		acc[ connection.source ] ||= [];
+		acc[ connection.source ].push( connection );
+		return acc;
+	}, {} as Record<string, Connection[]>);
+
   const visited = new Set<string>( [ startNode ] );
   const queue: Array<Array<Connection>> = ( adjacencyList[startNode] ?? [] ).map( connection  => [ connection ] );
 
