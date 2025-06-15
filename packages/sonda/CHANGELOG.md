@@ -1,6 +1,55 @@
 # Changelog
 
-## 1.0.0
+## 0.8.0
+
+This is the biggest release of Sonda to date, featuring a complete rewrite of both the backend and frontend. The goals of this rewrite were to:
+
+- Make it easier to inspect large projects with multiple outputs  
+- Display much more information about assets, inputs, external dependencies, and import relationships  
+- Significantly reduce the size of the HTML report files  
+- Prepare the codebase for future improvements and features
+
+### Highlights
+
+- **New HTML report design** – The report has been redesigned to improve navigation and clarity, especially for large projects with multiple outputs. See the [demo page](https://sonda.dev/demo) for an example.
+- **New JSON report format** – The JSON format has been overhauled to better differentiate resource types and expose relationships between them. For details, refer to the [JSON report](https://sonda.dev/features/json-report.html) documentation.
+- **ESM-only** – Sonda is now ESM-only and requires Node.js 20.19 or 22.12+. This change helps reduce the distribution size.
+- **New output directory** – Reports are now saved to the `.sonda` directory and are prefixed with a unique number to avoid overwriting existing reports.
+
+### Migration
+
+If you're upgrading from version 0.7, you'll need to update your import paths and configuration.
+
+#### Import Paths
+
+Each integration now has its own import path. It's recommended to use the path specific to your framework or bundler, as these may include optimizations that improve performance and accuracy.
+
+For example, if you're using Vite or Rolldown, use their dedicated import paths instead of the generic Rollup integration path.
+
+Available import paths:
+
+- `sonda/angular`
+- `sonda/astro`
+- `sonda/esbuild`
+- `sonda/next`
+- `sonda/nuxt`
+- `sonda/rolldown`
+- `sonda/rollup`
+- `sonda/rspack`
+- `sonda/sveltekit`
+- `sonda/vite`
+- `sonda/webpack`
+
+#### Configuration
+
+- The `filename` option has been removed and replaced with `outputDir`, which defaults to `.sonda`. All reports are saved to this directory, and filenames are prefixed with a unique number to prevent overwriting.
+- The `detailed` option has been renamed to `deep`.
+
+#### JSON Report
+
+The JSON report format has been completely redesigned. For complete details, refer to the updated [JSON report](https://sonda.dev/features/json-report.html) documentation.
+
+---
 
 ### Major Changes
 
@@ -61,6 +110,8 @@ Sonda now has integrations for the following frameworks:
 #### New `enabled` option
 
 You can now control whether the Sonda plugin is enabled or not using the `enabled` option.
+
+---
 
 ### Minor Changes
 

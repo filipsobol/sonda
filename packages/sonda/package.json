@@ -1,6 +1,6 @@
 {
   "name": "sonda",
-  "version": "1.0.0",
+  "version": "0.8.0",
   "description": "Universal visualizer and analyzer for JavaScript and CSS bundles. Works with most popular bundlers and frameworks.",
   "keywords": [
     "bundle",
