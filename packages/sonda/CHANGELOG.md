@@ -1,12 +1,19 @@
 # Changelog
 
+## 0.8.1
+
+### Patch Changes
+
+- f4144e0: HTML Report: Maintain active compression type when zooming on Treemap folder
+- 28b1f8d: HTML Report: If there is only one assets, immediately show its details in the Treemap view
+
 ## 0.8.0
 
 This is the biggest release of Sonda to date, featuring a complete rewrite of both the backend and frontend. The goals of this rewrite were to:
 
-- Make it easier to inspect large projects with multiple outputs  
-- Display much more information about assets, inputs, external dependencies, and import relationships  
-- Significantly reduce the size of the HTML report files  
+- Make it easier to inspect large projects with multiple outputs
+- Display much more information about assets, inputs, external dependencies, and import relationships
+- Significantly reduce the size of the HTML report files
 - Prepare the codebase for future improvements and features
 
 ### Highlights
