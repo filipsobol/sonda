@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import IconFunnel from '@components/icon/Funnel.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
 import BaseSelect from '@components/common/Select.vue';
@@ -113,6 +113,14 @@ const content = computed( () => {
 		
 	return getTrie( '', resources ).get( router.query.chunk || '' ) as Folder;
 } );
+
+onBeforeMount( () => {
+	if ( assets.value.length === 1 ) {
+		router.navigate( 'treemap', {
+			item: assets.value[ 0 ].name
+		} );
+	}
+} )
 
 onMounted( () => {
 	resizeObserver.observe( container.value! );

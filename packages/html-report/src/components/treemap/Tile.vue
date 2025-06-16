@@ -74,12 +74,20 @@ const url = computed( () => {
 
   if ( isFolder( props.content ) ) {
     // Tile is a folder
-    return router.getUrl( 'treemap', { item: router.query.item, chunk: path } );
+    return router.getUrl( 'treemap', {
+      item: router.query.item,
+      compression: props.compressionType,
+      chunk: path
+    } );
   }
 
   if ( props.content.kind === 'chunk' ) {
     // Tile is a chunk
-    return router.getUrl( 'inputs/details', { item: path, usage: 'true', usedIn: router.query.item } );
+    return router.getUrl( 'inputs/details', {
+      item: path,
+      usage: 'true',
+      usedIn: router.query.item
+    } );
   }
 
   if ( !getChunks( path ).length ) {
@@ -88,7 +96,10 @@ const url = computed( () => {
   }
 
   // Tile is an asset
-  return router.getUrl( 'treemap', { item: path, compression: props.compressionType } );
+  return router.getUrl( 'treemap', {
+    item: path,
+    compression: props.compressionType
+  } );
 } );
 const width = computed( () => props.tile.width - padding * 2 );
 const height = computed( () => props.tile.height - padding - paddingTop );
