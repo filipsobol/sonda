@@ -48,6 +48,19 @@ Specifies the output format of the report. Supported formats include:
 * `'html'` - An HTML file with a treemap visualization.
 * `'json'` - A JSON file.
 
+### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
+
+* **Type:** string
+* **Default:** `'sonda_[index]'` for bundler integrations and `'sonda_[env]_[index]'` for framework integrations.
+
+Specifies the filename of the generated report. If this value is an absolute path, it will override the `outputDir` option.
+
+The default value includes placeholders like `[index]` and `[env]`, which are replaced during report generation.
+
+The `[index]` placeholder is replaced with a version number that increments each time a new report is generated. This allows you to keep multiple revisions of the report without overwriting previous ones. If you want to generate only a single report and always overwrite the previous one, you can set this option to a static value, such as `'sonda'`.
+
+Additionally, framework integrations that can generate reports for both the client and server (with the [`server`](#server) option) will include the `[env]` placeholder in the filename. This is replaced with the environment name (e.g., `client`, `server`), allowing you to distinguish between client and server reports.
+
 ### `outputDir` <Badge type="tip" text="Introduced in 0.8.0" />
 * **Type:** string
 * **Default:** `'.sonda'`
@@ -128,21 +141,6 @@ This option is available only in **framework** integrations.
 :::
 
 ## Deprecated options
-
-### `filename` <Badge type="danger" text="Removed in 0.8.0" />
-
-* **Type:** string
-* **Default:** `'sonda-report.html'` or `'sonda-report.json'` depending on the `format` option
-
-Specifies the path of the generated report. This can be a filename, a relative path, or an absolute path. By default, the report is saved in the current working directory.
-
-::: tip 💡 Framework integrations
-Frameworks typically generate separate server and client bundles. Therefore, the `filename` option for frameworks must include a `[env]` token, which is replaced with the environment name (e.g., `'server'`, `'client'`, or similar).
-
-The default value for the `filename` option in frameworks is `'sonda-report-[env].html'` or `'sonda-report-[env].json'`, depending on the `format` option.
-
-This does not apply to bundler plugins, as they generate a single type of bundles.
-:::
 
 ### `detailed` <Badge type="danger" text="Removed in 0.8.0" />
 

@@ -5,7 +5,7 @@ export default function SondaNuxtPlugin( userOptions: UserOptions = {} ): NuxtMo
   return function SondaNuxtPlugin( _, nuxt: Nuxt ): void {
     const options = new Config( userOptions, {
       integration: 'nuxt',
-      filename: 'sonda_[env]'
+      filename: 'sonda_[env]_[index]'
     } );
 
     if ( !options.enabled ) {

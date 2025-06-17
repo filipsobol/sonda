@@ -4,7 +4,7 @@ import type { PluginOption } from 'vite';
 export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): PluginOption {
   const options = new Config( userOptions, {
     integration: 'sveltekit',
-    filename: 'sonda_[env]'
+    filename: 'sonda_[env]_[index]'
   } );
 
   if ( !options.enabled ) {
