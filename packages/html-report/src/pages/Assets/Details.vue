@@ -27,7 +27,7 @@
 		</template>
 
 		<template v-else>
-			<Alert>
+			<Alert variant="error">
 				<template #header>
 					<p>The asset does not exist</p>
 				</template>

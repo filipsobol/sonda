@@ -17,7 +17,7 @@
 		</template>
 
 		<template v-else>
-			<Alert>
+			<Alert variant="error">
 				<template #header>
 					<p>The input does not exist</p>
 				</template>

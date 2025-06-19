@@ -8,7 +8,10 @@
 
 		<hr class="mt-4 mb-6 border-gray-100">
 
-		<Alert v-if="!hasChunks">
+		<Alert
+			v-if="!hasChunks"
+			variant="warning"
+		>
 			<template #header>
 				<p>Have you enabled source maps in the bundler configuration?</p>
 			</template>
@@ -144,7 +147,7 @@ const types = computed( () => {
 
 			return acc;
 		}, ASSET_TYPES );
-	
+
 	return Object.values( countedTypes );
 } );
 
