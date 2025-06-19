@@ -90,6 +90,7 @@ The command accepts the following options. For more information about these opti
 * `--config=<path>`
 * `--projects=<name>` (can be specified multiple times)
 * `--format=<format>`
+* `--filename=<filename>`
 * `--outputDir=<dirname>`
 * `--no-open`
 * `--detailed`
