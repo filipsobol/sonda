@@ -71,7 +71,12 @@ export class FileSystemTrie {
 	}
 
 	optimize( folder: Folder ): void {
+		// First, sort direct children by size, largest first
+		folder.items.sort( ( a, b ) => b.uncompressed - a.uncompressed );
+
+		// Filter out non-folder items
 		const rootFolders = folder.items.filter( item => isFolder( item ) );
+
 		/**
 		 * This is a starting point for path collapsing. However, we don't want to collapse root element
 		 * if it has a name (likely an asset name). In such case we skip it and start collapsing from

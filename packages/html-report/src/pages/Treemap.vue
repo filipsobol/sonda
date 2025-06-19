@@ -135,8 +135,6 @@ const content = computed( () => {
 		trie.insert( resource.name, resource );
 	}
 
-	console.log( trie.root );
-
 	return trie.get( chunk ) as Folder | null;
 } );
 
