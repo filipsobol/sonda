@@ -138,6 +138,12 @@
             "prerender": true,
             "ssr": {
               "entry": "projects/subproject/src/server.ts"
+            },
+            "statsJson": true,
+            "sourceMap": {
+              "scripts": true,
+              "styles": true,
+              "vendor": true
             }
           },
           "configurations": {

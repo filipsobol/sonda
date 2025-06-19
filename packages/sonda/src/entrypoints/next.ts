@@ -5,7 +5,7 @@ export default function SondaNextPlugin( userOptions: UserOptions = {} ) {
   return function Sonda( nextConfig: NextConfig = {} ): NextConfig {
     const options = new Config( userOptions, {
       integration: 'next',
-      filename: 'sonda_[env]'
+      filename: 'sonda_[env]_[index]'
     } );
 
     if ( !options.enabled ) {

@@ -21,7 +21,7 @@ export default async function SondaAngular( {
 }: AngularUserOptions ): Promise<void> {
   const options = new Config( userOptions, {
     integration: 'angular',
-    filename: 'sonda_[project]'
+    filename: 'sonda_[env]_[index]'
   } );
 
   const angularConfig = loadJson( config );
@@ -46,7 +46,7 @@ export default async function SondaAngular( {
     const sondaOptions = options.clone();
 
     // Replace the "[project]" token with the current project name
-    sondaOptions.filename = sondaOptions.filename.replace( '[project]', project );
+    sondaOptions.filename = sondaOptions.filename.replace( '[env]', project );
 
     // Resolve the source map paths relative to the current working directory, not the path of the file itself
     sondaOptions.sourcesPathNormalizer = ( path: string ) => resolve( process.cwd(), path );

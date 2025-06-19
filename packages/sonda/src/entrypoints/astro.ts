@@ -4,7 +4,7 @@ import type { AstroIntegration } from 'astro';
 export default function SondaAstroPlugin( userOptions: UserOptions = {} ): AstroIntegration {
   const options = new Config( userOptions, {
     integration: 'astro',
-    filename: 'sonda_[env]'
+    filename: 'sonda_[env]_[index]'
   } );
 
   if ( !options.enabled ) {
