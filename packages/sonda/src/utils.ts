@@ -92,7 +92,7 @@ export function sortByKey<
 	T extends object,
 	K extends StringKeys<T>
 >( data: Array<T>, key: K ): Array<T> {
-	return data.toSorted( ( a, b ) => ( a[ key ] as string ).localeCompare( b[ key ] as string ));
+	return data.sort( ( a, b ) => ( a[ key ] as string ).localeCompare( b[ key ] as string ));
 }
 
 /**
