@@ -8,6 +8,7 @@ const { values } = parseArgs( {
     config: { type: 'string' },
     projects: { type: 'string', multiple: true },
     format: { type: 'string' },
+    filename: { type: 'string' },
     outputDir: { type: 'string' },
     'no-open': { type: 'boolean' },
     deep: { type: 'boolean' },

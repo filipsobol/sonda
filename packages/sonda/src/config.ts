@@ -15,6 +15,7 @@ export class Config implements Required<IntegrationOptions> {
 		this.#options = Object.assign( {
 			enabled: true,
 			format: 'html',
+			filename: 'sonda_[index]',
 			outputDir: '.sonda',
 			open: true,
 			deep: false,
@@ -22,7 +23,6 @@ export class Config implements Required<IntegrationOptions> {
 			gzip: false,
 			brotli: false,
 			server: false,
-			filename: 'sonda',
 			sourcesPathNormalizer: null
 		}, defaults, options );
 	}
@@ -37,6 +37,10 @@ export class Config implements Required<IntegrationOptions> {
 
 	public get format(): Format {
 		return this.#options.format;
+	}
+
+	public get filename(): string {
+		return this.#options.filename;
 	}
 
 	public get outputDir(): string {
@@ -71,10 +75,6 @@ export class Config implements Required<IntegrationOptions> {
 		return this.#options.integration;
 	}
 
-	public get filename(): string {
-		return this.#options.filename;
-	}
-
 	public get sourcesPathNormalizer(): SourcesPathNormalizer {
 		return this.#options.sourcesPathNormalizer;
 	}
@@ -102,6 +102,26 @@ export interface UserOptions {
    * @default 'html'
    */
 	format?: Format;
+
+	/**
+   * Specifies the filename of the generated report. If this value is an absolute path,
+   * it will override the `outputDir` option.
+   * 
+   * The default value includes placeholders like `[index]` and `[env]`, which are replaced
+   * during report generation.
+   *
+   * The `[index]` placeholder is replaced with a version number that increments each time
+   * a new report is generated. This allows you to keep multiple revisions of the report without
+   * overwriting previous ones. If you want to generate only a single report and always overwrite
+	 * the previous one, you can set this option to a static value, such as `'sonda'`.
+   *
+   * Additionally, framework integrations that can generate reports for both the client and server
+   * (with the `server` option) will include the `[env]` placeholder in the filename. This is replaced with
+   * the environment name (e.g., `client`, `server`), allowing you to distinguish between client and server reports.
+   *
+   * @default `'sonda_[index]'` for bundler integrations and `'sonda_[env]_[index]'` for framework integrations.
+   */
+  filename?: string;
 
 	/**
 	 * Specifies the name of the directory where the report will be saved.
@@ -172,7 +192,7 @@ export interface UserOptions {
 	/**
 	 * Specifies whether to generate a report for the server build.
    *
-   * This option is only available for meta-framework integrations.
+   * This option is only available for framework integrations.
 	 *
 	 * @default false
 	 */
@@ -184,13 +204,6 @@ export interface IntegrationOptions extends UserOptions {
 	 * Specifies the integration used to generate the report.
 	 */
 	integration: Integration;
-
-	/**
-	 * Specifies the name of the file where the report will be saved.
-	 *
-	 * @default 'sonda'
-	 */
-	filename?: string;
 
 	/**
 	 * Normalizes the paths in source maps to a consistent format.

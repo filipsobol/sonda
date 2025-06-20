@@ -4,16 +4,16 @@ import type { PluginOption } from 'vite';
 export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): PluginOption {
   const options = new Config( userOptions, {
     integration: 'sveltekit',
-    filename: 'sonda_[env]'
+    filename: 'sonda_[env]_[index]'
   } );
 
   if ( !options.enabled ) {
-    return { name: 'sonda-sveltekit' };
+    return { name: 'sonda/sveltekit' };
   }
 
   return {
     ...SondaVitePlugin( options ),
-    name: 'sonda-sveltekit',
+    name: 'sonda/sveltekit',
     configResolved( config ) {
       const env = config.build.ssr ? 'server' : 'client';
       const generateForServer = userOptions.server ?? false;

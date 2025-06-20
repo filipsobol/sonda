@@ -12,56 +12,27 @@ export interface Folder extends Sizes {
 	items: Array<Content>;
 }
 
-export interface Root extends Folder {
-	root: true;
-}
-
 export type Content = Folder | File;
 
-/**
- * Returns a trie structure representing the structure of the provided resources.
- */
-export function getTrie( name: string, resources: Array<ChunkResource | AssetResource> ): FileSystemTrie {
-	const trie = new FileSystemTrie();
-
-	trie.root.name = name;
-	trie.root.uncompressed = 0;
-	trie.root.gzip = 0;
-	trie.root.brotli = 0;
-	trie.root.root = true;
-
-	for ( const resource of resources ) {
-		trie.insert( resource.name, resource );
-
-		trie.root.uncompressed += resource.uncompressed;
-		trie.root.gzip += resource.gzip;
-		trie.root.brotli += resource.brotli;
-	}
-
-	trie.optimize();
-
-	return trie;
-}
-
-export function isFolder( content: Content ): content is Folder {
-	return 'items' in content;
+export function isFolder( content: Content | null ): content is Folder {
+	return !!content && 'items' in content;
 }
 
 export class FileSystemTrie {
-	root: Root;
+	root: Folder;
 
-	constructor() {
-		this.root = this.createNode( '', '' ) as Root;
+	constructor( name: string ) {
+		this.root = this.createNode( name, '' );
 	}
 
-	private createNode( name: string, path: string ): Folder {
+	private createNode( name: string, path: string): Folder {
 		return {
 			name,
 			path,
 			uncompressed: 0,
 			gzip: 0,
 			brotli: 0,
-			items: [],
+			items: []
 		};
 	}
 
@@ -93,16 +64,25 @@ export class FileSystemTrie {
 			brotli: chunk.brotli,
 			kind: chunk.kind
 		} );
+
+		this.root.uncompressed += chunk.uncompressed;
+		this.root.gzip += chunk.gzip;
+		this.root.brotli += chunk.brotli;
 	}
 
-	optimize(): void {
-		const rootFolders = this.root.items.filter( item => isFolder( item ) );
+	optimize( folder: Folder ): void {
+		// First, sort direct children by size, largest first
+		folder.items.sort( ( a, b ) => b.uncompressed - a.uncompressed );
+
+		// Filter out non-folder items
+		const rootFolders = folder.items.filter( item => isFolder( item ) );
+
 		/**
 		 * This is a starting point for path collapsing. However, we don't want to collapse root element
 		 * if it has a name (likely an asset name). In such case we skip it and start collapsing from
 		 * its children elements.
 		 */
-		const stack: Array<Folder> = this.root.name && rootFolders.length ? rootFolders : [ this.root ];
+		const stack: Array<Folder> = folder.name && rootFolders.length ? rootFolders : [ folder ];
 
 		while( stack.length ) {
 			const node = stack.pop()!;
@@ -129,6 +109,10 @@ export class FileSystemTrie {
 
 		while ( path && content && content.path !== path ) {
 			content = isFolder( content ) && content.items.find( item => path.startsWith( item.path ) ) || null;
+		}
+
+		if ( content && isFolder( content ) ) {
+			this.optimize( content );
 		}
 
 		return content;

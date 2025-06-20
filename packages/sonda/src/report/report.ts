@@ -117,7 +117,7 @@ export class Report {
 		this.assets[ name ] = entrypoints;
 	}
 
-	async generate(): Promise<void> {
+	async generate(): Promise<string> {
 		for ( const [ path, entrypoints ] of Object.entries( this.assets ) ) {
 			updateOutput( this, path, entrypoints );
 		}
@@ -130,6 +130,8 @@ export class Report {
 		if ( this.config.open ) {
 			await open( path );
 		}
+
+		return path;
 	}
 
 	addSourceMap( asset: string, sourcemap: DecodedReportSourceMap ): void {

@@ -2,28 +2,28 @@
 	<template v-if="sourceCode">
 		<h4 class="mt-16 mb-4 text-lg font-bold text-gray-700">Code</h4>
 
-		<div
-			v-if="supportsHighlight"
-			class="p-4 flex rounded-lg border border-gray-200 overflow-auto shadow-xs font-mono text-gray-700 bg-gray-50 max-h-[calc(100svh-12rem)]"
+		<Alert
+			v-if="!supportsHighlight"
+			variant="warning"
 		>
-			<pre class="h-full shrink select-none text-gray-400 text-right pr-2 mr-2 border-r border-gray-200 whitespace-pre">{{ lineNumbers }}</pre>
-			<pre><code ref="codeElement">{{ sourceCode }}</code></pre>
-		</div>
-
-		<Alert v-else>
 			<template #header>
 				<p>
-					Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>.
+					Your browser does not support the <a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API" target="_blank">CSS Custom Highlight API</a>
 				</p>
 			</template>
 
 			<template #body>
 				<p>
-					To use this feature, please update your browser to a version that supports it, or use a different browser. See the
+					The code highlighting feature is disabled. Please update your browser to a version that supports CSS Custom Highlight API, or use a different browser. See the
 					<a class="underline" href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API#browser_compatibility" target="_blank">Browser Compatibility page</a> for more information.
 				</p>
 			</template>
 		</Alert>
+
+		<div class="p-4 flex rounded-lg border border-gray-200 overflow-auto shadow-xs font-mono text-gray-700 bg-gray-50 max-h-[calc(100svh-12rem)]">
+			<pre class="h-full shrink select-none text-gray-400 text-right pr-2 mr-2 border-r border-gray-200 whitespace-pre">{{ lineNumbers }}</pre>
+			<pre><code ref="codeElement">{{ sourceCode }}</code></pre>
+		</div>
 	</template>
 </template>
 

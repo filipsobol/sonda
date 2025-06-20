@@ -21,6 +21,11 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex gap-2 mb-4">
+			<SearchInput
+				v-model="search"
+				placeholder="Filter items (prefix with - to exclude)"
+			/>
+
 			<BaseSelect
 				v-model="compressionType"
 				:options="availableCompressionOptions"
@@ -29,7 +34,6 @@
 
 			<Dropdown
 				v-model="types"
-				:disabled="!!activeAsset"
 				:options="availableTypeOptions"
 				title="Type"
 			>
@@ -45,13 +49,28 @@
 			class="flex-grow w-full overflow-hidden"
 		>
 			<Treemap
-				v-if="width > 0 && height > 0"
+				v-if="width > 0 && height > 0 && content && content.uncompressed > 0"
     		:key
 				:content
 				:compressionType
 				:width
 				:height
 			/>
+
+			<Alert
+				v-else
+				variant="neutral"
+			>
+				<template #header>
+					No results found
+				</template>
+
+				<template #body>
+					<p>
+						There are no inputs matching the current filters.
+					</p>
+				</template>
+			</Alert>
 		</div>
 	</div>
 </template>
@@ -59,10 +78,12 @@
 <script lang="ts" setup>
 import { ref, useTemplateRef, computed, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import IconFunnel from '@components/icon/Funnel.vue';
+import Alert from '@/components/common/Alert.vue';
+import SearchInput from '@/components/common/SearchInput.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
 import BaseSelect from '@components/common/Select.vue';
 import Treemap from '@/components/treemap/Treemap.vue';
-import { getTrie, type Folder } from '@/FileSystemTrie';
+import { FileSystemTrie, type Folder } from '@/FileSystemTrie';
 import { router } from '@/router';
 import { getAssets, getChunks, report } from '@/report';
 import type { FileType } from 'sonda';
@@ -95,24 +116,26 @@ const height = ref( 0 );
 
 const assets = computed( () => getAssets() );
 const activeAsset = computed( () => report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item ) );
-const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => assets.value.some( asset => asset.type === option.value ) ) );
+const resources = computed( () => router.query.item ? getChunks( router.query.item ) : assets.value );
+const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => resources.value.some( asset => asset.type === option.value ) ) );
 const availableCompressionOptions = computed( () => COMPRESSION_TYPES.filter( option => option.value === 'uncompressed' || report.metadata[ option.value ] ) );
+const search = computed( router.computedQuery( 'search', '' ) );
 const types = computed( router.computedQuery( 'types', [] as Array<FileType> ) );
 const compressionType = computed( router.computedQuery( 'compression', COMPRESSION_TYPES[ 0 ].value ) );
-const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 const content = computed( () => {
-	if ( router.query.item ) {
-		// Show details of a specific asset
-		const resources = getChunks( router.query.item );
+	const trie = new FileSystemTrie( router.query.item || '' );
+	const searchTerm = search.value.trim().toLocaleLowerCase();
+	const isNegativeSearch = searchTerm.startsWith( '-' );
+	const normalizedSearch = isNegativeSearch ? searchTerm.slice( 1 ) : searchTerm;
 
-		return getTrie( router.query.item, resources ).get( router.query.chunk || '' ) as Folder;
-	}
+	resources.value
+		.filter( resource => !normalizedSearch || isNegativeSearch !== resource.name.toLocaleLowerCase().includes( normalizedSearch ) )
+		.filter( resource => types.value.length === 0 || types.value.includes( resource.type ) )
+		.forEach( resource => trie.insert( resource.name, resource ) );
 
-	// Show assets
-	const resources = assets.value.filter( asset => types.value.length === 0 || types.value.includes( asset.type ) );
-		
-	return getTrie( '', resources ).get( router.query.chunk || '' ) as Folder;
+	return trie.get( router.query.chunk || '' ) as Folder | null;
 } );
+const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 
 onBeforeMount( () => {
 	if ( assets.value.length === 1 ) {
@@ -127,8 +150,8 @@ onMounted( () => {
 } );
 
 onBeforeUnmount( () => {
-  if ( resizeObserver && container.value ) {
-    resizeObserver.unobserve( container.value );
-  }
+	if ( resizeObserver && container.value ) {
+		resizeObserver.unobserve( container.value );
+	 }
 } );
 </script>

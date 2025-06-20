@@ -1,3 +1,4 @@
+import { styleText } from 'util';
 import { extname, resolve, dirname } from 'path';
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
@@ -16,13 +17,13 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 	} );
 
 	if ( !options.enabled ) {
-		return { name: 'sonda-rollup' };
+		return { name: 'sonda/rollup' };
 	}
 
 	const report = new Report( options );
 
 	return {
-		name: 'sonda-rollup',
+		name: 'sonda/rollup',
 
 		async resolveId( source: string, importer: string | undefined, options ) {
 			if ( !importer ) {
@@ -43,6 +44,8 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 					original: source
 				} );
 			}
+
+			return resolved;
 		},
 
 		moduleParsed( module: ModuleInfo ) {
@@ -70,7 +73,9 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 				)
 			}
 
-			await report.generate();
+			const reportPath = await report.generate();
+
+			this.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
 		}
 	};
 }

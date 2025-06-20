@@ -4,15 +4,15 @@ import type { AstroIntegration } from 'astro';
 export default function SondaAstroPlugin( userOptions: UserOptions = {} ): AstroIntegration {
   const options = new Config( userOptions, {
     integration: 'astro',
-    filename: 'sonda_[env]'
+    filename: 'sonda_[env]_[index]'
   } );
 
   if ( !options.enabled ) {
-    return { name: 'sonda-astro', hooks: {} };
+    return { name: 'sonda/astro', hooks: {} };
   }
 
   return {
-    name: 'sonda-astro',
+    name: 'sonda/astro',
     hooks: {
       'astro:build:setup'( { vite, target } ) {
         // Do not generate report for the server build unless explicitly enabled
@@ -27,7 +27,10 @@ export default function SondaAstroPlugin( userOptions: UserOptions = {} ): Astro
         sondaOptions.filename = sondaOptions.filename!.replace( '[env]', target );
 
         vite.plugins ??= [];
-        vite.plugins.push( SondaVitePlugin( sondaOptions ) );
+        vite.plugins.push( {
+          ...SondaVitePlugin( sondaOptions ),
+          name: 'sonda/astro'
+        } );
       }
     }
   };

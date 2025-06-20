@@ -13,6 +13,9 @@ export default defineConfig( {
 		format: 'es'
 	},
 	plugins: [
+		Sonda( {
+			format: 'html'
+		} ),
 		commonjs( {
 			sourceMap: true,
 			defaultIsModuleExports: true
@@ -26,9 +29,6 @@ export default defineConfig( {
 			sourceMap: true,
 			// minimize: true
 		} ),
-		terser(),
-		Sonda( {
-			format: 'html'
-		} )
+		terser()
 	]
 } );
