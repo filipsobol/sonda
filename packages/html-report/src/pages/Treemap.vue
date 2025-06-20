@@ -21,10 +21,7 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex gap-2 mb-4">
-			<SearchInput
-				v-model="search"
-				:disabled="!!router.query.chunk"
-			/>
+			<SearchInput v-model="search" />
 
 			<BaseSelect
 				v-model="compressionType"
@@ -122,20 +119,20 @@ const availableCompressionOptions = computed( () => COMPRESSION_TYPES.filter( op
 const search = computed( router.computedQuery( 'search', '' ) );
 const types = computed( router.computedQuery( 'types', [] as Array<FileType> ) );
 const compressionType = computed( router.computedQuery( 'compression', COMPRESSION_TYPES[ 0 ].value ) );
-const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 const content = computed( () => {
-	const filteredResources = resources.value
-		.filter( asset => asset.name.toLocaleLowerCase().includes( search.value.toLocaleLowerCase() ) )
-		.filter( asset => types.value.length === 0 || types.value.includes( asset.type ) );
-	
 	const trie = new FileSystemTrie( router.query.item || '' );
+	const searchTerm = search.value.trim().toLocaleLowerCase();
+	const isNegativeSearch = searchTerm.startsWith( '-' );
+	const normalizedSearch = isNegativeSearch ? searchTerm.slice( 1 ) : searchTerm;
 
-	for ( const resource of filteredResources ) {
-		trie.insert( resource.name, resource );
-	}
+	resources.value
+		.filter( resource => !normalizedSearch || isNegativeSearch !== resource.name.toLocaleLowerCase().includes( normalizedSearch ) )
+		.filter( resource => types.value.length === 0 || types.value.includes( resource.type ) )
+		.forEach( resource => trie.insert( resource.name, resource ) );
 
 	return trie.get( router.query.chunk || '' ) as Folder | null;
 } );
+const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 
 onBeforeMount( () => {
 	if ( assets.value.length === 1 ) {
