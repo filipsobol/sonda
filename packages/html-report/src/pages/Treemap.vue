@@ -25,6 +25,7 @@
 				v-model="search"
 				:disabled="!!router.query.chunk"
 			/>
+
 			<BaseSelect
 				v-model="compressionType"
 				:options="availableCompressionOptions"
@@ -33,7 +34,6 @@
 
 			<Dropdown
 				v-model="types"
-				:disabled="!!activeAsset"
 				:options="availableTypeOptions"
 				title="Type"
 			>
@@ -116,26 +116,25 @@ const height = ref( 0 );
 
 const assets = computed( () => getAssets() );
 const activeAsset = computed( () => report.resources.find( ( { kind, name } ) => kind === 'asset' && name === router.query.item ) );
-const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => assets.value.some( asset => asset.type === option.value ) ) );
+const resources = computed( () => router.query.item ? getChunks( router.query.item ) : assets.value );
+const availableTypeOptions = computed( () => TYPE_OPTIONS.filter( option => resources.value.some( asset => asset.type === option.value ) ) );
 const availableCompressionOptions = computed( () => COMPRESSION_TYPES.filter( option => option.value === 'uncompressed' || report.metadata[ option.value ] ) );
 const search = computed( router.computedQuery( 'search', '' ) );
 const types = computed( router.computedQuery( 'types', [] as Array<FileType> ) );
 const compressionType = computed( router.computedQuery( 'compression', COMPRESSION_TYPES[ 0 ].value ) );
 const key = computed( () => [ content.value!.path, width.value, height.value ].join( '-' ) );
 const content = computed( () => {
-	const { item = '', chunk = '' } = router.query;
-	const resources = item ? getChunks( item ) : assets.value;
-	const filteredResources = resources
+	const filteredResources = resources.value
 		.filter( asset => asset.name.toLocaleLowerCase().includes( search.value.toLocaleLowerCase() ) )
 		.filter( asset => types.value.length === 0 || types.value.includes( asset.type ) );
 	
-	const trie = new FileSystemTrie( item );
+	const trie = new FileSystemTrie( router.query.item || '' );
 
 	for ( const resource of filteredResources ) {
 		trie.insert( resource.name, resource );
 	}
 
-	return trie.get( chunk ) as Folder | null;
+	return trie.get( router.query.chunk || '' ) as Folder | null;
 } );
 
 onBeforeMount( () => {
