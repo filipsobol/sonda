@@ -21,7 +21,10 @@
 		<hr class="mt-4 mb-6 border-gray-100">
 
 		<div class="flex gap-2 mb-4">
-			<SearchInput v-model="search" />
+			<SearchInput
+				v-model="search"
+				placeholder="Filter items (prefix with - to exclude)"
+			/>
 
 			<BaseSelect
 				v-model="compressionType"
