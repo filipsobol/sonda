@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.8.2
+
+### Patch Changes
+
+- 3ec00ae: (Performance) Prevent duplicate resolution of some imports in Rollup
+- 9f34bbf: Add a search field to the Treemap view for filtering inputs
+- 1c14126: Log report path after generation
+- 5ae02e5: Fix edge case in Treemap where items fail to sort in descending order by size
+- 9d25830: Always show input code when available, even if CSS Custom Highlighting API is unsupported
+- b230643: Allow filtering inputs by "type" when inspecting asset in Treemap view
+- ab2f385: Reintroduce the `filename` configuration option
+
 ## 0.8.1
 
 ### Patch Changes
