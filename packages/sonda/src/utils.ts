@@ -12,9 +12,6 @@ export const extensions: Record<string, FileType> = {
 	'.tsx': 'script',
 	'.cts': 'script',
 	'.mts': 'script',
-	'.json': 'script',
-	'.node': 'script',
-	'.wasm': 'script',
 
 	// Styles
 	'.css': 'style',
