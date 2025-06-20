@@ -44,6 +44,8 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 					original: source
 				} );
 			}
+
+			return resolved;
 		},
 
 		moduleParsed( module: ModuleInfo ) {
