@@ -7,11 +7,11 @@ export default function RolldownPlugin( userOptions: UserOptions = {} ): Plugin 
 	} );
 
 	if ( !options.enabled ) {
-		return { name: 'sonda-rolldown' };
+		return { name: 'sonda/rolldown' };
 	}
 
 	return {
 		...SondaRollupPlugin( options ) as any,
-		name: 'sonda-rolldown'
+		name: 'sonda/rolldown'
 	};
 }

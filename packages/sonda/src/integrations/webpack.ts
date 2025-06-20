@@ -1,3 +1,4 @@
+import { styleText } from 'util';
 import { join, resolve } from 'path';
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
@@ -108,7 +109,7 @@ export class SondaWebpackPlugin {
 						.from( compilation.chunkGraph.getChunkEntryModulesIterable( chunk ) )
 						.map( module => module.nameForCondition()! );
 				}
-					
+
 				report.addAsset(
 					join( compilation.outputOptions.path!, name ),
 					entry
@@ -128,7 +129,11 @@ export class SondaWebpackPlugin {
 					: UNASSIGNED;
 			}
 
-			await report.generate();
+			const reportPath = await report.generate();
+
+			compilation
+				.getLogger('SondaWebpackPlugin')
+				.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
 		} );
   }
 }

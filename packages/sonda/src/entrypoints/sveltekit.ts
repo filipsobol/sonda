@@ -8,12 +8,12 @@ export default function SondaSvelteKitPlugin( userOptions: UserOptions = {} ): P
   } );
 
   if ( !options.enabled ) {
-    return { name: 'sonda-sveltekit' };
+    return { name: 'sonda/sveltekit' };
   }
 
   return {
     ...SondaVitePlugin( options ),
-    name: 'sonda-sveltekit',
+    name: 'sonda/sveltekit',
     configResolved( config ) {
       const env = config.build.ssr ? 'server' : 'client';
       const generateForServer = userOptions.server ?? false;

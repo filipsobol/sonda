@@ -8,12 +8,12 @@ export function SondaVitePlugin( userOptions: UserOptions = {} ): PluginOption {
   } );
 
   if ( !options.enabled ) {
-    return { name: 'sonda-vite' };
+    return { name: 'sonda/vite' };
   }
 
   return {
     ...SondaRollupPlugin( options ),
-    name: 'sonda-vite',
+    name: 'sonda/vite',
     enforce: 'pre',
     apply: 'build'
   };

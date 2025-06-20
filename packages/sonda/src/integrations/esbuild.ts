@@ -1,3 +1,4 @@
+import { styleText } from 'util';
 import { Config, type UserOptions } from '../config.js';
 import { getTypeByName, normalizePath } from '../utils.js';
 import { Report } from '../report/report.js';
@@ -63,7 +64,9 @@ export async function processEsbuildMetafile(
     }
   }
 
-  await report.generate();
+  const reportPath = await report.generate();
+
+  console.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
 }
 
 /**
