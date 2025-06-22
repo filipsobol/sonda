@@ -45,7 +45,7 @@
 
 		<div class="feature">
 			<p class="title">Flexible</p>
-			<p class="details">Export interactive HTML for deep dives or JSON for for CI/CD integration and automated reporting.</p>
+			<p class="details">Export interactive HTML for deep dives or JSON for CI/CD integration and automated reporting.</p>
 		</div>
 	</section>
 
