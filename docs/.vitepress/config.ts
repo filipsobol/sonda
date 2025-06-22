@@ -14,7 +14,7 @@ export default defineConfig({
     logo: '/sonda.jpg',
 
     nav: [
-      { text: 'Guide', link: '/getting-started' },
+      { text: 'Documentation', link: '/getting-started' },
       { text: 'Demo', link: '/demo.html', target: '_blank' },
     ],
 
