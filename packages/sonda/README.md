@@ -1,6 +1,6 @@
 # Sonda
 
-Sonda is a universal visualizer and analyzer for JavaScript and CSS bundles. It generates an interactive HTML report that is more accurate and detailed than some alternatives. The accuracy is achieved by analyzing source maps and showing the size of each module after tree-shaking and minification.
+Sonda is a universal bundle analyzer and visualizer. It generates an interactive HTML report that is more accurate and detailed than some alternatives. The accuracy is achieved by analyzing source maps and showing the size of each module after tree-shaking and minification.
 
 Sonda works with the following tools:
 

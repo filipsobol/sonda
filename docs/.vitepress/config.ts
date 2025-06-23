@@ -1,21 +1,24 @@
 import { defineConfig } from 'vitepress';
 
+const URL = 'https://sonda.dev';
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'en-US',
   title: 'Sonda',
-  description: 'Universal bundle visualizer and analyzer. Works with Vite, Rollup, esbuild, webpack, Rolldown, Rspack, Next.js, Nuxt, Astro, SvelteKit and Angular CLI.',
+  description: 'Universal bundle analyzer and visualizer. Works with Vite, Rollup, esbuild, webpack, Rolldown, Rspack, Next.js, Nuxt, Astro, SvelteKit and Angular CLI.',
   head: [
     [ 'link', { rel: 'icon', href: '/sonda.ico' } ],
+    [ 'meta', { property: 'og:url', content: URL } ],
     [ 'meta', { property: 'og:title', content: 'Sonda' } ],
-    [ 'meta', { property: 'og:description', content: 'Universal bundle analyzer' } ],
-    [ 'meta', { property: 'og:image', content: 'https://sonda.dev/og-image.png' } ],
+    [ 'meta', { property: 'og:description', content: 'Universal bundle analyzer and visualizer that works with most popular bundlers and frameworks.' } ],
     [ 'meta', { property: 'og:type', content: 'website' } ],
+    [ 'meta', { property: 'og:image', content: '/og-image.png' } ],
     [ 'meta', { name: 'twitter:card', content: 'summary_large_image' } ],
-    [ 'meta', { name: 'twitter:image', content: 'https://sonda.dev/og-image.png' } ],
+    [ 'meta', { name: 'twitter:image', content: '/og-image.png' } ],
   ],
   sitemap: {
-    hostname: 'https://sonda.dev'
+    hostname: URL
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
