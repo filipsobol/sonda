@@ -4,13 +4,15 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   lang: 'en-US',
   title: 'Sonda',
-  description: 'Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild',
+  description: 'Universal bundle visualizer and analyzer. Works with Vite, Rollup, esbuild, webpack, Rolldown, Rspack, Next.js, Nuxt, Astro, SvelteKit and Angular CLI.',
   head: [
     [ 'link', { rel: 'icon', href: '/sonda.ico' } ],
     [ 'meta', { property: 'og:title', content: 'Sonda' } ],
     [ 'meta', { property: 'og:description', content: 'Universal bundle analyzer' } ],
-    [ 'meta', { property: 'og:image', content: '/og_image.png' } ],
+    [ 'meta', { property: 'og:image', content: 'https://sonda.dev/og-image.png' } ],
     [ 'meta', { property: 'og:type', content: 'website' } ],
+    [ 'meta', { name: 'twitter:card', content: 'summary_large_image' } ],
+    [ 'meta', { name: 'twitter:image', content: 'https://sonda.dev/og-image.png' } ],
   ],
   sitemap: {
     hostname: 'https://sonda.dev'
