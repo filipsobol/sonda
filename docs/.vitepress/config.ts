@@ -5,7 +5,13 @@ export default defineConfig({
   lang: 'en-US',
   title: 'Sonda',
   description: 'Universal visualizer and analyzer for JavaScript and CSS bundles. Works with Vite, Rollup, webpack, Rspack, and esbuild',
-  head: [ [ 'link', { rel: 'icon', href: '/sonda.ico' } ] ],
+  head: [
+    [ 'link', { rel: 'icon', href: '/sonda.ico' } ],
+    [ 'meta', { property: 'og:title', content: 'Sonda' } ],
+    [ 'meta', { property: 'og:description', content: 'Universal bundle analyzer' } ],
+    [ 'meta', { property: 'og:image', content: '/og_image.png' } ],
+    [ 'meta', { property: 'og:type', content: 'website' } ],
+  ],
   sitemap: {
     hostname: 'https://sonda.dev'
   },
