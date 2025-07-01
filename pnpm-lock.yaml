@@ -367,8 +367,8 @@ importers:
         specifier: ^1.1.3
         version: 1.1.3(@rspack/core@1.3.15(@swc/helpers@0.5.17))(webpack@5.99.9)
       '@rspack/cli':
-        specifier: ^1.3.15
-        version: 1.3.15(@rspack/core@1.3.15(@swc/helpers@0.5.17))(@types/express@4.17.23)(webpack@5.99.9)
+        specifier: ^1.4.1
+        version: 1.4.1(@rspack/core@1.3.15(@swc/helpers@0.5.17))(@types/express@4.17.23)(webpack@5.99.9)
       sonda:
         specifier: workspace:^
         version: link:../../packages/sonda
@@ -3467,8 +3467,8 @@ packages:
   '@rspack/binding@1.3.15':
     resolution: {integrity: sha512-utNPuJglLO5lW9XbwIqjB7+2ilMo6JkuVLTVdnNVKU94FW7asn9F/qV+d+MgjUVqU1QPCGm0NuGO9xhbgeJ7pg==}
 
-  '@rspack/cli@1.3.15':
-    resolution: {integrity: sha512-3KOJhvsWODSLwgFUigp3SKJNRzoqb3PyTkf7GWauV5sMcQfTLOXU9Ar0NwYA1Rp1YABVb7Cw85plUESNeXTmnQ==}
+  '@rspack/cli@1.4.1':
+    resolution: {integrity: sha512-ZKJQD8rq9RR43MaclYf941kJbBNHGI8Kh8I/QfmL90+Q1dLsr0VEdTHH5W4LtD5Kv4dt2QI0Cx3n/568usbpHg==}
     hasBin: true
     peerDependencies:
       '@rspack/core': ^1.0.0-alpha || ^1.x
@@ -7651,10 +7651,6 @@ packages:
   oniguruma-to-es@4.3.3:
     resolution: {integrity: sha512-rPiZhzC3wXwE59YQMRDodUwwT9FZ9nNBwQQfsd1wfdtlKEyCdRV0avrTcSZ5xlIvGRVPd/cx6ZN45ECmS39xvg==}
 
-  open@10.1.0:
-    resolution: {integrity: sha512-mnkeQ1qP5Ue2wd+aivTD3NHd/lZ96Lu0jgf0pwktLPtx6cTZiH7tyeGRRHs0zX0rbrahXPnXlUnbeXyaBBuIaw==}
-    engines: {node: '>=18'}
-
   open@10.1.2:
     resolution: {integrity: sha512-cxN6aIDPz6rm8hbebcP7vrQNhvRcveZoJU72Y7vskh4oIm+BZwBECnx5nTmrlres1Qapvx27Qo1Auukpf8PKXw==}
     engines: {node: '>=18'}
@@ -10178,6 +10174,18 @@ packages:
 
   ws@8.18.2:
     resolution: {integrity: sha512-DMricUmwGZUVr++AEAe2uiVM7UoO9MAVZMDu05UQOaUII0lp+zOzLLU4Xqh/JvTqklB1T4uELaaPBKyjE1r4fQ==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
+  ws@8.18.3:
+    resolution: {integrity: sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -14097,7 +14105,7 @@ snapshots:
       '@rspack/binding-win32-ia32-msvc': 1.3.15
       '@rspack/binding-win32-x64-msvc': 1.3.15
 
-  '@rspack/cli@1.3.15(@rspack/core@1.3.15(@swc/helpers@0.5.17))(@types/express@4.17.23)(webpack@5.99.9)':
+  '@rspack/cli@1.4.1(@rspack/core@1.3.15(@swc/helpers@0.5.17))(@types/express@4.17.23)(webpack@5.99.9)':
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
       '@rspack/core': 1.3.15(@swc/helpers@0.5.17)
@@ -14132,7 +14140,7 @@ snapshots:
       http-proxy-middleware: 2.0.9(@types/express@4.17.23)
       p-retry: 6.2.1
       webpack-dev-server: 5.2.2(webpack@5.99.9)
-      ws: 8.18.2
+      ws: 8.18.3
     transitivePeerDependencies:
       - '@types/express'
       - bufferutil
@@ -19370,13 +19378,6 @@ snapshots:
       regex: 6.0.1
       regex-recursion: 6.0.2
 
-  open@10.1.0:
-    dependencies:
-      default-browser: 5.2.1
-      define-lazy-prop: 3.0.0
-      is-inside-container: 1.0.0
-      is-wsl: 3.1.0
-
   open@10.1.2:
     dependencies:
       default-browser: 5.2.1
@@ -22247,7 +22248,7 @@ snapshots:
       http-proxy-middleware: 2.0.9(@types/express@4.17.23)
       ipaddr.js: 2.2.0
       launch-editor: 2.10.0
-      open: 10.1.0
+      open: 10.1.2
       p-retry: 6.2.1
       schema-utils: 4.3.2
       selfsigned: 2.4.1
@@ -22255,7 +22256,7 @@ snapshots:
       sockjs: 0.3.24
       spdy: 4.0.2
       webpack-dev-middleware: 7.4.2(webpack@5.99.9)
-      ws: 8.18.2
+      ws: 8.18.3
     optionalDependencies:
       webpack: 5.99.9(webpack-cli@6.0.1)
     transitivePeerDependencies:
@@ -22468,6 +22469,8 @@ snapshots:
   ws@8.17.1: {}
 
   ws@8.18.2: {}
+
+  ws@8.18.3: {}
 
   xhr2@0.2.1: {}
 
