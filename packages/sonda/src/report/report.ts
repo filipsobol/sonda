@@ -1,7 +1,7 @@
 import { isBuiltin } from 'module';
 import open from 'open';
 import { version } from 'sonda/package.json' with { type: 'json' };
-import { hasIgnoredExtension, sortByKey } from '../utils.js';
+import { hasIgnoredExtension, normalizePath, sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';
 import { JsonFormatter } from './formatters/JsonFormatter.js';
 import { updateOutput } from './processors/outputs.js';
@@ -111,6 +111,18 @@ export class Report {
 
 	addAsset( name: string, entrypoints?: Array<string> ): void {
 		if ( hasIgnoredExtension( name ) ) {
+			return;
+		}
+
+		const normalizedName = normalizePath( name );
+
+		if ( this.config.exclude?.some( pattern => pattern.test( normalizedName ) ) ) {
+			// Ignore assets that match the exclude patterns
+			return;
+		}
+
+		if ( this.config.include && !this.config.include.some( pattern => pattern.test( normalizedName ) ) ) {
+			// Ignore assets that do not match the include patterns
 			return;
 		}
 

@@ -14,6 +14,8 @@ export class Config implements Required<IntegrationOptions> {
 
 		this.#options = Object.assign( {
 			enabled: true,
+			include: null,
+			exclude: null,
 			format: 'html',
 			filename: 'sonda_[index]',
 			outputDir: '.sonda',
@@ -33,6 +35,14 @@ export class Config implements Required<IntegrationOptions> {
 
 	public get enabled(): boolean {
 		return this.#options.enabled;
+	}
+
+	public get include(): AssetFilter {
+		return this.#options.include;
+	}
+
+	public get exclude(): AssetFilter {
+		return this.#options.exclude;
 	}
 
 	public get format(): Format {
@@ -97,7 +107,34 @@ export interface UserOptions {
   enabled?: boolean;
 
 	/**
-   * Specifies the output format of the report.
+	 * Specifies a list of RegExp patterns used to match output assets to include in the report.
+	 * By default, all assets are included.
+	 *
+	 * Patterns are matched against the relative asset paths as displayed in the report. For example,
+	 * to include only JavaScript files, use `[ /\.js$/ ]`.
+	 *
+	 * @default null
+	 */
+	include?: AssetFilter;
+
+	/**
+	 * Specifies a list of RegExp patterns used to match output assets to exclude from the report.
+	 * By default, no assets are excluded, except for those with `.map` and `.d.ts` extensions, which
+	 * are always excluded regardless of this setting.
+	 *
+	 * This option takes precedence over `include`.
+	 *
+	 * Patterns are matched against the relative asset paths as shown in the report. For example, to exclude all CSS files, use `[ /\.css$/ ]`.
+	 *
+	 * @default null
+	 */
+	exclude?: AssetFilter;
+
+	/**
+   * Specifies the output format of the report. Supported formats include:
+	 *
+	 * - `'html'` - An HTML file with a treemap visualization.
+	 * - `'json'` - A JSON file.
    *
    * @default 'html'
    */
@@ -105,8 +142,8 @@ export interface UserOptions {
 
 	/**
    * Specifies the filename of the generated report. If this value is an absolute path,
-   * it will override the `outputDir` option.
-   * 
+	 * it overrides the `outputDir` option.
+   *
    * The default value includes placeholders like `[index]` and `[env]`, which are replaced
    * during report generation.
    *
@@ -124,7 +161,10 @@ export interface UserOptions {
   filename?: string;
 
 	/**
-	 * Specifies the name of the directory where the report will be saved.
+	 * Specifies the directory where the report will be saved. This can be a relative or absolute path. By default,
+	 * the report is saved in a `.sonda` directory relative to the current working directory.
+	 *
+	 * The directory is created if it does not exist.
 	 *
 	 * @default '.sonda'
 	 */
@@ -140,50 +180,50 @@ export interface UserOptions {
 	open?: boolean;
 
 	/**
-   * Specifies whether to read the source maps of imported modules.
-   *
-   * By default, external dependencies bundled into a single file appear as a single
-   * asset in the report. When this option is enabled, the report includes the source
-   * files of imported modules, if source maps are available.
-   *
-   * Enabling this option may increase the time needed to generate the report and reduce
-   * the accuracy of estimated GZIP and Brotli sizes for individual files.
+   * Specifies whether to read source maps of imported modules.
+	 *
+	 * By default, external dependencies bundled into a single file appear as a single asset. When this option
+	 * is enabled, the report includes the source files of imported modules, if their source maps are available.
+	 *
+	 * Enabling this option may increase report generation time and reduce the accuracy of estimated GZIP
+	 * and Brotli sizes.
    *
    * @default false
    */
   deep?: boolean;
 
 	/**
-   * Specifies whether to include source maps of the assets in the report to visualize
-   * which parts of the code contribute to the final asset size.
+   * Specifies whether to include source maps of generated assets in the report to visualize which parts of
+	 * the code contribute to the final asset size.
    *
-   * ⚠️ This option significantly increases the size of the report and embeds the
-   * **source code** of the assets. If you are working with proprietary code, ensure
-   * you share the report responsibly. ⚠️
+   * ⚠️
+	 * This option significantly increases the report size and embeds the **source code** of the assets.
+	 * If you are working with proprietary code, ensure you share the report responsibly.
+	 * ⚠️
    *
    * @default false
    */
   sources?: boolean;
 
 	/**
-   * Specifies whether to calculate the sizes of assets after compression with GZIP.
+   * Specifies whether to calculate asset sizes after compression with GZIP.
    *
-   * The report includes estimated compressed sizes for each file within an asset.
-   * However, these estimates are approximate and should be used as a general reference.
+   * The report also includes estimated compressed sizes for each file within an asset. These estimates are
+	 * approximate and intended for general reference.
    *
-   * Enabling this option may increase the time required to generate the report.
+   * Enabling this option may increase report generation time.
    *
    * @default false
    */
   gzip?: boolean;
 
   /**
-   * Specifies whether to calculate the sizes of assets after compression with Brotli.
+   * Specifies whether to calculate asset sizes after compression with Brotli.
    *
-   * The report includes estimated compressed sizes for each file within an asset.
-   * However, these estimates are approximate and should be used as a general reference.
+   * The report also includes estimated compressed sizes for each file within an asset. These estimates are
+	 * approximate and intended for general reference.
    *
-   * Enabling this option may increase the time required to generate the report.
+   * Enabling this option may increase report generation time.
    *
    * @default false
    */
@@ -212,6 +252,11 @@ export interface IntegrationOptions extends UserOptions {
 	 */
 	sourcesPathNormalizer?: SourcesPathNormalizer;
 }
+
+/**
+ * Filter for including or excluding assets based on their paths.
+ */
+export type AssetFilter = Array<RegExp> | null;
 
 export type Format = 'html' | 'json';
 
