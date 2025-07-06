@@ -11,13 +11,16 @@ These are the default options:
 ```js
 {
   enabled: true,
+  include: null,
+  exclude: null,
   format: 'html',
+  filename: 'sonda_[index]',
   outputDir: '.sonda',
   open: true,
   deep: false,
   sources: false,
   gzip: false,
-  brotli: false,
+  brotli: false
 }
 ```
 
@@ -38,6 +41,26 @@ Sonda( {
 
 Specifies whether the plugin is enabled.
 
+### `include` <Badge type="tip" text="Introduced in 0.9.0" />
+
+* **Type:** `Array<RegExp>` | `null`
+* **Default:** `null`
+
+Specifies a list of RegExp patterns used to match output assets to include in the report. By default, all assets are included.
+
+Patterns are matched against the relative asset paths as displayed in the report. For example, to include only JavaScript files, use `[ /\.js$/ ]`.
+
+### `exclude` <Badge type="tip" text="Introduced in 0.9.0" />
+
+* **Type:** `Array<RegExp>` | `null`
+* **Default:** `null`
+
+Specifies a list of RegExp patterns used to match output assets to exclude from the report. By default, no assets are excluded, except for those with `.map` and `.d.ts` extensions, which are always excluded regardless of this setting.
+
+This option takes precedence over `include`.
+
+Patterns are matched against the relative asset paths as shown in the report. For example, to exclude all CSS files, use `[ /\.css$/ ]`.
+
 ### `format`
 
 * **Type:** string
@@ -53,7 +76,7 @@ Specifies the output format of the report. Supported formats include:
 * **Type:** string
 * **Default:** `'sonda_[index]'` for bundler integrations and `'sonda_[env]_[index]'` for framework integrations.
 
-Specifies the filename of the generated report. If this value is an absolute path, it will override the `outputDir` option.
+Specifies the filename of the generated report. If this value is an absolute path, it overrides the `outputDir` option.
 
 The default value includes placeholders like `[index]` and `[env]`, which are replaced during report generation.
 
@@ -66,7 +89,7 @@ Additionally, framework integrations that can generate reports for both the clie
 * **Default:** `'.sonda'`
 * **Description:** The directory where the report will be saved.
 
-Specifies the directory where the report will be saved. This can be a relative path or an absolute path. By default, the report is saved in a directory named `.sonda` relative to the current working directory.
+Specifies the directory where the report will be saved. This can be a relative or absolute path. By default, the report is saved in a `.sonda` directory relative to the current working directory.
 
 The directory is created if it does not exist.
 
@@ -82,11 +105,11 @@ Specifies whether to automatically open the report in the default program for th
 * **Type:** boolean
 * **Default:** `false`
 
-Specifies whether to read the source maps of imported modules.
+Specifies whether to read source maps of imported modules.
 
-By default, external dependencies bundled into a single file appear as a single asset in the report. When this option is enabled, the report includes the source files of imported modules, if source maps are available.
+By default, external dependencies bundled into a single file appear as a single asset. When this option is enabled, the report includes the source files of imported modules, if their source maps are available.
 
-Enabling this option may increase the time needed to generate the report and reduce the accuracy of estimated GZIP and Brotli sizes for individual files.
+Enabling this option may increase report generation time and reduce the accuracy of estimated GZIP and Brotli sizes.
 
 For more details, see the [Deep view](/features/deep-view) page.
 
@@ -95,12 +118,12 @@ For more details, see the [Deep view](/features/deep-view) page.
 * **Type:** boolean
 * **Default:** `false`
 
-Specifies whether to include source maps of the assets in the report to visualize which parts of the code contribute to the final asset size.
+Specifies whether to include source maps of generated assets in the report to visualize which parts of the code contribute to the final asset size.
 
 For more details, see the [Inspect code](/features/used-code) page.
 
 ::: danger ⚠️ Be cautious when sharing reports with the `sources` option enabled
-This option significantly increases the size of the report and embeds the **source code** of the assets. If you are working with proprietary code, ensure you share the report responsibly.
+This option significantly increases the report size and embeds the **source code** of the assets. If you are working with proprietary code, ensure you share the report responsibly.
 :::
 
 ### `gzip`
@@ -108,11 +131,11 @@ This option significantly increases the size of the report and embeds the **sour
 * **Type:** boolean
 * **Default:** `false`
 
-Specifies whether to calculate the sizes of assets after compression with GZIP.
+Specifies whether to calculate asset sizes after compression with GZIP.
 
-The report includes estimated compressed sizes for each file within an asset. However, these estimates are approximate and should be used as a general reference.
+The report also includes estimated compressed sizes for each file within an asset. These estimates are approximate and intended for general reference.
 
-Enabling this option may increase the time required to generate the report.
+Enabling this option may increase report generation time.
 
 For more details, see the [Compression sizes](/features/compression-sizes) page.
 
@@ -121,11 +144,11 @@ For more details, see the [Compression sizes](/features/compression-sizes) page.
 * **Type:** boolean
 * **Default:** `false`
 
-Specifies whether to calculate the sizes of assets after compression with Brotli.
+Specifies whether to calculate asset sizes after compression with Brotli.
 
-The report includes estimated compressed sizes for each file within an asset. However, these estimates are approximate and should be used as a general reference.
+The report also includes estimated compressed sizes for each file within an asset. These estimates are approximate and intended for general reference.
 
-Enabling this option may increase the time required to generate the report.
+Enabling this option may increase report generation time.
 
 For more details, see the [Compression sizes](/features/compression-sizes) page.
 
