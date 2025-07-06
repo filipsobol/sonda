@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- 87d59f9: Add `include` and `exclude` options
+
 ## 0.8.2
 
 ### Patch Changes
