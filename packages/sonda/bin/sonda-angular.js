@@ -13,7 +13,7 @@ function stringToRegExp(value) {
   // 2) Escape all regex‑meta in the core
   const escaped = core.replace( /[-.*+?^${}()|[\]\\]/g, '\\$&' );
 
-  // 3) Stitch back only the anchors the user really wrote
+  // 3) Stitch back the string
   return new RegExp( start + escaped + end );
 }
 
