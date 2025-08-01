@@ -13,7 +13,7 @@
     "vue": "^3.5.16"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.10",
+    "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "sonda": "workspace:^",
