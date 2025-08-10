@@ -9,15 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^15.3.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "next": "^15.4.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@types/node": "^24.0.1",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+    "@types/node": "^24.2.1",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "sonda": "workspace:^",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }

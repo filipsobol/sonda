@@ -14,10 +14,10 @@
     "@types/webpack": "^5.28.5",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
-    "mini-css-extract-plugin": "^2.9.2",
+    "mini-css-extract-plugin": "^2.9.3",
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^",
-    "webpack": "^5.99.9",
+    "webpack": "^5.101.0",
     "webpack-cli": "^6.0.1"
   }
 }

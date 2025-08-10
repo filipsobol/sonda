@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "fuzzysort": "^3.1.0",
-    "vue": "^3.5.16"
+    "vue": "^3.5.18"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "sonda": "workspace:^",
-    "tailwindcss": "^4.1.10",
-    "typescript": "^5.8.3",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2",
     "vite": "^6.3.5",
     "vite-plugin-singlefile": "^2.3.0",
     "vue-tsc": "^2.2.10"
