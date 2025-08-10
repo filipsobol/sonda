@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "fuzzysort": "^3.1.0",
-    "vue": "^3.5.16"
+    "vue": "^3.5.18"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
