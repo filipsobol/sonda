@@ -1,4 +1,4 @@
-import type { DecodedSourceMap } from '@ampproject/remapping';
+import type { DecodedSourceMap } from '@jridgewell/remapping';
 import type { Integration } from '../config.js';
 
 export interface JsonReport {
