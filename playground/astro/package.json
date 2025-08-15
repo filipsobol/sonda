@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.3",
-    "@astrojs/node": "^9.4.0",
+    "@astrojs/node": "^9.4.1",
     "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.2",
+    "@astrojs/sitemap": "^3.5.0",
     "@astrojs/vue": "^5.1.0",
-    "astro": "^5.12.9",
+    "astro": "^5.13.0",
     "vue": "^3.5.18"
   },
   "devDependencies": {
