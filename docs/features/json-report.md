@@ -45,7 +45,7 @@ Before we dive into the details of each field, here is the top-level structure o
     {
       "name": "@jridgewell/remapping",
       "paths": [
-        "node_modules/@amppjridgewellroject/remapping"
+        "node_modules/@jridgewell/remapping"
       ]
     }
   ],
