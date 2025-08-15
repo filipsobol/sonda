@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { loadCodeAndMap } from 'load-source-map';
-import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@ampproject/remapping';
+import { default as remapping, type DecodedSourceMap, type EncodedSourceMap } from '@jridgewell/remapping';
 import { Report } from '../report.js';
 import { Config } from '../../config.js';
 import { getBytesPerSource, getSizes } from './sourcemap.js';

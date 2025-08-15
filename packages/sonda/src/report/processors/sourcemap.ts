@@ -1,5 +1,5 @@
 import { gzipSync, brotliCompressSync } from 'zlib';
-import type { DecodedSourceMap, SourceMapSegment } from '@ampproject/remapping';
+import type { DecodedSourceMap, SourceMapSegment } from '@jridgewell/remapping';
 import type { Config } from '../../config.js';
 import type { Sizes } from '../types.js';
 

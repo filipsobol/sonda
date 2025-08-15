@@ -43,9 +43,9 @@ Before we dive into the details of each field, here is the top-level structure o
   ],
   "dependencies": [
     {
-      "name": "@ampproject/remapping",
+      "name": "@jridgewell/remapping",
       "paths": [
-        "node_modules/@ampproject/remapping"
+        "node_modules/@amppjridgewellroject/remapping"
       ]
     }
   ],
