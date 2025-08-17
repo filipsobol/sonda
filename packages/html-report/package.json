@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^13.6.0",
     "fuzzysort": "^3.1.0",
     "vue": "^3.5.18"
   },
