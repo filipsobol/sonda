@@ -26,7 +26,7 @@
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
     "pkg-pr-new": "^0.0.54",
-    "rolldown": "1.0.0-beta.32",
+    "rolldown": "1.0.0-beta.34",
     "typescript": "^5.9.2",
     "vitepress": "^1.6.4",
     "vue": "^3.5.18"
