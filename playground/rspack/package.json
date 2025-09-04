@@ -9,7 +9,7 @@
     "preview": "rspack preview"
   },
   "dependencies": {
-    "ckeditor5": "^46.0.1"
+    "ckeditor5": "^46.0.3"
   },
   "devDependencies": {
     "@rsdoctor/rspack-plugin": "^1.2.2",
