@@ -20,7 +20,7 @@
     "sonda": "workspace:^",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2",
-    "vite": "^7.1.2",
+    "vite": "^7.1.5",
     "vite-plugin-singlefile": "^2.3.0",
     "vue-tsc": "^3.0.5"
   }
