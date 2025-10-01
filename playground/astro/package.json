@@ -10,13 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.3",
-    "@astrojs/node": "^9.4.1",
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/node": "^9.4.4",
     "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.5.0",
-    "@astrojs/vue": "^5.1.0",
-    "astro": "^5.13.1",
-    "vue": "^3.5.18"
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vue": "^5.1.1",
+    "astro": "^5.14.1",
+    "vue": "^3.5.22"
   },
   "devDependencies": {
     "sonda": "workspace:^"
