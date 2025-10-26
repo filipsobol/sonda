@@ -36,13 +36,13 @@
     "@types/express": "^5.0.4",
     "@types/jasmine": "~5.1.12",
     "@types/node": "^24.9.1",
-    "jasmine-core": "~5.9.0",
+    "jasmine-core": "~5.12.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "sonda": "workspace:^",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.3"
   }
 }
