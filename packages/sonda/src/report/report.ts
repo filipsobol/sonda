@@ -129,21 +129,27 @@ export class Report {
 		this.assets[ name ] = entrypoints;
 	}
 
-	async generate(): Promise<string> {
+	async generate(): Promise<Array<string>> {
 		for ( const [ path, entrypoints ] of Object.entries( this.assets ) ) {
 			updateOutput( this, path, entrypoints );
 		}
 
 		this.dependencies = updateDependencies( this );
 
-		const formatter = new formatters[ this.config.format ]( this.config );
-		const path = await formatter.write( this.#getFormattedData() );
+		const outputs = [];
 
-		if ( this.config.open ) {
-			await open( path );
+		for ( const format of this.config.format ) {
+			const formatter = new formatters[ format ]( this.config );
+			const path = await formatter.write( this.#getFormattedData() );
+
+			if ( this.config.open === true || this.config.open === format ) {
+				await open( path );
+			}
+
+			outputs.push( path );
 		}
 
-		return path;
+		return outputs;
 	}
 
 	addSourceMap( asset: string, sourcemap: DecodedReportSourceMap ): void {
