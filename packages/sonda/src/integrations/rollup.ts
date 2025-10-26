@@ -73,9 +73,11 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 				)
 			}
 
-			const reportPath = await report.generate();
+			const reportPaths = await report.generate();
 
-			this.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			for ( const reportPath of reportPaths ) {
+				console.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			}
 		}
 	};
 }

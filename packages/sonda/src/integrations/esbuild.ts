@@ -64,9 +64,11 @@ export async function processEsbuildMetafile(
     }
   }
 
-  const reportPath = await report.generate();
+  const reportPaths = await report.generate();
 
-  console.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+  for ( const reportPath of reportPaths ) {
+    console.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+  }
 }
 
 /**

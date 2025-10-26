@@ -63,13 +63,15 @@ Patterns are matched against the relative asset paths as shown in the report. Fo
 
 ### `format`
 
-* **Type:** `string`
+* **Type:** `string` | `Array<string>`
 * **Default:** `'html'`
 
 Specifies the output format of the report. Supported formats include:
 
 * `'html'` - An HTML file with a treemap visualization.
 * `'json'` - A JSON file.
+
+You can specify multiple formats by providing an array of strings, e.g., `['html', 'json']`. This generates separate reports for each specified format.
 
 ### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
 
@@ -95,10 +97,12 @@ The directory is created if it does not exist.
 
 ### `open`
 
-* **Type:** `boolean`
+* **Type:** `boolean` | `'html'` | `'json'`
 * **Default:** `true`
 
 Specifies whether to automatically open the report in the default program for the given file extension (`.html` or `.json`, depending on the `format` option) after the build process.
+
+If you set the [`format`](#format) option to an array to generate multiple report formats but only want to open one of them automatically, you can specify the desired format as a string (e.g., `'html'` or `'json'`).
 
 ### `deep`
 
