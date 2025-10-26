@@ -8,13 +8,13 @@
     "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
   },
   "dependencies": {
-    "ckeditor5": "^46.0.3"
+    "ckeditor5": "^46.1.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-commonjs": "^28.0.9",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.46.2",
+    "rollup": "^4.52.5",
     "rollup-plugin-styles": "^4.0.0",
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^"
