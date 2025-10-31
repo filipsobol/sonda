@@ -7,11 +7,18 @@ import Sonda from 'sonda/rollup';
 
 export default defineConfig( {
 	input: 'src/index.js',
-	output: {
-		file: 'dist/index.js',
-		sourcemap: true,
-		format: 'es'
-	},
+	output: [
+		{
+			file: 'dist/index.js',
+			sourcemap: true,
+			format: 'es'
+		},
+		{
+			file: 'dist/index.cjs',
+			sourcemap: true,
+			format: 'cjs'
+		}
+	],
 	plugins: [
 		Sonda( {
 			format: 'html'
