@@ -10,10 +10,10 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/kit": "^2.47.3",
+		"@sveltejs/kit": "^2.48.4",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"sonda": "workspace:^",
-		"svelte": "^5.42.2",
+		"svelte": "^5.43.2",
 		"vite": "^7.1.12"
 	}
 }
