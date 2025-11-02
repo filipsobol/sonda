@@ -298,8 +298,8 @@ importers:
         specifier: ^19
         version: 19.2.2(@types/react@19.2.2)
       sonda:
-        specifier: ^0.9.0
-        version: 0.9.0
+        specifier: workspace:^
+        version: link:../../packages/sonda
       tailwindcss:
         specifier: ^4
         version: 4.1.16
@@ -9491,11 +9491,6 @@ packages:
   socks@2.8.7:
     resolution: {integrity: sha512-HLpt+uLy/pxB+bum/9DzAgiKS8CX1EvbWxI4zlmgGCExImLdiad2iCwXT5Z4c9c3Eq8rP2318mPW2c+QbtjK8A==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
-
-  sonda@0.9.0:
-    resolution: {integrity: sha512-abMPj/ki+FdVCKkC2tFahz3dMFQi5vlSyx5X8u9rUB6IMX7vWwBdv6rMj9XjE7iuWcf/OYn/jVOcXkIUmHzXUA==}
-    engines: {node: '>=20.19 || >=22.12'}
-    hasBin: true
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -22282,11 +22277,6 @@ snapshots:
     dependencies:
       ip-address: 10.0.1
       smart-buffer: 4.2.0
-
-  sonda@0.9.0:
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      open: 10.2.0
 
   source-map-js@1.2.1: {}
 
