@@ -23,18 +23,16 @@ const { values } = parseArgs( {
     projects: { type: 'string', multiple: true },
     include: { type: 'string', multiple: true },
     exclude: { type: 'string', multiple: true },
-    format: { type: 'string' },
+    format: { type: 'string', multiple: true },
     filename: { type: 'string' },
     outputDir: { type: 'string' },
+    open: { type: 'string' },
     'no-open': { type: 'boolean' },
     deep: { type: 'boolean' },
     sources: { type: 'boolean' },
     gzip: { type: 'boolean' },
     brotli: { type: 'boolean' }
   },
-  
-  // Skip `node sonda-angular`
-  args: process.argv.slice( 2 ),
 
   // Fail when unknown argument is used
   strict: true
