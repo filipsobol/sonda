@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0
+
+### Minor Changes
+
+- 1cda204: Allow passing an array to the [`format` option](https://sonda.dev/configuration.html#format) to generate multiple reports.
+- 1cda204: Allow passing a string to the [`open` option](https://sonda.dev/configuration.html#open) to automatically open only a specific report format.
+- c212e9a: Ensure only one consolidated report is generated when Vite or Rollup produce multiple outputs or formats.
+
+### Patch Changes
+
+- a595b6d: Add `--include` and `--exclude` options to the Angular CLI integration.
+- 8e8728b: Migrate from `@ampproject/remapping` to `@jridgewell/remapping`.
+- 1b9cdc9: Add virtual scrolling to Code block to improve performance.
+
 ## 0.9.0
 
 ### Minor Changes
