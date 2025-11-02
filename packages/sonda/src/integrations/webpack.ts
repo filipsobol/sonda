@@ -129,11 +129,13 @@ export class SondaWebpackPlugin {
 					: UNASSIGNED;
 			}
 
-			const reportPath = await report.generate();
+			const reportPaths = await report.generate();
 
-			compilation
-				.getLogger('SondaWebpackPlugin')
-				.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			for ( const reportPath of reportPaths ) {
+				compilation
+					.getLogger('SondaWebpackPlugin')
+					.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			}
 		} );
   }
 }

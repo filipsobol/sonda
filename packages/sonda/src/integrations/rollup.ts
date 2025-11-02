@@ -72,10 +72,14 @@ export function SondaRollupPlugin( userOptions: UserOptions = {} ): Plugin {
 					asset.type === 'chunk' && asset.facadeModuleId ? [ asset.facadeModuleId ] : undefined
 				)
 			}
+		},
 
-			const reportPath = await report.generate();
+		async closeBundle() {
+			const reportPaths = await report.generate();
 
-			this.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			for ( const reportPath of reportPaths ) {
+				console.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+			}
 		}
 	};
 }

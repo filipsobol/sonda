@@ -21,7 +21,7 @@ export function generateTreeMap(
 	const areaScale = ( totalWidth * totalHeight ) / totalValue;
 
 	for ( let i = 0; i < values.length; i++ ) {
-		areas[ i ] = values[ i ] * areaScale;
+		areas[ i ] = values[ i ]! * areaScale;
 	}
 
 	// Initialize position and dimensions
@@ -36,16 +36,16 @@ export function generateTreeMap(
 
 	// Initialize variables for tracking rows
 	let rowStartIndex = 0;
-	let rowSum = areas[ 0 ];
-	let minArea = areas[ 0 ];
-	let maxArea = areas[ 0 ];
+	let rowSum = areas[ 0 ]!;
+	let minArea = areas[ 0 ]!;
+	let maxArea = areas[ 0 ]!;
 
 	// Calculate initial aspect ratio
 	let previousRatio = calculateAspectRatio( sideLength, rowSum, minArea, maxArea );
 
 	// Loop through the areas to build the treemap
 	for ( let i = 1; i < areas.length; i++ ) {
-		const area = areas[ i ];
+		const area = areas[ i ]!;
 		const newRowSum = rowSum + area;
 		const newMinArea = Math.min( minArea, area );
 		const newMaxArea = Math.max( maxArea, area );
@@ -126,7 +126,7 @@ function layoutRow(
 	let position = isVertical ? y : x;
 
 	for ( let i = startIndex; i <= endIndex; i++ ) {
-		const area = areas[ i ];
+		const area = areas[ i ]!;
 		const tileLength = area / layoutLength;
 
 		if ( isVertical ) {

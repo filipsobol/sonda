@@ -7,7 +7,7 @@
     "node": ">=20.19.0",
     "pnpm": ">=10.5.2"
   },
-  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
+  "packageManager": "pnpm@10.20.0",
   "scripts": {
     "test": "pnpm -r --stream run test",
     "build": "pnpm -r --stream run build",
@@ -21,14 +21,14 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
-    "@changesets/cli": "^2.29.4",
-    "@types/node": "^24.0.1",
+    "@changesets/cli": "^2.29.7",
+    "@types/node": "^24.9.1",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
-    "pkg-pr-new": "^0.0.51",
-    "rolldown": "1.0.0-beta.24",
-    "typescript": "^5.8.3",
-    "vitepress": "^1.6.3",
-    "vue": "^3.5.16"
+    "pkg-pr-new": "^0.0.60",
+    "rolldown": "1.0.0-beta.44",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.22"
   }
 }

@@ -45,8 +45,8 @@ export class Config implements Required<IntegrationOptions> {
 		return this.#options.exclude;
 	}
 
-	public get format(): Format {
-		return this.#options.format;
+	public get format(): Array<Format> {
+		return Array.isArray( this.#options.format ) ? this.#options.format : [ this.#options.format ];
 	}
 
 	public get filename(): string {
@@ -57,7 +57,7 @@ export class Config implements Required<IntegrationOptions> {
 		return this.#options.outputDir;
 	}
 
-	public get open(): boolean {
+	public get open(): boolean | Format {
 		return this.#options.open;
 	}
 
@@ -138,7 +138,7 @@ export interface UserOptions {
    *
    * @default 'html'
    */
-	format?: Format;
+	format?: Format | Array<Format>;
 
 	/**
    * Specifies the filename of the generated report. If this value is an absolute path,
@@ -177,7 +177,7 @@ export interface UserOptions {
 	 *
 	 * @default false
 	 */
-	open?: boolean;
+	open?: boolean | Format;
 
 	/**
    * Specifies whether to read source maps of imported modules.

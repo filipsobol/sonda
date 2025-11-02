@@ -89,6 +89,8 @@ The command accepts the following options. For more information about these opti
 
 * `--config=<path>`
 * `--projects=<name>` (can be specified multiple times)
+* `--include=<pattern>` (can be specified multiple times)
+* `--exclude=<pattern>` (can be specified multiple times)
 * `--format=<format>`
 * `--filename=<filename>`
 * `--outputDir=<dirname>`
@@ -104,18 +106,44 @@ The steps above will allow you to generate your first report. However, if the re
 
 #### Additional configuration options
 
-In addition to the options listed on the configuration page, the Angular CLI integration accepts two additional options.
+In addition to the options listed on the configuration page, the Angular CLI integration accepts the following options.
 
 ##### `config`
 
-* **Type:** string
+* **Type:** `string`
 * **Default:** `'angular.json'`
 
 Specifies the path to the Angular CLI configuration file.
 
 ##### `projects`
 
-* **Type:** string[]
+* **Type:** `Array<string>`
 * **Default:** All projects in the `angular.json` file
 
 Specifies the projects to analyze. By default, Sonda will analyze all projects in the Angular CLI configuration file, but you can specify individual projects based on your needs.
+
+##### `include`
+
+* **Type:** `Array<RegExp>` | `null`
+* **Default:** `null`
+
+Specifies a list of patterns used to match output assets to include in the report. By default, all assets are included.
+
+The values will be escaped and used as regular expressions. Example:
+
+```bash
+sonda-angular --include=.js$
+```
+
+##### `exclude`
+
+* **Type:** `Array<RegExp>` | `null`
+* **Default:** `null`
+
+Specifies a list of patterns used to match output assets to exclude from the report. By default, no assets are excluded, except for those with `.map` and `.d.ts` extensions, which are always excluded regardless of this setting.
+
+The values will be escaped and used as regular expressions. Example:
+
+```bash
+sonda-angular --exclude=.css$
+```

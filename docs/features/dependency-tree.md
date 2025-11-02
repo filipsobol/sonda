@@ -16,7 +16,7 @@ In this example, the selected file appears in the bundle because:
 1. The file `src/index.ts` is the entry point for the asset,
 2. it imports `./report/report.js`,
 3. it imports `./processors/outputs.js`,
-4. it imports `@ampproject/remapping`,
+4. it imports `@jridgewell/remapping`,
 5. it imports `@jridgewell/trace-mapping`,
 6. it imports `@jridgewell/sourcemap-codec`,
 7. its source map references `[...]/src/sourcemap-codec.ts` which is the inspected file.

@@ -158,7 +158,7 @@ class Router {
 		// Only update queries that have changed
 		Object.keys( query ).forEach( key => {
 			if ( !areParamsEqual( query[ key ], this.#query[ key ] ) ) {
-				this.#query[ key ] = query[ key ];
+				this.#query[ key ] = query[ key ]!;
 			}
 		} );
 

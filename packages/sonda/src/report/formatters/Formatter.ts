@@ -22,13 +22,13 @@ export abstract class Formatter {
 		const path = await this.getOutputPath();
 		const content = await this.parse( data );
 	
-		// Ensure the output directory exists
+		// Ensure the output directory exists.
 		await mkdir( dirname( path ), { recursive: true } );
 
-		// Write the report to the file system
+		// Write the report to the file system.
 		await writeFile( path, content );
 
-		// Return the path to the report
+		// Return the path to the report.
 		return path;
 	}
 
@@ -44,11 +44,11 @@ export abstract class Formatter {
 			this.config.filename
 		);
 
-		// This ensure that the path, filename, and extension are correctly formatted
+		// This ensure that the path, filename, and extension are correctly formatted.
 		const path = format( {
 			...parse( configPath ),
 			base: '',
-			ext: '.' + this.config.format,
+			ext: this.extension,
 		} );
 
 		return this.replaceIndex( path );

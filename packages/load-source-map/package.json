@@ -5,13 +5,13 @@
   "type": "module",
   "license": "MIT",
   "exports": {
-    ".":  "./dist/index.js",
+    ".": "./dist/index.js",
     "./package.json": "./package.json"
   },
   "scripts": {
     "build": "rolldown -c"
   },
   "devDependencies": {
-    "rolldown-plugin-dts": "^0.13.11"
+    "rolldown-plugin-dts": "^0.17.1"
   }
 }
