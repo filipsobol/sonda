@@ -13,6 +13,6 @@
   "devDependencies": {
     "sonda": "workspace:^",
     "unplugin-sourcemaps": "workspace:^",
-    "vite": "^7.1.12"
+    "vite": "^7.2.0"
   }
 }
