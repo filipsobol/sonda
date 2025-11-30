@@ -1,4 +1,5 @@
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { resolve, dirname } from 'path';
 import { gzipSync } from 'zlib';
 import { readFile } from 'fs/promises';
 import { Formatter } from './Formatter.js';
@@ -9,7 +10,7 @@ export class HtmlFormatter extends Formatter {
 
 	public async parse( data: JsonReport ): Promise<string> {
 		const template = await readFile(
-			resolve( import.meta.dirname, './index.html' ),
+			resolve( dirname( fileURLToPath( import.meta.resolve( 'sonda' ) ) ), './index.html' ),
 			'utf-8'
 		);
 
