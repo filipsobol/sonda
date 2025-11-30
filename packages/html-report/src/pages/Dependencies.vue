@@ -69,7 +69,7 @@
 					v-else
 					class="mt-2 text-gray-400 italic"
 				>
-					(Tree-shaken)
+					Tree-shaken
 				</p>
 
 				<p class="mt-8 font-bold">Imported by</p>

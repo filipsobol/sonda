@@ -97,7 +97,7 @@
 						v-else
 						class="text-gray-400 italic"
 					>
-						(Tree-shaken)
+						Tree-shaken
 					</p>
 				</td>
 
