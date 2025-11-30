@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.1
+
+### Patch Changes
+
+- fd2b4e2: Update the `--format` and `--open` options in the Angular CLI integration to align with changes introduced in v0.10.
+- 56a53dd: Correctly resolve path to the `index.html` template when Sonda is bundled by a consuming project.
+
 ## 0.10.0
 
 ### Minor Changes
