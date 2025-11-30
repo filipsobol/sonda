@@ -106,7 +106,7 @@ const COLUMNS: Array<Column> = [
 	{
 		name: 'Uncompressed size',
 		align: 'right',
-		width: '154px'
+		width: '156px'
 	},
 	{
 		name: 'Type',
