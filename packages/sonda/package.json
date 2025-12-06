@@ -70,17 +70,17 @@
     "open": "^10.2.0"
   },
   "devDependencies": {
-    "@nuxt/schema": "^4.2.0",
-    "@rspack/core": "^1.5.8",
-    "@vitest/coverage-v8": "^4.0.3",
-    "astro": "^5.15.1",
-    "esbuild": "^0.25.11",
+    "@nuxt/schema": "^4.2.1",
+    "@rspack/core": "^1.6.6",
+    "@vitest/coverage-v8": "^4.0.15",
+    "astro": "^5.16.4",
+    "esbuild": "^0.25.12",
     "load-source-map": "workspace:^",
-    "next": "^16.0.0",
-    "rolldown-plugin-dts": "^0.17.1",
-    "rollup": "^4.52.5",
-    "vite": "^7.2.0",
-    "vitest": "^4.0.3",
-    "webpack": "^5.102.1"
+    "next": "^16.0.7",
+    "rolldown-plugin-dts": "^0.17.8",
+    "rollup": "^4.53.3",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15",
+    "webpack": "^5.103.0"
   }
 }
