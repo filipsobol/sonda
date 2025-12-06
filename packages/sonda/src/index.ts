@@ -28,12 +28,7 @@ export type {
 } from './report/types.js';
 
 // Config
-export {
-	Config,
-	type UserOptions,
-	type IntegrationOptions,
-	type Integration
-} from './config.js';
+export { Config, type UserOptions, type IntegrationOptions, type Integration } from './config.js';
 
 // Utils
 export { normalizePath, getTypeByName } from './utils.js';

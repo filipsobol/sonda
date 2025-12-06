@@ -4,6 +4,4 @@ import vClickOutside from './directives/click-outside';
 
 import './style.css';
 
-createApp(App)
-	.directive( 'click-outside', vClickOutside )
-	.mount('#app');
+createApp(App).directive('click-outside', vClickOutside).mount('#app');

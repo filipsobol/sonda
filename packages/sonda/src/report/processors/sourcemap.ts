@@ -11,39 +11,39 @@ export function getBytesPerSource(
 	assetSizes: Sizes,
 	config: Config
 ): Map<string, Sizes> {
-	const contributions = getContributions( map.sources );
+	const contributions = getContributions(map.sources);
 
 	// Split the code into lines
-	const codeLines = code.split( /(?<=\r?\n)/ );
+	const codeLines = code.split(/(?<=\r?\n)/);
 
-	for ( let lineIndex = 0; lineIndex < codeLines.length; lineIndex++ ) {
-		const lineCode = codeLines[ lineIndex ];
-		const mappings = map.mappings[ lineIndex ] || [];
+	for (let lineIndex = 0; lineIndex < codeLines.length; lineIndex++) {
+		const lineCode = codeLines[lineIndex];
+		const mappings = map.mappings[lineIndex] || [];
 		let currentColumn = 0;
 
-		for ( let i = 0; i <= mappings.length; i++ ) {
+		for (let i = 0; i <= mappings.length; i++) {
 			// 0: generatedColumn
 			// 1: sourceIndex
 			// 2: originalLine
 			// 3: originalColumn
 			// 4: nameIndex
 
-			const mapping: SourceMapSegment | undefined = mappings[ i ];
-			const startColumn = mapping?.[ 0 ] ?? lineCode.length;
-			const endColumn = mappings[ i + 1 ]?.[ 0 ] ?? lineCode.length;
+			const mapping: SourceMapSegment | undefined = mappings[i];
+			const startColumn = mapping?.[0] ?? lineCode.length;
+			const endColumn = mappings[i + 1]?.[0] ?? lineCode.length;
 
 			// Slice the code from currentColumn to startColumn for unassigned code
-			if ( startColumn > currentColumn ) {
-				contributions.set( UNASSIGNED, contributions.get( UNASSIGNED ) + lineCode.slice( currentColumn, startColumn ) );
+			if (startColumn > currentColumn) {
+				contributions.set(UNASSIGNED, contributions.get(UNASSIGNED) + lineCode.slice(currentColumn, startColumn));
 			}
 
-			if ( mapping ) {
+			if (mapping) {
 				// Slice the code from startColumn to endColumn for assigned code
-				const sourceIndex = mapping?.[ 1 ];
-				const codeSlice = lineCode.slice( startColumn, endColumn );
-				const source = sourceIndex !== undefined && map.sources[ sourceIndex ] || UNASSIGNED;
+				const sourceIndex = mapping?.[1];
+				const codeSlice = lineCode.slice(startColumn, endColumn);
+				const source = (sourceIndex !== undefined && map.sources[sourceIndex]) || UNASSIGNED;
 
-				contributions.set( source, contributions.get( source ) + codeSlice );
+				contributions.set(source, contributions.get(source) + codeSlice);
 				currentColumn = endColumn;
 			} else {
 				currentColumn = startColumn;
@@ -60,43 +60,38 @@ export function getBytesPerSource(
 		brotli: 0
 	};
 
-	for ( const [ source, codeSegment ] of contributions ) {
-		const sizes = getSizes( codeSegment, config );
+	for (const [source, codeSegment] of contributions) {
+		const sizes = getSizes(codeSegment, config);
 
 		contributionsSum.uncompressed += sizes.uncompressed;
 		contributionsSum.gzip += sizes.gzip;
 		contributionsSum.brotli += sizes.brotli;
 
-		sourceSizes.set( source, sizes );
+		sourceSizes.set(source, sizes);
 	}
 
-	return adjustSizes( sourceSizes, assetSizes, contributionsSum, config );
+	return adjustSizes(sourceSizes, assetSizes, contributionsSum, config);
 }
 
 /**
  * Returns the sizes of the given code based on the configuration.
  */
-export function getSizes(
-	code: string | Buffer,
-	config: Record<'gzip' | 'brotli', boolean>
-): Sizes {
+export function getSizes(code: string | Buffer, config: Record<'gzip' | 'brotli', boolean>): Sizes {
 	return {
-		uncompressed: Buffer.byteLength( code ),
-		gzip: config.gzip ? gzipSync( code ).length : 0,
-		brotli: config.brotli ? brotliCompressSync( code ).length : 0
+		uncompressed: Buffer.byteLength(code),
+		gzip: config.gzip ? gzipSync(code).length : 0,
+		brotli: config.brotli ? brotliCompressSync(code).length : 0
 	};
 }
 
-function getContributions( sources: Array<string | null> ): Map<string, string> {
+function getContributions(sources: Array<string | null>): Map<string, string> {
 	const contributions = new Map<string, string>();
 
 	// Populate contributions with sources
-	sources
-		.filter( source => source !== null )
-		.forEach( source => contributions.set( source, '' ) );
+	sources.filter(source => source !== null).forEach(source => contributions.set(source, ''));
 
 	// Add entry for the code that is not assigned to any source
-	contributions.set( UNASSIGNED, '' );
+	contributions.set(UNASSIGNED, '');
 
 	return contributions;
 }
@@ -112,21 +107,16 @@ function getContributions( sources: Array<string | null> ): Map<string, string> 
  * We use this information to estimate the actual size of the file in the bundle
  * after compression.
  */
-function adjustSizes(
-	sources: Map<string, Sizes>,
-	asset: Sizes,
-	sums: Sizes,
-	config: Config
-): Map<string, Sizes> {
+function adjustSizes(sources: Map<string, Sizes>, asset: Sizes, sums: Sizes, config: Config): Map<string, Sizes> {
 	const gzipDelta = config.gzip ? asset.gzip / sums.gzip : 0;
 	const brotliDelta = config.brotli ? asset.brotli / sums.brotli : 0;
 
-	for ( const [ source, sizes ] of sources ) {
-		sources.set( source, {
+	for (const [source, sizes] of sources) {
+		sources.set(source, {
 			uncompressed: sizes.uncompressed,
-			gzip: config.gzip ? Math.round( sizes.gzip * gzipDelta ) : 0,
-			brotli: config.brotli ? Math.round( sizes.brotli * brotliDelta ) : 0
-		} );
+			gzip: config.gzip ? Math.round(sizes.gzip * gzipDelta) : 0,
+			brotli: config.brotli ? Math.round(sizes.brotli * brotliDelta) : 0
+		});
 	}
 
 	return sources;

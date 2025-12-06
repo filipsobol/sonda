@@ -8,9 +8,9 @@ export default defineConfig({
 	},
 	plugins: [
 		sveltekit(),
-		Sonda( {
+		Sonda({
 			format: 'html',
 			server: true
-		} )
+		})
 	]
 });

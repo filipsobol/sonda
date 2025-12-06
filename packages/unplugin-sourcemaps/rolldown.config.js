@@ -4,30 +4,27 @@ import { defineConfig } from 'rolldown';
 import pkg from './package.json' with { type: 'json' };
 
 // Remove old build folder
-await rm( 'dist', { recursive: true, force: true } );
+await rm('dist', { recursive: true, force: true });
 
-const sharedOptions = defineConfig( {
+const sharedOptions = defineConfig({
 	input: 'src/index.ts',
-	external: [
-		...builtinModules,
-		...Object.keys( pkg.dependencies ),
-	],
+	external: [...builtinModules, ...Object.keys(pkg.dependencies)],
 	platform: 'node',
 	resolve: {
 		extensionAlias: {
-			'.js': [ '.ts', '.js' ],
+			'.js': ['.ts', '.js']
 		}
 	}
-} );
+});
 
-export default defineConfig( [
+export default defineConfig([
 	{
 		output: {
 			dir: 'dist',
 			format: 'esm',
 			sourcemap: true,
 			entryFileNames: '[name].mjs',
-			chunkFileNames: '[name].mjs',
+			chunkFileNames: '[name].mjs'
 		},
 		...sharedOptions
 	},
@@ -37,8 +34,8 @@ export default defineConfig( [
 			format: 'cjs',
 			sourcemap: true,
 			entryFileNames: '[name].cjs',
-			chunkFileNames: '[name].cjs',
+			chunkFileNames: '[name].cjs'
 		},
 		...sharedOptions
 	}
-] );
+]);

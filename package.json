@@ -9,6 +9,7 @@
   },
   "packageManager": "pnpm@10.20.0",
   "scripts": {
+    "format": "oxfmt",
     "test": "pnpm -r --stream run test",
     "build": "pnpm -r --stream run build",
     "restore": "pnpm run restore:sonda && pnpm run restore:unplugin-sourcemaps",
@@ -25,6 +26,7 @@
     "@types/node": "^24.9.1",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
+    "oxfmt": "^0.16.0",
     "pkg-pr-new": "^0.0.60",
     "rolldown": "1.0.0-beta.44",
     "typescript": "^5.9.3",

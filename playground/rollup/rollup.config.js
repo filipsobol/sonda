@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser';
 import styles from 'rollup-plugin-styles';
 import Sonda from 'sonda/rollup';
 
-export default defineConfig( {
+export default defineConfig({
 	input: 'src/index.js',
 	output: [
 		{
@@ -20,22 +20,22 @@ export default defineConfig( {
 		}
 	],
 	plugins: [
-		Sonda( {
+		Sonda({
 			format: 'html'
-		} ),
-		commonjs( {
+		}),
+		commonjs({
 			sourceMap: true,
 			defaultIsModuleExports: true
-		} ),
-		nodeResolve( {
+		}),
+		nodeResolve({
 			browser: true,
 			preferBuiltins: false
-		} ),
-		styles( {
+		}),
+		styles({
 			mode: 'extract',
-			sourceMap: true,
+			sourceMap: true
 			// minimize: true
-		} ),
+		}),
 		terser()
 	]
-} );
+});

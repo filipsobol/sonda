@@ -10,9 +10,9 @@ import Sonda from 'sonda/astro';
 export default defineConfig({
 	site: 'https://example.com',
 	output: 'server',
-	adapter: node( {
+	adapter: node({
 		mode: 'standalone'
-	} ),
+	}),
 	vite: {
 		build: {
 			sourcemap: true
@@ -22,9 +22,9 @@ export default defineConfig({
 		mdx(),
 		sitemap(),
 		vue(),
-		Sonda( {
+		Sonda({
 			format: 'html',
 			server: true
-		} )
-	],
+		})
+	]
 });

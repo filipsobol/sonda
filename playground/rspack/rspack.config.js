@@ -9,9 +9,9 @@ export default defineConfig({
 		clean: true
 	},
 	plugins: [
-		new Sonda( {
+		new Sonda({
 			format: 'html'
-		} ),
+		})
 		// new RsdoctorRspackPlugin( {
 		// 	disableClientServer: true,
 		// 	mode: 'brief',
@@ -26,5 +26,5 @@ export default defineConfig({
 	],
 	experiments: {
 		css: true
-	},
-} );
+	}
+});

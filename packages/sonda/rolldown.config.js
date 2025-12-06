@@ -5,17 +5,17 @@ import { dts } from 'rolldown-plugin-dts';
 import pkg from './package.json' with { type: 'json' };
 
 // Remove old build folder
-await rm( 'dist', { recursive: true, force: true } );
+await rm('dist', { recursive: true, force: true });
 
-export default defineConfig( {
+export default defineConfig({
 	output: {
 		dir: 'dist',
 		format: 'esm',
 		entryFileNames: '[name].js',
-		chunkFileNames: '[name].js',
+		chunkFileNames: '[name].js'
 	},
 	input: {
-		'index': 'src/index.ts',
+		index: 'src/index.ts',
 		'entrypoints/angular': 'src/entrypoints/angular.ts',
 		'entrypoints/astro': 'src/entrypoints/astro.ts',
 		'entrypoints/esbuild': 'src/entrypoints/esbuild.ts',
@@ -26,20 +26,14 @@ export default defineConfig( {
 		'entrypoints/rspack': 'src/entrypoints/rspack.ts',
 		'entrypoints/sveltekit': 'src/entrypoints/sveltekit.ts',
 		'entrypoints/vite': 'src/entrypoints/vite.ts',
-		'entrypoints/webpack': 'src/entrypoints/webpack.ts',
+		'entrypoints/webpack': 'src/entrypoints/webpack.ts'
 	},
-	external: [
-		...builtinModules,
-		...Object.keys( pkg.dependencies ),
-		'sonda'
-	],
+	external: [...builtinModules, ...Object.keys(pkg.dependencies), 'sonda'],
 	platform: 'node',
 	resolve: {
 		extensionAlias: {
-			'.js': [ '.ts', '.js' ],
+			'.js': ['.ts', '.js']
 		}
 	},
-	plugins: [
-		dts()
-	]
-} );
+	plugins: [dts()]
+});

@@ -19,9 +19,9 @@ import type {
 import type { Formatter } from './formatters/Formatter.js';
 import type { Config, Format } from '../config.js';
 
-const formatters: Record<Format, new ( config: Config ) => Formatter> = {
-	'html': HtmlFormatter,
-	'json': JsonFormatter
+const formatters: Record<Format, new (config: Config) => Formatter> = {
+	html: HtmlFormatter,
+	json: JsonFormatter
 };
 
 export class Report {
@@ -32,10 +32,10 @@ export class Report {
 
 	protected metadata: Metadata;
 	protected dependencies: Array<Dependency> = [];
-	protected issues: Array<Issue> = []
+	protected issues: Array<Issue> = [];
 	protected sourcemaps: Array<SourceMap> = [];
 
-	constructor( config: Config ) {
+	constructor(config: Config) {
 		this.config = config;
 
 		this.metadata = {
@@ -47,49 +47,42 @@ export class Report {
 		};
 	}
 
-	addResource( resource: Resource ): void {
-		if (
-			resource.name.startsWith( 'data:' )
-			|| hasIgnoredExtension( resource.name )
-		) {
+	addResource(resource: Resource): void {
+		if (resource.name.startsWith('data:') || hasIgnoredExtension(resource.name)) {
 			// Ignore data URIs or resources with ignored extensions
 			return;
 		}
 
-		const existing = this.resources.find( r =>
-			r.kind === resource.kind
-			&& r.name === resource.name
-			&& r.parent === resource.parent
+		const existing = this.resources.find(
+			r => r.kind === resource.kind && r.name === resource.name && r.parent === resource.parent
 		);
 
-		if ( existing ) {
+		if (existing) {
 			// Ignore duplicate resources
 			return;
 		}
 
-		this.resources.push( resource );
+		this.resources.push(resource);
 	}
 
-	addConnection( connection: Connection ): void {
+	addConnection(connection: Connection): void {
 		if (
-			connection.target.startsWith( 'data:' )
-			|| hasIgnoredExtension( connection.source )
-			|| hasIgnoredExtension( connection.target )
-			|| isBuiltin( connection.target )
+			connection.target.startsWith('data:') ||
+			hasIgnoredExtension(connection.source) ||
+			hasIgnoredExtension(connection.target) ||
+			isBuiltin(connection.target)
 		) {
 			// Ignore data URIs, resources with ignored extensions, and built-in modules
 			return;
 		}
 
-		const existing = this.connections.find( c => {
-			return c.kind === connection.kind
-				&& c.source === connection.source
-				&& c.target === connection.target;
-		} );
+		const existing = this.connections.find(c => {
+			return c.kind === connection.kind && c.source === connection.source && c.target === connection.target;
+		});
 
-		if ( !existing ) {
+		if (!existing) {
 			// Add the new connection if it doesn't exist
-			this.connections.push( connection );
+			this.connections.push(connection);
 			return;
 		}
 
@@ -98,78 +91,80 @@ export class Report {
 		 * If both connections have the `original` property, prioritize the shorter one because it is
 		 * more likely to be the original source than the absolute path.
 		 */
-		existing.original = [ connection.original, existing.original ]
-			// Filter out null values
-			.filter( original => original !== null )
-			// Sort by length to prioritize the shorter one
-			.sort( ( a, b ) => a.length - b.length )
-			// Take the first one, which is the shortest
-			[ 0 ]
+		existing.original =
+			[connection.original, existing.original]
+				// Filter out null values
+				.filter(original => original !== null)
+				// Sort by length to prioritize the shorter one
+				.sort((a, b) => a.length - b.length)[
+				// Take the first one, which is the shortest
+				0
+			] ||
 			// Fallback to null
-			|| null;
+			null;
 	}
 
-	addAsset( name: string, entrypoints?: Array<string> ): void {
-		if ( hasIgnoredExtension( name ) ) {
+	addAsset(name: string, entrypoints?: Array<string>): void {
+		if (hasIgnoredExtension(name)) {
 			return;
 		}
 
-		const normalizedName = normalizePath( name );
+		const normalizedName = normalizePath(name);
 
-		if ( this.config.exclude?.some( pattern => pattern.test( normalizedName ) ) ) {
+		if (this.config.exclude?.some(pattern => pattern.test(normalizedName))) {
 			// Ignore assets that match the exclude patterns
 			return;
 		}
 
-		if ( this.config.include && !this.config.include.some( pattern => pattern.test( normalizedName ) ) ) {
+		if (this.config.include && !this.config.include.some(pattern => pattern.test(normalizedName))) {
 			// Ignore assets that do not match the include patterns
 			return;
 		}
 
-		this.assets[ name ] = entrypoints;
+		this.assets[name] = entrypoints;
 	}
 
 	async generate(): Promise<Array<string>> {
-		for ( const [ path, entrypoints ] of Object.entries( this.assets ) ) {
-			updateOutput( this, path, entrypoints );
+		for (const [path, entrypoints] of Object.entries(this.assets)) {
+			updateOutput(this, path, entrypoints);
 		}
 
-		this.dependencies = updateDependencies( this );
+		this.dependencies = updateDependencies(this);
 
 		const outputs = [];
 
-		for ( const format of this.config.format ) {
-			const formatter = new formatters[ format ]( this.config );
-			const path = await formatter.write( this.#getFormattedData() );
+		for (const format of this.config.format) {
+			const formatter = new formatters[format](this.config);
+			const path = await formatter.write(this.#getFormattedData());
 
-			if ( this.config.open === true || this.config.open === format ) {
-				await open( path );
+			if (this.config.open === true || this.config.open === format) {
+				await open(path);
 			}
 
-			outputs.push( path );
+			outputs.push(path);
 		}
 
 		return outputs;
 	}
 
-	addSourceMap( asset: string, sourcemap: DecodedReportSourceMap ): void {
-		if ( this.sourcemaps.some( sm => sm.name === asset ) ) {
+	addSourceMap(asset: string, sourcemap: DecodedReportSourceMap): void {
+		if (this.sourcemaps.some(sm => sm.name === asset)) {
 			// Ignore duplicate sourcemaps for the same asset
 			return;
 		}
 
-		this.sourcemaps.push( {
+		this.sourcemaps.push({
 			name: asset,
-			map: JSON.stringify( sourcemap ),
-		} );
+			map: JSON.stringify(sourcemap)
+		});
 	}
 
 	#getFormattedData(): JsonReport {
 		return {
 			metadata: this.metadata,
-			resources: sortByKey( this.resources, 'name' ),
+			resources: sortByKey(this.resources, 'name'),
 			connections: this.connections,
-			dependencies: sortByKey( this.dependencies, 'name' ),
+			dependencies: sortByKey(this.dependencies, 'name'),
 			issues: this.issues,
 			sourcemaps: this.sourcemaps
 		};

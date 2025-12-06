@@ -8,24 +8,22 @@ import type { Compiler, Module, ModuleGraphConnection } from 'webpack';
 import type { ModuleFormat, ConnectionKind } from '../report/types.js';
 
 export class SondaWebpackPlugin {
-  options: Config;
+	options: Config;
 
-  constructor( userOptions: UserOptions = {} ) {
-    this.options = new Config( userOptions, {
-      integration: 'webpack'
-    } );
-  }
+	constructor(userOptions: UserOptions = {}) {
+		this.options = new Config(userOptions, {
+			integration: 'webpack'
+		});
+	}
 
-  apply( compiler: Compiler ): void {
-    if ( !this.options.enabled ) {
-      return;
-    }
+	apply(compiler: Compiler): void {
+		if (!this.options.enabled) {
+			return;
+		}
 
-    const report = new Report( this.options );
+		const report = new Report(this.options);
 
-    const namespace = compiler.options.output.devtoolNamespace
-			|| compiler.options.output.library?.name
-			|| '[^/]+/';
+		const namespace = compiler.options.output.devtoolNamespace || compiler.options.output.library?.name || '[^/]+/';
 
 		/**
 		 * Regex that matches the default Webpack source map filename format
@@ -45,132 +43,127 @@ export class SondaWebpackPlugin {
 		 * - (?:${ namespace })? - Non-capturing group that matches the optional namespace
 		 * - ([^?]*) - Matches the path, which is everything up to the first "?" (if present)
 		 */
-    const sourceMapFilenameRegex = new RegExp( `(?:webpack://)?(?:${ namespace })?([^?]*)` );
+		const sourceMapFilenameRegex = new RegExp(`(?:webpack://)?(?:${namespace})?([^?]*)`);
 
-    compiler.hooks.afterEmit.tapPromise( 'SondaWebpackPlugin', async compilation => {
+		compiler.hooks.afterEmit.tapPromise('SondaWebpackPlugin', async compilation => {
 			// Add resources and connections to the report
-			for ( const mod of compilation.modules ) {
+			for (const mod of compilation.modules) {
 				const name = mod.nameForCondition();
 
-				if ( !name ) {
+				if (!name) {
 					continue;
 				}
 
 				// ConcatenatedModule is a special case in Webpack where multiple modules are combined into one.
 				// We only want to get the module that is the entry point for the concatenated module.
-				const module = ( mod as any).modules?.find( ( module: Module ) => module.nameForCondition() === name ) || mod;
-				const normalizedName = normalizePath( name );
+				const module = (mod as any).modules?.find((module: Module) => module.nameForCondition() === name) || mod;
+				const normalizedName = normalizePath(name);
 
-				report.addResource( {
+				report.addResource({
 					kind: 'filesystem',
 					name: normalizedName,
-					type: getTypeByName( normalizedName ),
-					format: getFormat( normalizedName, module ),
+					type: getTypeByName(normalizedName),
+					format: getFormat(normalizedName, module),
 					uncompressed: module.size()
-				} );
+				});
 
 				Array
 					// Get all the connections from the current module
-					.from( compilation.moduleGraph.getOutgoingConnections( module ) )
+					.from(compilation.moduleGraph.getOutgoingConnections(module))
 
 					// Filter out connections without a name, or that are the same as the current module
-					.filter( connection => {
+					.filter(connection => {
 						const target = connection.module?.nameForCondition();
 
 						return !!target && target !== name;
-					} )
+					})
 
 					// Get the module name for each connection
-					.map( connection => ( {
-						kind: connectionKindMapper( connection ),
-						target: normalizePath( connection.module?.nameForCondition()! ),
+					.map(connection => ({
+						kind: connectionKindMapper(connection),
+						target: normalizePath(connection.module?.nameForCondition()!),
 						original: (connection.dependency as any)?.request
-					} ) )
+					}))
 
 					// Add connection to the report
-					.forEach( ( { kind, target, original } ) => report.addConnection( {
-						kind,
-						source: normalizedName,
-						target,
-						original
-					} ) );
+					.forEach(({ kind, target, original }) =>
+						report.addConnection({
+							kind,
+							source: normalizedName,
+							target,
+							original
+						})
+					);
 			}
 
 			// Add assets to the report
-			for ( const name of Object.keys( compilation.assets ) ) {
+			for (const name of Object.keys(compilation.assets)) {
 				let entry: Array<string> | undefined = undefined;
 
-				for ( const chunk of compilation.chunks ) {
-					if ( !chunk.files.has( name ) ) {
+				for (const chunk of compilation.chunks) {
+					if (!chunk.files.has(name)) {
 						continue;
 					}
 
-					entry = Array
-						.from( compilation.chunkGraph.getChunkEntryModulesIterable( chunk ) )
-						.map( module => module.nameForCondition()! );
+					entry = Array.from(compilation.chunkGraph.getChunkEntryModulesIterable(chunk)).map(
+						module => module.nameForCondition()!
+					);
 				}
 
-				report.addAsset(
-					join( compilation.outputOptions.path!, name ),
-					entry
-				)
+				report.addAsset(join(compilation.outputOptions.path!, name), entry);
 			}
 
 			// Register a custom sourcemap path normalizer to handle webpack specific paths.
-			this.options.sourcesPathNormalizer = ( path: string ) => {
-				if ( !path.startsWith( 'webpack://' ) ) {
-					return resolve( process.cwd(), path );
+			this.options.sourcesPathNormalizer = (path: string) => {
+				if (!path.startsWith('webpack://')) {
+					return resolve(process.cwd(), path);
 				}
 
-				const [ , filePath ] = path.match( sourceMapFilenameRegex )!;
+				const [, filePath] = path.match(sourceMapFilenameRegex)!;
 
-				return filePath
-					? resolve( process.cwd(), filePath )
-					: UNASSIGNED;
-			}
+				return filePath ? resolve(process.cwd(), filePath) : UNASSIGNED;
+			};
 
 			const reportPaths = await report.generate();
 
-			for ( const reportPath of reportPaths ) {
+			for (const reportPath of reportPaths) {
 				compilation
 					.getLogger('SondaWebpackPlugin')
-					.info( styleText( 'green', `📝 Sonda report generated: ${ reportPath }` ) );
+					.info(styleText('green', `📝 Sonda report generated: ${reportPath}`));
 			}
-		} );
-  }
+		});
+	}
 }
 
-function getFormat( name: string, module: Module ): ModuleFormat {
-	if ( getTypeByName( name ) !== 'script' ) {
-    return 'other';
-  }
+function getFormat(name: string, module: Module): ModuleFormat {
+	if (getTypeByName(name) !== 'script') {
+		return 'other';
+	}
 
-	return module.type === 'javascript/esm'
-		? 'esm'
-		: 'cjs';
+	return module.type === 'javascript/esm' ? 'esm' : 'cjs';
 }
 
 /**
  * Maps esbuild's ImportKind to Sonda's ConnectionKind.
  */
-function connectionKindMapper( connection: ModuleGraphConnection ): ConnectionKind {
-	if ( !connection.dependency ) {
+function connectionKindMapper(connection: ModuleGraphConnection): ConnectionKind {
+	if (!connection.dependency) {
 		return 'import';
 	}
 
 	const { category, type } = connection.dependency;
 
-	if ( category === 'esm' && type === 'import()' ) {
+	if (category === 'esm' && type === 'import()') {
 		return 'dynamic-import';
 	}
 
-	if ( category === 'esm' || category === 'css-import' ) {
+	if (category === 'esm' || category === 'css-import') {
 		return 'import';
 	}
 
-	if ( category === 'commonjs' ) {
+	if (category === 'commonjs') {
 		return 'require';
 	}
 
-	return 'import'
+	return 'import';
 }
