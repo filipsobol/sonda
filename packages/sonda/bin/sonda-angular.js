@@ -56,8 +56,33 @@ values.exclude = values.exclude?.map(stringToRegExp);
 // Build Angular projects before analyzing
 if (!skipBuild) {
 	const configPath = resolve(process.cwd(), values.config || 'angular.json');
-	const angularConfig = JSON.parse(readFileSync(configPath, 'utf8'));
+	
+	let angularConfig;
+	try {
+		angularConfig = JSON.parse(readFileSync(configPath, 'utf8'));
+	} catch (error) {
+		console.error(`Error reading Angular configuration file at ${configPath}:`);
+		console.error(error.message);
+		process.exit(1);
+	}
+
+	if (!angularConfig.projects || typeof angularConfig.projects !== 'object') {
+		console.error(`Invalid Angular configuration: 'projects' property not found in ${configPath}`);
+		process.exit(1);
+	}
+
 	const projectsToBuild = values.projects?.length ? values.projects : Object.keys(angularConfig.projects);
+
+	// Validate that specified projects exist
+	if (values.projects?.length) {
+		const invalidProjects = values.projects.filter(project => !angularConfig.projects[project]);
+		if (invalidProjects.length > 0) {
+			console.error(`The following projects were not found in ${configPath}:`);
+			invalidProjects.forEach(project => console.error(`  - ${project}`));
+			console.error(`\nAvailable projects: ${Object.keys(angularConfig.projects).join(', ')}`);
+			process.exit(1);
+		}
+	}
 
 	console.log('Building Angular projects with required options...');
 	
