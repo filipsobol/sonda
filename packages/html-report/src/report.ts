@@ -3,15 +3,11 @@ import type { AssetResource, ChunkResource, JsonReport, FilesystemResource, Sour
 
 declare global {
 	const SONDA_REPORT_DATA: string;
-
-	interface Window {
-		SONDA_DECOMPRESSED_DATA: JsonReport;
-	}
 }
 
-export async function decompressData(): Promise<any> {
+export async function getCompressedReport(compressedData: string): Promise<JsonReport> {
 	// Decode base64 string
-	const data = await fetch('data:application/octet-stream;base64,' + SONDA_REPORT_DATA);
+	const data = await fetch('data:application/octet-stream;base64,' + compressedData);
 	const arrayBuffer = await data.arrayBuffer();
 
 	// Decompress data
@@ -23,9 +19,31 @@ export async function decompressData(): Promise<any> {
 	return JSON.parse(new TextDecoder().decode(buffer));
 }
 
-window.SONDA_DECOMPRESSED_DATA = markRaw(await decompressData());
+const bundledReportData = SONDA_REPORT_DATA;
 
-export const report: JsonReport = window.SONDA_DECOMPRESSED_DATA;
+async function getRemoteReport(url: string): Promise<JsonReport> {
+	try {
+		const response = await fetch(url);
+		if (!response.ok) throw response;
+
+		return response.json() as Promise<JsonReport>;
+	} catch (error) {
+		throw new Error("Couldn't fetch remote report.", { cause: error });
+	}
+}
+
+async function getReport(): Promise<JsonReport> {
+	const { searchParams } = new URL(location.href);
+	const url = searchParams.get('url');
+
+	if (url) return getRemoteReport(url);
+
+	if (bundledReportData) return getCompressedReport(bundledReportData);
+
+	throw new Error("Couldn't load report data.");
+}
+
+export const report: JsonReport = markRaw(await getReport());
 
 // ------------------------------ SOURCES ------------------------------
 function isSource(resource: Resource): resource is FilesystemResource | SourcemapResource {
