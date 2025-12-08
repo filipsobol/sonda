@@ -20,9 +20,8 @@ npm install sonda --save-dev
 
 The `sonda-angular` CLI command automatically builds your Angular projects with the required options (`--stats-json` and `--source-map`) and then analyzes the results. You can either use the JavaScript API or the CLI command.
 
-::: tip Note
-The `sonda-angular` command automatically enables JSON stats and source maps during the build, so you **don't need to manually configure** these options in your `angular.json` file.
-:::
+> [!TIP]
+> The `sonda-angular` command automatically enables JSON stats and source maps during the build, so you **don't need to manually configure** these options in your `angular.json` file.
 
 If you prefer to build your project separately and skip the automatic build, you can use the `--skip-build` flag and manually configure the options in `angular.json`:
 
