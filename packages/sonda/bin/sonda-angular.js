@@ -66,7 +66,7 @@ if (!skipBuild) {
 		process.exit(1);
 	}
 
-	if (!angularConfig.projects || typeof angularConfig.projects !== 'object') {
+	if (!angularConfig.projects || typeof angularConfig.projects !== 'object' || Array.isArray(angularConfig.projects)) {
 		console.error(`Invalid Angular configuration: 'projects' property not found in ${configPath}`);
 		process.exit(1);
 	}
@@ -98,7 +98,7 @@ if (!skipBuild) {
 
 		if (result.status !== 0) {
 			console.error(`Failed to build project: ${project}`);
-			process.exit(result.status || 1);
+			process.exit(result.status ?? 1);
 		}
 	}
 	
