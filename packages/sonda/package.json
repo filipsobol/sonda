@@ -76,7 +76,7 @@
     "astro": "^5.16.4",
     "esbuild": "^0.27.1",
     "load-source-map": "workspace:^",
-    "next": "^16.0.7",
+    "next": "^16.0.9",
     "rolldown-plugin-dts": "^0.18.3",
     "rollup": "^4.53.3",
     "vite": "^7.2.6",
