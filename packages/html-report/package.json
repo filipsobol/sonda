@@ -11,17 +11,17 @@
   "dependencies": {
     "@vueuse/core": "^14.1.0",
     "fuzzysort": "^3.1.0",
-    "vue": "^3.5.25"
+    "vue": "^3.5.26"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.17",
-    "@vitejs/plugin-vue": "^6.0.2",
-    "@vue/tsconfig": "^0.7.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/tsconfig": "^0.8.1",
     "sonda": "workspace:^",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
-    "vite": "^7.2.6",
+    "vite": "^7.3.1",
     "vite-plugin-singlefile": "^2.3.0",
-    "vue-tsc": "^3.1.5"
+    "vue-tsc": "^3.2.2"
   }
 }
