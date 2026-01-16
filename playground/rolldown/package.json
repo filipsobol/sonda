@@ -1,18 +1,18 @@
 {
-  "name": "playground-rolldown",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "rolldown -c",
-    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
-  },
-  "dependencies": {
-    "ckeditor5": "^47.4.0"
-  },
-  "devDependencies": {
-    "rolldown": "1.0.0-beta.53",
-    "sonda": "workspace:^",
-    "unplugin-sourcemaps": "workspace:^"
-  }
+	"name": "playground-rolldown",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "rolldown -c",
+		"debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
+	},
+	"dependencies": {
+		"ckeditor5": "^47.4.0"
+	},
+	"devDependencies": {
+		"rolldown": "1.0.0-beta.60",
+		"sonda": "workspace:^",
+		"unplugin-sourcemaps": "workspace:^"
+	}
 }

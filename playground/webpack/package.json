@@ -1,23 +1,23 @@
 {
-  "name": "playground-webpack",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "webpack --mode=production",
-    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
-  },
-  "dependencies": {
-    "ckeditor5": "^47.4.0"
-  },
-  "devDependencies": {
-    "@types/webpack": "^5.28.5",
-    "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.4",
-    "mini-css-extract-plugin": "^2.10.0",
-    "sonda": "workspace:^",
-    "unplugin-sourcemaps": "workspace:^",
-    "webpack": "^5.104.1",
-    "webpack-cli": "^6.0.1"
-  }
+	"name": "playground-webpack",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "webpack --mode=production",
+		"debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
+	},
+	"dependencies": {
+		"ckeditor5": "^47.4.0"
+	},
+	"devDependencies": {
+		"@types/webpack": "^5.28.5",
+		"css-loader": "^7.1.2",
+		"css-minimizer-webpack-plugin": "^7.0.4",
+		"mini-css-extract-plugin": "^2.10.0",
+		"sonda": "workspace:^",
+		"unplugin-sourcemaps": "workspace:^",
+		"webpack": "^5.104.1",
+		"webpack-cli": "^6.0.1"
+	}
 }

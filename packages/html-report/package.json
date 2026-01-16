@@ -1,27 +1,27 @@
 {
-  "name": "html-report",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@vueuse/core": "^14.1.0",
-    "fuzzysort": "^3.1.0",
-    "vue": "^3.5.26"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "@vitejs/plugin-vue": "^6.0.3",
-    "@vue/tsconfig": "^0.7.0",
-    "sonda": "workspace:^",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-singlefile": "^2.3.0",
-    "vue-tsc": "3.1.5"
-  }
+	"name": "html-report",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc -b && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@vueuse/core": "^14.1.0",
+		"fuzzysort": "^3.1.0",
+		"vue": "^3.5.26"
+	},
+	"devDependencies": {
+		"@tailwindcss/vite": "^4.1.18",
+		"@vitejs/plugin-vue": "^6.0.3",
+		"@vue/tsconfig": "^0.7.0",
+		"sonda": "workspace:^",
+		"tailwindcss": "^4.1.18",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.1",
+		"vite-plugin-singlefile": "^2.3.0",
+		"vue-tsc": "3.1.5"
+	}
 }

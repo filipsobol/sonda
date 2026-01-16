@@ -1,6 +1,6 @@
 {
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "printWidth": 120,
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"printWidth": 120,
 	"bracketSpacing": true,
 	"semi": true,
 	"singleQuote": true,
@@ -9,5 +9,11 @@
 	"bracketSameLine": false,
 	"arrowParens": "avoid",
 	"objectWrap": "preserve",
-  "ignorePatterns": []
+	"ignorePatterns": [],
+	"experimentalTailwindcss": {
+		"attributes": ["class"],
+		"functions": [],
+		"preserveDuplicates": false,
+		"preserveWhitespace": false
+	}
 }

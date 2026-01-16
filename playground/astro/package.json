@@ -1,24 +1,24 @@
 {
-  "name": "playground-astro",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/node": "^9.5.2",
-    "@astrojs/rss": "^4.0.15",
-    "@astrojs/sitemap": "^3.7.0",
-    "@astrojs/vue": "^5.1.4",
-    "astro": "^5.16.11",
-    "vue": "^3.5.26"
-  },
-  "devDependencies": {
-    "sonda": "workspace:^"
-  }
+	"name": "playground-astro",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^4.3.13",
+		"@astrojs/node": "^9.5.2",
+		"@astrojs/rss": "^4.0.15",
+		"@astrojs/sitemap": "^3.7.0",
+		"@astrojs/vue": "^5.1.4",
+		"astro": "^5.16.11",
+		"vue": "^3.5.26"
+	},
+	"devDependencies": {
+		"sonda": "workspace:^"
+	}
 }

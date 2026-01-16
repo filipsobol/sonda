@@ -1,20 +1,20 @@
 {
-  "name": "playground-rspack",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "rspack serve",
-    "build": "rspack build",
-    "preview": "rspack preview"
-  },
-  "dependencies": {
-    "ckeditor5": "^47.4.0"
-  },
-  "devDependencies": {
-    "@rsdoctor/rspack-plugin": "^1.5.0",
-    "@rspack/cli": "^1.7.2",
-    "sonda": "workspace:^",
-    "unplugin-sourcemaps": "workspace:^"
-  }
+	"name": "playground-rspack",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "rspack serve",
+		"build": "rspack build",
+		"preview": "rspack preview"
+	},
+	"dependencies": {
+		"ckeditor5": "^47.4.0"
+	},
+	"devDependencies": {
+		"@rsdoctor/rspack-plugin": "^1.5.0",
+		"@rspack/cli": "^1.7.2",
+		"sonda": "workspace:^",
+		"unplugin-sourcemaps": "workspace:^"
+	}
 }
