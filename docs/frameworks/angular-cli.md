@@ -16,9 +16,14 @@ To get started, install the Sonda package using the following command:
 npm install sonda --save-dev
 ```
 
-### Enable JSON stats and source maps
+### Run Sonda
 
-Next, enable JSON stats and source maps in the `angular.json` file:
+The `sonda-angular` CLI command automatically builds your Angular projects with the required options (`--stats-json` and `--source-map`) and then analyzes the results. You can either use the JavaScript API or the CLI command.
+
+> [!TIP]
+> The `sonda-angular` command automatically enables JSON stats and source maps during the build, so you **don't need to manually configure** these options in your `angular.json` file.
+
+If you prefer to build your project separately and skip the automatic build, you can use the `--skip-build` flag and manually configure the options in `angular.json`:
 
 ```js{7-12}
 {
@@ -44,12 +49,6 @@ Next, enable JSON stats and source maps in the `angular.json` file:
 You may need to repeat this step for every project in your workspace.
 
 The `sourceMap.styles` and `sourceMap.vendor` options are optional. Enable them if you want to analyze styles and vendor scripts.
-
-Sonda requires source maps to function correctly, but some other plugins may not support or generate them by default. If Sonda does not work as expected, check the documentation for the other plugins you are using to ensure source maps are enabled.
-
-### Run Sonda
-
-After updating the configuration, you should **build your project**. Once the build is complete, you can run Sonda. You can either use the JavaScript API or the CLI command.
 
 #### Option 1: Using the JavaScript API
 
@@ -95,6 +94,7 @@ The command accepts the following options. For more information about these opti
 * `--filename=<filename>`
 * `--outputDir=<dirname>`
 * `--no-open`
+* `--skip-build`
 * `--detailed`
 * `--sources`
 * `--gzip`
@@ -121,6 +121,20 @@ Specifies the path to the Angular CLI configuration file.
 * **Default:** All projects in the `angular.json` file
 
 Specifies the projects to analyze. By default, Sonda will analyze all projects in the Angular CLI configuration file, but you can specify individual projects based on your needs.
+
+##### `skip-build`
+
+* **Type:** `boolean`
+* **Default:** `false`
+* **CLI only:** This option is only available when using the CLI command
+
+When set to `true`, skips the automatic build step. Use this if you want to build your Angular projects manually or if you've already built them. When using this option, you must ensure that the required build options (`statsJson: true` and `sourceMap`) are configured in your `angular.json` file.
+
+Example:
+
+```bash
+sonda-angular --skip-build
+```
 
 ##### `include`
 
