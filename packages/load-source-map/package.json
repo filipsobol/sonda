@@ -10,8 +10,5 @@
 	},
 	"scripts": {
 		"build": "rolldown -c"
-	},
-	"devDependencies": {
-		"rolldown-plugin-dts": "^0.21.2"
 	}
 }
