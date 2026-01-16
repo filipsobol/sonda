@@ -35,7 +35,7 @@ jobs:
         run: pnpm run test
 
       - name: Check if code is formatted
-        run: pnpm run test --check
+        run: pnpm run format --check
 
       - name: Release preview
         # Only run on pull requests
