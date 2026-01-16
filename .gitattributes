@@ -1,2 +1,2 @@
 # Exclude playground directory from GitHub's language statistics
-playground/* linguist-detectable=false
+playground/** linguist-detectable=false
