@@ -16,7 +16,7 @@
 
 			<BaseButton
 				:link="true"
-				:href="router.getUrl( 'assets/details', { item: usedIn } )"
+				:href="router.getUrl('assets/details', { item: usedIn })"
 			>
 				Asset details
 			</BaseButton>
@@ -24,25 +24,29 @@
 
 		<h4 class="mt-4 mb-4 text-lg font-bold text-gray-700">Size</h4>
 
-		<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
-			<table class="table-fixed w-full text-sm text-left">
+		<div class="overflow-hidden rounded-lg border border-gray-200 shadow-xs">
+			<table class="w-full table-fixed text-left text-sm">
 				<colgroup>
-					<col style="width: 210px">
-					<col style="width: 100%">
+					<col style="width: 210px" />
+					<col style="width: 100%" />
 				</colgroup>
 
 				<tbody class="text-gray-500">
 					<tr>
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Bundled size</td>
-						<td class="p-3 font-normal">{{ formatSize( chunk!.uncompressed ) }}</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Bundled size</td>
+						<td class="p-3 font-normal">{{ formatSize(chunk!.uncompressed) }}</td>
 					</tr>
 					<tr class="border-t border-gray-100">
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Approx. GZIP size</td>
-						<td class="p-3 font-normal">{{ report.metadata.gzip ? formatSize( chunk!.gzip! ) : '-' }}</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Approx. GZIP size</td>
+						<td class="p-3 font-normal">
+							{{ report.metadata.gzip ? formatSize(chunk!.gzip!) : '-' }}
+						</td>
 					</tr>
 					<tr class="border-t border-gray-100">
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Approx. Brotli size</td>
-						<td class="p-3 font-normal">{{ report.metadata.brotli ? formatSize( chunk!.brotli! ) : '-' }}</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Approx. Brotli size</td>
+						<td class="p-3 font-normal">
+							{{ report.metadata.brotli ? formatSize(chunk!.brotli!) : '-' }}
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -71,18 +75,18 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const show = computed( router.computedQuery( 'usage', false ) );
+const show = computed(router.computedQuery('usage', false));
 
-const parentAssets = computed( () => {
+const parentAssets = computed(() => {
 	return report.resources
-		.filter( ( resource ): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name )
-		.map( resource => ( {
+		.filter((resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name)
+		.map(resource => ({
 			label: resource.parent!,
 			value: resource.parent!
-		} ) );
-} );
+		}));
+});
 
-const usedIn = computed( router.computedQuery( 'usedIn', parentAssets.value[ 0 ]?.value || '' ) );
+const usedIn = computed(router.computedQuery('usedIn', parentAssets.value[0]?.value || ''));
 
-const chunk = computed( () => usedIn.value && getChunkResource( props.name, usedIn.value ) || null );
+const chunk = computed(() => (usedIn.value && getChunkResource(props.name, usedIn.value)) || null);
 </script>

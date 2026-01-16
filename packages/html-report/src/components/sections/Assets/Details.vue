@@ -3,26 +3,26 @@
 		<template #title>Details</template>
 		<template #description>Details of the source asset</template>
 
-		<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
-			<table class="table-fixed w-full text-sm text-left">
+		<div class="overflow-hidden rounded-lg border border-gray-200 shadow-xs">
+			<table class="w-full table-fixed text-left text-sm">
 				<colgroup>
-					<col style="width: 210px">
-					<col style="width: 100%">
+					<col style="width: 210px" />
+					<col style="width: 100%" />
 				</colgroup>
 
 				<tbody class="text-gray-500">
 					<tr>
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Path</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Path</td>
 						<td class="p-3 font-normal">{{ name }}</td>
 					</tr>
 
 					<tr class="border-t border-gray-100">
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Treemap</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Treemap</td>
 						<td class="p-3 font-normal">
 							<span class="inline-flex">
 								<BaseButton
 									:link="true"
-									:href="router.getUrl( 'treemap', { item: name } )"
+									:href="router.getUrl('treemap', { item: name })"
 									:active="true"
 								>
 									Treemap view
@@ -32,7 +32,7 @@
 					</tr>
 
 					<tr class="border-t border-gray-100">
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">File type</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">File type</td>
 						<td class="p-3 font-normal capitalize">{{ asset.type }}</td>
 					</tr>
 
@@ -40,7 +40,7 @@
 						v-if="entrypoints.length"
 						class="border-t border-gray-100"
 					>
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Entrypoint(s)</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Entrypoint(s)</td>
 						<td class="p-3 font-normal">
 							<ul>
 								<li
@@ -48,8 +48,8 @@
 									:key="entrypoint.target"
 								>
 									<a
-										:href="router.getUrl( 'inputs/details', { item: entrypoint.target } )"
-										class="py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+										:href="router.getUrl('inputs/details', { item: entrypoint.target })"
+										class="rounded-lg py-1 text-sm font-medium underline-offset-2 outline-hidden hover:underline focus:border-gray-500 focus:ring focus:ring-gray-500"
 									>
 										{{ entrypoint.target }}
 									</a>
@@ -60,62 +60,77 @@
 
 					<!-- Uncompressed -->
 					<tr class="border-t border-gray-100">
-						<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Original file size</td>
-						<td class="p-3 font-normal">{{ formatSize( asset.uncompressed ) }}</td>
+						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Original file size</td>
+						<td class="p-3 font-normal">{{ formatSize(asset.uncompressed) }}</td>
 					</tr>
 					<tr class="border-t border-gray-100">
-						<td class="flex items-center justify-between p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">
+						<td
+							class="flex items-center justify-between border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap"
+						>
 							Original download time
 
-							<span class="inline-flex" data-hover="Estimated download time on a slow 3G connection">
+							<span
+								class="inline-flex"
+								data-hover="Estimated download time on a slow 3G connection"
+							>
 								<IconInfo
 									:size="20"
-									class="ml-2 inline pointer-events-none"
+									class="pointer-events-none ml-2 inline"
 								/>
 							</span>
 						</td>
-						<td class="p-3 font-normal">{{ formatTime( downloadTimeOriginal ) }}</td>
+						<td class="p-3 font-normal">{{ formatTime(downloadTimeOriginal) }}</td>
 					</tr>
 
 					<!-- GZIP -->
 					<template v-if="asset.gzip">
 						<tr class="border-t border-gray-100">
-							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">GZIP size</td>
-							<td class="p-3 font-normal">{{ formatSize( asset.gzip ) }}</td>
+							<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">GZIP size</td>
+							<td class="p-3 font-normal">{{ formatSize(asset.gzip) }}</td>
 						</tr>
 						<tr class="border-t border-gray-100">
-							<td class="flex items-center justify-between p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">
+							<td
+								class="flex items-center justify-between border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap"
+							>
 								GZIP download time
 
-								<span class="inline-flex" data-hover="Estimated download time on a slow 3G connection">
+								<span
+									class="inline-flex"
+									data-hover="Estimated download time on a slow 3G connection"
+								>
 									<IconInfo
 										:size="20"
-										class="ml-2 inline pointer-events-none"
+										class="pointer-events-none ml-2 inline"
 									/>
 								</span>
 							</td>
-							<td class="p-3 font-normal">{{ formatTime( downloadTimeGzip ) }}</td>
+							<td class="p-3 font-normal">{{ formatTime(downloadTimeGzip) }}</td>
 						</tr>
 					</template>
 
 					<!-- Brotli -->
 					<template v-if="asset.brotli">
 						<tr class="border-t border-gray-100">
-							<td class="p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">Brotli size</td>
-							<td class="p-3 font-normal">{{ formatSize( asset.brotli ) }}</td>
+							<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Brotli size</td>
+							<td class="p-3 font-normal">{{ formatSize(asset.brotli) }}</td>
 						</tr>
 						<tr class="border-t border-gray-100">
-							<td class="flex items-center justify-between p-3 font-bold whitespace-nowrap bg-gray-50 border-r border-r-gray-100">
+							<td
+								class="flex items-center justify-between border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap"
+							>
 								Brotli download time
 
-								<span class="inline-flex" data-hover="Estimated download time on a slow 3G connection">
+								<span
+									class="inline-flex"
+									data-hover="Estimated download time on a slow 3G connection"
+								>
 									<IconInfo
 										:size="20"
-										class="ml-2 inline pointer-events-none"
+										class="pointer-events-none ml-2 inline"
 									/>
 								</span>
 							</td>
-							<td class="p-3 font-normal">{{ formatTime( downloadTimeBrotli ) }}</td>
+							<td class="p-3 font-normal">{{ formatTime(downloadTimeBrotli) }}</td>
 						</tr>
 					</template>
 				</tbody>
@@ -141,12 +156,14 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const show = computed( router.computedQuery( 'details', true ) );
-const asset = computed( () => getAssetResource( props.name )! );
-const entrypoints = computed( () => report.connections.filter( connection => connection.kind === 'entrypoint' && connection.source === props.name ) );
+const show = computed(router.computedQuery('details', true));
+const asset = computed(() => getAssetResource(props.name)!);
+const entrypoints = computed(() =>
+	report.connections.filter(connection => connection.kind === 'entrypoint' && connection.source === props.name)
+);
 
 // Download times
-const downloadTimeOriginal = computed( () => Math.round( asset.value.uncompressed / SLOW_3G * 1000 ) );
-const downloadTimeGzip = computed( () => Math.round( asset.value.gzip / SLOW_3G * 1000 ) );
-const downloadTimeBrotli = computed( () => Math.round( asset.value.brotli / SLOW_3G * 1000 ) );
+const downloadTimeOriginal = computed(() => Math.round((asset.value.uncompressed / SLOW_3G) * 1000));
+const downloadTimeGzip = computed(() => Math.round((asset.value.gzip / SLOW_3G) * 1000));
+const downloadTimeBrotli = computed(() => Math.round((asset.value.brotli / SLOW_3G) * 1000));
 </script>

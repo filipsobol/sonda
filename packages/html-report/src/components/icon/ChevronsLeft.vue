@@ -1,8 +1,8 @@
 <template>
 	<!-- https://lucide.dev/license -->
 	<Icon>
-		<path d="m11 17-5-5 5-5"/>
-		<path d="m18 17-5-5 5-5"/>
+		<path d="m11 17-5-5 5-5" />
+		<path d="m18 17-5-5 5-5" />
 	</Icon>
 </template>
 

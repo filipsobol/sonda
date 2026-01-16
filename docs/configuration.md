@@ -27,24 +27,24 @@ These are the default options:
 You can override these options by passing a configuration object to the plugin. For example:
 
 ```js
-Sonda( {
-  open: false
-} )
+Sonda({
+	open: false
+});
 ```
 
 ## Options
 
 ### `enabled` <Badge type="tip" text="Introduced in 0.7.0" />
 
-* **Type:** `boolean`
-* **Default:** `true`
+- **Type:** `boolean`
+- **Default:** `true`
 
 Specifies whether the plugin is enabled.
 
 ### `include` <Badge type="tip" text="Introduced in 0.9.0" />
 
-* **Type:** `Array<RegExp>` | `null`
-* **Default:** `null`
+- **Type:** `Array<RegExp>` | `null`
+- **Default:** `null`
 
 Specifies a list of RegExp patterns used to match output assets to include in the report. By default, all assets are included.
 
@@ -52,8 +52,8 @@ Patterns are matched against the relative asset paths as displayed in the report
 
 ### `exclude` <Badge type="tip" text="Introduced in 0.9.0" />
 
-* **Type:** `Array<RegExp>` | `null`
-* **Default:** `null`
+- **Type:** `Array<RegExp>` | `null`
+- **Default:** `null`
 
 Specifies a list of RegExp patterns used to match output assets to exclude from the report. By default, no assets are excluded, except for those with `.map` and `.d.ts` extensions, which are always excluded regardless of this setting.
 
@@ -63,20 +63,20 @@ Patterns are matched against the relative asset paths as shown in the report. Fo
 
 ### `format`
 
-* **Type:** `string` | `Array<string>`
-* **Default:** `'html'`
+- **Type:** `string` | `Array<string>`
+- **Default:** `'html'`
 
 Specifies the output format of the report. Supported formats include:
 
-* `'html'` - An HTML file with a treemap visualization.
-* `'json'` - A JSON file.
+- `'html'` - An HTML file with a treemap visualization.
+- `'json'` - A JSON file.
 
 You can specify multiple formats by providing an array of strings, e.g., `['html', 'json']`. This generates separate reports for each specified format.
 
 ### `filename` <Badge type="tip" text="Introduced in 0.6.0" />
 
-* **Type:** `string`
-* **Default:** `'sonda_[index]'` for bundler integrations and `'sonda_[env]_[index]'` for framework integrations.
+- **Type:** `string`
+- **Default:** `'sonda_[index]'` for bundler integrations and `'sonda_[env]_[index]'` for framework integrations.
 
 Specifies the filename of the generated report. If this value is an absolute path, it overrides the `outputDir` option.
 
@@ -87,9 +87,10 @@ The `[index]` placeholder is replaced with a version number that increments each
 Additionally, framework integrations that can generate reports for both the client and server (with the [`server`](#server) option) will include the `[env]` placeholder in the filename. This is replaced with the environment name (e.g., `client`, `server`), allowing you to distinguish between client and server reports.
 
 ### `outputDir` <Badge type="tip" text="Introduced in 0.8.0" />
-* **Type:** `string`
-* **Default:** `'.sonda'`
-* **Description:** The directory where the report will be saved.
+
+- **Type:** `string`
+- **Default:** `'.sonda'`
+- **Description:** The directory where the report will be saved.
 
 Specifies the directory where the report will be saved. This can be a relative or absolute path. By default, the report is saved in a `.sonda` directory relative to the current working directory.
 
@@ -97,8 +98,8 @@ The directory is created if it does not exist.
 
 ### `open`
 
-* **Type:** `boolean` | `'html'` | `'json'`
-* **Default:** `true`
+- **Type:** `boolean` | `'html'` | `'json'`
+- **Default:** `true`
 
 Specifies whether to automatically open the report in the default program for the given file extension (`.html` or `.json`, depending on the `format` option) after the build process.
 
@@ -106,8 +107,8 @@ If you set the [`format`](#format) option to an array to generate multiple repor
 
 ### `deep`
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Specifies whether to read source maps of imported modules.
 
@@ -119,8 +120,8 @@ For more details, see the [Deep view](/features/deep-view) page.
 
 ### `sources` <Badge type="tip" text="Introduced in 0.5.0" />
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Specifies whether to include source maps of generated assets in the report to visualize which parts of the code contribute to the final asset size.
 
@@ -132,8 +133,8 @@ This option significantly increases the report size and embeds the **source code
 
 ### `gzip`
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Specifies whether to calculate asset sizes after compression with GZIP.
 
@@ -145,8 +146,8 @@ For more details, see the [Compression sizes](/features/compression-sizes) page.
 
 ### `brotli`
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Specifies whether to calculate asset sizes after compression with Brotli.
 
@@ -158,8 +159,8 @@ For more details, see the [Compression sizes](/features/compression-sizes) page.
 
 ### `server` <Badge type="tip" text="Introduced in 0.7.0" />
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Specifies whether to generate reports for server bundles in addition to client bundles.
 
@@ -171,7 +172,7 @@ This option is available only in **framework** integrations.
 
 ### `detailed` <Badge type="danger" text="Removed in 0.8.0" />
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 Renamed to `deep`.

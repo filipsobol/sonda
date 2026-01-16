@@ -30,5 +30,5 @@ Notice how tiles representing distribution files were broken into smaller tiles 
 
 There are two important caveats to consider:
 
-* This feature only works for dependencies that publish valid source maps.
-* Enabling this feature will increase the report generation time, especially for large projects with many dependencies.
+- This feature only works for dependencies that publish valid source maps.
+- Enabling this feature will increase the report generation time, especially for large projects with many dependencies.

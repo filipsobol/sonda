@@ -14,43 +14,41 @@ Before we dive into the details of each field, here is the top-level structure o
 
 ```json
 {
-  "metadata": {
-    "version": "0.7.1",
-    "integration": "rolldown",
-    "sources": true,
-    "gzip": true,
-    "brotli": true
-  },
-  "resources": [
-    {
-      "kind": "chunk",
-      "name": "src/utils.ts",
-      "type": "script",
-      "format": "esm",
-      "uncompressed": 1598,
-      "gzip": 473,
-      "brotli": 436,
-      "parent": "dist/index.js"
-    }
-  ],
-  "connections": [
-    {
-      "kind": "import",
-      "source": "src/index.ts",
-      "target": "src/utils.ts",
-      "original": "./utils.js"
-    }
-  ],
-  "dependencies": [
-    {
-      "name": "@jridgewell/remapping",
-      "paths": [
-        "node_modules/@jridgewell/remapping"
-      ]
-    }
-  ],
-  "issues": [],
-  "sourcemaps": []
+	"metadata": {
+		"version": "0.7.1",
+		"integration": "rolldown",
+		"sources": true,
+		"gzip": true,
+		"brotli": true
+	},
+	"resources": [
+		{
+			"kind": "chunk",
+			"name": "src/utils.ts",
+			"type": "script",
+			"format": "esm",
+			"uncompressed": 1598,
+			"gzip": 473,
+			"brotli": 436,
+			"parent": "dist/index.js"
+		}
+	],
+	"connections": [
+		{
+			"kind": "import",
+			"source": "src/index.ts",
+			"target": "src/utils.ts",
+			"original": "./utils.js"
+		}
+	],
+	"dependencies": [
+		{
+			"name": "@jridgewell/remapping",
+			"paths": ["node_modules/@jridgewell/remapping"]
+		}
+	],
+	"issues": [],
+	"sourcemaps": []
 }
 ```
 

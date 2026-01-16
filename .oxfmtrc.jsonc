@@ -4,16 +4,13 @@
 	"bracketSpacing": true,
 	"semi": true,
 	"singleQuote": true,
+	"singleAttributePerLine": true,
 	"useTabs": true,
 	"trailingComma": "none",
 	"bracketSameLine": false,
 	"arrowParens": "avoid",
 	"objectWrap": "preserve",
-	"ignorePatterns": [],
-	"experimentalTailwindcss": {
-		"attributes": ["class"],
-		"functions": [],
-		"preserveDuplicates": false,
-		"preserveWhitespace": false
-	}
+	"ignorePatterns": ["docs/public/demo.html"],
+	"experimentalSortPackageJson": true,
+	"experimentalTailwindcss": {}
 }

@@ -6,30 +6,30 @@
 		<template #title>Imports</template>
 		<template #description>List of other inputs imported from this input</template>
 
-		<div class="rounded-lg border border-gray-200 overflow-y-scroll max-h-[475px] shadow-xs">
-			<table class="table-fixed w-full text-sm text-left">
+		<div class="max-h-[475px] overflow-y-scroll rounded-lg border border-gray-200 shadow-xs">
+			<table class="w-full table-fixed text-left text-sm">
 				<tbody class="text-gray-700">
-						<tr
-							v-for="( item, index ) in imports"
-							:key="item.target"
-							class="[&:not(:first-child)]:border-t border-gray-100"
-						>
-							<td class="p-3 font-normal">
-								<span class="select-none mr-2">{{ index + 1 }}.</span>
-								<a
-									:href="router.getUrl( 'inputs/details', { item: item.target } )"
-									class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
-								>
-									<template v-if="item.original">
-										{{ item.original }} <span class="text-gray-500">({{ item.target }})</span>
-									</template>
+					<tr
+						v-for="(item, index) in imports"
+						:key="item.target"
+						class="border-gray-100 [&:not(:first-child)]:border-t"
+					>
+						<td class="p-3 font-normal">
+							<span class="mr-2 select-none">{{ index + 1 }}.</span>
+							<a
+								:href="router.getUrl('inputs/details', { item: item.target })"
+								class="rounded-lg px-2 py-1 text-sm font-medium underline-offset-2 outline-hidden hover:underline focus:border-gray-500 focus:ring focus:ring-gray-500"
+							>
+								<template v-if="item.original">
+									{{ item.original }} <span class="text-gray-500">({{ item.target }})</span>
+								</template>
 
-									<template v-else>
-										{{ item.target }}
-									</template>
-								</a>
-							</td>
-						</tr>
+								<template v-else>
+									{{ item.target }}
+								</template>
+							</a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -47,10 +47,10 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const show = computed( router.computedQuery( 'imports', false ) );
-const imports = computed( () => report.connections.filter( ( { kind, source } ) => {
-	return kind !== 'sourcemap'
-		&& kind !== 'entrypoint'
-		&& source === props.name;
-} ) );
+const show = computed(router.computedQuery('imports', false));
+const imports = computed(() =>
+	report.connections.filter(({ kind, source }) => {
+		return kind !== 'sourcemap' && kind !== 'entrypoint' && source === props.name;
+	})
+);
 </script>

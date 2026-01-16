@@ -1,24 +1,24 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
-  "changelog": "@changesets/changelog-git",
-  "commit": false,
-  "fixed": [],
-  "linked": [],
-  "access": "public",
-  "baseBranch": "main",
-  "updateInternalDependencies": "patch",
-  "ignore": [
-    "html-report",
-    "playground-angular-cli",
-    "playground-astro",
-    "playground-esbuild",
-    "playground-nextjs",
-    "playground-nuxt",
-    "playground-rollup",
-    "playground-rolldown",
-    "playground-rspack",
-    "playground-sveltekit",
-    "playground-vite",
-    "playground-webpack"
-  ]
+	"$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
+	"changelog": "@changesets/changelog-git",
+	"commit": false,
+	"fixed": [],
+	"linked": [],
+	"access": "public",
+	"baseBranch": "main",
+	"updateInternalDependencies": "patch",
+	"ignore": [
+		"html-report",
+		"playground-angular-cli",
+		"playground-astro",
+		"playground-esbuild",
+		"playground-nextjs",
+		"playground-nuxt",
+		"playground-rollup",
+		"playground-rolldown",
+		"playground-rspack",
+		"playground-sveltekit",
+		"playground-vite",
+		"playground-webpack"
+	]
 }

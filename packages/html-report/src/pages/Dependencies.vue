@@ -1,14 +1,14 @@
 <template>
-	<div class="max-w-7xl flex flex-col">
+	<div class="flex max-w-7xl flex-col">
 		<h2 class="text-2xl font-bold">External dependencies</h2>
 
-		<p class="text-gray-500 mt-4">
+		<p class="mt-4 text-gray-500">
 			List of external dependencies discovered during the build process, including those that were tree-shaken.
 		</p>
 
-		<hr class="mt-4 mb-6 border-gray-100">
+		<hr class="mt-4 mb-6 border-gray-100" />
 
-		<div class="flex gap-2 mb-4">
+		<div class="mb-4 flex gap-2">
 			<SearchInput v-model="search" />
 
 			<Dropdown
@@ -35,11 +35,11 @@
 			<template #collapsible="{ item }">
 				<p class="font-bold">Paths</p>
 
-				<ul class="mt-2 list-disc list-inside">
+				<ul class="mt-2 list-inside list-disc">
 					<li
 						v-for="path in item.paths"
 						:key="path"
-						class="text-gray-700 ml-2"
+						class="ml-2 text-gray-700"
 					>
 						{{ path }}
 					</li>
@@ -49,16 +49,16 @@
 
 				<ul
 					v-if="item.usedIn.length"
-					class="mt-2 list-disc list-inside"
+					class="mt-2 list-inside list-disc"
 				>
 					<li
 						v-for="path in item.usedIn"
 						:key="path"
-						class="text-gray-700 ml-2"
+						class="ml-2 text-gray-700"
 					>
 						<a
-							:href="router.getUrl( 'assets/details', { item: path } )"
-							class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+							:href="router.getUrl('assets/details', { item: path })"
+							class="rounded-lg px-2 py-1 text-sm font-medium underline-offset-2 outline-hidden hover:underline focus:border-gray-500 focus:ring focus:ring-gray-500"
 						>
 							{{ path }}
 						</a>
@@ -74,17 +74,17 @@
 
 				<p class="mt-8 font-bold">Imported by</p>
 
-				<ul class="mt-2 list-disc list-inside">
+				<ul class="mt-2 list-inside list-disc">
 					<li
 						v-for="path in item.importedBy"
 						:key="path"
-						class="text-gray-700 ml-2"
+						class="ml-2 text-gray-700"
 					>
 						<a
-							:href="router.getUrl( 'inputs/details', { item: path } )"
-							class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+							:href="router.getUrl('inputs/details', { item: path })"
+							class="rounded-lg px-2 py-1 text-sm font-medium underline-offset-2 outline-hidden hover:underline focus:border-gray-500 focus:ring focus:ring-gray-500"
 						>
-							{{ formatPath( path ) }}
+							{{ formatPath(path) }}
 						</a>
 					</li>
 				</ul>
@@ -115,15 +115,13 @@ import type { ChunkResource } from 'sonda';
 const ITEMS_PER_PAGE = 12;
 
 const USED_IN_OPTIONS = report.resources
-	.filter( resource => resource.kind === 'asset' )
-	.map( output => ( {
+	.filter(resource => resource.kind === 'asset')
+	.map(output => ({
 		label: output.name,
 		value: output.name
-	} ) );
+	}));
 
-const COLUMNS: Array<Column> = [
-	{ name: 'Name', align: 'left' }
-];
+const COLUMNS: Array<Column> = [{ name: 'Name', align: 'left' }];
 
 interface Item {
 	name: string;
@@ -133,20 +131,22 @@ interface Item {
 }
 
 const data: Ref<Array<Item>> = ref(
-	report.dependencies.map( dependency => {
+	report.dependencies.map(dependency => {
 		const importedBy = report.connections
 			// Get the edges where the target is the dependency, but the source itself is not.
 			// This is to skip sources found in source maps, because in such cases both edges will include the dependency name.
-			.filter( ( { source, target } ) => !source.includes( dependency.name ) && target.includes( dependency.name ) )
-			.map( ( { source } ) => source )
-			.filter( ( value, index, self ) => self.indexOf( value ) === index )
+			.filter(({ source, target }) => !source.includes(dependency.name) && target.includes(dependency.name))
+			.map(({ source }) => source)
+			.filter((value, index, self) => self.indexOf(value) === index)
 			.toSorted();
 
 		const usedIn = report.resources
 			// Get all chunks that include the dependency name.
-			.filter( ( resource ): resource is ChunkResource => resource.name.includes( dependency.name ) && resource.kind === 'chunk' )
-			.map( resource => resource.parent! )
-			.filter( ( value, index, self ) => self.indexOf( value ) === index )
+			.filter(
+				(resource): resource is ChunkResource => resource.name.includes(dependency.name) && resource.kind === 'chunk'
+			)
+			.map(resource => resource.parent!)
+			.filter((value, index, self) => self.indexOf(value) === index)
 			.toSorted();
 
 		return {
@@ -155,38 +155,42 @@ const data: Ref<Array<Item>> = ref(
 			importedBy,
 			usedIn
 		};
-	} )
+	})
 );
 
-const availableUsedIn = computed( () => USED_IN_OPTIONS.filter( option => data.value.some( dependency => dependency.usedIn.includes( option.value ) ) ) );
-const search = computed( router.computedQuery( 'search', '' ) );
-const usedIn = computed( router.computedQuery( 'usage', [] as Array<string> ) );
-const currentPage = computed( router.computedQuery( 'page', 1 ) );
-const active = computed( router.computedQuery( 'active', '' ) );
+const availableUsedIn = computed(() =>
+	USED_IN_OPTIONS.filter(option => data.value.some(dependency => dependency.usedIn.includes(option.value)))
+);
+const search = computed(router.computedQuery('search', ''));
+const usedIn = computed(router.computedQuery('usage', [] as Array<string>));
+const currentPage = computed(router.computedQuery('page', 1));
+const active = computed(router.computedQuery('active', ''));
 
-const filteredData = computed( () => {
-	const filtered = data.value.filter( item => !usedIn.value.length || item.usedIn.some( path => usedIn.value.includes( path ) ) )
+const filteredData = computed(() => {
+	const filtered = data.value.filter(
+		item => !usedIn.value.length || item.usedIn.some(path => usedIn.value.includes(path))
+	);
 
 	return fuzzysort
-		.go( search.value, filtered, {
+		.go(search.value, filtered, {
 			key: 'name',
 			all: true
-		} )
-		.map( dependency => dependency.obj );
-} );
+		})
+		.map(dependency => dependency.obj);
+});
 
-const paginatedData = computed( () => {
-	const start = ( currentPage.value - 1 ) * ITEMS_PER_PAGE;
+const paginatedData = computed(() => {
+	const start = (currentPage.value - 1) * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
 
-	return filteredData.value.slice( start, end );
-} );
+	return filteredData.value.slice(start, end);
+});
 
-watch( [ search, usedIn, currentPage ], () => {
+watch([search, usedIn, currentPage], () => {
 	active.value = '';
-} );
+});
 
-watch( [ search, usedIn ], () => {
+watch([search, usedIn], () => {
 	currentPage.value = 1;
-} );
+});
 </script>

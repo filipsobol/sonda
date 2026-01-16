@@ -8,20 +8,20 @@
 		<template #description>List of inputs used in the asset</template>
 
 		<div class="rounded-lg border border-gray-200 shadow-xs">
-			<table class="table-fixed w-full text-sm text-left">
+			<table class="w-full table-fixed text-left text-sm">
 				<tbody class="text-gray-700">
 					<tr
-						v-for="( input, index ) in inputs"
+						v-for="(input, index) in inputs"
 						:key="input"
-						class="[&:not(:first-child)]:border-t border-gray-100"
+						class="border-gray-100 [&:not(:first-child)]:border-t"
 					>
 						<td class="p-3 font-normal">
-							<span class="select-none mr-2">{{ index + 1 }}.</span>
+							<span class="mr-2 select-none">{{ index + 1 }}.</span>
 							<a
-								:href="router.getUrl( 'inputs/details', { item: input } )"
-								class="px-2 py-1 text-sm font-medium underline-offset-2 rounded-lg outline-hidden focus:ring focus:ring-gray-500 focus:border-gray-500 hover:underline"
+								:href="router.getUrl('inputs/details', { item: input })"
+								class="rounded-lg px-2 py-1 text-sm font-medium underline-offset-2 outline-hidden hover:underline focus:border-gray-500 focus:ring focus:ring-gray-500"
 							>
-								{{ formatPath( input ) }}
+								{{ formatPath(input) }}
 							</a>
 						</td>
 					</tr>
@@ -43,5 +43,5 @@ interface Props {
 }
 
 defineProps<Props>();
-const show = computed( router.computedQuery( 'inputs', false ) );
+const show = computed(router.computedQuery('inputs', false));
 </script>

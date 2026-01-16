@@ -1,16 +1,17 @@
 <template>
-  <section id="hero">
-    <h1 class="tagline">
-      <span class="accent">Universal</span>
-      <br />bundle analyzer
-    </h1>
-    <p class="description">
-      Bundle visualizer and analyzer that works with most bundlers and frameworks
-    </p>
-  </section>
+	<section id="hero">
+		<h1 class="tagline">
+			<span class="accent">Universal</span>
+			<br />bundle analyzer
+		</h1>
+		<p class="description">Bundle visualizer and analyzer that works with most bundlers and frameworks</p>
+	</section>
 
 	<section class="actions">
-		<a class="brand" href="/getting-started">
+		<a
+			class="brand"
+			href="/getting-started"
+		>
 			<span>Get Started</span>
 
 			<svg
@@ -24,12 +25,16 @@
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			>
-				<path d="M5 12h14"/>
-				<path d="m12 5 7 7-7 7"/>
+				<path d="M5 12h14" />
+				<path d="m12 5 7 7-7 7" />
 			</svg>
 		</a>
 
-		<a href="/demo" target="_blank">Live Demo</a>
+		<a
+			href="/demo"
+			target="_blank"
+			>Live Demo</a
+		>
 	</section>
 
 	<section class="features">
@@ -40,12 +45,16 @@
 
 		<div class="feature">
 			<p class="title">Insightful</p>
-			<p class="details">Compare raw and compressed sizes, visualize dependency graphs, estimate download times and more.</p>
+			<p class="details">
+				Compare raw and compressed sizes, visualize dependency graphs, estimate download times and more.
+			</p>
 		</div>
 
 		<div class="feature">
 			<p class="title">Flexible</p>
-			<p class="details">Export interactive HTML for deep dives or JSON for CI/CD integration and automated reporting.</p>
+			<p class="details">
+				Export interactive HTML for deep dives or JSON for CI/CD integration and automated reporting.
+			</p>
 		</div>
 	</section>
 
@@ -54,31 +63,51 @@
 	<div class="works-with">
 		<h2>Supported technologies</h2>
 
-		<p>Sonda works seamlessly with these technologies, but is not officially associated, sponsored, or endorsed by them.</p>
+		<p>
+			Sonda works seamlessly with these technologies, but is not officially associated, sponsored, or endorsed by them.
+		</p>
 
 		<div class="grid">
 			<a href="/bundlers/vite.html">
-				<img src="/logos/vite.svg" alt="Vite logo" />
+				<img
+					src="/logos/vite.svg"
+					alt="Vite logo"
+				/>
 			</a>
 
 			<a href="/bundlers/rollup.html">
-				<img src="/logos/rollup.svg" alt="Rollup logo" />
+				<img
+					src="/logos/rollup.svg"
+					alt="Rollup logo"
+				/>
 			</a>
 
 			<a href="bundlers/esbuild.html">
-				<img src="/logos/esbuild.svg" alt="esbuild logo" />
+				<img
+					src="/logos/esbuild.svg"
+					alt="esbuild logo"
+				/>
 			</a>
 
 			<a href="bundlers/webpack.html">
-				<img src="/logos/webpack.svg" alt="webpack logo" />
+				<img
+					src="/logos/webpack.svg"
+					alt="webpack logo"
+				/>
 			</a>
 
 			<a href="bundlers/rolldown.html">
-				<img src="/logos/rolldown.svg" alt="Rolldown logo" />
+				<img
+					src="/logos/rolldown.svg"
+					alt="Rolldown logo"
+				/>
 			</a>
 
 			<a href="bundlers/rspack.html">
-				<img src="/logos/rspack.svg" alt="Rspack logo" />
+				<img
+					src="/logos/rspack.svg"
+					alt="Rspack logo"
+				/>
 			</a>
 		</div>
 	</div>
@@ -86,23 +115,43 @@
 	<div class="works-with">
 		<div class="grid">
 			<a href="frameworks/nextjs.html">
-				<div class="logo logo-nextjs" role="img" aria-label="Next.js logo"></div>
+				<div
+					class="logo logo-nextjs"
+					role="img"
+					aria-label="Next.js logo"
+				></div>
 			</a>
 
 			<a href="frameworks/nuxt.html">
-				<div class="logo logo-nuxt" role="img" aria-label="Nuxt logo"></div>
+				<div
+					class="logo logo-nuxt"
+					role="img"
+					aria-label="Nuxt logo"
+				></div>
 			</a>
 
 			<a href="frameworks/astro.html">
-				<div class="logo logo-astro" role="img" aria-label="Astro logo"></div>
+				<div
+					class="logo logo-astro"
+					role="img"
+					aria-label="Astro logo"
+				></div>
 			</a>
 
 			<a href="frameworks/sveltekit.html">
-				<div class="logo logo-svelte" role="img" aria-label="Svelte logo"></div>
+				<div
+					class="logo logo-svelte"
+					role="img"
+					aria-label="Svelte logo"
+				></div>
 			</a>
 
 			<a href="frameworks/angular-cli.html">
-				<div class="logo logo-angular" role="img" aria-label="Angular logo"></div>
+				<div
+					class="logo logo-angular"
+					role="img"
+					aria-label="Angular logo"
+				></div>
 			</a>
 		</div>
 	</div>
@@ -110,11 +159,11 @@
 
 <style scoped>
 section {
-  padding: 16px;
+	padding: 16px;
 }
 
 #hero {
-  padding-top: 96px;
+	padding-top: 96px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -131,7 +180,7 @@ section {
 	}
 
 	.dark .tagline {
-		color: var(--vt-c-text-2)
+		color: var(--vt-c-text-2);
 	}
 
 	.tagline .accent {
@@ -226,7 +275,7 @@ section {
 .features {
 	margin-top: 48px;
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax( 300px, 1fr ) );
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 24px;
 
 	.feature {
@@ -273,7 +322,7 @@ section {
 	.grid {
 		margin-top: 36px;
 		display: grid;
-		grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 		gap: 24px;
 
 		a {
@@ -317,43 +366,43 @@ section {
 
 /* Next.js logo */
 .logo-nextjs {
-  background-image: url('/logos/nextjs.svg');
+	background-image: url('/logos/nextjs.svg');
 }
 
 .dark .logo-nextjs {
-  background-image: url('/logos/nextjs-dark.svg');
+	background-image: url('/logos/nextjs-dark.svg');
 }
 
 /* Nuxt logo */
 .logo-nuxt {
-  background-image: url('/logos/nuxt.svg');
+	background-image: url('/logos/nuxt.svg');
 }
 
 .dark .logo-nuxt {
-  background-image: url('/logos/nuxt-dark.svg');
+	background-image: url('/logos/nuxt-dark.svg');
 }
 
 /* Astro logo */
 .logo-astro {
-  background-image: url('/logos/astro.svg');
+	background-image: url('/logos/astro.svg');
 }
 .dark .logo-astro {
-  background-image: url('/logos/astro-dark.svg');
+	background-image: url('/logos/astro-dark.svg');
 }
 
 /* Svelte logo */
 .logo-svelte {
-  background-image: url('/logos/svelte.svg');
+	background-image: url('/logos/svelte.svg');
 }
 .dark .logo-svelte {
-  background-image: url('/logos/svelte-dark.svg');
+	background-image: url('/logos/svelte-dark.svg');
 }
 
 /* Angular logo */
 .logo-angular {
-  background-image: url('/logos/angular.svg');
+	background-image: url('/logos/angular.svg');
 }
 .dark .logo-angular {
-  background-image: url('/logos/angular-dark.svg');
+	background-image: url('/logos/angular-dark.svg');
 }
 </style>
