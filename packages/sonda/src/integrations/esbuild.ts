@@ -50,15 +50,6 @@ export async function processEsbuildMetafile(metafile: Metafile, options: Config
 
 	for (const [path, output] of Object.entries(metafile.outputs)) {
 		report.addAsset(path, output.entryPoint ? [output.entryPoint] : undefined);
-
-		if (output.entryPoint) {
-			report.addConnection({
-				kind: 'entrypoint',
-				source: normalizePath(output.entryPoint),
-				target: normalizePath(path),
-				original: null
-			});
-		}
 	}
 
 	const reportPaths = await report.generate();
