@@ -31,4 +31,4 @@ export default defineConfig({
 		}
 	},
 	plugins: [dts()]
-});
+}) as any;

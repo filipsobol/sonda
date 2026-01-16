@@ -10,11 +10,11 @@ export default defineConfig({
 	},
 	input: 'src/index.ts',
 	platform: 'node',
-	external: builtinModules,
+	external: builtinModules as string[],
 	resolve: {
 		extensionAlias: {
 			'.js': ['.ts', '.js']
 		}
 	},
 	plugins: [dts()]
-});
+}) as any;
