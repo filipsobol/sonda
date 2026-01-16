@@ -27,8 +27,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       oxfmt:
-        specifier: ^0.16.0
-        version: 0.16.0
+        specifier: ^0.24.0
+        version: 0.24.0
       pkg-pr-new:
         specifier: ^0.0.62
         version: 0.0.62
@@ -64,8 +64,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3(vite@7.3.1(@types/node@25.0.9)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(sass@1.97.1)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.26(typescript@5.9.3))
       '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
+        specifier: ^0.8.1
+        version: 0.8.1(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
       sonda:
         specifier: workspace:^
         version: link:../sonda
@@ -88,8 +88,8 @@ importers:
   packages/load-source-map:
     devDependencies:
       rolldown-plugin-dts:
-        specifier: ^0.18.4
-        version: 0.18.4(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
+        specifier: ^0.21.2
+        version: 0.21.2(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
 
   packages/sonda:
     dependencies:
@@ -120,10 +120,10 @@ importers:
         version: link:../load-source-map
       next:
         specifier: ^16.1.3
-        version: 16.1.3(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.97.1)
+        version: 16.1.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.1)
       rolldown-plugin-dts:
-        specifier: ^0.18.4
-        version: 0.18.4(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
+        specifier: ^0.21.2
+        version: 0.21.2(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
       rollup:
         specifier: ^4.55.1
         version: 4.55.1
@@ -282,14 +282,14 @@ importers:
   playground/nextjs:
     dependencies:
       next:
-        specifier: 16.1.2
-        version: 16.1.2(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.97.1)
+        specifier: 16.1.3
+        version: 16.1.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.1)
       react:
-        specifier: 19.2.1
-        version: 19.2.1
+        specifier: 19.2.3
+        version: 19.2.3
       react-dom:
-        specifier: 19.2.1
-        version: 19.2.1(react@19.2.1)
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.1.18
@@ -2332,28 +2332,13 @@ packages:
     resolution: {integrity: sha512-7/vIJlMYrPJPlEW84V2yeRuG3QBu66dmlv9neTmZ5nXzwylhBEOhy11ai+34A8mHCSZI4mKns25w3HM9kaDdJg==}
     engines: {node: '>=16.0.0'}
 
-  '@next/env@16.1.2':
-    resolution: {integrity: sha512-r6TpLovDTvWtzw11UubUQxEK6IduT8rSAHbGX68yeFpA/1Oq9R4ovi5nqMUMgPN0jr2SpfeyFRbTZg3Inuuv3g==}
-
   '@next/env@16.1.3':
     resolution: {integrity: sha512-BLP14oBOvZWXgfdJf9ao+VD8O30uE+x7PaV++QtACLX329WcRSJRO5YJ+Bcvu0Q+c/lei41TjSiFf6pXqnpbQA==}
-
-  '@next/swc-darwin-arm64@16.1.2':
-    resolution: {integrity: sha512-0N2baysDpTXASTVxTV+DkBnD97bo9PatUj8sHlKA+oR9CyvReaPQchQyhCbH0Jm0mC/Oka5F52intN+lNOhSlA==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
 
   '@next/swc-darwin-arm64@16.1.3':
     resolution: {integrity: sha512-CpOD3lmig6VflihVoGxiR/l5Jkjfi4uLaOR4ziriMv0YMDoF6cclI+p5t2nstM8TmaFiY6PCTBgRWB57/+LiBA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
-    os: [darwin]
-
-  '@next/swc-darwin-x64@16.1.2':
-    resolution: {integrity: sha512-Q0wnSK0lmeC9ps+/w/bDsMSF3iWS45WEwF1bg8dvMH3CmKB2BV4346tVrjWxAkrZq20Ro6Of3R19IgrEJkXKyw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
     os: [darwin]
 
   '@next/swc-darwin-x64@16.1.3':
@@ -2362,20 +2347,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@16.1.2':
-    resolution: {integrity: sha512-4twW+h7ZatGKWq+2pUQ9SDiin6kfZE/mY+D8jOhSZ0NDzKhQfAPReXqwTDWVrNjvLzHzOcDL5kYjADHfXL/b/Q==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
   '@next/swc-linux-arm64-gnu@16.1.3':
     resolution: {integrity: sha512-8VRkcpcfBtYvhGgXAF7U3MBx6+G1lACM1XCo1JyaUr4KmAkTNP8Dv2wdMq7BI+jqRBw3zQE7c57+lmp7jCFfKA==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@next/swc-linux-arm64-musl@16.1.2':
-    resolution: {integrity: sha512-Sn6LxPIZcADe5AnqqMCfwBv6vRtDikhtrjwhu+19WM6jHZe31JDRcGuPZAlJrDk6aEbNBPUUAKmySJELkBOesg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2386,20 +2359,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@16.1.2':
-    resolution: {integrity: sha512-nwzesEQBfQIOOnQ7JArzB08w9qwvBQ7nC1i8gb0tiEFH94apzQM3IRpY19MlE8RBHxc9ArG26t1DEg2aaLaqVQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
   '@next/swc-linux-x64-gnu@16.1.3':
     resolution: {integrity: sha512-SzGTfTjR5e9T+sZh5zXqG/oeRQufExxBF6MssXS7HPeZFE98JDhCRZXpSyCfWrWrYrzmnw/RVhlP2AxQm+wkRQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@next/swc-linux-x64-musl@16.1.2':
-    resolution: {integrity: sha512-s60bLf16BDoICQHeKEm0lDgUNMsL1UpQCkRNZk08ZNnRpK0QUV+6TvVHuBcIA7oItzU0m7kVmXe8QjXngYxJVA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2410,22 +2371,10 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@16.1.2':
-    resolution: {integrity: sha512-Sq8k4SZd8Y8EokKdz304TvMO9HoiwGzo0CTacaiN1bBtbJSQ1BIwKzNFeFdxOe93SHn1YGnKXG6Mq3N+tVooyQ==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-
   '@next/swc-win32-arm64-msvc@16.1.3':
     resolution: {integrity: sha512-3gFCp83/LSduZMSIa+lBREP7+5e7FxpdBoc9QrCdmp+dapmTK9I+SLpY60Z39GDmTXSZA4huGg9WwmYbr6+WRw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
-    os: [win32]
-
-  '@next/swc-win32-x64-msvc@16.1.2':
-    resolution: {integrity: sha512-KQDBwspSaNX5/wwt6p7ed5oINJWIxcgpuqJdDNubAyq7dD+ZM76NuEjg8yUxNOl5R4NNgbMfqE/RyNrsbYmOKg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
     os: [win32]
 
   '@next/swc-win32-x64-msvc@16.1.3':
@@ -2879,43 +2828,43 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@oxfmt/darwin-arm64@0.16.0':
-    resolution: {integrity: sha512-I+Unj7wePcUTK7p/YKtgbm4yer6dw7dTlmCJa0UilFZyge5uD4rwCSfSDx3A+a6Z3A60/SqXMbNR2UyidWF4Cg==}
+  '@oxfmt/darwin-arm64@0.24.0':
+    resolution: {integrity: sha512-aYXuGf/yq8nsyEcHindGhiz9I+GEqLkVq8CfPbd+6VE259CpPEH+CaGHEO1j6vIOmNr8KHRq+IAjeRO2uJpb8A==}
     cpu: [arm64]
     os: [darwin]
 
-  '@oxfmt/darwin-x64@0.16.0':
-    resolution: {integrity: sha512-EfiXFKEOV5gXgEatFK89OOoSmd8E9Xq83TcjPLWQNFBO4cgaQsfKmctpgJmJjQnoUwD7nQsm0ruj3ae7Gva8QA==}
+  '@oxfmt/darwin-x64@0.24.0':
+    resolution: {integrity: sha512-vs3b8Bs53hbiNvcNeBilzE/+IhDTWKjSBB3v/ztr664nZk65j0xr+5IHMBNz3CFppmX7o/aBta2PxY+t+4KoPg==}
     cpu: [x64]
     os: [darwin]
 
-  '@oxfmt/linux-arm64-gnu@0.16.0':
-    resolution: {integrity: sha512-ydcNY9Fn/8TjVswANhdSh+zdgD3tiikNQA68bgXbENHuV3RyYql1qoOM1eGv5xeIVJfkPJme17MKQz3OwMFS4A==}
+  '@oxfmt/linux-arm64-gnu@0.24.0':
+    resolution: {integrity: sha512-ItPDOPoQ0wLj/s8osc5ch57uUcA1Wk8r0YdO8vLRpXA3UNg7KPOm1vdbkIZRRiSUphZcuX5ioOEetEK8H7RlTw==}
     cpu: [arm64]
     os: [linux]
 
-  '@oxfmt/linux-arm64-musl@0.16.0':
-    resolution: {integrity: sha512-I9WeYe1/YnrfXgXVaKkZITZzil0G0g9IknS2KJbq1lOnpTw3dwViXZ7XMa2cq6Mv7S+4SoDImb7fLQ59AfVX/w==}
+  '@oxfmt/linux-arm64-musl@0.24.0':
+    resolution: {integrity: sha512-JkQO3WnQjQTJONx8nxdgVBfl6BBFfpp9bKhChYhWeakwJdr7QPOAWJ/v3FGZfr0TbqINwnNR74aVZayDDRyXEA==}
     cpu: [arm64]
     os: [linux]
 
-  '@oxfmt/linux-x64-gnu@0.16.0':
-    resolution: {integrity: sha512-Szg9lJtZdN5FoCnNbl3N/2pJv8d056NUmk51m60E2tZV7rvwRTrNC8HPc2sVdb1Ti5ogsicpZDYSWA3cwIrJIQ==}
+  '@oxfmt/linux-x64-gnu@0.24.0':
+    resolution: {integrity: sha512-N/SXlFO+2kak5gMt0oxApi0WXQDhwA0PShR0UbkY0PwtHjfSiDqJSOumyNqgQVoroKr1GNnoRmUqjZIz6DKIcw==}
     cpu: [x64]
     os: [linux]
 
-  '@oxfmt/linux-x64-musl@0.16.0':
-    resolution: {integrity: sha512-5koN8nl21ZxOADaMxXHT+mt3YjfXe1nsa23Fanf9aY7B0hcQ6rXYCZ7r5vmpoTtzW/US3aaVcRFZE1cyof+lKw==}
+  '@oxfmt/linux-x64-musl@0.24.0':
+    resolution: {integrity: sha512-WM0pek5YDCQf50XQ7GLCE9sMBCMPW/NPAEPH/Hx6Qyir37lEsP4rUmSECo/QFNTU6KBc9NnsviAyJruWPpCMXw==}
     cpu: [x64]
     os: [linux]
 
-  '@oxfmt/win32-arm64@0.16.0':
-    resolution: {integrity: sha512-Jaesn+FYn+MudSmWJMPGBAa0PhQXo52Z0ZYeNfzbQP7v2GFbZBI3Cb87+K0aHGlpqK3VEJKXeIaASaTWlkgO1Q==}
+  '@oxfmt/win32-arm64@0.24.0':
+    resolution: {integrity: sha512-vFCseli1KWtwdHrVlT/jWfZ8jP8oYpnPPEjI23mPLW8K/6GEJmmvy0PZP5NpWUFNTzX0lqie58XnrATJYAe9Xw==}
     cpu: [arm64]
     os: [win32]
 
-  '@oxfmt/win32-x64@0.16.0':
-    resolution: {integrity: sha512-1obVSlb5blwBKgSsE1mNxvcq1pK9I6aXpZDy5d6jjGdrru33dHrH1ASChrcxwCukkToH2SxwYmnzAto0xeuZlw==}
+  '@oxfmt/win32-x64@0.24.0':
+    resolution: {integrity: sha512-0tmlNzcyewAnauNeBCq0xmAkmiKzl+H09p0IdHy+QKrTQdtixtf+AOjDAADbRfihkS+heF15Pjc4IyJMdAAJjw==}
     cpu: [x64]
     os: [win32]
 
@@ -4161,8 +4110,8 @@ packages:
   '@vue/shared@3.5.26':
     resolution: {integrity: sha512-7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==}
 
-  '@vue/tsconfig@0.7.0':
-    resolution: {integrity: sha512-ku2uNz5MaZ9IerPPUyOHzyjhXoX2kVJaVf7hL315DC17vS6IiZRmmCPfggNbU16QTvM80+uYYy3eYJB59WCtvg==}
+  '@vue/tsconfig@0.8.1':
+    resolution: {integrity: sha512-aK7feIWPXFSUhsCP9PFqPyFOcz4ENkb8hZ2pneL6m2UjCkccvaOhC/5KCKluuBufvp2KzkbdA2W2pk20vLzu3g==}
     peerDependencies:
       typescript: 5.x
       vue: ^3.4.0
@@ -7173,27 +7122,6 @@ packages:
     resolution: {integrity: sha512-Nc3loyVASW59W+8fLDZT1lncpG7llffyZ2o0UQLx/Fr20i7P8oP+lE7+TEcFvXj9IUWU6LjB9P3BH+iFGyp+mg==}
     engines: {node: ^14.16.0 || >=16.0.0}
 
-  next@16.1.2:
-    resolution: {integrity: sha512-SVSWX7wjUUDrIDVqhl4xm/jiOrvYGMG7NzVE/dGzzgs7r3dFGm4V19ia0xn3GDNtHCKM7C9h+5BoimnJBhmt9A==}
-    engines: {node: '>=20.9.0'}
-    hasBin: true
-    peerDependencies:
-      '@opentelemetry/api': ^1.1.0
-      '@playwright/test': ^1.51.1
-      babel-plugin-react-compiler: '*'
-      react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-      react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      '@playwright/test':
-        optional: true
-      babel-plugin-react-compiler:
-        optional: true
-      sass:
-        optional: true
-
   next@16.1.3:
     resolution: {integrity: sha512-gthG3TRD+E3/mA0uDQb9lqBmx1zVosq5kIwxNN6+MRNd085GzD+9VXMPUs+GGZCbZ+GDZdODUq4Pm7CTXK6ipw==}
     engines: {node: '>=20.9.0'}
@@ -7456,8 +7384,8 @@ packages:
     peerDependencies:
       oxc-parser: '>=0.98.0'
 
-  oxfmt@0.16.0:
-    resolution: {integrity: sha512-uRnnBAN0zH07FXSfvSKbIw+Jrohv4Px2RwNiZOGI4/pvns4sx0+k4WSt+tqwd7bDeoWaXiGmhZgnbK63hi6hVQ==}
+  oxfmt@0.24.0:
+    resolution: {integrity: sha512-UjeM3Peez8Tl7IJ9s5UwAoZSiDRMww7BEc21gDYxLq3S3/KqJnM3mjNxsoSHgmBvSeX6RBhoVc2MfC/+96RdSw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -8170,13 +8098,13 @@ packages:
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
 
-  react-dom@19.2.1:
-    resolution: {integrity: sha512-ibrK8llX2a4eOskq1mXKu/TGZj9qzomO+sNfO98M6d9zIPOEhlBkMkBUBLd1vgS0gQsLDBzA+8jJBVXDnfHmJg==}
+  react-dom@19.2.3:
+    resolution: {integrity: sha512-yELu4WmLPw5Mr/lmeEpox5rw3RETacE++JgHqQzd2dg+YbJuat3jH4ingc+WPZhxaoFzdv9y33G+F7Nl5O0GBg==}
     peerDependencies:
-      react: ^19.2.1
+      react: ^19.2.3
 
-  react@19.2.1:
-    resolution: {integrity: sha512-DGrYcCWK7tvYMnWh79yrPHt+vdx9tY+1gPZa7nJQtO/p8bLTDaHp4dzwEhQB7pZ4Xe3ok4XKuEPrVuc+wlpkmw==}
+  react@19.2.3:
+    resolution: {integrity: sha512-Ku/hhYbVjOQnXDZFv2+RibmLFGwFdeeKHFcOTlrt7xplBnya5OGn/hIRDsqDiSUcfORsDC7MPxwork8jBwsIWA==}
     engines: {node: '>=0.10.0'}
 
   read-yaml-file@1.1.0:
@@ -8367,13 +8295,13 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rolldown-plugin-dts@0.18.4:
-    resolution: {integrity: sha512-7UpdiICFd/BhdjKtDPeakCFRk6pbkTGFe0Z6u01egt4c8aoO+JoPGF1Smc+JRuCH2s5j5hBdteBi0e10G0xQdQ==}
+  rolldown-plugin-dts@0.21.2:
+    resolution: {integrity: sha512-yFOvVkkxmdGVBH4UwCu/ApQZQXI1kre+aQyOyrmDAwFfALRaX7JlEn+F3HDDj3hEFE/q3+kCSGYGxEZ8W5NsGg==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       '@ts-macro/tsc': ^0.3.6
       '@typescript/native-preview': '>=7.0.0-dev.20250601.1'
-      rolldown: ^1.0.0-beta.51
+      rolldown: ^1.0.0-beta.57
       typescript: ^5.0.0
       vue-tsc: 3.1.5
     peerDependenciesMeta:
@@ -8963,6 +8891,10 @@ packages:
   tinyglobby@0.2.15:
     resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
     engines: {node: '>=12.0.0'}
+
+  tinypool@2.0.0:
+    resolution: {integrity: sha512-/RX9RzeH2xU5ADE7n2Ykvmi9ED3FBGPAjw9u3zucrNNaEBIO0HPSYgL0NT7+3p147ojeSdaVu08F6hjpv31HJg==}
+    engines: {node: ^20.0.0 || >=22.0.0}
 
   tinyrainbow@3.0.3:
     resolution: {integrity: sha512-PSkbLUoxOFRzJYjjxHJt9xro7D+iilgMX/C9lawzVuYiIdcihh9DXmVibBe8lmcFrRi/VzlPjBxbN7rH24q8/Q==}
@@ -11417,6 +11349,8 @@ snapshots:
       '@ckeditor/ckeditor5-engine': 47.4.0
       '@ckeditor/ckeditor5-utils': 47.4.0
       es-toolkit: 1.39.5
+    transitivePeerDependencies:
+      - supports-color
 
   '@ckeditor/ckeditor5-widget@47.4.0':
     dependencies:
@@ -12357,53 +12291,27 @@ snapshots:
   '@netlify/runtime-utils@1.3.1':
     optional: true
 
-  '@next/env@16.1.2': {}
-
   '@next/env@16.1.3': {}
 
-  '@next/swc-darwin-arm64@16.1.2':
-    optional: true
-
   '@next/swc-darwin-arm64@16.1.3':
-    optional: true
-
-  '@next/swc-darwin-x64@16.1.2':
     optional: true
 
   '@next/swc-darwin-x64@16.1.3':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@16.1.2':
-    optional: true
-
   '@next/swc-linux-arm64-gnu@16.1.3':
-    optional: true
-
-  '@next/swc-linux-arm64-musl@16.1.2':
     optional: true
 
   '@next/swc-linux-arm64-musl@16.1.3':
     optional: true
 
-  '@next/swc-linux-x64-gnu@16.1.2':
-    optional: true
-
   '@next/swc-linux-x64-gnu@16.1.3':
-    optional: true
-
-  '@next/swc-linux-x64-musl@16.1.2':
     optional: true
 
   '@next/swc-linux-x64-musl@16.1.3':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@16.1.2':
-    optional: true
-
   '@next/swc-win32-arm64-msvc@16.1.3':
-    optional: true
-
-  '@next/swc-win32-x64-msvc@16.1.2':
     optional: true
 
   '@next/swc-win32-x64-msvc@16.1.3':
@@ -12999,28 +12907,28 @@ snapshots:
   '@oxc-transform/binding-win32-x64-msvc@0.102.0':
     optional: true
 
-  '@oxfmt/darwin-arm64@0.16.0':
+  '@oxfmt/darwin-arm64@0.24.0':
     optional: true
 
-  '@oxfmt/darwin-x64@0.16.0':
+  '@oxfmt/darwin-x64@0.24.0':
     optional: true
 
-  '@oxfmt/linux-arm64-gnu@0.16.0':
+  '@oxfmt/linux-arm64-gnu@0.24.0':
     optional: true
 
-  '@oxfmt/linux-arm64-musl@0.16.0':
+  '@oxfmt/linux-arm64-musl@0.24.0':
     optional: true
 
-  '@oxfmt/linux-x64-gnu@0.16.0':
+  '@oxfmt/linux-x64-gnu@0.24.0':
     optional: true
 
-  '@oxfmt/linux-x64-musl@0.16.0':
+  '@oxfmt/linux-x64-musl@0.24.0':
     optional: true
 
-  '@oxfmt/win32-arm64@0.16.0':
+  '@oxfmt/win32-arm64@0.24.0':
     optional: true
 
-  '@oxfmt/win32-x64@0.16.0':
+  '@oxfmt/win32-x64@0.24.0':
     optional: true
 
   '@parcel/watcher-android-arm64@2.5.4':
@@ -14397,7 +14305,7 @@ snapshots:
 
   '@vue/shared@3.5.26': {}
 
-  '@vue/tsconfig@0.7.0(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))':
+  '@vue/tsconfig@0.8.1(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))':
     optionalDependencies:
       typescript: 5.9.3
       vue: 3.5.26(typescript@5.9.3)
@@ -18121,41 +18029,16 @@ snapshots:
       qs: 6.14.1
     optional: true
 
-  next@16.1.2(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.97.1):
-    dependencies:
-      '@next/env': 16.1.2
-      '@swc/helpers': 0.5.15
-      baseline-browser-mapping: 2.9.15
-      caniuse-lite: 1.0.30001764
-      postcss: 8.4.31
-      react: 19.2.1
-      react-dom: 19.2.1(react@19.2.1)
-      styled-jsx: 5.1.6(react@19.2.1)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 16.1.2
-      '@next/swc-darwin-x64': 16.1.2
-      '@next/swc-linux-arm64-gnu': 16.1.2
-      '@next/swc-linux-arm64-musl': 16.1.2
-      '@next/swc-linux-x64-gnu': 16.1.2
-      '@next/swc-linux-x64-musl': 16.1.2
-      '@next/swc-win32-arm64-msvc': 16.1.2
-      '@next/swc-win32-x64-msvc': 16.1.2
-      sass: 1.97.1
-      sharp: 0.34.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
-  next@16.1.3(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.97.1):
+  next@16.1.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.1):
     dependencies:
       '@next/env': 16.1.3
       '@swc/helpers': 0.5.15
       baseline-browser-mapping: 2.9.15
       caniuse-lite: 1.0.30001764
       postcss: 8.4.31
-      react: 19.2.1
-      react-dom: 19.2.1(react@19.2.1)
-      styled-jsx: 5.1.6(react@19.2.1)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      styled-jsx: 5.1.6(react@19.2.3)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.1.3
       '@next/swc-darwin-x64': 16.1.3
@@ -18692,16 +18575,18 @@ snapshots:
       magic-regexp: 0.10.0
       oxc-parser: 0.102.0
 
-  oxfmt@0.16.0:
+  oxfmt@0.24.0:
+    dependencies:
+      tinypool: 2.0.0
     optionalDependencies:
-      '@oxfmt/darwin-arm64': 0.16.0
-      '@oxfmt/darwin-x64': 0.16.0
-      '@oxfmt/linux-arm64-gnu': 0.16.0
-      '@oxfmt/linux-arm64-musl': 0.16.0
-      '@oxfmt/linux-x64-gnu': 0.16.0
-      '@oxfmt/linux-x64-musl': 0.16.0
-      '@oxfmt/win32-arm64': 0.16.0
-      '@oxfmt/win32-x64': 0.16.0
+      '@oxfmt/darwin-arm64': 0.24.0
+      '@oxfmt/darwin-x64': 0.24.0
+      '@oxfmt/linux-arm64-gnu': 0.24.0
+      '@oxfmt/linux-arm64-musl': 0.24.0
+      '@oxfmt/linux-x64-gnu': 0.24.0
+      '@oxfmt/linux-x64-musl': 0.24.0
+      '@oxfmt/win32-arm64': 0.24.0
+      '@oxfmt/win32-x64': 0.24.0
 
   p-filter@2.1.0:
     dependencies:
@@ -19398,12 +19283,12 @@ snapshots:
       defu: 6.1.4
       destr: 2.0.5
 
-  react-dom@19.2.1(react@19.2.1):
+  react-dom@19.2.3(react@19.2.3):
     dependencies:
-      react: 19.2.1
+      react: 19.2.3
       scheduler: 0.27.0
 
-  react@19.2.1: {}
+  react@19.2.3: {}
 
   read-yaml-file@1.1.0:
     dependencies:
@@ -19677,7 +19562,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rolldown-plugin-dts@0.18.4(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3)):
+  rolldown-plugin-dts@0.21.2(rolldown@1.0.0-beta.53)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3)):
     dependencies:
       '@babel/generator': 7.28.6
       '@babel/parser': 7.28.6
@@ -19686,7 +19571,6 @@ snapshots:
       birpc: 4.0.0
       dts-resolver: 2.1.3
       get-tsconfig: 4.13.0
-      magic-string: 0.30.21
       obug: 2.1.1
       rolldown: 1.0.0-beta.53
     optionalDependencies:
@@ -20325,10 +20209,10 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.7
 
-  styled-jsx@5.1.6(react@19.2.1):
+  styled-jsx@5.1.6(react@19.2.3):
     dependencies:
       client-only: 0.0.1
-      react: 19.2.1
+      react: 19.2.3
 
   stylehacks@5.1.1(postcss@8.5.6):
     dependencies:
@@ -20478,6 +20362,8 @@ snapshots:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
+
+  tinypool@2.0.0: {}
 
   tinyrainbow@3.0.3: {}
 

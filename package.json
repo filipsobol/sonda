@@ -26,7 +26,7 @@
     "@types/node": "^24.10.9",
     "clean-package": "^2.2.0",
     "medium-zoom": "^1.1.0",
-    "oxfmt": "^0.16.0",
+    "oxfmt": "^0.24.0",
     "pkg-pr-new": "^0.0.62",
     "rolldown": "1.0.0-beta.53",
     "typescript": "^5.9.3",
