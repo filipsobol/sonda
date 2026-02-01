@@ -9,19 +9,19 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@vueuse/core": "^14.1.0",
+		"@vueuse/core": "^14.2.0",
 		"fuzzysort": "^3.1.0",
-		"vue": "^3.5.26"
+		"vue": "^3.5.27"
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.1.18",
 		"@vitejs/plugin-vue": "^6.0.3",
-		"@vue/tsconfig": "^0.7.0",
+		"@vue/tsconfig": "^0.8.1",
 		"sonda": "workspace:^",
 		"tailwindcss": "^4.1.18",
 		"typescript": "~5.9.3",
 		"vite": "^7.3.1",
 		"vite-plugin-singlefile": "^2.3.0",
-		"vue-tsc": "3.1.5"
+		"vue-tsc": "3.2.4"
 	}
 }
