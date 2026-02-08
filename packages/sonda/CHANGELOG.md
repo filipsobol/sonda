@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - 8cd728c: Allow uploading a JSON report when no report is embedded in the HTML.
-- b78ff1d: Remove duplicate entrypoint connection pointing in the wrong direction.
+- b78ff1d: [esbuild] Remove duplicate entrypoint connection pointing in the wrong direction.
 
 ## 0.10.1
 
