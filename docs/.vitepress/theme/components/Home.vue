@@ -40,7 +40,9 @@
 	<section class="features">
 		<div class="feature">
 			<p class="title">Accurate by design</p>
-			<p class="details">Analyze final source maps to capture tree-shaking and minification, not pre-build estimates.</p>
+			<p class="details">
+				Analyze final source maps to capture tree-shaking and minification, not pre-build estimates.
+			</p>
 		</div>
 
 		<div class="feature">

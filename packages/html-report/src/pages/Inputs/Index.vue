@@ -187,7 +187,6 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' }
 ];
 
-
 const COLUMNS: Array<Column> = [
 	{
 		name: '',
@@ -216,7 +215,7 @@ const COLUMNS: Array<Column> = [
 	}
 ];
 
-const usedInOptions = computed(() =>  assets.value.map(( { name } ) => ({ label: name, value: name })));
+const usedInOptions = computed(() => assets.value.map(({ name }) => ({ label: name, value: name })));
 
 const data = ref(
 	reportSources.value.map(input => ({
