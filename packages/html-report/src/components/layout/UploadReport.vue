@@ -141,7 +141,7 @@ const demoReportUrl = new URL('/sample_data.json', window.location.origin).href;
 const reportUrl = computed(router.computedQuery('reportUrl', ''));
 
 const isTrustedUrl = computed(() => {
-	if ( !reportUrl.value) {
+	if (!reportUrl.value) {
 		return true;
 	}
 
