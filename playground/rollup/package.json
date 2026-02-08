@@ -1,22 +1,22 @@
 {
-  "name": "playground-rollup",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
-  },
-  "dependencies": {
-    "ckeditor5": "^47.1.0"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.9",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.52.5",
-    "rollup-plugin-styles": "^4.0.0",
-    "sonda": "workspace:^",
-    "unplugin-sourcemaps": "workspace:^"
-  }
+	"name": "playground-rollup",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "rollup -c rollup.config.js",
+		"debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
+	},
+	"dependencies": {
+		"ckeditor5": "^47.4.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^29.0.0",
+		"@rollup/plugin-node-resolve": "^16.0.3",
+		"@rollup/plugin-terser": "^0.4.4",
+		"rollup": "^4.57.1",
+		"rollup-plugin-styles": "^4.0.0",
+		"sonda": "workspace:^",
+		"unplugin-sourcemaps": "workspace:^"
+	}
 }

@@ -23,14 +23,12 @@ Then register the bundler-specific plugin and enable the source maps.
 import { defineConfig } from 'vite';
 import { ViteSourcemap } from 'unplugin-sourcemaps';
 
-export default defineConfig( {
-  plugins: [
-    ViteSourcemap()
-  ],
-  build: {
-    sourcemap: true
-  }
-} );
+export default defineConfig({
+	plugins: [ViteSourcemap()],
+	build: {
+		sourcemap: true
+	}
+});
 ```
 
 </details>
@@ -44,15 +42,13 @@ export default defineConfig( {
 import { defineConfig } from 'rollup';
 import { RollupSourcemap } from 'unplugin-sourcemaps';
 
-export default defineConfig( {
-  output: {
-    // Other options are skipped for brevity
-    sourcemap: true,
-  },
-  plugins: [
-    RollupSourcemap()
-  ]
-} );
+export default defineConfig({
+	output: {
+		// Other options are skipped for brevity
+		sourcemap: true
+	},
+	plugins: [RollupSourcemap()]
+});
 ```
 
 </details>
@@ -64,12 +60,10 @@ export default defineConfig( {
 import { build } from 'esbuild';
 import { EsbuildSourcemap } from 'unplugin-sourcemaps';
 
-build( {
-  sourcemap: true,
-  plugins: [
-    SondaEsbuildPlugin()
-  ]
-} );
+build({
+	sourcemap: true,
+	plugins: [SondaEsbuildPlugin()]
+});
 ```
 
 </details>
@@ -80,13 +74,11 @@ build( {
 ```javascript
 // webpack.config.js
 
-const { WebpackSourcemap } = require( 'unplugin-sourcemaps' );
+const { WebpackSourcemap } = require('unplugin-sourcemaps');
 
 module.exports = {
-  devtool: 'source-map',
-  plugins: [
-    WebpackSourcemap()
-  ],
+	devtool: 'source-map',
+	plugins: [WebpackSourcemap()]
 };
 ```
 

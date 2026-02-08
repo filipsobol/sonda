@@ -1,46 +1,46 @@
 {
-  "name": "unplugin-sourcemaps",
-  "version": "0.1.2",
-  "description": "Universal plugin for loading existing source maps from imported modules. Works with Vite, Rollup, webpack, and esbuild.",
-  "keywords": [
-    "sourcemap",
-    "source-map",
-    "sourceMappingURL",
-    "vite",
-    "rollup",
-    "webpack",
-    "esbuild",
-    "unplugin"
-  ],
-  "license": "MIT",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/filipsobol/sonda.git",
-    "directory": "packages/unplugin-sourcemaps"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "CHANGELOG.md"
-  ],
-  "scripts": {
-    "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
-    "build:load-source-map": "cd ../load-source-map && pnpm run build",
-    "build:dist": "rolldown -c && tsc",
-    "build": "pnpm run build:load-source-map && pnpm run build:dist"
-  },
-  "dependencies": {
-    "unplugin": "^2.3.10"
-  },
-  "devDependencies": {
-    "load-source-map": "workspace:^"
-  }
+	"name": "unplugin-sourcemaps",
+	"version": "0.1.2",
+	"description": "Universal plugin for loading existing source maps from imported modules. Works with Vite, Rollup, webpack, and esbuild.",
+	"keywords": [
+		"esbuild",
+		"rollup",
+		"source-map",
+		"sourceMappingURL",
+		"sourcemap",
+		"unplugin",
+		"vite",
+		"webpack"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/filipsobol/sonda.git",
+		"directory": "packages/unplugin-sourcemaps"
+	},
+	"files": [
+		"CHANGELOG.md",
+		"dist"
+	],
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"prepack": "pnpm run build && clean-package -rm devDependencies scripts",
+		"build:load-source-map": "cd ../load-source-map && pnpm run build",
+		"build:dist": "rolldown -c && tsc",
+		"build": "pnpm run build:load-source-map && pnpm run build:dist"
+	},
+	"dependencies": {
+		"unplugin": "^3.0.0"
+	},
+	"devDependencies": {
+		"load-source-map": "workspace:^"
+	}
 }

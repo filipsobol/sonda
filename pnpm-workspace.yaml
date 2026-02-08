@@ -1,6 +1,7 @@
 packages:
   - packages/**
   - playground/**
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
@@ -11,3 +12,6 @@ onlyBuiltDependencies:
   - rolldown
   - sharp
   - unrs-resolver
+
+overrides:
+  vue-tsc: '3.1.5' # https://github.com/vuejs/language-tools/issues/5810

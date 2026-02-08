@@ -1,7 +1,7 @@
 import { defineConfig } from 'rolldown';
 import Sonda from 'sonda/rolldown';
 
-export default defineConfig( {
+export default defineConfig({
 	input: 'src/index.ts',
 	output: {
 		dir: 'dist',
@@ -10,9 +10,9 @@ export default defineConfig( {
 		minify: true
 	},
 	plugins: [
-		Sonda( {
-			format: [ 'html', 'json' ],
+		Sonda({
+			format: ['html', 'json'],
 			open: 'html'
-		} )
+		})
 	]
-} );
+});

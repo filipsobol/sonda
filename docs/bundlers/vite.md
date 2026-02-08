@@ -12,9 +12,25 @@ To analyze and visualize your Vite bundles, you need to install the Sonda npm pa
 
 To get started, install the Sonda package using the following command:
 
-```bash
-npm install sonda --save-dev
+::: code-group
+
+```bash [npm]
+npm install -D sonda
 ```
+
+```bash [pnpm]
+pnpm add -D sonda
+```
+
+```bash [yarn]
+yarn add -D sonda
+```
+
+```bash [bun]
+bun add -d sonda
+```
+
+:::
 
 ### Add the plugin and enable source maps
 

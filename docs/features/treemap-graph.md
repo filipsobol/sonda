@@ -26,12 +26,12 @@ The size and color of each tile is proportional to the file or folder size. Larg
   caption="Compression selector (available only if extra compression settings are enabled)"
 />
 
-## The `[unassigned]` Tile
+## `[unassigned]` Tile
 
 A `[unassigned]` tile represents bundle content that couldn't be mapped to a specific source file, typically including:
 
 - Comments
-- Code injected by the bundler at build time  
-- Plugin-generated code without proper source-map support  
+- Code injected by the bundler at build time
+- Plugin-generated code without proper source-map support
 
 If you see a large `[unassigned]` tile, consider investigating its origin using a tool like the [Source Map Visualizer](https://evanw.github.io/source-map-visualization/).

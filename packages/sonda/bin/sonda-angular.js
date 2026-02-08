@@ -7,43 +7,43 @@ import Sonda from 'sonda/angular';
  * Use `RegExp.escape()` when it's more widely available.
  */
 function stringToRegExp(value) {
-  // 1) Grab optional ^, then any characters, then optional $
-  const [, start, core, end] = /^(\^?)(.*?)(\$?)$/.exec( value );
+	// 1) Grab optional ^, then any characters, then optional $
+	const [, start, core, end] = /^(\^?)(.*?)(\$?)$/.exec(value);
 
-  // 2) Escape all regex‑meta in the core
-  const escaped = core.replace( /[-.*+?^${}()|[\]\\]/g, '\\$&' );
+	// 2) Escape all regex‑meta in the core
+	const escaped = core.replace(/[-.*+?^${}()|[\]\\]/g, '\\$&');
 
-  // 3) Stitch back the string
-  return new RegExp( start + escaped + end );
+	// 3) Stitch back the string
+	return new RegExp(start + escaped + end);
 }
 
-const { values } = parseArgs( {
-  options: {
-    config: { type: 'string' },
-    projects: { type: 'string', multiple: true },
-    include: { type: 'string', multiple: true },
-    exclude: { type: 'string', multiple: true },
-    format: { type: 'string', multiple: true },
-    filename: { type: 'string' },
-    outputDir: { type: 'string' },
-    open: { type: 'string' },
-    'no-open': { type: 'boolean' },
-    deep: { type: 'boolean' },
-    sources: { type: 'boolean' },
-    gzip: { type: 'boolean' },
-    brotli: { type: 'boolean' }
-  },
+const { values } = parseArgs({
+	options: {
+		config: { type: 'string' },
+		projects: { type: 'string', multiple: true },
+		include: { type: 'string', multiple: true },
+		exclude: { type: 'string', multiple: true },
+		format: { type: 'string', multiple: true },
+		filename: { type: 'string' },
+		outputDir: { type: 'string' },
+		open: { type: 'string' },
+		'no-open': { type: 'boolean' },
+		deep: { type: 'boolean' },
+		sources: { type: 'boolean' },
+		gzip: { type: 'boolean' },
+		brotli: { type: 'boolean' }
+	},
 
-  // Fail when unknown argument is used
-  strict: true
-} );
+	// Fail when unknown argument is used
+	strict: true
+});
 
-if ( values[ 'no-open' ] ) {
-  values.open = false;
-  delete values[ 'no-open' ];
+if (values['no-open']) {
+	values.open = false;
+	delete values['no-open'];
 }
 
-values.include = values.include?.map( stringToRegExp );
-values.exclude = values.exclude?.map( stringToRegExp );
+values.include = values.include?.map(stringToRegExp);
+values.exclude = values.exclude?.map(stringToRegExp);
 
-Sonda( values );
+Sonda(values);

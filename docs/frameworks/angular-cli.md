@@ -12,9 +12,25 @@ To analyze and visualize your Angular CLI bundles, you need to install the Sonda
 
 To get started, install the Sonda package using the following command:
 
-```bash
-npm install sonda --save-dev
+::: code-group
+
+```bash [npm]
+npm install -D sonda
 ```
+
+```bash [pnpm]
+pnpm add -D sonda
+```
+
+```bash [yarn]
+yarn add -D sonda
+```
+
+```bash [bun]
+bun add -d sonda
+```
+
+:::
 
 ### Enable JSON stats and source maps
 
@@ -73,9 +89,9 @@ Open the `package.json` file and add the following script:
 
 ```json
 {
-  "scripts": {
-    "analyze": "sonda-angular"
-  }
+	"scripts": {
+		"analyze": "sonda-angular"
+	}
 }
 ```
 
@@ -87,18 +103,18 @@ npm run analyze
 
 The command accepts the following options. For more information about these options, refer to the next section.
 
-* `--config=<path>`
-* `--projects=<name>` (can be specified multiple times)
-* `--include=<pattern>` (can be specified multiple times)
-* `--exclude=<pattern>` (can be specified multiple times)
-* `--format=<format>`
-* `--filename=<filename>`
-* `--outputDir=<dirname>`
-* `--no-open`
-* `--detailed`
-* `--sources`
-* `--gzip`
-* `--brotli`
+- `--config=<path>`
+- `--projects=<name>` (can be specified multiple times)
+- `--include=<pattern>` (can be specified multiple times)
+- `--exclude=<pattern>` (can be specified multiple times)
+- `--format=<format>`
+- `--filename=<filename>`
+- `--outputDir=<dirname>`
+- `--no-open`
+- `--deep`
+- `--sources`
+- `--gzip`
+- `--brotli`
 
 ### Configure the plugin
 
@@ -110,22 +126,22 @@ In addition to the options listed on the configuration page, the Angular CLI int
 
 ##### `config`
 
-* **Type:** `string`
-* **Default:** `'angular.json'`
+- **Type:** `string`
+- **Default:** `'angular.json'`
 
 Specifies the path to the Angular CLI configuration file.
 
 ##### `projects`
 
-* **Type:** `Array<string>`
-* **Default:** All projects in the `angular.json` file
+- **Type:** `Array<string>`
+- **Default:** All projects in the `angular.json` file
 
 Specifies the projects to analyze. By default, Sonda will analyze all projects in the Angular CLI configuration file, but you can specify individual projects based on your needs.
 
 ##### `include`
 
-* **Type:** `Array<RegExp>` | `null`
-* **Default:** `null`
+- **Type:** `Array<RegExp>` | `null`
+- **Default:** `null`
 
 Specifies a list of patterns used to match output assets to include in the report. By default, all assets are included.
 
@@ -137,8 +153,8 @@ sonda-angular --include=.js$
 
 ##### `exclude`
 
-* **Type:** `Array<RegExp>` | `null`
-* **Default:** `null`
+- **Type:** `Array<RegExp>` | `null`
+- **Default:** `null`
 
 Specifies a list of patterns used to match output assets to exclude from the report. By default, no assets are excluded, except for those with `.map` and `.d.ts` extensions, which are always excluded regardless of this setting.
 

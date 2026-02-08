@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Enable corepack
         # https://github.com/nodejs/corepack/issues/627
         run: npm i -g --force corepack && corepack enable
@@ -30,8 +30,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20.19.0"
-          cache: "pnpm"
+          node-version: '20.19.0'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

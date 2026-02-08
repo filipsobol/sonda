@@ -1,18 +1,18 @@
 {
-  "name": "playground-vite",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
-  },
-  "dependencies": {
-    "ckeditor5": "^47.1.0"
-  },
-  "devDependencies": {
-    "sonda": "workspace:^",
-    "unplugin-sourcemaps": "workspace:^",
-    "vite": "^7.2.0"
-  }
+	"name": "playground-vite",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
+	},
+	"dependencies": {
+		"ckeditor5": "^47.4.0"
+	},
+	"devDependencies": {
+		"sonda": "workspace:^",
+		"unplugin-sourcemaps": "workspace:^",
+		"vite": "^7.3.1"
+	}
 }

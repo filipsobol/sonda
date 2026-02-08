@@ -1,14 +1,14 @@
 import { existsSync, readFileSync, statSync } from 'fs';
 import { dirname, join, resolve, isAbsolute } from 'path';
 
-export type SourcesPathNormalizer = ( path: string, sourceRoot: string ) => string;
+export type SourcesPathNormalizer = (path: string, sourceRoot: string) => string;
 
 export interface SourceMapV3 {
 	file?: string | null;
 	names: string[];
 	sourceRoot?: string;
-	sources: ( string | null )[];
-	sourcesContent?: ( string | null )[];
+	sources: (string | null)[];
+	sourcesContent?: (string | null)[];
 	mappings: string;
 	version: 3;
 	ignoreList?: number[];
@@ -27,8 +27,8 @@ export type MaybeCodeMap = CodeMap | null;
  *
  * https://github.com/mozilla/source-map/blob/3cb92cc3b73bfab27c146bae4ef2bc09dbb4e5ed/lib/util.js#L162-L164
  */
-function parseSourceMapInput( str: string ): SourceMapV3 {
-	return JSON.parse( str.replace( /^\)]}'[^\n]*\n/, "" ) );
+function parseSourceMapInput(str: string): SourceMapV3 {
+	return JSON.parse(str.replace(/^\)]}'[^\n]*\n/, ''));
 }
 
 /**
@@ -43,9 +43,9 @@ const sourceMappingRegExp = /[@#]\s*sourceMappingURL=(\S+)\b/g;
 /**
  * Checks if the given path is a file.
  */
-function isFile( path: string ): boolean {
+function isFile(path: string): boolean {
 	try {
-		return statSync( path ).isFile();
+		return statSync(path).isFile();
 	} catch {
 		return false;
 	}
@@ -54,31 +54,28 @@ function isFile( path: string ): boolean {
 /**
  * Default path normalizer that resolves the path relative to the source root.
  */
-function defaultPathNormalizer( path: string, sourceRoot: string ): string {
-	return isAbsolute( path ) ? path : resolve( sourceRoot, path );
+function defaultPathNormalizer(path: string, sourceRoot: string): string {
+	return isAbsolute(path) ? path : resolve(sourceRoot, path);
 }
 
-export function loadCodeAndMap(
-	codePath: string,
-	sourcesPathNormalizer?: SourcesPathNormalizer
-): MaybeCodeMap {
-	if ( !isFile( codePath ) ) {
+export function loadCodeAndMap(codePath: string, sourcesPathNormalizer?: SourcesPathNormalizer): MaybeCodeMap {
+	if (!isFile(codePath)) {
 		return null;
 	}
 
-	const code = readFileSync( codePath, 'utf-8' );
-	const maybeMap = loadMap( codePath, code );
+	const code = readFileSync(codePath, 'utf-8');
+	const maybeMap = loadMap(codePath, code);
 
-	if ( !maybeMap ) {
+	if (!maybeMap) {
 		return { code };
 	}
 
 	const { map, mapPath } = maybeMap;
-	const sourceRoot = resolve( dirname( mapPath ), map.sourceRoot ?? '.' );
+	const sourceRoot = resolve(dirname(mapPath), map.sourceRoot ?? '.');
 	const normalizer = sourcesPathNormalizer || defaultPathNormalizer;
 
-	map.sources = map.sources.map( source => source && normalizer( source, sourceRoot ) );
-	map.sourcesContent = loadMissingSourcesContent( map );
+	map.sources = map.sources.map(source => source && normalizer(source, sourceRoot));
+	map.sourcesContent = loadMissingSourcesContent(map);
 
 	delete map.sourceRoot;
 
@@ -88,19 +85,19 @@ export function loadCodeAndMap(
 	};
 }
 
-function loadMap( codePath: string, code: string ): { map: SourceMapV3; mapPath: string } | null {
+function loadMap(codePath: string, code: string): { map: SourceMapV3; mapPath: string } | null {
 	/**
 	 * Because in most cases the source map has the same name as the code file,
 	 * we can try to append `.map` to the code path and check if the file exists.
 	 */
 	try {
 		const possibleMapPath = codePath + '.map';
-		const map = readFileSync( possibleMapPath, 'utf-8' );
+		const map = readFileSync(possibleMapPath, 'utf-8');
 
 		return {
-			map: parseSourceMapInput( map ),
+			map: parseSourceMapInput(map),
 			mapPath: possibleMapPath
-		}
+		};
 	} catch {}
 
 	/**
@@ -108,66 +105,66 @@ function loadMap( codePath: string, code: string ): { map: SourceMapV3; mapPath:
 	 * The path to the source map is usually in a comment at the end of the file, but it can
 	 * also be inlined in the code itself.
 	 */
-	const extractedComment = code.includes( 'sourceMappingURL' ) && Array.from( code.matchAll( sourceMappingRegExp ) ).at( -1 );
+	const extractedComment = code.includes('sourceMappingURL') && Array.from(code.matchAll(sourceMappingRegExp)).at(-1);
 
-	if ( !extractedComment || !extractedComment.length ) {
+	if (!extractedComment || !extractedComment.length) {
 		// There's no source map comment in the code.
 		return null;
 	}
 
-	const sourceMappingURL = extractedComment[ 1 ];
+	const sourceMappingURL = extractedComment[1];
 
-	if ( sourceMappingURL.startsWith( 'data:' ) ) {
+	if (sourceMappingURL.startsWith('data:')) {
 		// The source map is inlined in the code.
-		const map = parseDataUrl( sourceMappingURL );
+		const map = parseDataUrl(sourceMappingURL);
 
 		return {
-			map: parseSourceMapInput( map ),
+			map: parseSourceMapInput(map),
 			mapPath: codePath
 		};
 	}
 
 	// The source map comment is a path to a file.
-	const sourceMapFilename = new URL( sourceMappingURL, 'file://' ).pathname;
-	const mapPath = join( dirname( codePath ), sourceMapFilename );
+	const sourceMapFilename = new URL(sourceMappingURL, 'file://').pathname;
+	const mapPath = join(dirname(codePath), sourceMapFilename);
 
-	if ( !existsSync( mapPath ) ) {
+	if (!existsSync(mapPath)) {
 		return null;
 	}
 
 	return {
-		map: parseSourceMapInput( readFileSync( mapPath, 'utf-8' ) ),
+		map: parseSourceMapInput(readFileSync(mapPath, 'utf-8')),
 		mapPath
 	};
 }
 
-function parseDataUrl( url: string ): string {
-	const [ prefix, payload ] = url.split( ',' );
-	const encoding = prefix.split( ';' ).at( -1 );
+function parseDataUrl(url: string): string {
+	const [prefix, payload] = url.split(',');
+	const encoding = prefix.split(';').at(-1);
 
-	switch ( encoding ) {
+	switch (encoding) {
 		case 'base64':
-			return Buffer.from( payload, 'base64' ).toString();
+			return Buffer.from(payload, 'base64').toString();
 		case 'uri':
-			return decodeURIComponent( payload );
+			return decodeURIComponent(payload);
 		default:
-			throw new Error( 'Unsupported source map encoding: ' + encoding );
+			throw new Error('Unsupported source map encoding: ' + encoding);
 	}
 }
 
 /**
  * Loop through the sources and try to load missing `sourcesContent` from the file system.
  */
-function loadMissingSourcesContent( map: SourceMapV3 ): Array<string | null> {
-	return map.sources.map( ( source, index ) => {
-		if ( map.sourcesContent?.[ index ] ) {
-			return map.sourcesContent[ index ];
+function loadMissingSourcesContent(map: SourceMapV3): Array<string | null> {
+	return map.sources.map((source, index) => {
+		if (map.sourcesContent?.[index]) {
+			return map.sourcesContent[index];
 		}
 
-		if ( source && existsSync( source ) ) {
-			return readFileSync( source, 'utf-8' );
+		if (source && existsSync(source)) {
+			return readFileSync(source, 'utf-8');
 		}
 
 		return null;
-	} );
+	});
 }

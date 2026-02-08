@@ -8,15 +8,12 @@ import type { JsonReport } from '../types.js';
 export class HtmlFormatter extends Formatter {
 	protected extension = '.html';
 
-	public async parse( data: JsonReport ): Promise<string> {
+	public async parse(data: JsonReport): Promise<string> {
 		const template = await readFile(
-			resolve( dirname( fileURLToPath( import.meta.resolve( 'sonda' ) ) ), './index.html' ),
+			resolve(dirname(fileURLToPath(import.meta.resolve('sonda'))), './index.html'),
 			'utf-8'
 		);
 
-		return template.replace(
-			'__REPORT_DATA__',
-			gzipSync( JSON.stringify( data ) ).toString('base64')
-		);
+		return template.replace('__REPORT_DATA__', gzipSync(JSON.stringify(data)).toString('base64'));
 	}
 }

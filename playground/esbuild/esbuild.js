@@ -1,10 +1,8 @@
 import { build } from 'esbuild';
 import Sonda from 'sonda/esbuild';
 
-build( {
-	entryPoints: [
-		'src/index.js'
-	],
+build({
+	entryPoints: ['src/index.js'],
 	outdir: 'dist',
 	format: 'esm',
 	bundle: true,
@@ -13,8 +11,8 @@ build( {
 	metafile: true,
 	logLevel: 'info',
 	plugins: [
-		Sonda( {
+		Sonda({
 			format: 'html'
-		} )
+		})
 	]
-} );
+});

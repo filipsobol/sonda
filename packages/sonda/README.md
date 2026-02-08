@@ -4,19 +4,19 @@ Sonda is a universal bundle analyzer and visualizer. It generates an interactive
 
 Sonda works with the following tools:
 
-* **Bundlers**
-  * Vite
-  * Rollup
-  * Rolldown
-  * esbuild
-  * webpack
-  * Rspack
-* **Frameworks**
-  * Next.js
-  * Nuxt
-  * Astro
-  * SvelteKit
-  * Angular CLI
+- **Bundlers**
+  - Vite
+  - Rollup
+  - Rolldown
+  - esbuild
+  - webpack
+  - Rspack
+- **Frameworks**
+  - Next.js
+  - Nuxt
+  - Astro
+  - SvelteKit
+  - Angular CLI
 
 ## Installation
 

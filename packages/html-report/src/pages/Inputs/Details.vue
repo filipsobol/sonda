@@ -1,18 +1,22 @@
 <template>
-	<div class="max-w-7xl flex flex-col">
+	<div class="flex max-w-7xl flex-col">
 		<template v-if="input">
-			<h2 class="text-2xl font-bold">{{ formatPath( name ) }}</h2>
+			<h2 class="text-2xl font-bold">{{ formatPath(name) }}</h2>
 
-			<p class="text-gray-500 mt-4">
-				Details of the input discovered during the build process.
-			</p>
+			<p class="mt-4 text-gray-500">Details of the input discovered during the build process.</p>
 
-			<hr class="mt-4 mb-6 border-gray-100">
+			<hr class="mt-4 mb-6 border-gray-100" />
 
-			<div class="flex flex-col mt-4">
+			<div class="mt-4 flex flex-col">
 				<Details :name />
-				<Usage :name class="mt-4" />
-				<Imports :name class="mt-4" />
+				<Usage
+					:name
+					class="mt-4"
+				/>
+				<Imports
+					:name
+					class="mt-4"
+				/>
 			</div>
 		</template>
 
@@ -24,7 +28,13 @@
 
 				<template #body>
 					<p>
-						The input you are looking for does not exist. Go back to the <a :href="router.getUrl( 'inputs' )" class="underline" >Inputs</a> page to see all the available inputs.
+						The input you are looking for does not exist. Go back to the
+						<a
+							:href="router.getUrl('inputs')"
+							class="underline"
+							>Inputs</a
+						>
+						page to see all the available inputs.
 					</p>
 				</template>
 			</Alert>
@@ -42,6 +52,6 @@ import Details from '@/components/sections/Inputs/Details.vue';
 import Imports from '@/components/sections/Inputs/Imports.vue';
 import Usage from '@/components/sections/Inputs/Usage.vue';
 
-const name = computed( () => router.query.item );
-const input = computed( () => getSourceResource( name.value ) );
+const name = computed(() => router.query.item);
+const input = computed(() => getSourceResource(name.value));
 </script>

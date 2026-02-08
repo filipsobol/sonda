@@ -67,54 +67,54 @@ export interface Metadata {
 
 /**
  * Base interface for all resources.
- * 
+ *
  * Resources represent the following inputs:
- * 
+ *
  *                                     ┌─────────────────────────────┐
  *                                     │                             │
  *                                     │   OPTIONAL ORIGINAL SOURCE  │
  *                                     │                             │
  *                                     └──────────────▲──────────────┘
- *                                                    │               
- *                                                    │               
- *                                              VIA SOURCEMAP         
- *                                                    │               
- *                                                    │               
+ *                                                    │
+ *                                                    │
+ *                                              VIA SOURCEMAP
+ *                                                    │
+ *                                                    │
  * ┌─────────────────────────────┐     ┌──────────────┼──────────────┐
  * │                             │     │                             │
  * │       INTERNAL SOURCE       │     │       EXTERNAL SOURCE       │
  * │                             │     │                             │
  * └──────────────┬──────────────┘     └──────────────┬──────────────┘
- *                │                                   │               
- *                │                                   │               
- *                └─────────────────┬─────────────────┘               
- *                                  │                                 
- *                                  │                                 
- *                   ┌──────────────▼──────────────┐                  
- *                   │                             │                  
- *                   │           BUNDLER           │                  
- *                   │                             │                  
- *                   └──────────────┬──────────────┘                  
- *                                  │                                 
- *                                  │                                 
- *                                  │                                 
- *                                  │                                 
- *                                  │                                 
- *                   ┌──────────────▼──────────────┐                  
- *                   │                             │                  
- *                   │            ASSET            │                  
- *                   │                             │                  
- *                   └──────────────┬──────────────┘                  
- *                                  │                                 
- *                                  │                                 
- *                            VIA SOURCEMAP                           
- *                                  │                                 
- *                                  │                                 
- *                   ┌──────────────▼──────────────┐                  
- *                   │                             │                  
- *                   │            CHUNK            │                  
- *                   │                             │                  
- *                   └─────────────────────────────┘                  
+ *                │                                   │
+ *                │                                   │
+ *                └─────────────────┬─────────────────┘
+ *                                  │
+ *                                  │
+ *                   ┌──────────────▼──────────────┐
+ *                   │                             │
+ *                   │           BUNDLER           │
+ *                   │                             │
+ *                   └──────────────┬──────────────┘
+ *                                  │
+ *                                  │
+ *                                  │
+ *                                  │
+ *                                  │
+ *                   ┌──────────────▼──────────────┐
+ *                   │                             │
+ *                   │            ASSET            │
+ *                   │                             │
+ *                   └──────────────┬──────────────┘
+ *                                  │
+ *                                  │
+ *                            VIA SOURCEMAP
+ *                                  │
+ *                                  │
+ *                   ┌──────────────▼──────────────┐
+ *                   │                             │
+ *                   │            CHUNK            │
+ *                   │                             │
+ *                   └─────────────────────────────┘
  */
 export interface ResourceBase {
 	/**
@@ -146,14 +146,14 @@ export interface ResourceBase {
 
 	/**
 	 * Size of the resource after GZIP compression.
-	 * 
+	 *
 	 * This value is only available when the `gzip` option is enabled.
 	 */
 	gzip?: number;
 
 	/**
 	 * Size of the resource after Brotli compression.
-	 * 
+	 *
 	 * This value is only available when the `brotli` option is enabled.
 	 */
 	brotli?: number;
@@ -163,7 +163,7 @@ export interface ResourceBase {
 	 *
 	 * If the `kind` is `chunk`, this resource is a part of the output
 	 * asset and value of `parent` is the name of the output asset.
-	 * 
+	 *
 	 * If the `kind` is `sourcemap`, this resource is a part of the source
 	 * map of other resource and value of `parent` is the name of that resource.
 	 */
@@ -208,7 +208,7 @@ export interface SourcemapResource extends ResourceBase {
  * See ASSET in the diagram above.
  */
 export interface AssetResource extends ResourceBase {
-	kind: 'asset'
+	kind: 'asset';
 	name: string;
 	type: FileType;
 	format?: never;
@@ -255,11 +255,7 @@ export interface Issue {
 /**
  * All types of resources.
  */
-export type Resource = 
-	| FilesystemResource
-	| SourcemapResource
-	| AssetResource
-	| ChunkResource;
+export type Resource = FilesystemResource | SourcemapResource | AssetResource | ChunkResource;
 
 export type Sizes = Required<Pick<ResourceBase, 'uncompressed' | 'gzip' | 'brotli'>>;
 
@@ -311,22 +307,9 @@ export type ConnectionKind =
 	 */
 	| 'sourcemap';
 
-export type FileType = 
-	| 'component'
-	| 'font'
-	| 'image'
-	| 'script'
-	| 'style'
-	| 'other';
+export type FileType = 'component' | 'font' | 'image' | 'script' | 'style' | 'other';
 
-export type ModuleFormat = 
-	| 'esm'
-	| 'cjs'
-	| 'amd'
-	| 'umd'
-	| 'iife'
-	| 'system'
-	| 'other';
+export type ModuleFormat = 'esm' | 'cjs' | 'amd' | 'umd' | 'iife' | 'system' | 'other';
 
 /**
  * Type for the source map strings from the report after decoding.
@@ -339,11 +322,10 @@ export interface SourceMap {
 
 	/**
 	 * Stringified source map.
-	 * 
+	 *
 	 * Use the `DecodedMap` type for the decoded version of this map (after `JSON.parse()`).
 	 */
 	map: string;
-};
-
+}
 
 export type DecodedReportSourceMap = Pick<DecodedSourceMap, 'mappings' | 'sources' | 'sourcesContent'>;

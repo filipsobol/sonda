@@ -1,7 +1,7 @@
 <template>
 	<span
-		:class="[ variantClasses[variant] ]"
-		class="font-medium px-2.5 py-0.5 rounded-sm border"
+		:class="[variantClasses[variant]]"
+		class="rounded-sm border px-2.5 py-0.5 font-medium"
 	>
 		<slot />
 	</span>
@@ -14,9 +14,9 @@ interface Props {
 	variant?: Variants;
 }
 
-withDefaults( defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
 	variant: 'primary'
-} );
+});
 
 const variantClasses = {
 	primary: 'bg-blue-100 text-blue-800 border-blue-200',

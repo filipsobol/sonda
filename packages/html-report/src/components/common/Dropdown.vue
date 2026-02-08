@@ -1,13 +1,13 @@
 <template>
 	<div
 		v-if="options.length > 0"
-		v-click-outside="() => open = false"
+		v-click-outside="() => (open = false)"
 		class="relative"
 	>
 		<BaseButton
 			:active="model.length > 0"
 			:disabled
-			@click="() => open = !open"
+			@click="() => (open = !open)"
 		>
 			<slot name="icon" />
 
@@ -24,9 +24,9 @@
 		>
 			<div
 				v-show="open"
-				class="absolute mt-1 z-10 w-max min-w-3xs max-w-sm max-h-64 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg"
+				class="absolute z-10 mt-1 max-h-64 w-max max-w-sm min-w-3xs overflow-y-auto rounded-lg border border-gray-300 bg-white shadow-lg"
 			>
-				<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
+				<ul class="flex flex-col gap-3 p-3 text-sm text-gray-900">
 					<li
 						v-for="option in props.options"
 						:key="option.value"
@@ -38,11 +38,11 @@
 								:value="option.value"
 								:id="'checkbox-' + option.value"
 								type="checkbox"
-								class="flex-shrink-0 size-4"
-							>
+								class="size-4 shrink-0 accent-orange-500"
+							/>
 							<label
 								:for="'checkbox-' + option.value"
-								class="flex-grow ps-2 select-none"
+								class="grow ps-2 select-none"
 							>
 								{{ option.label }}
 								<span
@@ -76,10 +76,10 @@ interface Props {
 	options: Array<DropdownOption>;
 }
 
-const model = defineModel<Array<string>>( {
-	default: () => [],
-} );
+const model = defineModel<Array<string>>({
+	default: () => []
+});
 const props = defineProps<Props>();
 
-const open = ref( false );
+const open = ref(false);
 </script>

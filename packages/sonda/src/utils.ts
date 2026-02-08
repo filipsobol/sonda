@@ -52,65 +52,59 @@ export const extensions: Record<string, FileType> = {
 	'.riot': 'component'
 };
 
-const ignoredExtensions: Array<string> = [
-	'.map',
-	'.d.ts',
-];
+const ignoredExtensions: Array<string> = ['.map', '.d.ts'];
 
 /**
  * Normalizes a given path by removing leading null characters and converting it to a relative POSIX path.
  */
-export function normalizePath( pathToNormalize: string ): string {
+export function normalizePath(pathToNormalize: string): string {
 	// Unicode escape sequences used by Rollup and Vite to identify virtual modules
-	const normalized = pathToNormalize.replace( /^\0/, '' )
+	const normalized = pathToNormalize.replace(/^\0/, '');
 
 	// Transform absolute paths to relative paths
-	const relativized = relative( process.cwd(), normalized );
+	const relativized = relative(process.cwd(), normalized);
 
 	// Ensure paths are POSIX-compliant - https://stackoverflow.com/a/63251716/4617687
-	return relativized.replaceAll( win32.sep, posix.sep );
+	return relativized.replaceAll(win32.sep, posix.sep);
 }
 
 /**
  * Returns the type of a given file based on its name.
  */
-export function getTypeByName( name: string ): FileType {
-	return extensions[ extname( name ) ] ?? 'other';
+export function getTypeByName(name: string): FileType {
+	return extensions[extname(name)] ?? 'other';
 }
 
 /**
  * Returns only the object keys which have a string value.
  */
 type StringKeys<T> = keyof {
-  [P in keyof T as T[P] extends string ? P : never]: unknown
+	[P in keyof T as T[P] extends string ? P : never]: unknown;
 };
 
 /**
  * Sort an array of objects by a specific key.
  */
-export function sortByKey<
-	T extends object,
-	K extends StringKeys<T>
->( data: Array<T>, key: K ): Array<T> {
-	return data.sort( ( a, b ) => ( a[ key ] as string ).localeCompare( b[ key ] as string ));
+export function sortByKey<T extends object, K extends StringKeys<T>>(data: Array<T>, key: K): Array<T> {
+	return data.sort((a, b) => (a[key] as string).localeCompare(b[key] as string));
 }
 
 /**
  * Returns relative paths to all files in the given directory. The files are filtered to exclude source maps.
  */
-export async function getAllFiles( dir: string, recursive = true ): Promise<string[]> {
+export async function getAllFiles(dir: string, recursive = true): Promise<string[]> {
 	try {
-		await access( dir );
+		await access(dir);
 
-		const files = await readdir( dir, {
+		const files = await readdir(dir, {
 			withFileTypes: true,
 			recursive
-		} );
-	
+		});
+
 		return files
-			.filter( file => file.isFile() )
-			.filter( file => !hasIgnoredExtension( file.name ) )
-			.map( file => join( relative( process.cwd(), file.parentPath ), file.name ) );
+			.filter(file => file.isFile())
+			.filter(file => !hasIgnoredExtension(file.name))
+			.map(file => join(relative(process.cwd(), file.parentPath), file.name));
 	} catch {
 		// Directory does not exist or is inaccessible
 		return [];
@@ -121,6 +115,6 @@ export async function getAllFiles( dir: string, recursive = true ): Promise<stri
  * Checks if a file name has an ignored extension. Using `endsWith` ensures that extensions like `.d.ts` are
  * correctly identified as ignored, even though `extname` would return `.ts`.
  */
-export function hasIgnoredExtension( name: string ): boolean {
-	return ignoredExtensions.some( ext => name.endsWith( ext ) );
+export function hasIgnoredExtension(name: string): boolean {
+	return ignoredExtensions.some(ext => name.endsWith(ext));
 }

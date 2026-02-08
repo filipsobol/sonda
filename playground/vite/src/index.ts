@@ -13,4 +13,4 @@ Ut ultrices, mi eu cursus luctus, libero lorem accumsan felis, ut venenatis nisi
 Nam semper rutrum nulla, at tincidunt ipsum dictum eget. Nullam a ex massa. Nunc malesuada, elit non egestas sodales, ligula mauris tempor ex, et aliquet sem tortor ac turpis. Pellentesque aliquet rhoncus justo in tempus. Suspendisse potenti. Vestibulum vitae nisl eu ligula dignissim suscipit sit amet a risus. In mollis neque urna, at faucibus orci mollis ut. Phasellus non cursus arcu. Quisque egestas augue volutpat, blandit magna nec, aliquam arcu. Vestibulum quis sem tempor justo condimentum laoreet sit amet et metus. Sed porttitor porttitor pretium. Fusce iaculis mauris eros, eu vestibulum sem vulputate non. Praesent gravida sodales sem.
 `;
 
-console.log( loremIpsum );
+console.log(loremIpsum);

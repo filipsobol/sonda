@@ -1,22 +1,19 @@
 <template>
 	<div
-		v-click-outside="() => open = false"
+		v-click-outside="() => (open = false)"
 		class="relative"
 	>
 		<BaseButton
-			class="ps-3 pe-2 min-w-48"
+			class="min-w-48 ps-3 pe-2"
 			:active="!!model"
 			:disabled
-			@click="() => open = !open"
+			@click="() => (open = !open)"
 		>
 			<span ref="select-button">{{ title }}</span>
 
 			<IconChevronLeft
 				:size="16"
-				:class="[
-					'ms-2 text-gray-500 transition-[rotate] duration-150',
-					open ? 'rotate-90' : 'rotate-270'
-				]"
+				:class="['ms-2 text-orange-500 transition-[rotate] duration-150', open ? 'rotate-90' : 'rotate-270']"
 			/>
 		</BaseButton>
 
@@ -30,37 +27,37 @@
 		>
 			<div
 				v-show="open"
-				class="absolute mt-1 z-10 w-max min-w-3xs max-w-sm max-h-64 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg"
+				class="absolute z-10 mt-1 max-h-64 w-max max-w-sm min-w-3xs overflow-y-auto rounded-lg border border-gray-300 bg-white shadow-lg"
 			>
-			<ul class="p-3 flex flex-col gap-3 text-sm text-gray-900">
-				<li
-					v-for="option in props.options"
-					:key="option.value"
-					class="cursor-pointer"
-				>
-					<div class="flex items-center">
-						<input
-							v-model="model"
-							:value="option.value"
-							:id="'radio-' + option.value"
-							type="radio"
-							class="size-4"
-						>
-						<label
-							:for="'radio-' + option.value"
-							class="ps-2 w-full"
-						>
-							{{ option.label }}
-							<span
-								v-if="option.subLabel"
-								class="text-gray-500"
+				<ul class="flex flex-col gap-3 p-3 text-sm text-gray-900">
+					<li
+						v-for="option in props.options"
+						:key="option.value"
+						class="cursor-pointer"
+					>
+						<div class="flex items-center">
+							<input
+								v-model="model"
+								:value="option.value"
+								:id="'radio-' + option.value"
+								type="radio"
+								class="size-4 accent-orange-500"
+							/>
+							<label
+								:for="'radio-' + option.value"
+								class="w-full ps-2"
 							>
-								({{ option.subLabel }})
-							</span>
-						</label>
-					</div>
-				</li>
-			</ul>
+								{{ option.label }}
+								<span
+									v-if="option.subLabel"
+									class="text-gray-500"
+								>
+									({{ option.subLabel }})
+								</span>
+							</label>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</transition>
 	</div>
@@ -82,19 +79,19 @@ interface Props {
 	options: Array<Option>;
 }
 
-const element = useTemplateRef<HTMLButtonElement>( 'select-button' );
-const model = defineModel<string>( {
+const element = useTemplateRef<HTMLButtonElement>('select-button');
+const model = defineModel<string>({
 	default: ''
-} );
+});
 const props = defineProps<Props>();
 
-const open = ref( false );
-const title = computed( () => props.options.find( option => option.value === model.value )!.label );
+const open = ref(false);
+const title = computed(() => props.options.find(option => option.value === model.value)!.label);
 
-watch( model, () => {
+watch(model, () => {
 	open.value = false;
-	
+
 	// `element` is always empty when `ref` is directly on the `<BaseButton>` element.
-	element.value!.closest( 'button' )!.focus();
-} );
+	element.value!.closest('button')!.focus();
+});
 </script>

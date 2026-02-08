@@ -1,27 +1,30 @@
 <template>
-	<div class="rounded-lg border border-gray-200 overflow-hidden shadow-xs">
-		<table class="table-fixed w-full text-sm text-left">
+	<div class="overflow-hidden rounded-lg border border-gray-200 shadow-xs">
+		<table class="w-full table-fixed text-left text-sm">
 			<colgroup>
 				<col
 					v-if="$slots.collapsible"
 					style="width: 58px"
-				>
+				/>
 
 				<col
 					v-for="column in columns"
 					:key="column.name"
 					:style="{ width: column.width ?? '100%' }"
-				>
+				/>
 			</colgroup>
 
-			<thead class="text-xs text-gray-900 uppercase bg-gray-50">
+			<thead class="bg-gray-50 text-xs text-gray-900 uppercase">
 				<tr>
-					<th v-if="$slots.collapsible" class="p-3"></th>
+					<th
+						v-if="$slots.collapsible"
+						class="p-3"
+					></th>
 
 					<th
 						v-for="column in columns"
 						:key="column.name"
-						:class="column.align && getAlignClass( column.align )"
+						:class="column.align && getAlignClass(column.align)"
 						class="p-3 font-bold"
 					>
 						{{ column.name }}
@@ -32,23 +35,26 @@
 			<tbody class="text-gray-500">
 				<template
 					v-for="item in data"
-					:key="item[ id ]"
+					:key="item[id]"
 				>
-					<tr class="bg-white border-t border-gray-100">
+					<tr class="border-t border-gray-100 bg-white">
 						<td
 							v-if="$slots.collapsible"
 							class="p-3 font-normal whitespace-nowrap"
 						>
-							<BaseButton @click="() => model = model === item[ id ] ? '' : item[ id ]">
+							<BaseButton @click="() => (model = model === item[id] ? '' : item[id])">
 								<IconChevronLeft
 									:size="16"
-									:class="[ model === item[ id ] ? 'rotate-90' : 'rotate-270' ]"
+									:class="[model === item[id] ? 'rotate-90' : 'rotate-270']"
 									class="text-gray-500 transition-[rotate] duration-150"
 								/>
 							</BaseButton>
 						</td>
 
-						<slot name="row" :item />
+						<slot
+							name="row"
+							:item
+						/>
 					</tr>
 
 					<tr
@@ -58,12 +64,15 @@
 						<td colspan="1"></td>
 						<td colspan="5">
 							<div
-								:class="{ 'grid-rows-[1fr]': model === item[ id ] }"
+								:class="{ 'grid-rows-[1fr]': model === item[id] }"
 								class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-150 ease-linear"
 							>
 								<div class="overflow-hidden">
-									<div class="p-4 border-t border-gray-100 font-normal">
-										<slot name="collapsible" :item />
+									<div class="border-t border-gray-100 p-4 font-normal">
+										<slot
+											name="collapsible"
+											:item
+										/>
 									</div>
 								</div>
 							</div>

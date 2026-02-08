@@ -1,0 +1,518 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { build } from 'vite';
+import { resolve, join } from 'path';
+import { readFileSync } from 'fs';
+import { SondaVitePlugin } from '../src/integrations/vite.js';
+
+const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
+
+const toOutputDir = (path: string = '') => join(import.meta.dirname, 'dist', path);
+const getFixture = (path: string) => resolve(import.meta.dirname, 'fixtures', path);
+const getReport = (filename: string = 'sonda_0.json') => JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+
+describe('SondaVitePlugin', () => {
+	beforeEach(() => {
+		mockConsoleInfo.mockClear();
+	});
+
+	it('should generate correct report for bundlers fixture', async () => {
+		await build({
+			root: getFixture('bundlers'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('bundlers/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(getReport()).toEqual({
+			metadata: {
+				version: '0.10.1',
+				integration: 'vite',
+				sources: false,
+				gzip: false,
+				brotli: false
+			},
+			resources: [
+				{
+					format: 'other',
+					kind: 'sourcemap',
+					name: '[unassigned]',
+					parent: null,
+					type: 'other',
+					uncompressed: 0
+				},
+				{
+					brotli: 0,
+					format: 'other',
+					gzip: 0,
+					kind: 'chunk',
+					name: '[unassigned]',
+					parent: 'tests/dist/vite_1.js',
+					type: 'other',
+					uncompressed: 243
+				},
+				{
+					brotli: 0,
+					gzip: 0,
+					kind: 'asset',
+					name: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 445
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/bundlers/index.js',
+					type: 'script',
+					uncompressed: 66
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/bundlers/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 16
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/detailed/index.js',
+					type: 'script',
+					uncompressed: 290
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/detailed/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 186
+				}
+			],
+			connections: [
+				{
+					kind: 'import',
+					source: 'tests/fixtures/bundlers/index.js',
+					target: 'tests/fixtures/detailed/index.js',
+					original: '../detailed/index.js'
+				},
+				{
+					kind: 'entrypoint',
+					original: null,
+					source: 'tests/dist/vite_1.js',
+					target: 'tests/fixtures/bundlers/index.js'
+				}
+			],
+			dependencies: [],
+			issues: [],
+			sourcemaps: []
+		});
+	});
+
+	it('should generate correct report for detailed fixture', async () => {
+		await build({
+			root: getFixture('detailed'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('detailed/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(getReport()).toEqual({
+			metadata: {
+				version: '0.10.1',
+				integration: 'vite',
+				sources: false,
+				gzip: false,
+				brotli: false
+			},
+			resources: [
+				{
+					format: 'other',
+					kind: 'sourcemap',
+					name: '[unassigned]',
+					parent: null,
+					type: 'other',
+					uncompressed: 0
+				},
+				{
+					brotli: 0,
+					format: 'other',
+					gzip: 0,
+					kind: 'chunk',
+					name: '[unassigned]',
+					parent: 'tests/dist/vite_1.js',
+					type: 'other',
+					uncompressed: 120
+				},
+				{
+					brotli: 0,
+					gzip: 0,
+					kind: 'asset',
+					name: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 306
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/detailed/index.js',
+					type: 'script',
+					uncompressed: 290
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/detailed/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 186
+				}
+			],
+			connections: [
+				{
+					kind: 'entrypoint',
+					original: null,
+					source: 'tests/dist/vite_1.js',
+					target: 'tests/fixtures/detailed/index.js'
+				}
+			],
+			dependencies: [],
+			issues: [],
+			sourcemaps: []
+		});
+	});
+
+	it('should generate correct report for hasMapping fixture', async () => {
+		await build({
+			root: getFixture('hasMapping'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('hasMapping/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(getReport()).toEqual({
+			metadata: {
+				version: '0.10.1',
+				integration: 'vite',
+				sources: false,
+				gzip: false,
+				brotli: false
+			},
+			resources: [
+				{
+					format: 'other',
+					kind: 'sourcemap',
+					name: '[unassigned]',
+					parent: null,
+					type: 'other',
+					uncompressed: 0
+				},
+				{
+					brotli: 0,
+					format: 'other',
+					gzip: 0,
+					kind: 'chunk',
+					name: '[unassigned]',
+					parent: 'tests/dist/vite_1.js',
+					type: 'other',
+					uncompressed: 58
+				},
+				{
+					brotli: 0,
+					gzip: 0,
+					kind: 'asset',
+					name: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 95
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/hasMapping/index.js',
+					type: 'script',
+					uncompressed: 91
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/hasMapping/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 37
+				}
+			],
+			connections: [
+				{
+					kind: 'entrypoint',
+					original: null,
+					source: 'tests/dist/vite_1.js',
+					target: 'tests/fixtures/hasMapping/index.js'
+				}
+			],
+			dependencies: [],
+			issues: [],
+			sourcemaps: []
+		});
+	});
+
+	it('should generate correct report for noMapping fixture', async () => {
+		await build({
+			root: getFixture('noMapping'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('noMapping/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(getReport()).toEqual({
+			metadata: {
+				version: '0.10.1',
+				integration: 'vite',
+				sources: false,
+				gzip: false,
+				brotli: false
+			},
+			resources: [
+				{
+					format: 'other',
+					kind: 'sourcemap',
+					name: '[unassigned]',
+					parent: null,
+					type: 'other',
+					uncompressed: 0
+				},
+				{
+					brotli: 0,
+					format: 'other',
+					gzip: 0,
+					kind: 'chunk',
+					name: '[unassigned]',
+					parent: 'tests/dist/vite_1.js',
+					type: 'other',
+					uncompressed: 58
+				},
+				{
+					brotli: 0,
+					gzip: 0,
+					kind: 'asset',
+					name: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 95
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/noMapping/index.js',
+					type: 'script',
+					uncompressed: 45
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/noMapping/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 37
+				}
+			],
+			connections: [
+				{
+					kind: 'entrypoint',
+					original: null,
+					source: 'tests/dist/vite_1.js',
+					target: 'tests/fixtures/noMapping/index.js'
+				}
+			],
+			dependencies: [],
+			issues: [],
+			sourcemaps: []
+		});
+	});
+
+	it('should not generate reports when disabled', async () => {
+		await build({
+			root: getFixture('bundlers'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('bundlers/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					enabled: false,
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(() => getReport()).toThrowError();
+	});
+
+	it('should respect custom report filename', async () => {
+		await build({
+			root: getFixture('noMapping'),
+			logLevel: 'silent',
+			build: {
+				outDir: toOutputDir(),
+				emptyOutDir: true,
+				lib: {
+					entry: getFixture('noMapping/index.js'),
+					formats: ['es'],
+					fileName: () => 'vite_1.js'
+				},
+				sourcemap: true
+			},
+			plugins: [
+				SondaVitePlugin({
+					open: false,
+					format: 'json',
+					filename: 'custom-report',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		expect(getReport('custom-report.json')).toEqual({
+			metadata: {
+				version: '0.10.1',
+				integration: 'vite',
+				sources: false,
+				gzip: false,
+				brotli: false
+			},
+			resources: [
+				{
+					format: 'other',
+					kind: 'sourcemap',
+					name: '[unassigned]',
+					parent: null,
+					type: 'other',
+					uncompressed: 0
+				},
+				{
+					brotli: 0,
+					format: 'other',
+					gzip: 0,
+					kind: 'chunk',
+					name: '[unassigned]',
+					parent: 'tests/dist/vite_1.js',
+					type: 'other',
+					uncompressed: 58
+				},
+				{
+					brotli: 0,
+					gzip: 0,
+					kind: 'asset',
+					name: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 95
+				},
+				{
+					format: 'esm',
+					kind: 'filesystem',
+					name: 'tests/fixtures/noMapping/index.js',
+					type: 'script',
+					uncompressed: 45
+				},
+				{
+					brotli: 0,
+					format: 'esm',
+					gzip: 0,
+					kind: 'chunk',
+					name: 'tests/fixtures/noMapping/index.js',
+					parent: 'tests/dist/vite_1.js',
+					type: 'script',
+					uncompressed: 37
+				}
+			],
+			connections: [
+				{
+					kind: 'entrypoint',
+					original: null,
+					source: 'tests/dist/vite_1.js',
+					target: 'tests/fixtures/noMapping/index.js'
+				}
+			],
+			dependencies: [],
+			issues: [],
+			sourcemaps: []
+		});
+	});
+});

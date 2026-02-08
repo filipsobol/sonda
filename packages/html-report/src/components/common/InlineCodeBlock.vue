@@ -1,5 +1,5 @@
 <template>
-	<span class="px-2 py-1 bg-gray-100 rounded-lg pre-nowrap">
+	<span class="pre-nowrap rounded-lg bg-gray-100 px-2 py-1">
 		<slot />
 	</span>
 </template>
