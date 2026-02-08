@@ -12,8 +12,8 @@
 		"ckeditor5": "^47.4.0"
 	},
 	"devDependencies": {
-		"@rsdoctor/rspack-plugin": "^1.5.0",
-		"@rspack/cli": "^1.7.2",
+		"@rsdoctor/rspack-plugin": "^1.5.2",
+		"@rspack/cli": "^1.7.5",
 		"sonda": "workspace:^",
 		"unplugin-sourcemaps": "workspace:^"
 	}
