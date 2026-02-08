@@ -75,7 +75,7 @@
 		"astro": "^5.17.1",
 		"esbuild": "^0.27.3",
 		"load-source-map": "workspace:^",
-		"next": "^16.1.6",
+		"next": "^16.1.5",
 		"rollup": "^4.57.1",
 		"vite": "^7.3.1",
 		"vitest": "^4.0.18",
