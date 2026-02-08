@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import { resolve, join } from 'path';
 import { readFileSync } from 'fs';
 import { SondaWebpackPlugin } from '../src/integrations/webpack.js';
+import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
 
@@ -48,7 +49,7 @@ describe('SondaWebpackPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -241,7 +242,7 @@ describe('SondaWebpackPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -304,7 +305,7 @@ describe('SondaWebpackPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -367,7 +368,7 @@ describe('SondaWebpackPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -466,7 +467,7 @@ describe('SondaWebpackPlugin', () => {
 
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,

@@ -3,6 +3,7 @@ import { build } from 'esbuild';
 import { resolve, join } from 'path';
 import { readFileSync } from 'fs';
 import { SondaEsbuildPlugin } from '../src/integrations/esbuild.js';
+import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
 
@@ -33,7 +34,7 @@ describe('SondaEsbuildPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'esbuild',
 				sources: false,
 				gzip: false,
@@ -147,7 +148,7 @@ describe('SondaEsbuildPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'esbuild',
 				sources: false,
 				gzip: false,
@@ -238,7 +239,7 @@ describe('SondaEsbuildPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'esbuild',
 				sources: false,
 				gzip: false,
@@ -329,7 +330,7 @@ describe('SondaEsbuildPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'esbuild',
 				sources: false,
 				gzip: false,
@@ -433,7 +434,7 @@ describe('SondaEsbuildPlugin', () => {
 
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'esbuild',
 				sources: false,
 				gzip: false,

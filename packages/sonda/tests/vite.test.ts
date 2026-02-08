@@ -3,6 +3,7 @@ import { build } from 'vite';
 import { resolve, join } from 'path';
 import { readFileSync } from 'fs';
 import { SondaVitePlugin } from '../src/integrations/vite.js';
+import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
 
@@ -40,7 +41,7 @@ describe('SondaVitePlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -153,7 +154,7 @@ describe('SondaVitePlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -243,7 +244,7 @@ describe('SondaVitePlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -333,7 +334,7 @@ describe('SondaVitePlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -451,7 +452,7 @@ describe('SondaVitePlugin', () => {
 
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'vite',
 				sources: false,
 				gzip: false,

@@ -3,6 +3,7 @@ import { rollup } from 'rollup';
 import { resolve, join } from 'path';
 import { readFileSync } from 'fs';
 import { SondaRollupPlugin } from '../src/integrations/rollup.js';
+import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
 
@@ -37,7 +38,7 @@ describe('SondaRollupPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'rollup',
 				sources: false,
 				gzip: false,
@@ -147,7 +148,7 @@ describe('SondaRollupPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'rollup',
 				sources: false,
 				gzip: false,
@@ -234,7 +235,7 @@ describe('SondaRollupPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'rollup',
 				sources: false,
 				gzip: false,
@@ -321,7 +322,7 @@ describe('SondaRollupPlugin', () => {
 
 		expect(getReport()).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'rollup',
 				sources: false,
 				gzip: false,
@@ -433,7 +434,7 @@ describe('SondaRollupPlugin', () => {
 
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
-				version: '0.10.1',
+				version,
 				integration: 'rollup',
 				sources: false,
 				gzip: false,
