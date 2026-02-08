@@ -8,14 +8,14 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"next": "16.1.3",
-		"react": "19.2.3",
-		"react-dom": "19.2.3"
+		"next": "16.1.6",
+		"react": "19.2.4",
+		"react-dom": "19.2.4"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.18",
-		"@types/node": "^25.0.9",
-		"@types/react": "^19.2.8",
+		"@types/node": "^25.2.2",
+		"@types/react": "^19.2.13",
 		"@types/react-dom": "^19.2.3",
 		"sonda": "workspace:^",
 		"tailwindcss": "^4.1.18",
