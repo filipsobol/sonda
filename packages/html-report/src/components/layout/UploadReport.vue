@@ -59,7 +59,7 @@
 			</label>
 
 			<form
-				class="mt-8"
+				class="mt-12"
 				@submit.prevent="onUrlSubmit"
 			>
 				<p class="text-base font-medium text-gray-700">Or load report from URL</p>
@@ -67,10 +67,10 @@
 				<div class="mt-2 flex flex-col gap-2 sm:flex-row">
 					<input
 						v-model="reportUrl"
-						:placeholder="demoReportUrl"
 						:disabled="isLoading"
 						type="url"
 						required
+						placeholder="Enter report URL"
 						class="h-8 w-full rounded-lg border border-gray-300 bg-white px-3 text-sm text-gray-900 shadow-xs outline-hidden transition-colors duration-150 placeholder:text-gray-500 focus:border-gray-500 focus:ring focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
 					/>
 
@@ -85,12 +85,12 @@
 			</form>
 
 			<Alert
-				v-if="reportUrl"
-				class="mt-4 mb-0"
+				v-if="!isTrustedUrl"
+				class="mt-4"
 				variant="warning"
 			>
-				<template #header>Untrusted report URL</template>
-				<template #body>Only load reports from URLs you trust.</template>
+				<template #header>Unverified report URL</template>
+				<template #body>This URL comes from an unverified host. Only load it if you trust the report source.</template>
 			</Alert>
 
 			<div class="mt-16 rounded-lg border border-gray-200 bg-gray-50 p-6">
@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref, computed } from 'vue';
 import { router } from '@/router.js';
 import { loadReportFromJson, loadReportFromUrl } from '@/report.js';
 import IconFileInput from '@icon/FileInput.vue';
@@ -137,8 +137,21 @@ const isLoading = ref(false);
 const isDragging = ref(false);
 const dragDepth = ref(0);
 const selectedFile = ref('');
-const demoReportUrl = `${window.location.origin}/sample_data.json`;
-const reportUrl = ref('');
+const demoReportUrl = new URL('/sample_data.json', window.location.origin).href;
+const reportUrl = computed(router.computedQuery('reportUrl', ''));
+
+const isTrustedUrl = computed(() => {
+	if ( !reportUrl.value) {
+		return true;
+	}
+
+	try {
+		const url = new URL(reportUrl.value);
+		return url.origin === window.location.origin;
+	} catch {
+		return false;
+	}
+});
 
 async function processFile(file: File | undefined): Promise<void> {
 	if (!file) {
