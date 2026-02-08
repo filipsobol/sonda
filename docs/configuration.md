@@ -112,7 +112,7 @@ If you set the [`format`](#format) option to an array to generate multiple repor
 
 Specifies whether to read source maps of imported modules.
 
-By default, external dependencies bundled into a single file appear as a single asset. When this option is enabled, the report includes the source files of imported modules, if their source maps are available.
+By default, external dependencies bundled into a single file appear as a single asset. When this option is enabled, the report includes the source files of imported modules, if their source maps are available. This option allows for breaking dependencies down into their original source files in the report.
 
 Enabling this option may increase report generation time and reduce the accuracy of estimated GZIP and Brotli sizes.
 
@@ -123,7 +123,7 @@ For more details, see the [Deep view](/features/deep-view) page.
 - **Type:** `boolean`
 - **Default:** `false`
 
-Specifies whether to include source maps of generated assets in the report to visualize which parts of the code contribute to the final asset size.
+Specifies whether to include source maps of generated assets in the report to visualize which parts of the code contribute to the final asset size. This option is for inspecting the exact code that ends up in each bundle.
 
 For more details, see the [Inspect code](/features/used-code) page.
 

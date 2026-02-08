@@ -206,4 +206,4 @@ The `sourcemaps` field is an array of objects containing sourcemaps for `asset` 
 - **name** – The name of the sourcemap resource, relative to the project root.
 - **map** – A stringified sourcemap object, including only the `mappings`, `sources`, and `sourcesContent` fields.
 
-This field is populated only if the [`deep`](/configuration#deep) configuration option is enabled. Otherwise, the `sourcemaps` array will be empty.
+This field is populated only if the [`sources`](/configuration#sources) configuration option is enabled. Otherwise, the `sourcemaps` array will be empty.

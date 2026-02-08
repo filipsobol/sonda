@@ -26,7 +26,7 @@ The size and color of each tile is proportional to the file or folder size. Larg
   caption="Compression selector (available only if extra compression settings are enabled)"
 />
 
-## The `[unassigned]` Tile
+## `[unassigned]` Tile
 
 A `[unassigned]` tile represents bundle content that couldn't be mapped to a specific source file, typically including:
 

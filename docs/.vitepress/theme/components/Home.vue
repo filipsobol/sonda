@@ -39,22 +39,18 @@
 
 	<section class="features">
 		<div class="feature">
-			<p class="title">Accurate</p>
-			<p class="details">Measure true, post-optimization bundle sizes, accounting for tree-shaking and minification.</p>
+			<p class="title">Accurate by design</p>
+			<p class="details">Analyze final source maps to capture tree-shaking and minification, not pre-build estimates.</p>
 		</div>
 
 		<div class="feature">
-			<p class="title">Insightful</p>
-			<p class="details">
-				Compare raw and compressed sizes, visualize dependency graphs, estimate download times and more.
-			</p>
+			<p class="title">Practical insights</p>
+			<p class="details">Trace dependencies, compare compressed sizes, and pinpoint heavy files in seconds.</p>
 		</div>
 
 		<div class="feature">
-			<p class="title">Flexible</p>
-			<p class="details">
-				Export interactive HTML for deep dives or JSON for CI/CD integration and automated reporting.
-			</p>
+			<p class="title">Ship anywhere</p>
+			<p class="details">Generate interactive HTML reports for deep dives or JSON for automation and CI checks.</p>
 		</div>
 	</section>
 

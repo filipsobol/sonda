@@ -4,7 +4,7 @@ outline: deep
 
 # What is Sonda?
 
-Sonda is a universal tool for visualizing and analyzing JavaScript and CSS assets. It helps you understand the structure of your assets, examine dependencies, identify potential issues, and optimize them for better performance.
+Sonda is a universal bundle visualizer and analyzer for JavaScript and CSS assets. It helps you understand the structure of your assets, examine dependencies, identify potential issues, and optimize them for better performance.
 
 Unlike other tools, Sonda is not tied to a specific bundler. Instead, it analyzes the source maps of the JavaScript and CSS assets directly. This approach ensures greater accuracy and compatibility with all major bundlers and JavaScript frameworks.
 

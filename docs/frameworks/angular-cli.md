@@ -12,9 +12,25 @@ To analyze and visualize your Angular CLI bundles, you need to install the Sonda
 
 To get started, install the Sonda package using the following command:
 
-```bash
-npm install sonda --save-dev
+::: code-group
+
+```bash [npm]
+npm install -D sonda
 ```
+
+```bash [pnpm]
+pnpm add -D sonda
+```
+
+```bash [yarn]
+yarn add -D sonda
+```
+
+```bash [bun]
+bun add -d sonda
+```
+
+:::
 
 ### Enable JSON stats and source maps
 
@@ -95,7 +111,7 @@ The command accepts the following options. For more information about these opti
 - `--filename=<filename>`
 - `--outputDir=<dirname>`
 - `--no-open`
-- `--detailed`
+- `--deep`
 - `--sources`
 - `--gzip`
 - `--brotli`
