@@ -149,7 +149,7 @@
 import { ref, computed, watch } from 'vue';
 import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js';
-import { getSources, report } from '@/report.js';
+import { sources as reportSources, report, assets } from '@/report.js';
 import { formatPath } from '@/format.js';
 import SearchInput from '@/components/common/SearchInput.vue';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
@@ -162,8 +162,6 @@ import IconFunnel from '@components/icon/Funnel.vue';
 import type { ChunkResource, FileType, ModuleFormat } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
-
-const ASSETS = report.resources.filter(({ kind }) => kind === 'asset').map(input => input.name);
 
 const TYPE_OPTIONS: Array<DropdownOption<FileType>> = [
 	{ label: 'Script', value: 'script' },
@@ -189,10 +187,6 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' }
 ];
 
-const USED_IN_OPTIONS = ASSETS.map(asset => ({
-	label: asset,
-	value: asset
-}));
 
 const COLUMNS: Array<Column> = [
 	{
@@ -222,15 +216,19 @@ const COLUMNS: Array<Column> = [
 	}
 ];
 
+const usedInOptions = computed(() =>  assets.value.map(( { name } ) => ({ label: name, value: name })));
+
 const data = ref(
-	getSources().map(input => ({
+	reportSources.value.map(input => ({
 		path: input.name,
 		name: formatPath(input.name),
 		format: input.format,
 		type: input.type,
 		source: input.name.includes('node_modules') ? 'external' : 'internal',
-		usedIn: report.resources
-			.filter((resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === input.name)
+		usedIn: report
+			.value!.resources.filter(
+				(resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === input.name
+			)
 			.map(resource => resource.parent!)
 	}))
 );
@@ -245,7 +243,7 @@ const availableSourceOptions = computed(() =>
 	SOURCE_OPTIONS.filter(option => data.value.some(source => source.source === option.value))
 );
 const availableUsedInOptions = computed(() =>
-	USED_IN_OPTIONS.filter(option => data.value.some(source => source.usedIn.includes(option.value)))
+	usedInOptions.value.filter(option => data.value.some(source => source.usedIn.includes(option.value)))
 );
 const search = computed(router.computedQuery('search', ''));
 const types = computed(router.computedQuery('types', [] as Array<string>));

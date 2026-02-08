@@ -9,18 +9,19 @@
 			The layout is not optimized for mobile devices. Please use a desktop browser or wider screen.
 		</p>
 
-		<button
+		<BaseButton
 			type="button"
-			class="me-2 mt-6 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm text-gray-900 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 focus:outline-none"
+			class="mt-6 px-5 text-gray-700"
 			@click="() => (dismissed = true)"
 		>
 			Dismiss
-		</button>
+		</BaseButton>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import BaseButton from '@components/common/Button.vue';
 
 const dismissed = ref(false);
 </script>

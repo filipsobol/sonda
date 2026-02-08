@@ -114,8 +114,8 @@ import type { ChunkResource } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
-const USED_IN_OPTIONS = report.resources
-	.filter(resource => resource.kind === 'asset')
+const USED_IN_OPTIONS = report
+	.value!.resources.filter(resource => resource.kind === 'asset')
 	.map(output => ({
 		label: output.name,
 		value: output.name
@@ -131,17 +131,17 @@ interface Item {
 }
 
 const data: Ref<Array<Item>> = ref(
-	report.dependencies.map(dependency => {
-		const importedBy = report.connections
-			// Get the edges where the target is the dependency, but the source itself is not.
+	report.value!.dependencies.map(dependency => {
+		const importedBy = report
+			.value!.connections // Get the edges where the target is the dependency, but the source itself is not.
 			// This is to skip sources found in source maps, because in such cases both edges will include the dependency name.
 			.filter(({ source, target }) => !source.includes(dependency.name) && target.includes(dependency.name))
 			.map(({ source }) => source)
 			.filter((value, index, self) => self.indexOf(value) === index)
 			.toSorted();
 
-		const usedIn = report.resources
-			// Get all chunks that include the dependency name.
+		const usedIn = report
+			.value!.resources // Get all chunks that include the dependency name.
 			.filter(
 				(resource): resource is ChunkResource => resource.name.includes(dependency.name) && resource.kind === 'chunk'
 			)

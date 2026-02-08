@@ -159,7 +159,7 @@ const props = defineProps<Props>();
 const show = computed(router.computedQuery('details', true));
 const asset = computed(() => getAssetResource(props.name)!);
 const entrypoints = computed(() =>
-	report.connections.filter(connection => connection.kind === 'entrypoint' && connection.source === props.name)
+	report.value!.connections.filter(connection => connection.kind === 'entrypoint' && connection.source === props.name)
 );
 
 // Download times

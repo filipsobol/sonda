@@ -13,7 +13,7 @@
 
 			<IconChevronLeft
 				:size="16"
-				:class="['ms-2 text-gray-500 transition-[rotate] duration-150', open ? 'rotate-90' : 'rotate-270']"
+				:class="['ms-2 text-orange-500 transition-[rotate] duration-150', open ? 'rotate-90' : 'rotate-270']"
 			/>
 		</BaseButton>
 
@@ -41,7 +41,7 @@
 								:value="option.value"
 								:id="'radio-' + option.value"
 								type="radio"
-								class="size-4"
+								class="size-4 accent-orange-500"
 							/>
 							<label
 								:for="'radio-' + option.value"

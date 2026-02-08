@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue';
 import { router } from '@/router.js';
-import { getAssets, report } from '@/report.js';
+import { assets, report } from '@/report.js';
 import { formatSize } from '@/format.js';
 import Alert from '@/components/common/Alert.vue';
 import IconBox from '@icon/Box.vue';
@@ -148,7 +148,7 @@ const ASSET_TYPES: Record<FileType | 'all', AssetType> = {
 };
 
 const types = computed(() => {
-	const countedTypes = Object.values(getAssets()).reduce((acc, asset) => {
+	const countedTypes = Object.values(assets.value).reduce((acc, asset) => {
 		acc[asset.type].size += asset.uncompressed;
 		acc[asset.type].count += 1;
 
@@ -161,5 +161,5 @@ const types = computed(() => {
 	return Object.values(countedTypes);
 });
 
-const hasChunks = computed(() => report.resources.some(resource => resource.kind === 'chunk'));
+const hasChunks = computed(() => report.value!.resources.some(resource => resource.kind === 'chunk'));
 </script>

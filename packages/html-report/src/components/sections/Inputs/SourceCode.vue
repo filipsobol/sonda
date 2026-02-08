@@ -93,7 +93,7 @@ const props = defineProps<Props>();
 const codeRoot = useTemplateRef('codeRoot');
 
 const asset = computed(() => {
-	const parent = report.resources.find(
+	const parent = report.value!.resources.find(
 		(resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name
 	)?.parent;
 
@@ -103,7 +103,7 @@ const asset = computed(() => {
 // Code highlighting
 const supportsHighlight = 'CSS' in window && 'highlights' in window.CSS;
 const sourceMap = computed<DecodedReportSourceMap | null>(() => {
-	const encodedSourceMap = report.sourcemaps.find(sm => sm.name === asset.value?.name);
+	const encodedSourceMap = report.value!.sourcemaps.find(sm => sm.name === asset.value?.name);
 	return encodedSourceMap ? JSON.parse(encodedSourceMap.map) : null;
 });
 const sourceIndex = computed(() => sourceMap.value?.sources.indexOf(props.name) ?? -1);

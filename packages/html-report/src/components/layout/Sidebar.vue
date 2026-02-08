@@ -1,6 +1,6 @@
 <template>
 	<aside
-		class="w-72 flex-shrink-0"
+		class="w-72 shrink-0"
 		aria-label="Sidebar"
 	>
 		<div class="h-full overflow-y-auto border-r border-gray-200 bg-gray-50 px-2 py-3">
@@ -47,9 +47,9 @@
 						<component
 							:is="item.icon"
 							:size="18"
-							class="flex-shrink-0 text-gray-400"
+							class="shrink-0 text-gray-400"
 						/>
-						<span class="ms-3 flex-grow truncate text-gray-900">{{ item.title }}</span>
+						<span class="ms-3 grow truncate text-gray-900">{{ item.title }}</span>
 						<span
 							v-if="item.count !== undefined"
 							class="rounded-lg bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800"
@@ -64,8 +64,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue';
-import { getAssets, getSources, report } from '@/report.js';
+import { computed, type Component } from 'vue';
+import { assets, sources, report } from '@/report.js';
 import { router } from '@/router.js';
 import IconHome from '@icon/Home.vue';
 import IconGrid from '@icon/Grid.vue';
@@ -81,7 +81,7 @@ interface Link {
 	count?: number;
 }
 
-const items: Array<Link> = [
+const items = computed<Array<Link>>(() => [
 	{
 		title: 'Home',
 		link: '',
@@ -96,19 +96,19 @@ const items: Array<Link> = [
 		title: 'Assets',
 		link: 'assets',
 		icon: IconBoxes,
-		count: Object.values(getAssets()).length
+		count: Object.values(assets.value).length
 	},
 	{
 		title: 'Inputs',
 		link: 'inputs',
 		icon: IconFileInput,
-		count: Object.values(getSources()).length
+		count: Object.values(sources.value).length
 	},
 	{
 		title: 'Dependencies',
 		link: 'dependencies',
 		icon: IconShare2,
-		count: Object.values(report.dependencies).length
+		count: Object.values(report.value!.dependencies).length
 	}
 	/*
 	{
@@ -118,5 +118,5 @@ const items: Array<Link> = [
 		count: report.issues.length
 	}
 	*/
-];
+]);
 </script>

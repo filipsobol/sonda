@@ -39,13 +39,13 @@
 					<tr class="border-t border-gray-100">
 						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Approx. GZIP size</td>
 						<td class="p-3 font-normal">
-							{{ report.metadata.gzip ? formatSize(chunk!.gzip!) : '-' }}
+							{{ report!.metadata.gzip ? formatSize(chunk!.gzip!) : '-' }}
 						</td>
 					</tr>
 					<tr class="border-t border-gray-100">
 						<td class="border-r border-r-gray-100 bg-gray-50 p-3 font-bold whitespace-nowrap">Approx. Brotli size</td>
 						<td class="p-3 font-normal">
-							{{ report.metadata.brotli ? formatSize(chunk!.brotli!) : '-' }}
+							{{ report!.metadata.brotli ? formatSize(chunk!.brotli!) : '-' }}
 						</td>
 					</tr>
 				</tbody>
@@ -78,8 +78,10 @@ const props = defineProps<Props>();
 const show = computed(router.computedQuery('usage', false));
 
 const parentAssets = computed(() => {
-	return report.resources
-		.filter((resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name)
+	return report
+		.value!.resources.filter(
+			(resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name
+		)
 		.map(resource => ({
 			label: resource.parent!,
 			value: resource.parent!

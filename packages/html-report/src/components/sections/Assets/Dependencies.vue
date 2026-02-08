@@ -1,6 +1,6 @@
 <template>
 	<Collapsible
-		v-if="dependencies.length"
+		v-if="dependencies!.length"
 		v-model="show"
 	>
 		<template #title>Dependencies</template>
@@ -12,7 +12,7 @@
 					<tr
 						v-for="(dependency, index) in dependencies"
 						:key="dependency"
-						class="border-gray-100 [&:not(:first-child)]:border-t"
+						class="border-gray-100 not-first:border-t"
 					>
 						<td class="p-3 font-normal">
 							<span class="mr-2 select-none">{{ index + 1 }}.</span>
@@ -51,8 +51,10 @@ const props = defineProps<Props>();
 const show = computed(router.computedQuery('dependencies', false));
 
 const dependencies = computed(() => {
-	return report.dependencies
-		.filter(dependency => dependency.paths.some(path => props.inputs.some(input => input.includes(path))))
+	return report
+		.value!.dependencies.filter(dependency =>
+			dependency.paths.some(path => props.inputs.some(input => input.includes(path)))
+		)
 		.map(dependency => dependency.name)
 		.toSorted();
 });

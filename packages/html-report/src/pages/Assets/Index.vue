@@ -67,10 +67,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { computed, watch } from 'vue';
 import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js';
-import { getAssets } from '@/report.js';
+import { assets } from '@/report.js';
 import { formatSize } from '@/format.js';
 import DataTable, { type Column } from '@components/common/DataTable.vue';
 import SearchInput from '@/components/common/SearchInput.vue';
@@ -116,17 +116,15 @@ const COLUMNS: Array<Column> = [
 	}
 ];
 
-const data = ref(getAssets());
-
 const availableTypeOptions = computed(() =>
-	TYPE_OPTIONS.filter(option => data.value.some(asset => asset.type === option.value))
+	TYPE_OPTIONS.filter(option => assets.value.some(asset => asset.type === option.value))
 );
 const search = computed(router.computedQuery('search', ''));
 const types = computed(router.computedQuery('types', [] as Array<string>));
 const currentPage = computed(router.computedQuery('page', 1));
 
 const filteredData = computed(() => {
-	const filtered = data.value.filter(item => !types.value.length || types.value.includes(item.type));
+	const filtered = assets.value.filter(item => !types.value.length || types.value.includes(item.type));
 
 	return fuzzysort
 		.go(search.value, filtered, {

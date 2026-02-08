@@ -105,8 +105,10 @@ const props = defineProps<Props>();
 
 const source = computed(() => getSourceResource(props.name)!);
 const usedIn = computed(() => {
-	return report.resources
-		.filter((resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name)
+	return report
+		.value!.resources.filter(
+			(resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name
+		)
 		.map(resource => ({
 			label: resource.parent!,
 			value: resource.parent!
@@ -124,7 +126,7 @@ const graph = computed(() => (asset.value ? findShortestPath(asset.value.name, s
  */
 function findShortestPath(startNode: string, targetNode: string): Array<Connection> | null {
 	// Use `Object.groupBy( report.connections, connection => connection.source );` when it has better browser support.
-	const adjacencyList = report.connections.reduce(
+	const adjacencyList = report.value!.connections.reduce(
 		(acc, connection) => {
 			acc[connection.source] ||= [];
 			acc[connection.source].push(connection);

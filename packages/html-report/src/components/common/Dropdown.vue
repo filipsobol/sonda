@@ -38,11 +38,11 @@
 								:value="option.value"
 								:id="'checkbox-' + option.value"
 								type="checkbox"
-								class="size-4 flex-shrink-0"
+								class="size-4 shrink-0 accent-orange-500"
 							/>
 							<label
 								:for="'checkbox-' + option.value"
-								class="flex-grow ps-2 select-none"
+								class="grow ps-2 select-none"
 							>
 								{{ option.label }}
 								<span

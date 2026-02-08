@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vue-tsc -b && vite build",
+		"build": "vue-tsc -b && vite build && pnpm run copy-assets",
+		"copy-assets": "node ./scripts/copy-html-report-assets.mjs",
 		"preview": "vite preview"
 	},
 	"dependencies": {

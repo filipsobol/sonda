@@ -45,7 +45,7 @@
 		<div
 			ref="container"
 			role="application"
-			class="w-full flex-grow overflow-hidden"
+			class="w-full grow overflow-hidden"
 		>
 			<Treemap
 				v-if="width > 0 && height > 0 && content && content.uncompressed > 0"
@@ -80,7 +80,7 @@ import BaseSelect from '@components/common/Select.vue';
 import Treemap from '@/components/treemap/Treemap.vue';
 import { FileSystemTrie, type Folder } from '@/FileSystemTrie';
 import { router } from '@/router';
-import { getAssets, getChunks, report } from '@/report';
+import { assets, getChunks, report } from '@/report';
 import type { FileType } from 'sonda';
 
 type CompressionType = 'uncompressed' | 'gzip' | 'brotli';
@@ -109,16 +109,15 @@ const container = useTemplateRef('container');
 const width = ref(0);
 const height = ref(0);
 
-const assets = computed(() => getAssets());
 const activeAsset = computed(() =>
-	report.resources.find(({ kind, name }) => kind === 'asset' && name === router.query.item)
+	report.value!.resources.find(({ kind, name }) => kind === 'asset' && name === router.query.item)
 );
 const resources = computed(() => (router.query.item ? getChunks(router.query.item) : assets.value));
 const availableTypeOptions = computed(() =>
 	TYPE_OPTIONS.filter(option => resources.value.some(asset => asset.type === option.value))
 );
 const availableCompressionOptions = computed(() =>
-	COMPRESSION_TYPES.filter(option => option.value === 'uncompressed' || report.metadata[option.value])
+	COMPRESSION_TYPES.filter(option => option.value === 'uncompressed' || report.value!.metadata[option.value])
 );
 const search = computed(router.computedQuery('search', ''));
 const types = computed(router.computedQuery('types', [] as Array<FileType>));

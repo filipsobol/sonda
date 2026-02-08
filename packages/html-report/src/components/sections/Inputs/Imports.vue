@@ -49,7 +49,7 @@ interface Props {
 const props = defineProps<Props>();
 const show = computed(router.computedQuery('imports', false));
 const imports = computed(() =>
-	report.connections.filter(({ kind, source }) => {
+	report.value!.connections.filter(({ kind, source }) => {
 		return kind !== 'sourcemap' && kind !== 'entrypoint' && source === props.name;
 	})
 );
