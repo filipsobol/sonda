@@ -102,26 +102,36 @@ interface Props {
 	name: string;
 }
 
+interface ConnectionGraph {
+	adjacency: Map<string, Array<Connection>>;
+	nodes: Set<string>;
+	roots: Array<string>;
+}
+
 const props = defineProps<Props>();
 
 const usedIn = computed(router.computedQuery('usedIn', ''));
 const uniqueConnections = computed(() => deduplicateConnections(report.value!.connections));
+const connectionGraph = computed(() => buildConnectionGraph(uniqueConnections.value));
 
 // Dependency graph
 const graph = computed(() => {
 	const targetNode = props.name;
+	const searchGraph = connectionGraph.value;
 
-	if (usedIn.value) {
-		const pathFromSelectedAsset = findShortestPath([usedIn.value], targetNode, uniqueConnections.value);
+	if (!searchGraph.nodes.has(targetNode)) {
+		return null;
+	}
+
+	if (usedIn.value && searchGraph.nodes.has(usedIn.value)) {
+		const pathFromSelectedAsset = findShortestPath([usedIn.value], targetNode, searchGraph);
 
 		if (pathFromSelectedAsset?.length) {
 			return pathFromSelectedAsset;
 		}
 	}
 
-	const rootNodes = collectRootNodes(uniqueConnections.value);
-
-	return findShortestPath(rootNodes, targetNode, uniqueConnections.value);
+	return findShortestPath(searchGraph.roots, targetNode, searchGraph);
 });
 
 /**
@@ -130,47 +140,48 @@ const graph = computed(() => {
 function findShortestPath(
 	startNodes: Array<string>,
 	targetNode: string,
-	connections: Array<Connection>
+	graph: ConnectionGraph
 ): Array<Connection> | null {
-	if (!startNodes.length || !connections.length) {
+	if (!startNodes.length) {
 		return null;
 	}
 
-	// Use `Object.groupBy( report.connections, connection => connection.source );` when it has better browser support.
-	const adjacencyList = connections.reduce(
-		(acc, connection) => {
-			acc[connection.source] ||= [];
-			acc[connection.source].push(connection);
-			return acc;
-		},
-		{} as Record<string, Connection[]>
-	);
-
-	for (const node in adjacencyList) {
-		adjacencyList[node]!.sort((a, b) => {
-			return compareText(a.target, b.target) || compareText(a.kind, b.kind);
-		});
+	if (!graph.nodes.has(targetNode)) {
+		return null;
 	}
 
-	const uniqueStartNodes = Array.from(new Set(startNodes)).sort(compareText);
+	const uniqueStartNodes = Array.from(new Set(startNodes))
+		.filter(node => graph.nodes.has(node))
+		.sort(compareText);
+
+	if (!uniqueStartNodes.length) {
+		return null;
+	}
+
 	const visited = new Set<string>(uniqueStartNodes);
 	const queue: Array<Array<Connection>> = [];
+	let queueIndex = 0;
 
 	for (const startNode of uniqueStartNodes) {
-		for (const connection of adjacencyList[startNode] ?? []) {
+		for (const connection of graph.adjacency.get(startNode) || []) {
+			if (visited.has(connection.target)) {
+				continue;
+			}
+
+			visited.add(connection.target);
 			queue.push([connection]);
 		}
 	}
 
-	while (queue.length > 0) {
-		const path = queue.shift()!;
+	while (queueIndex < queue.length) {
+		const path = queue[queueIndex++]!;
 		const node = path[path.length - 1];
 
 		if (node.target === targetNode) {
 			return path;
 		}
 
-		for (const connection of adjacencyList[node.target] ?? []) {
+		for (const connection of graph.adjacency.get(node.target) || []) {
 			if (visited.has(connection.target)) {
 				continue;
 			}
@@ -183,7 +194,8 @@ function findShortestPath(
 	return null;
 }
 
-function collectRootNodes(connections: Array<Connection>): Array<string> {
+function buildConnectionGraph(connections: Array<Connection>): ConnectionGraph {
+	const adjacency = new Map<string, Array<Connection>>();
 	const nodeIds = new Set<string>();
 	const indegrees = new Map<string, number>();
 
@@ -192,15 +204,26 @@ function collectRootNodes(connections: Array<Connection>): Array<string> {
 		nodeIds.add(connection.target);
 		indegrees.set(connection.source, indegrees.get(connection.source) || 0);
 		indegrees.set(connection.target, (indegrees.get(connection.target) || 0) + 1);
+
+		if (adjacency.has(connection.source)) {
+			adjacency.get(connection.source)!.push(connection);
+		} else {
+			adjacency.set(connection.source, [connection]);
+		}
 	}
 
-	const roots = Array.from(nodeIds).filter(nodeId => (indegrees.get(nodeId) || 0) === 0);
-
-	if (roots.length) {
-		return roots.sort(compareText);
+	for (const edges of adjacency.values()) {
+		edges.sort((a, b) => compareText(a.target, b.target) || compareText(a.kind, b.kind));
 	}
 
-	return Array.from(nodeIds).sort(compareText);
+	const sortedNodes = Array.from(nodeIds).sort(compareText);
+	const roots = sortedNodes.filter(nodeId => (indegrees.get(nodeId) || 0) === 0);
+
+	return {
+		adjacency,
+		nodes: nodeIds,
+		roots: roots.length ? roots : sortedNodes
+	};
 }
 
 function compareText(a: string, b: string): number {
