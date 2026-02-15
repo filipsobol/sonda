@@ -93,9 +93,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { router } from '@/router.js';
-import { getAssetResource, getSourceResource, report } from '@/report.js';
+import { deduplicateConnections } from '@/dag.js';
+import { report } from '@/report.js';
 import InlineCodeBlock from '@components/common/InlineCodeBlock.vue';
-import type { ChunkResource, Connection } from 'sonda';
+import type { Connection } from 'sonda';
 
 interface Props {
 	name: string;
@@ -103,30 +104,40 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const source = computed(() => getSourceResource(props.name)!);
-const usedIn = computed(() => {
-	return report
-		.value!.resources.filter(
-			(resource): resource is ChunkResource => resource.kind === 'chunk' && resource.name === props.name
-		)
-		.map(resource => ({
-			label: resource.parent!,
-			value: resource.parent!
-		}));
-});
-
-// Selected asset
-const asset = computed(() => (usedIn.value[0]?.value && getAssetResource(usedIn.value[0].value)) || null);
+const usedIn = computed(router.computedQuery('usedIn', ''));
+const uniqueConnections = computed(() => deduplicateConnections(report.value!.connections));
 
 // Dependency graph
-const graph = computed(() => (asset.value ? findShortestPath(asset.value.name, source.value.name) : null));
+const graph = computed(() => {
+	const targetNode = props.name;
+
+	if (usedIn.value) {
+		const pathFromSelectedAsset = findShortestPath([usedIn.value], targetNode, uniqueConnections.value);
+
+		if (pathFromSelectedAsset?.length) {
+			return pathFromSelectedAsset;
+		}
+	}
+
+	const rootNodes = collectRootNodes(uniqueConnections.value);
+
+	return findShortestPath(rootNodes, targetNode, uniqueConnections.value);
+});
 
 /**
  * Finds the shortest directed path from any of the given start nodes to the target node using BFS.
  */
-function findShortestPath(startNode: string, targetNode: string): Array<Connection> | null {
+function findShortestPath(
+	startNodes: Array<string>,
+	targetNode: string,
+	connections: Array<Connection>
+): Array<Connection> | null {
+	if (!startNodes.length || !connections.length) {
+		return null;
+	}
+
 	// Use `Object.groupBy( report.connections, connection => connection.source );` when it has better browser support.
-	const adjacencyList = report.value!.connections.reduce(
+	const adjacencyList = connections.reduce(
 		(acc, connection) => {
 			acc[connection.source] ||= [];
 			acc[connection.source].push(connection);
@@ -135,8 +146,21 @@ function findShortestPath(startNode: string, targetNode: string): Array<Connecti
 		{} as Record<string, Connection[]>
 	);
 
-	const visited = new Set<string>([startNode]);
-	const queue: Array<Array<Connection>> = (adjacencyList[startNode] ?? []).map(connection => [connection]);
+	for (const node in adjacencyList) {
+		adjacencyList[node]!.sort((a, b) => {
+			return compareText(a.target, b.target) || compareText(a.kind, b.kind);
+		});
+	}
+
+	const uniqueStartNodes = Array.from(new Set(startNodes)).sort(compareText);
+	const visited = new Set<string>(uniqueStartNodes);
+	const queue: Array<Array<Connection>> = [];
+
+	for (const startNode of uniqueStartNodes) {
+		for (const connection of adjacencyList[startNode] ?? []) {
+			queue.push([connection]);
+		}
+	}
 
 	while (queue.length > 0) {
 		const path = queue.shift()!;
@@ -157,5 +181,29 @@ function findShortestPath(startNode: string, targetNode: string): Array<Connecti
 	}
 
 	return null;
+}
+
+function collectRootNodes(connections: Array<Connection>): Array<string> {
+	const nodeIds = new Set<string>();
+	const indegrees = new Map<string, number>();
+
+	for (const connection of connections) {
+		nodeIds.add(connection.source);
+		nodeIds.add(connection.target);
+		indegrees.set(connection.source, indegrees.get(connection.source) || 0);
+		indegrees.set(connection.target, (indegrees.get(connection.target) || 0) + 1);
+	}
+
+	const roots = Array.from(nodeIds).filter(nodeId => (indegrees.get(nodeId) || 0) === 0);
+
+	if (roots.length) {
+		return roots.sort(compareText);
+	}
+
+	return Array.from(nodeIds).sort(compareText);
+}
+
+function compareText(a: string, b: string): number {
+	return a.localeCompare(b);
 }
 </script>
