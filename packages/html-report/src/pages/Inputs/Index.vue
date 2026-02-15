@@ -154,12 +154,7 @@ import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js';
 import { sources as reportSources, report, assets } from '@/report.js';
 import { formatPath, formatSize } from '@/format.js';
-import {
-	parseTableSort,
-	formatTableSortColumn,
-	formatTableSortOrder,
-	sortTableData
-} from '@/data-table-sort.js';
+import { parseTableSort, formatTableSortColumn, formatTableSortOrder, sortTableData } from '@/data-table-sort.js';
 import SearchInput from '@/components/common/SearchInput.vue';
 import DataTable, { type Column, type TableSort } from '@components/common/DataTable.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
