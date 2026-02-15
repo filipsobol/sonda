@@ -7,6 +7,7 @@ interface DagLayoutOptions {
 	verticalGap: number;
 	paddingX: number;
 	paddingY: number;
+	maxNodesPerColumn: number;
 }
 
 export interface DagLayoutNode {
@@ -43,9 +44,11 @@ const DEFAULT_LAYOUT_OPTIONS: DagLayoutOptions = {
 	horizontalGap: 120,
 	verticalGap: 16,
 	paddingX: 36,
-	paddingY: 24
+	paddingY: 24,
+	maxNodesPerColumn: Number.POSITIVE_INFINITY
 };
 
+const SPLIT_COLUMN_GAP = 24;
 const EDGE_SIBLING_OFFSET_STEP = 6;
 
 export function createDagLayout(connections: Array<Connection>, options: Partial<DagLayoutOptions> = {}): DagLayout {
@@ -123,10 +126,19 @@ export function createDagLayout(connections: Array<Connection>, options: Partial
 		layersMap.set(layer, ids);
 	}
 
+	const layerColumns = new Map<number, Array<Array<string>>>();
+
+	for (const [layer, ids] of layersMap) {
+		const columns = splitLayerNodes(ids, layoutOptions.maxNodesPerColumn);
+		layerColumns.set(layer, columns.length ? columns : [[]]);
+	}
+
 	let maxRows = 1;
 
-	for (const ids of layersMap.values()) {
-		maxRows = Math.max(maxRows, ids.length);
+	for (const columns of layerColumns.values()) {
+		for (const column of columns) {
+			maxRows = Math.max(maxRows, column.length);
+		}
 	}
 
 	const innerHeight = Math.max(
@@ -134,36 +146,57 @@ export function createDagLayout(connections: Array<Connection>, options: Partial
 		maxRows * layoutOptions.nodeHeight + (maxRows - 1) * layoutOptions.verticalGap
 	);
 
-	const totalLayers = maxLayer + 1;
-	const innerWidth =
-		totalLayers * layoutOptions.nodeWidth + Math.max(totalLayers - 1, 0) * layoutOptions.horizontalGap;
+	let innerWidth = 0;
+
+	for (let layer = 0; layer <= maxLayer; layer++) {
+		const columns = layerColumns.get(layer)!;
+		const layerWidth = columns.length * layoutOptions.nodeWidth + Math.max(columns.length - 1, 0) * SPLIT_COLUMN_GAP;
+
+		innerWidth += layerWidth;
+
+		if (layer < maxLayer) {
+			innerWidth += layoutOptions.horizontalGap;
+		}
+	}
 
 	const width = layoutOptions.paddingX * 2 + innerWidth;
 	const height = layoutOptions.paddingY * 2 + innerHeight;
 
 	const nodes: Array<DagLayoutNode> = [];
 	const positions = new Map<string, DagLayoutNode>();
+	let layerStartX = layoutOptions.paddingX;
 
 	for (let layer = 0; layer <= maxLayer; layer++) {
-		const ids = layersMap.get(layer)!;
-		const columnHeight =
-			ids.length * layoutOptions.nodeHeight + Math.max(ids.length - 1, 0) * layoutOptions.verticalGap;
-		const yStart = layoutOptions.paddingY + (innerHeight - columnHeight) / 2;
-		const x = layoutOptions.paddingX + layer * (layoutOptions.nodeWidth + layoutOptions.horizontalGap);
+		const columns = layerColumns.get(layer)!;
+		const layerWidth = columns.length * layoutOptions.nodeWidth + Math.max(columns.length - 1, 0) * SPLIT_COLUMN_GAP;
 
-		for (let index = 0; index < ids.length; index++) {
-			const id = ids[index]!;
-			const node: DagLayoutNode = {
-				id,
-				layer,
-				x,
-				y: yStart + index * (layoutOptions.nodeHeight + layoutOptions.verticalGap),
-				width: layoutOptions.nodeWidth,
-				height: layoutOptions.nodeHeight
-			};
+		for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+			const ids = columns[columnIndex]!;
+			const columnHeight =
+				ids.length * layoutOptions.nodeHeight + Math.max(ids.length - 1, 0) * layoutOptions.verticalGap;
+			const yStart = layoutOptions.paddingY + (innerHeight - columnHeight) / 2;
+			const x = layerStartX + columnIndex * (layoutOptions.nodeWidth + SPLIT_COLUMN_GAP);
 
-			nodes.push(node);
-			positions.set(id, node);
+			for (let index = 0; index < ids.length; index++) {
+				const id = ids[index]!;
+				const node: DagLayoutNode = {
+					id,
+					layer,
+					x,
+					y: yStart + index * (layoutOptions.nodeHeight + layoutOptions.verticalGap),
+					width: layoutOptions.nodeWidth,
+					height: layoutOptions.nodeHeight
+				};
+
+				nodes.push(node);
+				positions.set(id, node);
+			}
+		}
+
+		layerStartX += layerWidth;
+
+		if (layer < maxLayer) {
+			layerStartX += layoutOptions.horizontalGap;
 		}
 	}
 
@@ -319,4 +352,28 @@ function getConnectionKey(connection: Connection): string {
 
 function compareText(a: string, b: string): number {
 	return a.localeCompare(b);
+}
+
+function splitLayerNodes(ids: Array<string>, maxNodesPerColumn: number): Array<Array<string>> {
+	if (!ids.length) {
+		return [];
+	}
+
+	if (!Number.isFinite(maxNodesPerColumn) || maxNodesPerColumn <= 0) {
+		return [ids];
+	}
+
+	const columnSize = Math.max(1, Math.floor(maxNodesPerColumn));
+
+	if (ids.length <= columnSize) {
+		return [ids];
+	}
+
+	const columns: Array<Array<string>> = [];
+
+	for (let index = 0; index < ids.length; index += columnSize) {
+		columns.push(ids.slice(index, index + columnSize));
+	}
+
+	return columns;
 }

@@ -154,7 +154,7 @@ const resourceKinds = computed<Record<string, Exclude<ResourceKind, 'chunk'> | u
 	return kinds;
 });
 
-const layout = computed(() => createDagLayout(filteredConnections.value));
+const layout = computed(() => createDagLayout(filteredConnections.value, { maxNodesPerColumn: 50 }));
 const focusNode = ref('');
 
 const searchNodeMatches = computed(() => {
