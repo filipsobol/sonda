@@ -21,6 +21,7 @@
 		</div>
 
 		<DataTable
+			v-model:sort="tableSort"
 			:columns="COLUMNS"
 			:data="paginatedData"
 			id="name"
@@ -72,7 +73,13 @@ import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js';
 import { assets } from '@/report.js';
 import { formatSize } from '@/format.js';
-import DataTable, { type Column } from '@components/common/DataTable.vue';
+import {
+	parseTableSort,
+	formatTableSortColumn,
+	formatTableSortOrder,
+	sortTableData
+} from '@/data-table-sort.js';
+import DataTable, { type Column, type TableSort } from '@components/common/DataTable.vue';
 import SearchInput from '@/components/common/SearchInput.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
 import BaseButton from '@/components/common/Button.vue';
@@ -80,7 +87,7 @@ import Pagination from '@components/common/Pagination.vue';
 import Badge from '@components/common/Badge.vue';
 import IconSearch from '@components/icon/Search.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
-import type { FileType } from 'sonda';
+import type { AssetResource, FileType } from 'sonda';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -93,7 +100,7 @@ const TYPE_OPTIONS: Array<DropdownOption<FileType>> = [
 	{ label: 'Other', value: 'other' }
 ];
 
-const COLUMNS: Array<Column> = [
+const COLUMNS: Array<Column<AssetResource>> = [
 	{
 		name: '',
 		align: 'center',
@@ -101,16 +108,19 @@ const COLUMNS: Array<Column> = [
 	},
 	{
 		name: 'Path',
+		key: 'name',
 		align: 'left',
 		width: '100%'
 	},
 	{
 		name: 'Uncompressed size',
+		key: 'uncompressed',
 		align: 'right',
 		width: '156px'
 	},
 	{
 		name: 'Type',
+		key: 'type',
 		align: 'center',
 		width: '122px'
 	}
@@ -121,7 +131,16 @@ const availableTypeOptions = computed(() =>
 );
 const search = computed(router.computedQuery('search', ''));
 const types = computed(router.computedQuery('types', [] as Array<string>));
+const sortColumn = computed(router.computedQuery<string>('sortColumn', ''));
+const sortOrder = computed(router.computedQuery<string>('sortOrder', ''));
 const currentPage = computed(router.computedQuery('page', 1));
+const tableSort = computed<TableSort | null>({
+	get: () => parseTableSort<AssetResource>(sortColumn.value, sortOrder.value, COLUMNS),
+	set: value => {
+		sortColumn.value = formatTableSortColumn(value);
+		sortOrder.value = formatTableSortOrder(value);
+	}
+});
 
 const filteredData = computed(() => {
 	const filtered = assets.value.filter(item => !types.value.length || types.value.includes(item.type));
@@ -134,11 +153,13 @@ const filteredData = computed(() => {
 		.map(dependency => dependency.obj);
 });
 
+const sortedData = computed(() => sortTableData(filteredData.value, COLUMNS, tableSort.value));
+
 const paginatedData = computed(() => {
 	const start = (currentPage.value - 1) * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
 
-	return filteredData.value.slice(start, end);
+	return sortedData.value.slice(start, end);
 });
 
 watch([search, types], () => {

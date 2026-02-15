@@ -24,6 +24,7 @@
 
 		<DataTable
 			v-model="active"
+			v-model:sort="tableSort"
 			:columns="COLUMNS"
 			:data="paginatedData"
 			id="name"
@@ -105,8 +106,14 @@ import fuzzysort from 'fuzzysort';
 import { formatPath } from '@/format';
 import { router } from '@/router.js';
 import { report } from '@/report.js';
+import {
+	parseTableSort,
+	formatTableSortColumn,
+	formatTableSortOrder,
+	sortTableData
+} from '@/data-table-sort.js';
 import SearchInput from '@/components/common/SearchInput.vue';
-import DataTable, { type Column } from '@components/common/DataTable.vue';
+import DataTable, { type Column, type TableSort } from '@components/common/DataTable.vue';
 import Dropdown from '@components/common/Dropdown.vue';
 import Pagination from '@components/common/Pagination.vue';
 import IconFunnel from '@components/icon/Funnel.vue';
@@ -121,7 +128,7 @@ const USED_IN_OPTIONS = report
 		value: output.name
 	}));
 
-const COLUMNS: Array<Column> = [{ name: 'Name', align: 'left' }];
+const COLUMNS: Array<Column<Item>> = [{ name: 'Name', key: 'name', align: 'left' }];
 
 interface Item {
 	name: string;
@@ -163,8 +170,17 @@ const availableUsedIn = computed(() =>
 );
 const search = computed(router.computedQuery('search', ''));
 const usedIn = computed(router.computedQuery('usage', [] as Array<string>));
+const sortColumn = computed(router.computedQuery<string>('sortColumn', ''));
+const sortOrder = computed(router.computedQuery<string>('sortOrder', ''));
 const currentPage = computed(router.computedQuery('page', 1));
 const active = computed(router.computedQuery('active', ''));
+const tableSort = computed<TableSort | null>({
+	get: () => parseTableSort<Item>(sortColumn.value, sortOrder.value, COLUMNS),
+	set: value => {
+		sortColumn.value = formatTableSortColumn(value);
+		sortOrder.value = formatTableSortOrder(value);
+	}
+});
 
 const filteredData = computed(() => {
 	const filtered = data.value.filter(
@@ -179,11 +195,13 @@ const filteredData = computed(() => {
 		.map(dependency => dependency.obj);
 });
 
+const sortedData = computed(() => sortTableData(filteredData.value, COLUMNS, tableSort.value));
+
 const paginatedData = computed(() => {
 	const start = (currentPage.value - 1) * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
 
-	return filteredData.value.slice(start, end);
+	return sortedData.value.slice(start, end);
 });
 
 watch([search, usedIn, currentPage], () => {
