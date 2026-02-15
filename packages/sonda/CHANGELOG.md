@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.0
+
+### Minor Changes
+
+- 5609a40: Add a new "File connections" page that visualizes build dependencies as an interactive graph.
+- a1b7c32: Add column sorting to tables on Assets and Inputs pages.
+
+### Patch Changes
+
+- c99a784: Fix dependency tree path resolution on the Input Details page so connection graphs render more reliably.
+
 ## 0.10.2
 
 ### Patch Changes
@@ -110,6 +121,7 @@ The JSON report format has been completely redesigned. For complete details, ref
 - 0c0113f: BREAKING CHANGE: Distribute only the ESM builds
 - 0c0113f: BREAKING CHANGE: Rename the `detailed` configuration option to `deep`.
 - 0c0113f: BREAKING CHANGE: Reports are now saved to the `.sonda` folder by default. The `filename` configuration option has been replaced with the `outputDir` option. Each new report will end with incremented numbers to avoid overwriting previous reports. For example:
+
   - `.sonda/sonda_1.html`
   - `.sonda/sonda_2.html`
   - `.sonda/sonda_3.html`
@@ -253,9 +265,9 @@ Besides the new features listed below, this release changes some default behavio
 
 ```json
 {
-	"detailed": true,
-	"gzip": true,
-	"brotli": true
+  "detailed": true,
+  "gzip": true,
+  "brotli": true
 }
 ```
 
