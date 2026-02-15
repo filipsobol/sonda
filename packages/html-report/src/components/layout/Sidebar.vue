@@ -69,6 +69,7 @@ import { assets, sources, report } from '@/report.js';
 import { router } from '@/router.js';
 import IconHome from '@icon/Home.vue';
 import IconGrid from '@icon/Grid.vue';
+import IconWorkflow from '@icon/Workflow.vue';
 import IconBoxes from '@icon/Boxes.vue';
 import IconFileInput from '@icon/FileInput.vue';
 import IconShare2 from '@icon/Share2.vue';
@@ -91,6 +92,11 @@ const items = computed<Array<Link>>(() => [
 		title: 'Treemap',
 		link: 'treemap',
 		icon: IconGrid
+	},
+	{
+		title: 'Connections',
+		link: 'connections',
+		icon: IconWorkflow
 	},
 	{
 		title: 'Assets',
