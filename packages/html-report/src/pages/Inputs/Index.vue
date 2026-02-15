@@ -53,6 +53,7 @@
 		</div>
 
 		<DataTable
+			v-model:sort="tableSort"
 			:columns="COLUMNS"
 			:data="paginatedData"
 			id="path"
@@ -104,6 +105,8 @@
 					</p>
 				</td>
 
+				<td class="p-3 text-right font-normal whitespace-nowrap">{{ formatSize(item.uncompressed) }}</td>
+
 				<td class="p-3 text-center font-normal whitespace-nowrap">
 					<Badge
 						v-if="item.format === 'esm'"
@@ -150,9 +153,10 @@ import { ref, computed, watch } from 'vue';
 import fuzzysort from 'fuzzysort';
 import { router } from '@/router.js';
 import { sources as reportSources, report, assets } from '@/report.js';
-import { formatPath } from '@/format.js';
+import { formatPath, formatSize } from '@/format.js';
+import { parseTableSort, formatTableSortColumn, formatTableSortOrder, sortTableData } from '@/data-table-sort.js';
 import SearchInput from '@/components/common/SearchInput.vue';
-import DataTable, { type Column } from '@components/common/DataTable.vue';
+import DataTable, { type Column, type TableSort } from '@components/common/DataTable.vue';
 import Dropdown, { type DropdownOption } from '@components/common/Dropdown.vue';
 import BaseButton from '@/components/common/Button.vue';
 import Pagination from '@components/common/Pagination.vue';
@@ -187,7 +191,17 @@ const SOURCE_OPTIONS = [
 	{ label: 'External', value: 'external' }
 ];
 
-const COLUMNS: Array<Column> = [
+interface InputItem {
+	path: string;
+	name: string;
+	uncompressed: number;
+	format: ModuleFormat;
+	type: FileType;
+	source: 'internal' | 'external';
+	usedIn: Array<string>;
+}
+
+const COLUMNS: Array<Column<InputItem>> = [
 	{
 		name: '',
 		align: 'center',
@@ -195,21 +209,32 @@ const COLUMNS: Array<Column> = [
 	},
 	{
 		name: 'Path',
+		key: 'name',
 		align: 'left',
-		width: '66.6%'
+		width: '50%'
 	},
 	{
 		name: 'Used in',
+		sortId: 'usedIn',
+		sort: item => item.usedIn.length,
 		align: 'left',
-		width: '33.4%'
+		width: '50%'
+	},
+	{
+		name: 'Original size',
+		key: 'uncompressed',
+		align: 'right',
+		width: '152px'
 	},
 	{
 		name: 'Format',
+		key: 'format',
 		align: 'center',
 		width: '106px'
 	},
 	{
 		name: 'Source',
+		key: 'source',
 		align: 'center',
 		width: '106px'
 	}
@@ -217,10 +242,11 @@ const COLUMNS: Array<Column> = [
 
 const usedInOptions = computed(() => assets.value.map(({ name }) => ({ label: name, value: name })));
 
-const data = ref(
+const data = ref<Array<InputItem>>(
 	reportSources.value.map(input => ({
 		path: input.name,
 		name: formatPath(input.name),
+		uncompressed: input.uncompressed,
 		format: input.format,
 		type: input.type,
 		source: input.name.includes('node_modules') ? 'external' : 'internal',
@@ -249,7 +275,16 @@ const types = computed(router.computedQuery('types', [] as Array<string>));
 const formats = computed(router.computedQuery('formats', [] as Array<string>));
 const sources = computed(router.computedQuery('sources', [] as Array<string>));
 const usedIn = computed(router.computedQuery('usedIn', [] as Array<string>));
+const sortColumn = computed(router.computedQuery<string>('sortColumn', ''));
+const sortOrder = computed(router.computedQuery<string>('sortOrder', ''));
 const currentPage = computed(router.computedQuery('page', 1));
+const tableSort = computed<TableSort | null>({
+	get: () => parseTableSort<InputItem>(sortColumn.value, sortOrder.value, COLUMNS),
+	set: value => {
+		sortColumn.value = formatTableSortColumn(value);
+		sortOrder.value = formatTableSortOrder(value);
+	}
+});
 
 const filteredData = computed(() => {
 	const filtered = data.value.filter(item => {
@@ -269,11 +304,13 @@ const filteredData = computed(() => {
 		.map(dependency => dependency.obj);
 });
 
+const sortedData = computed(() => sortTableData(filteredData.value, COLUMNS, tableSort.value));
+
 const paginatedData = computed(() => {
 	const start = (currentPage.value - 1) * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
 
-	return filteredData.value.slice(start, end);
+	return sortedData.value.slice(start, end);
 });
 
 watch([search, types, formats, sources, usedIn], () => {

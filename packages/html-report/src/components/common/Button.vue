@@ -3,7 +3,7 @@
 		:is="elementType"
 		:disabled
 		:class="[
-			'flex h-8 cursor-pointer items-center justify-between gap-2 rounded-lg border border-gray-300 px-2 text-sm text-gray-500 shadow-xs outline-hidden',
+			'flex h-8 cursor-pointer items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white px-2 text-sm text-gray-500 shadow-xs outline-hidden',
 			'transition-opacity duration-150',
 			'hover:border-gray-400 hover:bg-gray-100 hover:text-gray-700',
 			'focus:border-gray-500 focus:ring focus:ring-gray-500',
