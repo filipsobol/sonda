@@ -14,8 +14,8 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.18",
-		"@types/node": "^25.2.2",
-		"@types/react": "^19.2.13",
+		"@types/node": "^25.2.3",
+		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"sonda": "workspace:^",
 		"tailwindcss": "^4.1.18",

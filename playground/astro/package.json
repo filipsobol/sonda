@@ -11,12 +11,12 @@
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.13",
-		"@astrojs/node": "^9.5.2",
+		"@astrojs/node": "^9.5.3",
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
 		"@astrojs/vue": "^5.1.4",
-		"astro": "^5.17.1",
-		"vue": "^3.5.27"
+		"astro": "^5.17.2",
+		"vue": "^3.5.28"
 	},
 	"devDependencies": {
 		"sonda": "workspace:^"

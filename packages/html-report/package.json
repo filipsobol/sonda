@@ -10,9 +10,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@vueuse/core": "^14.2.0",
+		"@vueuse/core": "^14.2.1",
 		"fuzzysort": "^3.1.0",
-		"vue": "^3.5.27"
+		"vue": "^3.5.28"
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.1.18",
