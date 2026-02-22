@@ -21,7 +21,7 @@
 		"@types/node": "^25.3.0",
 		"clean-package": "^2.2.0",
 		"medium-zoom": "^1.1.0",
-		"oxfmt": "^0.28.0",
+		"oxfmt": "^0.34.0",
 		"pkg-pr-new": "^0.0.63",
 		"rolldown": "1.0.0-rc.5",
 		"rolldown-plugin-dts": "~0.20.0",
