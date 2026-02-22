@@ -79,5 +79,12 @@ function getModuleFormat(name: string, module: ModuleInfo): ModuleFormat {
 
 	const ext = extname(module.id);
 
-	return module.meta.commonjs?.isCommonJS === true || ext === '.cjs' || ext === '.cts' ? 'cjs' : 'esm';
+	const isCommonJS =
+		!!module.meta.commonjs?.isCommonJS ||
+		// @ts-ignore - Rolldown uses `inputFormat` instead of `meta`.
+		module.inputFormat === 'cjs' ||
+		ext === '.cjs' ||
+		ext === '.cts';
+
+	return isCommonJS ? 'cjs' : 'esm';
 }
