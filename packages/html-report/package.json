@@ -10,16 +10,16 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@vueuse/core": "^14.2.0",
+		"@vueuse/core": "^14.2.1",
 		"fuzzysort": "^3.1.0",
-		"vue": "^3.5.27"
+		"vue": "^3.5.28"
 	},
 	"devDependencies": {
-		"@tailwindcss/vite": "^4.1.18",
+		"@tailwindcss/vite": "^4.2.0",
 		"@vitejs/plugin-vue": "^6.0.4",
 		"@vue/tsconfig": "^0.7.0",
 		"sonda": "workspace:^",
-		"tailwindcss": "^4.1.18",
+		"tailwindcss": "^4.2.0",
 		"typescript": "~5.9.3",
 		"vite": "^7.3.1",
 		"vite-plugin-singlefile": "^2.3.0",

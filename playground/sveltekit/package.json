@@ -9,11 +9,11 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/kit": "^2.52.2",
+		"@sveltejs/adapter-auto": "^7.0.1",
+		"@sveltejs/kit": "^2.53.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"sonda": "workspace:^",
-		"svelte": "^5.51.5",
+		"svelte": "^5.53.2",
 		"vite": "^7.3.1"
 	}
 }
