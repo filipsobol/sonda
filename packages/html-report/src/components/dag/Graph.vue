@@ -12,16 +12,100 @@
 			class="max-w-420px absolute top-3 left-3 z-1 cursor-default rounded-[10px] border border-gray-200 bg-white p-4 shadow-xs"
 			@mousedown.stop
 			@click.stop
+			@wheel.stop
 		>
-			<p class="text-sm text-gray-500">Selected node</p>
+			<div class="flex items-start justify-between gap-2">
+				<p class="text-sm text-gray-500">Selected node</p>
+				<button
+					type="button"
+					class="flex size-6 cursor-pointer items-center justify-center rounded-md text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+					aria-label="Close selected node details"
+					@click="closeSelectedNode"
+				>
+					<IconX class="h-4 w-4" />
+				</button>
+			</div>
 			<p
+				v-if="hasNamedActiveNode"
 				:title="activeNodeData.id"
 				class="mt-2 truncate text-sm font-semibold"
 			>
 				{{ activeNodeData.displayName }}
 			</p>
 			<p class="mt-1 text-sm">Kind: {{ activeNodeData.kind }}</p>
+
+			<div class="mt-4 grid gap-3">
+				<div>
+					<p class="text-sm font-semibold tracking-wide text-gray-500">
+						Incoming connections ({{ incomingConnections.length }})
+					</p>
+
+					<ul class="mt-1 max-h-37.5 overflow-y-auto rounded-md border border-gray-200 bg-gray-50">
+						<li
+							v-if="!incomingConnections.length"
+							class="px-2 py-1.5 text-sm text-gray-500"
+						>
+							No incoming connections
+						</li>
+
+						<li
+							v-for="connection in incomingConnections"
+							:key="connection.key"
+						>
+							<a
+								:href="connection.url"
+								class="flex items-center justify-between gap-2 px-2 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-orange-600"
+								@click.prevent="onConnectionNodeClick(connection.nodeId)"
+							>
+								<span
+									:title="connection.id"
+									class="max-w-250px min-w-0 grow truncate"
+								>
+									{{ connection.label }}
+								</span>
+								<span class="shrink-0 text-xs text-gray-500">{{ connection.kind }}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<p class="text-sm font-semibold tracking-wide text-gray-500">
+						Outgoing connections ({{ outgoingConnections.length }})
+					</p>
+
+					<ul class="mt-1 max-h-37.5 overflow-y-auto rounded-md border border-gray-200 bg-gray-50">
+						<li
+							v-if="!outgoingConnections.length"
+							class="px-2 py-1.5 text-sm text-gray-500"
+						>
+							No outgoing connections
+						</li>
+
+						<li
+							v-for="connection in outgoingConnections"
+							:key="connection.key"
+						>
+							<a
+								:href="connection.url"
+								class="flex items-center justify-between gap-2 px-2 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-orange-600"
+								@click.prevent="onConnectionNodeClick(connection.nodeId)"
+							>
+								<span
+									:title="connection.id"
+									class="max-w-250px min-w-0 grow truncate"
+								>
+									{{ connection.label }}
+								</span>
+								<span class="shrink-0 text-xs text-gray-500">{{ connection.kind }}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
 			<a
+				v-if="hasNamedActiveNode"
 				:href="activeNodeData.url"
 				class="mt-4 inline-flex rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-800 hover:bg-gray-50"
 			>
@@ -34,8 +118,19 @@
 			class="max-w-360px absolute right-3 bottom-14 z-20 cursor-default rounded-[10px] border border-gray-200 bg-white p-4 shadow-xs"
 			@mousedown.stop
 			@click.stop
+			@wheel.stop
 		>
-			<p class="text-sm text-gray-500">Controls</p>
+			<div class="flex items-start justify-between gap-2">
+				<p class="text-sm text-gray-500">Controls</p>
+				<button
+					type="button"
+					class="flex size-6 cursor-pointer items-center justify-center rounded-md text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+					aria-label="Close controls"
+					@click="closeControlsPanel"
+				>
+					<IconX class="h-4 w-4" />
+				</button>
+			</div>
 
 			<ul class="mt-2 space-y-1 text-sm text-gray-700">
 				<li><span class="font-semibold">Drag with left mouse button</span>: pan graph</li>
@@ -165,7 +260,7 @@
 					:key="node.id"
 					:xlink:href="node.url"
 					:data-state="node.state"
-					class="[&[data-state=active]_.node]:fill-orange-100 [&[data-state=active]_.node]:stroke-orange-500 [&[data-state=active]_.node-label]:fill-orange-800 [&[data-state=connected]_.node]:fill-orange-100 [&[data-state=connected]_.node]:stroke-orange-500 [&[data-state=matched]_.node]:fill-amber-100 [&[data-state=matched]_.node]:stroke-amber-500 [&[data-state=matched]_.node-label]:fill-amber-700"
+					class="[&[data-state=active]_.node]:fill-orange-100 [&[data-state=active]_.node]:stroke-orange-600 [&[data-state=active]_.node-label]:fill-orange-900 [&[data-state=connected]_.node]:fill-orange-50 [&[data-state=connected]_.node]:stroke-orange-300 [&[data-state=matched]_.node]:fill-yellow-50 [&[data-state=matched]_.node]:stroke-yellow-600 [&[data-state=matched]_.node-label]:fill-yellow-900"
 					@click.prevent="onNodeClick(node.id)"
 				>
 					<rect
@@ -201,6 +296,7 @@ import { router } from '@/router.js';
 import BaseButton from '../common/Button.vue';
 import IconCircleQuestionMark from '../icon/CircleQuestionMark.vue';
 import IconReset from '../icon/Reset.vue';
+import IconX from '../icon/X.vue';
 import IconZoomIn from '../icon/ZoomIn.vue';
 import IconZoomOut from '../icon/ZoomOut.vue';
 import type { DagCamera, DagLayout, DagLayoutEdge, DagLayoutNode } from '@/dag.js';
@@ -230,6 +326,16 @@ interface RenderedNode extends DagLayoutNode {
 	state: VisualState;
 }
 
+interface NodeConnectionLink {
+	key: string;
+	id: string;
+	nodeId: string;
+	label: string;
+	sortLabel: string;
+	kind: string;
+	url: string;
+}
+
 const EDGE_CLASS =
 	'pointer-events-none stroke-gray-300 stroke-2 opacity-30 [&[data-state=connected]]:stroke-orange-500 [&[data-state=connected]]:opacity-50 [&[data-state=active]]:stroke-orange-500 [&[data-state=active]]:opacity-50';
 
@@ -257,6 +363,7 @@ const DEFAULT_LEFT_PADDING = 30;
 const NODE_LABEL_PADDING_X = 20;
 const ELLIPSIS = '...';
 const LABEL_FONT = '12px sans-serif';
+const SELECTED_CONNECTION_LABEL_MAX_WIDTH = 210;
 
 const viewport = ref<HTMLDivElement | null>(null);
 const canvas = ref<SVGSVGElement | null>(null);
@@ -323,6 +430,60 @@ const activeNodeData = computed(() => {
 		url: getNodeUrl(node.id)
 	};
 });
+
+const incomingConnections = computed<Array<NodeConnectionLink>>(() => {
+	if (!props.activeNode) {
+		return [];
+	}
+
+	const connections = props.layout.edges
+		.filter(edge => edge.target === props.activeNode)
+		.map((edge, index) => {
+			const id = edge.source;
+			const label = formatPath(id);
+
+			return {
+				key: [edge.kind, edge.source, edge.target, edge.original || '', String(index)].join('\u0000'),
+				id,
+				nodeId: id,
+				label: trimConnectionLabel(label),
+				sortLabel: label,
+				kind: edge.kind,
+				url: getNodeUrl(id)
+			};
+		})
+		.sort((a, b) => a.sortLabel.localeCompare(b.sortLabel) || a.kind.localeCompare(b.kind));
+
+	return connections;
+});
+
+const outgoingConnections = computed<Array<NodeConnectionLink>>(() => {
+	if (!props.activeNode) {
+		return [];
+	}
+
+	const connections = props.layout.edges
+		.filter(edge => edge.source === props.activeNode)
+		.map((edge, index) => {
+			const id = edge.target;
+			const label = formatPath(id);
+
+			return {
+				key: [edge.kind, edge.source, edge.target, edge.original || '', String(index)].join('\u0000'),
+				id,
+				nodeId: id,
+				label: trimConnectionLabel(label),
+				sortLabel: label,
+				kind: edge.kind,
+				url: getNodeUrl(id)
+			};
+		})
+		.sort((a, b) => a.sortLabel.localeCompare(b.sortLabel) || a.kind.localeCompare(b.kind));
+
+	return connections;
+});
+
+const hasNamedActiveNode = computed(() => Boolean(activeNodeData.value?.displayName.trim()));
 
 const connectedNodeIds = computed(() => {
 	if (!props.activeNode) {
@@ -395,8 +556,20 @@ function trimLabel(name: string, nodeWidth: number): string {
 	const normalized = formatPath(name);
 	const maxWidth = Math.max(0, nodeWidth - NODE_LABEL_PADDING_X);
 
-	if (measureLabelWidth(normalized) <= maxWidth) {
-		return normalized;
+	return trimLabelFromStart(normalized, maxWidth);
+}
+
+function trimConnectionLabel(label: string): string {
+	return trimLabelFromStart(label, SELECTED_CONNECTION_LABEL_MAX_WIDTH);
+}
+
+function trimLabelFromStart(label: string, maxWidth: number): string {
+	if (maxWidth <= 0) {
+		return ELLIPSIS;
+	}
+
+	if (measureLabelWidth(label) <= maxWidth) {
+		return label;
 	}
 
 	if (measureLabelWidth(ELLIPSIS) > maxWidth) {
@@ -404,11 +577,11 @@ function trimLabel(name: string, nodeWidth: number): string {
 	}
 
 	let low = 0;
-	let high = normalized.length;
+	let high = label.length;
 
 	while (low < high) {
 		const middle = Math.floor((low + high + 1) / 2);
-		const candidate = `${ELLIPSIS}${normalized.slice(-middle)}`;
+		const candidate = `${ELLIPSIS}${label.slice(-middle)}`;
 
 		if (measureLabelWidth(candidate) <= maxWidth) {
 			low = middle;
@@ -417,7 +590,7 @@ function trimLabel(name: string, nodeWidth: number): string {
 		}
 	}
 
-	return low > 0 ? `${ELLIPSIS}${normalized.slice(-low)}` : ELLIPSIS;
+	return low > 0 ? `${ELLIPSIS}${label.slice(-low)}` : ELLIPSIS;
 }
 
 function measureLabelWidth(text: string): number {
@@ -461,6 +634,14 @@ function onNodeClick(nodeId: string): void {
 	}
 
 	emit('update:activeNode', nodeId);
+}
+
+function onConnectionNodeClick(nodeId: string): void {
+	emit('update:activeNode', nodeId);
+}
+
+function closeSelectedNode(): void {
+	emit('update:activeNode', '');
 }
 
 function getNodeState(nodeId: string): VisualState {
@@ -596,6 +777,10 @@ function onWheel(event: WheelEvent): void {
 
 function toggleControlsPanel(): void {
 	isControlsPanelOpen.value = !isControlsPanelOpen.value;
+}
+
+function closeControlsPanel(): void {
+	isControlsPanelOpen.value = false;
 }
 
 function zoomFromWheel(deltaY: number, clientX: number, clientY: number): void {
