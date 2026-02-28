@@ -173,8 +173,8 @@ importers:
         specifier: ^21.1.5
         version: 21.1.5(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.1.5(@angular/animations@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)))(rxjs@7.8.2)
       '@angular/ssr':
-        specifier: ^21.1.5
-        version: 21.1.5(fb3bca3ccd86997b5f8f28cf467b8d7e)
+        specifier: ^21.2.0
+        version: 21.2.0(fb3bca3ccd86997b5f8f28cf467b8d7e)
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -190,7 +190,7 @@ importers:
     devDependencies:
       '@angular/build':
         specifier: ^21.1.4
-        version: 21.1.4(acfa8273d2241c1d9d3c70d102dffc23)
+        version: 21.1.4(514db3fee3706678052c6e6bf01ee306)
       '@angular/cli':
         specifier: ^21.1.4
         version: 21.1.4(@types/node@25.3.0)(chokidar@5.0.0)
@@ -767,8 +767,8 @@ packages:
       '@angular/platform-browser': 21.1.5
       rxjs: ^6.5.3 || ^7.4.0
 
-  '@angular/ssr@21.1.5':
-    resolution: {integrity: sha512-e+lDOJN0Ttg6mLoVIiGK4OZKIT1ei3o/IBOjuHm84Nv6Q7XIL/5pN940e5nYoNaY40lzonKEXA0caAm+BGN5Ow==}
+  '@angular/ssr@21.2.0':
+    resolution: {integrity: sha512-NqtCNJETO1ocQ0F3pK4KxkoDkPxI2qN2YPEBLPAGTrLXxTb6vM06LwYa6tTwFm0sk26tfOGTuauJV1KhRnDcVQ==}
     peerDependencies:
       '@angular/common': ^21.0.0
       '@angular/core': ^21.0.0
@@ -10658,7 +10658,7 @@ snapshots:
       '@angular/core': 21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)
       tslib: 2.8.1
 
-  '@angular/build@21.1.4(acfa8273d2241c1d9d3c70d102dffc23)':
+  '@angular/build@21.1.4(514db3fee3706678052c6e6bf01ee306)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2101.4(chokidar@5.0.0)
@@ -10695,7 +10695,7 @@ snapshots:
       '@angular/core': 21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)
       '@angular/platform-browser': 21.1.5(@angular/animations@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))
       '@angular/platform-server': 21.1.5(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/compiler@21.1.5)(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.1.5(@angular/animations@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)))(rxjs@7.8.2)
-      '@angular/ssr': 21.1.5(fb3bca3ccd86997b5f8f28cf467b8d7e)
+      '@angular/ssr': 21.2.0(fb3bca3ccd86997b5f8f28cf467b8d7e)
       karma: 6.4.4
       less: 4.4.0
       lmdb: 3.4.4
@@ -10819,7 +10819,7 @@ snapshots:
       rxjs: 7.8.2
       tslib: 2.8.1
 
-  '@angular/ssr@21.1.5(fb3bca3ccd86997b5f8f28cf467b8d7e)':
+  '@angular/ssr@21.2.0(fb3bca3ccd86997b5f8f28cf467b8d7e)':
     dependencies:
       '@angular/common': 21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2)
       '@angular/core': 21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)(zone.js@0.16.1)
@@ -11509,8 +11509,6 @@ snapshots:
       '@ckeditor/ckeditor5-utils': 47.5.0
       ckeditor5: 47.5.0
       es-toolkit: 1.39.5
-    transitivePeerDependencies:
-      - supports-color
 
   '@ckeditor/ckeditor5-editor-multi-root@47.5.0':
     dependencies:
@@ -11541,8 +11539,6 @@ snapshots:
     dependencies:
       '@ckeditor/ckeditor5-utils': 47.5.0
       es-toolkit: 1.39.5
-    transitivePeerDependencies:
-      - supports-color
 
   '@ckeditor/ckeditor5-enter@47.5.0':
     dependencies:
@@ -11948,6 +11944,8 @@ snapshots:
       '@ckeditor/ckeditor5-engine': 47.5.0
       '@ckeditor/ckeditor5-utils': 47.5.0
       es-toolkit: 1.39.5
+    transitivePeerDependencies:
+      - supports-color
 
   '@ckeditor/ckeditor5-widget@47.5.0':
     dependencies:
