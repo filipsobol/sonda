@@ -92,7 +92,7 @@ export default defineConfig({
 		socialLinks: [
 			{ icon: 'github', link: 'https://github.com/filipsobol/sonda' },
 			{ icon: 'npm', link: 'https://www.npmjs.com/package/sonda' },
-			{ icon: 'bluesky', link: 'https://bsky.app/profile/filipsobol.bsky.social' },
+			{ icon: 'bluesky', link: 'https://bsky.app/profile/filipsobol.com' },
 			{ icon: 'x', link: 'https://x.com/filipsobol' }
 		],
 
