@@ -15,7 +15,7 @@
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
 		"@astrojs/vue": "^5.1.4",
-		"astro": "^5.17.3",
+		"astro": "^6.1.6",
 		"vue": "^3.5.28"
 	},
 	"devDependencies": {
