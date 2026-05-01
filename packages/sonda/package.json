@@ -69,17 +69,17 @@
 		"open": "^11.0.0"
 	},
 	"devDependencies": {
-		"@nuxt/schema": "^4.3.1",
+		"@nuxt/schema": "^4.4.4",
 		"@rspack/core": "^1.7.6",
-		"@vitest/coverage-v8": "^4.0.18",
+		"@vitest/coverage-v8": "^4.1.5",
 		"astro": "^5.17.3",
-		"esbuild": "^0.27.3",
+		"esbuild": "^0.28.0",
 		"load-source-map": "workspace:^",
-		"next": "^16.1.6",
-		"rollup": "^4.59.0",
+		"next": "^16.2.4",
+		"rollup": "^4.60.2",
 		"vite": "^7.3.1",
-		"vitest": "^4.0.18",
-		"webpack": "^5.105.2"
+		"vitest": "^4.1.5",
+		"webpack": "^5.106.2"
 	},
 	"engines": {
 		"node": ">=20.19 || >=22.12"
