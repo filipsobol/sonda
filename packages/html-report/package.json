@@ -17,12 +17,12 @@
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.3.0",
 		"@vitejs/plugin-vue": "^6.0.7",
-		"@vue/tsconfig": "^0.7.0",
+		"@vue/tsconfig": "^0.9.1",
 		"sonda": "workspace:^",
 		"tailwindcss": "^4.3.0",
 		"typescript": "~6.0.3",
 		"vite": "^7.3.5",
 		"vite-plugin-singlefile": "^2.3.3",
-		"vue-tsc": "3.1.5"
+		"vue-tsc": "3.3.3"
 	}
 }
