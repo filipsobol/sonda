@@ -13,5 +13,3 @@ onlyBuiltDependencies:
   - sharp
   - unrs-resolver
 
-overrides:
-  vue-tsc: '3.1.5' # https://github.com/vuejs/language-tools/issues/5810
