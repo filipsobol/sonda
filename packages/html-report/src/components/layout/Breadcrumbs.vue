@@ -1,9 +1,9 @@
 <template>
 	<nav
-		class="-mx-2 w-full text-gray-700"
+		class="-mx-2 flex w-full items-center justify-between gap-4 text-gray-700"
 		aria-label="Breadcrumb"
 	>
-		<ol class="inline-flex w-full items-center gap-1">
+		<ol class="inline-flex min-w-0 items-center gap-1">
 			<template
 				v-for="(part, index) in parts"
 				:key="index"
@@ -33,13 +33,23 @@
 				</li>
 			</template>
 		</ol>
+
+		<p
+			v-if="generatedAt"
+			class="shrink-0 px-2 text-sm text-gray-500"
+		>
+			<span class="font-medium text-gray-600">Generated</span>
+			{{ generatedAt }}
+		</p>
 	</nav>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { formatDateTime } from '@/format.js';
+import { report } from '@/report.js';
 import { router } from '@/router.js';
 import IconChevronLeft from '@icon/ChevronLeft.vue';
-import { computed } from 'vue';
 
 const parts = computed(() => {
 	const parts = [{ name: 'Home', url: router.getUrl('') }];
@@ -61,4 +71,10 @@ const parts = computed(() => {
 function capitalize(title: string): string {
 	return title.charAt(0).toUpperCase() + title.slice(1);
 }
+
+const generatedAt = computed(() => {
+	const value = report.value?.metadata.generatedAt;
+
+	return value ? formatDateTime(value) : null;
+});
 </script>

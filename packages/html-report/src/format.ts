@@ -25,6 +25,13 @@ export function formatTime(ms: number): string {
 	return format(TIME_UNITS, 1000, ms);
 }
 
+export function formatDateTime(date: string): string {
+	return new Intl.DateTimeFormat(undefined, {
+		dateStyle: 'medium',
+		timeStyle: 'short'
+	}).format(new Date(date));
+}
+
 export function formatPath(path: string): string {
 	// Path may containg multiple `node_modules` directories, so we need to find the last one.
 	const index = path.lastIndexOf(MODULES);

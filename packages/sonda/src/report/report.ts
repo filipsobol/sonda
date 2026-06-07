@@ -40,6 +40,7 @@ export class Report {
 
 		this.metadata = {
 			version,
+			generatedAt: new Date().toISOString(),
 			integration: config.integration,
 			sources: config.sources,
 			gzip: config.gzip,
@@ -125,9 +126,9 @@ export class Report {
 	}
 
 	async generate(): Promise<Array<string>> {
-		for (const [path, entrypoints] of Object.entries(this.assets)) {
-			updateOutput(this, path, entrypoints);
-		}
+		Object.entries(this.assets)
+			.filter(([_, entrypoints]) => !!entrypoints)
+			.forEach(([path, entrypoints]) => updateOutput(this, path, entrypoints!));
 
 		this.dependencies = updateDependencies(this);
 

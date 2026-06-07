@@ -6,10 +6,19 @@ import { SondaVitePlugin } from '../src/integrations/vite.js';
 import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
+const NORMALIZED_GENERATED_AT = '2026-06-07T12:00:00.000Z';
 
 const toOutputDir = (path: string = '') => join(import.meta.dirname, 'dist', path);
 const getFixture = (path: string) => resolve(import.meta.dirname, 'fixtures', path);
-const getReport = (filename: string = 'sonda_0.json') => JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+const getReport = (filename: string = 'sonda_0.json') => {
+	const report = JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+
+	expect(report.metadata.generatedAt).toEqual(expect.any(String));
+	expect(new Date(report.metadata.generatedAt).toISOString()).toBe(report.metadata.generatedAt);
+	report.metadata.generatedAt = NORMALIZED_GENERATED_AT;
+
+	return report;
+};
 
 describe('SondaVitePlugin', () => {
 	beforeEach(() => {
@@ -42,6 +51,7 @@ describe('SondaVitePlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -64,7 +74,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 243
+					uncompressed: 441
 				},
 				{
 					brotli: 0,
@@ -72,7 +82,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 445
+					uncompressed: 633
 				},
 				{
 					format: 'esm',
@@ -106,7 +116,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/detailed/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 186
+					uncompressed: 176
 				}
 			],
 			connections: [
@@ -155,6 +165,7 @@ describe('SondaVitePlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -177,7 +188,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 120
+					uncompressed: 171
 				},
 				{
 					brotli: 0,
@@ -185,7 +196,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 306
+					uncompressed: 347
 				},
 				{
 					format: 'esm',
@@ -202,7 +213,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/detailed/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 186
+					uncompressed: 176
 				}
 			],
 			connections: [
@@ -245,6 +256,7 @@ describe('SondaVitePlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -267,7 +279,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 115
 				},
 				{
 					brotli: 0,
@@ -275,7 +287,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 150
 				},
 				{
 					format: 'esm',
@@ -292,7 +304,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/hasMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [
@@ -335,6 +347,7 @@ describe('SondaVitePlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -357,7 +370,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 114
 				},
 				{
 					brotli: 0,
@@ -365,7 +378,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 149
 				},
 				{
 					format: 'esm',
@@ -382,7 +395,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/noMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [
@@ -453,6 +466,7 @@ describe('SondaVitePlugin', () => {
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'vite',
 				sources: false,
 				gzip: false,
@@ -475,7 +489,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 114
 				},
 				{
 					brotli: 0,
@@ -483,7 +497,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 149
 				},
 				{
 					format: 'esm',
@@ -500,7 +514,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/noMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [

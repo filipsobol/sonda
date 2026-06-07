@@ -16,6 +16,7 @@ Before we dive into the details of each field, here is the top-level structure o
 {
 	"metadata": {
 		"version": "0.7.1",
+		"generatedAt": "2026-06-07T12:00:00.000Z",
 		"integration": "rolldown",
 		"sources": true,
 		"gzip": true,
@@ -59,6 +60,7 @@ You can also refer to the TypeScript types with descriptions in the [`types.ts`]
 The `metadata` field contains information about Sonda itself and the configuration used to generate the report. It doesn't include all configuration options, but only those relevant to the report. The fields are:
 
 - **version** – The Sonda version used to generate the report.
+- **generatedAt** – The ISO 8601 timestamp indicating when the report was generated.
 - **integration** – The name of the integration used to generate the report. This can be a bundler or metaframework.
 - **sources** – Indicates whether the [`sources`](/configuration#sources) configuration option was enabled. If `true`, the `"sourcemaps"` field in the report will contain source maps of output assets.
 - **gzip** – Indicates whether the [`gzip`](/configuration#gzip) configuration option was enabled. If `true`, the `asset` and `chunk` resources will contain the `gzip` field with the size of the gzipped resource.

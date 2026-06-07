@@ -45,6 +45,11 @@ export interface Metadata {
 	version: string;
 
 	/**
+	 * ISO 8601 timestamp indicating when the report was generated.
+	 */
+	generatedAt: string;
+
+	/**
 	 * Integration used to generate the report.
 	 */
 	integration: Integration;

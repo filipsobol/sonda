@@ -23,7 +23,7 @@ export default defineConfig({
 		'entrypoints/vite': 'src/entrypoints/vite.ts',
 		'entrypoints/webpack': 'src/entrypoints/webpack.ts'
 	},
-	external: [...builtinModules, ...Object.keys(pkg.dependencies), 'sonda'],
+	external: [...builtinModules, ...Object.keys(pkg.dependencies), ...Object.keys(pkg.devDependencies), 'sonda'],
 	platform: 'node',
 	resolve: {
 		extensionAlias: {

@@ -6,10 +6,19 @@ import { SondaWebpackPlugin } from '../src/integrations/webpack.js';
 import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
+const NORMALIZED_GENERATED_AT = '2026-06-07T12:00:00.000Z';
 
 const toOutputDir = (path: string = '') => join(import.meta.dirname, 'dist', path);
 const getFixture = (path: string) => resolve(import.meta.dirname, 'fixtures', path);
-const getReport = (filename: string = 'sonda_0.json') => JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+const getReport = (filename: string = 'sonda_0.json') => {
+	const report = JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+
+	expect(report.metadata.generatedAt).toEqual(expect.any(String));
+	expect(new Date(report.metadata.generatedAt).toISOString()).toBe(report.metadata.generatedAt);
+	report.metadata.generatedAt = NORMALIZED_GENERATED_AT;
+
+	return report;
+};
 
 describe('SondaWebpackPlugin', () => {
 	beforeEach(() => {
@@ -50,6 +59,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -72,7 +82,7 @@ describe('SondaWebpackPlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/webpack_1.js',
 					type: 'other',
-					uncompressed: 147
+					uncompressed: 56
 				},
 				{
 					brotli: 0,
@@ -97,7 +107,7 @@ describe('SondaWebpackPlugin', () => {
 					name: 'tests/fixtures/bundlers/index.js',
 					parent: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 14
+					uncompressed: 20
 				},
 				{
 					format: 'esm',
@@ -114,7 +124,7 @@ describe('SondaWebpackPlugin', () => {
 					name: 'tests/fixtures/detailed/index.js',
 					parent: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 136
+					uncompressed: 216
 				},
 				{
 					format: 'other',
@@ -186,7 +196,7 @@ describe('SondaWebpackPlugin', () => {
 					name: 'webpack/runtime/make namespace object',
 					parent: 'tests/dist/webpack_1.js',
 					type: 'other',
-					uncompressed: 166
+					uncompressed: 171
 				}
 			],
 			connections: [
@@ -243,6 +253,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -255,7 +266,7 @@ describe('SondaWebpackPlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 23
+					uncompressed: 0
 				},
 				{
 					format: 'esm',
@@ -306,6 +317,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -318,7 +330,7 @@ describe('SondaWebpackPlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 23
+					uncompressed: 0
 				},
 				{
 					format: 'esm',
@@ -369,6 +381,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -381,7 +394,7 @@ describe('SondaWebpackPlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 23
+					uncompressed: 0
 				},
 				{
 					format: 'esm',
@@ -468,6 +481,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -480,7 +494,7 @@ describe('SondaWebpackPlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/webpack_1.js',
 					type: 'script',
-					uncompressed: 23
+					uncompressed: 0
 				},
 				{
 					format: 'esm',

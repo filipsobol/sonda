@@ -39,18 +39,54 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
-		".": "./dist/index.js",
-		"./angular": "./dist/entrypoints/angular.js",
-		"./astro": "./dist/entrypoints/astro.js",
-		"./esbuild": "./dist/entrypoints/esbuild.js",
-		"./next": "./dist/entrypoints/next.js",
-		"./nuxt": "./dist/entrypoints/nuxt.js",
-		"./rolldown": "./dist/entrypoints/rolldown.js",
-		"./rollup": "./dist/entrypoints/rollup.js",
-		"./rspack": "./dist/entrypoints/rspack.js",
-		"./sveltekit": "./dist/entrypoints/sveltekit.js",
-		"./vite": "./dist/entrypoints/vite.js",
-		"./webpack": "./dist/entrypoints/webpack.js",
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./angular": {
+			"types": "./dist/entrypoints/angular.d.ts",
+			"default": "./dist/entrypoints/angular.js"
+		},
+		"./astro": {
+			"types": "./dist/entrypoints/astro.d.ts",
+			"default": "./dist/entrypoints/astro.js"
+		},
+		"./esbuild": {
+			"types": "./dist/entrypoints/esbuild.d.ts",
+			"default": "./dist/entrypoints/esbuild.js"
+		},
+		"./next": {
+			"types": "./dist/entrypoints/next.d.ts",
+			"default": "./dist/entrypoints/next.js"
+		},
+		"./nuxt": {
+			"types": "./dist/entrypoints/nuxt.d.ts",
+			"default": "./dist/entrypoints/nuxt.js"
+		},
+		"./rolldown": {
+			"types": "./dist/entrypoints/rolldown.d.ts",
+			"default": "./dist/entrypoints/rolldown.js"
+		},
+		"./rollup": {
+			"types": "./dist/entrypoints/rollup.d.ts",
+			"default": "./dist/entrypoints/rollup.js"
+		},
+		"./rspack": {
+			"types": "./dist/entrypoints/rspack.d.ts",
+			"default": "./dist/entrypoints/rspack.js"
+		},
+		"./sveltekit": {
+			"types": "./dist/entrypoints/sveltekit.d.ts",
+			"default": "./dist/entrypoints/sveltekit.js"
+		},
+		"./vite": {
+			"types": "./dist/entrypoints/vite.d.ts",
+			"default": "./dist/entrypoints/vite.js"
+		},
+		"./webpack": {
+			"types": "./dist/entrypoints/webpack.d.ts",
+			"default": "./dist/entrypoints/webpack.js"
+		},
 		"./package.json": "./package.json"
 	},
 	"scripts": {
@@ -69,19 +105,19 @@
 		"open": "^11.0.0"
 	},
 	"devDependencies": {
-		"@nuxt/schema": "^4.3.1",
-		"@rspack/core": "^1.7.6",
-		"@vitest/coverage-v8": "^4.0.18",
-		"astro": "^5.17.3",
-		"esbuild": "^0.27.3",
+		"@nuxt/schema": "^4.4.7",
+		"@rspack/core": "^2.0.6",
+		"@vitest/coverage-v8": "^4.1.8",
+		"astro": "^6.4.4",
+		"esbuild": "^0.28.0",
 		"load-source-map": "workspace:^",
-		"next": "^16.1.6",
-		"rollup": "^4.59.0",
-		"vite": "^7.3.1",
-		"vitest": "^4.0.18",
-		"webpack": "^5.105.2"
+		"next": "^16.2.7",
+		"rollup": "^4.61.1",
+		"vite": "^8.0.16",
+		"vitest": "^4.1.8",
+		"webpack": "^5.107.2"
 	},
 	"engines": {
-		"node": ">=20.19 || >=22.12"
+		"node": ">=22.12"
 	}
 }
