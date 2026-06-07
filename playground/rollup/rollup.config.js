@@ -20,12 +20,12 @@ export default defineConfig({
 	],
 	plugins: [
 		Sonda({
-			format: [ 'html', 'json' ]
+			format: ['html', 'json']
 		}),
 		styles({
 			mode: 'extract',
 			sourceMap: true
 			// minimize: true
-		}),
+		})
 	]
 });
