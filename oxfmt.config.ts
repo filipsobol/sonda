@@ -12,5 +12,5 @@ export default defineConfig({
 	arrowParens: 'avoid',
 	objectWrap: 'preserve',
 	experimentalSortPackageJson: true,
-	ignorePatterns: ['.changeset/*.md', 'docs/public/demo.html']
+	ignorePatterns: ['.changeset/*.md', 'docs/public/demo.html', 'packages/sonda/CHANGELOG.md']
 }) as any;
