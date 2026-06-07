@@ -12,3 +12,12 @@ onlyBuiltDependencies:
   - rolldown
   - sharp
   - unrs-resolver
+
+overrides:
+  axios@>=1.0.0 <1.16.0: '>=1.16.0'
+  cookie@<0.7.0: '>=0.7.0'
+  esbuild@<=0.24.2: '>=0.25.0'
+  postcss@<8.5.10: '>=8.5.10'
+  uuid@<11.1.1: '>=11.1.1'
+  vite@<=6.4.1: '>=6.4.2'
+  webpack-dev-server@<=5.2.3: '>=5.2.4'
