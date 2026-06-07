@@ -14,8 +14,6 @@ export class HtmlFormatter extends Formatter {
 			'utf-8'
 		);
 
-		console.log( template.includes('__REPORT_DATA__') );
-
 		return template.replace('__REPORT_DATA__', gzipSync(JSON.stringify(data)).toString('base64'));
 	}
 }
