@@ -40,6 +40,7 @@ export class Report {
 
 		this.metadata = {
 			version,
+			generatedAt: new Date().toISOString(),
 			integration: config.integration,
 			sources: config.sources,
 			gzip: config.gzip,

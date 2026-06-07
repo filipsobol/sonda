@@ -6,10 +6,19 @@ import { SondaWebpackPlugin } from '../src/integrations/webpack.js';
 import { version } from '../package.json' with { type: 'json' };
 
 const mockConsoleInfo = vi.spyOn(console, 'info').mockImplementation(() => {});
+const NORMALIZED_GENERATED_AT = '2026-06-07T12:00:00.000Z';
 
 const toOutputDir = (path: string = '') => join(import.meta.dirname, 'dist', path);
 const getFixture = (path: string) => resolve(import.meta.dirname, 'fixtures', path);
-const getReport = (filename: string = 'sonda_0.json') => JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+const getReport = (filename: string = 'sonda_0.json') => {
+	const report = JSON.parse(readFileSync(toOutputDir(filename), 'utf-8'));
+
+	expect(report.metadata.generatedAt).toEqual(expect.any(String));
+	expect(new Date(report.metadata.generatedAt).toISOString()).toBe(report.metadata.generatedAt);
+	report.metadata.generatedAt = NORMALIZED_GENERATED_AT;
+
+	return report;
+};
 
 describe('SondaWebpackPlugin', () => {
 	beforeEach(() => {
@@ -50,6 +59,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -243,6 +253,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -306,6 +317,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -369,6 +381,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport()).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
@@ -468,6 +481,7 @@ describe('SondaWebpackPlugin', () => {
 		expect(getReport('custom-report.json')).toEqual({
 			metadata: {
 				version,
+				generatedAt: NORMALIZED_GENERATED_AT,
 				integration: 'webpack',
 				sources: false,
 				gzip: false,
