@@ -26,7 +26,7 @@
 		"rolldown": "1.1.0",
 		"rolldown-plugin-dts": "~0.25.2",
 		"typescript": "~6.0.3",
-		"vitepress": "^1.6.4",
+		"vitepress": "^2.0.0-alpha.17",
 		"vue": "^3.5.35"
 	},
 	"engines": {
