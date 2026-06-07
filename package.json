@@ -25,7 +25,7 @@
 		"pkg-pr-new": "^0.0.75",
 		"rolldown": "1.1.0",
 		"rolldown-plugin-dts": "~0.20.0",
-		"typescript": "~5.9.3",
+		"typescript": "~6.0.3",
 		"vitepress": "^1.6.4",
 		"vue": "^3.5.35"
 	},

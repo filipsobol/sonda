@@ -24,7 +24,12 @@ export default defineConfig({
 		// 	}
 		// } )
 	],
-	experiments: {
-		css: true
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				type: 'css/auto'
+			}
+		]
 	}
 });

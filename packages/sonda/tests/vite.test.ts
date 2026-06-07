@@ -64,7 +64,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 243
+					uncompressed: 441
 				},
 				{
 					brotli: 0,
@@ -72,7 +72,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 445
+					uncompressed: 633
 				},
 				{
 					format: 'esm',
@@ -106,7 +106,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/detailed/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 186
+					uncompressed: 176
 				}
 			],
 			connections: [
@@ -177,7 +177,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 120
+					uncompressed: 171
 				},
 				{
 					brotli: 0,
@@ -185,7 +185,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 306
+					uncompressed: 347
 				},
 				{
 					format: 'esm',
@@ -202,7 +202,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/detailed/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 186
+					uncompressed: 176
 				}
 			],
 			connections: [
@@ -267,7 +267,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 115
 				},
 				{
 					brotli: 0,
@@ -275,7 +275,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 150
 				},
 				{
 					format: 'esm',
@@ -292,7 +292,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/hasMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [
@@ -357,7 +357,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 114
 				},
 				{
 					brotli: 0,
@@ -365,7 +365,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 149
 				},
 				{
 					format: 'esm',
@@ -382,7 +382,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/noMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [
@@ -475,7 +475,7 @@ describe('SondaVitePlugin', () => {
 					name: '[unassigned]',
 					parent: 'tests/dist/vite_1.js',
 					type: 'other',
-					uncompressed: 58
+					uncompressed: 114
 				},
 				{
 					brotli: 0,
@@ -483,7 +483,7 @@ describe('SondaVitePlugin', () => {
 					kind: 'asset',
 					name: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 95
+					uncompressed: 149
 				},
 				{
 					format: 'esm',
@@ -500,7 +500,7 @@ describe('SondaVitePlugin', () => {
 					name: 'tests/fixtures/noMapping/index.js',
 					parent: 'tests/dist/vite_1.js',
 					type: 'script',
-					uncompressed: 37
+					uncompressed: 35
 				}
 			],
 			connections: [
