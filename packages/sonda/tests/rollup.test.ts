@@ -136,6 +136,46 @@ describe('SondaRollupPlugin', () => {
 		});
 	});
 
+	it('should record dynamic import connections', async () => {
+		const bundle = await rollup({
+			input: getFixture('dynamic/index.js'),
+			plugins: [
+				SondaRollupPlugin({
+					open: false,
+					format: 'json',
+					outputDir: toOutputDir()
+				})
+			]
+		});
+
+		await bundle.write({
+			format: 'es',
+			dir: toOutputDir('rollup_dynamic'),
+			sourcemap: true
+		});
+
+		await bundle.close();
+
+		const { connections } = getReport();
+
+		expect(connections).toEqual(
+			expect.arrayContaining([
+				{
+					kind: 'dynamic-import',
+					source: 'tests/fixtures/dynamic/index.js',
+					target: 'tests/fixtures/dynamic/lazy.js',
+					original: null
+				}
+			])
+		);
+		expect(connections).not.toContainEqual({
+			kind: 'import',
+			source: 'tests/fixtures/dynamic/index.js',
+			target: 'tests/fixtures/dynamic/lazy.js',
+			original: './lazy.js'
+		});
+	});
+
 	it('should generate correct report for detailed fixture', async () => {
 		const bundle = await rollup({
 			input: getFixture('detailed/index.js'),

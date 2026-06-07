@@ -1,7 +1,4 @@
 import { defineConfig } from 'rollup';
-import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
 import styles from 'rollup-plugin-styles';
 import Sonda from 'sonda/rollup';
 
@@ -9,33 +6,26 @@ export default defineConfig({
 	input: 'src/index.js',
 	output: [
 		{
-			file: 'dist/index.js',
+			dir: 'dist/es',
 			sourcemap: true,
-			format: 'es'
+			format: 'es',
+			minify: true
 		},
 		{
-			file: 'dist/index.cjs',
+			dir: 'dist/cjs',
 			sourcemap: true,
-			format: 'cjs'
+			format: 'cjs',
+			minify: true
 		}
 	],
 	plugins: [
 		Sonda({
-			format: 'html'
-		}),
-		commonjs({
-			sourceMap: true,
-			defaultIsModuleExports: true
-		}),
-		nodeResolve({
-			browser: true,
-			preferBuiltins: false
+			format: [ 'html', 'json' ]
 		}),
 		styles({
 			mode: 'extract',
 			sourceMap: true
 			// minimize: true
 		}),
-		terser()
 	]
 });

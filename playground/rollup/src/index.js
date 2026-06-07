@@ -14,3 +14,7 @@ Nam semper rutrum nulla, at tincidunt ipsum dictum eget. Nullam a ex massa. Nunc
 `;
 
 console.log(loremIpsum);
+
+import('./lazy.js').then(({ formatTeaser }) => {
+	console.log(formatTeaser(loremIpsum));
+});

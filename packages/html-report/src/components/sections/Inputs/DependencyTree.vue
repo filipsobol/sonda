@@ -108,6 +108,8 @@ interface ConnectionGraph {
 	roots: Array<string>;
 }
 
+type SkipConnection = (connection: Connection) => boolean;
+
 const props = defineProps<Props>();
 
 const usedIn = computed(router.computedQuery('usedIn', ''));
@@ -123,15 +125,13 @@ const graph = computed(() => {
 		return null;
 	}
 
-	if (usedIn.value && searchGraph.nodes.has(usedIn.value)) {
-		const pathFromSelectedAsset = findShortestPath([usedIn.value], targetNode, searchGraph);
+	const pathFromSelectedAsset = usedIn.value ? findShortestPath([usedIn.value], targetNode, searchGraph) : null;
+	const pathFromImportingEntrypoint = findShortestPath(searchGraph.roots, targetNode, searchGraph, connection => {
+		return isDirectEntrypointToTarget(connection, targetNode);
+	});
+	const combinedPath = mergePaths(pathFromImportingEntrypoint, pathFromSelectedAsset);
 
-		if (pathFromSelectedAsset?.length) {
-			return pathFromSelectedAsset;
-		}
-	}
-
-	return findShortestPath(searchGraph.roots, targetNode, searchGraph);
+	return combinedPath.length ? combinedPath : findShortestPath(searchGraph.roots, targetNode, searchGraph);
 });
 
 /**
@@ -140,7 +140,8 @@ const graph = computed(() => {
 function findShortestPath(
 	startNodes: Array<string>,
 	targetNode: string,
-	graph: ConnectionGraph
+	graph: ConnectionGraph,
+	skipConnection: SkipConnection = () => false
 ): Array<Connection> | null {
 	if (!startNodes.length) {
 		return null;
@@ -159,39 +160,57 @@ function findShortestPath(
 	}
 
 	const visited = new Set<string>(uniqueStartNodes);
-	const queue: Array<Array<Connection>> = [];
+	const queue: Array<{ node: string; path: Array<Connection> }> = uniqueStartNodes.map(node => ({ node, path: [] }));
 	let queueIndex = 0;
 
-	for (const startNode of uniqueStartNodes) {
-		for (const connection of graph.adjacency.get(startNode) || []) {
-			if (visited.has(connection.target)) {
-				continue;
-			}
-
-			visited.add(connection.target);
-			queue.push([connection]);
-		}
-	}
-
 	while (queueIndex < queue.length) {
-		const path = queue[queueIndex++]!;
-		const node = path[path.length - 1];
+		const { node, path } = queue[queueIndex++]!;
 
-		if (node.target === targetNode) {
-			return path;
-		}
+		for (const connection of graph.adjacency.get(node) || []) {
+			if (skipConnection(connection)) {
+				continue;
+			}
 
-		for (const connection of graph.adjacency.get(node.target) || []) {
 			if (visited.has(connection.target)) {
 				continue;
 			}
 
+			const nextPath = [...path, connection];
+
+			if (connection.target === targetNode) {
+				return nextPath;
+			}
+
 			visited.add(connection.target);
-			queue.push([...path, connection]);
+			queue.push({ node: connection.target, path: nextPath });
 		}
 	}
 
 	return null;
+}
+
+function isDirectEntrypointToTarget(connection: Connection, targetNode: string): boolean {
+	return connection.kind === 'entrypoint' && connection.target === targetNode;
+}
+
+function mergePaths(...paths: Array<Array<Connection> | null>): Array<Connection> {
+	const path: Array<Connection> = [];
+	const seen = new Set<string>();
+
+	for (const connections of paths) {
+		for (const connection of connections || []) {
+			const key = `${connection.kind}\0${connection.source}\0${connection.target}`;
+
+			if (seen.has(key)) {
+				continue;
+			}
+
+			seen.add(key);
+			path.push(connection);
+		}
+	}
+
+	return path;
 }
 
 function buildConnectionGraph(connections: Array<Connection>): ConnectionGraph {
