@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.12.0
+
+### Minor Changes
+
+- fbabd14: BREAKING CHANGE: Require Node.js 22.12.0 or later.
+- adb77bb: Add `metadata.generatedAt` field to the report.
+
+### Patch Changes
+
+- 9d70127: Fix error when generating report in Astro 6.
+
 ## 0.11.1
 
 ### Patch Changes
@@ -130,6 +141,7 @@ The JSON report format has been completely redesigned. For complete details, ref
 - 0c0113f: BREAKING CHANGE: Distribute only the ESM builds
 - 0c0113f: BREAKING CHANGE: Rename the `detailed` configuration option to `deep`.
 - 0c0113f: BREAKING CHANGE: Reports are now saved to the `.sonda` folder by default. The `filename` configuration option has been replaced with the `outputDir` option. Each new report will end with incremented numbers to avoid overwriting previous reports. For example:
+
   - `.sonda/sonda_1.html`
   - `.sonda/sonda_2.html`
   - `.sonda/sonda_3.html`
@@ -273,9 +285,9 @@ Besides the new features listed below, this release changes some default behavio
 
 ```json
 {
-	"detailed": true,
-	"gzip": true,
-	"brotli": true
+  "detailed": true,
+  "gzip": true,
+  "brotli": true
 }
 ```
 
