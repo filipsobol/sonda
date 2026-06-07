@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- fbabd14: Require Node.js 22.12.0 or later
+- fbabd14: BREAKING CHANGE: Require Node.js 22.12.0 or later.
 - adb77bb: Add `metadata.generatedAt` field to the report.
 
 ### Patch Changes
