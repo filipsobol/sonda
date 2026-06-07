@@ -2,16 +2,16 @@ packages:
   - packages/**
   - playground/**
 
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
-  - '@tailwindcss/oxide'
-  - esbuild
-  - lmdb
-  - msgpackr-extract
-  - rolldown
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  '@tailwindcss/oxide': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  rolldown: true
+  sharp: true
+  unrs-resolver: true
 
 overrides:
   axios@>=1.0.0 <1.16.0: '>=1.16.0'
@@ -21,3 +21,6 @@ overrides:
   uuid@<11.1.1: '>=11.1.1'
   vite@<=6.4.1: '>=6.4.2'
   webpack-dev-server@<=5.2.3: '>=5.2.4'
+
+minimumReleaseAgeExclude:
+  - jasmine-core # Remove after 2026-06-08
