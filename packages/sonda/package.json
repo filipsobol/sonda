@@ -1,6 +1,7 @@
 {
 	"name": "sonda",
 	"version": "0.12.0",
+	"$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
 	"description": "Universal bundle analyzer and visualizer that works with most popular bundlers and frameworks.",
 	"keywords": [
 		"analyzer",
@@ -26,6 +27,21 @@
 		"type": "git",
 		"url": "git+https://github.com/filipsobol/sonda.git",
 		"directory": "packages/sonda"
+	},
+	"compatiblePackages": {
+		"schemaVersion": 1,
+		"vite": {
+			"type": "compatible",
+			"versions": "^7.0.0 || ^8.0.0"
+		},
+		"rollup": {
+			"type": "compatible",
+			"versions": "^4.0.0"
+		},
+		"rolldown": {
+			"type": "compatible",
+			"versions": "^1.0.0"
+		}
 	},
 	"bin": {
 		"sonda-angular": "./bin/sonda-angular.js"
