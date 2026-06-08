@@ -8,10 +8,10 @@ const external = [
 	...Object.keys(pkg.dependencies),
 	...Object.keys(pkg.devDependencies),
 	'sonda'
-].filter( pkg => {
+].filter(pkg => {
 	// 'load-source-map' is a workspace dependency that is inlined
 	return pkg !== 'load-source-map';
-} );
+});
 
 export default defineConfig({
 	output: {
