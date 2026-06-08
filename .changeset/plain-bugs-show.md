@@ -1,5 +1,5 @@
 ---
-"sonda": minor
+"sonda": patch
 ---
 
-Improved Rollup/Rolldown dynamic import handling and input dependency trees for lazy chunks.
+Fix Rollup/Rolldown dynamic import handling and input dependency trees for lazy chunks.
