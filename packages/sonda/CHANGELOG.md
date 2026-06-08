@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.12.1
+
+### Patch Changes
+
+- c10b179: Fix Rollup/Rolldown dynamic import handling and input dependency trees for lazy chunks.
+- 71be720: Inline local `load-source-map` dependency.
+
 ## 0.12.0
 
 ### Minor Changes

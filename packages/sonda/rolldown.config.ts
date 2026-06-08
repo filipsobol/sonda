@@ -3,6 +3,16 @@ import { defineConfig } from 'rolldown';
 import { dts } from 'rolldown-plugin-dts';
 import pkg from './package.json' with { type: 'json' };
 
+const external = [
+	...builtinModules,
+	...Object.keys(pkg.dependencies),
+	...Object.keys(pkg.devDependencies),
+	'sonda'
+].filter(pkg => {
+	// 'load-source-map' is a workspace dependency that is inlined
+	return pkg !== 'load-source-map';
+});
+
 export default defineConfig({
 	output: {
 		dir: 'dist',
@@ -23,7 +33,7 @@ export default defineConfig({
 		'entrypoints/vite': 'src/entrypoints/vite.ts',
 		'entrypoints/webpack': 'src/entrypoints/webpack.ts'
 	},
-	external: [...builtinModules, ...Object.keys(pkg.dependencies), ...Object.keys(pkg.devDependencies), 'sonda'],
+	external,
 	platform: 'node',
 	resolve: {
 		extensionAlias: {

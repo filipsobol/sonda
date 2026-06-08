@@ -16,12 +16,25 @@ export function SondaRollupPlugin(userOptions: UserOptions = {}): Plugin {
 	}
 
 	const report = new Report(options);
+	const dynamicImportSources = new Set<string>();
 
 	return {
 		name: 'sonda/rollup',
 
+		resolveDynamicImport(specifier: unknown, importer: string) {
+			if (typeof specifier === 'string') {
+				dynamicImportSources.add(connectionKey(importer, specifier));
+			}
+
+			return null;
+		},
+
 		async resolveId(source: string, importer: string | undefined, options) {
 			if (!importer) {
+				return;
+			}
+
+			if (dynamicImportSources.has(connectionKey(importer, source))) {
 				return;
 			}
 
@@ -51,6 +64,25 @@ export function SondaRollupPlugin(userOptions: UserOptions = {}): Plugin {
 			});
 		},
 
+		buildEnd() {
+			for (const id of this.getModuleIds()) {
+				const module = this.getModuleInfo(id);
+
+				if (!module) {
+					continue;
+				}
+
+				for (const target of module.dynamicallyImportedIds) {
+					report.addConnection({
+						kind: 'dynamic-import',
+						source: normalizePath(module.id),
+						target: normalizePath(target),
+						original: null
+					});
+				}
+			}
+		},
+
 		async writeBundle({ dir, file }: NormalizedOutputOptions, bundle: OutputBundle) {
 			const outputDir = resolve(process.cwd(), dir ?? dirname(file!));
 
@@ -70,6 +102,10 @@ export function SondaRollupPlugin(userOptions: UserOptions = {}): Plugin {
 			}
 		}
 	};
+}
+
+function connectionKey(importer: string, source: string): string {
+	return `${importer}\0${source}`;
 }
 
 function getModuleFormat(name: string, module: ModuleInfo): ModuleFormat {
