@@ -2,4 +2,4 @@
 "sonda": patch
 ---
 
-Restored npm provenance publishing in the release workflow.
+Restore npm provenance publishing in the release workflow.
