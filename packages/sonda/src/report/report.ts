@@ -1,5 +1,5 @@
 import { isBuiltin } from 'module';
-import open from 'open';
+import open from 'tiny-open';
 import { version } from 'sonda/package.json' with { type: 'json' };
 import { hasIgnoredExtension, normalizePath, sortByKey } from '../utils.js';
 import { HtmlFormatter } from './formatters/HtmlFormatter.js';

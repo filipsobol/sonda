@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.0
+
+### Minor Changes
+
+- 24825cd: Replace the `open` dependency with `tiny-open`, removing 11 transitive dependencies from the published package.
+
+### Patch Changes
+
+- 6ddc13c: Restore npm provenance publishing in the release workflow.
+
 ## 0.12.1
 
 ### Patch Changes
