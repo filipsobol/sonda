@@ -27,6 +27,9 @@
 		"url": "git+https://github.com/filipsobol/sonda.git",
 		"directory": "packages/sonda"
 	},
+	"bugs": {
+		"url": "https://github.com/filipsobol/sonda/issues"
+	},
 	"bin": {
 		"sonda-angular": "./bin/sonda-angular.js"
 	},
