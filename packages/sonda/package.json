@@ -135,4 +135,8 @@
 			"versions": "^1.0.0"
 		}
 	}
+,
+	"bugs": {
+		"url": "https://github.com/filipsobol/sonda/issues"
+	}
 }
