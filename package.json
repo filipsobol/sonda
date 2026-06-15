@@ -1,37 +1,45 @@
 {
-	"name": "sonda-repo",
-	"version": "0.0.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"format": "oxfmt",
-		"test": "pnpm -r --stream run test",
-		"build": "pnpm -r --stream run build",
-		"restore": "pnpm run restore:sonda && pnpm run restore:unplugin-sourcemaps",
-		"restore:sonda": "cd packages/sonda && clean-package restore",
-		"restore:unplugin-sourcemaps": "cd packages/unplugin-sourcemaps && clean-package restore",
-		"release": "pnpm run build && changeset publish && pnpm run restore",
-		"docs:dev": "vitepress dev docs",
-		"docs:build": "pnpm run --filter sonda build && vitepress build docs",
-		"docs:preview": "vitepress preview docs"
-	},
-	"devDependencies": {
-		"@changesets/changelog-git": "^0.2.1",
-		"@changesets/cli": "^2.31.0",
-		"@types/node": "^25.9.2",
-		"clean-package": "^2.2.0",
-		"medium-zoom": "^1.1.0",
-		"oxfmt": "^0.53.0",
-		"pkg-pr-new": "^0.0.75",
-		"rolldown": "1.1.0",
-		"rolldown-plugin-dts": "~0.25.2",
-		"typescript": "~6.0.3",
-		"vitepress": "^2.0.0-alpha.17",
-		"vue": "^3.5.35"
-	},
-	"engines": {
-		"node": ">=22.13.0",
-		"pnpm": ">=11.5.2"
-	},
-	"packageManager": "pnpm@11.5.2"
+  "name": "sonda-repo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "oxfmt",
+    "test": "pnpm -r --stream run test",
+    "build": "pnpm -r --stream run build",
+    "restore": "pnpm run restore:sonda && pnpm run restore:unplugin-sourcemaps",
+    "restore:sonda": "cd packages/sonda && clean-package restore",
+    "restore:unplugin-sourcemaps": "cd packages/unplugin-sourcemaps && clean-package restore",
+    "release": "pnpm run build && changeset publish && pnpm run restore",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "pnpm run --filter sonda build && vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@changesets/changelog-git": "^0.2.1",
+    "@changesets/cli": "^2.31.0",
+    "@types/node": "^25.9.2",
+    "clean-package": "^2.2.0",
+    "medium-zoom": "^1.1.0",
+    "oxfmt": "^0.53.0",
+    "pkg-pr-new": "^0.0.75",
+    "rolldown": "1.1.0",
+    "rolldown-plugin-dts": "~0.25.2",
+    "typescript": "~6.0.3",
+    "vitepress": "^2.0.0-alpha.17",
+    "vue": "^3.5.35"
+  },
+  "engines": {
+    "node": ">=22.13.0",
+    "pnpm": ">=11.5.2"
+  },
+  "packageManager": "pnpm@11.5.2",
+  "homepage": "https://github.com/filipsobol/sonda",
+  "bugs": {
+    "url": "https://github.com/filipsobol/sonda/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipsobol/sonda.git"
+  }
 }

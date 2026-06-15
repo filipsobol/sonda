@@ -1,28 +1,36 @@
 {
-	"name": "html-report",
-	"version": "0.0.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "vue-tsc -b && vite build && pnpm run copy-assets",
-		"copy-assets": "node ./scripts/copy-html-report-assets.mjs",
-		"preview": "vite preview"
-	},
-	"dependencies": {
-		"@vueuse/core": "^14.3.0",
-		"fuzzysort": "^3.1.0",
-		"vue": "^3.5.35"
-	},
-	"devDependencies": {
-		"@tailwindcss/vite": "^4.3.0",
-		"@vitejs/plugin-vue": "^6.0.7",
-		"@vue/tsconfig": "^0.9.1",
-		"sonda": "workspace:^",
-		"tailwindcss": "^4.3.0",
-		"typescript": "~6.0.3",
-		"vite": "^7.3.5",
-		"vite-plugin-singlefile": "^2.3.3",
-		"vue-tsc": "3.3.3"
-	}
+  "name": "html-report",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build && pnpm run copy-assets",
+    "copy-assets": "node ./scripts/copy-html-report-assets.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.3.0",
+    "fuzzysort": "^3.1.0",
+    "vue": "^3.5.35"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/tsconfig": "^0.9.1",
+    "sonda": "workspace:^",
+    "tailwindcss": "^4.3.0",
+    "typescript": "~6.0.3",
+    "vite": "^7.3.5",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vue-tsc": "3.3.3"
+  },
+  "homepage": "https://github.com/filipsobol/sonda",
+  "bugs": {
+    "url": "https://github.com/filipsobol/sonda/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipsobol/sonda.git"
+  }
 }

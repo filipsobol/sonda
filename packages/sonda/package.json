@@ -1,138 +1,141 @@
 {
-	"name": "sonda",
-	"version": "0.13.0",
-	"description": "Universal bundle analyzer and visualizer that works with most popular bundlers and frameworks.",
-	"keywords": [
-		"analyzer",
-		"angular",
-		"bundle",
-		"devtools",
-		"esbuild",
-		"nextjs",
-		"nuxt",
-		"performance",
-		"rolldown-plugin",
-		"rollup-plugin",
-		"rspack",
-		"sveltekit",
-		"visualizer",
-		"vite-plugin",
-		"webpack",
-		"withastro"
-	],
-	"homepage": "https://sonda.dev",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/filipsobol/sonda.git",
-		"directory": "packages/sonda"
-	},
-	"bin": {
-		"sonda-angular": "./bin/sonda-angular.js"
-	},
-	"files": [
-		"bin",
-		"CHANGELOG.md",
-		"dist"
-	],
-	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		},
-		"./angular": {
-			"types": "./dist/entrypoints/angular.d.ts",
-			"default": "./dist/entrypoints/angular.js"
-		},
-		"./astro": {
-			"types": "./dist/entrypoints/astro.d.ts",
-			"default": "./dist/entrypoints/astro.js"
-		},
-		"./esbuild": {
-			"types": "./dist/entrypoints/esbuild.d.ts",
-			"default": "./dist/entrypoints/esbuild.js"
-		},
-		"./next": {
-			"types": "./dist/entrypoints/next.d.ts",
-			"default": "./dist/entrypoints/next.js"
-		},
-		"./nuxt": {
-			"types": "./dist/entrypoints/nuxt.d.ts",
-			"default": "./dist/entrypoints/nuxt.js"
-		},
-		"./rolldown": {
-			"types": "./dist/entrypoints/rolldown.d.ts",
-			"default": "./dist/entrypoints/rolldown.js"
-		},
-		"./rollup": {
-			"types": "./dist/entrypoints/rollup.d.ts",
-			"default": "./dist/entrypoints/rollup.js"
-		},
-		"./rspack": {
-			"types": "./dist/entrypoints/rspack.d.ts",
-			"default": "./dist/entrypoints/rspack.js"
-		},
-		"./sveltekit": {
-			"types": "./dist/entrypoints/sveltekit.d.ts",
-			"default": "./dist/entrypoints/sveltekit.js"
-		},
-		"./vite": {
-			"types": "./dist/entrypoints/vite.d.ts",
-			"default": "./dist/entrypoints/vite.js"
-		},
-		"./webpack": {
-			"types": "./dist/entrypoints/webpack.d.ts",
-			"default": "./dist/entrypoints/webpack.js"
-		},
-		"./package.json": "./package.json"
-	},
-	"scripts": {
-		"test": "vitest run",
-		"test:watch": "vitest",
-		"test:coverage": "vitest run --coverage",
-		"prepack": "pnpm run build && clean-package -rm devDependencies scripts",
-		"build:load-source-map": "cd ../load-source-map && pnpm run build",
-		"build:html": "cd ../html-report && pnpm run build",
-		"build:dist": "rolldown -c",
-		"build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html",
-		"dev": "rolldown -w -c"
-	},
-	"dependencies": {
-		"@jridgewell/remapping": "^2.3.5",
-		"tiny-open": "^1.3.0"
-	},
-	"devDependencies": {
-		"@nuxt/schema": "^4.4.7",
-		"@rspack/core": "^2.0.6",
-		"@vitest/coverage-v8": "^4.1.8",
-		"astro": "^6.4.4",
-		"esbuild": "^0.28.1",
-		"load-source-map": "workspace:^",
-		"next": "^16.2.7",
-		"rollup": "^4.61.1",
-		"vite": "^8.0.16",
-		"vitest": "^4.1.8",
-		"webpack": "^5.107.2"
-	},
-	"engines": {
-		"node": ">=22.12"
-	},
-	"compatiblePackages": {
-		"schemaVersion": 1,
-		"vite": {
-			"type": "compatible",
-			"versions": "^7.0.0 || ^8.0.0"
-		},
-		"rollup": {
-			"type": "compatible",
-			"versions": "^4.0.0"
-		},
-		"rolldown": {
-			"type": "compatible",
-			"versions": "^1.0.0"
-		}
-	}
+  "name": "sonda",
+  "version": "0.13.0",
+  "description": "Universal bundle analyzer and visualizer that works with most popular bundlers and frameworks.",
+  "keywords": [
+    "analyzer",
+    "angular",
+    "bundle",
+    "devtools",
+    "esbuild",
+    "nextjs",
+    "nuxt",
+    "performance",
+    "rolldown-plugin",
+    "rollup-plugin",
+    "rspack",
+    "sveltekit",
+    "visualizer",
+    "vite-plugin",
+    "webpack",
+    "withastro"
+  ],
+  "homepage": "https://sonda.dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipsobol/sonda.git",
+    "directory": "packages/sonda"
+  },
+  "bin": {
+    "sonda-angular": "./bin/sonda-angular.js"
+  },
+  "files": [
+    "bin",
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./angular": {
+      "types": "./dist/entrypoints/angular.d.ts",
+      "default": "./dist/entrypoints/angular.js"
+    },
+    "./astro": {
+      "types": "./dist/entrypoints/astro.d.ts",
+      "default": "./dist/entrypoints/astro.js"
+    },
+    "./esbuild": {
+      "types": "./dist/entrypoints/esbuild.d.ts",
+      "default": "./dist/entrypoints/esbuild.js"
+    },
+    "./next": {
+      "types": "./dist/entrypoints/next.d.ts",
+      "default": "./dist/entrypoints/next.js"
+    },
+    "./nuxt": {
+      "types": "./dist/entrypoints/nuxt.d.ts",
+      "default": "./dist/entrypoints/nuxt.js"
+    },
+    "./rolldown": {
+      "types": "./dist/entrypoints/rolldown.d.ts",
+      "default": "./dist/entrypoints/rolldown.js"
+    },
+    "./rollup": {
+      "types": "./dist/entrypoints/rollup.d.ts",
+      "default": "./dist/entrypoints/rollup.js"
+    },
+    "./rspack": {
+      "types": "./dist/entrypoints/rspack.d.ts",
+      "default": "./dist/entrypoints/rspack.js"
+    },
+    "./sveltekit": {
+      "types": "./dist/entrypoints/sveltekit.d.ts",
+      "default": "./dist/entrypoints/sveltekit.js"
+    },
+    "./vite": {
+      "types": "./dist/entrypoints/vite.d.ts",
+      "default": "./dist/entrypoints/vite.js"
+    },
+    "./webpack": {
+      "types": "./dist/entrypoints/webpack.d.ts",
+      "default": "./dist/entrypoints/webpack.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepack": "pnpm run build && clean-package -rm devDependencies scripts",
+    "build:load-source-map": "cd ../load-source-map && pnpm run build",
+    "build:html": "cd ../html-report && pnpm run build",
+    "build:dist": "rolldown -c",
+    "build": "pnpm run build:load-source-map && pnpm run build:dist && pnpm run build:html",
+    "dev": "rolldown -w -c"
+  },
+  "dependencies": {
+    "@jridgewell/remapping": "^2.3.5",
+    "tiny-open": "^1.3.0"
+  },
+  "devDependencies": {
+    "@nuxt/schema": "^4.4.7",
+    "@rspack/core": "^2.0.6",
+    "@vitest/coverage-v8": "^4.1.8",
+    "astro": "^6.4.4",
+    "esbuild": "^0.28.1",
+    "load-source-map": "workspace:^",
+    "next": "^16.2.7",
+    "rollup": "^4.61.1",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8",
+    "webpack": "^5.107.2"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "compatiblePackages": {
+    "schemaVersion": 1,
+    "vite": {
+      "type": "compatible",
+      "versions": "^7.0.0 || ^8.0.0"
+    },
+    "rollup": {
+      "type": "compatible",
+      "versions": "^4.0.0"
+    },
+    "rolldown": {
+      "type": "compatible",
+      "versions": "^1.0.0"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/filipsobol/sonda/issues"
+  }
 }
