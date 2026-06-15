@@ -21,6 +21,9 @@
 		"withastro"
 	],
 	"homepage": "https://sonda.dev",
+	"bugs": {
+		"url": "https://github.com/filipsobol/sonda/issues"
+	},
 	"license": "MIT",
 	"repository": {
 		"type": "git",
