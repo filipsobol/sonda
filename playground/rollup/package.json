@@ -14,7 +14,7 @@
 		"@rollup/plugin-commonjs": "^29.0.3",
 		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-terser": "^1.0.0",
-		"rollup": "^4.61.1",
+		"rollup": "^4.62.2",
 		"rollup-plugin-styles": "^4.0.0",
 		"sonda": "workspace:^",
 		"unplugin-sourcemaps": "workspace:^"

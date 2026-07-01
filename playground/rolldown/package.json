@@ -11,7 +11,7 @@
 		"ckeditor5": "^48.2.0"
 	},
 	"devDependencies": {
-		"rolldown": "1.1.0",
+		"rolldown": "1.1.3",
 		"sonda": "workspace:^",
 		"unplugin-sourcemaps": "workspace:^"
 	}

@@ -105,17 +105,17 @@
 		"tiny-open": "^1.3.0"
 	},
 	"devDependencies": {
-		"@nuxt/schema": "^4.4.7",
-		"@rspack/core": "^2.0.6",
-		"@vitest/coverage-v8": "^4.1.8",
+		"@nuxt/schema": "^4.4.8",
+		"@rspack/core": "^2.1.2",
+		"@vitest/coverage-v8": "^4.1.9",
 		"astro": "^6.4.6",
 		"esbuild": "^0.28.1",
 		"load-source-map": "workspace:^",
-		"next": "^16.2.7",
-		"rollup": "^4.61.1",
+		"next": "^16.2.9",
+		"rollup": "^4.62.2",
 		"vite": "^8.0.16",
-		"vitest": "^4.1.8",
-		"webpack": "^5.107.2"
+		"vitest": "^4.1.9",
+		"webpack": "^5.108.3"
 	},
 	"engines": {
 		"node": ">=22.12"
