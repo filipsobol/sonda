@@ -17,7 +17,7 @@
 		"mini-css-extract-plugin": "^2.10.2",
 		"sonda": "workspace:^",
 		"unplugin-sourcemaps": "workspace:^",
-		"webpack": "^5.108.3",
-		"webpack-cli": "^7.1.0"
+		"webpack": "^5.108.4",
+		"webpack-cli": "^7.2.1"
 	}
 }
