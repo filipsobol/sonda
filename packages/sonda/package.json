@@ -108,7 +108,7 @@
 		"@nuxt/schema": "^4.4.8",
 		"@rspack/core": "^2.1.2",
 		"@vitest/coverage-v8": "^4.1.9",
-		"astro": "^7.0.6",
+		"astro": "^7.1.1",
 		"esbuild": "^0.28.1",
 		"load-source-map": "workspace:^",
 		"next": "^16.2.10",
