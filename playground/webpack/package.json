@@ -8,16 +8,16 @@
 		"debug:build": "NODE_OPTIONS='--inspect-brk' pnpm run build"
 	},
 	"dependencies": {
-		"ckeditor5": "^48.3.0"
+		"ckeditor5": "^48.4.0"
 	},
 	"devDependencies": {
 		"@types/webpack": "^5.28.5",
-		"css-loader": "^7.1.4",
+		"css-loader": "^7.1.5",
 		"css-minimizer-webpack-plugin": "^8.0.0",
 		"mini-css-extract-plugin": "^2.10.2",
 		"sonda": "workspace:^",
 		"unplugin-sourcemaps": "workspace:^",
-		"webpack": "^5.108.3",
-		"webpack-cli": "^7.1.0"
+		"webpack": "^5.110.1",
+		"webpack-cli": "^7.2.3"
 	}
 }
