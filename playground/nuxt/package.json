@@ -9,9 +9,9 @@
 		"preview": "nuxt preview"
 	},
 	"dependencies": {
-		"nuxt": "^4.4.8",
+		"nuxt": "^4.5.2",
 		"sonda": "workspace:^",
-		"vue": "^3.5.39",
-		"vue-router": "^5.1.0"
+		"vue": "^3.5.42",
+		"vue-router": "^5.3.0"
 	}
 }

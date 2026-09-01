@@ -18,16 +18,16 @@
 	"devDependencies": {
 		"@changesets/changelog-git": "^0.2.1",
 		"@changesets/cli": "^2.31.0",
-		"@types/node": "^26.1.0",
+		"@types/node": "^26.4.0",
 		"clean-package": "^2.2.0",
 		"medium-zoom": "^1.1.0",
-		"oxfmt": "^0.57.0",
-		"pkg-pr-new": "^0.0.75",
-		"rolldown": "1.1.4",
-		"rolldown-plugin-dts": "~0.26.0",
+		"oxfmt": "^0.65.0",
+		"pkg-pr-new": "^0.0.88",
+		"rolldown": "1.2.6",
+		"rolldown-plugin-dts": "~0.28.3",
 		"typescript": "~6.0.3",
 		"vitepress": "^2.0.0-alpha.17",
-		"vue": "^3.5.39"
+		"vue": "^3.5.42"
 	},
 	"engines": {
 		"node": ">=22.13.0",
