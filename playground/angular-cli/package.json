@@ -21,7 +21,7 @@
 		"@angular/forms": "^22.0.5",
 		"@angular/platform-browser": "^22.0.5",
 		"@angular/platform-browser-dynamic": "^22.0.5",
-		"@angular/platform-server": "^22.0.5",
+		"@angular/platform-server": "^22.1.4",
 		"@angular/router": "^22.0.5",
 		"@angular/ssr": "^22.0.5",
 		"express": "^5.2.1",
